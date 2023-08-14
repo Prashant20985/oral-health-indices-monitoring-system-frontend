@@ -6,10 +6,17 @@ import {
   ChangePasswordValues,
   ResetPasswordValues,
 } from "../models/User";
+import { store } from "../stores/Store";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
+
+axios.interceptors.request.use((config) => {
+  const token = store.commonStore.token;
+  if (token && config.headers) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
 
 axios.interceptors.response.use(
   async (res) => {
