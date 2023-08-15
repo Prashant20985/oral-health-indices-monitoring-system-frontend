@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { ColorModeContext, useMode } from "../../themeConfig";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { ToastContainer } from "react-toastify";
+import Navbar from "../common/navbar/Navbar";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -15,9 +16,10 @@ function App() {
           hideProgressBar
           theme="colored"
         />
-        <div>
+        <Navbar />
+        <Container maxWidth="xl">
           <Outlet />
-        </div>
+        </Container>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
