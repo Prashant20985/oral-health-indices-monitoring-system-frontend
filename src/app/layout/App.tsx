@@ -17,7 +17,7 @@ function App() {
           theme="colored"
         />
         <Navbar />
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{ mt: 10 }}>
           <Outlet />
         </Container>
       </ThemeProvider>
