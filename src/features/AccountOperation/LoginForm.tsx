@@ -17,6 +17,7 @@ import CustomTextField from "../../app/common/formInputs/CustomTextField";
 import CustomPasswordTextField from "../../app/common/formInputs/CustomPassowrdTextField";
 import CustomErrorMessage from "../../app/common/formInputs/CustomErrorMessage";
 import CustomSubmitButton from "../../app/common/formInputs/CustomSubmitButtom";
+import { Link } from "react-router-dom";
 
 export default observer(function LoginForm() {
   const theme = useTheme();
@@ -115,6 +116,14 @@ export default observer(function LoginForm() {
             </Form>
           )}
         </Formik>
+        <Box mt="2rem" textAlign="right">
+          <Link
+            style={{ color: color.grey[100], fontSize: 14 }}
+            to={"/forgot-pass"}
+          >
+            Forgot password?
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
