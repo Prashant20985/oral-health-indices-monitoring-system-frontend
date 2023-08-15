@@ -8,6 +8,7 @@ import {
 import { makeAutoObservable, runInAction } from "mobx";
 import { store } from "./Store";
 import { toast } from "react-toastify";
+import { router } from "../router/Routes";
 
 export default class UserStore {
   user: UserResposne | null = null;
@@ -27,6 +28,7 @@ export default class UserStore {
       store.commonStore.setToken(user.token);
       this.startRefreshTokenTimer(user);
       runInAction(() => (this.user = user));
+      router.navigate("/");
     } catch (error: any) {
       throw error;
     }
@@ -35,6 +37,7 @@ export default class UserStore {
   logout = () => {
     store.commonStore.setToken(null);
     this.user = null;
+    router.navigate("/login");
   };
 
   getCurrentUser = async () => {
@@ -51,6 +54,7 @@ export default class UserStore {
     try {
       await axiosAgent.AccountOperations.forgotPassword(email);
       toast.success("Email sent successfully");
+      router.navigate("/login");
     } catch (error) {
       throw error;
     }
@@ -60,6 +64,7 @@ export default class UserStore {
     try {
       await axiosAgent.AccountOperations.resetPassword(resetPassValues);
       toast.success("Password reset successful");
+      router.navigate("/login");
     } catch (error: any) {
       throw error;
     }
