@@ -10,7 +10,7 @@ interface AuthProps {
 
 export default function RequireAuthentication({
   roles,
-  fallbackPath = "/",
+  fallbackPath = "/login",
 }: AuthProps) {
   const { userStore } = useStore();
   const { isUserLoggedIn, user } = userStore;

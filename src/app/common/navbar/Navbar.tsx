@@ -12,8 +12,9 @@ import ColorModeToggle from "./ColorModeToggle";
 import LanguageSelect from "./LanguageSelect";
 import UserOptions from "./UserOptions";
 import { useStore } from "../../stores/Store";
+import { observer } from "mobx-react-lite";
 
-export default function Navbar() {
+export default observer(function Navbar() {
   const theme = useTheme();
   const backgroundColor =
     theme.palette.mode === "dark" ? blueGrey[900] : "#455a64";
@@ -61,4 +62,4 @@ export default function Navbar() {
       </AppBar>
     </Box>
   );
-}
+});
