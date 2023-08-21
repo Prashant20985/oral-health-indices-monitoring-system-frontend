@@ -7,7 +7,6 @@ import {
   ResetPasswordValues,
 } from "../models/User";
 import { store } from "../stores/Store";
-import { PaginatedResult } from "../models/Pagination";
 import {
   ApplicationUser,
   ApplicationUserFormValues,
@@ -29,11 +28,6 @@ axios.interceptors.response.use(
       new Promise((resolve) => {
         setTimeout(resolve, 1000); // Delays requests by 1 second in development env.
       });
-    }
-    const pagintion = res.headers["pagination"];
-    if (pagintion) {
-      res.data = new PaginatedResult(res.data, JSON.parse(pagintion));
-      return res as AxiosResponse<PaginatedResult<any>>;
     }
     return res;
   },
@@ -86,30 +80,30 @@ const AccountOperations = {
 const AdminOperations = {
   activeUsersList: (params: URLSearchParams) =>
     axios
-      .get<PaginatedResult<ApplicationUser[]>>("/admin/active-users", {
+      .get<ApplicationUser[]>("/admin/active-users", {
         params,
       })
       .then(responseBody),
 
   deactivatedUsersList: (params: URLSearchParams) =>
     axios
-      .get<PaginatedResult<ApplicationUser[]>>("/admin/deactivated-users", {
+      .get<ApplicationUser[]>("/admin/deactivated-users", {
         params,
       })
       .then(responseBody),
 
   deletedUsersList: (params: URLSearchParams) =>
     axios
-      .get<PaginatedResult<ApplicationUser[]>>("/admin/deleted-users", {
+      .get<ApplicationUser[]>("/admin/deleted-users", {
         params,
       })
       .then(responseBody),
 
   userDetails: (userName: string) =>
-    apiRequests.get<ApplicationUser[]>(`/admin/user-details/${userName}`),
+    apiRequests.get<ApplicationUser>(`/admin/user-details/${userName}`),
 
   addApplicationUser: (values: ApplicationUserFormValues) =>
-    apiRequests.post<void>("create-user", values),
+    apiRequests.post<void>("/admin/create-user", values),
 
   addApplicationUsersFromCsv: (file: File) => {
     let formData = new FormData();
