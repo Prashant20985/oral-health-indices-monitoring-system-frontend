@@ -1,0 +1,176 @@
+import { observer } from "mobx-react-lite";
+import { useState } from "react";
+import {
+  Box,
+  Button,
+  Dialog,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { useStore } from "../../../app/stores/Store";
+import { colors } from "../../../themeConfig";
+import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
+import { Form, Formik } from "formik";
+import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
+import CustomTextField from "../../../app/common/formInputs/CustomTextField";
+import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
+import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+
+interface Props {
+  userName: string;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default observer(function UserDeleteForm({
+  userName,
+  isOpen,
+  onClose,
+}: Props) {
+  const {
+    adminStore: { deleteApplicationUser },
+  } = useStore();
+  const theme = useTheme();
+  const color = colors(theme.palette.mode);
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const handleDelete = async (userName: string, deleteUserComment: string) => {
+    await deleteApplicationUser(userName, deleteUserComment);
+    setSnackbarOpen(true);
+    onClose();
+  };
+
+  return (
+    <>
+      <Dialog
+        open={isOpen}
+        fullWidth
+        onClose={() => onClose()}
+        TransitionComponent={SlideUpTransition}
+      >
+        <Box
+          display="flex"
+          padding={5}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box width="100%">
+            <Formik
+              initialValues={{
+                userName: userName,
+                deleteUserComment: "",
+                error: null,
+              }}
+              onSubmit={async (values, { setErrors }) =>
+                await handleDelete(
+                  values.userName,
+                  values.deleteUserComment
+                ).catch((error) => {
+                  setErrors({ error: error.response.data });
+                })
+              }
+            >
+              {({
+                errors,
+                handleChange,
+                handleSubmit,
+                isSubmitting,
+                touched,
+              }) => (
+                <Form onSubmit={handleSubmit}>
+                  <Typography
+                    variant="h5"
+                    color="text.primary"
+                    fontWeight="bold"
+                    sx={{ mb: "15px" }}
+                    align="left"
+                  >
+                    {`Are you sure you want to delete ${userName}?`}
+                  </Typography>
+                  <Box
+                    display="grid"
+                    gap="30px"
+                    gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                    sx={{
+                      "& > div": {
+                        gridColumn: isNonMobile ? undefined : "span 4",
+                      },
+                    }}
+                  >
+                    <CustomTextField
+                      label="Delete Comment"
+                      name="deleteUserComment"
+                      required={true}
+                      onChange={handleChange}
+                      error={
+                        touched.deleteUserComment && !!errors.deleteUserComment
+                      }
+                      helperText={
+                        touched.deleteUserComment
+                          ? errors.deleteUserComment
+                          : ""
+                      }
+                      gridColumn="span 4"
+                    />
+
+                    <CustomErrorMessage error={errors.error} />
+
+                    <Box
+                      display="flex"
+                      justifyContent="flex-end"
+                      sx={{ gridColumn: "span 4", gap: 2 }}
+                    >
+                      <Button
+                        onClick={() => onClose()}
+                        variant="contained"
+                        sx={{
+                          height: "40px",
+                          width: "25%",
+                          backgroundColor: color.blueAccent[500],
+                          "&:hover": {
+                            backgroundColor: color.blueAccent[600],
+                          },
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        fullWidth
+                        disabled={isSubmitting}
+                        sx={{
+                          alignItems: "left",
+                          height: "40px",
+                          width: "25%",
+                          backgroundColor: color.redAccent[500],
+                          "&:hover": {
+                            backgroundColor: color.redAccent[400],
+                          },
+                        }}
+                      >
+                        {isSubmitting ? (
+                          <ButtonLoadingComponent content="Deleting..." />
+                        ) : (
+                          <p>Delete</p>
+                        )}
+                      </Button>
+                    </Box>
+                  </Box>
+                </Form>
+              )}
+            </Formik>
+          </Box>
+        </Box>
+      </Dialog>
+      <CustomSanckbar
+        snackbarOpen={snackbarOpen}
+        snackbarClose={() => setSnackbarOpen(false)}
+        message="User deleted successfully!!"
+      />
+    </>
+  );
+});

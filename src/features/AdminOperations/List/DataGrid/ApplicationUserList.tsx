@@ -17,6 +17,7 @@ import LinearProgressComponent from "../../../../app/common/loadingComponents/Li
 import * as React from "react";
 import CustomSanckbar from "../../../../app/common/snackbar/CustomSnackbar";
 import UserProfileDialog from "../../UserProfile/UserProfileDialog";
+import UserDeleteForm from "../../Forms/UserDeleteForm";
 
 interface Props {
   applicationUsers: ApplicationUser[];
@@ -43,6 +44,7 @@ export default observer(function AppplicationUsersList({
   const [activationChangeSanckbar, setActivationChangeSanckbar] =
     React.useState(false);
   const [selectedUserName, setSelectedUserName] = React.useState("");
+  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
 
   React.useEffect(() => {
@@ -112,7 +114,12 @@ export default observer(function AppplicationUsersList({
           </Tooltip>
           {!deletedUsersList && (
             <Tooltip title="Delete User">
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  setOpenDeleteDialog(true);
+                  setSelectedUserName(userName);
+                }}
+              >
                 <Delete color="primary" />
               </IconButton>
             </Tooltip>
@@ -251,6 +258,14 @@ export default observer(function AppplicationUsersList({
         isOpen={openProfileDialog}
         onClose={() => {
           setOpenProfileDialog(false);
+          setSelectedUserName("");
+        }}
+      />
+      <UserDeleteForm
+        userName={selectedUserName}
+        isOpen={openDeleteDialog}
+        onClose={() => {
+          setOpenDeleteDialog(false);
           setSelectedUserName("");
         }}
       />
