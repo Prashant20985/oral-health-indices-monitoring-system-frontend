@@ -16,6 +16,7 @@ import ChangeActivationStatusButton from "../../ChangeActivationStatus/ChangeAct
 import LinearProgressComponent from "../../../../app/common/loadingComponents/LinearProgressComponent";
 import * as React from "react";
 import CustomSanckbar from "../../../../app/common/snackbar/CustomSnackbar";
+import UserProfileDialog from "../../UserProfile/UserProfileDialog";
 
 interface Props {
   applicationUsers: ApplicationUser[];
@@ -41,6 +42,8 @@ export default observer(function AppplicationUsersList({
   const [users, setUsers] = React.useState<ApplicationUser[]>(applicationUsers);
   const [activationChangeSanckbar, setActivationChangeSanckbar] =
     React.useState(false);
+  const [selectedUserName, setSelectedUserName] = React.useState("");
+  const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
 
   React.useEffect(() => {
     const filterOutCurrentUser = () => {
@@ -85,6 +88,7 @@ export default observer(function AppplicationUsersList({
     flex: 1,
     headerAlign: "center",
     renderCell: ({ row }: any) => {
+      const { userName } = row || {};
       return (
         <Box
           width="100%"
@@ -97,7 +101,12 @@ export default observer(function AppplicationUsersList({
           }}
         >
           <Tooltip title="View Profile">
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                setOpenProfileDialog(true);
+                setSelectedUserName(userName);
+              }}
+            >
               <AccountCircle color="primary" />
             </IconButton>
           </Tooltip>
@@ -236,6 +245,14 @@ export default observer(function AppplicationUsersList({
         snackbarOpen={activationChangeSanckbar}
         message="Activation status changed successfully!!"
         snackbarClose={() => setActivationChangeSanckbar(false)}
+      />
+      <UserProfileDialog
+        userName={selectedUserName}
+        isOpen={openProfileDialog}
+        onClose={() => {
+          setOpenProfileDialog(false);
+          setSelectedUserName("");
+        }}
       />
     </Box>
   );
