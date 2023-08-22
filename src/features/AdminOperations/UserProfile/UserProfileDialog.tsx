@@ -14,6 +14,7 @@ import SlideUpTransition from "../../../app/common/transition/SlideUpTransition"
 import { Edit } from "@mui/icons-material";
 import ProfileForm from "../Forms/ProfileForm";
 import UserEditForm from "../Forms/UserEditForm";
+import ChangePasswordForm from "../Forms/ChangePasswordForm";
 
 interface Props {
   userName: string | undefined;
@@ -41,6 +42,7 @@ export default observer(function UserProfileDialog({
   } = adminStore;
 
   const [editMode, setEditMode] = React.useState(false);
+  const [changePasswordMode, setChangePasswordMode] = React.useState(false);
 
   React.useEffect(() => {
     if (userName) {
@@ -77,7 +79,11 @@ export default observer(function UserProfileDialog({
                     color="text.primary"
                     fontWeight="bold"
                   >
-                    {editMode ? "Edit User" : "User Details"}
+                    {editMode
+                      ? "Edit User"
+                      : changePasswordMode
+                      ? "Change Password"
+                      : "User Details"}
                   </Typography>
                 </Box>
                 <Box
@@ -87,28 +93,45 @@ export default observer(function UserProfileDialog({
                   width="40%"
                   gap={2}
                 >
-                  {user?.role === "Admin" &&
-                  userName !== user.userName &&
-                  !editMode &&
-                  applicationUser.deletedAt === null ? (
-                    <>
-                      <Button
-                        variant="contained"
-                        fullWidth
-                        onClick={() => setEditMode(true)}
-                        startIcon={<Edit />}
-                        sx={{
-                          backgroundColor: color.pinkAccent[600],
-                          "&:hover": {
-                            backgroundColor: color.pinkAccent[400],
-                          },
-                        }}
-                      >
-                        Edit User
-                      </Button>
-                    </>
+                  {userName === user?.userName && !changePasswordMode ? (
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      startIcon={<Edit />}
+                      onClick={() => setChangePasswordMode(!changePasswordMode)}
+                      sx={{
+                        backgroundColor: color.pinkAccent[600],
+                        "&:hover": {
+                          backgroundColor: color.pinkAccent[400],
+                        },
+                      }}
+                    >
+                      Change Password
+                    </Button>
                   ) : (
-                    <></>
+                    user?.role === "Admin" &&
+                    userName !== user.userName &&
+                    !editMode &&
+                    applicationUser.deletedAt === null && (
+                      <>
+                        {!changePasswordMode && (
+                          <Button
+                            variant="contained"
+                            fullWidth
+                            onClick={() => setEditMode(true)}
+                            startIcon={<Edit />}
+                            sx={{
+                              backgroundColor: color.pinkAccent[600],
+                              "&:hover": {
+                                backgroundColor: color.pinkAccent[400],
+                              },
+                            }}
+                          >
+                            Edit User
+                          </Button>
+                        )}
+                      </>
+                    )
                   )}
                 </Box>
               </Box>
@@ -121,6 +144,11 @@ export default observer(function UserProfileDialog({
                   <UserEditForm
                     onClose={() => setEditMode(false)}
                     applicationUser={applicationUser}
+                  />
+                ) : changePasswordMode ? (
+                  <ChangePasswordForm
+                    email={applicationUser.email}
+                    onClose={() => setChangePasswordMode(false)}
                   />
                 ) : (
                   <ProfileForm
