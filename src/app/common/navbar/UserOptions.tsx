@@ -17,6 +17,7 @@ import { colors } from "../../../themeConfig";
 import { useStore } from "../../stores/Store";
 import * as React from "react";
 import { AssignmentIndOutlined, PowerSettingsNew } from "@mui/icons-material";
+import UserProfileDialog from "../../../features/AdminOperations/UserProfile/UserProfileDialog";
 
 export default observer(function UserOptions() {
   const theme = useTheme();
@@ -29,6 +30,8 @@ export default observer(function UserOptions() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const [selectedUserName, setSelectedUserName] = React.useState("");
+  const [openprofileDialog, setOpenProfileDialog] = React.useState(false);
 
   const isPortrait = useMediaQuery("(orientation: portrait)");
 
@@ -100,7 +103,15 @@ export default observer(function UserOptions() {
         </Box>
         <Divider variant="fullWidth" />
         <MenuList>
-          <MenuItem onClick={() => setAnchorElUser(null)}>
+          <MenuItem
+            onClick={() => {
+              if (user?.userName) {
+                setSelectedUserName(user?.userName);
+                setOpenProfileDialog(true);
+              }
+              setAnchorElUser(null);
+            }}
+          >
             <ListItemIcon>
               <AssignmentIndOutlined color="info" />
             </ListItemIcon>
@@ -119,6 +130,14 @@ export default observer(function UserOptions() {
           </MenuItem>
         </MenuList>
       </Popover>
+      <UserProfileDialog
+        userName={selectedUserName}
+        isOpen={openprofileDialog}
+        onClose={() => {
+          setOpenProfileDialog(false);
+          setSelectedUserName("");
+        }}
+      />
     </>
   );
 });
