@@ -13,6 +13,7 @@ import LanguageSelect from "./LanguageSelect";
 import UserOptions from "./UserOptions";
 import { useStore } from "../../stores/Store";
 import { observer } from "mobx-react-lite";
+import AdminNavOptions from "../../../features/AdminOperations/NavOptions/AdminNavOptions";
 
 export default observer(function Navbar() {
   const theme = useTheme();
@@ -20,7 +21,7 @@ export default observer(function Navbar() {
     theme.palette.mode === "dark" ? blueGrey[900] : "#455a64";
 
   const {
-    userStore: { isUserLoggedIn },
+    userStore: { isUserLoggedIn, user },
   } = useStore();
 
   return (
@@ -36,7 +37,11 @@ export default observer(function Navbar() {
             {/* Nav Header */}
             <NavHeader />
             {/* Left side  of the Nav bar*/}
-            <Box display="flex" flexGrow={1}></Box>
+            {user?.role === "Admin" ? (
+              <AdminNavOptions />
+            ) : (
+              <Box display="flex" flexGrow={1}></Box>
+            )}
             {/* Right Side of the nav bar */}
             <Box display="flex" flexGrow={0}>
               {isUserLoggedIn && (
