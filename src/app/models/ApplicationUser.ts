@@ -1,6 +1,6 @@
 import { ApplicationRole } from "./Role";
 
-type UserType = "RegularUser" | "GuestUser";
+export type UserType = "RegularUser" | "GuestUser";
 
 export interface ApplicationUser {
   userName: string;
