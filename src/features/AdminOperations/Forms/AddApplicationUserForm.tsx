@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   Typography,
   Dialog,
+  FormControl,
 } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
@@ -19,6 +20,8 @@ import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessag
 import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButtom";
 import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import CustomSelect from "../../../app/common/formInputs/CustomSelect";
+import { roles } from "../../../app/models/Role";
 
 interface Props {
   isOpen: boolean;
@@ -44,6 +47,7 @@ export default observer(function AddApplicationUserForm({
     email: "",
     guestUserComment: "",
     phoneNumber: "",
+    role: "Student",
   };
 
   const phoneRegExp = /^\d{6,11}$/;
@@ -82,6 +86,7 @@ export default observer(function AddApplicationUserForm({
               }
             >
               {({
+                values,
                 errors,
                 handleChange,
                 handleSubmit,
@@ -121,12 +126,38 @@ export default observer(function AddApplicationUserForm({
                     <CustomTextField
                       label="Last Name"
                       name="lastName"
-                      required={true}
                       onChange={handleChange}
                       error={touched.lastName && !!errors.lastName}
                       helperText={touched.lastName ? errors.lastName : ""}
                       gridColumn="span 2"
                     />
+
+                    <CustomTextField
+                      label="Phone Number"
+                      name="phoneNumber"
+                      onChange={handleChange}
+                      error={touched.phoneNumber && !!errors.phoneNumber}
+                      helperText={touched.phoneNumber ? errors.phoneNumber : ""}
+                      gridColumn="span 2"
+                      type="text"
+                    />
+
+                    <Box component={FormControl} sx={{ gridColumn: "span 2" }}>
+                      <CustomSelect
+                        label="Role"
+                        value={values.role}
+                        options={roles}
+                        required={true}
+                        onChange={(e) => {
+                          handleChange({
+                            target: {
+                              name: "role",
+                              value: e.target.value,
+                            },
+                          });
+                        }}
+                      />
+                    </Box>
 
                     <CustomTextField
                       label="Email"
@@ -137,16 +168,6 @@ export default observer(function AddApplicationUserForm({
                       required={true}
                       gridColumn="span 4"
                       type="email"
-                    />
-
-                    <CustomTextField
-                      label="Phone Number"
-                      name="phoneNumber"
-                      onChange={handleChange}
-                      error={touched.phoneNumber && !!errors.phoneNumber}
-                      helperText={touched.phoneNumber ? errors.phoneNumber : ""}
-                      gridColumn="span 4"
-                      type="text"
                     />
 
                     <FormControlLabel

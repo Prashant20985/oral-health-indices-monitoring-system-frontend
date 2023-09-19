@@ -19,8 +19,9 @@ export interface ApplicationUser {
 
 export interface ApplicationUserFormValues {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   email: string;
   phoneNumber: string;
   guestUserComment?: string;
+  role: ApplicationRole;
 }
