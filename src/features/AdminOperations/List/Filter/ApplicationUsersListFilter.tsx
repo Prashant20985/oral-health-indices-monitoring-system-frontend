@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import { UserType } from "../../../../app/models/ApplicationUser";
-import { ApplicationRole } from "../../../../app/models/Role";
+import { ApplicationRole, roles } from "../../../../app/models/Role";
 import {
   FilterAltOffOutlined,
   FilterAltOutlined,
@@ -70,13 +70,6 @@ export default function ApplicationUsersListFilter({
     userType !== "" || role !== "" || searchValue !== "" || searchTerm !== "";
 
   const userTypes: UserType[] = ["RegularUser", "GuestUser"];
-
-  const roles: ApplicationRole[] = [
-    "Admin",
-    "Student",
-    "Dentist_Teacher_Researcher",
-    "Dentist_Teacher_Examiner",
-  ];
 
   return (
     <Box
