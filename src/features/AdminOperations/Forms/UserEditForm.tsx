@@ -5,7 +5,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { ApplicationUser } from "../../../app/models/ApplicationUser";
 import { useStore } from "../../../app/stores/Store";
-import { ApplicationRole } from "../../../app/models/Role";
+import { roles } from "../../../app/models/Role";
 import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
 import CustomSelect from "../../../app/common/formInputs/CustomSelect";
 import CustomTextField from "../../../app/common/formInputs/CustomTextField";
@@ -27,13 +27,6 @@ export default observer(function UserEditForm({
 
   const [hasChanges, setHasChanges] = React.useState(false);
   const isNonMobile = useMediaQuery("(min-width:600px)");
-
-  const roles: ApplicationRole[] = [
-    "Admin",
-    "Student",
-    "Dentist_Teacher_Researcher",
-    "Dentist_Teacher_Examiner",
-  ];
 
   const phoneRegExp = /^\d{6,11}$/;
   const validationSchema = Yup.object().shape({
@@ -101,7 +94,6 @@ export default observer(function UserEditForm({
                       name="lastName"
                       onChange={(e) => handleFieldChange(e, handleChange)}
                       value={values.lastName}
-                      required={true}
                       error={touched.lastName && !!errors.lastName}
                       helperText={touched.lastName ? errors.lastName : ""}
                       gridColumn="span 2"
