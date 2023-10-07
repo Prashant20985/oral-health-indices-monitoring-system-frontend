@@ -29,7 +29,7 @@ function App() {
           hideProgressBar
           theme="colored"
         />
-        {!commonStore.applocationLoaded ? (
+        {commonStore.applocationLoaded ? (
           <>
             <Navbar />
             <Container maxWidth="xl" sx={{ mt: 10 }}>

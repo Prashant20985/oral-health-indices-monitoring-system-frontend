@@ -11,6 +11,7 @@ import {
   ApplicationUser,
   ApplicationUserFormValues,
 } from "../models/ApplicationUser";
+import { router } from "../router/Routes";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -44,7 +45,7 @@ axios.interceptors.response.use(
         toast.warning("Forbidden");
         break;
       case 500:
-        toast.error("Server Error");
+        router.navigate("/server-error");
     }
     return Promise.reject(error);
   }
