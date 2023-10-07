@@ -8,6 +8,7 @@ import Dashboard from "../../features/Dashboard/Dashboard";
 import ActiveApplicationUsersList from "../../features/AdminOperations/List/ActiveUsers/ActiveApplicationUsersList";
 import DeactivatedApplicationUsersList from "../../features/AdminOperations/List/DeactivatedUsers/DeactivatedApplicationUsersList";
 import DeletedApplicationUsersList from "../../features/AdminOperations/List/DeletedUsers/DeletedApplicationUsersList";
+import ServerError from "../../features/Errors/ServerError";
 
 const routes: RouteObject[] = [
   {
@@ -47,6 +48,7 @@ const routes: RouteObject[] = [
       { path: "login", element: <LoginForm /> },
       { path: "forgot-pass", element: <ForgotPasswordForm /> },
       { path: "reset-password", element: <ResetPasswordForm /> },
+      { path: "server-error", element: <ServerError /> },
     ],
   },
 ];
