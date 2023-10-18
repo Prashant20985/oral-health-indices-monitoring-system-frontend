@@ -9,6 +9,7 @@ import ActiveApplicationUsersList from "../../features/AdminOperations/List/Acti
 import DeactivatedApplicationUsersList from "../../features/AdminOperations/List/DeactivatedUsers/DeactivatedApplicationUsersList";
 import DeletedApplicationUsersList from "../../features/AdminOperations/List/DeletedUsers/DeletedApplicationUsersList";
 import ServerError from "../../features/Errors/ServerError";
+import Unauthorized from "../../features/Errors/Unauthorized";
 
 const routes: RouteObject[] = [
   {
@@ -29,7 +30,7 @@ const routes: RouteObject[] = [
         children: [{ path: "/", element: <Dashboard /> }],
       },
       {
-        element: <RequireAuthentication roles={["Admin"]} fallbackPath="/" />,
+        element: <RequireAuthentication roles={["Admin"]} />,
         children: [
           {
             path: "admin/active-users",
@@ -49,6 +50,7 @@ const routes: RouteObject[] = [
       { path: "forgot-pass", element: <ForgotPasswordForm /> },
       { path: "reset-password", element: <ResetPasswordForm /> },
       { path: "server-error", element: <ServerError /> },
+      { path: "unauthorized", element: <Unauthorized /> },
     ],
   },
 ];
