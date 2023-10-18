@@ -6,14 +6,12 @@ import {
   Toolbar,
   useTheme,
 } from "@mui/material";
-import NavHeader from "./NavHeader";
 import { blueGrey } from "@mui/material/colors";
 import ColorModeToggle from "./ColorModeToggle";
 import LanguageSelect from "./LanguageSelect";
 import UserOptions from "./UserOptions";
 import { useStore } from "../../stores/Store";
 import { observer } from "mobx-react-lite";
-import AdminNavOptions from "../../../features/AdminOperations/NavOptions/AdminNavOptions";
 
 export default observer(function Navbar() {
   const theme = useTheme();
@@ -21,7 +19,7 @@ export default observer(function Navbar() {
     theme.palette.mode === "dark" ? blueGrey[900] : "#455a64";
 
   const {
-    userStore: { isUserLoggedIn, user },
+    userStore: { isUserLoggedIn },
   } = useStore();
 
   return (
@@ -30,19 +28,14 @@ export default observer(function Navbar() {
         position="fixed"
         sx={{
           backgroundColor: backgroundColor,
+          zIndex: 0,
         }}
       >
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            {/* Nav Header */}
-            <NavHeader />
-            {/* Left side  of the Nav bar*/}
-            {user?.role === "Admin" ? (
-              <AdminNavOptions />
-            ) : (
-              <Box display="flex" flexGrow={1}></Box>
-            )}
-            {/* Right Side of the nav bar */}
+          <Toolbar
+            disableGutters
+            sx={{ display: "flex", justifyContent: "flex-end" }}
+          >
             <Box display="flex" flexGrow={0}>
               {isUserLoggedIn && (
                 <>
