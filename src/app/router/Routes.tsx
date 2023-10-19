@@ -10,6 +10,7 @@ import DeactivatedApplicationUsersList from "../../features/AdminOperations/List
 import DeletedApplicationUsersList from "../../features/AdminOperations/List/DeletedUsers/DeletedApplicationUsersList";
 import ServerError from "../../features/Errors/ServerError";
 import Unauthorized from "../../features/Errors/Unauthorized";
+import NotFound from "../../features/Errors/NotFound";
 
 const routes: RouteObject[] = [
   {
@@ -51,6 +52,7 @@ const routes: RouteObject[] = [
       { path: "reset-password", element: <ResetPasswordForm /> },
       { path: "server-error", element: <ServerError /> },
       { path: "unauthorized", element: <Unauthorized /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ];

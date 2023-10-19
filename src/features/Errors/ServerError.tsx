@@ -1,7 +1,7 @@
 import { Typography, Box } from "@mui/material";
 import GoToHomePageButton from "./GoToHomePageButton";
 
-export default function NotFound() {
+export default function ServerError() {
   return (
     <Box
       sx={{
