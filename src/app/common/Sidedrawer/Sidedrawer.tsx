@@ -8,6 +8,7 @@ import { router } from "../../router/Routes";
 import AdminNavOptions from "../../../features/AdminOperations/NavOptions/AdminNavOptions";
 import { useStore } from "../../stores/Store";
 import SidedrawerHeader from "./SidedrawerHeader";
+import DentistTeacherNavOptions from "../../../features/DentistTeacherOperations/NavOptions/DentistTeacherNavOptions";
 
 export default function Sidedrawer() {
   const theme = useTheme();
@@ -89,8 +90,13 @@ export default function Sidedrawer() {
               Dashboard
             </MenuItem>
           </Menu>
-          {user?.role === "Admin" && (
+          {user?.role === "Admin" ? (
             <AdminNavOptions menuItemStyles={menuItemStyles} />
+          ) : user?.role === "Dentist_Teacher_Examiner" ||
+            "Dentist_Teacher_Researcher" ? (
+            <DentistTeacherNavOptions menuItemStyles={menuItemStyles} />
+          ) : (
+            <></>
           )}
         </Box>
       </Sidebar>
