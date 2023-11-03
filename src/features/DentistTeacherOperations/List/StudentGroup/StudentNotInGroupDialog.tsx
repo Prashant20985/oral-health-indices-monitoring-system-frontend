@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import { Student } from "../../../../app/models/Group";
 import {
   Avatar,
   Button,
@@ -9,23 +8,24 @@ import {
   Dialog,
   useTheme,
 } from "@mui/material";
-import { colors } from "../../../../themeConfig";
 import SlideUpTransition from "../../../../app/common/transition/SlideUpTransition";
 import { Groups3 } from "@mui/icons-material";
+import { colors } from "../../../../themeConfig";
+import { Student } from "../../../../app/models/Group";
 import StudentList from "../StudentList/StudentList";
 
 interface Props {
-  students: Student[];
-  handleClose: () => void;
-  isOpen: boolean;
   groupId: string;
+  isOpen: boolean;
+  handleClose: () => void;
+  students: Student[];
 }
 
-export default observer(function StudentsInGroupDialog({
-  students,
-  handleClose,
-  isOpen,
+export default observer(function StudentNotInGroupDialog({
   groupId,
+  isOpen,
+  handleClose,
+  students,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -34,7 +34,6 @@ export default observer(function StudentsInGroupDialog({
     <Dialog open={isOpen} fullWidth TransitionComponent={SlideUpTransition}>
       <Card
         style={{
-          width: "100%",
           backgroundColor:
             theme.palette.mode === "dark" ? "#1F2A40" : "#E2DFD2",
         }}
@@ -52,9 +51,13 @@ export default observer(function StudentsInGroupDialog({
               <Groups3 />
             </Avatar>
           }
-          title="Students in Group"
+          title="Students To Add"
         />
-        <StudentList students={students} groupId={groupId} />
+        <StudentList
+          students={students}
+          groupId={groupId}
+          studentsInGroupList={false}
+        />
         <CardActions
           sx={{
             display: "flex",

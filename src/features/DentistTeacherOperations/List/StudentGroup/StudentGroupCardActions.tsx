@@ -15,7 +15,9 @@ import {
 import { observer } from "mobx-react-lite";
 import * as React from "react";
 import StudentInGroupDialog from "./StudentInGroupDialog";
+import StudentNotInGroupDialog from "./StudentNotInGroupDialog";
 import { Student } from "../../../../app/models/Group";
+import { useStore } from "../../../../app/stores/Store";
 
 interface Props {
   groupId: string;
@@ -30,6 +32,8 @@ export default observer(function StudentGroupCardActions({
 }: Props) {
   const theme = useTheme();
 
+  const { dentistTeacherStore } = useStore();
+
   const [studentsInGroupDialog, setStudentsInGroupDialog] = React.useState<{
     groupId: string;
     students: Student[];
@@ -39,6 +43,17 @@ export default observer(function StudentGroupCardActions({
     students: [],
     isOpen: false,
   });
+
+  const [studentsNotInGroupDialog, setStudentsNotInGroupDialog] =
+    React.useState<{
+      groupId: string;
+      students: Student[];
+      isOpen: boolean;
+    }>({
+      groupId: "",
+      isOpen: false,
+      students: [],
+    });
 
   const handleOpenStudentsInGroupDialog = (
     groupId: string,
@@ -61,6 +76,23 @@ export default observer(function StudentGroupCardActions({
       groupId: "",
       students: [],
       isOpen: false,
+    });
+  };
+
+  const handleOpenStudentsNotInGroupDialog = async (groupId: string) => {
+    await dentistTeacherStore.getStudentsNotInGroup(groupId);
+    setStudentsNotInGroupDialog({
+      groupId: groupId,
+      isOpen: true,
+      students: dentistTeacherStore.studentsNotInGroup,
+    });
+  };
+
+  const handleCloseStudentsNotInGroupDialog = () => {
+    setStudentsNotInGroupDialog({
+      groupId: "",
+      isOpen: false,
+      students: [],
     });
   };
 
@@ -87,7 +119,9 @@ export default observer(function StudentGroupCardActions({
         </Box>
         <Box display="flex">
           <Tooltip title="Add Student">
-            <IconButton>
+            <IconButton
+              onClick={() => handleOpenStudentsNotInGroupDialog(groupId)}
+            >
               <AddCircleOutline color="success" />
             </IconButton>
           </Tooltip>
@@ -106,7 +140,14 @@ export default observer(function StudentGroupCardActions({
       <StudentInGroupDialog
         students={studentsInGroupDialog.students}
         isOpen={studentsInGroupDialog.isOpen}
+        groupId={studentsInGroupDialog.groupId}
         handleClose={() => handleCloseStudentsInGroupDialog()}
+      />
+      <StudentNotInGroupDialog
+        groupId={studentsNotInGroupDialog.groupId}
+        isOpen={studentsNotInGroupDialog.isOpen}
+        students={studentsNotInGroupDialog.students}
+        handleClose={handleCloseStudentsNotInGroupDialog}
       />
     </>
   );

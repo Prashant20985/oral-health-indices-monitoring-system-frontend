@@ -13,26 +13,47 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import LinearProgressComponent from "../../../../app/common/loadingComponents/LinearProgressComponent";
 import { Student } from "../../../../app/models/Group";
 import { DeleteForever, PersonAdd } from "@mui/icons-material";
+import { useStore } from "../../../../app/stores/Store";
 
 interface Props {
   students: Student[];
   loading?: boolean;
   studentsInGroupList?: boolean;
+  groupId: string;
 }
 
 export default observer(function StudentList({
   students,
   loading = false,
   studentsInGroupList = true,
+  groupId,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const { dentistTeacherStore } = useStore();
 
   const [studentsList, setStudentsList] = React.useState<Student[]>([]);
 
   React.useEffect(() => {
     setStudentsList(students);
   }, [students]);
+
+  const handleRemoveStudentFromGroupClick = async (studentId: string) => {
+    await dentistTeacherStore
+      .removeStudentFromGroup(groupId, studentId)
+      .then(() => {
+        const updatedStudents = studentsList.filter((s) => s.id !== studentId);
+        setStudentsList(updatedStudents);
+      });
+  };
+
+  const handleAddStudentsToGroupClick = async (student: Student) => {
+    await dentistTeacherStore.addStudentToGroup(groupId, student).then(() => {
+      const updatedStudents = studentsList.filter((s) => s.id !== student.id);
+      setStudentsList(updatedStudents);
+    });
+  };
 
   const columns: GridColDef[] = [
     {
@@ -92,6 +113,7 @@ export default observer(function StudentList({
       headerAlign: "center",
       flex: 1,
       renderCell: ({ row }: any) => {
+        const { id } = row || {};
         return (
           <Box
             display="flex"
@@ -106,13 +128,15 @@ export default observer(function StudentList({
           >
             {studentsInGroupList ? (
               <Tooltip title="Remove From Group">
-                <IconButton>
+                <IconButton
+                  onClick={() => handleRemoveStudentFromGroupClick(id)}
+                >
                   <DeleteForever color="primary" />
                 </IconButton>
               </Tooltip>
             ) : (
               <Tooltip title="Add To Group">
-                <IconButton>
+                <IconButton onClick={() => handleAddStudentsToGroupClick(row)}>
                   <PersonAdd color="primary" />
                 </IconButton>
               </Tooltip>
