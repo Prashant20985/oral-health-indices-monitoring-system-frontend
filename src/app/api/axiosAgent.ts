@@ -12,6 +12,7 @@ import {
   ApplicationUserFormValues,
 } from "../models/ApplicationUser";
 import { router } from "../router/Routes";
+import { Group, Student } from "../models/Group";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -126,9 +127,43 @@ const AdminOperations = {
     apiRequests.put<void>(`/admin/change-activation-status/${userName}`, {}),
 };
 
+const DentistTeacherOperations = {
+  createGroup: (groupName: string) =>
+    apiRequests.post<void>(
+      `/dentistTeacher/create-group?groupName=${groupName}`,
+      {}
+    ),
+
+  addStudentToGroup: (groupId: string, studentId: string) =>
+    apiRequests.post<void>(
+      `/dentistTeacher/add-student/${groupId}?studentId=${studentId}`,
+      {}
+    ),
+
+  removeStudentFromGroup: (groupId: string, studentId: string) =>
+    apiRequests.del<void>(
+      `/dentistTeacher/remove-student/${groupId}?studentId=${studentId}`
+    ),
+
+  deleteGroup: (groupId: string) =>
+    apiRequests.del<void>(`/dentistTeacher/delete-group/${groupId}`),
+
+  updateGroupName: (groupId: string, groupName: string) =>
+    apiRequests.put<void>(
+      `/dentistTeacher/update-groupname/${groupId}?groupName=${groupName}`,
+      {}
+    ),
+
+  getStudentsNotInGroup: (groupId: string) =>
+    apiRequests.get<Student[]>(`/dentistTeacher/get-studentsNotInGroup/${groupId}`),
+
+  getGroups: () => apiRequests.get<Group[]>(`/dentistTeacher/groups`),
+};
+
 const axiosAgent = {
   AccountOperations,
   AdminOperations,
+  DentistTeacherOperations,
 };
 
 export default axiosAgent;
