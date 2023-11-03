@@ -1,11 +1,19 @@
-import { Box, InputAdornment, Paper, TextField, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  Paper,
+  TextField,
+  useTheme,
+} from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../../app/stores/Store";
 import { colors } from "../../../../themeConfig";
 import * as React from "react";
 import Header from "../../../../app/common/header/Header";
-import { SearchRounded } from "@mui/icons-material";
+import { Add, SearchRounded } from "@mui/icons-material";
 import StudentGroupCard from "./StudentGroupCard";
+import AddStudentGroupForm from "../../Forms/AddStudentGroupForm";
 
 export default observer(function StudentGroupList() {
   const { dentistTeacherStore } = useStore();
@@ -14,6 +22,7 @@ export default observer(function StudentGroupList() {
   const color = colors(theme.palette.mode);
 
   const [groupSearchQuery, setGroupSearchQuery] = React.useState("");
+  const [addFormOpen, setAddFormOpen] = React.useState(false);
 
   React.useEffect(() => {
     const fetchGroups = async () => {
@@ -28,8 +37,16 @@ export default observer(function StudentGroupList() {
 
   return (
     <Box display="flex" flexDirection="column">
-      <Box>
+      <Box display="flex" justifyContent="space-between" alignContent="center">
         <Header title="Student Groups" />
+        <Button
+          variant="contained"
+          color="success"
+          startIcon={<Add />}
+          onClick={() => setAddFormOpen(true)}
+        >
+          Add New Group
+        </Button>
       </Box>
       <Box
         display="flex"
@@ -38,24 +55,26 @@ export default observer(function StudentGroupList() {
         flexDirection="column"
         mt="2rem"
       >
-        <Box>
-          <TextField
-            color="info"
-            label="Search"
-            variant="outlined"
-            type="text"
-            fullWidth
-            value={groupSearchQuery}
-            onChange={(e) => setGroupSearchQuery(e.target.value)}
-            size="small"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <SearchRounded color="info" />
-                </InputAdornment>
-              ),
-            }}
-          />
+        <Box display="flex" justifyContent="flex-end">
+          <Box width="30%">
+            <TextField
+              color="info"
+              label="Search"
+              variant="outlined"
+              type="text"
+              fullWidth
+              value={groupSearchQuery}
+              onChange={(e) => setGroupSearchQuery(e.target.value)}
+              size="small"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <SearchRounded color="info" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Box>
         </Box>
         <Paper
           style={{
@@ -71,6 +90,10 @@ export default observer(function StudentGroupList() {
           ))}
         </Paper>
       </Box>
+      <AddStudentGroupForm
+        isOpen={addFormOpen}
+        onClose={() => setAddFormOpen(false)}
+      />
     </Box>
   );
 });
