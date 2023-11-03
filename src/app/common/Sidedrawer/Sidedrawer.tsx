@@ -1,13 +1,13 @@
-import { Box, IconButton, useTheme, Typography, Divider } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import { Menu, MenuItem, MenuItemStyles, Sidebar } from "react-pro-sidebar";
 import * as React from "react";
-import { ChevronLeft, Dashboard, ViewSidebar } from "@mui/icons-material";
+import { Dashboard } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
-//import AdminNavOptions from "../../../features/AdminOperations/NavOptions/AdminNavOptions";
 import { router } from "../../router/Routes";
 import AdminNavOptions from "../../../features/AdminOperations/NavOptions/AdminNavOptions";
 import { useStore } from "../../stores/Store";
+import SidedrawerHeader from "./SidedrawerHeader";
 
 export default function Sidedrawer() {
   const theme = useTheme();
@@ -19,13 +19,13 @@ export default function Sidedrawer() {
   } = useStore();
 
   const backgroundColor =
-    theme.palette.mode === "dark" ? blueGrey[900] : blueGrey[300];
+    theme.palette.mode === "dark" ? blueGrey[900] : blueGrey[100];
 
   const submenuBackgroundColor =
     theme.palette.mode === "dark" ? blueGrey[800] : blueGrey[200];
 
   const hoverColor =
-    theme.palette.mode === "dark" ? blueGrey[700] : blueGrey[100];
+    theme.palette.mode === "dark" ? blueGrey[700] : blueGrey[300];
 
   const hexToRgba = (hex: string, alpha: number) => {
     const r = parseInt(hex.slice(1, 3), 16);
@@ -37,8 +37,8 @@ export default function Sidedrawer() {
 
   const menuItemStyles: MenuItemStyles = {
     root: {
-      fontSize: "15px",
-      fontWeight: 500,
+      fontSize: "13px",
+      fontWeight: 600,
     },
     SubMenuExpandIcon: {
       color: color.grey[200],
@@ -80,48 +80,12 @@ export default function Sidedrawer() {
             mt: "1rem",
           }}
         >
-          <IconButton
-            disableRipple
-            color="inherit"
-            aria-label="open sidebar"
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            sx={{
-              display: "flex",
-              alignContent: "center",
-            }}
-          >
-            {isCollapsed ? (
-              <ViewSidebar sx={{ fontSize: 30 }} />
-            ) : (
-              <>
-                <Typography
-                  variant="h4"
-                  noWrap
-                  color="inherit"
-                  sx={{
-                    fontFamily: "monospace",
-                    fontWeight: 700,
-                  }}
-                >
-                  Oral EHR System
-                </Typography>
-                <ChevronLeft sx={{ fontSize: 30 }} />
-              </>
-            )}
-          </IconButton>
-          <Divider sx={{ mb: "2rem" }} />
+          <SidedrawerHeader
+            isCollapsed={isCollapsed}
+            setIsCollapsed={setIsCollapsed}
+          />
           <Menu menuItemStyles={menuItemStyles}>
-            <MenuItem
-              icon={
-                <Dashboard
-                  sx={{
-                    color: color.pinkAccent[400],
-                    fontSize: 30,
-                  }}
-                />
-              }
-              onClick={() => router.navigate("/")}
-            >
+            <MenuItem icon={<Dashboard />} onClick={() => router.navigate("/")}>
               Dashboard
             </MenuItem>
           </Menu>

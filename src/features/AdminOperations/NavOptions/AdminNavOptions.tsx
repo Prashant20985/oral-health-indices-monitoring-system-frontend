@@ -1,15 +1,14 @@
-import { Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { useLocation } from "react-router-dom";
 import { router } from "../../../app/router/Routes";
 import { colors } from "../../../themeConfig";
 import {
-  DeleteSweepOutlined,
-  GppBadOutlined,
-  GppGoodOutlined,
-  GroupRounded,
+  DeleteForeverSharp,
+  GppBadSharp,
+  GppGoodSharp,
 } from "@mui/icons-material";
-import { Menu, MenuItemStyles, SubMenu, MenuItem } from "react-pro-sidebar";
+import { Menu, MenuItemStyles, MenuItem } from "react-pro-sidebar";
 
 interface Props {
   menuItemStyles: MenuItemStyles;
@@ -24,30 +23,25 @@ export default observer(function AdminNavOptions({ menuItemStyles }: Props) {
     {
       title: "Active Users",
       path: "active-users",
-      icon: <GppGoodOutlined color="success" />,
+      icon: <GppGoodSharp />,
     },
     {
       title: "Deactivated Users",
       path: "deactivated-users",
-      icon: <GppBadOutlined color="warning" />,
+      icon: <GppBadSharp />,
     },
     {
       title: "Deleted Users",
       path: "deleted-users",
-      icon: <DeleteSweepOutlined color="error" />,
+      icon: <DeleteForeverSharp />,
     },
   ];
 
   const currentPath = location.pathname.split("/")[2];
 
   return (
-    <Menu menuItemStyles={menuItemStyles}>
-      <SubMenu
-        label="Users"
-        icon={
-          <GroupRounded sx={{ fontSize: 30, color: color.redAccent[400] }} />
-        }
-      >
+    <Box mt="1.5rem">
+      <Menu menuItemStyles={menuItemStyles}>
         {options.map((option) => (
           <>
             <MenuItem
@@ -67,7 +61,7 @@ export default observer(function AdminNavOptions({ menuItemStyles }: Props) {
             </MenuItem>
           </>
         ))}
-      </SubMenu>
-    </Menu>
+      </Menu>
+    </Box>
   );
 });
