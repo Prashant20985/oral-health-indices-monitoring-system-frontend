@@ -5,6 +5,7 @@ import AdminStore from "./AdminStore";
 import ActiveUsersAxiosParamsStore from "./ActiveUsersAxiosParamsStore";
 import DeactivatedUsersAxiosParamsStore from "./DeactivatedUsersAxiosParamsStore";
 import DeletedUsersAxiosParamsStore from "./DeletedUsersAxiosParamsStore";
+import DentistTeacherStore from "./DentistTeacherStore";
 
 interface Store {
   commonStore: CommonStore;
@@ -13,6 +14,7 @@ interface Store {
   activeUsersAxiosParamsStore: ActiveUsersAxiosParamsStore;
   deactivatedUsersAxiosParamsStore: DeactivatedUsersAxiosParamsStore;
   deletedUsersAxiosParamsStore: DeletedUsersAxiosParamsStore;
+  dentistTeacherStore: DentistTeacherStore;
 }
 
 export const store: Store = {
@@ -22,6 +24,7 @@ export const store: Store = {
   activeUsersAxiosParamsStore: new ActiveUsersAxiosParamsStore(),
   deactivatedUsersAxiosParamsStore: new DeactivatedUsersAxiosParamsStore(),
   deletedUsersAxiosParamsStore: new DeletedUsersAxiosParamsStore(),
+  dentistTeacherStore: new DentistTeacherStore(),
 };
 
 export const StoreContext = createContext(store);
