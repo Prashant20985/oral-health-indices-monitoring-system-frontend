@@ -11,6 +11,7 @@ import DeletedApplicationUsersList from "../../features/AdminOperations/List/Del
 import ServerError from "../../features/Errors/ServerError";
 import Unauthorized from "../../features/Errors/Unauthorized";
 import NotFound from "../../features/Errors/NotFound";
+import StudentGroupList from "../../features/DentistTeacherOperations/List/StudentGroup/StudentGroupList";
 
 const routes: RouteObject[] = [
   {
@@ -44,6 +45,19 @@ const routes: RouteObject[] = [
           {
             path: "admin/deleted-users",
             element: <DeletedApplicationUsersList />,
+          },
+        ],
+      },
+      {
+        element: (
+          <RequireAuthentication
+            roles={["Dentist_Teacher_Examiner", "Dentist_Teacher_Researcher"]}
+          />
+        ),
+        children: [
+          {
+            path: "student-groups",
+            element: <StudentGroupList />,
           },
         ],
       },
