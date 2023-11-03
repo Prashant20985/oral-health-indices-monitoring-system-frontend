@@ -18,6 +18,8 @@ import StudentInGroupDialog from "./StudentInGroupDialog";
 import StudentNotInGroupDialog from "./StudentNotInGroupDialog";
 import { Student } from "../../../../app/models/Group";
 import { useStore } from "../../../../app/stores/Store";
+import EditStudentGroupForm from "../../Forms/EditStudentGroupForm";
+import StudentGroupDeleteConfirmation from "../../Forms/StudentGroupDeleteConfirmation";
 
 interface Props {
   groupId: string;
@@ -33,6 +35,8 @@ export default observer(function StudentGroupCardActions({
   const theme = useTheme();
 
   const { dentistTeacherStore } = useStore();
+
+  const [openEditGroupDialog, setOpenEditGroupDialog] = React.useState(false);
 
   const [studentsInGroupDialog, setStudentsInGroupDialog] = React.useState<{
     groupId: string;
@@ -55,10 +59,14 @@ export default observer(function StudentGroupCardActions({
       students: [],
     });
 
-  const handleOpenStudentsInGroupDialog = (
-    groupId: string,
-    groupName: string
-  ) => {
+  const [deleteConfirmationDialog, setDeleteConfirmationDialog] =
+    React.useState<{ isOpen: boolean; groupId: string; groupName: string }>({
+      isOpen: false,
+      groupId: "",
+      groupName: "",
+    });
+
+  const handleOpenStudentsInGroupDialog = () => {
     const updatedStudents = students.map((student) => ({
       ...student,
       groupName: groupName,
@@ -79,7 +87,7 @@ export default observer(function StudentGroupCardActions({
     });
   };
 
-  const handleOpenStudentsNotInGroupDialog = async (groupId: string) => {
+  const handleOpenStudentsNotInGroupDialog = async () => {
     await dentistTeacherStore.getStudentsNotInGroup(groupId);
     setStudentsNotInGroupDialog({
       groupId: groupId,
@@ -93,6 +101,22 @@ export default observer(function StudentGroupCardActions({
       groupId: "",
       isOpen: false,
       students: [],
+    });
+  };
+
+  const handleDeleteClick = () => {
+    setDeleteConfirmationDialog({
+      groupId: groupId,
+      isOpen: true,
+      groupName: groupName,
+    });
+  };
+
+  const handleDeleteConfiramtionClose = () => {
+    setDeleteConfirmationDialog({
+      groupId: "",
+      isOpen: false,
+      groupName: "",
     });
   };
 
@@ -112,26 +136,24 @@ export default observer(function StudentGroupCardActions({
             size="small"
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
             endIcon={<KeyboardDoubleArrowRight />}
-            onClick={() => handleOpenStudentsInGroupDialog(groupId, groupName)}
+            onClick={() => handleOpenStudentsInGroupDialog()}
           >
             View Students
           </Button>
         </Box>
         <Box display="flex">
           <Tooltip title="Add Student">
-            <IconButton
-              onClick={() => handleOpenStudentsNotInGroupDialog(groupId)}
-            >
+            <IconButton onClick={() => handleOpenStudentsNotInGroupDialog()}>
               <AddCircleOutline color="success" />
             </IconButton>
           </Tooltip>
           <Tooltip title="Edit Group Name">
-            <IconButton>
+            <IconButton onClick={() => setOpenEditGroupDialog(true)}>
               <Edit color="warning" />
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete Group">
-            <IconButton>
+            <IconButton onClick={() => handleDeleteClick()}>
               <DeleteSweep color="error" />
             </IconButton>
           </Tooltip>
@@ -148,6 +170,18 @@ export default observer(function StudentGroupCardActions({
         isOpen={studentsNotInGroupDialog.isOpen}
         students={studentsNotInGroupDialog.students}
         handleClose={handleCloseStudentsNotInGroupDialog}
+      />
+      <EditStudentGroupForm
+        isOpen={openEditGroupDialog}
+        groupId={groupId}
+        name={groupName}
+        onClose={() => setOpenEditGroupDialog(false)}
+      />
+      <StudentGroupDeleteConfirmation
+        isOpen={deleteConfirmationDialog.isOpen}
+        groupId={deleteConfirmationDialog.groupId}
+        groupName={deleteConfirmationDialog.groupName}
+        onClose={() => handleDeleteConfiramtionClose()}
       />
     </>
   );
