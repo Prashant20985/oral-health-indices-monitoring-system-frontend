@@ -76,7 +76,7 @@ export default class UserRequestStore {
       );
       runInAction(() => {
         this.loading.createRequest = false;
-        this.fetchUserRequestsForAdmin();
+        this.fetchUserRequestsForCurrentUser();
       });
     } catch (error) {
       console.log(error);
