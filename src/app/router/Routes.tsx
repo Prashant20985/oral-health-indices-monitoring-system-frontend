@@ -12,6 +12,7 @@ import ServerError from "../../features/Errors/ServerError";
 import Unauthorized from "../../features/Errors/Unauthorized";
 import NotFound from "../../features/Errors/NotFound";
 import StudentGroupList from "../../features/DentistTeacherOperations/List/StudentGroup/StudentGroupList";
+import UserRequestListForCurrentuser from "../../features/UserRequestOperations/List/UserRequestListForCurrentuser";
 
 const routes: RouteObject[] = [
   {
@@ -29,7 +30,10 @@ const routes: RouteObject[] = [
             ]}
           />
         ),
-        children: [{ path: "/", element: <Dashboard /> }],
+        children: [
+          { path: "/", element: <Dashboard /> },
+          { path: "my-requests", element: <UserRequestListForCurrentuser /> },
+        ],
       },
       {
         element: <RequireAuthentication roles={["Admin"]} />,
