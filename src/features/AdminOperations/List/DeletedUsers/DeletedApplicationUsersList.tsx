@@ -6,29 +6,19 @@ import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
 import ApplicationUserList from "../DataGrid/ApplicationUserList";
 
 export default observer(function DeletedApplicationUsersList() {
-  const { deletedUsersAxiosParamsStore, adminStore } = useStore();
+  const { adminStore } = useStore();
 
   const {
-    setUserType,
-    setRole,
-    setSearchTerm,
-    clearFilters,
-    searchTerm,
-    role,
-    userType,
-  } = deletedUsersAxiosParamsStore;
-
-  const handleUserTypeChange = (userType: string) => {
-    setUserType(userType);
-  };
-
-  const handleRoleChange = (role: string) => {
-    setRole(role);
-  };
-
-  const handleSetSearchTerm = (searchTerm: string) => {
-    setSearchTerm(searchTerm);
-  };
+    setDeletedApplicationUsersRole,
+    setDeletedApplicationUsersSearchTerm,
+    setDeletedApplicationUsersUserType,
+    clearDeletedApplicationUsersFilters,
+    deletedApplicationUsersSearchTerm,
+    deletedApplicationUsersRole,
+    deletedApplicationUsersUserType,
+    deletedApplicationUsers,
+    loading,
+  } = adminStore;
 
   React.useEffect(() => {
     const fetchUsers = async () => {
@@ -43,17 +33,17 @@ export default observer(function DeletedApplicationUsersList() {
       <ApplicationUsersListFilter
         title="Deleted Users"
         subTitle="List of Deleted Users"
-        onRoleChange={handleRoleChange}
-        setSearchTerm={handleSetSearchTerm}
-        onUserTypeChange={handleUserTypeChange}
-        userType={userType}
-        role={role}
-        clearFilters={clearFilters}
-        searchTerm={searchTerm}
+        onRoleChange={setDeletedApplicationUsersRole}
+        setSearchTerm={setDeletedApplicationUsersSearchTerm}
+        onUserTypeChange={setDeletedApplicationUsersUserType}
+        userType={deletedApplicationUsersUserType}
+        role={deletedApplicationUsersRole}
+        clearFilters={clearDeletedApplicationUsersFilters}
+        searchTerm={deletedApplicationUsersSearchTerm}
       />
       <ApplicationUserList
-        applicationUsers={adminStore.deletedApplicationUsers}
-        loading={adminStore.loading.deletedApplicationUsers}
+        applicationUsers={deletedApplicationUsers}
+        loading={loading.deletedApplicationUsers}
         deletedUsersList={true}
       />
     </Box>

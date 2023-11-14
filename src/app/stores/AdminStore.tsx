@@ -1,10 +1,9 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 import {
   ApplicationUser,
   ApplicationUserFormValues,
 } from "../models/ApplicationUser";
 import axiosAgent from "../api/axiosAgent";
-import { store } from "./Store";
 
 export default class AdminStore {
   selectedApplicationUser: ApplicationUser | undefined;
@@ -12,6 +11,18 @@ export default class AdminStore {
   deactivatedApplicationUsers: ApplicationUser[] = [];
   deletedApplicationUsers: ApplicationUser[] = [];
   csvAddResponse: string = "";
+
+  activeApplicationUsersSearchTerm: string = "";
+  activeApplicationUsersUserType: string = "";
+  activeApplicationUsersRole: string = "";
+
+  deactivatedApplicationUsersSearchTerm: string = "";
+  deactivatedApplicationUsersUserType: string = "";
+  deactivatedApplicationUsersRole: string = "";
+
+  deletedApplicationUsersSearchTerm: string = "";
+  deletedApplicationUsersUserType: string = "";
+  deletedApplicationUsersRole: string = "";
 
   loading = {
     activeApplicationUsers: false,
@@ -27,7 +38,76 @@ export default class AdminStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    reaction(
+      () => ({
+        searchTerm: this.activeApplicationUsersSearchTerm,
+        userType: this.activeApplicationUsersUserType,
+        role: this.activeApplicationUsersRole,
+      }),
+      () => {
+        this.fetchActiveApplicationUsers();
+      }
+    );
+
+    reaction(
+      () => ({
+        searchTerm: this.deactivatedApplicationUsersSearchTerm,
+        userType: this.deactivatedApplicationUsersUserType,
+        role: this.deactivatedApplicationUsersRole,
+      }),
+      () => {
+        this.fetchDeactivatedApplicationUsers();
+      }
+    );
+
+    reaction(
+      () => ({
+        searchTerm: this.deletedApplicationUsersSearchTerm,
+        userType: this.deletedApplicationUsersUserType,
+        role: this.deletedApplicationUsersRole,
+      }),
+      () => {
+        this.fetchDeletedApplicationUsers();
+      }
+    );
   }
+
+  setActiveApplicationUsersSearchTerm = (searchTerm: string) => {
+    this.activeApplicationUsersSearchTerm = searchTerm;
+  };
+
+  setActiveApplicationUsersUserType = (userType: string) => {
+    this.activeApplicationUsersUserType = userType;
+  };
+
+  setActiveApplicationUsersRole = (role: string) => {
+    this.activeApplicationUsersRole = role;
+  };
+
+  setDeactivatedApplicationUsersSearchTerm = (searchTerm: string) => {
+    this.deactivatedApplicationUsersSearchTerm = searchTerm;
+  };
+
+  setDeactivatedApplicationUsersUserType = (userType: string) => {
+    this.deactivatedApplicationUsersUserType = userType;
+  };
+
+  setDeactivatedApplicationUsersRole = (role: string) => {
+    this.deactivatedApplicationUsersRole = role;
+  };
+
+  setDeletedApplicationUsersSearchTerm = (searchTerm: string) => {
+    this.deletedApplicationUsersSearchTerm = searchTerm;
+  };
+
+  setDeletedApplicationUsersUserType = (userType: string) => {
+    this.deletedApplicationUsersUserType = userType;
+  };
+
+  setDeletedApplicationUsersRole = (role: string) => {
+    this.deletedApplicationUsersRole = role;
+  };
 
   setCsvAddResponse = (response: string) => {
     this.csvAddResponse = response;
@@ -49,6 +129,48 @@ export default class AdminStore {
     this.selectedApplicationUser = undefined;
   };
 
+  clearActiveApplicationUsersFilters = () => {
+    this.setActiveApplicationUsersSearchTerm("");
+    this.setActiveApplicationUsersUserType("");
+    this.setActiveApplicationUsersRole("");
+  };
+
+  clearDeactivatedApplicationUsersFilters = () => {
+    this.setDeactivatedApplicationUsersSearchTerm("");
+    this.setDeactivatedApplicationUsersUserType("");
+    this.setDeactivatedApplicationUsersRole("");
+  };
+
+  clearDeletedApplicationUsersFilters = () => {
+    this.setDeletedApplicationUsersSearchTerm("");
+    this.setDeletedApplicationUsersUserType("");
+    this.setDeletedApplicationUsersRole("");
+  };
+
+  get activeApplicationUsersAxiosParams() {
+    const params = new URLSearchParams();
+    params.append("searchTerm", this.activeApplicationUsersSearchTerm);
+    params.append("userType", this.activeApplicationUsersUserType);
+    params.append("role", this.activeApplicationUsersRole);
+    return params;
+  }
+
+  get deactivatedApplicationUsersAxiosParams() {
+    const params = new URLSearchParams();
+    params.append("searchTerm", this.deactivatedApplicationUsersSearchTerm);
+    params.append("userType", this.deactivatedApplicationUsersUserType);
+    params.append("role", this.deactivatedApplicationUsersRole);
+    return params;
+  }
+
+  get deletedApplicationUsersAxiosParams() {
+    const params = new URLSearchParams();
+    params.append("searchTerm", this.deletedApplicationUsersSearchTerm);
+    params.append("userType", this.deletedApplicationUsersUserType);
+    params.append("role", this.deletedApplicationUsersRole);
+    return params;
+  }
+
   private getUserDetails = (userName: string) => {
     return this.activeApplicationUsers
       .concat(this.deletedApplicationUsers, this.deactivatedApplicationUsers)
@@ -59,7 +181,7 @@ export default class AdminStore {
     this.loading.activeApplicationUsers = true;
     try {
       const result = await axiosAgent.AdminOperations.activeUsersList(
-        store.activeUsersAxiosParamsStore.axiosParams
+        this.activeApplicationUsersAxiosParams
       );
       runInAction(() => {
         this.loading.activeApplicationUsers = false;
@@ -78,7 +200,7 @@ export default class AdminStore {
     this.loading.deactivatdApplicationUsers = true;
     try {
       const result = await axiosAgent.AdminOperations.deactivatedUsersList(
-        store.deactivatedUsersAxiosParamsStore.axiosParams
+        this.deactivatedApplicationUsersAxiosParams
       );
       runInAction(() => {
         this.loading.deactivatdApplicationUsers = false;
@@ -97,7 +219,7 @@ export default class AdminStore {
     this.loading.deletedApplicationUsers = true;
     try {
       const result = await axiosAgent.AdminOperations.deletedUsersList(
-        store.deletedUsersAxiosParamsStore.axiosParams
+        this.deletedApplicationUsersAxiosParams
       );
       runInAction(() => {
         this.loading.deletedApplicationUsers = false;

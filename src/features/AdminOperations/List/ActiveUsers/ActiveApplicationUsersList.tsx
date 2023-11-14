@@ -6,34 +6,25 @@ import ApplicationUserList from "../DataGrid/ApplicationUserList";
 import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
 
 export default observer(function ActiveApplicationUsersList() {
-  const { activeUsersAxiosParamsStore, adminStore } = useStore();
+  const { adminStore } = useStore();
 
   const {
-    setUserType,
-    setRole,
-    setSearchTerm,
-    clearFilters,
-    searchTerm,
-    role,
-    userType,
-  } = activeUsersAxiosParamsStore;
-
-  const handleUserTypeChange = (userType: string) => {
-    setUserType(userType);
-  };
-
-  const handleRoleChange = (role: string) => {
-    setRole(role);
-  };
-
-  const handleSetSearchTerm = (searchTerm: string) => {
-    setSearchTerm(searchTerm);
-  };
+    setActiveApplicationUsersUserType,
+    setActiveApplicationUsersRole,
+    setActiveApplicationUsersSearchTerm,
+    clearActiveApplicationUsersFilters,
+    activeApplicationUsersSearchTerm,
+    activeApplicationUsersRole,
+    activeApplicationUsersUserType,
+    activeApplicationUsers,
+    fetchActiveApplicationUsers,
+    loading,
+  } = adminStore;
 
   React.useEffect(() => {
     const fetchUsers = async () => {
       if (adminStore.activeApplicationUsers.length <= 0) {
-        await adminStore.fetchActiveApplicationUsers();
+        await fetchActiveApplicationUsers();
       }
     };
     fetchUsers();
@@ -44,17 +35,17 @@ export default observer(function ActiveApplicationUsersList() {
       <ApplicationUsersListFilter
         title="Active Users"
         subTitle="List Of Active Users"
-        onRoleChange={handleRoleChange}
-        setSearchTerm={handleSetSearchTerm}
-        onUserTypeChange={handleUserTypeChange}
-        userType={userType}
-        role={role}
-        clearFilters={clearFilters}
-        searchTerm={searchTerm}
+        onRoleChange={setActiveApplicationUsersRole}
+        setSearchTerm={setActiveApplicationUsersSearchTerm}
+        onUserTypeChange={setActiveApplicationUsersUserType}
+        userType={activeApplicationUsersUserType}
+        role={activeApplicationUsersRole}
+        clearFilters={clearActiveApplicationUsersFilters}
+        searchTerm={activeApplicationUsersSearchTerm}
       />
       <ApplicationUserList
-        applicationUsers={adminStore.activeApplicationUsers}
-        loading={adminStore.loading.activeApplicationUsers}
+        applicationUsers={activeApplicationUsers}
+        loading={loading.activeApplicationUsers}
       />
     </Box>
   );

@@ -6,29 +6,19 @@ import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
 import ApplicationUserList from "../DataGrid/ApplicationUserList";
 
 export default observer(function DeactivatedApplicationUsersList() {
-  const { deactivatedUsersAxiosParamsStore, adminStore } = useStore();
+  const { adminStore } = useStore();
 
   const {
-    setUserType,
-    setRole,
-    setSearchTerm,
-    clearFilters,
-    searchTerm,
-    role,
-    userType,
-  } = deactivatedUsersAxiosParamsStore;
-
-  const handleUserTypeChange = (userType: string) => {
-    setUserType(userType);
-  };
-
-  const handleRoleChange = (role: string) => {
-    setRole(role);
-  };
-
-  const handleSetSearchTerm = (searchTerm: string) => {
-    setSearchTerm(searchTerm);
-  };
+    setDeactivatedApplicationUsersRole,
+    setDeactivatedApplicationUsersSearchTerm,
+    setDeactivatedApplicationUsersUserType,
+    clearDeactivatedApplicationUsersFilters,
+    deactivatedApplicationUsersSearchTerm,
+    deactivatedApplicationUsersRole,
+    deactivatedApplicationUsersUserType,
+    deactivatedApplicationUsers,
+    loading,
+  } = adminStore;
 
   React.useEffect(() => {
     const fetchUsers = async () => {
@@ -44,17 +34,17 @@ export default observer(function DeactivatedApplicationUsersList() {
       <ApplicationUsersListFilter
         title="Deactivated Users"
         subTitle="List Of Deactivated Users"
-        onRoleChange={handleRoleChange}
-        setSearchTerm={handleSetSearchTerm}
-        onUserTypeChange={handleUserTypeChange}
-        userType={userType}
-        role={role}
-        clearFilters={clearFilters}
-        searchTerm={searchTerm}
+        onRoleChange={setDeactivatedApplicationUsersRole}
+        setSearchTerm={setDeactivatedApplicationUsersSearchTerm}
+        onUserTypeChange={setDeactivatedApplicationUsersUserType}
+        userType={deactivatedApplicationUsersUserType}
+        role={deactivatedApplicationUsersRole}
+        clearFilters={clearDeactivatedApplicationUsersFilters}
+        searchTerm={deactivatedApplicationUsersSearchTerm}
       />
       <ApplicationUserList
-        applicationUsers={adminStore.deactivatedApplicationUsers}
-        loading={adminStore.loading.deactivatdApplicationUsers}
+        applicationUsers={deactivatedApplicationUsers}
+        loading={loading.deactivatdApplicationUsers}
       />
     </Box>
   );
