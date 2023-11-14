@@ -13,6 +13,7 @@ import {
 } from "../models/ApplicationUser";
 import { router } from "../router/Routes";
 import { Group, Student } from "../models/Group";
+import { UserRequest } from "../models/UserRequest";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -155,15 +156,57 @@ const DentistTeacherOperations = {
     ),
 
   getStudentsNotInGroup: (groupId: string) =>
-    apiRequests.get<Student[]>(`/dentistTeacher/get-studentsNotInGroup/${groupId}`),
+    apiRequests.get<Student[]>(
+      `/dentistTeacher/get-studentsNotInGroup/${groupId}`
+    ),
 
   getGroups: () => apiRequests.get<Group[]>(`/dentistTeacher/groups`),
+};
+
+const UserRequestOperations = {
+  userRequestListForAdmin: (params: URLSearchParams) =>
+    axios.get<UserRequest[]>(`/userRequest/user-requests`, { params }),
+
+  userRequestListForCurrentUser: (params: URLSearchParams) =>
+    axios.get<UserRequest[]>(`/userRequest/requests-by-userid`, { params }),
+
+  createUserRequest: (requestTitle: string, description: string) =>
+    apiRequests.post<void>(
+      `/userRequest/create-request?requestTitle=${requestTitle}&description=${description}`,
+      {}
+    ),
+
+  deleteRequest: (userRequestid: string) =>
+    apiRequests.del<void>(`/userRequest/delete-request/${userRequestid}`),
+
+  updateUserRequest: (
+    userRequestId: string,
+    requestTitle: string,
+    description: string
+  ) =>
+    apiRequests.put<void>(
+      `/userRequest/update-request/${userRequestId}?requestTitle=${requestTitle}&description=${description}`,
+      {}
+    ),
+
+  updateUserRequestToInProgress: (userRequestId: string) =>
+    apiRequests.put<void>(
+      `/userRequest/update-to-inProgress/${userRequestId}`,
+      {}
+    ),
+
+  updateUserRequestToCompleted: (userRequestId: string, adminComment: string) =>
+    apiRequests.put<void>(
+      `/userRequest/update-to-inProgress/${userRequestId}?adminComment=${adminComment}`,
+      {}
+    ),
 };
 
 const axiosAgent = {
   AccountOperations,
   AdminOperations,
   DentistTeacherOperations,
+  UserRequestOperations,
 };
 
 export default axiosAgent;
