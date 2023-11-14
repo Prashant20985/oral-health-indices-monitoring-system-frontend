@@ -54,7 +54,7 @@ export default function ApplicationUsersListFilter({
   const handleSearchValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSearchValue(event.target.value);
+    setSearchValue(event.target.value!);
   };
 
   const handleSearchClick = () => {
