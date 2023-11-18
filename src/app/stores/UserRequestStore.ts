@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { RequestStatus, UserRequest } from "../models/UserRequest";
 import axiosAgent from "../api/axiosAgent";
 
@@ -24,6 +24,28 @@ export default class UserRequestStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    reaction(
+      () => ({
+        dateSubmitted: this.dateSubmittedForAdmin,
+        requestStatus: this.requestStatusForAdmin,
+      }),
+      () => {
+        this.setUserRequestsForAdmin([]);
+        this.fetchUserRequestsForAdmin();
+      }
+    );
+
+    reaction(
+      () => ({
+        dateSubmitted: this.dateSubmittedForCurrentUser,
+        requestStatus: this.requestStatusForCurrentUser,
+      }),
+      () => {
+        this.setUserRequestsForCurrentUser([]);
+        this.fetchUserRequestsForCurrentUser();
+      }
+    );
   }
 
   private setUserRequestsForAdmin(requests: UserRequest[]) {
@@ -108,7 +130,7 @@ export default class UserRequestStore {
     try {
       const result =
         await axiosAgent.UserRequestOperations.userRequestListForCurrentUser(
-          this.userRequestsForAdminParams
+          this.userRequestsForCurrentUserParams
         );
       runInAction(() => {
         this.setUserRequestsForCurrentUser(result.data);

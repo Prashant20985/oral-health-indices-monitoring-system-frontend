@@ -1,16 +1,18 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import { Menu, MenuItem, MenuItemStyles, Sidebar } from "react-pro-sidebar";
 import * as React from "react";
-import { Dashboard } from "@mui/icons-material";
+import { Dashboard, Message } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
 import { router } from "../../router/Routes";
 import AdminNavOptions from "../../../features/AdminOperations/NavOptions/AdminNavOptions";
 import { useStore } from "../../stores/Store";
 import SidedrawerHeader from "./SidedrawerHeader";
 import DentistTeacherNavOptions from "../../../features/DentistTeacherOperations/NavOptions/DentistTeacherNavOptions";
+import { useLocation } from "react-router-dom";
 
 export default function Sidedrawer() {
+  const location = useLocation();
   const theme = useTheme();
   const color = colors(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = React.useState(false);
@@ -18,6 +20,8 @@ export default function Sidedrawer() {
   const {
     userStore: { user },
   } = useStore();
+
+  const currentPath = location.pathname;
 
   const backgroundColor =
     theme.palette.mode === "dark" ? blueGrey[900] : blueGrey[100];
@@ -98,6 +102,22 @@ export default function Sidedrawer() {
           ) : (
             <></>
           )}
+          <Menu menuItemStyles={menuItemStyles}>
+            <MenuItem
+              icon={<Message />}
+              onClick={() => router.navigate("/my-requests")}
+            >
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: currentPath === "/my-requests" ? 700 : 500,
+                  color: color.grey[100],
+                }}
+              >
+                My Requests
+              </Typography>
+            </MenuItem>
+          </Menu>
         </Box>
       </Sidebar>
     </Box>
