@@ -75,7 +75,11 @@ export default observer(function UserRequestListForCurrentuser() {
             }}
           >
             {userRequestsForCurrentUser.map((userRequest) => (
-              <UserRequestCard userRequest={userRequest} />
+              <UserRequestCard
+                key={userRequest.id}
+                userRequest={userRequest}
+                isCurrentUserRequest={true}
+              />
             ))}
           </Paper>
         </Box>

@@ -13,6 +13,7 @@ import Unauthorized from "../../features/Errors/Unauthorized";
 import NotFound from "../../features/Errors/NotFound";
 import StudentGroupList from "../../features/DentistTeacherOperations/List/StudentGroup/StudentGroupList";
 import UserRequestListForCurrentuser from "../../features/UserRequestOperations/List/UserRequestListForCurrentuser";
+import UserRequestListForAdmin from "../../features/UserRequestOperations/List/UserRequestListForAdmin";
 
 const routes: RouteObject[] = [
   {
@@ -49,6 +50,10 @@ const routes: RouteObject[] = [
           {
             path: "admin/deleted-users",
             element: <DeletedApplicationUsersList />,
+          },
+          {
+            path: "admin/requests",
+            element: <UserRequestListForAdmin />,
           },
         ],
       },
