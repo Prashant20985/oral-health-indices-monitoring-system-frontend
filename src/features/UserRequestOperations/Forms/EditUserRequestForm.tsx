@@ -1,38 +1,54 @@
 import { observer } from "mobx-react-lite";
-import { Box, Dialog, TextField, Typography, useTheme } from "@mui/material";
-import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
-import { Form, Formik } from "formik";
 import { useStore } from "../../../app/stores/Store";
-import CustomTextField from "../../../app/common/formInputs/CustomTextField";
+import { Box, Dialog, TextField, Typography, useTheme } from "@mui/material";
+import { colors } from "../../../themeConfig";
+import * as React from "react";
+import { Formik } from "formik";
+import { Form } from "react-router-dom";
+import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
 import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
 import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButtom";
-import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
+import CustomTextField from "../../../app/common/formInputs/CustomTextField";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
-import * as React from "react";
-import { colors } from "../../../themeConfig";
+import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  userRequestId: string;
+  requestTitle: string;
+  description: string;
 }
 
-export default observer(function AddUserRequestForm({
+export default observer(function EditUserRequestForm({
   isOpen,
   onClose,
+  userRequestId,
+  requestTitle,
+  description,
 }: Props) {
-  const { userRequestStore } = useStore();
-  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const {
+    userRequestStore: { updateUserRequest },
+  } = useStore();
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
-  const handelSubmit = async (requestTitle: string, description: string) => {
-    await userRequestStore.createRequest(requestTitle, description).then(() => {
-      onClose();
-      setSnackbarOpen(true);
-    });
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+
+  const handelSubmit = async (
+    userRequestId: string,
+    requestTitle: string,
+    description: string
+  ) => {
+    await updateUserRequest(userRequestId, requestTitle, description).then(
+      () => {
+        onClose();
+        setSnackbarOpen(true);
+      }
+    );
   };
-  
+
   return (
     <Box>
       <Dialog
@@ -50,12 +66,14 @@ export default observer(function AddUserRequestForm({
           <Box width="100%">
             <Formik
               initialValues={{
-                requestTitle: "",
-                description: "",
+                userRequestId: userRequestId,
+                requestTitle: requestTitle,
+                description: description,
                 error: null,
               }}
               onSubmit={async (values, { setErrors }) =>
                 await handelSubmit(
+                  values.userRequestId,
                   values.requestTitle,
                   values.description
                 ).catch((error) => {
@@ -64,6 +82,7 @@ export default observer(function AddUserRequestForm({
               }
             >
               {({
+                values,
                 errors,
                 handleChange,
                 handleSubmit,
@@ -78,7 +97,7 @@ export default observer(function AddUserRequestForm({
                     sx={{ mb: "15px" }}
                     align="left"
                   >
-                    New Request
+                    Edit Request
                   </Typography>
                   <Box
                     display="grid"
@@ -95,6 +114,7 @@ export default observer(function AddUserRequestForm({
                       name="requestTitle"
                       required={true}
                       onChange={handleChange}
+                      value={values.requestTitle}
                       error={touched.requestTitle && !!errors.requestTitle}
                       helperText={
                         touched.requestTitle ? errors.requestTitle : ""
@@ -113,6 +133,7 @@ export default observer(function AddUserRequestForm({
                         color: color.grey[100],
                       }}
                       multiline
+                      value={values.description}
                       rows={4}
                       variant="filled"
                       color="secondary"
@@ -127,7 +148,7 @@ export default observer(function AddUserRequestForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Add"
+                        buttonText="Update"
                       />
                       <CustomCancelButton handleCancel={() => onClose()} />
                     </Box>
@@ -141,7 +162,7 @@ export default observer(function AddUserRequestForm({
       <CustomSanckbar
         snackbarOpen={snackbarOpen}
         snackbarClose={() => setSnackbarOpen(false)}
-        message="Request Created successfully!!"
+        message="Request Updated successfully!!"
       />
     </Box>
   );

@@ -185,7 +185,7 @@ const UserRequestOperations = {
     description: string
   ) =>
     apiRequests.put<void>(
-      `/userRequest/update-request/${userRequestId}?requestTitle=${requestTitle}&description=${description}`,
+      `/userRequest/update-request/${userRequestId}?title=${requestTitle}&description=${description}`,
       {}
     ),
 
