@@ -16,12 +16,17 @@ import { UserRequest } from "../../../app/models/UserRequest";
 import { colors } from "../../../themeConfig";
 import Status from "./Status";
 import UserRequestActionsForCurrentUser from "./UserRequestActionsForCurrentUser";
+import UserRequestActionsForAdmin from "./UserRequestActionsForAdmin";
 
 interface Props {
   userRequest: UserRequest;
+  isCurrentUserRequest?: boolean;
 }
 
-export default observer(function UserRequestCard({ userRequest }: Props) {
+export default observer(function UserRequestCard({
+  userRequest,
+  isCurrentUserRequest = false,
+}: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
@@ -70,7 +75,11 @@ export default observer(function UserRequestCard({ userRequest }: Props) {
         }
       />
       <CardActions>
-        <UserRequestActionsForCurrentUser userRequest={userRequest} />
+        {isCurrentUserRequest ? (
+          <UserRequestActionsForCurrentUser userRequest={userRequest} />
+        ) : (
+          <UserRequestActionsForAdmin userRequest={userRequest} />
+        )}
         {dropdownDescription ? (
           <IconButton onClick={() => setDropdownDescription(false)}>
             <ArrowDropUp />
