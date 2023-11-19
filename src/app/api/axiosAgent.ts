@@ -197,7 +197,7 @@ const UserRequestOperations = {
 
   updateUserRequestToCompleted: (userRequestId: string, adminComment: string) =>
     apiRequests.put<void>(
-      `/userRequest/update-to-inProgress/${userRequestId}?adminComment=${adminComment}`,
+      `/userRequest/update-to-completed/${userRequestId}?adminComment=${adminComment}`,
       {}
     ),
 };

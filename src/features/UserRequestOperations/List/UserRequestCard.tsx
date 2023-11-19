@@ -2,11 +2,14 @@ import { observer } from "mobx-react-lite";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
+  Divider,
   IconButton,
+  TextField,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -17,6 +20,7 @@ import { colors } from "../../../themeConfig";
 import Status from "./Status";
 import UserRequestActionsForCurrentUser from "./UserRequestActionsForCurrentUser";
 import UserRequestActionsForAdmin from "./UserRequestActionsForAdmin";
+import { useStore } from "../../../app/stores/Store";
 
 interface Props {
   userRequest: UserRequest;
@@ -30,7 +34,21 @@ export default observer(function UserRequestCard({
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const {
+    userRequestStore: { updateUserRequestToCompleted },
+  } = useStore();
+
   const [dropdownDescription, setDropdownDescription] = React.useState(false);
+  const [openMarkAsComplete, setOpenMarkAsComplete] = React.useState(false);
+  const [adminComment, setAdminComment] = React.useState("");
+
+  const hanldeCompleteClick = async () => {
+    await updateUserRequestToCompleted(userRequest.id, adminComment).then(
+      () => {
+        setOpenMarkAsComplete(false);
+      }
+    );
+  };
 
   return (
     <Card sx={{ backgroundColor: color.primary[400], marginBottom: "10px" }}>
@@ -78,7 +96,10 @@ export default observer(function UserRequestCard({
         {isCurrentUserRequest ? (
           <UserRequestActionsForCurrentUser userRequest={userRequest} />
         ) : (
-          <UserRequestActionsForAdmin userRequest={userRequest} />
+          <UserRequestActionsForAdmin
+            userRequest={userRequest}
+            openMarkAsComplete={() => setOpenMarkAsComplete(true)}
+          />
         )}
         {dropdownDescription ? (
           <IconButton onClick={() => setDropdownDescription(false)}>
@@ -90,11 +111,53 @@ export default observer(function UserRequestCard({
           </IconButton>
         )}
       </CardActions>
+      {openMarkAsComplete && (
+        <>
+          <CardContent>
+            <Box>
+              <TextField
+                size="small"
+                fullWidth
+                color="info"
+                label="Comment (Optional)"
+                value={adminComment}
+                onChange={(e) => setAdminComment(e.target.value)}
+              />
+            </Box>
+            <Box display="flex" justifyContent="flex-end" gap={1} mt=".5rem">
+              <Button
+                size="small"
+                color="success"
+                onClick={hanldeCompleteClick}
+              >
+                Completed
+              </Button>
+              <Button
+                size="small"
+                color="error"
+                onClick={() => setOpenMarkAsComplete(false)}
+              >
+                Cancel
+              </Button>
+            </Box>
+          </CardContent>
+          <Divider />
+        </>
+      )}
       {dropdownDescription && (
         <CardContent>
+          <Typography variant="h6">Description:</Typography>
           {userRequest.description === null
             ? "No Description."
             : userRequest.description}
+          {userRequest.adminComment && (
+            <>
+              <Typography variant="h6" sx={{ mt: ".5rem" }}>
+                Admin Comment:
+              </Typography>
+              <Typography>{userRequest.adminComment}</Typography>
+            </>
+          )}
         </CardContent>
       )}
     </Card>

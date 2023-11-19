@@ -4,10 +4,12 @@ import { Box, Button, useTheme } from "@mui/material";
 
 interface Props {
   userRequest: UserRequest;
+  openMarkAsComplete: () => void;
 }
 
 export default observer(function UserRequestListForAdmin({
   userRequest,
+  openMarkAsComplete,
 }: Props) {
   const theme = useTheme();
 
@@ -27,6 +29,7 @@ export default observer(function UserRequestListForAdmin({
           variant="outlined"
           size="small"
           color={theme.palette.mode === "dark" ? "secondary" : "info"}
+          onClick={openMarkAsComplete}
         >
           Mark as Completed
         </Button>
