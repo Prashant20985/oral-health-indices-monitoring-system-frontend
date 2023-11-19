@@ -4,7 +4,6 @@ import {
   FormControl,
   Paper,
   SelectChangeEvent,
-  Typography,
   useTheme,
 } from "@mui/material";
 import { observer } from "mobx-react-lite";
@@ -93,14 +92,6 @@ export default observer(function UserRequestListForCurrentuser() {
             />
           </Box>
           <Box>
-            <Typography
-              variant="h6"
-              fontWeight={600}
-              textTransform="uppercase"
-              sx={{ mb: "0.5rem" }}
-            >
-              Choose Date
-            </Typography>
             <Calendar setDate={setDateSubmittedForCurrentUser} />
           </Box>
         </Box>

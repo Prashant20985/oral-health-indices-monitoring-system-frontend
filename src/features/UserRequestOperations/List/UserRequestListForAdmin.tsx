@@ -7,7 +7,6 @@ import {
   Paper,
   SelectChangeEvent,
   TextField,
-  Typography,
   useTheme,
 } from "@mui/material";
 import { colors } from "../../../themeConfig";
@@ -104,14 +103,6 @@ export default observer(function UserRequestListForAdmin() {
             />
           </Box>
           <Box>
-            <Typography
-              variant="h6"
-              fontWeight={600}
-              textTransform="uppercase"
-              sx={{ mb: "0.5rem" }}
-            >
-              Choose Date
-            </Typography>
             <Calendar setDate={setDateSubmittedForAdmin} />
           </Box>
         </Box>
