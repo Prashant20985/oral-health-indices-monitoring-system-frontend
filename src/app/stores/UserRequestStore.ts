@@ -248,6 +248,7 @@ export default class UserRequestStore {
           };
           updatedRequest.requestStatus = "Completed";
           updatedRequest.adminComment = adminComment;
+          updatedRequest.dateCompleted = new Date();
           const requests = [...this.userRequestsForAdmin];
           requests[userRequestIndex] = updatedRequest;
           this.setUserRequestsForAdmin(requests);

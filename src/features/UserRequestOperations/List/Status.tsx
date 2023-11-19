@@ -11,7 +11,11 @@ export default function Status({ status }: Props) {
   const color = colors(theme.palette.mode);
 
   return (
-    <Box p={0.8} borderRadius={1} sx={{ backgroundColor: color.blueAccent[600] }}>
+    <Box
+      p={0.8}
+      borderRadius={1}
+      sx={{ backgroundColor: color.blueAccent[600] }}
+    >
       <Typography
         sx={{
           textTransform: "uppercase",
@@ -19,7 +23,7 @@ export default function Status({ status }: Props) {
           color: "white",
         }}
       >
-        {status}
+        {status === "In_Progress" ? "In Progress" : status}
       </Typography>
     </Box>
   );
