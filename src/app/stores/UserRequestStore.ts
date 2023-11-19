@@ -7,10 +7,10 @@ export default class UserRequestStore {
   userRequestsForCurrentUser: UserRequest[] = [];
 
   requestStatusForAdmin: RequestStatus = "Submitted";
-  dateSubmittedForAdmin = new Date();
+  dateSubmittedForAdmin: Date | null = null;
 
   requestStatusForCurrentUser: RequestStatus = "Submitted";
-  dateSubmittedForCurrentUser = new Date();
+  dateSubmittedForCurrentUser: Date | null = null;
 
   loading = {
     createRequest: false,
@@ -56,7 +56,7 @@ export default class UserRequestStore {
     this.requestStatusForAdmin = status;
   }
 
-  setDateSubmittedForAdmin = (date: Date) => {
+  setDateSubmittedForAdmin = (date: Date | null) => {
     this.dateSubmittedForAdmin = date;
   };
 
@@ -68,24 +68,28 @@ export default class UserRequestStore {
     this.requestStatusForCurrentUser = status;
   }
 
-  setDateSubmittedForCurrentUser = (date: Date) => {
+  setDateSubmittedForCurrentUser = (date: Date | null) => {
     this.dateSubmittedForCurrentUser = date;
   };
 
   get userRequestsForAdminParams() {
     const params = new URLSearchParams();
     params.append("requestStatus", this.requestStatusForAdmin);
-    params.append("dateSubmitted", this.dateSubmittedForAdmin.toISOString());
+    if (this.dateSubmittedForAdmin) {
+      params.append("dateSubmitted", this.dateSubmittedForAdmin.toISOString());
+    }
     return params;
   }
 
   get userRequestsForCurrentUserParams() {
     const params = new URLSearchParams();
     params.append("requestStatus", this.requestStatusForCurrentUser);
-    params.append(
-      "dateSubmitted",
-      this.dateSubmittedForCurrentUser.toISOString()
-    );
+    if (this.dateSubmittedForCurrentUser) {
+      params.append(
+        "dateSubmitted",
+        this.dateSubmittedForCurrentUser.toISOString()
+      );
+    }
     return params;
   }
 
