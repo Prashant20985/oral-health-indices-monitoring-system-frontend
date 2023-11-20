@@ -4,6 +4,7 @@ import { UserRequest } from "../../../app/models/UserRequest";
 import { Edit, DeleteSweep } from "@mui/icons-material";
 import * as React from "react";
 import EditUserRequestForm from "../Forms/EditUserRequestForm";
+import UserRequestDeleteConfirmation from "../Forms/UserRequestDeleteConfirmation";
 
 interface Props {
   userRequest: UserRequest;
@@ -13,6 +14,9 @@ export default observer(function UserRequestCardActionsForCurrentUser({
   userRequest,
 }: Props) {
   const theme = useTheme();
+
+  const [openDeleteConfirmation, setOpenDeleteConfirmation] =
+    React.useState(false);
 
   const isDisabled =
     userRequest.requestStatus === "Completed" ||
@@ -38,7 +42,10 @@ export default observer(function UserRequestCardActionsForCurrentUser({
         >
           Edit
         </Button>
-        <IconButton disabled={isDisabled}>
+        <IconButton
+          disabled={isDisabled}
+          onClick={() => setOpenDeleteConfirmation(true)}
+        >
           <DeleteSweep color={isDisabled ? "disabled" : "error"} />
         </IconButton>
       </Box>
@@ -48,6 +55,11 @@ export default observer(function UserRequestCardActionsForCurrentUser({
         userRequestId={userRequest.id}
         requestTitle={userRequest.requestTitle}
         description={userRequest.description}
+      />
+      <UserRequestDeleteConfirmation
+        isOpen={openDeleteConfirmation}
+        userRequest={userRequest}
+        onClose={() => setOpenDeleteConfirmation(false)}
       />
     </>
   );
