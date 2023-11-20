@@ -1,6 +1,9 @@
 import { observer } from "mobx-react-lite";
 import { UserRequest } from "../../../app/models/UserRequest";
 import { Box, Button, useTheme } from "@mui/material";
+import { useStore } from "../../../app/stores/Store";
+import * as React from "react";
+import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 
 interface Props {
   userRequest: UserRequest;
@@ -13,6 +16,18 @@ export default observer(function UserRequestListForAdmin({
 }: Props) {
   const theme = useTheme();
 
+  const {
+    userRequestStore: { updateUserRequestToInProgress },
+  } = useStore();
+
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+
+  const handleMarkInProgressClick = async () => {
+    await updateUserRequestToInProgress(userRequest.id).then(() =>
+      setOpenSnackbar(true)
+    );
+  };
+
   return (
     <Box
       display="flex"
@@ -21,7 +36,12 @@ export default observer(function UserRequestListForAdmin({
       height="1.5rem"
     >
       {userRequest.requestStatus === "Submitted" ? (
-        <Button variant="outlined" size="small" color="warning">
+        <Button
+          variant="outlined"
+          size="small"
+          color="warning"
+          onClick={handleMarkInProgressClick}
+        >
           Mark as In Progress
         </Button>
       ) : userRequest.requestStatus === "In_Progress" ? (
@@ -36,6 +56,11 @@ export default observer(function UserRequestListForAdmin({
       ) : (
         <></>
       )}
+      <CustomSanckbar
+        snackbarOpen={openSnackbar}
+        snackbarClose={() => setOpenSnackbar(false)}
+        message="Request set to In Progress"
+      />
     </Box>
   );
 });
