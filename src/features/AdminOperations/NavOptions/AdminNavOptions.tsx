@@ -7,6 +7,7 @@ import {
   DeleteForeverSharp,
   GppBadSharp,
   GppGoodSharp,
+  QuestionAnswer,
 } from "@mui/icons-material";
 import { Menu, MenuItemStyles, MenuItem } from "react-pro-sidebar";
 
@@ -34,6 +35,11 @@ export default observer(function AdminNavOptions({ menuItemStyles }: Props) {
       title: "Deleted Users",
       path: "deleted-users",
       icon: <DeleteForeverSharp />,
+    },
+    {
+      title: "User Requests",
+      path: "requests",
+      icon: <QuestionAnswer />,
     },
   ];
 
