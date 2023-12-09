@@ -14,6 +14,8 @@ function App() {
   const { commonStore, userStore } = useStore();
   const { isUserLoggedIn } = userStore;
 
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
+
   React.useEffect(() => {
     if (commonStore.token) {
       userStore.getCurrentUser().finally(() => commonStore.setAppLoaded());
@@ -33,10 +35,10 @@ function App() {
         />
         {commonStore.applocationLoaded ? (
           <>
-            <Navbar />
+            <Navbar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
             <Box display="flex">
-              {isUserLoggedIn && <Sidedrawer />}
-              <Container maxWidth="xl" sx={{ mt: 10 }}>
+              {isUserLoggedIn && <Sidedrawer isCollapsed={isCollapsed} />}
+              <Container maxWidth="xl" sx={{ mt: 4 }}>
                 <Outlet />
               </Container>
             </Box>

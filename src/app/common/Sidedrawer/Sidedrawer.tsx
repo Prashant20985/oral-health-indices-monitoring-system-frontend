@@ -1,21 +1,22 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import { Menu, MenuItem, MenuItemStyles, Sidebar } from "react-pro-sidebar";
-import * as React from "react";
 import { Dashboard, Message } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
 import { router } from "../../router/Routes";
 import AdminNavOptions from "../../../features/AdminOperations/NavOptions/AdminNavOptions";
 import { useStore } from "../../stores/Store";
-import SidedrawerHeader from "./SidedrawerHeader";
 import DentistTeacherNavOptions from "../../../features/DentistTeacherOperations/NavOptions/DentistTeacherNavOptions";
 import { useLocation } from "react-router-dom";
 
-export default function Sidedrawer() {
+interface Props {
+  isCollapsed: boolean;
+}
+
+export default function Sidedrawer({ isCollapsed }: Props) {
   const location = useLocation();
   const theme = useTheme();
   const color = colors(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = React.useState(false);
 
   const {
     userStore: { user },
@@ -62,64 +63,54 @@ export default function Sidedrawer() {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        height: "100vh",
+    <Sidebar
+      collapsed={isCollapsed}
+      backgroundColor={hexToRgba(backgroundColor, 0.9)}
+      image="/assets/sidebarbackground.jpg"
+      rootStyles={{
+        border: "none",
+        minHeight: "100vh",
+        zIndex: 12000,
       }}
     >
-      <Sidebar
-        collapsed={isCollapsed}
-        backgroundColor={hexToRgba(backgroundColor, 0.9)}
-        image="/assets/sidebarbackground.jpg"
-        rootStyles={{
-          border: "none",
-          zIndex: 1,
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          mt: "1rem",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            height: "100%",
-            mt: "1rem",
-          }}
-        >
-          <SidedrawerHeader
-            isCollapsed={isCollapsed}
-            setIsCollapsed={setIsCollapsed}
-          />
-          <Menu menuItemStyles={menuItemStyles}>
-            <MenuItem icon={<Dashboard />} onClick={() => router.navigate("/")}>
-              Dashboard
-            </MenuItem>
-          </Menu>
-          {user?.role === "Admin" ? (
-            <AdminNavOptions menuItemStyles={menuItemStyles} />
-          ) : user?.role === "Dentist_Teacher_Examiner" ||
-            "Dentist_Teacher_Researcher" ? (
-            <DentistTeacherNavOptions menuItemStyles={menuItemStyles} />
-          ) : (
-            <></>
-          )}
-          <Menu menuItemStyles={menuItemStyles}>
-            <MenuItem
-              icon={<Message />}
-              onClick={() => router.navigate("/my-requests")}
+        <Menu menuItemStyles={menuItemStyles}>
+          <MenuItem icon={<Dashboard />} onClick={() => router.navigate("/")}>
+            Dashboard
+          </MenuItem>
+        </Menu>
+        {user?.role === "Admin" ? (
+          <AdminNavOptions menuItemStyles={menuItemStyles} />
+        ) : user?.role === "Dentist_Teacher_Examiner" ||
+          "Dentist_Teacher_Researcher" ? (
+          <DentistTeacherNavOptions menuItemStyles={menuItemStyles} />
+        ) : (
+          <></>
+        )}
+        <Menu menuItemStyles={menuItemStyles}>
+          <MenuItem
+            icon={<Message />}
+            onClick={() => router.navigate("/my-requests")}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: currentPath === "/my-requests" ? 700 : 500,
+                color: color.grey[100],
+              }}
             >
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: currentPath === "/my-requests" ? 700 : 500,
-                  color: color.grey[100],
-                }}
-              >
-                My Requests
-              </Typography>
-            </MenuItem>
-          </Menu>
-        </Box>
-      </Sidebar>
-    </Box>
+              My Requests
+            </Typography>
+          </MenuItem>
+        </Menu>
+      </Box>
+    </Sidebar>
   );
 }
