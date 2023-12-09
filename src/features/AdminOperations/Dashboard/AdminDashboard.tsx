@@ -1,7 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import AddApplicationUserButton from "./AddApplicationUserButton";
 import Header from "../../../app/common/header/Header";
 import AddApplicationUserFromCsvButton from "./AddApplicationUserFromCsvButton";
+import ActiveApplicationUsersListShortcut from "./ActiveApplicationUsersListShortcut";
+import UserRequestForAdminShortcut from "./UserRequestForAdminShortcut";
 
 export default function AdminDashboard() {
   return (
@@ -13,6 +15,10 @@ export default function AdminDashboard() {
           <AddApplicationUserFromCsvButton />
         </Box>
       </Box>
+      <Grid container spacing={2}>
+        <ActiveApplicationUsersListShortcut />
+        <UserRequestForAdminShortcut />
+      </Grid>
     </Box>
   );
 }
