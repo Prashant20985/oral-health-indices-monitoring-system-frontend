@@ -24,6 +24,8 @@ interface Props {
   loading?: boolean;
   deletedUsersList?: boolean;
   changeActivationStatusDisabled?: boolean;
+  isDashboard?: boolean;
+  height?: string;
 }
 
 export default observer(function AppplicationUsersList({
@@ -31,6 +33,8 @@ export default observer(function AppplicationUsersList({
   loading,
   deletedUsersList = false,
   changeActivationStatusDisabled = false,
+  isDashboard = false,
+  height = "75vh",
 }: Props) {
   const {
     adminStore,
@@ -190,21 +194,23 @@ export default observer(function AppplicationUsersList({
             flex: 1,
           },
         ]),
-    ...[
-      {
-        field: "role",
-        headerName: "Role",
-        cellClassName: "name-column--cell",
-        flex: 1,
-      },
-    ],
-    ...[statusColums],
+    ...(isDashboard
+      ? []
+      : [
+          {
+            field: "role",
+            headerName: "Role",
+            cellClassName: "name-column--cell",
+            flex: 1,
+          },
+        ]),
+    ...(isDashboard ? [] : [statusColums]),
     ...[actionsColumn],
   ];
 
   return (
     <Box
-      height="75vh"
+      height={height}
       minWidth="100%"
       sx={{
         "& .MuiDataGrid-root": {
@@ -214,7 +220,9 @@ export default observer(function AppplicationUsersList({
           borderBottom: "none",
         },
         "& .MuiDataGrid-columnHeaders": {
-          backgroundColor: color.blueAccent[700],
+          backgroundColor: isDashboard
+            ? color.primary[400]
+            : color.blueAccent[700],
           borderBottom: "none",
         },
         "& .MuiDataGrid-virtualScroller": {
@@ -222,7 +230,9 @@ export default observer(function AppplicationUsersList({
         },
         "& .MuiDataGrid-footerContainer": {
           borderTop: "none",
-          backgroundColor: color.blueAccent[700],
+          backgroundColor: isDashboard
+            ? color.primary[400]
+            : color.blueAccent[700],
         },
         "& .name-column--cell": {
           color: color.grey[100],
