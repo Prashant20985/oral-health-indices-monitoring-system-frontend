@@ -89,7 +89,7 @@ export default function Sidedrawer({ isCollapsed }: Props) {
         {user?.role === "Admin" ? (
           <AdminNavOptions menuItemStyles={menuItemStyles} />
         ) : user?.role === "Dentist_Teacher_Examiner" ||
-          "Dentist_Teacher_Researcher" ? (
+          user?.role === "Dentist_Teacher_Researcher" ? (
           <DentistTeacherNavOptions menuItemStyles={menuItemStyles} />
         ) : (
           <></>

@@ -37,7 +37,7 @@ export default observer(function UserEditForm({
 
   const handleFieldChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    handleChange: (e: React.ChangeEvent<any>) => void
+    handleChange: (e: React.ChangeEvent<unknown>) => void
   ) => {
     setHasChanges(true);
     handleChange(event);
