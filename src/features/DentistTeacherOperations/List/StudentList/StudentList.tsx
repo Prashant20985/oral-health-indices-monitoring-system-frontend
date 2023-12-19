@@ -61,7 +61,7 @@ export default observer(function StudentList({
       headerName: "User Name",
       cellClassName: "name-column--cell",
       flex: 1,
-      renderCell: ({ row }: any) => {
+      renderCell: ({ row }) => {
         const { userName } = row || {};
         return (
           <Box display="flex" alignItems="center" alignContent="center" gap={1}>
@@ -112,7 +112,7 @@ export default observer(function StudentList({
       headerName: "Actions",
       headerAlign: "center",
       flex: 1,
-      renderCell: ({ row }: any) => {
+      renderCell: ({ row }) => {
         const { id } = row || {};
         return (
           <Box

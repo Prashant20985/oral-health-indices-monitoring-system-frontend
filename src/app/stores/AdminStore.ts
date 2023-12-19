@@ -301,7 +301,7 @@ export default class AdminStore {
   };
 
   fetchUserDetails = async (userName: string) => {
-    let userDetails = this.getUserDetails(userName);
+    const userDetails = this.getUserDetails(userName);
     if (userDetails) {
       runInAction(() => {
         this.selectedApplicationUser = userDetails;

@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { colors } from "../../../../themeConfig";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { AccountCircle, Delete } from "@mui/icons-material";
 import ChangeActivationStatusButton from "../../ChangeActivationStatus/ChangeActivationStatusButton";
 import LinearProgressComponent from "../../../../app/common/loadingComponents/LinearProgressComponent";
@@ -67,12 +67,16 @@ export default observer(function AppplicationUsersList({
       .then(() => setActivationChangeSanckbar(true));
   };
 
+  const getDate = (params: GridValueGetterParams) => {
+    return new Date(params.value as string).toLocaleDateString();
+  };
+
   const statusColums: GridColDef = {
     field: "isAccountActive",
     headerName: "Activation Status",
     flex: 1,
     headerAlign: "center",
-    renderCell: ({ row }: any) => {
+    renderCell: ({ row }) => {
       const { userName, isAccountActive, deletedAt } = row || {};
       return (
         <ChangeActivationStatusButton
@@ -93,7 +97,7 @@ export default observer(function AppplicationUsersList({
     minWidth: 100,
     flex: 1,
     headerAlign: "center",
-    renderCell: ({ row }: any) => {
+    renderCell: ({ row }) => {
       const { userName } = row || {};
       return (
         <Box
@@ -138,7 +142,7 @@ export default observer(function AppplicationUsersList({
     headerName: "User Name",
     cellClassName: "name-column--cell",
     flex: 1,
-    renderCell: ({ row }: any) => {
+    renderCell: ({ row }) => {
       const { userName, isAccountActive, deletedAt } = row || {};
       return (
         <Box display="flex" alignItems="center" alignContent="center" gap={1}>
@@ -189,8 +193,7 @@ export default observer(function AppplicationUsersList({
             field: "deletedAt",
             headerName: "Delete Date",
             cellClassName: "name-column--cell",
-            type: "dateTime",
-            valueGetter: ({ value }: any) => value && new Date(value),
+            valueGetter: getDate,
             flex: 1,
           },
         ]),

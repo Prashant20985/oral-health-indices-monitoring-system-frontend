@@ -15,7 +15,7 @@ import { router } from "../router/Routes";
 import { Group, Student } from "../models/Group";
 import { UserRequest } from "../models/UserRequest";
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -27,11 +27,6 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use(
   async (res) => {
-    if (process.env.NODE_ENV === "development") {
-      new Promise((resolve) => {
-        setTimeout(resolve, 1000); // Delays requests by 1 second in development env.
-      });
-    }
     return res;
   },
   (error: AxiosError) => {
@@ -55,9 +50,9 @@ axios.interceptors.response.use(
 
 const apiRequests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
-  post: <T>(url: string, body: {}) =>
+  post: <T>(url: string, body: object) =>
     axios.post<T>(url, body).then(responseBody),
-  put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
+  put: <T>(url: string, body: object) => axios.put<T>(url, body).then(responseBody),
   del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 };
 
@@ -109,7 +104,7 @@ const AdminOperations = {
     apiRequests.post<void>("/admin/create-user", values),
 
   addApplicationUsersFromCsv: (file: File) => {
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append("File", file);
     return axios.post<string>("/admin/create-users", formData, {
       headers: { "Content-Type": "multipart/form-data" },

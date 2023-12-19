@@ -17,14 +17,13 @@ export default observer(function ActiveApplicationUsersList() {
     activeApplicationUsersRole,
     activeApplicationUsersUserType,
     activeApplicationUsers,
-    fetchActiveApplicationUsers,
     loading,
   } = adminStore;
 
   React.useEffect(() => {
     const fetchUsers = async () => {
       if (adminStore.activeApplicationUsers.length <= 0) {
-        await fetchActiveApplicationUsers();
+        await adminStore.fetchActiveApplicationUsers();
       }
     };
     fetchUsers();

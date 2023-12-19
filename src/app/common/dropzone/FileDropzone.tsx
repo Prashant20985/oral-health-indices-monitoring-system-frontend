@@ -9,7 +9,7 @@ interface Props {
   open: boolean;
   message: string;
   onClose: () => void;
-  setFiles: (files: any) => void;
+  setFiles: (files: File[]) => void;
 }
 
 export default function FileDropzone({
@@ -22,7 +22,7 @@ export default function FileDropzone({
     border: "dashed 3px",
     borderRadius: "4px",
     paddingTop: "35px",
-    textAlign: "center" as "center",
+    textAlign: "center" as const,
     height: 250,
   };
 
@@ -31,9 +31,9 @@ export default function FileDropzone({
   };
 
   const onDrop = useCallback(
-    (acceptedFiles: any) => {
+    (acceptedFiles: File[]) => {
       setFiles(
-        acceptedFiles.map((file: any) =>
+        acceptedFiles.map((file: File) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
           })

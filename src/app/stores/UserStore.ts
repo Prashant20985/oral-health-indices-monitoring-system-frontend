@@ -12,7 +12,7 @@ import { router } from "../router/Routes";
 
 export default class UserStore {
   user: UserResposne | null = null;
-  refreshTokenTimeout: any;
+  refreshTokenTimeout: NodeJS.Timeout | number = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -29,7 +29,8 @@ export default class UserStore {
       this.startRefreshTokenTimer(user);
       runInAction(() => (this.user = user));
       router.navigate("/");
-    } catch (error: any) {
+    } catch (error) {
+      console.log(error);
       throw error;
     }
   };
@@ -45,7 +46,7 @@ export default class UserStore {
       const user = await axiosAgent.AccountOperations.currentUser();
       store.commonStore.setToken(user.token);
       runInAction(() => (this.user = user));
-    } catch (error: any) {
+    } catch (error) {
       console.log(error);
     }
   };
@@ -56,6 +57,7 @@ export default class UserStore {
       toast.success("Email sent successfully");
       router.navigate("/login");
     } catch (error) {
+      console.log(error);
       throw error;
     }
   };
@@ -65,7 +67,8 @@ export default class UserStore {
       await axiosAgent.AccountOperations.resetPassword(resetPassValues);
       toast.success("Password reset successful");
       router.navigate("/login");
-    } catch (error: any) {
+    } catch (error) {
+      console.log(error);
       throw error;
     }
   };
@@ -74,6 +77,7 @@ export default class UserStore {
     try {
       await axiosAgent.AccountOperations.changePassword(changePassValues);
     } catch (error) {
+      console.log(error);
       throw error;
     }
   };
