@@ -15,6 +15,15 @@ export default function Calendar({ setDate }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const handleChange = (newValue: Date | null) => {
+    if (newValue) {
+      const offset = newValue.getTimezoneOffset();
+      const adjustedDate = new Date(newValue.getTime() - offset * 60 * 1000);
+      setValue(adjustedDate);
+      setDate(adjustedDate);
+    }
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box
@@ -43,12 +52,7 @@ export default function Calendar({ setDate }: Props) {
         showDaysOutsideCurrentMonth
         fixedWeekNumber={6}
         value={value}
-        onChange={(newValue) => {
-          if (newValue) {
-            setValue(newValue);
-            setDate(newValue);
-          }
-        }}
+        onChange={handleChange}
         sx={{
           "& .MuiButtonBase-root.MuiPickersDay-root.Mui-selected": {
             backgroundColor: color.blueAccent[600],
