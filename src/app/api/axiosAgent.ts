@@ -14,6 +14,11 @@ import {
 import { router } from "../router/Routes";
 import { Group, Student } from "../models/Group";
 import { UserRequest } from "../models/UserRequest";
+import {
+  ResearchGroup,
+  ResearchGroupFormValues,
+  ResearchGroupPatient,
+} from "../models/ResearchGroup";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -36,7 +41,9 @@ axios.interceptors.response.use(
         if (config.method === "get") toast.warning(data);
         break;
       case 401:
-        toast.error("Unauthorized");
+        if (!config.url?.includes("current-user")) {
+          toast.error("Unauthorized");
+        }
         break;
       case 403:
         toast.warning("Forbidden");
@@ -52,7 +59,8 @@ const apiRequests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
   post: <T>(url: string, body: object) =>
     axios.post<T>(url, body).then(responseBody),
-  put: <T>(url: string, body: object) => axios.put<T>(url, body).then(responseBody),
+  put: <T>(url: string, body: object) =>
+    axios.put<T>(url, body).then(responseBody),
   del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 };
 
@@ -156,6 +164,45 @@ const DentistTeacherOperations = {
     ),
 
   getGroups: () => apiRequests.get<Group[]>(`/dentistTeacher/groups`),
+
+  getResearchGroups: (groupName: string) =>
+    apiRequests.get<ResearchGroup[]>(
+      `/dentistTeacher/research-groups?groupName=${groupName}`
+    ),
+
+  getPatientsNotInResearchGroup: (params: URLSearchParams) =>
+    axios
+      .get<ResearchGroupPatient[]>(
+        `/dentistTeacher/patients-not-in-research-group`,
+        { params }
+      )
+      .then(responseBody),
+
+  createResearchGroup: (values: ResearchGroupFormValues) =>
+    apiRequests.post<void>(`/dentistTeacher/create-research-group`, values),
+
+  deleteResearchGroup: (researchGroupId: string) =>
+    apiRequests.del<void>(
+      `/dentistTeacher/delete-research-group/${researchGroupId}`
+    ),
+
+  updateResearchGroup: (
+    researchGroupId: string,
+    values: ResearchGroupFormValues
+  ) =>
+    apiRequests.put<void>(
+      `/dentistTeacher/update-research-group/${researchGroupId}`,
+      values
+    ),
+
+  addPatientToResearchGroup: (researchGroupId: string, patientId: string) =>
+    apiRequests.post<void>(
+      `/dentistTeacher/add-patient/${researchGroupId}?patientId=${patientId}`,
+      {}
+    ),
+
+  removePatientFromResearchGroup: (patientId: string) =>
+    apiRequests.del<void>(`/dentistTeacher/remove-patient/${patientId}`),
 };
 
 const UserRequestOperations = {

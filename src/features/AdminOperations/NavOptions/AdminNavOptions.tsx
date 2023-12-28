@@ -49,23 +49,21 @@ export default observer(function AdminNavOptions({ menuItemStyles }: Props) {
     <Box mt="1.5rem">
       <Menu menuItemStyles={menuItemStyles}>
         {options.map((option) => (
-          <>
-            <MenuItem
-              key={option.path}
-              icon={option.icon}
-              onClick={() => router.navigate(`/admin/${option.path}`)}
+          <MenuItem
+            key={option.path}
+            icon={option.icon}
+            onClick={() => router.navigate(`/admin/${option.path}`)}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: currentPath === option.path ? 700 : 500,
+                color: color.grey[100],
+              }}
             >
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: currentPath === option.path ? 700 : 500,
-                  color: color.grey[100],
-                }}
-              >
-                {option.title}
-              </Typography>
-            </MenuItem>
-          </>
+              {option.title}
+            </Typography>
+          </MenuItem>
         ))}
       </Menu>
     </Box>
