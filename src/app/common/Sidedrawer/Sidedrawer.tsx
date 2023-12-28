@@ -70,7 +70,6 @@ export default function Sidedrawer({ isCollapsed }: Props) {
       rootStyles={{
         border: "none",
         minHeight: "100vh",
-        zIndex: 12000,
       }}
     >
       <Box
