@@ -15,7 +15,14 @@ export default observer(function GroupCard({ group }: Props) {
 
   return (
     <>
-      <Card sx={{ mb: "10px", backgroundColor: color.primary[400] }}>
+      <Card
+        sx={{
+          backgroundColor: color.primary[400],
+          padding: 1,
+          border: 0.1,
+          borderColor: theme.palette.mode === "dark" ? color.greenAccent[300] : color.grey[700],
+        }}
+      >
         <CardHeader
           avatar={
             <Avatar

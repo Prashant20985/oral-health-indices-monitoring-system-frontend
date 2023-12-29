@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { School } from "@mui/icons-material";
+import { Biotech, School } from "@mui/icons-material";
 import { observer } from "mobx-react-lite";
 import { Menu, MenuItem, MenuItemStyles } from "react-pro-sidebar";
 import { router } from "../../../app/router/Routes";
@@ -20,6 +20,11 @@ export default observer(function DentistTeacherNavOptions({
   const color = colors(theme.palette.mode);
 
   const options = [
+    {
+      title: "Research Groups",
+      path: "/research-groups",
+      icon: <Biotech sx={{ fontSize: 25 }} />,
+    },
     {
       title: "Student Groups",
       path: "/student-groups",
