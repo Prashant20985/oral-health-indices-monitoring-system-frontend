@@ -15,12 +15,15 @@ import * as React from "react";
 import ResearchGroupCard from "./ResearchGroupCard";
 import { colors } from "../../../../themeConfig";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
+import ResearchGroupForm from "../../Forms/ResearchGroupForm";
 
 export default observer(function ResearchGroupList() {
   const { dentistTeacherStore } = useStore();
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [addFormOpen, setAddFormOpen] = React.useState(false);
 
   React.useEffect(() => {
     const fetchResearchGroups = async () => {
@@ -33,7 +36,12 @@ export default observer(function ResearchGroupList() {
     <Box>
       <Box display="flex" alignContent="center" justifyContent="space-between">
         <Header title="Research Groups" />
-        <Button variant="contained" color="success" startIcon={<Add />}>
+        <Button
+          variant="contained"
+          color="success"
+          startIcon={<Add />}
+          onClick={() => setAddFormOpen(true)}
+        >
           Add New Research Group
         </Button>
       </Box>
@@ -82,6 +90,10 @@ export default observer(function ResearchGroupList() {
           )}
         </Grid>
       </Paper>
+      <ResearchGroupForm
+        isOpen={addFormOpen}
+        onClose={() => setAddFormOpen(false)}
+      />
     </Box>
   );
 });
