@@ -60,6 +60,10 @@ export default class DentistTeacherStore {
     return params;
   }
 
+  setResearchGroupName = (researchGroupName: string) => {
+    this.researchGroupName = researchGroupName;
+  };
+
   setStudentsNotInGroup = (students: Student[]) => {
     this.studentsNotInGroup = students;
   };

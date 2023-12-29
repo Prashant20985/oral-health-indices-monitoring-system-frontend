@@ -14,6 +14,7 @@ import NotFound from "../../features/Errors/NotFound";
 import StudentGroupList from "../../features/DentistTeacherOperations/List/StudentGroup/StudentGroupList";
 import UserRequestListForCurrentuser from "../../features/UserRequestOperations/List/UserRequestListForCurrentuser";
 import UserRequestListForAdmin from "../../features/UserRequestOperations/List/UserRequestListForAdmin";
+import ResearchGroupList from "../../features/DentistTeacherOperations/List/ResearchGroup/ResearchGroupList";
 
 const routes: RouteObject[] = [
   {
@@ -67,6 +68,10 @@ const routes: RouteObject[] = [
           {
             path: "student-groups",
             element: <StudentGroupList />,
+          },
+          {
+            path: "research-groups",
+            element: <ResearchGroupList />,
           },
         ],
       },
