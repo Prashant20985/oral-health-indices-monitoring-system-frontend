@@ -9,7 +9,7 @@ import {
   Dialog,
   useTheme,
 } from "@mui/material";
-import { Groups3 } from "@mui/icons-material";
+import { Diversity2, Groups3 } from "@mui/icons-material";
 import { colors } from "../../../themeConfig";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 import { useStore } from "../../../app/stores/Store";
@@ -19,13 +19,15 @@ interface Props {
   isOpen: boolean;
   groupName: string;
   onClose: () => void;
+  isResearchGroup?: boolean;
 }
 
-export default observer(function StudentGroupDeleteConfirmation({
+export default observer(function StudentAndResearchGroupDeleteConfirmation({
   isOpen,
   groupId,
   onClose,
   groupName,
+  isResearchGroup = false,
 }: Props) {
   const { dentistTeacherStore } = useStore();
 
@@ -33,9 +35,15 @@ export default observer(function StudentGroupDeleteConfirmation({
   const color = colors(theme.palette.mode);
 
   const handleDelete = async () => {
-    await dentistTeacherStore.deleteGroup(groupId).then(() => {
-      onClose();
-    });
+    if (isResearchGroup) {
+      await dentistTeacherStore.deleteResearchGroup(groupId).then(() => {
+        onClose();
+      });
+    } else {
+      await dentistTeacherStore.deleteGroup(groupId).then(() => {
+        onClose();
+      });
+    }
   };
 
   return (
@@ -45,15 +53,15 @@ export default observer(function StudentGroupDeleteConfirmation({
         onClose={onClose}
         TransitionComponent={SlideUpTransition}
       >
-        <Card sx={{ backgroundColor: color.primary[400] }}>
+        <Card sx={{ backgroundColor: color.primary[400], p: 1 }}>
           <CardHeader
             avatar={
               <Avatar
                 sx={{
-                  backgroundColor: color.redAccent[500]
+                  backgroundColor: color.redAccent[500],
                 }}
               >
-                <Groups3 />
+                {isResearchGroup ? <Diversity2 /> : <Groups3 />}
               </Avatar>
             }
             title={`Are you sure you want to delete ${groupName} ?`}

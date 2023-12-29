@@ -1,36 +1,51 @@
+import { Box, Dialog, TextField, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { Box, Dialog, Typography } from "@mui/material";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 import { Form, Formik } from "formik";
-import { useStore } from "../../../app/stores/Store";
+import { ResearchGroupFormValues } from "../../../app/models/ResearchGroup";
+import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
+import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButtom";
 import CustomTextField from "../../../app/common/formInputs/CustomTextField";
 import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
-import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButtom";
-import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
-import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
-import * as React from "react";
+import * as Yup from "yup";
+import { useStore } from "../../../app/stores/Store";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  groupId: string;
-  name: string;
+  researchGroupId?: string;
+  groupName?: string;
+  description?: string;
+  isEdit?: boolean;
 }
 
-export default observer(function EditGroupForm({
+export default observer(function ResearchGroupForm({
   isOpen,
   onClose,
-  groupId,
-  name,
+  researchGroupId = "",
+  groupName = "",
+  description = "",
+  isEdit = false,
 }: Props) {
   const { dentistTeacherStore } = useStore();
-  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
-  const handleSubmit = async (groupName: string) => {
-    await dentistTeacherStore.updateGroupName(groupId, groupName).then(() => {
-      onClose();
-      setSnackbarOpen(true);
-    });
+  const initialValues: ResearchGroupFormValues = {
+    groupName: groupName,
+    description: description,
+  };
+
+  const handleSubmit = async (values: ResearchGroupFormValues) => {
+    if (isEdit) {
+      await dentistTeacherStore
+        .updateResearchGroup(researchGroupId, values)
+        .then(() => {
+          onClose();
+        });
+    } else {
+      await dentistTeacherStore.createResearchGroup(values).then(() => {
+        onClose();
+      });
+    }
   };
 
   return (
@@ -49,15 +64,22 @@ export default observer(function EditGroupForm({
         >
           <Box width="100%">
             <Formik
-              initialValues={{
-                groupName: name,
-                error: null,
-              }}
-              onSubmit={async (values, { setErrors }) =>
-                await handleSubmit(values.groupName).catch((error) => {
+              initialValues={{ ...initialValues, error: null }}
+              validationSchema={Yup.object().shape({
+                groupName: Yup.string().max(
+                  50,
+                  "Group Name must be at most 50 characters"
+                ),
+                description: Yup.string().max(
+                  500,
+                  "Description must be at most 500 characters"
+                ),
+              })}
+              onSubmit={async (values, { setErrors }) => {
+                await handleSubmit(values).catch((error) => {
                   setErrors({ error: error.response.data });
-                })
-              }
+                });
+              }}
             >
               {({
                 errors,
@@ -75,7 +97,7 @@ export default observer(function EditGroupForm({
                     sx={{ mb: "15px" }}
                     align="left"
                   >
-                    {`Edit Group Name`}
+                    {!isEdit ? "Add New Research Group" : "Edit Research Group"}
                   </Typography>
                   <Box
                     display="grid"
@@ -88,14 +110,30 @@ export default observer(function EditGroupForm({
                     }}
                   >
                     <CustomTextField
-                      label="Group Name"
                       name="groupName"
+                      label="Group Name (Max 50 characters)"
+                      onChange={handleChange}
                       required={true}
                       value={values.groupName}
-                      onChange={handleChange}
                       error={touched.groupName && !!errors.groupName}
                       helperText={touched.groupName ? errors.groupName : ""}
                       gridColumn="span 4"
+                    />
+
+                    <TextField
+                      label="Description (Max 500 characters)"
+                      name="description"
+                      onChange={handleChange}
+                      value={values.description}
+                      error={touched.description && !!errors.description}
+                      helperText={touched.description ? errors.description : ""}
+                      sx={{
+                        gridColumn: "span 4",
+                      }}
+                      multiline
+                      rows={4}
+                      variant="filled"
+                      color="secondary"
                     />
 
                     <CustomErrorMessage error={errors.error} />
@@ -107,7 +145,7 @@ export default observer(function EditGroupForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Save"
+                        buttonText={isEdit ? "Update" : "Create"}
                       />
                       <CustomCancelButton handleCancel={() => onClose()} />
                     </Box>
@@ -118,11 +156,6 @@ export default observer(function EditGroupForm({
           </Box>
         </Box>
       </Dialog>
-      <CustomSanckbar
-        snackbarOpen={snackbarOpen}
-        snackbarClose={() => setSnackbarOpen(false)}
-        message="Group Name updated successfully!!"
-      />
     </>
   );
 });

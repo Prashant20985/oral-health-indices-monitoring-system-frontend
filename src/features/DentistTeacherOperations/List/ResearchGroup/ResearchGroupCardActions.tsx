@@ -14,6 +14,9 @@ import {
 } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { ResearchGroup } from "../../../../app/models/ResearchGroup";
+import * as React from "react";
+import ResearchGroupForm from "../../Forms/ResearchGroupForm";
+import StudentAndResearchGroupDeleteConfirmation from "../../Forms/StudentAndResearchGroupDeleteConfirmation";
 
 interface Props {
   researchGroup: ResearchGroup;
@@ -22,6 +25,9 @@ interface Props {
 export default observer(function ResearchGroupCardActions({
   researchGroup,
 }: Props) {
+  const [openEditGroupDialog, setOpenEditGroupDialog] = React.useState(false);
+  const [openDeleteConfirmation, setOpenDeleteConfirmation] =
+    React.useState(false);
   const theme = useTheme();
   return (
     <>
@@ -51,17 +57,32 @@ export default observer(function ResearchGroupCardActions({
             </IconButton>
           </Tooltip>
           <Tooltip title="Edit">
-            <IconButton>
+            <IconButton onClick={() => setOpenEditGroupDialog(true)}>
               <Edit color="warning" />
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-            <IconButton>
+            <IconButton onClick={() => setOpenDeleteConfirmation(true)}>
               <DeleteSweep color="error" />
             </IconButton>
           </Tooltip>
         </Box>
       </CardActions>
+      <ResearchGroupForm
+        isOpen={openEditGroupDialog}
+        onClose={() => setOpenEditGroupDialog(false)}
+        isEdit={true}
+        researchGroupId={researchGroup.id}
+        groupName={researchGroup.groupName}
+        description={researchGroup.description}
+      />
+      <StudentAndResearchGroupDeleteConfirmation
+        isOpen={openDeleteConfirmation}
+        onClose={() => setOpenDeleteConfirmation(false)}
+        groupId={researchGroup.id}
+        groupName={researchGroup.groupName}
+        isResearchGroup={true}
+      />
     </>
   );
 });

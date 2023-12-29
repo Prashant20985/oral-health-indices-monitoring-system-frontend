@@ -19,7 +19,7 @@ import StudentNotInGroupDialog from "./StudentNotInGroupDialog";
 import { Student } from "../../../../app/models/Group";
 import { useStore } from "../../../../app/stores/Store";
 import EditStudentGroupForm from "../../Forms/EditStudentGroupForm";
-import StudentGroupDeleteConfirmation from "../../Forms/StudentGroupDeleteConfirmation";
+import StudentAndResearchGroupDeleteConfirmation from "../../Forms/StudentAndResearchGroupDeleteConfirmation";
 
 interface Props {
   groupId: string;
@@ -177,7 +177,7 @@ export default observer(function StudentGroupCardActions({
         name={groupName}
         onClose={() => setOpenEditGroupDialog(false)}
       />
-      <StudentGroupDeleteConfirmation
+      <StudentAndResearchGroupDeleteConfirmation
         isOpen={deleteConfirmationDialog.isOpen}
         groupId={deleteConfirmationDialog.groupId}
         groupName={deleteConfirmationDialog.groupName}
