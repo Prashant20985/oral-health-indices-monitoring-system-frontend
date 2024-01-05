@@ -1,71 +1,51 @@
-import { Box, Typography, useTheme } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { useLocation } from "react-router-dom";
-import { router } from "../../../app/router/Routes";
-import { colors } from "../../../themeConfig";
 import {
-  DeleteForeverSharp,
-  GppBadSharp,
-  GppGoodSharp,
-  QuestionAnswer,
+  DeleteSweepOutlined,
+  GppBadOutlined,
+  GppGoodOutlined,
+  QuestionAnswerOutlined,
 } from "@mui/icons-material";
-import { Menu, MenuItemStyles, MenuItem } from "react-pro-sidebar";
+import SidebarListItem from "../../../app/common/sidebar/SidebarListItem";
 
 interface Props {
-  menuItemStyles: MenuItemStyles;
+  open: boolean;
 }
 
-export default observer(function AdminNavOptions({ menuItemStyles }: Props) {
-  const location = useLocation();
-  const theme = useTheme();
-  const color = colors(theme.palette.mode);
-
+export default observer(function AdminNavOptions({ open }: Props) {
   const options = [
     {
       title: "Active Users",
       path: "active-users",
-      icon: <GppGoodSharp />,
+      icon: <GppGoodOutlined />,
     },
     {
       title: "Deactivated Users",
       path: "deactivated-users",
-      icon: <GppBadSharp />,
+      icon: <GppBadOutlined />,
     },
     {
       title: "Deleted Users",
       path: "deleted-users",
-      icon: <DeleteForeverSharp />,
+      icon: <DeleteSweepOutlined />,
     },
     {
       title: "User Requests",
       path: "requests",
-      icon: <QuestionAnswer />,
+      icon: <QuestionAnswerOutlined />,
     },
   ];
 
-  const currentPath = location.pathname.split("/")[2];
-
   return (
-    <Box mt="1.5rem">
-      <Menu menuItemStyles={menuItemStyles}>
-        {options.map((option) => (
-          <MenuItem
-            key={option.path}
-            icon={option.icon}
-            onClick={() => router.navigate(`/admin/${option.path}`)}
-          >
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: currentPath === option.path ? 700 : 500,
-                color: color.grey[100],
-              }}
-            >
-              {option.title}
-            </Typography>
-          </MenuItem>
-        ))}
-      </Menu>
-    </Box>
+    <>
+      {options.map((option) => (
+        <SidebarListItem
+          open={open}
+          key={option.path}
+          path={`/admin/${option.path}`}
+          icon={option.icon}
+          text={option.title}
+        />
+      ))}
+    </>
   );
 });

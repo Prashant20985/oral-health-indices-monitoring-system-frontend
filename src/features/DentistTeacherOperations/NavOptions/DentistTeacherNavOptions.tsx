@@ -1,58 +1,36 @@
-import { Box, Typography, useTheme } from "@mui/material";
-import { useLocation } from "react-router-dom";
-import { Biotech, School } from "@mui/icons-material";
+import { BiotechOutlined, SchoolOutlined } from "@mui/icons-material";
 import { observer } from "mobx-react-lite";
-import { Menu, MenuItem, MenuItemStyles } from "react-pro-sidebar";
-import { router } from "../../../app/router/Routes";
-import { colors } from "../../../themeConfig";
+import SidebarListItem from "../../../app/common/sidebar/SidebarListItem";
 
 interface Props {
-  menuItemStyles: MenuItemStyles;
+  open: boolean;
 }
 
-export default observer(function DentistTeacherNavOptions({
-  menuItemStyles,
-}: Props) {
-  const location = useLocation();
-  const currentPath = location.pathname;
-
-  const theme = useTheme();
-  const color = colors(theme.palette.mode);
-
+export default observer(function DentistTeacherNavOptions({ open }: Props) {
   const options = [
     {
       title: "Research Groups",
       path: "/research-groups",
-      icon: <Biotech sx={{ fontSize: 25 }} />,
+      icon: <BiotechOutlined />,
     },
     {
       title: "Student Groups",
       path: "/student-groups",
-      icon: <School />,
+      icon: <SchoolOutlined />,
     },
   ];
 
   return (
-    <Box mt="1.5rem">
-      <Menu menuItemStyles={menuItemStyles}>
-        {options.map((option) => (
-          <MenuItem
-            key={option.path}
-            icon={option.icon}
-            onClick={() => router.navigate(option.path)}
-          >
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: currentPath === option.path ? 700 : 500,
-                color: color.grey[100],
-              }}
-            >
-              {option.title}
-            </Typography>
-          </MenuItem>
-        ))}
-      </Menu>
-    </Box>
+    <>
+      {options.map((option) => (
+        <SidebarListItem
+          open={open}
+          key={option.path}
+          path={option.path}
+          icon={option.icon}
+          text={option.title}
+        />
+      ))}
+    </>
   );
 });

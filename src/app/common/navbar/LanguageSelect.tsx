@@ -1,15 +1,17 @@
 import {
-  IconButton,
+  ListItem,
+  ListItemButton,
   ListItemIcon,
+  ListItemText,
   MenuItem,
   MenuList,
   Popover,
-  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import * as React from "react";
+import { blueGrey } from "@mui/material/colors";
 
 type Language = "english" | "polish";
 const EnglishFlag = "/assets/english.svg";
@@ -48,56 +50,73 @@ export default function LanguageSelect() {
 
   return (
     <>
-      <Tooltip title="Change Language">
-        <IconButton aria-label="language" onClick={handleOpenLangMenu}>
-          {renderLanguageImage()}
-        </IconButton>
-      </Tooltip>
-      <Popover
-        anchorEl={anchorElLang}
-        open={Boolean(anchorElLang)}
-        onClose={handleCloseLangMenu}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        sx={{
-          "& .MuiPopover-paper": {
-            backgroundColor: color.primary[400],
-            borderRadius: 0.5,
-            width: "8rem",
-          },
-        }}
+      <ListItem
+        disablePadding
+        sx={{ display: "block", justifyContent: "center" }}
       >
-        <MenuList>
-          <MenuItem onClick={() => handleLanguageChange("english")}>
-            <ListItemIcon>
-              <Typography
-                variant="subtitle1"
-                sx={{ color: color.grey[100], fontWeight: 300 }}
-              >
-                <img src={EnglishFlag} alt="English" height={30} width={20} />
-              </Typography>
-            </ListItemIcon>
-            <Typography variant="inherit">English</Typography>
-          </MenuItem>
-          <MenuItem onClick={() => handleLanguageChange("polish")}>
-            <ListItemIcon>
-              <Typography
-                variant="subtitle1"
-                sx={{ color: color.grey[100], fontWeight: 300 }}
-              >
-                <img src={PolishFlag} alt="Polish" height={30} width={20} />
-              </Typography>
-            </ListItemIcon>
-            <Typography variant="inherit">Polish</Typography>
-          </MenuItem>
-        </MenuList>
-      </Popover>
+        <ListItemButton
+          onClick={handleOpenLangMenu}
+          sx={{
+            px: 2.5,
+            m: 0.5,
+            borderRadius: 1.5,
+            "&:hover": {
+              backgroundColor:
+                theme.palette.mode === "dark" ? blueGrey[800] : blueGrey[100],
+            },
+          }}
+        >
+          <ListItemIcon sx={{ minWidth: 0, mr: 3 }}>
+            {renderLanguageImage()}
+          </ListItemIcon>
+          <ListItemText primary="Language" />
+        </ListItemButton>
+        <Popover
+          anchorEl={anchorElLang}
+          open={Boolean(anchorElLang)}
+          onClose={handleCloseLangMenu}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          sx={{
+            "& .MuiPopover-paper": {
+              backgroundColor: color.primary[400],
+              borderRadius: 0.5,
+              width: "8rem",
+            },
+          }}
+        >
+          <MenuList>
+            <MenuItem onClick={() => handleLanguageChange("english")}>
+              <ListItemIcon>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ color: color.grey[100], fontWeight: 300 }}
+                >
+                  <img src={EnglishFlag} alt="English" height={30} width={20} />
+                </Typography>
+              </ListItemIcon>
+              <Typography variant="inherit">English</Typography>
+            </MenuItem>
+            <MenuItem onClick={() => handleLanguageChange("polish")}>
+              <ListItemIcon>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ color: color.grey[100], fontWeight: 300 }}
+                >
+                  <img src={PolishFlag} alt="Polish" height={30} width={20} />
+                </Typography>
+              </ListItemIcon>
+              <Typography variant="inherit">Polish</Typography>
+            </MenuItem>
+          </MenuList>
+        </Popover>
+      </ListItem>
     </>
   );
 }
