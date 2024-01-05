@@ -16,7 +16,7 @@ import { observer } from "mobx-react-lite";
 import { colors } from "../../../themeConfig";
 import { useStore } from "../../stores/Store";
 import * as React from "react";
-import { AssignmentIndOutlined, PowerSettingsNew } from "@mui/icons-material";
+import { AssignmentIndOutlined, LogoutOutlined } from "@mui/icons-material";
 import UserProfileDialog from "../../../features/AdminOperations/UserProfile/UserProfileDialog";
 
 export default observer(function UserOptions() {
@@ -44,6 +44,7 @@ export default observer(function UserOptions() {
       <Tooltip title="User Options">
         <Button
           variant="text"
+          color="info"
           onClick={handleOpenUserMenu}
           endIcon={
             <Avatar
@@ -87,7 +88,6 @@ export default observer(function UserOptions() {
         }}
         sx={{
           "& .MuiPopover-paper": {
-            backgroundColor: color.primary[400],
             borderRadius: 0.5,
             width: "12rem",
           },
@@ -124,7 +124,7 @@ export default observer(function UserOptions() {
             }}
           >
             <ListItemIcon>
-              <PowerSettingsNew color="error" />
+              <LogoutOutlined color="error" />
             </ListItemIcon>
             <Typography variant="h6">Logout</Typography>
           </MenuItem>

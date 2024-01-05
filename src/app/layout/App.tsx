@@ -7,14 +7,13 @@ import { useStore } from "../stores/Store";
 import * as React from "react";
 import { observer } from "mobx-react-lite";
 import SkeletonLoadingComponenet from "../common/loadingComponents/SkeletonLoadingComponent";
-import Sidedrawer from "../common/Sidedrawer/Sidedrawer";
+import SidebarComponent from "../common/sidebar/SidebarComponent";
 
 function App() {
   const [theme, colorMode] = useMode();
   const { commonStore, userStore } = useStore();
-  const { isUserLoggedIn } = userStore;
 
-  const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const [sidebarOpen, setSidebarOpen] = React.useState(true);
 
   React.useEffect(() => {
     if (commonStore.token) {
@@ -35,10 +34,17 @@ function App() {
         />
         {commonStore.applocationLoaded ? (
           <>
-            <Navbar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+            <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
             <Box display="flex">
-              {isUserLoggedIn && <Sidedrawer isCollapsed={isCollapsed} />}
-              <Container maxWidth="xl" sx={{ mt: 4 }}>
+              <SidebarComponent
+                open={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+              />
+              <Container
+                maxWidth="xl"
+                component="main"
+                sx={{ flexGrow: 1, p: 4, mt: 6 }}
+              >
                 <Outlet />
               </Container>
             </Box>

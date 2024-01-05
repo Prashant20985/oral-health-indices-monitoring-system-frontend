@@ -1,28 +1,51 @@
 import {
-  AppBar,
+  AppBar as MuiAppBar,
+  AppBarProps as MuiAppBarProps,
   Box,
-  Container,
-  Divider,
   Toolbar,
-  Typography,
   useTheme,
+  styled,
+  IconButton,
 } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
-import ColorModeToggle from "./ColorModeToggle";
-import LanguageSelect from "./LanguageSelect";
 import UserOptions from "./UserOptions";
 import { useStore } from "../../stores/Store";
 import { observer } from "mobx-react-lite";
-import SidedrawerHeader from "../Sidedrawer/SidedrawerHeader";
+import { Menu } from "@mui/icons-material";
+import SettingsOption from "./SettingsOption";
+
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
+
+const drawerWidth = 245;
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})<AppBarProps>(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
 
 interface Props {
-  isCollapsed: boolean;
-  setIsCollapsed: (isCollapsed: boolean) => void;
+  sidebarOpen: boolean;
+  setSidebarOpen: (value: boolean) => void;
 }
 
 export default observer(function Navbar({
-  isCollapsed,
-  setIsCollapsed,
+  sidebarOpen,
+  setSidebarOpen,
 }: Props) {
   const theme = useTheme();
   const backgroundColor =
@@ -35,69 +58,42 @@ export default observer(function Navbar({
   return (
     <Box display="flex">
       <AppBar
-        position="relative"
+        open={sidebarOpen}
+        position="fixed"
         sx={{
           backgroundColor: backgroundColor,
+          zIndex: theme.zIndex.drawer + 1,
         }}
       >
-        <Box display="flex">
-          {isUserLoggedIn ? (
-            <SidedrawerHeader
-              isCollapsed={isCollapsed}
-              setIsCollapsed={setIsCollapsed}
-            />
-          ) : (
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              ml={2}
+        <Box display="flex" sx={{ ml: 0.5 }}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => setSidebarOpen(true)}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(sidebarOpen && { display: "none" }),
+              }}
             >
-              <Typography
-                variant="h4"
-                noWrap
-                color="inherit"
-                sx={{
-                  fontFamily: "monospace",
-                  fontWeight: 600,
-                }}
-              >
-                ORAL EHR SYSTEM
-              </Typography>
-            </Box>
-          )}
-          <Container maxWidth="xl">
-            <Toolbar
-              disableGutters
-              sx={{ display: "flex", justifyContent: "flex-end" }}
-            >
-              <Box display="flex" flexGrow={0}>
-                {isUserLoggedIn && (
-                  <>
-                    <UserOptions />
-                    <Divider
-                      orientation="vertical"
-                      flexItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        ml: 2,
-                        mr: 2,
-                        mt: 1,
-                        mb: 1,
-                      }}
-                    />
-                  </>
-                )}
-                <LanguageSelect />
-                <Divider
-                  orientation="vertical"
-                  flexItem
-                  sx={{ backgroundColor: "#fff", ml: 2, mr: 2, mt: 1, mb: 1 }}
-                />
-                <ColorModeToggle />
-              </Box>
-            </Toolbar>
-          </Container>
+              <Menu />
+            </IconButton>
+          </Toolbar>
+          <Toolbar
+            disableGutters
+            sx={{
+              display: "flex",
+              flexGrow: 1,
+              padding: 1,
+              justifyContent: "flex-end",
+              gap: 1,
+              mr: 0.5,
+            }}
+          >
+            {isUserLoggedIn && <UserOptions />}
+            <SettingsOption />
+          </Toolbar>
         </Box>
       </AppBar>
     </Box>
