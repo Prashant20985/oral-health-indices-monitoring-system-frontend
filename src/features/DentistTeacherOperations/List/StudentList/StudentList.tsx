@@ -14,6 +14,7 @@ import LinearProgressComponent from "../../../../app/common/loadingComponents/Li
 import { Student } from "../../../../app/models/Group";
 import { DeleteForever, PersonAdd } from "@mui/icons-material";
 import { useStore } from "../../../../app/stores/Store";
+import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 
 interface Props {
   students: Student[];
@@ -187,6 +188,7 @@ export default observer(function StudentList({
         })}
         slots={{
           loadingOverlay: LinearProgressComponent,
+          noRowsOverlay: NoRowsFound,
         }}
       />
     </Box>

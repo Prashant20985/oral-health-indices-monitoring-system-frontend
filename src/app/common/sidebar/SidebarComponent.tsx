@@ -2,6 +2,7 @@ import {
   ChevronLeft,
   DashboardOutlined,
   LoginOutlined,
+  MessageOutlined,
 } from "@mui/icons-material";
 import {
   CSSObject,
@@ -132,6 +133,12 @@ export default observer(function SidebarComponent({
                   <DentistTeacherNavOptions open={open} />
                 ))}
             </>
+            <SidebarListItem
+              open={open}
+              path="/my-requests"
+              icon={<MessageOutlined />}
+              text="My Requests"
+            />
           </>
         )}
       </List>

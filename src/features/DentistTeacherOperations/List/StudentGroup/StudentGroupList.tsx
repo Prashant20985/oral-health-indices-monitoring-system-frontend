@@ -73,25 +73,20 @@ export default observer(function StudentGroupList() {
         sx={{
           overflow: "auto",
           backgroundColor: color.primary[400],
-          maxHeight: "75vh",
-          minHeight: "50vh",
+          height: "75vh",
         }}
       >
-        <Grid container spacing={1} sx={{ p: 1 }}>
-          {filteredGroups.length > 0 ? (
-            <>
-              {filteredGroups.map((group) => (
-                <Grid item md={6} lg={3} key={group.id}>
-                  <StudentGroupCard group={group} />
-                </Grid>
-              ))}
-            </>
-          ) : (
-            <Box margin="auto">
-              <NoRowsFound />
-            </Box>
-          )}
-        </Grid>
+        {filteredGroups.length > 0 ? (
+          <Grid container spacing={1} sx={{ p: 1 }}>
+            {filteredGroups.map((group) => (
+              <Grid item md={6} lg={3} key={group.id}>
+                <StudentGroupCard group={group} />
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <NoRowsFound />
+        )}
       </Paper>
       <AddStudentGroupForm
         isOpen={addFormOpen}

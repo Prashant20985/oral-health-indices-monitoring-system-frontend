@@ -17,6 +17,7 @@ import CustomSelect from "../../../app/common/formInputs/CustomSelect";
 import { RequestStatus } from "../../../app/models/UserRequest";
 import Calendar from "../../../app/common/calendar/Calendar";
 import { SearchRounded } from "@mui/icons-material";
+import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 
 export default observer(function UserRequestListForAdmin() {
   const { userRequestStore } = useStore();
@@ -88,9 +89,18 @@ export default observer(function UserRequestListForAdmin() {
               height: "75vh",
             }}
           >
-            {filteredRequests.map((userRequest) => (
-              <UserRequestCard key={userRequest.id} userRequest={userRequest} />
-            ))}
+            {filteredRequests.length > 0 ? (
+              <>
+                {filteredRequests.map((userRequest) => (
+                  <UserRequestCard
+                    key={userRequest.id}
+                    userRequest={userRequest}
+                  />
+                ))}
+              </>
+            ) : (
+              <NoRowsFound />
+            )}
           </Paper>
         </Box>
         <Box display="flex" flexDirection="column" gap={4}>

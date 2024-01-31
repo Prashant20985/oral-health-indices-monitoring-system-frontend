@@ -7,7 +7,7 @@ export default function NoRowsFound() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "60vh",
+        height: "100%",
         flexDirection: "column",
       }}
     >

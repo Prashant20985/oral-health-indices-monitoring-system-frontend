@@ -14,6 +14,7 @@ import { colors } from "../../../themeConfig";
 import { RequestStatus } from "../../../app/models/UserRequest";
 import UserRequestCard from "../../UserRequestOperations/List/UserRequestCard";
 import { router } from "../../../app/router/Routes";
+import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 
 export default observer(function UserRequestForAdminShortcut() {
   const { userRequestStore } = useStore();
@@ -70,9 +71,18 @@ export default observer(function UserRequestForAdminShortcut() {
             height: "30vh",
           }}
         >
-          {userRequestStore.userRequestsForAdmin.map((userRequest) => (
-            <UserRequestCard key={userRequest.id} userRequest={userRequest} />
-          ))}
+          {userRequestStore.userRequestsForAdmin.length > 0 ? (
+            <>
+              {userRequestStore.userRequestsForAdmin.map((userRequest) => (
+                <UserRequestCard
+                  key={userRequest.id}
+                  userRequest={userRequest}
+                />
+              ))}
+            </>
+          ) : (
+            <NoRowsFound />
+          )}
         </Box>
         <Box display="flex" justifyContent="flex-end">
           <Button
