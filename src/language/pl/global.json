@@ -1,0 +1,22 @@
+{
+  "topbar": {
+    "colorMode": {
+      "dark": "Tryb Ciemny",
+      "light": "Tryb światła"
+    },
+    "language": {
+      "header": "Język",
+      "en": "Angielski",
+      "pl": "Polski"
+    }
+  },
+  "login": {
+    "header": "Zaloguj się",
+    "email": "Adres e-mail",
+    "password": "Hasło",
+    "button": "Zaloguj się",
+    "buttonLoading": "Logowanie...",
+    "forgotPassword": "Zapomniałeś hasła?",
+    "rememberMe": "Zapamiętaj mnie"
+  }
+}

@@ -18,6 +18,7 @@ import CustomPasswordTextField from "../../app/common/formInputs/CustomPassowrdT
 import CustomErrorMessage from "../../app/common/formInputs/CustomErrorMessage";
 import CustomSubmitButton from "../../app/common/formInputs/CustomSubmitButtom";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default observer(function LoginForm() {
   const theme = useTheme();
@@ -25,6 +26,8 @@ export default observer(function LoginForm() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const { userStore } = useStore();
   const { isUserLoggedIn, login } = userStore;
+
+  const [t] = useTranslation("global");
 
   React.useEffect(() => {
     if (isUserLoggedIn) {
@@ -64,7 +67,7 @@ export default observer(function LoginForm() {
                 sx={{ mb: "10px" }}
                 align="left"
               >
-                Login
+                {t("login.header")}
               </Typography>
               <Box
                 display="grid"
@@ -75,7 +78,7 @@ export default observer(function LoginForm() {
                 }}
               >
                 <CustomTextField
-                  label="Email or User Name"
+                  label={t("login.email")}
                   name="email"
                   required={true}
                   onChange={handleChange}
@@ -86,7 +89,7 @@ export default observer(function LoginForm() {
                 />
 
                 <CustomPasswordTextField
-                  label="Password"
+                  label={t("login.password")}
                   name="password"
                   onChange={handleChange}
                   error={touched.password && !!errors.password}
@@ -96,7 +99,7 @@ export default observer(function LoginForm() {
 
                 <FormControlLabel
                   control={<Checkbox value="remember" color="success" />}
-                  label="Remember me"
+                  label={t("login.rememberMe")}
                   color="primary"
                   sx={{ gridColumn: "span 2" }}
                 />
@@ -109,8 +112,8 @@ export default observer(function LoginForm() {
                   isSubmitting={isSubmitting}
                   fullwidth={true}
                   width="100%"
-                  buttonText="Login"
-                  loadingText="Logging in..."
+                  buttonText={t("login.button")}
+                  loadingText={t("login.buttonLoading")}
                 />
               </Box>
             </Form>
@@ -121,7 +124,7 @@ export default observer(function LoginForm() {
             style={{ color: color.grey[100], fontSize: 14 }}
             to={"/forgot-pass"}
           >
-            Forgot password?
+            {t("login.forgotPassword")}
           </Link>
         </Box>
       </Box>

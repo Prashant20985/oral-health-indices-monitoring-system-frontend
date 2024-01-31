@@ -9,10 +9,14 @@ import { useContext } from "react";
 import { ColorModeContext } from "../../../themeConfig";
 import { Brightness4, LightMode } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 export default function ColorModeToggle() {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
+
+  const [t] = useTranslation("global");
+
   return (
     <ListItem
       disablePadding
@@ -34,7 +38,11 @@ export default function ColorModeToggle() {
           {theme.palette.mode === "dark" ? <LightMode /> : <Brightness4 />}
         </ListItemIcon>
         <ListItemText
-          primary={theme.palette.mode === "dark" ? "Light Mode" : "Dark Mode"}
+          primary={
+            theme.palette.mode === "dark"
+              ? t("topbar.colorMode.light")
+              : t("topbar.colorMode.dark")
+          }
         />
       </ListItemButton>
     </ListItem>
