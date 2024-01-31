@@ -12,8 +12,9 @@ import {
 import { colors } from "../../../themeConfig";
 import * as React from "react";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
-type Language = "english" | "polish";
+type Language = "en" | "pl";
 const EnglishFlag = "/assets/english.svg";
 const PolishFlag = "/assets/polish.svg";
 
@@ -21,10 +22,16 @@ export default function LanguageSelect() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const [t, i18next] = useTranslation("global");
+
   const [anchorElLang, setAnchorElLang] = React.useState<null | HTMLElement>(
     null
   );
-  const [selectedLang, setSelectedLang] = React.useState<Language>("english");
+
+  const [selectedLang, setSelectedLang] = React.useState<Language>(() => {
+    const storedLang = localStorage.getItem("selectedLang");
+    return (storedLang as Language) || "en";
+  });
 
   const handleOpenLangMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElLang(event.currentTarget);
@@ -35,14 +42,16 @@ export default function LanguageSelect() {
   };
 
   const handleLanguageChange = (language: Language) => {
+    i18next.changeLanguage(language);
     setSelectedLang(language);
+    localStorage.setItem("selectedLang", language);
     handleCloseLangMenu();
   };
 
   const renderLanguageImage = () => {
-    if (selectedLang === "english") {
+    if (selectedLang === "en") {
       return <img src={EnglishFlag} alt="English" height={24} width={24} />;
-    } else if (selectedLang === "polish") {
+    } else if (selectedLang === "pl") {
       return <img src={PolishFlag} alt="Polish" height={24} width={24} />;
     }
     return null;
@@ -69,7 +78,7 @@ export default function LanguageSelect() {
           <ListItemIcon sx={{ minWidth: 0, mr: 3 }}>
             {renderLanguageImage()}
           </ListItemIcon>
-          <ListItemText primary="Language" />
+          <ListItemText primary={t("topbar.language.header")} />
         </ListItemButton>
         <Popover
           anchorEl={anchorElLang}
@@ -92,7 +101,10 @@ export default function LanguageSelect() {
           }}
         >
           <MenuList>
-            <MenuItem onClick={() => handleLanguageChange("english")}>
+            <MenuItem
+              disabled={selectedLang === "en"}
+              onClick={() => handleLanguageChange("en")}
+            >
               <ListItemIcon>
                 <Typography
                   variant="subtitle1"
@@ -101,9 +113,14 @@ export default function LanguageSelect() {
                   <img src={EnglishFlag} alt="English" height={30} width={20} />
                 </Typography>
               </ListItemIcon>
-              <Typography variant="inherit">English</Typography>
+              <Typography variant="inherit">
+                {t("topbar.language.en")}
+              </Typography>
             </MenuItem>
-            <MenuItem onClick={() => handleLanguageChange("polish")}>
+            <MenuItem
+              disabled={selectedLang === "pl"}
+              onClick={() => handleLanguageChange("pl")}
+            >
               <ListItemIcon>
                 <Typography
                   variant="subtitle1"
@@ -112,7 +129,9 @@ export default function LanguageSelect() {
                   <img src={PolishFlag} alt="Polish" height={30} width={20} />
                 </Typography>
               </ListItemIcon>
-              <Typography variant="inherit">Polish</Typography>
+              <Typography variant="inherit">
+                {t("topbar.language.pl")}
+              </Typography>
             </MenuItem>
           </MenuList>
         </Popover>

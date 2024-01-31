@@ -1,0 +1,22 @@
+{
+  "topbar": {
+    "colorMode": {
+      "dark": "Dark Mode",
+      "light": "Light Mode"
+    },
+    "language": {
+      "header": "Language",
+      "en": "English",
+      "pl": "Polish"
+    }
+  },
+  "login": {
+    "header": "Login",
+    "email": "Email or UserName",
+    "password": "Password",
+    "button": "Login",
+    "buttonLoading": "Logging in...",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me"
+  }
+}
