@@ -70,25 +70,20 @@ export default observer(function ResearchGroupList() {
         sx={{
           overflow: "auto",
           backgroundColor: color.primary[400],
-          maxHeight: "75vh",
-          minHeight: "50vh",
+          height: "75vh",
         }}
       >
-        <Grid container spacing={1} sx={{ p: 1 }}>
-          {dentistTeacherStore.researchGroups.length > 0 ? (
-            <>
-              {dentistTeacherStore.researchGroups.map((researchGroup) => (
-                <Grid item lg={3} md={6} sm={12} xs={18} key={researchGroup.id}>
-                  <ResearchGroupCard researchGroup={researchGroup} />
-                </Grid>
-              ))}
-            </>
-          ) : (
-            <Box margin="auto">
-              <NoRowsFound />
-            </Box>
-          )}
-        </Grid>
+        {dentistTeacherStore.researchGroups.length > 0 ? (
+          <Grid container spacing={1} sx={{ p: 1 }}>
+            {dentistTeacherStore.researchGroups.map((researchGroup) => (
+              <Grid item lg={3} md={6} sm={12} xs={18} key={researchGroup.id}>
+                <ResearchGroupCard researchGroup={researchGroup} />
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <NoRowsFound />
+        )}
       </Paper>
       <ResearchGroupForm
         isOpen={addFormOpen}

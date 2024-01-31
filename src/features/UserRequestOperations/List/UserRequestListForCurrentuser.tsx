@@ -17,6 +17,7 @@ import UserRequestCard from "./UserRequestCard";
 import Calendar from "../../../app/common/calendar/Calendar";
 import CustomSelect from "../../../app/common/formInputs/CustomSelect";
 import { RequestStatus } from "../../../app/models/UserRequest";
+import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 
 export default observer(function UserRequestListForCurrentuser() {
   const { userRequestStore } = useStore();
@@ -73,13 +74,19 @@ export default observer(function UserRequestListForCurrentuser() {
               height: "75vh",
             }}
           >
-            {userRequestsForCurrentUser.map((userRequest) => (
-              <UserRequestCard
-                key={userRequest.id}
-                userRequest={userRequest}
-                isCurrentUserRequest={true}
-              />
-            ))}
+            {userRequestsForCurrentUser.length > 0 ? (
+              <>
+                {userRequestsForCurrentUser.map((userRequest) => (
+                  <UserRequestCard
+                    key={userRequest.id}
+                    userRequest={userRequest}
+                    isCurrentUserRequest={true}
+                  />
+                ))}
+              </>
+            ) : (
+              <NoRowsFound />
+            )}
           </Paper>
         </Box>
         <Box display="flex" flexDirection="column" gap={4}>

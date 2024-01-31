@@ -18,6 +18,7 @@ import * as React from "react";
 import CustomSanckbar from "../../../../app/common/snackbar/CustomSnackbar";
 import UserProfileDialog from "../../UserProfile/UserProfileDialog";
 import UserDeleteForm from "../../Forms/UserDeleteForm";
+import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 
 interface Props {
   applicationUsers: ApplicationUser[];
@@ -258,6 +259,7 @@ export default observer(function AppplicationUsersList({
           })}
           slots={{
             loadingOverlay: LinearProgressComponent,
+            noRowsOverlay: NoRowsFound,
           }}
         />
       </>
