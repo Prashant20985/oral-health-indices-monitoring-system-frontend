@@ -99,9 +99,6 @@ import {
                 color="success"
                 startIcon={<Add />}
                 variant="contained"
-                onClick={() =>
-                  router.navigate(`/research-groups/${id}/add-patients`)
-                }
               >
                 Add Patient
               </Button>
