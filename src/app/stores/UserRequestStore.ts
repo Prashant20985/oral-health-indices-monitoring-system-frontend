@@ -24,7 +24,7 @@ export default class UserRequestStore {
 
   constructor() {
     makeAutoObservable(this);
-
+    
     reaction(
       () => ({
         dateSubmitted: this.dateSubmittedForAdmin,
