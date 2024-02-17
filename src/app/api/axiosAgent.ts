@@ -170,6 +170,11 @@ const DentistTeacherOperations = {
       `/dentistTeacher/research-groups?groupName=${groupName}`
     ),
 
+  getResearchGroup: (researchGroupId: string) =>
+    apiRequests.get<ResearchGroup>(
+      `/dentistTeacher/research-group/${researchGroupId}`
+    ),
+
   getPatientsNotInResearchGroup: (params: URLSearchParams) =>
     axios
       .get<ResearchGroupPatient[]>(

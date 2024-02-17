@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardHeader,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Avatar, Card, CardHeader, Typography, useTheme } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { ResearchGroup } from "../../../../app/models/ResearchGroup";
 import { colors } from "../../../../themeConfig";
@@ -23,12 +16,9 @@ export default observer(function ResearchGroupList({ researchGroup }: Props) {
     <Card
       sx={{
         backgroundColor: color.primary[400],
+        border: 1,
+        borderColor: color.grey[200],
         padding: 1,
-        border: 0.1,
-        borderColor:
-          theme.palette.mode === "dark"
-            ? color.greenAccent[300]
-            : color.grey[700],
       }}
     >
       <CardHeader
@@ -43,20 +33,17 @@ export default observer(function ResearchGroupList({ researchGroup }: Props) {
           </Avatar>
         }
         title={researchGroup.groupName}
-        subheader={`Number of Patients: ${researchGroup.patients.length}`}
+        subheader={
+          <>
+            <Typography variant="body2" color="text.secondary">
+              {`Created By: ${researchGroup.createdBy}`}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {`Number of Patients: ${researchGroup.patients.length}`}
+            </Typography>
+          </>
+        }
       />
-      <CardContent
-        sx={{
-          height: "5rem",
-          overflow: "auto",
-          borderBottom: "1px solid",
-          mb: 0.5,
-        }}
-      >
-        <Typography variant="body2" color="text.secondary">
-          {researchGroup.description}
-        </Typography>
-      </CardContent>
       <ResearchGroupCardActions researchGroup={researchGroup} />
     </Card>
   );

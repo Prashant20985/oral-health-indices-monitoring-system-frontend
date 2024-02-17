@@ -1,5 +1,4 @@
 import {
-  AddCircleOutline,
   DeleteSweep,
   Edit,
   KeyboardDoubleArrowRight,
@@ -17,6 +16,8 @@ import { ResearchGroup } from "../../../../app/models/ResearchGroup";
 import * as React from "react";
 import ResearchGroupForm from "../../Forms/ResearchGroupForm";
 import StudentAndResearchGroupDeleteConfirmation from "../../Forms/StudentAndResearchGroupDeleteConfirmation";
+import { router } from "../../../../app/router/Routes";
+import { useStore } from "../../../../app/stores/Store";
 
 interface Props {
   researchGroup: ResearchGroup;
@@ -29,6 +30,15 @@ export default observer(function ResearchGroupCardActions({
   const [openDeleteConfirmation, setOpenDeleteConfirmation] =
     React.useState(false);
   const theme = useTheme();
+
+  const {
+    dentistTeacherStore: { setSelectedResearchGroup },
+  } = useStore();
+
+  const handleViewDetails = () => {
+    setSelectedResearchGroup(researchGroup);
+    router.navigate(`/research-groups/${researchGroup.id}`);
+  };
   return (
     <>
       <CardActions
@@ -45,17 +55,12 @@ export default observer(function ResearchGroupCardActions({
             size="small"
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
             endIcon={<KeyboardDoubleArrowRight />}
-            onClick={() => console.log(researchGroup)}
+            onClick={handleViewDetails}
           >
-            View Patients
+            View Details
           </Button>
         </Box>
         <Box display="flex">
-          <Tooltip title="Add Patient">
-            <IconButton>
-              <AddCircleOutline color="success" />
-            </IconButton>
-          </Tooltip>
           <Tooltip title="Edit">
             <IconButton onClick={() => setOpenEditGroupDialog(true)}>
               <Edit color="warning" />

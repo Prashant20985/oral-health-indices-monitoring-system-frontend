@@ -15,6 +15,7 @@ export default class DentistTeacherStore {
   researchGroupName: string = "";
   patientName: string = "";
   email: string = "";
+  selectedResearchGroup: ResearchGroup | undefined;
 
   loading = {
     createGroup: false,
@@ -25,6 +26,7 @@ export default class DentistTeacherStore {
     studentsNotInGroup: false,
     groups: false,
     researchGroups: false,
+    researchGroupDetails: false,
     patientsNotInResearchGroup: false,
     createResearchGroup: false,
     deleteResearchGroup: false,
@@ -60,6 +62,14 @@ export default class DentistTeacherStore {
     return params;
   }
 
+  setSelectedResearchGroup = (researchGroup: ResearchGroup | undefined) => {
+    this.selectedResearchGroup = researchGroup;
+  };
+
+  clearSelectedResearchGroup = () => {
+    this.selectedResearchGroup = undefined;
+  };
+
   setResearchGroupName = (researchGroupName: string) => {
     this.researchGroupName = researchGroupName;
   };
@@ -78,6 +88,10 @@ export default class DentistTeacherStore {
 
   setPatientsNotInResearchGroup = (patients: ResearchGroupPatient[]) => {
     this.patientsNotInResearchGroup = patients;
+  };
+
+  private getReseatchGroupDetails = (researchGroupId: string) => {
+    return this.researchGroups.find((rg) => rg.id === researchGroupId);
   };
 
   createGroup = async (groupName: string) => {
@@ -252,6 +266,29 @@ export default class DentistTeacherStore {
     }
   };
 
+  getResearchGroup = async (researchGroupId: string) => {
+    const researchGroup = this.getReseatchGroupDetails(researchGroupId);
+    if (researchGroup) {
+      runInAction(() => this.setSelectedResearchGroup(researchGroup));
+      return researchGroup;
+    } else {
+      this.loading.researchGroupDetails = true;
+      try {
+        const result =
+          await axiosAgent.DentistTeacherOperations.getResearchGroup(
+            researchGroupId
+          );
+        runInAction(() => {
+          this.setSelectedResearchGroup(result);
+          this.loading.researchGroupDetails = false;
+        });
+      } catch (error) {
+        console.log(error);
+        runInAction(() => (this.loading.researchGroupDetails = false));
+      }
+    }
+  };
+
   getPatientsNotInResearchGroup = async () => {
     this.loading.patientsNotInResearchGroup = true;
     try {
@@ -350,20 +387,9 @@ export default class DentistTeacherStore {
       );
 
       runInAction(() => {
-        const researchGroupIndex = this.researchGroups.findIndex(
-          (rg) => rg.id === researchGroupId
-        );
-
-        if (researchGroupIndex !== -1) {
-          const updatedResearchGroup = {
-            ...this.researchGroups[researchGroupIndex],
-          };
-          updatedResearchGroup.patients.push(patient);
-          const updatedResearchGroups = [...this.researchGroups];
-          updatedResearchGroups[researchGroupIndex] = updatedResearchGroup;
-          this.setResearchGroups(updatedResearchGroups);
-        }
-
+        this.selectedResearchGroup?.patients.push(patient);
+        this.patientsNotInResearchGroup =
+          this.patientsNotInResearchGroup.filter((p) => p.id !== patient.id);
         this.loading.addPatientToResearchGroup = false;
       });
     } catch (error) {
@@ -375,33 +401,19 @@ export default class DentistTeacherStore {
     }
   };
 
-  removePatientFromResearchGroup = async (
-    patientId: string,
-    researchGroupId: string
-  ) => {
+  removePatientFromResearchGroup = async (patient: ResearchGroupPatient) => {
     this.loading.removePatientFromResearchGroup = true;
     try {
       await axiosAgent.DentistTeacherOperations.removePatientFromResearchGroup(
-        patientId
+        patient.id
       );
       runInAction(() => {
-        const researchGroupIndex = this.researchGroups.findIndex(
-          (rg) => rg.id === researchGroupId
-        );
-
-        if (researchGroupIndex !== -1) {
-          const updatedResearchGroup = {
-            ...this.researchGroups[researchGroupIndex],
-          };
-
-          updatedResearchGroup.patients = updatedResearchGroup.patients.filter(
-            (patient) => patient.id !== patientId
+        const updatedResearchGroup =
+          this.selectedResearchGroup?.patients.filter(
+            (p) => p.id !== patient.id
           );
-
-          const updatedResearchGroups = [...this.researchGroups];
-          updatedResearchGroups[researchGroupIndex] = updatedResearchGroup;
-          this.setResearchGroups(updatedResearchGroups);
-        }
+        this.patientsNotInResearchGroup.push(patient);
+        this.selectedResearchGroup!.patients = updatedResearchGroup!;
         this.loading.removePatientFromResearchGroup = false;
       });
     } catch (error) {
