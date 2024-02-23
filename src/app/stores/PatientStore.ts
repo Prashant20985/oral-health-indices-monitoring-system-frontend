@@ -96,12 +96,20 @@ export class PatientStore {
     this.archivedPatientsByDoctorIdSearchParams = searchParams;
   };
 
-  clearActivePatientSearchParams = () => {
-    this.activePatientsSerachParams = { name: "", email: "" };
+  clearActivePatientNameSearch = () => {
+    this.activePatientsSerachParams.name = "";
   };
 
-  clearArchivedPatientSearchParams = () => {
-    this.archivedPatientsSearchParams = { name: "", email: "" };
+  clearActivePatientEmailSearch = () => {
+    this.activePatientsSerachParams.email = "";
+  };
+
+  clearArchivedPatientNameSearch = () => {
+    this.archivedPatientsSearchParams.name = "";
+  };
+
+  clearArchivedPatientEmailSearch = () => {
+    this.archivedPatientsSearchParams.email = "";
   };
 
   clearActivePatientsByDoctorIdSearchParams = () => {
