@@ -1,8 +1,10 @@
 import { observer } from "mobx-react-lite";
 import {
+  ArchiveOutlined,
   DeleteSweepOutlined,
   GppBadOutlined,
   GppGoodOutlined,
+  LocalHospitalOutlined,
   QuestionAnswerOutlined,
 } from "@mui/icons-material";
 import SidebarListItem from "../../../app/common/sidebar/SidebarListItem";
@@ -27,6 +29,16 @@ export default observer(function AdminNavOptions({ open }: Props) {
       title: "Deleted Users",
       path: "deleted-users",
       icon: <DeleteSweepOutlined />,
+    },
+    {
+      title: "Active Patients",
+      path: "active-patients",
+      icon: <LocalHospitalOutlined />,
+    },
+    {
+      title: "Archived Patients",
+      path: "archived-patients",
+      icon: <ArchiveOutlined />,
     },
     {
       title: "User Requests",

@@ -16,6 +16,8 @@ import UserRequestListForCurrentuser from "../../features/UserRequestOperations/
 import UserRequestListForAdmin from "../../features/UserRequestOperations/List/UserRequestListForAdmin";
 import ResearchGroupList from "../../features/DentistTeacherOperations/List/ResearchGroup/ResearchGroupList";
 import ResearchGroupDetails from "../../features/DentistTeacherOperations/List/ResearchGroup/ResearchGroupDetails";
+import ActivePatientsList from "../../features/AdminOperations/List/ActivePatients/ActivePatientsList";
+import ArchivedPatientsList from "../../features/AdminOperations/List/ArchivedPatients/ArchivedPatientsList";
 
 const routes: RouteObject[] = [
   {
@@ -56,6 +58,14 @@ const routes: RouteObject[] = [
           {
             path: "admin/requests",
             element: <UserRequestListForAdmin />,
+          },
+          {
+            path: "admin/active-patients",
+            element: <ActivePatientsList />,
+          },
+          {
+            path: "admin/archived-patients",
+            element: <ArchivedPatientsList />,
           },
         ],
       },
