@@ -13,11 +13,15 @@ import PatientDetailsDialog from "../../Forms/PatientDetailsDialog";
 interface Props {
   patients: Patient[];
   loading?: boolean;
+  height?: string;
+  isDashboard?: boolean;
 }
 
 export default observer(function PatientList({
   patients,
   loading = false,
+  height = "75vh",
+  isDashboard = false,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -52,29 +56,34 @@ export default observer(function PatientList({
       cellClassName: "name-column--cell",
       flex: 1,
     },
-    {
-      field: "ethnicGroup",
-      headerName: "Ethnic Group",
-      cellClassName: "name-column--cell",
-      flex: 1,
-    },
-    {
-      field: "location",
-      headerName: "Location",
-      cellClassName: "name-column--cell",
-      flex: 1,
-    },
-    {
-      field: "age",
-      headerName: "Age",
-      cellClassName: "name-column--cell",
-    },
+    ...(isDashboard
+      ? []
+      : [
+          {
+            field: "ethnicGroup",
+            headerName: "Ethnic Group",
+            cellClassName: "name-column--cell",
+            flex: 1,
+          },
+          {
+            field: "location",
+            headerName: "Location",
+            cellClassName: "name-column--cell",
+            flex: 1,
+          },
+          {
+            field: "age",
+            headerName: "Age",
+            cellClassName: "name-column--cell",
+            flex: 1,
+          },
+        ]),
     {
       field: "actions",
       headerName: "Actions",
       minWidth: 150,
-      flex: 1,
       headerAlign: "center",
+      flex: 1,
       renderCell: ({ row }) => {
         const patient = (row as Patient) || {};
         return (
@@ -116,7 +125,7 @@ export default observer(function PatientList({
   ];
   return (
     <Box
-      height="75vh"
+      height={height}
       minWidth="100%"
       sx={{
         "& .MuiDataGrid-root": {
@@ -126,7 +135,9 @@ export default observer(function PatientList({
           borderBottom: "none",
         },
         "& .MuiDataGrid-columnHeaders": {
-          backgroundColor: color.blueAccent[700],
+          backgroundColor: isDashboard
+            ? color.primary[400]
+            : color.blueAccent[700],
           borderBottom: "none",
         },
         "& .MuiDataGrid-virtualScroller": {
@@ -134,7 +145,9 @@ export default observer(function PatientList({
         },
         "& .MuiDataGrid-footerContainer": {
           borderTop: "none",
-          backgroundColor: color.blueAccent[700],
+          backgroundColor: isDashboard
+            ? color.primary[400]
+            : color.blueAccent[700],
         },
         "& .name-column--cell": {
           color: color.grey[100],

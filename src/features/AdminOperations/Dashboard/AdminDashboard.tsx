@@ -4,6 +4,9 @@ import Header from "../../../app/common/header/Header";
 import AddApplicationUserFromCsvButton from "./AddApplicationUserFromCsvButton";
 import ActiveApplicationUsersListShortcut from "./ActiveApplicationUsersListShortcut";
 import UserRequestForAdminShortcut from "./UserRequestForAdminShortcut";
+import DeactivatedApplicationUserListShortcut from "./DeactivatedApplicationUserListShortcut";
+import ActivePatientListShortcut from "./ActivePatientListShortcut";
+import ArchivedPatientListShortcut from "./ArchivedPatientListShortcut";
 
 export default function AdminDashboard() {
   return (
@@ -17,6 +20,9 @@ export default function AdminDashboard() {
       </Box>
       <Grid container spacing={2}>
         <ActiveApplicationUsersListShortcut />
+        <DeactivatedApplicationUserListShortcut />
+        <ActivePatientListShortcut />
+        <ArchivedPatientListShortcut />
         <UserRequestForAdminShortcut />
       </Grid>
     </Box>

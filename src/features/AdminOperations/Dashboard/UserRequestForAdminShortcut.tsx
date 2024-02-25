@@ -40,18 +40,21 @@ export default observer(function UserRequestForAdminShortcut() {
 
   return (
     <Grid item xs={12} md={6} lg={4}>
-      <Paper sx={{ backgroundColor: color.primary[400] }}>
-        <Box display="flex" justifyContent="space-between">
-          <Typography
-            variant="h6"
-            p={0.5}
-            textTransform="uppercase"
-            fontWeight={600}
-          >
+      <Paper
+        sx={{
+          backgroundColor:
+            theme.palette.mode === "dark"
+              ? color.primary[400]
+              : color.primary[900],
+        }}
+      >
+        <Box display="flex" justifyContent="space-between" p={1}>
+          <Typography variant="h6" textTransform="uppercase" fontWeight={600}>
             User Requests
           </Typography>
           <ButtonGroup
             size="small"
+            variant="contained"
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
           >
             {["Submitted", "In_Progress", "Completed"].map((status) => (
@@ -69,6 +72,7 @@ export default observer(function UserRequestForAdminShortcut() {
           sx={{
             overflow: "auto",
             height: "30vh",
+            backgroundColor: color.primary[400],
           }}
         >
           {userRequestStore.userRequestsForAdmin.length > 0 ? (
