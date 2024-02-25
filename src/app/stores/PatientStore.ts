@@ -148,6 +148,12 @@ export class PatientStore {
     return params;
   }
 
+  private getPatientById = (patientId: string) => {
+    return this.activePatients
+      .concat(this.archivedPatients)
+      .find((p) => p.id === patientId);
+  };
+
   fetchActivePatients = async () => {
     this.loading.activePatients = true;
     try {
@@ -310,14 +316,17 @@ export class PatientStore {
 
   deletePatient = async (patientId: string) => {
     this.loading.deletePatient = true;
+    const patient = this.getPatientById(patientId);
     try {
       await axiosAgent.PatientOperations.deletePatient(patientId);
       runInAction(() => {
-        this.activePatientsByDoctorId = this.activePatientsByDoctorId.filter(
-          (p) => p.id !== patientId
-        );
-        this.archivedPatientsByDoctorId =
-          this.archivedPatientsByDoctorId.filter((p) => p.id !== patientId);
+        if (patient) {
+          if (patient.isArchived) {
+            this.fetchArchivedPatients();
+          } else {
+            this.fetchActivePatients();
+          }
+        }
         this.loading.deletePatient = false;
       });
     } catch (error) {

@@ -6,20 +6,24 @@ import { colors } from "../../../../themeConfig";
 import LinearProgressComponent from "../../../../app/common/loadingComponents/LinearProgressComponent";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import { AccountCircle, Delete } from "@mui/icons-material";
+import * as React from "react";
+import DeletePatientConfirmation from "../../Forms/DeletePatientConfirmation";
 
 interface Props {
   patients: Patient[];
   loading?: boolean;
-  archivedPatientsList?: boolean;
 }
 
 export default observer(function PatientList({
   patients,
   loading = false,
-}: //archivedPatientsList = false,
-Props) {
+}: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
+    React.useState(false);
+  const [selectedPatientId, setSelectedPatientId] = React.useState("");
 
   const columns: GridColDef[] = [
     {
@@ -69,7 +73,8 @@ Props) {
       minWidth: 150,
       flex: 1,
       headerAlign: "center",
-      renderCell: () => {
+      renderCell: ({ row }) => {
+        const patient = row as Patient || {};
         return (
           <Box
             width="100%"
@@ -86,7 +91,13 @@ Props) {
                 <AccountCircle color="primary" />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Delete">
+            <Tooltip
+              title="Delete"
+              onClick={() => {
+                setDeleteConfirmationOpen(true);
+                setSelectedPatientId(patient.id);
+              }}
+            >
               <IconButton>
                 <Delete color="primary" />
               </IconButton>
@@ -143,6 +154,14 @@ Props) {
           }}
         />
       </>
+      <DeletePatientConfirmation
+        isOpen={deleteConfirmationOpen}
+        onClose={() => {
+          setDeleteConfirmationOpen(false);
+          setSelectedPatientId("");
+        }}
+        patientId={selectedPatientId}
+      />
     </Box>
   );
 });
