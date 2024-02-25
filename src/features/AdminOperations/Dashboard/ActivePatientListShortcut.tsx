@@ -1,27 +1,27 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/Store";
-import * as React from "react";
 import { Box, Button, Grid, Paper, Typography, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
+import * as React from "react";
+import PatientList from "../List/DataGrid/PatientList";
 import { router } from "../../../app/router/Routes";
-import ApplicationUserList from "../List/DataGrid/ApplicationUserList";
 
-export default observer(function ActiveApplicationUserListShortcut() {
-  const { adminStore } = useStore();
+export default observer(function ActivePatientListShortcut() {
+  const { patientStore } = useStore();
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
   React.useEffect(() => {
-    const fetchUsers = async () => {
-      if (adminStore.activeApplicationUsers.length <= 0) {
-        await adminStore.fetchActiveApplicationUsers();
+    const fetchPatients = async () => {
+      if (patientStore.activePatients.length <= 0) {
+        await patientStore.fetchActivePatients();
       }
     };
-    fetchUsers();
-  }, [adminStore]);
+    fetchPatients();
+  }, [patientStore]);
 
   return (
-    <Grid item xs={12} md={6} lg={6}>
+    <Grid item xs={12} md={6} lg={4}>
       <Paper
         sx={{
           backgroundColor:
@@ -36,18 +36,18 @@ export default observer(function ActiveApplicationUserListShortcut() {
           textTransform="uppercase"
           fontWeight={600}
         >
-          Active Users
+          Active Patients
         </Typography>
-        <ApplicationUserList
-          applicationUsers={adminStore.activeApplicationUsers}
-          loading={adminStore.loading.activeApplicationUsers}
-          isDashboard={true}
+        <PatientList 
+          patients={patientStore.activePatients}
+          loading={patientStore.loading.activePatients}
           height="30vh"
+          isDashboard={true}
         />
         <Box display="flex" justifyContent="flex-end">
           <Button
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
-            onClick={() => router.navigate("/admin/active-users")}
+            onClick={() => router.navigate("/admin/active-patients")}
             size="small"
           >
             View All
