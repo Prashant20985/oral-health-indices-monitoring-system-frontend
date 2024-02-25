@@ -148,7 +148,7 @@ export class PatientStore {
     return params;
   }
 
-  private getPatientById = (patientId: string) => {
+  getPatientById = (patientId: string) => {
     return this.activePatients
       .concat(this.archivedPatients)
       .find((p) => p.id === patientId);
