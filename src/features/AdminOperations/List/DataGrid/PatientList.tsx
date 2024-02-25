@@ -8,6 +8,7 @@ import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import { AccountCircle, Delete } from "@mui/icons-material";
 import * as React from "react";
 import DeletePatientConfirmation from "../../Forms/DeletePatientConfirmation";
+import PatientDetailsDialog from "../../Forms/PatientDetailsDialog";
 
 interface Props {
   patients: Patient[];
@@ -21,6 +22,7 @@ export default observer(function PatientList({
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const [patientDetailsOpen, setPatientDetailsOpen] = React.useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
     React.useState(false);
   const [selectedPatientId, setSelectedPatientId] = React.useState("");
@@ -74,7 +76,7 @@ export default observer(function PatientList({
       flex: 1,
       headerAlign: "center",
       renderCell: ({ row }) => {
-        const patient = row as Patient || {};
+        const patient = (row as Patient) || {};
         return (
           <Box
             width="100%"
@@ -87,7 +89,12 @@ export default observer(function PatientList({
             }}
           >
             <Tooltip title="View details">
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  setSelectedPatientId(patient.id);
+                  setPatientDetailsOpen(true);
+                }}
+              >
                 <AccountCircle color="primary" />
               </IconButton>
             </Tooltip>
@@ -161,6 +168,14 @@ export default observer(function PatientList({
           setSelectedPatientId("");
         }}
         patientId={selectedPatientId}
+      />
+      <PatientDetailsDialog
+        patientId={selectedPatientId}
+        isOpen={patientDetailsOpen}
+        onClose={() => {
+          setPatientDetailsOpen(false);
+          setSelectedPatientId("");
+        }}
       />
     </Box>
   );
