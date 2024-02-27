@@ -16,8 +16,8 @@ import UserRequestListForCurrentuser from "../../features/UserRequestOperations/
 import UserRequestListForAdmin from "../../features/UserRequestOperations/List/UserRequestListForAdmin";
 import ResearchGroupList from "../../features/DentistTeacherOperations/List/ResearchGroup/ResearchGroupList";
 import ResearchGroupDetails from "../../features/DentistTeacherOperations/List/ResearchGroup/ResearchGroupDetails";
-import ActivePatientsList from "../../features/AdminOperations/List/ActivePatients/ActivePatientsList";
-import ArchivedPatientsList from "../../features/AdminOperations/List/ArchivedPatients/ArchivedPatientsList";
+import ActivePatientsList from "../../features/PatientOperations/List/ActivePatientsForAdmin/ActivePatientsList";
+import ArchivedPatientsList from "../../features/PatientOperations/List/ArchivedPatientsForAdmin/ArchivedPatientsList";
 
 const routes: RouteObject[] = [
   {
