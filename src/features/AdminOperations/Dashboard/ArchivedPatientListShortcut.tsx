@@ -3,7 +3,7 @@ import { useStore } from "../../../app/stores/Store";
 import { Box, Button, Grid, Paper, Typography, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import * as React from "react";
-import PatientList from "../List/DataGrid/PatientList";
+import PatientList from "../../PatientOperations/List/DataGrid/PatientList";
 import { router } from "../../../app/router/Routes";
 
 export default observer(function ArchivedPatientListShortcut() {

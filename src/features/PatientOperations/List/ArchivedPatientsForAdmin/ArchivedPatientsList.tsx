@@ -3,7 +3,7 @@ import { useStore } from "../../../../app/stores/Store";
 import * as React from "react";
 import { Box } from "@mui/material";
 import PatientList from "../DataGrid/PatientList";
-import PatientListFilter from "../Filter/PatientListFilter";
+import PatientListFilter from "../Filters/PatientListFilter";
 
 export default observer(function ArchivedPatientsList() {
   const {
