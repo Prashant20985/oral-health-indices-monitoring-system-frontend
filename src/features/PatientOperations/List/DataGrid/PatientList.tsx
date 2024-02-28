@@ -17,6 +17,7 @@ import DeletePatientConfirmation from "../../Forms/DeletePatientConfirmation";
 import PatientDetailsDialog from "../../Forms/PatientDetailsDialog";
 import ArchivePatientForm from "../../Forms/ArchivePatientForm";
 import { useStore } from "../../../../app/stores/Store";
+import CreateEditPatientForm from "../../Forms/CreateEditPatientForm";
 
 interface Props {
   patients: Patient[];
@@ -41,11 +42,20 @@ export default observer(function PatientList({
   } = useStore();
 
   const [patientDetailsOpen, setPatientDetailsOpen] = React.useState(false);
+
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
     React.useState(false);
+
   const [archivePatientFormOpen, setArchivePatientFormOpen] =
     React.useState(false);
+
   const [selectedPatientId, setSelectedPatientId] = React.useState("");
+
+  const [openEditForm, setOpenEditForm] = React.useState(false);
+
+  const [selectedPatient, setSelectedPatient] = React.useState<Patient | null>(
+    null
+  );
 
   const statusColumn: GridColDef = {
     field: "isArchived",
@@ -170,7 +180,12 @@ export default observer(function PatientList({
             </Tooltip>
             {isListForDoctor && (
               <Tooltip title="Edit">
-                <IconButton>
+                <IconButton
+                  onClick={() => {
+                    setSelectedPatient(patient);
+                    setOpenEditForm(true);
+                  }}
+                >
                   <Edit color="primary" />
                 </IconButton>
               </Tooltip>
@@ -266,6 +281,15 @@ export default observer(function PatientList({
         onClose={() => {
           setSelectedPatientId("");
           setArchivePatientFormOpen(false);
+        }}
+      />
+      <CreateEditPatientForm
+        patient={selectedPatient!}
+        isOpen={openEditForm}
+        isEdit={true}
+        onClose={() => {
+          setOpenEditForm(false);
+          setSelectedPatient(null);
         }}
       />
     </Box>
