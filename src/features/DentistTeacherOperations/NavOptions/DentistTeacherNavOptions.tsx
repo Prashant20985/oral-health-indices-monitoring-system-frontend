@@ -1,26 +1,17 @@
 import {
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  useTheme,
-} from "@mui/material";
-import { useLocation } from "react-router-dom";
-import { BiotechOutlined, SchoolOutlined } from "@mui/icons-material";
+  ArchiveOutlined,
+  BiotechOutlined,
+  LocalHospitalOutlined,
+  SchoolOutlined,
+} from "@mui/icons-material";
 import { observer } from "mobx-react-lite";
-import { router } from "../../../app/router/Routes";
-import { blueGrey } from "@mui/material/colors";
+import SidebarListItem from "../../../app/common/sidebar/SidebarListItem";
 
 interface Props {
   open: boolean;
 }
 
 export default observer(function DentistTeacherNavOptions({ open }: Props) {
-  const location = useLocation();
-  const currentPath = location.pathname;
-
-  const theme = useTheme();
-
   const options = [
     {
       title: "Research Groups",
@@ -32,45 +23,28 @@ export default observer(function DentistTeacherNavOptions({ open }: Props) {
       path: "/student-groups",
       icon: <SchoolOutlined />,
     },
+    {
+      title: "Active Patients",
+      path: "/active-patients",
+      icon: <LocalHospitalOutlined />,
+    },
+    {
+      title: "Archived Patients",
+      path: "/archived-patients",
+      icon: <ArchiveOutlined />,
+    },
   ];
 
   return (
     <>
       {options.map((option) => (
-        <ListItem key={option.path} disablePadding sx={{ display: "block" }}>
-          <ListItemButton
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? "initial" : "center",
-              px: 2.5,
-              backgroundColor:
-                currentPath === option.path
-                  ? theme.palette.mode === "dark"
-                    ? blueGrey[700]
-                    : blueGrey[200]
-                  : "inherit",
-              "&:hover": {
-                backgroundColor:
-                  theme.palette.mode === "dark" ? blueGrey[800] : blueGrey[100],
-              },
-            }}
-            onClick={() => router.navigate(option.path)}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : "auto",
-                justifyContent: "center",
-              }}
-            >
-              {option.icon}
-            </ListItemIcon>
-            <ListItemText
-              primary={option.title}
-              sx={{ opacity: open ? 1 : 0 }}
-            />
-          </ListItemButton>
-        </ListItem>
+        <SidebarListItem
+          open={open}
+          key={option.path}
+          path={option.path}
+          icon={option.icon}
+          text={option.title}
+        />
       ))}
     </>
   );

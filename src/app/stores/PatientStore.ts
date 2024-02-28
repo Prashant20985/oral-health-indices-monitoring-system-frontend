@@ -112,12 +112,20 @@ export class PatientStore {
     this.archivedPatientsSearchParams.email = "";
   };
 
-  clearActivePatientsByDoctorIdSearchParams = () => {
-    this.activePatientsByDoctorIdSearchParams = { name: "", email: "" };
+  clearActivePatientsByDoctorIdEmailSearch = () => {
+    this.activePatientsByDoctorIdSearchParams.email = "";
   };
 
-  clearArchivedPatientsByDoctorIdSearchParams = () => {
-    this.archivedPatientsByDoctorIdSearchParams = { name: "", email: "" };
+  clearActivePatientsByDoctorIdNameSearch = () => {
+    this.activePatientsByDoctorIdSearchParams.name = "";
+  };
+
+  clearArchivedPatientsByDoctorIdEmailSearch = () => {
+    this.archivedPatientsByDoctorIdSearchParams.email = "";
+  };
+
+  clearArchivedPatientsByDoctorIdNameSearch = () => {
+    this.archivedPatientsByDoctorIdSearchParams.name = "";
   };
 
   get activePatientAxiosParams() {

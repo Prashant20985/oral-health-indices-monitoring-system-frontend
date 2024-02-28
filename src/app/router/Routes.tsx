@@ -19,7 +19,8 @@ import ResearchGroupDetails from "../../features/DentistTeacherOperations/List/R
 import PatientsNotInResearchGroupList from "../../features/DentistTeacherOperations/List/ResearchGroup/PatientsNotInResearchGroupList";
 import ActivePatientsList from "../../features/PatientOperations/List/ActivePatientsForAdmin/ActivePatientsList";
 import ArchivedPatientsList from "../../features/PatientOperations/List/ArchivedPatientsForAdmin/ArchivedPatientsList";
-
+import ActivePatientList from "../../features/PatientOperations/List/ActivePatientsForDoctor/ActivePatientList";
+import ArchivedPatientList from "../../features/PatientOperations/List/ArchivedPatientListForDoctor/ArchivedPatientList";
 
 const routes: RouteObject[] = [
   {
@@ -93,6 +94,27 @@ const routes: RouteObject[] = [
           {
             path: "research-groups/:id/add-patients",
             element: <PatientsNotInResearchGroupList />,
+          },
+        ],
+      },
+      {
+        element: (
+          <RequireAuthentication
+            roles={[
+              "Student",
+              "Dentist_Teacher_Examiner",
+              "Dentist_Teacher_Researcher",
+            ]}
+          />
+        ),
+        children: [
+          {
+            path: "active-patients",
+            element: <ActivePatientList />,
+          },
+          {
+            path: "archived-patients",
+            element: <ArchivedPatientList />,
           },
         ],
       },
