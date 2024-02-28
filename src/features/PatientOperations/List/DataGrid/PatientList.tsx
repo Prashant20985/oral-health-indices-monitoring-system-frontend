@@ -15,6 +15,8 @@ import {
 import * as React from "react";
 import DeletePatientConfirmation from "../../Forms/DeletePatientConfirmation";
 import PatientDetailsDialog from "../../Forms/PatientDetailsDialog";
+import ArchivePatientForm from "../../Forms/ArchivePatientForm";
+import { useStore } from "../../../../app/stores/Store";
 
 interface Props {
   patients: Patient[];
@@ -34,8 +36,14 @@ export default observer(function PatientList({
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const {
+    patientStore: { unarchivePatient },
+  } = useStore();
+
   const [patientDetailsOpen, setPatientDetailsOpen] = React.useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
+    React.useState(false);
+  const [archivePatientFormOpen, setArchivePatientFormOpen] =
     React.useState(false);
   const [selectedPatientId, setSelectedPatientId] = React.useState("");
 
@@ -62,6 +70,14 @@ export default observer(function PatientList({
                   ? color.pinkAccent[500]
                   : color.greenAccent[500],
               },
+            }}
+            onClick={() => {
+              if (!patient.isArchived) {
+                setArchivePatientFormOpen(true);
+                setSelectedPatientId(patient.id);
+              } else {
+                unarchivePatient(patient.id);
+              }
             }}
           >
             {patient.isArchived ? (
@@ -242,6 +258,14 @@ export default observer(function PatientList({
         onClose={() => {
           setPatientDetailsOpen(false);
           setSelectedPatientId("");
+        }}
+      />
+      <ArchivePatientForm
+        patientId={selectedPatientId}
+        isOpen={archivePatientFormOpen}
+        onClose={() => {
+          setSelectedPatientId("");
+          setArchivePatientFormOpen(false);
         }}
       />
     </Box>
