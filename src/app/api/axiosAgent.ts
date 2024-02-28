@@ -255,7 +255,7 @@ const PatientOperations = {
     apiRequests.post<void>("/patient/create-patient", values),
 
   updatePatient: (patientId: string, values: CreateUpdatePatientFormValues) =>
-    apiRequests.post<void>(`/patient/update-patient/${patientId}`, values),
+    apiRequests.put<void>(`/patient/update-patient/${patientId}`, values),
 
   archivePatient: (patientId: string, archiveComment: string) =>
     apiRequests.put<void>(

@@ -4,7 +4,7 @@ import { colors } from "../../../themeConfig";
 interface Props {
   label: string;
   name: string;
-  value?: string;
+  value?: string | number;
   required?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error?: boolean;
