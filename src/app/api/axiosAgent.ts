@@ -19,6 +19,7 @@ import {
   ResearchGroupFormValues,
   ResearchGroupPatient,
 } from "../models/ResearchGroup";
+import { CreateUpdatePatientFormValues, Patient } from "../models/Patient";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -249,11 +250,52 @@ const UserRequestOperations = {
     ),
 };
 
+const PatientOperations = {
+  createPatient: (values: CreateUpdatePatientFormValues) =>
+    apiRequests.post<void>("/patient/create-patient", values),
+
+  updatePatient: (patientId: string, values: CreateUpdatePatientFormValues) =>
+    apiRequests.post<void>(`/patient/update-patient/${patientId}`, values),
+
+  archivePatient: (patientId: string, archiveComment: string) =>
+    apiRequests.put<void>(
+      `/patient/archive-patient/${patientId}?archiveComment=${archiveComment}`,
+      {}
+    ),
+
+  unarchivePatient: (patientId: string) =>
+    apiRequests.put<void>(`/patient/unarchive-patient/${patientId}`, {}),
+
+  deletePatient: (patientId: string) =>
+    apiRequests.del<void>(`/patient/delete-patient/${patientId}`),
+
+  getActicePatients: (params: URLSearchParams) =>
+    axios
+      .get<Patient[]>(`/patient/active-patients`, { params })
+      .then(responseBody),
+
+  getArchivedPatients: (params: URLSearchParams) =>
+    axios
+      .get<Patient[]>(`/patient/archived-patients`, { params })
+      .then(responseBody),
+
+  getActivePatientsByDoctorId: (params: URLSearchParams) =>
+    axios
+      .get<Patient[]>(`/patient/active-patients-by-doctorId`, { params })
+      .then(responseBody),
+
+  getArchivedPatientsByDoctorId: (params: URLSearchParams) =>
+    axios
+      .get<Patient[]>(`/patient/archived-patients-by-doctorId`, { params })
+      .then(responseBody),
+};
+
 const axiosAgent = {
   AccountOperations,
   AdminOperations,
   DentistTeacherOperations,
   UserRequestOperations,
+  PatientOperations,
 };
 
 export default axiosAgent;

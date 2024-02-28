@@ -1,20 +1,20 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/Store";
-import * as React from "react";
 import { Box, Button, Grid, Paper, Typography, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
-import { router } from "../../../app/router/Routes";
+import * as React from "react";
 import ApplicationUserList from "../List/DataGrid/ApplicationUserList";
+import { router } from "../../../app/router/Routes";
 
-export default observer(function ActiveApplicationUserListShortcut() {
+export default observer(function DeactivatedApplicationUserListShortcut() {
   const { adminStore } = useStore();
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
   React.useEffect(() => {
     const fetchUsers = async () => {
-      if (adminStore.activeApplicationUsers.length <= 0) {
-        await adminStore.fetchActiveApplicationUsers();
+      if (adminStore.deactivatedApplicationUsers.length <= 0) {
+        await adminStore.fetchDeactivatedApplicationUsers();
       }
     };
     fetchUsers();
@@ -36,18 +36,18 @@ export default observer(function ActiveApplicationUserListShortcut() {
           textTransform="uppercase"
           fontWeight={600}
         >
-          Active Users
+          Deactivated Users
         </Typography>
         <ApplicationUserList
-          applicationUsers={adminStore.activeApplicationUsers}
-          loading={adminStore.loading.activeApplicationUsers}
+          applicationUsers={adminStore.deactivatedApplicationUsers}
+          loading={adminStore.loading.deactivatdApplicationUsers}
           isDashboard={true}
           height="30vh"
         />
         <Box display="flex" justifyContent="flex-end">
           <Button
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
-            onClick={() => router.navigate("/admin/active-users")}
+            onClick={() => router.navigate("/admin/deactivated-users")}
             size="small"
           >
             View All
