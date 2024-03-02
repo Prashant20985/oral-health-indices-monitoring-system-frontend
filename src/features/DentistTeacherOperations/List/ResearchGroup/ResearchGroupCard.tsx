@@ -4,6 +4,7 @@ import { ResearchGroup } from "../../../../app/models/ResearchGroup";
 import { colors } from "../../../../themeConfig";
 import { Diversity2 } from "@mui/icons-material";
 import ResearchGroupCardActions from "./ResearchGroupCardActions";
+import { blueGrey } from "@mui/material/colors";
 
 interface Props {
   researchGroup: ResearchGroup;
@@ -14,10 +15,10 @@ export default observer(function ResearchGroupList({ researchGroup }: Props) {
   const color = colors(theme.palette.mode);
   return (
     <Card
+      elevation={3}
       sx={{
-        backgroundColor: color.primary[400],
-        border: 1,
-        borderColor: color.grey[200],
+        backgroundColor:
+          theme.palette.mode === "dark" ? color.primary[400] : blueGrey[50],
         padding: 1,
       }}
     >
@@ -25,7 +26,8 @@ export default observer(function ResearchGroupList({ researchGroup }: Props) {
         avatar={
           <Avatar
             sx={{
-              backgroundColor: color.pinkAccent[400],
+              backgroundColor:
+                theme.palette.mode === "dark" ? blueGrey[400] : blueGrey[600],
             }}
             aria-label="group"
           >

@@ -4,6 +4,7 @@ import { Groups3 } from "@mui/icons-material";
 import { Card, CardHeader, Avatar, useTheme } from "@mui/material";
 import { colors } from "../../../../themeConfig";
 import StudentGroupCardActions from "./StudentGroupCardActions";
+import { blueGrey } from "@mui/material/colors";
 
 interface Props {
   group: Group;
@@ -16,18 +17,19 @@ export default observer(function GroupCard({ group }: Props) {
   return (
     <>
       <Card
+        elevation={3}
         sx={{
-          backgroundColor: color.primary[400],
+          backgroundColor:
+            theme.palette.mode === "dark" ? color.primary[400] : blueGrey[50],
           padding: 1,
-          border: 0.1,
-          borderColor: theme.palette.mode === "dark" ? color.greenAccent[300] : color.grey[700],
         }}
       >
         <CardHeader
           avatar={
             <Avatar
               sx={{
-                backgroundColor: color.pinkAccent[400],
+                backgroundColor:
+                  theme.palette.mode === "dark" ? blueGrey[400] : blueGrey[600],
               }}
               aria-label="group"
             >

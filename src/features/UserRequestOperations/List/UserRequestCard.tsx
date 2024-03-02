@@ -21,6 +21,7 @@ import Status from "./Status";
 import UserRequestActionsForCurrentUser from "./UserRequestActionsForCurrentUser";
 import UserRequestActionsForAdmin from "./UserRequestActionsForAdmin";
 import { useStore } from "../../../app/stores/Store";
+import { blueGrey } from "@mui/material/colors";
 
 interface Props {
   userRequest: UserRequest;
@@ -51,7 +52,14 @@ export default observer(function UserRequestCard({
   };
 
   return (
-    <Card sx={{ backgroundColor: color.primary[400], marginBottom: "10px" }}>
+    <Card
+      elevation={3}
+      sx={{
+        backgroundColor:
+          theme.palette.mode === "dark" ? color.primary[400] : blueGrey[50],
+        padding: 1,
+      }}
+    >
       <CardHeader
         avatar={
           <Avatar

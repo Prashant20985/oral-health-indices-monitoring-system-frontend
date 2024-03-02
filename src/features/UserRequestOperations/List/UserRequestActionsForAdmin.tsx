@@ -38,8 +38,7 @@ export default observer(function UserRequestListForAdmin({
       {userRequest.requestStatus === "Submitted" ? (
         <Button
           variant="outlined"
-          size="small"
-          color="warning"
+          color={theme.palette.mode === "dark" ? "secondary" : "info"}
           onClick={handleMarkInProgressClick}
         >
           Mark as In Progress
@@ -47,7 +46,6 @@ export default observer(function UserRequestListForAdmin({
       ) : userRequest.requestStatus === "In_Progress" ? (
         <Button
           variant="outlined"
-          size="small"
           color={theme.palette.mode === "dark" ? "secondary" : "info"}
           onClick={openMarkAsComplete}
         >

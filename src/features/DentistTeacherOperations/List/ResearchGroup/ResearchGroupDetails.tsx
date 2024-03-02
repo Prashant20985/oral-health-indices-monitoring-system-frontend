@@ -21,6 +21,7 @@ import ResearchGroupPatientList from "../ResearchGroupPatientList/ResearchGroupP
 import Header from "../../../../app/common/header/Header";
 import ResearchGroupForm from "../../Forms/ResearchGroupForm";
 import { router } from "../../../../app/router/Routes";
+import { blueGrey } from "@mui/material/colors";
 
 export default observer(function ResearchGroupDetails() {
   const { dentistTeacherStore } = useStore();
@@ -49,45 +50,67 @@ export default observer(function ResearchGroupDetails() {
         Back
       </Button>
       <Box display="flex" flexDirection="column" gap={4}>
-        <Box>
-          <Card
+        <Card
+          elevation={3}
+          sx={{
+            backgroundColor:
+              theme.palette.mode === "dark"
+                ? color.primary[400]
+                : blueGrey[100],
+            padding: 1,
+          }}
+        >
+          <CardActions
             sx={{
-              background: `linear-gradient(248.6deg, ${color.greenAccent[800]} 0%, ${color.primary[400]} 99.8%)`,
+              width: "100%",
+              height: "2rem",
+              display: "flex",
+              justifyContent: "flex-end",
             }}
           >
-            <CardHeader
-              avatar={
-                <Avatar variant="square" sx={{ height: 100, width: 100 }}>
-                  <Biotech sx={{ fontSize: 80, color: "whitesmoke" }} />
-                </Avatar>
-              }
-              title={
-                <Typography variant="h2" fontFamily="monospace">
-                  {selectedResearchGroup?.groupName}
-                </Typography>
-              }
-              subheader={
-                <Typography variant="h6">
-                  Created By: {selectedResearchGroup?.createdBy}
-                </Typography>
-              }
-            />
-            <CardContent>
-              <Box width="60%">
-                <Typography variant="body1">
-                  {selectedResearchGroup?.description}
-                </Typography>
-              </Box>
-            </CardContent>
-            <CardActions>
-              <Tooltip title="Edit Research Group">
-                <IconButton onClick={() => setOpenEdit(true)}>
-                  <Edit color="warning" />
-                </IconButton>
-              </Tooltip>
-            </CardActions>
-          </Card>
-        </Box>
+            <Tooltip title="Edit Research Group">
+              <IconButton onClick={() => setOpenEdit(true)}>
+                <Edit
+                  color={theme.palette.mode === "dark" ? "secondary" : "info"}
+                />
+              </IconButton>
+            </Tooltip>
+          </CardActions>
+          <CardHeader
+            avatar={
+              <Avatar
+                variant="rounded"
+                sx={{
+                  height: 100,
+                  width: 100,
+                  backgroundColor:
+                    theme.palette.mode === "dark"
+                      ? blueGrey[500]
+                      : blueGrey[600],
+                }}
+              >
+                <Biotech sx={{ fontSize: 80, color: "whitesmoke" }} />
+              </Avatar>
+            }
+            title={
+              <Typography variant="h2" fontFamily="monospace">
+                {selectedResearchGroup?.groupName}
+              </Typography>
+            }
+            subheader={
+              <Typography variant="h6">
+                Created By: {selectedResearchGroup?.createdBy}
+              </Typography>
+            }
+          />
+          <CardContent>
+            <Box width="60%">
+              <Typography variant="body1">
+                {selectedResearchGroup?.description}
+              </Typography>
+            </Box>
+          </CardContent>
+        </Card>
         <Box display="flex" flexDirection="column" gap={1}>
           <Box
             display="flex"

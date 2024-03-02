@@ -16,6 +16,7 @@ import ResearchGroupCard from "./ResearchGroupCard";
 import { colors } from "../../../../themeConfig";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import ResearchGroupForm from "../../Forms/ResearchGroupForm";
+import { blueGrey } from "@mui/material/colors";
 
 export default observer(function ResearchGroupList() {
   const { dentistTeacherStore } = useStore();
@@ -67,9 +68,13 @@ export default observer(function ResearchGroupList() {
         />
       </Box>
       <Paper
+        elevation={3}
         sx={{
           overflow: "auto",
-          backgroundColor: color.primary[400],
+          backgroundColor:
+            theme.palette.mode === "dark" ? color.primary[500] : blueGrey[50],
+          p: 1.5,
+          borderRadius: 2,
           height: "75vh",
         }}
       >

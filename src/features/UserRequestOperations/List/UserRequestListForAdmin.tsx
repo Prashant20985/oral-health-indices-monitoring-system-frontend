@@ -3,6 +3,7 @@ import { useStore } from "../../../app/stores/Store";
 import {
   Box,
   FormControl,
+  Grid,
   InputAdornment,
   Paper,
   SelectChangeEvent,
@@ -18,6 +19,7 @@ import { RequestStatus } from "../../../app/models/UserRequest";
 import Calendar from "../../../app/common/calendar/Calendar";
 import { SearchRounded } from "@mui/icons-material";
 import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
+import { blueGrey } from "@mui/material/colors";
 
 export default observer(function UserRequestListForAdmin() {
   const { userRequestStore } = useStore();
@@ -59,7 +61,7 @@ export default observer(function UserRequestListForAdmin() {
           <TextField
             label="Search by Requestor Name"
             size="small"
-            color="secondary"
+            color={theme.palette.mode === "dark" ? "secondary" : "info"}
             type="text"
             fullWidth
             variant="outlined"
@@ -68,7 +70,9 @@ export default observer(function UserRequestListForAdmin() {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <SearchRounded color="secondary" />
+                  <SearchRounded
+                    color={theme.palette.mode === "dark" ? "secondary" : "info"}
+                  />
                 </InputAdornment>
               ),
             }}
@@ -83,21 +87,26 @@ export default observer(function UserRequestListForAdmin() {
           width="100%"
         >
           <Paper
+            elevation={3}
             sx={{
               overflow: "auto",
-              backgroundColor: color.primary[400],
+              backgroundColor:
+                theme.palette.mode === "dark"
+                  ? color.primary[500]
+                  : blueGrey[50],
+              p: 1.5,
+              borderRadius: 2,
               height: "75vh",
             }}
           >
             {filteredRequests.length > 0 ? (
-              <>
+              <Grid container spacing={1}>
                 {filteredRequests.map((userRequest) => (
-                  <UserRequestCard
-                    key={userRequest.id}
-                    userRequest={userRequest}
-                  />
+                  <Grid item key={userRequest.id} lg={12} md={12}>
+                    <UserRequestCard userRequest={userRequest} />
+                  </Grid>
                 ))}
-              </>
+              </Grid>
             ) : (
               <NoRowsFound />
             )}
