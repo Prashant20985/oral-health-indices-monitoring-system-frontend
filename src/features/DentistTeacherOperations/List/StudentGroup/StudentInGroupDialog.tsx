@@ -11,6 +11,7 @@ import { colors } from "../../../../themeConfig";
 import SlideUpTransition from "../../../../app/common/transition/SlideUpTransition";
 import { Close } from "@mui/icons-material";
 import StudentList from "../StudentList/StudentList";
+import { blueGrey } from "@mui/material/colors";
 
 interface Props {
   students: Student[];
@@ -38,7 +39,10 @@ export default observer(function StudentsInGroupDialog({
           "& .MuiPaper-root": {
             width: "100%",
             minWidth: "50rem",
-            backgroundColor: color.primary[400],
+            backgroundColor:
+              theme.palette.mode === "dark"
+                ? color.primary[400]
+                : blueGrey[100],
           },
         },
       }}
@@ -46,9 +50,14 @@ export default observer(function StudentsInGroupDialog({
       <DialogTitle
         display="flex"
         justifyContent="space-between"
-        alignContent="center"
+        alignItems="center"
       >
-        <Typography variant="h5">Students not in group</Typography>
+        <Typography
+          variant="h6"
+          sx={{ textTransform: "uppercase", fontWeight: "bold" }}
+        >
+          Students In Group
+        </Typography>
         <IconButton onClick={handleClose}>
           <Close />
         </IconButton>

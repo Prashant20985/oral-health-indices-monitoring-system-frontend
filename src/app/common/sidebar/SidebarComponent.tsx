@@ -133,12 +133,16 @@ export default observer(function SidebarComponent({
                   <DentistTeacherNavOptions open={open} />
                 ))}
             </>
-            <SidebarListItem
-              open={open}
-              path="/my-requests"
-              icon={<MessageOutlined />}
-              text="My Requests"
-            />
+            <>
+              {user?.role !== "Admin" && (
+                <SidebarListItem
+                  open={open}
+                  path="/my-requests"
+                  icon={<MessageOutlined />}
+                  text="My Requests"
+                />
+              )}
+            </>
           </>
         )}
       </List>

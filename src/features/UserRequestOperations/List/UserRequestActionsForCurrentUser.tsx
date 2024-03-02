@@ -37,7 +37,6 @@ export default observer(function UserRequestCardActionsForCurrentUser({
           color={theme.palette.mode === "dark" ? "secondary" : "info"}
           startIcon={<Edit />}
           disabled={isDisabled}
-          size="small"
           onClick={() => setOpenEditForm(true)}
         >
           Edit

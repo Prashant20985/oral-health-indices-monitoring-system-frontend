@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   FormControl,
+  Grid,
   Paper,
   SelectChangeEvent,
   useTheme,
@@ -18,6 +19,7 @@ import Calendar from "../../../app/common/calendar/Calendar";
 import CustomSelect from "../../../app/common/formInputs/CustomSelect";
 import { RequestStatus } from "../../../app/models/UserRequest";
 import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
+import { blueGrey } from "@mui/material/colors";
 
 export default observer(function UserRequestListForCurrentuser() {
   const { userRequestStore } = useStore();
@@ -68,22 +70,29 @@ export default observer(function UserRequestListForCurrentuser() {
           width="100%"
         >
           <Paper
+            elevation={3}
             sx={{
               overflow: "auto",
-              backgroundColor: color.primary[400],
+              backgroundColor:
+                theme.palette.mode === "dark"
+                  ? color.primary[500]
+                  : blueGrey[50],
+              p: 1.5,
+              borderRadius: 2,
               height: "75vh",
             }}
           >
             {userRequestsForCurrentUser.length > 0 ? (
-              <>
+              <Grid container spacing={1}>
                 {userRequestsForCurrentUser.map((userRequest) => (
-                  <UserRequestCard
-                    key={userRequest.id}
-                    userRequest={userRequest}
-                    isCurrentUserRequest={true}
-                  />
+                  <Grid item key={userRequest.id} lg={12} md={12}>
+                    <UserRequestCard
+                      userRequest={userRequest}
+                      isCurrentUserRequest
+                    />
+                  </Grid>
                 ))}
-              </>
+              </Grid>
             ) : (
               <NoRowsFound />
             )}
