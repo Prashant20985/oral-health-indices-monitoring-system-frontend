@@ -13,8 +13,8 @@ import * as React from "react";
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  groupId: string;
-  name: string;
+  groupId?: string;
+  name?: string;
 }
 
 export default observer(function EditGroupForm({
@@ -27,7 +27,7 @@ export default observer(function EditGroupForm({
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
   const handleSubmit = async (groupName: string) => {
-    await dentistTeacherStore.updateGroupName(groupId, groupName).then(() => {
+    await dentistTeacherStore.updateStudentGroupName(groupId!, groupName).then(() => {
       onClose();
       setSnackbarOpen(true);
     });
@@ -54,7 +54,7 @@ export default observer(function EditGroupForm({
                 error: null,
               }}
               onSubmit={async (values, { setErrors }) =>
-                await handleSubmit(values.groupName).catch((error) => {
+                await handleSubmit(values.groupName!).catch((error) => {
                   setErrors({ error: error.response.data });
                 })
               }

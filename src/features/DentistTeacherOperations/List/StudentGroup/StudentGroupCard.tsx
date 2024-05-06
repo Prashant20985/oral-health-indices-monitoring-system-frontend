@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Group } from "../../../../app/models/Group";
+import { StudentGroup } from "../../../../app/models/Group";
 import { Groups3 } from "@mui/icons-material";
 import { Card, CardHeader, Avatar, useTheme } from "@mui/material";
 import { colors } from "../../../../themeConfig";
@@ -7,7 +7,7 @@ import StudentGroupCardActions from "./StudentGroupCardActions";
 import { blueGrey } from "@mui/material/colors";
 
 interface Props {
-  group: Group;
+  group: StudentGroup;
 }
 
 export default observer(function GroupCard({ group }: Props) {
@@ -40,9 +40,7 @@ export default observer(function GroupCard({ group }: Props) {
           subheader={`Number of Students: ${group.students.length}`}
         />
         <StudentGroupCardActions
-          groupId={group.id}
-          students={group.students}
-          groupName={group.groupName}
+          group={group}
         />
       </Card>
     </>

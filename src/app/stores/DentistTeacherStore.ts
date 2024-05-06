@@ -1,5 +1,5 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
-import { Group, Student } from "../models/Group";
+import { StudentGroup, Student } from "../models/Group";
 import axiosAgent from "../api/axiosAgent";
 import {
   ResearchGroup,
@@ -9,22 +9,24 @@ import {
 
 export default class DentistTeacherStore {
   studentsNotInGroup: Student[] = [];
-  groups: Group[] = [];
+  studentGroups: StudentGroup[] = [];
   researchGroups: ResearchGroup[] = [];
   patientsNotInResearchGroup: ResearchGroupPatient[] = [];
   researchGroupName: string = "";
   patientName: string = "";
   email: string = "";
   selectedResearchGroup: ResearchGroup | undefined;
+  selectedStudentGroup: StudentGroup | undefined;
 
   loading = {
-    createGroup: false,
+    createStudentGroup: false,
     addStudentToGroup: false,
     removeStudentFromGroup: false,
-    deleteGroup: false,
-    updateGroupName: false,
+    deleteStudentGroup: false,
+    updateStudentGroupName: false,
     studentsNotInGroup: false,
-    groups: false,
+    studentGroups: false,
+    studentGroupDetails: false,
     researchGroups: false,
     researchGroupDetails: false,
     patientsNotInResearchGroup: false,
@@ -62,12 +64,20 @@ export default class DentistTeacherStore {
     return params;
   }
 
+  setSelectedStudentGroup = (studentGroup: StudentGroup) => {
+    this.selectedStudentGroup = studentGroup;
+  };
+
   setSelectedResearchGroup = (researchGroup: ResearchGroup | undefined) => {
     this.selectedResearchGroup = researchGroup;
   };
 
   clearSelectedResearchGroup = () => {
     this.selectedResearchGroup = undefined;
+  };
+
+  clearSelectedStudentGroup = () => {
+    this.selectedStudentGroup = undefined;
   };
 
   setResearchGroupName = (researchGroupName: string) => {
@@ -78,8 +88,8 @@ export default class DentistTeacherStore {
     this.studentsNotInGroup = students;
   };
 
-  setGroups = (groups: Group[]) => {
-    this.groups = groups;
+  setStudentGroups = (groups: StudentGroup[]) => {
+    this.studentGroups = groups;
   };
 
   setResearchGroups = (researchGroups: ResearchGroup[]) => {
@@ -94,38 +104,44 @@ export default class DentistTeacherStore {
     return this.researchGroups.find((rg) => rg.id === researchGroupId);
   };
 
-  createGroup = async (groupName: string) => {
-    this.loading.createGroup = true;
+  private getStudentGroupDetails = (studentGroupId: string) => {
+    return this.studentGroups.find((sg) => sg.id === studentGroupId);
+  };
+
+  createStudentGroup = async (groupName: string) => {
+    this.loading.createStudentGroup = true;
     try {
-      await axiosAgent.DentistTeacherOperations.createGroup(groupName);
+      await axiosAgent.DentistTeacherOperations.createStudentGroup(groupName);
       runInAction(() => {
-        this.getGroups();
-        this.loading.createGroup = false;
+        this.getStudentGroups();
+        this.loading.createStudentGroup = false;
       });
     } catch (error) {
       console.log(error);
-      runInAction(() => (this.loading.createGroup = false));
+      runInAction(() => (this.loading.createStudentGroup = false));
       throw error;
     }
   };
 
-  addStudentToGroup = async (groupId: string, student: Student) => {
+  addStudentToStudentGroup = async (groupId: string, student: Student) => {
     this.loading.addStudentToGroup = true;
     try {
-      await axiosAgent.DentistTeacherOperations.addStudentToGroup(
+      await axiosAgent.DentistTeacherOperations.addStudentToStudentGroup(
         groupId,
         student.id
       );
 
       runInAction(() => {
-        const groupIndex = this.groups.findIndex((g) => g.id === groupId);
+        const groupIndex = this.studentGroups.findIndex(
+          (g) => g.id === groupId
+        );
 
         if (groupIndex !== -1) {
-          const updatedGroup = { ...this.groups[groupIndex] };
+          const updatedGroup = { ...this.studentGroups[groupIndex] };
           updatedGroup.students.push(student);
-          const updatedGroups = [...this.groups];
+          const updatedGroups = [...this.studentGroups];
           updatedGroups[groupIndex] = updatedGroup;
-          this.setGroups(updatedGroups);
+          this.setStudentGroups(updatedGroups);
         }
 
         this.loading.addStudentToGroup = false;
@@ -139,26 +155,31 @@ export default class DentistTeacherStore {
     }
   };
 
-  removeStudentFromGroup = async (groupId: string, studentId: string) => {
+  removeStudentFromStudentGroup = async (
+    groupId: string,
+    studentId: string
+  ) => {
     this.loading.removeStudentFromGroup = true;
     try {
-      await axiosAgent.DentistTeacherOperations.removeStudentFromGroup(
+      await axiosAgent.DentistTeacherOperations.removeStudentFromStudentGroup(
         groupId,
         studentId
       );
       runInAction(() => {
-        const groupIndex = this.groups.findIndex((g) => g.id === groupId);
+        const groupIndex = this.studentGroups.findIndex(
+          (g) => g.id === groupId
+        );
 
         if (groupIndex !== -1) {
-          const updatedGroup = { ...this.groups[groupIndex] };
+          const updatedGroup = { ...this.studentGroups[groupIndex] };
 
           updatedGroup.students = updatedGroup.students.filter(
             (student) => student.id !== studentId
           );
 
-          const updatedGroups = [...this.groups];
+          const updatedGroups = [...this.studentGroups];
           updatedGroups[groupIndex] = updatedGroup;
-          this.setGroups(updatedGroups);
+          this.setStudentGroups(updatedGroups);
         }
         this.loading.removeStudentFromGroup = false;
       });
@@ -171,58 +192,63 @@ export default class DentistTeacherStore {
     }
   };
 
-  deleteGroup = async (groupId: string) => {
-    this.loading.deleteGroup = true;
+  deleteStudentGroup = async (groupId: string) => {
+    this.loading.deleteStudentGroup = true;
     try {
-      await axiosAgent.DentistTeacherOperations.deleteGroup(groupId);
+      await axiosAgent.DentistTeacherOperations.deleteStudentGroup(groupId);
 
       runInAction(() => {
-        const updatedGroups = this.groups.filter(
+        const updatedGroups = this.studentGroups.filter(
           (group) => group.id !== groupId
         );
-        this.setGroups(updatedGroups);
-        this.loading.deleteGroup = false;
+        this.setStudentGroups(updatedGroups);
+        this.loading.deleteStudentGroup = false;
       });
     } catch (error) {
       console.log(error);
       runInAction(() => {
-        this.loading.deleteGroup = false;
+        this.loading.deleteStudentGroup = false;
       });
       throw error;
     }
   };
 
-  updateGroupName = async (groupId: string, groupName: string) => {
-    this.loading.updateGroupName = true;
+  updateStudentGroupName = async (groupId: string, groupName: string) => {
+    this.loading.updateStudentGroupName = true;
     try {
-      await axiosAgent.DentistTeacherOperations.updateGroupName(
+      await axiosAgent.DentistTeacherOperations.updateStudentGroupName(
         groupId,
         groupName
       );
       runInAction(() => {
-        const groupIndex = this.groups.findIndex((g) => g.id === groupId);
+        const groupIndex = this.studentGroups.findIndex(
+          (g) => g.id === groupId
+        );
 
         if (groupIndex !== -1) {
-          const updatedGroup = { ...this.groups[groupIndex] };
+          const updatedGroup = { ...this.studentGroups[groupIndex] };
           updatedGroup.groupName = groupName;
-          const updatedGroups = [...this.groups];
+          const updatedGroups = [...this.studentGroups];
           updatedGroups[groupIndex] = updatedGroup;
-          this.setGroups(updatedGroups);
+          this.setStudentGroups(updatedGroups);
         }
-        this.loading.updateGroupName = false;
+        if (this.selectedStudentGroup) {
+          this.selectedStudentGroup.groupName = groupName;
+        }
+        this.loading.updateStudentGroupName = false;
       });
     } catch (error) {
       console.log(error);
-      runInAction(() => (this.loading.updateGroupName = false));
+      runInAction(() => (this.loading.updateStudentGroupName = false));
       throw error;
     }
   };
 
-  getStudentsNotInGroup = async (groupId: string) => {
+  getStudentsNotInStudentGroup = async (groupId: string) => {
     this.loading.studentsNotInGroup = true;
     try {
       const result =
-        await axiosAgent.DentistTeacherOperations.getStudentsNotInGroup(
+        await axiosAgent.DentistTeacherOperations.getStudentsNotInStudentGroup(
           groupId
         );
       runInAction(() => {
@@ -235,18 +261,27 @@ export default class DentistTeacherStore {
     }
   };
 
-  getGroups = async () => {
-    this.loading.groups = true;
+  getStudentGroups = async () => {
+    this.loading.studentGroups = true;
     try {
-      const result = await axiosAgent.DentistTeacherOperations.getGroups();
+      const result =
+        await axiosAgent.DentistTeacherOperations.getStudentGroups();
       runInAction(() => {
-        this.setGroups(result);
-        this.loading.groups = false;
+        this.setStudentGroups(result);
+        this.loading.studentGroups = false;
       });
     } catch (error) {
       console.log(error);
-      runInAction(() => (this.loading.groups = false));
+      runInAction(() => (this.loading.studentGroups = false));
     }
+  };
+
+  getStudentGroup = async (studentGroupId: string) => {
+    this.loading.studentGroups = false;
+    const studentGroup = this.getStudentGroupDetails(studentGroupId);
+    if (studentGroup)
+      runInAction(() => this.setSelectedStudentGroup(studentGroup));
+    return studentGroup;
   };
 
   getResearchGroups = async () => {
@@ -366,6 +401,12 @@ export default class DentistTeacherStore {
           updatedResearchGroups[researchGroupIndex] = updatedResearchGroup;
           this.setResearchGroups(updatedResearchGroups);
         }
+
+        if (this.selectedResearchGroup) {
+          this.selectedResearchGroup.groupName = values.groupName;
+          this.selectedResearchGroup.description = values.description;
+        }
+
         this.loading.updateResearchGroup = false;
       });
     } catch (error) {

@@ -1,6 +1,5 @@
 import {
   KeyboardDoubleArrowRight,
-  AddCircleOutline,
   Edit,
   DeleteSweep,
 } from "@mui/icons-material";
@@ -14,50 +13,24 @@ import {
 } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import * as React from "react";
-import StudentInGroupDialog from "./StudentInGroupDialog";
-import StudentNotInGroupDialog from "./StudentNotInGroupDialog";
-import { Student } from "../../../../app/models/Group";
+import { StudentGroup } from "../../../../app/models/Group";
 import { useStore } from "../../../../app/stores/Store";
 import EditStudentGroupForm from "../../Forms/EditStudentGroupForm";
 import StudentAndResearchGroupDeleteConfirmation from "../../Forms/StudentAndResearchGroupDeleteConfirmation";
+import { router } from "../../../../app/router/Routes";
 
 interface Props {
-  groupId: string;
-  students: Student[];
-  groupName: string;
+  group: StudentGroup;
 }
 
-export default observer(function StudentGroupCardActions({
-  groupId,
-  students,
-  groupName,
-}: Props) {
+export default observer(function StudentGroupCardActions({ group }: Props) {
   const theme = useTheme();
 
-  const { dentistTeacherStore } = useStore();
+  const {
+    dentistTeacherStore: { setSelectedStudentGroup },
+  } = useStore();
 
   const [openEditGroupDialog, setOpenEditGroupDialog] = React.useState(false);
-
-  const [studentsInGroupDialog, setStudentsInGroupDialog] = React.useState<{
-    groupId: string;
-    students: Student[];
-    isOpen: boolean;
-  }>({
-    groupId: "",
-    students: [],
-    isOpen: false,
-  });
-
-  const [studentsNotInGroupDialog, setStudentsNotInGroupDialog] =
-    React.useState<{
-      groupId: string;
-      students: Student[];
-      isOpen: boolean;
-    }>({
-      groupId: "",
-      isOpen: false,
-      students: [],
-    });
 
   const [deleteConfirmationDialog, setDeleteConfirmationDialog] =
     React.useState<{ isOpen: boolean; groupId: string; groupName: string }>({
@@ -66,49 +39,11 @@ export default observer(function StudentGroupCardActions({
       groupName: "",
     });
 
-  const handleOpenStudentsInGroupDialog = () => {
-    const updatedStudents = students.map((student) => ({
-      ...student,
-      groupName: groupName,
-    }));
-
-    setStudentsInGroupDialog({
-      groupId: groupId,
-      students: updatedStudents,
-      isOpen: true,
-    });
-  };
-
-  const handleCloseStudentsInGroupDialog = () => {
-    setStudentsInGroupDialog({
-      groupId: "",
-      students: [],
-      isOpen: false,
-    });
-  };
-
-  const handleOpenStudentsNotInGroupDialog = async () => {
-    await dentistTeacherStore.getStudentsNotInGroup(groupId);
-    setStudentsNotInGroupDialog({
-      groupId: groupId,
-      isOpen: true,
-      students: dentistTeacherStore.studentsNotInGroup,
-    });
-  };
-
-  const handleCloseStudentsNotInGroupDialog = () => {
-    setStudentsNotInGroupDialog({
-      groupId: "",
-      isOpen: false,
-      students: [],
-    });
-  };
-
   const handleDeleteClick = () => {
     setDeleteConfirmationDialog({
-      groupId: groupId,
+      groupId: group.id,
       isOpen: true,
-      groupName: groupName,
+      groupName: group.groupName,
     });
   };
 
@@ -118,6 +53,11 @@ export default observer(function StudentGroupCardActions({
       isOpen: false,
       groupName: "",
     });
+  };
+
+  const handleViewDetails = () => {
+    setSelectedStudentGroup(group);
+    router.navigate(`/student-groups/${group.id}`);
   };
 
   return (
@@ -136,17 +76,12 @@ export default observer(function StudentGroupCardActions({
             size="small"
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
             endIcon={<KeyboardDoubleArrowRight />}
-            onClick={() => handleOpenStudentsInGroupDialog()}
+            onClick={handleViewDetails}
           >
-            View Students
+            View Details
           </Button>
         </Box>
         <Box display="flex">
-          <Tooltip title="Add Student">
-            <IconButton onClick={() => handleOpenStudentsNotInGroupDialog()}>
-              <AddCircleOutline color="success" />
-            </IconButton>
-          </Tooltip>
           <Tooltip title="Edit Group Name">
             <IconButton onClick={() => setOpenEditGroupDialog(true)}>
               <Edit color="warning" />
@@ -159,22 +94,11 @@ export default observer(function StudentGroupCardActions({
           </Tooltip>
         </Box>
       </CardActions>
-      <StudentInGroupDialog
-        students={studentsInGroupDialog.students}
-        isOpen={studentsInGroupDialog.isOpen}
-        groupId={studentsInGroupDialog.groupId}
-        handleClose={() => handleCloseStudentsInGroupDialog()}
-      />
-      <StudentNotInGroupDialog
-        groupId={studentsNotInGroupDialog.groupId}
-        isOpen={studentsNotInGroupDialog.isOpen}
-        students={studentsNotInGroupDialog.students}
-        handleClose={handleCloseStudentsNotInGroupDialog}
-      />
+
       <EditStudentGroupForm
         isOpen={openEditGroupDialog}
-        groupId={groupId}
-        name={groupName}
+        groupId={group.id}
+        name={group.groupName}
         onClose={() => setOpenEditGroupDialog(false)}
       />
       <StudentAndResearchGroupDeleteConfirmation

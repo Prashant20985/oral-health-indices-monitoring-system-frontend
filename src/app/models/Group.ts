@@ -6,7 +6,7 @@ export interface Student {
     userName: string;
 }
 
-export interface Group {
+export interface StudentGroup {
     id: string;
     groupName: string;
     students: Student[];

@@ -40,7 +40,7 @@ export default observer(function StudentAndResearchGroupDeleteConfirmation({
         onClose();
       });
     } else {
-      await dentistTeacherStore.deleteGroup(groupId).then(() => {
+      await dentistTeacherStore.deleteStudentGroup(groupId).then(() => {
         onClose();
       });
     }
@@ -83,7 +83,7 @@ export default observer(function StudentAndResearchGroupDeleteConfirmation({
               </Button>
               <Button
                 variant="contained"
-                disabled={dentistTeacherStore.loading.deleteGroup}
+                disabled={dentistTeacherStore.loading.deleteStudentGroup}
                 onClick={handleDelete}
                 size="small"
                 sx={{

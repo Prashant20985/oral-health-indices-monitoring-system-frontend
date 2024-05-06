@@ -29,12 +29,12 @@ export default observer(function StudentGroupList() {
 
   React.useEffect(() => {
     const fetchGroups = async () => {
-      await dentistTeacherStore.getGroups();
+      await dentistTeacherStore.getStudentGroups();
     };
     fetchGroups();
   }, [dentistTeacherStore]);
 
-  const filteredGroups = dentistTeacherStore.groups.filter((group) =>
+  const filteredGroups = dentistTeacherStore.studentGroups.filter((group) =>
     group.groupName.toLowerCase().includes(groupSearchQuery.toLowerCase())
   );
 

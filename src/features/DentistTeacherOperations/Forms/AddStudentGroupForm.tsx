@@ -20,7 +20,7 @@ export default observer(function AddGroupForm({ isOpen, onClose }: Props) {
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
   const handelSubmit = async (groupName: string) => {
-    await dentistTeacherStore.createGroup(groupName).then(() => {
+    await dentistTeacherStore.createStudentGroup(groupName).then(() => {
       onClose();
       setSnackbarOpen(true);
     });
