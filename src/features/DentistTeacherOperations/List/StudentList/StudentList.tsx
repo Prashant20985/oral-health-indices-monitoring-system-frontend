@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import { colors } from "../../../../themeConfig";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import LinearProgressComponent from "../../../../app/common/loadingComponents/LinearProgressComponent";
 import { Student } from "../../../../app/models/Group";
 import { DeleteForever, PersonAdd } from "@mui/icons-material";
@@ -42,7 +42,7 @@ export default observer(function StudentList({
 
   const handleRemoveStudentFromGroupClick = async (studentId: string) => {
     await dentistTeacherStore
-      .removeStudentFromGroup(groupId, studentId)
+      .removeStudentFromStudentGroup(groupId, studentId)
       .then(() => {
         const updatedStudents = studentsList.filter((s) => s.id !== studentId);
         setStudentsList(updatedStudents);
@@ -50,10 +50,12 @@ export default observer(function StudentList({
   };
 
   const handleAddStudentsToGroupClick = async (student: Student) => {
-    await dentistTeacherStore.addStudentToGroup(groupId, student).then(() => {
-      const updatedStudents = studentsList.filter((s) => s.id !== student.id);
-      setStudentsList(updatedStudents);
-    });
+    await dentistTeacherStore
+      .addStudentToStudentGroup(groupId, student)
+      .then(() => {
+        const updatedStudents = studentsList.filter((s) => s.id !== student.id);
+        setStudentsList(updatedStudents);
+      });
   };
 
   const columns: GridColDef[] = [
@@ -98,16 +100,6 @@ export default observer(function StudentList({
       cellClassName: "name-column--cell",
       flex: 1,
     },
-    ...(!studentsInGroupList
-      ? []
-      : [
-          {
-            field: "groupName",
-            headerName: "Group Name",
-            cellClassName: "name-column--cell",
-            flex: 1.5,
-          },
-        ]),
     {
       field: "actions",
       headerName: "Actions",
@@ -116,32 +108,36 @@ export default observer(function StudentList({
       renderCell: ({ row }) => {
         const { id } = row || {};
         return (
-          <Box
-            display="flex"
-            width="100%"
-            justifyContent="center"
-            sx={{
-              backgroundColor: studentsInGroupList
-                ? color.redAccent[600]
-                : color.greenAccent[600],
-              borderRadius: "4px",
-            }}
-          >
-            {studentsInGroupList ? (
-              <Tooltip title="Remove From Group">
-                <IconButton
-                  onClick={() => handleRemoveStudentFromGroupClick(id)}
-                >
-                  <DeleteForever color="primary" />
-                </IconButton>
-              </Tooltip>
-            ) : (
-              <Tooltip title="Add To Group">
-                <IconButton onClick={() => handleAddStudentsToGroupClick(row)}>
-                  <PersonAdd color="primary" />
-                </IconButton>
-              </Tooltip>
-            )}
+          <Box display="flex" justifyContent="center" width="100%">
+            <Box
+              display="flex"
+              width="50%"
+              justifyContent="center"
+              sx={{
+                backgroundColor: studentsInGroupList
+                  ? color.redAccent[600]
+                  : color.greenAccent[600],
+                borderRadius: "4px",
+              }}
+            >
+              {studentsInGroupList ? (
+                <Tooltip title="Remove From Group">
+                  <IconButton
+                    onClick={() => handleRemoveStudentFromGroupClick(id)}
+                  >
+                    <DeleteForever color="primary" />
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <Tooltip title="Add To Group">
+                  <IconButton
+                    onClick={() => handleAddStudentsToGroupClick(row)}
+                  >
+                    <PersonAdd color="primary" />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Box>
           </Box>
         );
       },
@@ -150,7 +146,7 @@ export default observer(function StudentList({
 
   return (
     <Box
-      height="65vh"
+      height="80vh"
       width="100%"
       sx={{
         "& .MuiDataGrid-root": {
@@ -174,6 +170,9 @@ export default observer(function StudentList({
           color: color.grey[100],
           fontSize: 14,
         },
+        "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+          color: `${color.grey[200]} !important`,
+        },
         overflow: "auto",
       }}
     >
@@ -187,8 +186,10 @@ export default observer(function StudentList({
           bottom: params.isLastVisible ? 0 : 5,
         })}
         slots={{
+          toolbar: GridToolbar,
           loadingOverlay: LinearProgressComponent,
           noRowsOverlay: NoRowsFound,
+          noResultsOverlay: NoRowsFound,
         }}
       />
     </Box>

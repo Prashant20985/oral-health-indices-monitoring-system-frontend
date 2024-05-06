@@ -21,6 +21,8 @@ import ActivePatientsList from "../../features/PatientOperations/List/ActivePati
 import ArchivedPatientsList from "../../features/PatientOperations/List/ArchivedPatientsForAdmin/ArchivedPatientsList";
 import ActivePatientList from "../../features/PatientOperations/List/ActivePatientsForDoctor/ActivePatientList";
 import ArchivedPatientList from "../../features/PatientOperations/List/ArchivedPatientListForDoctor/ArchivedPatientList";
+import StudentGroupDetails from "../../features/DentistTeacherOperations/List/StudentGroup/StudentGroupDetails";
+import StudentsNotInStudentGroupList from "../../features/DentistTeacherOperations/List/StudentGroup/StudentsNotInStudentGroupList";
 
 const routes: RouteObject[] = [
   {
@@ -82,6 +84,14 @@ const routes: RouteObject[] = [
           {
             path: "student-groups",
             element: <StudentGroupList />,
+          },
+          {
+            path: "student-groups/:id",
+            element: <StudentGroupDetails />,
+          },
+          {
+            path: "student-groups/:id/add-students",
+            element: <StudentsNotInStudentGroupList />
           },
           {
             path: "research-groups",

@@ -12,7 +12,7 @@ import {
   ApplicationUserFormValues,
 } from "../models/ApplicationUser";
 import { router } from "../router/Routes";
-import { Group, Student } from "../models/Group";
+import { StudentGroup, Student } from "../models/Group";
 import { UserRequest } from "../models/UserRequest";
 import {
   ResearchGroup,
@@ -133,38 +133,42 @@ const AdminOperations = {
 };
 
 const DentistTeacherOperations = {
-  createGroup: (groupName: string) =>
+  createStudentGroup: (groupName: string) =>
     apiRequests.post<void>(
       `/dentistTeacher/create-group?groupName=${groupName}`,
       {}
     ),
 
-  addStudentToGroup: (groupId: string, studentId: string) =>
+  addStudentToStudentGroup: (groupId: string, studentId: string) =>
     apiRequests.post<void>(
       `/dentistTeacher/add-student/${groupId}?studentId=${studentId}`,
       {}
     ),
 
-  removeStudentFromGroup: (groupId: string, studentId: string) =>
+  removeStudentFromStudentGroup: (groupId: string, studentId: string) =>
     apiRequests.del<void>(
       `/dentistTeacher/remove-student/${groupId}?studentId=${studentId}`
     ),
 
-  deleteGroup: (groupId: string) =>
+  deleteStudentGroup: (groupId: string) =>
     apiRequests.del<void>(`/dentistTeacher/delete-group/${groupId}`),
 
-  updateGroupName: (groupId: string, groupName: string) =>
+  updateStudentGroupName: (groupId: string, groupName: string) =>
     apiRequests.put<void>(
       `/dentistTeacher/update-groupname/${groupId}?groupName=${groupName}`,
       {}
     ),
 
-  getStudentsNotInGroup: (groupId: string) =>
+  getStudentsNotInStudentGroup: (groupId: string) =>
     apiRequests.get<Student[]>(
       `/dentistTeacher/get-studentsNotInGroup/${groupId}`
     ),
 
-  getGroups: () => apiRequests.get<Group[]>(`/dentistTeacher/groups`),
+  getStudentGroups: () =>
+    apiRequests.get<StudentGroup[]>(`/dentistTeacher/groups`),
+
+  getStudentGroup: (groupId: string) =>
+    apiRequests.get<StudentGroup>(`/dentistTeacher/group-details/${groupId}`),
 
   getResearchGroups: (groupName: string) =>
     apiRequests.get<ResearchGroup[]>(

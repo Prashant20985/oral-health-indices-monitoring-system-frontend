@@ -128,10 +128,10 @@ export default observer(function SidebarComponent({
             />
             <>{user?.role === "Admin" && <AdminNavOptions open={open} />}</>
             <>
-              {user?.role === "Dentist_Teacher_Examiner" ||
-                (user?.role === "Dentist_Teacher_Researcher" && (
-                  <DentistTeacherNavOptions open={open} />
-                ))}
+              {(user?.role === "Dentist_Teacher_Examiner" ||
+                user?.role === "Dentist_Teacher_Researcher") && (
+                <DentistTeacherNavOptions open={open} />
+              )}
             </>
             <>
               {user?.role !== "Admin" && (
