@@ -246,6 +246,7 @@ export default class DentistTeacherStore {
 
   getStudentsNotInStudentGroup = async (groupId: string) => {
     this.loading.studentsNotInGroup = true;
+    this.studentsNotInGroup = [];
     try {
       const result =
         await axiosAgent.DentistTeacherOperations.getStudentsNotInStudentGroup(
@@ -277,11 +278,26 @@ export default class DentistTeacherStore {
   };
 
   getStudentGroup = async (studentGroupId: string) => {
-    this.loading.studentGroups = false;
     const studentGroup = this.getStudentGroupDetails(studentGroupId);
-    if (studentGroup)
+    if (studentGroup) {
       runInAction(() => this.setSelectedStudentGroup(studentGroup));
-    return studentGroup;
+      return studentGroup;
+    } else {
+      this.loading.studentGroupDetails = true;
+      try {
+        const result =
+          await axiosAgent.DentistTeacherOperations.getStudentGroup(
+            studentGroupId
+          );
+        runInAction(() => {
+          this.setSelectedStudentGroup(result);
+          this.loading.studentGroupDetails = false;
+        });
+      } catch (error) {
+        console.log(error);
+        runInAction(() => (this.loading.studentGroupDetails = false));
+      }
+    }
   };
 
   getResearchGroups = async () => {

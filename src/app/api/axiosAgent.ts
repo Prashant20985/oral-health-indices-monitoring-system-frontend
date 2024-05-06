@@ -164,7 +164,11 @@ const DentistTeacherOperations = {
       `/dentistTeacher/get-studentsNotInGroup/${groupId}`
     ),
 
-  getStudentGroups: () => apiRequests.get<StudentGroup[]>(`/dentistTeacher/groups`),
+  getStudentGroups: () =>
+    apiRequests.get<StudentGroup[]>(`/dentistTeacher/groups`),
+
+  getStudentGroup: (groupId: string) =>
+    apiRequests.get<StudentGroup>(`/dentistTeacher/group-details/${groupId}`),
 
   getResearchGroups: (groupName: string) =>
     apiRequests.get<ResearchGroup[]>(
