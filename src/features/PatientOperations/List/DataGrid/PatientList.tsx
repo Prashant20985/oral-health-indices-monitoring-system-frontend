@@ -176,7 +176,7 @@ export default observer(function PatientList({
                     setSelectedPatientId(patient.id);
                     setPatientDetailsOpen(true);
                   } else {
-                    router.navigate(`/patient-details/${patient.id}`);
+                    router.navigate(`/patient-profile/${patient.id}`);
                   }
                 }}
               >

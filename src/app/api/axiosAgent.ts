@@ -20,6 +20,13 @@ import {
   ResearchGroupPatient,
 } from "../models/ResearchGroup";
 import { CreateUpdatePatientFormValues, Patient } from "../models/Patient";
+import {
+  Exam,
+  ExamSolution,
+  ExamSolutionFormValues,
+  PublishExam,
+  UpdateExam,
+} from "../models/StudentExam";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -297,12 +304,75 @@ const PatientOperations = {
     apiRequests.get<Patient>(`/patient/patient-details/${patientId}`),
 };
 
+const StudentExamOperations = {
+  publishExam: (values: PublishExam) =>
+    apiRequests.post<Exam>("/StudentExam/publish-exam", values),
+
+  deleteExam: (examId: string) =>
+    apiRequests.del<void>(`/StudentExam/delete-exam/${examId}`),
+
+  updateExam: (examId: string, values: UpdateExam) =>
+    apiRequests.put<Exam>(`/StudentExam/update-exam/${examId}`, values),
+
+  commentPracticePatientExaminationCard: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/StudentExam/comment-card/${cardId}?comment=${comment}`,
+      {}
+    ),
+
+  commentAPIBleedingForm: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/StudentExam/comment-apiBleedingForm/${cardId}?comment=${comment}`,
+      {}
+    ),
+
+  commentBeweForm: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/StudentExam/comment-beweForm/${cardId}?comment=${comment}`,
+      {}
+    ),
+
+  commentDMFT_DMFSForm: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/StudentExam/comment-dmft_dmfsForm/${cardId}?comment=${comment}`,
+      {}
+    ),
+
+  markExamAsGraded: (examId: string) =>
+    apiRequests.put<void>(`/StudentExam/markAsGraded/${examId}`, {}),
+
+  gradeExaminationCard: (cardId: string, mark: number) =>
+    apiRequests.put<void>(
+      `/StudentExam/gradeExaminationCard/${cardId}?studentMark=${mark}`,
+      {}
+    ),
+
+  getExams: (groupId: string) =>
+    apiRequests.get<Exam[]>(`/StudentExam/exams/${groupId}`),
+
+  getExamDetails: (examId: string) =>
+    apiRequests.get<Exam>(`/StudentExam/exam-details/${examId}`),
+
+  getExamCards: (examId: string) =>
+    apiRequests.get<ExamSolution[]>(`/StudentExam/exam-cards/${examId}`),
+
+  getExamCard: (cardId: string) =>
+    apiRequests.get<ExamSolution>(`/StudentExam/exam-card/${cardId}`),
+
+  submitExamSolution: (examId: string, values: ExamSolutionFormValues) =>
+    apiRequests.post<void>(`/StudentExam/exam-solution/${examId}`, values),
+
+  getExamSolution: (examId: string) =>
+    apiRequests.get<ExamSolution>(`/StudentExam/exam-solution/${examId}`),
+};
+
 const axiosAgent = {
   AccountOperations,
   AdminOperations,
   DentistTeacherOperations,
   UserRequestOperations,
   PatientOperations,
+  StudentExamOperations,
 };
 
 export default axiosAgent;
