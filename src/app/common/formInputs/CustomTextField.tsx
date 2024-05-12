@@ -12,6 +12,7 @@ interface Props {
   readOnly?: boolean;
   gridColumn?: string;
   type?: string;
+  variant?: "filled" | "outlined";
 }
 
 export default function CustomTextField({
@@ -25,6 +26,7 @@ export default function CustomTextField({
   gridColumn = "span 1",
   type = "text",
   readOnly = false,
+  variant = "filled",
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -35,7 +37,7 @@ export default function CustomTextField({
       color="secondary"
       type={type}
       label={label}
-      variant="filled"
+      variant={variant}
       name={name}
       value={value}
       onChange={onChange}
