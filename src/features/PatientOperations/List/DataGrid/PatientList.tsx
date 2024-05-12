@@ -18,6 +18,7 @@ import PatientDetailsDialog from "../../Forms/PatientDetailsDialog";
 import ArchivePatientForm from "../../Forms/ArchivePatientForm";
 import { useStore } from "../../../../app/stores/Store";
 import CreateEditPatientForm from "../../Forms/CreateEditPatientForm";
+import { router } from "../../../../app/router/Routes";
 
 interface Props {
   patients: Patient[];
@@ -171,8 +172,12 @@ export default observer(function PatientList({
             <Tooltip title="View details">
               <IconButton
                 onClick={() => {
-                  setSelectedPatientId(patient.id);
-                  setPatientDetailsOpen(true);
+                  if (!isListForDoctor) {
+                    setSelectedPatientId(patient.id);
+                    setPatientDetailsOpen(true);
+                  } else {
+                    router.navigate(`/patient-details/${patient.id}`);
+                  }
                 }}
               >
                 <AccountCircle color="primary" />

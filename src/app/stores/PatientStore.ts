@@ -7,6 +7,7 @@ export class PatientStore {
   archivedPatients: Patient[] = [];
   activePatientsByDoctorId: Patient[] = [];
   archivedPatientsByDoctorId: Patient[] = [];
+  patientDetails: Patient | null = null;
 
   activePatientsSerachParams = { name: "", email: "" };
 
@@ -26,6 +27,7 @@ export class PatientStore {
     archivePatient: false,
     unarchivePatient: false,
     deletePatient: false,
+    patientDetails: false,
   };
 
   constructor() {
@@ -66,6 +68,10 @@ export class PatientStore {
 
   setArchivedPatientsByDoctorId = (patients: Patient[]) => {
     this.archivedPatientsByDoctorId = patients;
+  };
+
+  setPatientDetails = (patient: Patient) => {
+    this.patientDetails = patient;
   };
 
   setActivePatientsSearchParams = (searchParams: {
@@ -156,9 +162,15 @@ export class PatientStore {
     return params;
   }
 
-  getPatientById = (patientId: string) => {
+  getPatientByIdForAdmin = (patientId: string) => {
     return this.activePatients
       .concat(this.archivedPatients)
+      .find((p) => p.id === patientId);
+  };
+
+  getPatientByIdForDoctor = (patientId: string) => {
+    return this.activePatientsByDoctorId
+      .concat(this.archivedPatientsByDoctorId)
       .find((p) => p.id === patientId);
   };
 
@@ -324,7 +336,7 @@ export class PatientStore {
 
   deletePatient = async (patientId: string) => {
     this.loading.deletePatient = true;
-    const patient = this.getPatientById(patientId);
+    const patient = this.getPatientByIdForAdmin(patientId);
     try {
       await axiosAgent.PatientOperations.deletePatient(patientId);
       runInAction(() => {
@@ -339,6 +351,31 @@ export class PatientStore {
       });
     } catch (error) {
       runInAction(() => (this.loading.deletePatient = false));
+      console.log(error);
+      throw error;
+    }
+  };
+
+  fetchPatientDetails = async (patientId: string) => {
+    this.loading.patientDetails = true;
+    const patient = this.getPatientByIdForAdmin(patientId);
+    if (patient) {
+      runInAction(() => {
+        this.setPatientDetails(patient);
+        this.loading.patientDetails = false;
+      });
+      return;
+    }
+    try {
+      const patient = await axiosAgent.PatientOperations.getPatientDetails(
+        patientId
+      );
+      runInAction(() => {
+        this.setPatientDetails(patient);
+        this.loading.patientDetails = false;
+      });
+    } catch (error) {
+      runInAction(() => (this.loading.patientDetails = false));
       console.log(error);
       throw error;
     }

@@ -292,6 +292,9 @@ const PatientOperations = {
     axios
       .get<Patient[]>(`/patient/archived-patients-by-doctorId`, { params })
       .then(responseBody),
+
+  getPatientDetails: (patientId: string) =>
+    apiRequests.get<Patient>(`/patient/patient-details/${patientId}`),
 };
 
 const axiosAgent = {
