@@ -22,6 +22,7 @@ import { blueGrey } from "@mui/material/colors";
 import EditStudentGroupForm from "../../Forms/EditStudentGroupForm";
 import StudentList from "../StudentList/StudentList";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import ExamsList from "../../../StudentExamOperations/ExamsList/ExamsList";
 
 export default observer(function StudentGroupDetails() {
   const {
@@ -59,7 +60,7 @@ export default observer(function StudentGroupDetails() {
             backgroundColor:
               theme.palette.mode === "dark"
                 ? color.primary[400]
-                : blueGrey[100],
+                : blueGrey[200],
             padding: 1,
             display: "flex",
           }}
@@ -153,7 +154,9 @@ export default observer(function StudentGroupDetails() {
                 )}
               </Box>
             </TabPanel>
-            <TabPanel value="2">List of Exams</TabPanel>
+            <TabPanel value="2">
+              <ExamsList />
+            </TabPanel>
           </Box>
         </TabContext>
       </Box>
