@@ -9,7 +9,7 @@ import {
 import axiosAgent from "../api/axiosAgent";
 
 export class StudentExamStore {
-  studentExams: Exam[] = [];
+  studentExams = new Map<string, Exam>();
   examDetails: Exam | null = null;
   examCards: ExamSolution[] = [];
   examCard: ExamSolution | null = null;
@@ -37,8 +37,10 @@ export class StudentExamStore {
     makeAutoObservable(this);
   }
 
-  setStudentExams = (studentExams: Exam[]) => {
-    this.studentExams = studentExams;
+  setStudentExams = (studentExam: Exam) => {
+    console.log(studentExam.dateOfExamination);
+    studentExam.dateOfExamination = new Date(studentExam.dateOfExamination);
+    this.studentExams.set(studentExam.id, studentExam);
   };
 
   setExamDetails = (examDetails: Exam) => {
@@ -58,12 +60,37 @@ export class StudentExamStore {
   };
 
   getExamDetails = (examId: string) => {
-    return this.studentExams.find((exam) => exam.id === examId);
+    return this.studentExams.get(examId);
   };
 
   getExamCard = (cardId: string) => {
     return this.examCards.find((card) => card.id === cardId);
   };
+
+  get groupedStudentExams() {
+    return Object.entries(
+      this.studentExamsByDate.reduce((studentExams, exam) => {
+        const year = exam.dateOfExamination.getFullYear();
+        const month = (exam.dateOfExamination.getMonth() + 1)
+          .toString()
+          .padStart(2, "0");
+          
+        const yearMonth = `${year}-${month}`;
+
+        studentExams[yearMonth] = studentExams[yearMonth]
+          ? [...studentExams[yearMonth], exam]
+          : [exam];
+
+        return studentExams;
+      }, {} as { [key: string]: Exam[] })
+    );
+  }
+
+  get studentExamsByDate() {
+    return Array.from(this.studentExams.values()).sort(
+      (a, b) => a.dateOfExamination.getTime() - b.dateOfExamination.getTime()
+    );
+  }
 
   publishExam = async (values: PublishExam) => {
     this.loading.publishExam = true;
@@ -71,7 +98,7 @@ export class StudentExamStore {
       const exam = await axiosAgent.StudentExamOperations.publishExam(values);
       runInAction(() => {
         if (exam) {
-          this.studentExams.push(exam);
+          this.setStudentExams(exam);
         }
         this.loading.publishExam = false;
       });
@@ -86,9 +113,7 @@ export class StudentExamStore {
     try {
       await axiosAgent.StudentExamOperations.deleteExam(examId);
       runInAction(() => {
-        this.studentExams = this.studentExams.filter(
-          (exam) => exam.id !== examId
-        );
+        this.studentExams.delete(examId);
         this.loading.deleteExam = false;
       });
     } catch (error) {
@@ -105,12 +130,17 @@ export class StudentExamStore {
         values
       );
       runInAction(() => {
-        this.studentExams = this.studentExams.map((exam) => {
-          if (exam.id === examId) {
-            return { ...exam, ...updatedExam };
+        const updatedExamsArray = Array.from(this.studentExams.values()).map(
+          (exam) => {
+            if (exam.id === examId) {
+              return updatedExam;
+            }
+            return exam;
           }
-          return exam;
-        });
+        );
+        this.studentExams = new Map(
+          updatedExamsArray.map((exam) => [exam.id, exam])
+        );
         this.loading.updateExam = false;
       });
     } catch (error) {
@@ -202,12 +232,14 @@ export class StudentExamStore {
     try {
       await axiosAgent.StudentExamOperations.markExamAsGraded(examId);
       runInAction(() => {
-        this.studentExams = this.studentExams.map((exam) => {
-          if (exam.id === examId) {
-            return { ...exam, examStatus: "Graded" };
-          }
-          return exam;
-        });
+        this.studentExams = new Map(
+          Array.from(this.studentExams).map(([key, exam]) => {
+            if (exam.id === examId) {
+              return [key, { ...exam, examStatus: "Graded" }];
+            }
+            return [key, exam];
+          })
+        );
         this.loading.markExamAsGraded = false;
       });
     } catch (error) {
@@ -240,7 +272,9 @@ export class StudentExamStore {
     try {
       const exams = await axiosAgent.StudentExamOperations.getExams(grouId);
       runInAction(() => {
-        this.setStudentExams(exams);
+        exams.forEach((exam) => {
+          this.setStudentExams(exam);
+        });
         this.loading.studentExams = false;
       });
     } catch (error) {

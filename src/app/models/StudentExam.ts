@@ -8,7 +8,7 @@ import {
 } from "./RiskFactorAssesment";
 
 export interface UpdateExam {
-  dateOFExamination: Date;
+  dateOfExamination: Date;
   examTitle: string;
   description: string;
   startTime: string;
