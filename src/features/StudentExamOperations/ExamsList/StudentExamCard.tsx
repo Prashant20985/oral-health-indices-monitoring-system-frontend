@@ -7,6 +7,7 @@ import {
   Timelapse,
   Assessment,
   Edit,
+  DeleteSweep,
 } from "@mui/icons-material";
 import {
   Card,
@@ -28,6 +29,7 @@ import { colors } from "../../../themeConfig";
 import { Exam } from "../../../app/models/StudentExam";
 import * as React from "react";
 import UpdateExamForm from "../Forms/UpdateExamForm";
+import DeleteExamConfirmationForm from "../Forms/DeleteExamConfirmationForm";
 
 interface Props {
   exam: Exam;
@@ -38,6 +40,8 @@ export default observer(function StudentExamCard({ exam }: Props) {
   const color = colors(theme.palette.mode);
 
   const [openEditDialog, setOpenEditDialog] = React.useState(false);
+
+  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
 
   return (
     <>
@@ -136,7 +140,12 @@ export default observer(function StudentExamCard({ exam }: Props) {
           <Box display="flex" width="100%" justifyContent="flex-end">
             <Tooltip title="Edit Exam">
               <IconButton onClick={() => setOpenEditDialog(true)}>
-                <Edit />
+                <Edit color="warning" />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete Exam">
+              <IconButton onClick={() => setOpenDeleteDialog(true)}>
+                <DeleteSweep color="error" />
               </IconButton>
             </Tooltip>
           </Box>
@@ -146,6 +155,12 @@ export default observer(function StudentExamCard({ exam }: Props) {
         isOpen={openEditDialog}
         onClose={() => setOpenEditDialog(false)}
         exam={exam}
+      />
+      <DeleteExamConfirmationForm
+        isOpen={openDeleteDialog}
+        onClose={() => setOpenDeleteDialog(false)}
+        examId={exam.id}
+        examTitle={exam.examTitle}
       />
     </>
   );

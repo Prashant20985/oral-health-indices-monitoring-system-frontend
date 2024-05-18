@@ -270,7 +270,7 @@ export default observer(function UpdateExamForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Publish Exam"
+                        buttonText="Update Exam"
                       />
                       <CustomCancelButton handleCancel={onClose} />
                     </Box>
