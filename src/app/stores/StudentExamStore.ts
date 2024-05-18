@@ -74,7 +74,7 @@ export class StudentExamStore {
         const month = (exam.dateOfExamination.getMonth() + 1)
           .toString()
           .padStart(2, "0");
-          
+
         const yearMonth = `${year}-${month}`;
 
         studentExams[yearMonth] = studentExams[yearMonth]
@@ -105,6 +105,7 @@ export class StudentExamStore {
     } catch (error) {
       console.error(error);
       this.loading.publishExam = false;
+      throw error;
     }
   };
 
