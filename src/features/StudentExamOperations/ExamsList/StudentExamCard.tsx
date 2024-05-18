@@ -6,6 +6,7 @@ import {
   Schedule,
   Timelapse,
   Assessment,
+  Edit,
 } from "@mui/icons-material";
 import {
   Card,
@@ -18,11 +19,15 @@ import {
   CardActions,
   Button,
   useTheme,
+  Tooltip,
+  IconButton,
 } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
 import { observer } from "mobx-react-lite";
 import { colors } from "../../../themeConfig";
 import { Exam } from "../../../app/models/StudentExam";
+import * as React from "react";
+import UpdateExamForm from "../Forms/UpdateExamForm";
 
 interface Props {
   exam: Exam;
@@ -31,96 +36,117 @@ interface Props {
 export default observer(function StudentExamCard({ exam }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [openEditDialog, setOpenEditDialog] = React.useState(false);
+
   return (
-    <Card
-      elevation={3}
-      sx={{
-        backgroundColor:
-          theme.palette.mode === "dark" ? color.primary[400] : color.grey[900],
-      }}
-    >
-      <CardHeader
-        sx={{ width: "100%" }}
-        avatar={
-          <Avatar
-            variant="rounded"
-            sx={{
-              backgroundColor:
-                theme.palette.mode === "dark" ? blueGrey[400] : blueGrey[600],
-              width: 50,
-              height: 50,
-            }}
-            aria-label="group"
-          >
-            <AssignmentOutlined />
-          </Avatar>
-        }
-        title={
-          <Typography variant="h5" fontWeight="bold">
-            {exam.examTitle}
-          </Typography>
-        }
-        subheader={
-          <>
-            <Typography variant="h6" color="textSecondary">
-              <b>Publish Date:</b> {new Date(exam.publishDate).toDateString()}
+    <>
+      <Card
+        elevation={3}
+        sx={{
+          backgroundColor:
+            theme.palette.mode === "dark"
+              ? color.primary[400]
+              : color.grey[900],
+        }}
+      >
+        <CardHeader
+          sx={{ width: "100%" }}
+          avatar={
+            <Avatar
+              variant="rounded"
+              sx={{
+                backgroundColor:
+                  theme.palette.mode === "dark" ? blueGrey[400] : blueGrey[600],
+                width: 50,
+                height: 50,
+              }}
+              aria-label="group"
+            >
+              <AssignmentOutlined />
+            </Avatar>
+          }
+          title={
+            <Typography variant="h5" fontWeight="bold">
+              {exam.examTitle}
             </Typography>
-          </>
-        }
+          }
+          subheader={
+            <>
+              <Typography variant="h6" color="textSecondary">
+                <b>Publish Date:</b> {new Date(exam.publishDate).toDateString()}
+              </Typography>
+            </>
+          }
+        />
+        <CardContent>
+          <Stack spacing={1}>
+            {exam.examStatus === "Published" ? (
+              <Box display="flex" alignItems="center" gap={1}>
+                <Check />
+                <Typography variant="h6" color="textSecondary">
+                  Status: {exam.examStatus}
+                </Typography>
+              </Box>
+            ) : (
+              <Box display="flex" alignItems="center" gap={1}>
+                <AssignmentTurnedIn />
+                <Typography variant="h6" color="textSecondary">
+                  Status: {exam.examStatus}
+                </Typography>
+              </Box>
+            )}
+            <Box display="flex" alignItems="center" gap={1}>
+              <CalendarMonth />
+              <Typography variant="h6" color="textSecondary">
+                {exam.dateOfExamination.toDateString()}
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center" gap={1}>
+              <Schedule />
+              <Typography variant="h6" color="textSecondary">
+                {exam.startTime} - {exam.endTime}
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center" gap={1}>
+              <Timelapse />
+              <Typography variant="h6" color="textSecondary">
+                Duration: {exam.durationInterval}
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center" gap={1}>
+              <Assessment />
+              <Typography variant="h6" color="textSecondary">
+                Max Marks: {exam.maxMark}
+              </Typography>
+            </Box>
+          </Stack>
+        </CardContent>
+        <CardActions>
+          <Box sx={{ width: "100%" }}>
+            <Button
+              variant="outlined"
+              color={theme.palette.mode === "dark" ? "secondary" : "primary"}
+              endIcon={<Assessment />}
+              size="small"
+            >
+              View Exam
+            </Button>
+          </Box>
+          <Box display="flex" width="100%" justifyContent="flex-end">
+            <Tooltip title="Edit Exam">
+              <IconButton onClick={() => setOpenEditDialog(true)}>
+                <Edit />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        </CardActions>
+      </Card>
+      <UpdateExamForm
+        isOpen={openEditDialog}
+        onClose={() => setOpenEditDialog(false)}
+        exam={exam}
       />
-      <CardContent>
-        <Stack spacing={1}>
-          {exam.examStatus === "Published" ? (
-            <Box display="flex" alignItems="center" gap={1}>
-              <Check />
-              <Typography variant="h6" color="textSecondary">
-                Status: {exam.examStatus}
-              </Typography>
-            </Box>
-          ) : (
-            <Box display="flex" alignItems="center" gap={1}>
-              <AssignmentTurnedIn />
-              <Typography variant="h6" color="textSecondary">
-                Status: {exam.examStatus}
-              </Typography>
-            </Box>
-          )}
-          <Box display="flex" alignItems="center" gap={1}>
-            <CalendarMonth />
-            <Typography variant="h6" color="textSecondary">
-              {exam.dateOfExamination.toDateString()}
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center" gap={1}>
-            <Schedule />
-            <Typography variant="h6" color="textSecondary">
-              {exam.startTime} - {exam.endTime}
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center" gap={1}>
-            <Timelapse />
-            <Typography variant="h6" color="textSecondary">
-              Duration: {exam.durationInterval}
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center" gap={1}>
-            <Assessment />
-            <Typography variant="h6" color="textSecondary">
-              Max Marks: {exam.maxMark}
-            </Typography>
-          </Box>
-        </Stack>
-      </CardContent>
-      <CardActions>
-        <Button
-          variant="outlined"
-          color={theme.palette.mode === "dark" ? "secondary" : "primary"}
-          endIcon={<Assessment />}
-          size="small"
-        >
-          View Exam
-        </Button>
-      </CardActions>
-    </Card>
+    </>
   );
 });

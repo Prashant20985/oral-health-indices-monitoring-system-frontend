@@ -38,7 +38,6 @@ export class StudentExamStore {
   }
 
   setStudentExams = (studentExam: Exam) => {
-    console.log(studentExam.dateOfExamination);
     studentExam.dateOfExamination = new Date(studentExam.dateOfExamination);
     this.studentExams.set(studentExam.id, studentExam);
   };
@@ -131,17 +130,9 @@ export class StudentExamStore {
         values
       );
       runInAction(() => {
-        const updatedExamsArray = Array.from(this.studentExams.values()).map(
-          (exam) => {
-            if (exam.id === examId) {
-              return updatedExam;
-            }
-            return exam;
-          }
-        );
-        this.studentExams = new Map(
-          updatedExamsArray.map((exam) => [exam.id, exam])
-        );
+        if (updatedExam) {
+          this.setStudentExams(updatedExam);
+        }
         this.loading.updateExam = false;
       });
     } catch (error) {
