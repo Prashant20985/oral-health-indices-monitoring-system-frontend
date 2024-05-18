@@ -23,6 +23,7 @@ import EditStudentGroupForm from "../../Forms/EditStudentGroupForm";
 import StudentList from "../StudentList/StudentList";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import ExamsList from "../../../StudentExamOperations/ExamsList/ExamsList";
+import PublishExamForm from "../../../StudentExamOperations/Forms/PublishExamForm";
 
 export default observer(function StudentGroupDetails() {
   const {
@@ -33,6 +34,7 @@ export default observer(function StudentGroupDetails() {
   const color = colors(theme.palette.mode);
 
   const [openEdit, setOpenEdit] = React.useState(false);
+  const [openAdd, setOpenAdd] = React.useState(false);
 
   const [value, setValue] = React.useState("1");
 
@@ -155,7 +157,19 @@ export default observer(function StudentGroupDetails() {
               </Box>
             </TabPanel>
             <TabPanel value="2">
-              <ExamsList />
+              <Box display="flex" flexDirection="column" gap={1}>
+                <Box display="flex" justifyContent="flex-end">
+                  <Button
+                    color="success"
+                    startIcon={<Add />}
+                    variant="contained"
+                    onClick={() => setOpenAdd(true)}
+                  >
+                    Publish New Exam
+                  </Button>
+                </Box>
+                <ExamsList />
+              </Box>
             </TabPanel>
           </Box>
         </TabContext>
@@ -165,6 +179,11 @@ export default observer(function StudentGroupDetails() {
         groupId={selectedStudentGroup?.id}
         name={selectedStudentGroup?.groupName}
         onClose={() => setOpenEdit(false)}
+      />
+      <PublishExamForm
+        isOpen={openAdd}
+        onClose={() => setOpenAdd(false)}
+        groupId={id!}
       />
     </>
   );
