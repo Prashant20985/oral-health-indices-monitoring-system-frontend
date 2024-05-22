@@ -39,4 +39,9 @@ export interface PracticePatient {
 
 export interface PracticePatientDetails extends PracticePatient {
   id: string;
+  createdAt: string;
+  isArchived: boolean;
+  archiveComment: string;
+  doctorName: string;
+  researchGroupName: string;
 }

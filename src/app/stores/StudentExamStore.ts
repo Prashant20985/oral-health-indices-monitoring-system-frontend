@@ -232,6 +232,9 @@ export class StudentExamStore {
             return [key, exam];
           })
         );
+        if (this.examDetails?.id === examId) {
+          this.examDetails.examStatus = "Graded";
+        }
         this.loading.markExamAsGraded = false;
       });
     } catch (error) {

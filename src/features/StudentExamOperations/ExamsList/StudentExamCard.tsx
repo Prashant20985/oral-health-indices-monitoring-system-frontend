@@ -30,12 +30,17 @@ import { Exam } from "../../../app/models/StudentExam";
 import * as React from "react";
 import UpdateExamForm from "../Forms/UpdateExamForm";
 import DeleteExamConfirmationForm from "../Forms/DeleteExamConfirmationForm";
+import { router } from "../../../app/router/Routes";
 
 interface Props {
   exam: Exam;
+  isExamDetails?: boolean;
 }
 
-export default observer(function StudentExamCard({ exam }: Props) {
+export default observer(function StudentExamCard({
+  exam,
+  isExamDetails,
+}: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
@@ -103,7 +108,7 @@ export default observer(function StudentExamCard({ exam }: Props) {
             <Box display="flex" alignItems="center" gap={1}>
               <CalendarMonth />
               <Typography variant="h6" color="textSecondary">
-                {exam.dateOfExamination.toDateString()}
+                {new Date(exam.dateOfExamination).toDateString()}
               </Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={1}>
@@ -126,30 +131,33 @@ export default observer(function StudentExamCard({ exam }: Props) {
             </Box>
           </Stack>
         </CardContent>
-        <CardActions>
-          <Box sx={{ width: "100%" }}>
-            <Button
-              variant="outlined"
-              color={theme.palette.mode === "dark" ? "secondary" : "primary"}
-              endIcon={<Assessment />}
-              size="small"
-            >
-              View Exam
-            </Button>
-          </Box>
-          <Box display="flex" width="100%" justifyContent="flex-end">
-            <Tooltip title="Edit Exam">
-              <IconButton onClick={() => setOpenEditDialog(true)}>
-                <Edit color="warning" />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete Exam">
-              <IconButton onClick={() => setOpenDeleteDialog(true)}>
-                <DeleteSweep color="error" />
-              </IconButton>
-            </Tooltip>
-          </Box>
-        </CardActions>
+        {!isExamDetails && (
+          <CardActions>
+            <Box sx={{ width: "100%" }}>
+              <Button
+                variant="outlined"
+                color={theme.palette.mode === "dark" ? "secondary" : "primary"}
+                endIcon={<Assessment />}
+                size="small"
+                onClick={() => router.navigate(`/exam-details/${exam.id}`)}
+              >
+                View Exam
+              </Button>
+            </Box>
+            <Box display="flex" width="100%" justifyContent="flex-end">
+              <Tooltip title="Edit Exam">
+                <IconButton onClick={() => setOpenEditDialog(true)}>
+                  <Edit color="warning" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Delete Exam">
+                <IconButton onClick={() => setOpenDeleteDialog(true)}>
+                  <DeleteSweep color="error" />
+                </IconButton>
+              </Tooltip>
+            </Box>
+          </CardActions>
+        )}
       </Card>
       <UpdateExamForm
         isOpen={openEditDialog}

@@ -1,4 +1,4 @@
-import { FiveSurfaceTooth, FourSurfaceTooth } from "./Tooth";
+import { FiveSurfaceToothBewe, FourSurfaceTooth } from "./Tooth";
 
 export interface PracticeBeweFormValues {
   assessmentModel: BeweAssessmentModel;
@@ -12,10 +12,10 @@ export interface Bewe extends PracticeBeweFormValues {
 
 export interface BeweAssessmentModel {
   sectant1: {
-    tooth_17: FiveSurfaceTooth;
-    tooth_16: FiveSurfaceTooth;
-    tooth_15: FiveSurfaceTooth;
-    tooth_14: FiveSurfaceTooth;
+    tooth_17: FiveSurfaceToothBewe;
+    tooth_16: FiveSurfaceToothBewe;
+    tooth_15: FiveSurfaceToothBewe;
+    tooth_14: FiveSurfaceToothBewe;
   };
   sectant2: {
     tooth_13: FourSurfaceTooth;
@@ -26,16 +26,16 @@ export interface BeweAssessmentModel {
     tooth_23: FourSurfaceTooth;
   };
   sectant3: {
-    tooth_24: FiveSurfaceTooth;
-    tooth_25: FiveSurfaceTooth;
-    tooth_26: FiveSurfaceTooth;
-    tooth_27: FiveSurfaceTooth;
+    tooth_24: FiveSurfaceToothBewe;
+    tooth_25: FiveSurfaceToothBewe;
+    tooth_26: FiveSurfaceToothBewe;
+    tooth_27: FiveSurfaceToothBewe;
   };
   sectant4: {
-    tooth_37: FiveSurfaceTooth;
-    tooth_36: FiveSurfaceTooth;
-    tooth_35: FiveSurfaceTooth;
-    tooth_34: FiveSurfaceTooth;
+    tooth_37: FiveSurfaceToothBewe;
+    tooth_36: FiveSurfaceToothBewe;
+    tooth_35: FiveSurfaceToothBewe;
+    tooth_34: FiveSurfaceToothBewe;
   };
   sectant5: {
     tooth_33: FourSurfaceTooth;
@@ -46,9 +46,9 @@ export interface BeweAssessmentModel {
     tooth_43: FourSurfaceTooth;
   };
   sectant6: {
-    tooth_44: FiveSurfaceTooth;
-    tooth_45: FiveSurfaceTooth;
-    tooth_46: FiveSurfaceTooth;
-    tooth_47: FiveSurfaceTooth;
+    tooth_44: FiveSurfaceToothBewe;
+    tooth_45: FiveSurfaceToothBewe;
+    tooth_46: FiveSurfaceToothBewe;
+    tooth_47: FiveSurfaceToothBewe;
   };
 }
