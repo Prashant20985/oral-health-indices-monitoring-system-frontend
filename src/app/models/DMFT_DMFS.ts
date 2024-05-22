@@ -1,4 +1,4 @@
-import { SixSurfaceTooth, FiveSurfaceTooth } from "./Tooth";
+import { FiveSurfaceToothDMFT_DMFS, SixSurfaceTooth } from "./Tooth";
 
 export interface PracticeDMFT_DMFSFormValues {
   assessmentModel: DMFT_DMFSAssessmentModel;
@@ -22,12 +22,12 @@ export interface DMFT_DMFSAssessmentModelUpperMouth {
   tooth_16: SixSurfaceTooth;
   tooth_15: SixSurfaceTooth;
   tooth_14: SixSurfaceTooth;
-  tooth_13: FiveSurfaceTooth;
-  tooth_12: FiveSurfaceTooth;
-  tooth_11: FiveSurfaceTooth;
-  tooth_21: FiveSurfaceTooth;
-  tooth_22: FiveSurfaceTooth;
-  tooth_23: FiveSurfaceTooth;
+  tooth_13: FiveSurfaceToothDMFT_DMFS;
+  tooth_12: FiveSurfaceToothDMFT_DMFS;
+  tooth_11: FiveSurfaceToothDMFT_DMFS;
+  tooth_21: FiveSurfaceToothDMFT_DMFS;
+  tooth_22: FiveSurfaceToothDMFT_DMFS;
+  tooth_23: FiveSurfaceToothDMFT_DMFS;
   tooth_24: SixSurfaceTooth;
   tooth_25: SixSurfaceTooth;
   tooth_26: SixSurfaceTooth;
@@ -51,12 +51,12 @@ export interface DMFT_DMFSAssessmentModelLowerMouth {
   tooth_46: SixSurfaceTooth;
   tooth_45: SixSurfaceTooth;
   tooth_44: SixSurfaceTooth;
-  tooth_43: FiveSurfaceTooth;
-  tooth_42: FiveSurfaceTooth;
-  tooth_41: FiveSurfaceTooth;
-  tooth_31: FiveSurfaceTooth;
-  tooth_32: FiveSurfaceTooth;
-  tooth_33: FiveSurfaceTooth;
+  tooth_43: FiveSurfaceToothDMFT_DMFS;
+  tooth_42: FiveSurfaceToothDMFT_DMFS;
+  tooth_41: FiveSurfaceToothDMFT_DMFS;
+  tooth_31: FiveSurfaceToothDMFT_DMFS;
+  tooth_32: FiveSurfaceToothDMFT_DMFS;
+  tooth_33: FiveSurfaceToothDMFT_DMFS;
   tooth_34: SixSurfaceTooth;
   tooth_35: SixSurfaceTooth;
   tooth_36: SixSurfaceTooth;

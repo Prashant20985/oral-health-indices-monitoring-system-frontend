@@ -24,6 +24,8 @@ import ArchivedPatientList from "../../features/PatientOperations/List/ArchivedP
 import StudentGroupDetails from "../../features/DentistTeacherOperations/List/StudentGroup/StudentGroupDetails";
 import StudentsNotInStudentGroupList from "../../features/DentistTeacherOperations/List/StudentGroup/StudentsNotInStudentGroupList";
 import PatientProfile from "../../features/PatientOperations/PatientProfile/PatientProfile";
+import ExamDetails from "../../features/StudentExamOperations/ExamDetails/ExamDetails";
+import ExamSolutionDetailsForTeacher from "../../features/StudentExamOperations/ExamSolutionDetails/ExamSolutionDetailsForTeacher/ExamSolutionDetailsForTeacher";
 
 const routes: RouteObject[] = [
   {
@@ -105,6 +107,14 @@ const routes: RouteObject[] = [
           {
             path: "research-groups/:id/add-patients",
             element: <PatientsNotInResearchGroupList />,
+          },
+          {
+            path: "exam-details/:examId",
+            element: <ExamDetails />,
+          },
+          {
+            path: "exam-details/:examId/:cardId",
+            element: <ExamSolutionDetailsForTeacher />,
           },
         ],
       },

@@ -5,10 +5,14 @@ export interface FourSurfaceTooth {
   m: string;
 }
 
-export interface FiveSurfaceTooth extends FourSurfaceTooth {
+export interface FiveSurfaceToothBewe extends FourSurfaceTooth {
+  o: string;
+}
+
+export interface FiveSurfaceToothDMFT_DMFS extends FourSurfaceTooth {
   r: string;
 }
 
-export interface SixSurfaceTooth extends FiveSurfaceTooth {
-  o: string;
+export interface SixSurfaceTooth extends FiveSurfaceToothBewe {
+  r: string;
 }

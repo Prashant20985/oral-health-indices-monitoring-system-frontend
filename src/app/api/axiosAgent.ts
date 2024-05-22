@@ -357,7 +357,7 @@ const StudentExamOperations = {
     apiRequests.get<ExamSolution[]>(`/StudentExam/exam-cards/${examId}`),
 
   getExamCard: (cardId: string) =>
-    apiRequests.get<ExamSolution>(`/StudentExam/exam-card/${cardId}`),
+    apiRequests.get<ExamSolution>(`/StudentExam/exam-card-details/${cardId}`),
 
   submitExamSolution: (examId: string, values: ExamSolutionFormValues) =>
     apiRequests.post<void>(`/StudentExam/exam-solution/${examId}`, values),

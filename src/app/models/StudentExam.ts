@@ -1,7 +1,7 @@
 import { APIBleeding, PracticeAPIBleedingFormValues } from "./APIBleeding";
 import { Bewe, PracticeBeweFormValues } from "./Bewe";
 import { DMFT_DMFS, PracticeDMFT_DMFSFormValues } from "./DMFT_DMFS";
-import { PracticePatient } from "./Patient";
+import { PracticePatient, PracticePatientDetails } from "./Patient";
 import {
   RiskFactorAssessment,
   RiskFactorAssessmentModel,
@@ -43,7 +43,7 @@ export interface ExamSolution {
   doctorComment: string;
   doctorName: string;
   studentName: string;
-  practicePatient: PracticePatient;
+  practicePatient: PracticePatientDetails;
   practiceRiskFactorAssessment: RiskFactorAssessment;
   practicePatientExaminationResult: {
     bewe: Bewe;

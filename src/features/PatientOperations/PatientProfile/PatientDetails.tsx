@@ -19,9 +19,13 @@ import { blueGrey } from "@mui/material/colors";
 
 interface Props {
   patientDetails: Patient;
+  isPracticePatient?: boolean;
 }
 
-export default observer(function PatientDetails({ patientDetails }: Props) {
+export default observer(function PatientDetails({
+  patientDetails,
+  isPracticePatient,
+}: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
   return (
@@ -106,13 +110,15 @@ export default observer(function PatientDetails({ patientDetails }: Props) {
                       Years in School: {patientDetails.yearsInSchool}
                     </Typography>
                   </Box>
-                  <Box display="flex" alignItems="center" gap={1}>
-                    <EditCalendar />
-                    <Typography variant="h6" color="textSecondary">
-                      Created At:{" "}
-                      {new Date(patientDetails.createdAt).toDateString()}
-                    </Typography>
-                  </Box>
+                  {!isPracticePatient && (
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <EditCalendar />
+                      <Typography variant="h6" color="textSecondary">
+                        Created At:{" "}
+                        {new Date(patientDetails.createdAt).toDateString()}
+                      </Typography>
+                    </Box>
+                  )}
                 </Stack>
               </Box>
             </CardContent>
@@ -171,23 +177,27 @@ export default observer(function PatientDetails({ patientDetails }: Props) {
                   gridColumn="span 2"
                 />
 
-                <CustomTextField
-                  label="Doctor Name"
-                  name="doctorName"
-                  value={patientDetails.doctorName}
-                  readOnly={true}
-                  variant="outlined"
-                  gridColumn="span 4"
-                />
+                {!isPracticePatient && (
+                  <>
+                    <CustomTextField
+                      label="Doctor Name"
+                      name="doctorName"
+                      value={patientDetails.doctorName}
+                      readOnly={true}
+                      variant="outlined"
+                      gridColumn="span 4"
+                    />
 
-                <CustomTextField
-                  label="Research Group Name"
-                  name="researchGroupName"
-                  value={patientDetails.researchGroupName}
-                  readOnly={true}
-                  variant="outlined"
-                  gridColumn="span 4"
-                />
+                    <CustomTextField
+                      label="Research Group Name"
+                      name="researchGroupName"
+                      value={patientDetails.researchGroupName}
+                      readOnly={true}
+                      variant="outlined"
+                      gridColumn="span 4"
+                    />
+                  </> 
+                )}
 
                 <CustomTextField
                   label="Other Group"
