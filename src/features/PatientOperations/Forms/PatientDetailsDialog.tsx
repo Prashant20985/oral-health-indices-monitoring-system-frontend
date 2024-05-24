@@ -27,17 +27,17 @@ export default observer(function PatientDetailsDialog({
 }: Props) {
   const [patient, setPatient] = React.useState<Patient | null>(null);
   const {
-    patientStore: { getPatientById },
+    patientStore: { getPatientByIdForAdmin },
   } = useStore();
 
   React.useEffect(() => {
     if (patientId) {
-      const patientDetails = getPatientById(patientId);
+      const patientDetails = getPatientByIdForAdmin(patientId);
       if (patientDetails) {
         setPatient(patientDetails);
       }
     }
-  }, [patientId, getPatientById]);
+  }, [patientId, getPatientByIdForAdmin]);
 
   return (
     <Dialog

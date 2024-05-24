@@ -26,6 +26,8 @@ import StudentsNotInStudentGroupList from "../../features/DentistTeacherOperatio
 import PatientProfile from "../../features/PatientOperations/PatientProfile/PatientProfile";
 import ExamDetails from "../../features/StudentExamOperations/ExamDetails/ExamDetails";
 import ExamSolutionDetailsForTeacher from "../../features/StudentExamOperations/ExamSolutionDetails/ExamSolutionDetailsForTeacher/ExamSolutionDetailsForTeacher";
+import GroupsListForStudent from "../../features/StudentOperations/StudentGroupsList/GroupsListForStudent";
+import GroupDetailsForStudent from "../../features/StudentOperations/StudentGroupDetails/GroupDetailsForStudent";
 
 const routes: RouteObject[] = [
   {
@@ -115,6 +117,19 @@ const routes: RouteObject[] = [
           {
             path: "exam-details/:examId/:cardId",
             element: <ExamSolutionDetailsForTeacher />,
+          },
+        ],
+      },
+      {
+        element: <RequireAuthentication roles={["Student"]} />,
+        children: [
+          {
+            path: "my-groups",
+            element: <GroupsListForStudent />,
+          },
+          {
+            path: "my-group/:groupId",
+            element: <GroupDetailsForStudent />,
           },
         ],
       },

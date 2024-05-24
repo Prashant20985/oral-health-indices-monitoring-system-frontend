@@ -1,6 +1,10 @@
 import { Box, Typography } from "@mui/material";
 
-export default function NoRowsFound() {
+interface Props {
+  message?: string;
+}
+
+export default function NoRowsFound({ message = "No Rows Found" }: Props) {
   return (
     <Box
       sx={{
@@ -19,7 +23,7 @@ export default function NoRowsFound() {
         width={200}
       />
       <Typography variant="h6" fontWeight={600} textTransform="uppercase">
-        No Rows Found
+        {message}
       </Typography>
     </Box>
   );
