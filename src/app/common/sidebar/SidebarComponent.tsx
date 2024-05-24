@@ -20,6 +20,7 @@ import { useStore } from "../../stores/Store";
 import { observer } from "mobx-react-lite";
 import AdminNavOptions from "../../../features/AdminOperations/NavOptions/AdminNavOptions";
 import DentistTeacherNavOptions from "../../../features/DentistTeacherOperations/NavOptions/DentistTeacherNavOptions";
+import StudentNavOptions from "../../../features/StudentOperations/NavOptions/StudentNavOptions";
 
 interface Props {
   open: boolean;
@@ -133,6 +134,7 @@ export default observer(function SidebarComponent({
                 <DentistTeacherNavOptions open={open} />
               )}
             </>
+            <>{user?.role === "Student" && <StudentNavOptions open={open} />}</>
             <>
               {user?.role !== "Admin" && (
                 <SidebarListItem

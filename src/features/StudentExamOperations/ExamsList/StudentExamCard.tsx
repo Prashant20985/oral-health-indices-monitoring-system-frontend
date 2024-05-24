@@ -35,10 +35,12 @@ import { router } from "../../../app/router/Routes";
 interface Props {
   exam: Exam;
   isExamDetails?: boolean;
+  forStudentUser?: boolean;
 }
 
 export default observer(function StudentExamCard({
   exam,
+  forStudentUser,
   isExamDetails,
 }: Props) {
   const theme = useTheme();
@@ -90,20 +92,24 @@ export default observer(function StudentExamCard({
         />
         <CardContent>
           <Stack spacing={1}>
-            {exam.examStatus === "Published" ? (
-              <Box display="flex" alignItems="center" gap={1}>
-                <Check />
-                <Typography variant="h6" color="textSecondary">
-                  Status: {exam.examStatus}
-                </Typography>
-              </Box>
-            ) : (
-              <Box display="flex" alignItems="center" gap={1}>
-                <AssignmentTurnedIn />
-                <Typography variant="h6" color="textSecondary">
-                  Status: {exam.examStatus}
-                </Typography>
-              </Box>
+            {!isExamDetails && (
+              <>
+                {exam.examStatus === "Published" ? (
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <Check />
+                    <Typography variant="h6" color="textSecondary">
+                      Status: {exam.examStatus}
+                    </Typography>
+                  </Box>
+                ) : (
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <AssignmentTurnedIn />
+                    <Typography variant="h6" color="textSecondary">
+                      Status: {exam.examStatus}
+                    </Typography>
+                  </Box>
+                )}
+              </>
             )}
             <Box display="flex" alignItems="center" gap={1}>
               <CalendarMonth />
@@ -117,47 +123,64 @@ export default observer(function StudentExamCard({
                 {exam.startTime} - {exam.endTime}
               </Typography>
             </Box>
-            <Box display="flex" alignItems="center" gap={1}>
-              <Timelapse />
-              <Typography variant="h6" color="textSecondary">
-                Duration: {exam.durationInterval}
-              </Typography>
-            </Box>
-            <Box display="flex" alignItems="center" gap={1}>
-              <Assessment />
-              <Typography variant="h6" color="textSecondary">
-                Max Marks: {exam.maxMark}
-              </Typography>
-            </Box>
+            {!isExamDetails && (
+              <>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <Timelapse />
+                  <Typography variant="h6" color="textSecondary">
+                    Duration: {exam.durationInterval}
+                  </Typography>
+                </Box>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <Assessment />
+                  <Typography variant="h6" color="textSecondary">
+                    Max Marks: {exam.maxMark}
+                  </Typography>
+                </Box>
+              </>
+            )}
           </Stack>
         </CardContent>
-        {!isExamDetails && (
-          <CardActions>
-            <Box sx={{ width: "100%" }}>
-              <Button
-                variant="outlined"
-                color={theme.palette.mode === "dark" ? "secondary" : "primary"}
-                endIcon={<Assessment />}
-                size="small"
-                onClick={() => router.navigate(`/exam-details/${exam.id}`)}
-              >
-                View Exam
-              </Button>
-            </Box>
-            <Box display="flex" width="100%" justifyContent="flex-end">
-              <Tooltip title="Edit Exam">
-                <IconButton onClick={() => setOpenEditDialog(true)}>
-                  <Edit color="warning" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Delete Exam">
-                <IconButton onClick={() => setOpenDeleteDialog(true)}>
-                  <DeleteSweep color="error" />
-                </IconButton>
-              </Tooltip>
-            </Box>
-          </CardActions>
-        )}
+        <CardActions>
+          {!forStudentUser ? (
+            <>
+              <Box sx={{ width: "100%" }}>
+                <Button
+                  variant="outlined"
+                  color={
+                    theme.palette.mode === "dark" ? "secondary" : "primary"
+                  }
+                  endIcon={<Assessment />}
+                  size="small"
+                  onClick={() => router.navigate(`/exam-details/${exam.id}`)}
+                >
+                  View Exam
+                </Button>
+              </Box>
+              <Box display="flex" width="100%" justifyContent="flex-end">
+                <Tooltip title="Edit Exam">
+                  <IconButton onClick={() => setOpenEditDialog(true)}>
+                    <Edit color="warning" />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete Exam">
+                  <IconButton onClick={() => setOpenDeleteDialog(true)}>
+                    <DeleteSweep color="error" />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            </>
+          ) : (
+            <Button
+              variant="contained"
+              color="info"
+              startIcon={<Assessment />}
+              fullWidth
+            >
+              View Exam
+            </Button>
+          )}
+        </CardActions>
       </Card>
       <UpdateExamForm
         isOpen={openEditDialog}

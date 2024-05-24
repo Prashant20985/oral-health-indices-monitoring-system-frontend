@@ -22,7 +22,7 @@ export default function Header({ title, subTitle = "" }: props) {
       </Typography>
       <Typography
         variant="h6"
-        color={color.grey[400]}
+        color={color.greenAccent[400]}
         sx={{
           fontWeight: 700,
         }}

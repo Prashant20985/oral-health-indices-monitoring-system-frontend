@@ -12,7 +12,7 @@ import {
   ApplicationUserFormValues,
 } from "../models/ApplicationUser";
 import { router } from "../router/Routes";
-import { StudentGroup, Student } from "../models/Group";
+import { StudentGroup, Student, GroupWithExams } from "../models/Group";
 import { UserRequest } from "../models/UserRequest";
 import {
   ResearchGroup,
@@ -366,6 +366,16 @@ const StudentExamOperations = {
     apiRequests.get<ExamSolution>(`/StudentExam/exam-solution/${examId}`),
 };
 
+const StudentOperations = {
+  getStudentGroupsWithExams: () =>
+    apiRequests.get<GroupWithExams[]>("/student/student-groups"),
+
+  getStudentGroupDetailsWithExams: (groupId: string) =>
+    apiRequests.get<GroupWithExams>(
+      `/student/student-group-details/${groupId}`
+    ),
+};
+
 const axiosAgent = {
   AccountOperations,
   AdminOperations,
@@ -373,6 +383,7 @@ const axiosAgent = {
   UserRequestOperations,
   PatientOperations,
   StudentExamOperations,
+  StudentOperations,
 };
 
 export default axiosAgent;
