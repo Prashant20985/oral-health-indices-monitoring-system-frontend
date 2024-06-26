@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import { APIBleeding } from "../../../../app/models/APIBleeding";
 import {
   Box,
   Button,
@@ -17,22 +16,20 @@ import { blueGrey } from "@mui/material/colors";
 import { Send } from "@mui/icons-material";
 import { useStore } from "../../../../app/stores/Store";
 import CommentStudentExamCardDialog from "../../Forms/CommentStudentExamCardDialog";
+import { Bleeding } from "../../../../app/models/APIBleeding";
 
 const APIBleedingForm = React.lazy(
   () => import("../../../IndexCalculationForms/APIBleeding/APIBleedingForm")
 );
 
 interface Props {
-  apiBleeding: APIBleeding;
+  bleeding: Bleeding;
   cardId: string;
 }
 
-export default observer(function APIBleedingDetails({
-  apiBleeding,
-  cardId,
-}: Props) {
+export default observer(function BleedingDetails({ bleeding, cardId }: Props) {
   const {
-    studentExamStore: { commentAPIBleedingForm },
+    studentExamStore: { commentBleedingForm },
   } = useStore();
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -40,7 +37,7 @@ export default observer(function APIBleedingDetails({
   const [openCommentDialog, setOpenCommentDialog] = React.useState(false);
 
   const handleComment = async (commnet: string) => {
-    await commentAPIBleedingForm(cardId, commnet);
+    await commentBleedingForm(cardId, commnet);
   };
 
   return (
@@ -55,7 +52,7 @@ export default observer(function APIBleedingDetails({
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              API Bleeding Details
+              Bleeding Details
             </Typography>
           }
         />
@@ -66,14 +63,21 @@ export default observer(function APIBleedingDetails({
               variant="outlined"
               label="API Result"
               name="apiResult"
-              value={apiBleeding.apiResult}
+              value={`${bleeding.bleedingResult} %`}
               readOnly
             />
             <CustomTextField
               variant="outlined"
-              label="Bleeding Result"
-              name="bleedingResult"
-              value={apiBleeding.bleedingResult}
+              label="Maxilla"
+              name="maxilla"
+              value={`${bleeding.bleedingResult} %`}
+              readOnly
+            />
+            <CustomTextField
+              variant="outlined"
+              label="Mandible"
+              name="mandible"
+              value={`${bleeding.bleedingResult} %`}
               readOnly
             />
           </Box>
@@ -86,7 +90,7 @@ export default observer(function APIBleedingDetails({
               multiline
               rows={3}
               inputProps={{ readonly: true }}
-              value={apiBleeding.comments ?? "No comment yet."}
+              value={bleeding.comment ?? "No comment yet."}
             />
             <Box display="flex" justifyContent="flex-end">
               <Button
@@ -96,19 +100,19 @@ export default observer(function APIBleedingDetails({
                 onClick={() => setOpenCommentDialog(true)}
                 startIcon={<Send />}
               >
-                {apiBleeding.comments === null ? "Add Comment" : "Edit Comment"}
+                {bleeding.comment === null ? "Add Comment" : "Edit Comment"}
               </Button>
             </Box>
           </Box>
         </CardContent>
       </Card>
-      <APIBleedingForm apiBleeding={apiBleeding} isView />
+      <APIBleedingForm apiBleeding={bleeding} isView />
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
         title="Comment API Bleeding Form"
         description="Please write your comment about the API Bleeding form."
-        comment={apiBleeding.comments ?? ""}
+        comment={bleeding.comment ?? ""}
         handleSubmit={handleComment}
       />
     </Box>

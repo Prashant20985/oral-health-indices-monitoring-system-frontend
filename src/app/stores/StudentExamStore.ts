@@ -26,7 +26,8 @@ export class StudentExamStore {
     deleteExam: false,
     updateExam: false,
     commentPracticePatientExaminationCard: false,
-    commentAPIBleedingForm: false,
+    commentAPIForm: false,
+    commentBleedingForm: false,
     commentBeweForm: false,
     commentDMFT_DMFSForm: false,
     markExamAsGraded: false,
@@ -163,23 +164,35 @@ export class StudentExamStore {
     }
   };
 
-  commentAPIBleedingForm = async (cardId: string, comment: string) => {
-    this.loading.commentAPIBleedingForm = true;
+  commentAPIForm = async (cardId: string, comment: string) => {
+    this.loading.commentAPIForm = true;
     try {
-      await axiosAgent.StudentExamOperations.commentAPIBleedingForm(
-        cardId,
-        comment
-      );
+      await axiosAgent.StudentExamOperations.commentAPIForm(cardId, comment);
       runInAction(() => {
         if (this.examCard) {
-          this.examCard.practicePatientExaminationResult.apiBleeding.comments =
-            comment;
+          this.examCard.practicePatientExaminationResult.api.comment = comment;
         }
-        this.loading.commentAPIBleedingForm = false;
+        this.loading.commentAPIForm = false;
       });
     } catch (error) {
       console.error(error);
-      this.loading.commentAPIBleedingForm = false;
+      this.loading.commentAPIForm = false;
+    }
+  };
+
+  commentBleedingForm = async (cardId: string, comment: string) => {
+    this.loading.commentBleedingForm = true;
+    try {
+      await axiosAgent.StudentExamOperations.commentBleedingForm(cardId, comment);
+      runInAction(() => {
+        if (this.examCard) {
+          this.examCard.practicePatientExaminationResult.bleeding.comment = comment;
+        }
+        this.loading.commentBleedingForm = false;
+      });
+    } catch (error) {
+      console.error(error);
+      this.loading.commentBleedingForm = false;
     }
   };
 
