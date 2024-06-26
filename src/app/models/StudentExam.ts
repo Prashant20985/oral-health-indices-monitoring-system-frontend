@@ -1,4 +1,4 @@
-import { APIBleeding, PracticeAPIBleedingFormValues } from "./APIBleeding";
+import { API, Bleeding, PracticeAPIFormValues, PracticeBleedingFormValues } from "./APIBleeding";
 import { Bewe, PracticeBeweFormValues } from "./Bewe";
 import { DMFT_DMFS, PracticeDMFT_DMFSFormValues } from "./DMFT_DMFS";
 import { PracticePatient, PracticePatientDetails } from "./Patient";
@@ -32,7 +32,8 @@ export type ExamStatus = "Published" | "Graded";
 export interface ExamSolutionFormValues {
   patientDto: PracticePatient;
   riskFactorAssessmentModel: RiskFactorAssessmentModel;
-  practiceAPIBleeding: PracticeAPIBleedingFormValues;
+  practiceAPI: PracticeAPIFormValues;
+  practiceBleeding: PracticeBleedingFormValues;
   practiceBewe: PracticeBeweFormValues;
   practiceDMFT_DMFS: PracticeDMFT_DMFSFormValues;
 }
@@ -48,6 +49,7 @@ export interface ExamSolution {
   practicePatientExaminationResult: {
     bewe: Bewe;
     dmfT_DMFS: DMFT_DMFS;
-    apiBleeding: APIBleeding;
+    api: API;
+    bleeding: Bleeding;
   };
 }

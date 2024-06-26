@@ -27,9 +27,10 @@ import {
 import { blueGrey } from "@mui/material/colors";
 import DMFT_DMFSDetails from "./DMFT_DMFSDetails";
 import BeweDetails from "./BeweDetails";
-import APIBleedingDetails from "./APIBleedingDetails";
 import CommentStudentExamCardDialog from "../../Forms/CommentStudentExamCardDialog";
 import AddStudentMarksDialog from "../../Forms/AddStudentMarksDialog";
+import APIDetails from "./APIDetails";
+import BleedingDetails from "./BleedingDetails";
 
 const RiskFactorAssessment = React.lazy(
   () => import("../../../IndexCalculationForms/RiskFactorAssessment")
@@ -205,12 +206,14 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                   value="4"
                 />
                 <Tab
-                  label={
-                    <Typography color={color.grey[100]}>
-                      API Bleeding
-                    </Typography>
-                  }
+                  label={<Typography color={color.grey[100]}>API</Typography>}
                   value="5"
+                />
+                <Tab
+                  label={
+                    <Typography color={color.grey[100]}>Bleeding</Typography>
+                  }
+                  value="6"
                 />
               </TabList>
               <TabPanel value="1">
@@ -250,10 +253,16 @@ export default observer(function ExamSolutionDetailsForTeacher() {
               </TabPanel>
               <TabPanel value="5">
                 <React.Suspense fallback={<ButtonLoadingComponent />}>
-                  <APIBleedingDetails
-                    apiBleeding={
-                      examCard.practicePatientExaminationResult.apiBleeding
-                    }
+                  <APIDetails
+                    api={examCard.practicePatientExaminationResult.api}
+                    cardId={examCard.id}
+                  />
+                </React.Suspense>
+              </TabPanel>
+              <TabPanel value="6">
+                <React.Suspense fallback={<ButtonLoadingComponent />}>
+                  <BleedingDetails
+                    bleeding={examCard.practicePatientExaminationResult.bleeding}
                     cardId={examCard.id}
                   />
                 </React.Suspense>

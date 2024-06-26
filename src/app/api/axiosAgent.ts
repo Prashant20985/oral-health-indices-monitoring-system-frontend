@@ -320,11 +320,17 @@ const StudentExamOperations = {
       {}
     ),
 
-  commentAPIBleedingForm: (cardId: string, comment: string) =>
+  commentAPIForm: (cardId: string, comment: string) =>
     apiRequests.put<void>(
-      `/StudentExam/comment-apiBleedingForm/${cardId}?comment=${comment}`,
+      `/StudentExam/comment-api-form/${cardId}?comment=${comment}`,
       {}
     ),
+
+    commentBleedingForm: (cardId: string, comment: string) =>
+      apiRequests.put<void>(
+        `/StudentExam/comment-bleeding-form/${cardId}?comment=${comment}`,
+        {}
+      ),
 
   commentBeweForm: (cardId: string, comment: string) =>
     apiRequests.put<void>(

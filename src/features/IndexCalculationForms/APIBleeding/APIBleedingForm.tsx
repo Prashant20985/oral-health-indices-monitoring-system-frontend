@@ -10,10 +10,10 @@ import {
 import { Form, Formik } from "formik";
 import Header from "../../../app/common/header/Header";
 import { colors } from "../../../themeConfig";
-import { APIBleeding } from "../../../app/models/APIBleeding";
+import { API, Bleeding } from "../../../app/models/APIBleeding";
 
 interface Props {
-  apiBleeding: APIBleeding;
+  apiBleeding: API | Bleeding;
   isView?: boolean;
 }
 

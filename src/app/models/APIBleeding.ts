@@ -15,13 +15,34 @@ export interface APIBleedingAssessmentModel {
   quadrant4: Quadrant;
 }
 
-export interface PracticeAPIBleedingFormValues {
+export interface PracticeAPIFormValues {
   apiResult: number;
-  bleedingResult: number;
+  maxilla: number;
+  mandible: number;
   assessmentModel: APIBleedingAssessmentModel;
 }
 
-export interface APIBleeding extends PracticeAPIBleedingFormValues {
+export interface PracticeBleedingFormValues {
+  bleedingResult: number;
+  maxilla: number;
+  mandible: number;
+  assessmentModel: APIBleedingAssessmentModel;
+}
+
+export interface Bleeding {
   id: string;
-  comments: string;
+  bleedingResult: number;
+  maxilla: number;
+  mandible: number;
+  comment: string;
+  assessmentModel: APIBleedingAssessmentModel;
+}
+
+export interface API {
+  id: string;
+  apiResult: number;
+  maxilla: number;
+  mandible: number;
+  comment: string;
+  assessmentModel: APIBleedingAssessmentModel;
 }
