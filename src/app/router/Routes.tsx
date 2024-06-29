@@ -128,7 +128,7 @@ const routes: RouteObject[] = [
             element: <GroupsListForStudent />,
           },
           {
-            path: "my-group/:groupId",
+            path: "my-groups/:groupId",
             element: <GroupDetailsForStudent />,
           },
         ],
