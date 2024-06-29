@@ -93,7 +93,7 @@ export default observer(function BeweDetails({ bewe, cardId }: Props) {
           </Box>
         </CardContent>
       </Card>
-      <BeweForm bewe={bewe} isView />
+      <BeweForm beweAssessmentModel={bewe.assessmentModel} isView />
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}

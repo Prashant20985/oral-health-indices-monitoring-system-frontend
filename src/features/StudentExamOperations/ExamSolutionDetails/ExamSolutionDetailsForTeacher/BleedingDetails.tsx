@@ -106,7 +106,10 @@ export default observer(function BleedingDetails({ bleeding, cardId }: Props) {
           </Box>
         </CardContent>
       </Card>
-      <APIBleedingForm apiBleeding={bleeding} isView />
+      <APIBleedingForm
+        apiBleedingAssessmentModel={bleeding.assessmentModel}
+        isView
+      />
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}

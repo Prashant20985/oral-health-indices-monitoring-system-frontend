@@ -31,7 +31,7 @@ import * as React from "react";
 import UpdateExamForm from "../Forms/UpdateExamForm";
 import DeleteExamConfirmationForm from "../Forms/DeleteExamConfirmationForm";
 import { router } from "../../../app/router/Routes";
-import { checkExamStatus } from "../../../app/helpers/CheckExamStatus";
+import { CheckExamStatus } from "../../../app/helper/CheckExamStatus";
 import MarkAsGradedConformationDialog from "../Forms/MarkAsGradedConformationDialog";
 
 interface Props {
@@ -57,7 +57,7 @@ export default observer(function StudentExamCard({
   const [openMarkAsGradedDialog, setOpenMarkAsGradedDialog] =
     React.useState(false);
 
-  const { ended } = checkExamStatus(
+  const { ended } = CheckExamStatus(
     exam.dateOfExamination.toString(),
     exam.endTime,
     exam.startTime

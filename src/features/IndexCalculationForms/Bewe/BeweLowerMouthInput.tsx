@@ -7,15 +7,17 @@ import InverseFourSurfaceToothInput from "../../../app/common/formInputs/ToothIn
 import InverseFiveSurfaceBeweToothInput from "../../../app/common/formInputs/ToothInputs/InverseFiveSurfaceBeweToothInput";
 
 interface Props {
-  bewe: BeweAssessmentModel;
+  beweAssessmentModel: BeweAssessmentModel;
   isView?: boolean;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
 }
 
 export default React.memo(function BeweLowerMouthInput({
-  bewe,
+  beweAssessmentModel,
   isView,
   handleChange,
+  name,
 }: Props) {
   return (
     <Box>
@@ -26,10 +28,10 @@ export default React.memo(function BeweLowerMouthInput({
             key={toothNumber}
             surfaces={
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (bewe.sectant6 as any)[`tooth_${toothNumber}`]
+              (beweAssessmentModel.sectant6 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`sectant6.tooth_${toothNumber}`}
+            name={`${name}.sectant6.tooth_${toothNumber}`}
             onChange={handleChange}
             readOnly={isView}
           />
@@ -42,10 +44,10 @@ export default React.memo(function BeweLowerMouthInput({
             key={toothNumber}
             surfaces={
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (bewe.sectant5 as any)[`tooth_${toothNumber}`]
+              (beweAssessmentModel.sectant5 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`sectant5.tooth_${toothNumber}`}
+            name={`${name}.sectant5.tooth_${toothNumber}`}
             onChange={handleChange}
             readOnly={isView}
           />
@@ -57,10 +59,10 @@ export default React.memo(function BeweLowerMouthInput({
             key={toothNumber}
             surfaces={
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (bewe.sectant5 as any)[`tooth_${toothNumber}`]
+              (beweAssessmentModel.sectant5 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`sectant5.tooth_${toothNumber}`}
+            name={`${name}.sectant5.tooth_${toothNumber}`}
             onChange={handleChange}
             readOnly={isView}
           />
@@ -73,10 +75,10 @@ export default React.memo(function BeweLowerMouthInput({
             key={toothNumber}
             surfaces={
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (bewe.sectant4 as any)[`tooth_${toothNumber}`]
+              (beweAssessmentModel.sectant4 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`sectant4.tooth_${toothNumber}`}
+            name={`${name}.sectant4.tooth_${toothNumber}`}
             onChange={handleChange}
             readOnly={isView}
           />

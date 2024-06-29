@@ -225,11 +225,11 @@ export default observer(function ExamSolutionDetailsForTeacher() {
               <TabPanel value="2">
                 <React.Suspense fallback={<ButtonLoadingComponent />}>
                   <RiskFactorAssessment
-                  // riskFactorAssessment={
-                  //   examCard.practicePatientExaminationResult
-                  //     .riskFactorAssessment
-                  // }
-                  // isView
+                    riskFactorAssessment={
+                      examCard.practiceRiskFactorAssessment
+                        .riskFactorAssessmentModel
+                    }
+                    isView
                   />
                 </React.Suspense>
               </TabPanel>
@@ -262,7 +262,9 @@ export default observer(function ExamSolutionDetailsForTeacher() {
               <TabPanel value="6">
                 <React.Suspense fallback={<ButtonLoadingComponent />}>
                   <BleedingDetails
-                    bleeding={examCard.practicePatientExaminationResult.bleeding}
+                    bleeding={
+                      examCard.practicePatientExaminationResult.bleeding
+                    }
                     cardId={examCard.id}
                   />
                 </React.Suspense>

@@ -50,7 +50,10 @@ export default function MarkAsGradedConformationDialog({
           color="secondary"
           type="submit"
           variant="contained"
-          onClick={() => markExamAsGraded(examId)}
+          onClick={() => {
+            markExamAsGraded(examId);
+            onClose();
+          }}
         >
           Yes
         </Button>

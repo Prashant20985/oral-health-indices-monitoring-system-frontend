@@ -11,6 +11,7 @@ interface Props {
   lowerMouth: DMFT_DMFSAssessmentModelLowerMouth;
   isView?: boolean;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
 }
 
 export default React.memo(function DMFT_DMFSExtraToothInput({
@@ -18,6 +19,7 @@ export default React.memo(function DMFT_DMFSExtraToothInput({
   lowerMouth,
   handleChange,
   isView,
+  name,
 }: Props) {
   return (
     <Box mt="1rem" mb="1rem">
@@ -30,7 +32,7 @@ export default React.memo(function DMFT_DMFSExtraToothInput({
               (upperMouth as any)[`tooth_${toothNumber}`]
             }
             onChange={handleChange}
-            name={`upperMouth.tooth_${toothNumber}`}
+            name={`${name}.upperMouth.tooth_${toothNumber}`}
             readOnly={isView}
             width="3rem"
             height="2rem"
@@ -47,7 +49,7 @@ export default React.memo(function DMFT_DMFSExtraToothInput({
               (lowerMouth as any)[`tooth_${toothNumber}`]
             }
             onChange={handleChange}
-            name={`lowerMouth.tooth_${toothNumber}`}
+            name={`${name}.lowerMouth.tooth_${toothNumber}`}
             readOnly={isView}
             width="3rem"
             height="2rem"

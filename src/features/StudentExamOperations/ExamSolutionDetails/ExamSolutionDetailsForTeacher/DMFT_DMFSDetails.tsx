@@ -100,7 +100,10 @@ export default observer(function DMFT_DMFSDetails({
           </Box>
         </CardContent>
       </Card>
-      <DMFT_DMFSForm dmft_dmfs={dmft_dmfs} isView />
+      <DMFT_DMFSForm
+        dmft_dmfsAssessmentModel={dmft_dmfs.assessmentModel}
+        isView
+      />
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
