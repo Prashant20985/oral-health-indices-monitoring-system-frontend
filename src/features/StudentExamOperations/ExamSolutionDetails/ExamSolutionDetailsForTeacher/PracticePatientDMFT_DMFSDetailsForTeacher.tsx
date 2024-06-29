@@ -27,7 +27,7 @@ interface Props {
   cardId: string;
 }
 
-export default observer(function DMFT_DMFSDetails({
+export default observer(function PracticePatientDMFT_DMFSDetailsForTeacher({
   dmft_dmfs,
   cardId,
 }: Props) {

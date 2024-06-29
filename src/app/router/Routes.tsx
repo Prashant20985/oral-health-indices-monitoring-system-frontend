@@ -28,6 +28,7 @@ import ExamDetails from "../../features/StudentExamOperations/ExamDetails/ExamDe
 import ExamSolutionDetailsForTeacher from "../../features/StudentExamOperations/ExamSolutionDetails/ExamSolutionDetailsForTeacher/ExamSolutionDetailsForTeacher";
 import GroupsListForStudent from "../../features/StudentOperations/StudentGroupsList/GroupsListForStudent";
 import GroupDetailsForStudent from "../../features/StudentOperations/StudentGroupDetails/GroupDetailsForStudent";
+import ExamSolutionDetailsForStudent from "../../features/StudentExamOperations/ExamSolutionDetails/ExamSolutionDetailsForStudent/ExamSolutionDetailsForStudent";
 
 const routes: RouteObject[] = [
   {
@@ -130,6 +131,10 @@ const routes: RouteObject[] = [
           {
             path: "my-groups/:groupId",
             element: <GroupDetailsForStudent />,
+          },
+          {
+            path: "exam/:examId",
+            element: <ExamSolutionDetailsForStudent />,
           },
         ],
       },

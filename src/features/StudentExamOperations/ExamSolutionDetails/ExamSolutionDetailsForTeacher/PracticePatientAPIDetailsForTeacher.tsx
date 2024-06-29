@@ -27,7 +27,10 @@ interface Props {
   cardId: string;
 }
 
-export default observer(function APIDetails({ api, cardId }: Props) {
+export default observer(function PracticePatientAPIDetailsForTeacher({
+  api,
+  cardId,
+}: Props) {
   const {
     studentExamStore: { commentAPIForm },
   } = useStore();

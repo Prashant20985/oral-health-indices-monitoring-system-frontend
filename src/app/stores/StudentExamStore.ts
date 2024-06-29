@@ -67,6 +67,14 @@ export class StudentExamStore {
     return this.examCards.find((card) => card.id === cardId);
   };
 
+  clearExamDetails = () => {
+    this.examDetails = null;
+  };
+
+  clearExamSolutionByStudent = () => {
+    this.examSolutionByStudent = null;
+  };
+
   get groupedStudentExams() {
     return Object.entries(
       this.studentExamsByDate.reduce((studentExams, exam) => {
@@ -183,10 +191,14 @@ export class StudentExamStore {
   commentBleedingForm = async (cardId: string, comment: string) => {
     this.loading.commentBleedingForm = true;
     try {
-      await axiosAgent.StudentExamOperations.commentBleedingForm(cardId, comment);
+      await axiosAgent.StudentExamOperations.commentBleedingForm(
+        cardId,
+        comment
+      );
       runInAction(() => {
         if (this.examCard) {
-          this.examCard.practicePatientExaminationResult.bleeding.comment = comment;
+          this.examCard.practicePatientExaminationResult.bleeding.comment =
+            comment;
         }
         this.loading.commentBleedingForm = false;
       });

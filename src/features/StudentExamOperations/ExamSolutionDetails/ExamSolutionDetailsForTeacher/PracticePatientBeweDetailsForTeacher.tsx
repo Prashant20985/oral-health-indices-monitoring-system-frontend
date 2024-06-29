@@ -1,4 +1,3 @@
-import { observer } from "mobx-react-lite";
 import {
   Box,
   Button,
@@ -9,35 +8,41 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { observer } from "mobx-react-lite";
+
 import * as React from "react";
-import CustomTextField from "../../../../app/common/formInputs/CustomTextField";
+import { Bewe } from "../../../../app/models/Bewe";
 import { colors } from "../../../../themeConfig";
-import { blueGrey } from "@mui/material/colors";
 import { Send } from "@mui/icons-material";
+import { blueGrey } from "@mui/material/colors";
+import CustomTextField from "../../../../app/common/formInputs/CustomTextField";
 import { useStore } from "../../../../app/stores/Store";
 import CommentStudentExamCardDialog from "../../Forms/CommentStudentExamCardDialog";
-import { Bleeding } from "../../../../app/models/APIBleeding";
 
-const APIBleedingForm = React.lazy(
-  () => import("../../../IndexCalculationForms/APIBleeding/APIBleedingForm")
+const BeweForm = React.lazy(
+  () => import("../../../IndexCalculationForms/Bewe/BeweForm")
 );
 
 interface Props {
-  bleeding: Bleeding;
+  bewe: Bewe;
   cardId: string;
 }
 
-export default observer(function BleedingDetails({ bleeding, cardId }: Props) {
+export default observer(function PracticePatientBeweDetailsForTeacher({
+  bewe,
+  cardId,
+}: Props) {
   const {
-    studentExamStore: { commentBleedingForm },
+    studentExamStore: { commentBeweForm },
   } = useStore();
+
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
   const [openCommentDialog, setOpenCommentDialog] = React.useState(false);
 
   const handleComment = async (commnet: string) => {
-    await commentBleedingForm(cardId, commnet);
+    await commentBeweForm(cardId, commnet);
   };
 
   return (
@@ -52,32 +57,17 @@ export default observer(function BleedingDetails({ bleeding, cardId }: Props) {
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              Bleeding Details
+              BEWE Details
             </Typography>
           }
         />
-
         <CardContent>
           <Box display="flex" gap={2} mb={2}>
             <CustomTextField
               variant="outlined"
-              label="API Result"
-              name="apiResult"
-              value={`${bleeding.bleedingResult} %`}
-              readOnly
-            />
-            <CustomTextField
-              variant="outlined"
-              label="Maxilla"
-              name="maxilla"
-              value={`${bleeding.bleedingResult} %`}
-              readOnly
-            />
-            <CustomTextField
-              variant="outlined"
-              label="Mandible"
-              name="mandible"
-              value={`${bleeding.bleedingResult} %`}
+              label="BEWE Result"
+              name="beweResult"
+              value={bewe.beweResult}
               readOnly
             />
           </Box>
@@ -90,7 +80,7 @@ export default observer(function BleedingDetails({ bleeding, cardId }: Props) {
               multiline
               rows={3}
               inputProps={{ readonly: true }}
-              value={bleeding.comment ?? "No comment yet."}
+              value={bewe.comment ?? "No comment yet."}
             />
             <Box display="flex" justifyContent="flex-end">
               <Button
@@ -100,22 +90,19 @@ export default observer(function BleedingDetails({ bleeding, cardId }: Props) {
                 onClick={() => setOpenCommentDialog(true)}
                 startIcon={<Send />}
               >
-                {bleeding.comment === null ? "Add Comment" : "Edit Comment"}
+                {bewe.comment === null ? "Add Comment" : "Edit Comment"}
               </Button>
             </Box>
           </Box>
         </CardContent>
       </Card>
-      <APIBleedingForm
-        apiBleedingAssessmentModel={bleeding.assessmentModel}
-        isView
-      />
+      <BeweForm beweAssessmentModel={bewe.assessmentModel} isView />
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title="Comment API Bleeding Form"
-        description="Please write your comment about the API Bleeding form."
-        comment={bleeding.comment ?? ""}
+        title="Comment BEWE Form"
+        description="Please write your comment about the BEWE form."
+        comment={bewe.comment ?? ""}
         handleSubmit={handleComment}
       />
     </Box>
