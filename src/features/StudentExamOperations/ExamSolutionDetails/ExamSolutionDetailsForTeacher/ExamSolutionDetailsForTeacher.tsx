@@ -25,12 +25,12 @@ import {
   SchoolOutlined,
 } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
-import DMFT_DMFSDetails from "./DMFT_DMFSDetails";
-import BeweDetails from "./BeweDetails";
 import CommentStudentExamCardDialog from "../../Forms/CommentStudentExamCardDialog";
 import AddStudentMarksDialog from "../../Forms/AddStudentMarksDialog";
-import APIDetails from "./APIDetails";
-import BleedingDetails from "./BleedingDetails";
+import PracticePatientDMFT_DMFSDetailsForTeacher from "./PracticePatientDMFT_DMFSDetailsForTeacher";
+import PracticePatientBeweDetailsForTeacher from "./PracticePatientBeweDetailsForTeacher";
+import PracticePatientAPIDetailsForTeacher from "./PracticePatientAPIDetailsForTeacher";
+import PracticePatientBleedingDetailsForTeacher from "./PracticePatientBleedingDetailsForTeacher";
 
 const RiskFactorAssessment = React.lazy(
   () => import("../../../IndexCalculationForms/RiskFactorAssessment")
@@ -235,7 +235,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
               </TabPanel>
               <TabPanel value="3">
                 <React.Suspense fallback={<ButtonLoadingComponent />}>
-                  <DMFT_DMFSDetails
+                  <PracticePatientDMFT_DMFSDetailsForTeacher
                     dmft_dmfs={
                       examCard.practicePatientExaminationResult.dmfT_DMFS
                     }
@@ -245,7 +245,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
               </TabPanel>
               <TabPanel value="4">
                 <React.Suspense fallback={<ButtonLoadingComponent />}>
-                  <BeweDetails
+                  <PracticePatientBeweDetailsForTeacher
                     bewe={examCard.practicePatientExaminationResult.bewe}
                     cardId={examCard.id}
                   />
@@ -253,7 +253,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
               </TabPanel>
               <TabPanel value="5">
                 <React.Suspense fallback={<ButtonLoadingComponent />}>
-                  <APIDetails
+                  <PracticePatientAPIDetailsForTeacher
                     api={examCard.practicePatientExaminationResult.api}
                     cardId={examCard.id}
                   />
@@ -261,7 +261,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
               </TabPanel>
               <TabPanel value="6">
                 <React.Suspense fallback={<ButtonLoadingComponent />}>
-                  <BleedingDetails
+                  <PracticePatientBleedingDetailsForTeacher
                     bleeding={
                       examCard.practicePatientExaminationResult.bleeding
                     }
