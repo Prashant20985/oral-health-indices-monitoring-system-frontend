@@ -31,17 +31,21 @@ import * as React from "react";
 import UpdateExamForm from "../Forms/UpdateExamForm";
 import DeleteExamConfirmationForm from "../Forms/DeleteExamConfirmationForm";
 import { router } from "../../../app/router/Routes";
+import { checkExamStatus } from "../../../app/helpers/CheckExamStatus";
+import MarkAsGradedConformationDialog from "../Forms/MarkAsGradedConformationDialog";
 
 interface Props {
   exam: Exam;
   isExamDetails?: boolean;
-  forStudentUser?: boolean;
+  isForStudentUser?: boolean;
+  isTop3?: boolean;
 }
 
 export default observer(function StudentExamCard({
   exam,
-  forStudentUser,
+  isForStudentUser,
   isExamDetails,
+  isTop3,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -49,6 +53,18 @@ export default observer(function StudentExamCard({
   const [openEditDialog, setOpenEditDialog] = React.useState(false);
 
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
+
+  const [openMarkAsGradedDialog, setOpenMarkAsGradedDialog] =
+    React.useState(false);
+
+  const { ended } = checkExamStatus(
+    exam.dateOfExamination.toString(),
+    exam.endTime,
+    exam.startTime
+  );
+
+  const isMarkAsGradedButtonVisible =
+    ended && exam.examStatus === "Published" && !isForStudentUser;
 
   return (
     <>
@@ -92,7 +108,7 @@ export default observer(function StudentExamCard({
         />
         <CardContent>
           <Stack spacing={1}>
-            {!isExamDetails && (
+            {!isTop3 && (
               <>
                 {exam.examStatus === "Published" ? (
                   <Box display="flex" alignItems="center" gap={1}>
@@ -123,7 +139,7 @@ export default observer(function StudentExamCard({
                 {exam.startTime} - {exam.endTime}
               </Typography>
             </Box>
-            {!isExamDetails && (
+            {!isTop3 && (
               <>
                 <Box display="flex" alignItems="center" gap={1}>
                   <Timelapse />
@@ -142,44 +158,60 @@ export default observer(function StudentExamCard({
           </Stack>
         </CardContent>
         <CardActions>
-          {!forStudentUser ? (
+          {!isExamDetails ? (
             <>
-              <Box sx={{ width: "100%" }}>
+              {!isForStudentUser ? (
+                <>
+                  <Box sx={{ width: "100%" }}>
+                    <Button
+                      variant="outlined"
+                      color={
+                        theme.palette.mode === "dark" ? "secondary" : "primary"
+                      }
+                      endIcon={<Assessment />}
+                      size="small"
+                      onClick={() =>
+                        router.navigate(`/exam-details/${exam.id}`)
+                      }
+                    >
+                      View Exam
+                    </Button>
+                  </Box>
+                  <Box display="flex" width="100%" justifyContent="flex-end">
+                    <Tooltip title="Edit Exam">
+                      <IconButton onClick={() => setOpenEditDialog(true)}>
+                        <Edit color="warning" />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete Exam">
+                      <IconButton onClick={() => setOpenDeleteDialog(true)}>
+                        <DeleteSweep color="error" />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                </>
+              ) : (
                 <Button
-                  variant="outlined"
-                  color={
-                    theme.palette.mode === "dark" ? "secondary" : "primary"
-                  }
-                  endIcon={<Assessment />}
-                  size="small"
-                  onClick={() => router.navigate(`/exam-details/${exam.id}`)}
+                  variant="contained"
+                  color="info"
+                  startIcon={<Assessment />}
+                  onClick={() => router.navigate(`/exam/${exam.id}`)}
+                  fullWidth
                 >
                   View Exam
                 </Button>
-              </Box>
-              <Box display="flex" width="100%" justifyContent="flex-end">
-                <Tooltip title="Edit Exam">
-                  <IconButton onClick={() => setOpenEditDialog(true)}>
-                    <Edit color="warning" />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Delete Exam">
-                  <IconButton onClick={() => setOpenDeleteDialog(true)}>
-                    <DeleteSweep color="error" />
-                  </IconButton>
-                </Tooltip>
-              </Box>
+              )}
             </>
-          ) : (
+          ) : isMarkAsGradedButtonVisible ? (
             <Button
-              variant="contained"
-              color="info"
-              startIcon={<Assessment />}
               fullWidth
+              variant="outlined"
+              color="secondary"
+              onClick={() => setOpenMarkAsGradedDialog(true)}
             >
-              View Exam
+              Mark as graded
             </Button>
-          )}
+          ) : null}
         </CardActions>
       </Card>
       <UpdateExamForm
@@ -192,6 +224,11 @@ export default observer(function StudentExamCard({
         onClose={() => setOpenDeleteDialog(false)}
         examId={exam.id}
         examTitle={exam.examTitle}
+      />
+      <MarkAsGradedConformationDialog
+        isOpen={openMarkAsGradedDialog}
+        onClose={() => setOpenMarkAsGradedDialog(false)}
+        examId={exam.id}
       />
     </>
   );

@@ -5,18 +5,14 @@ import {
   Box,
   Grid,
   InputAdornment,
-  Paper,
   TextField,
-  Typography,
   useTheme,
 } from "@mui/material";
 import GroupForStudentCard from "./GroupForStudentCard";
 import Header from "../../../app/common/header/Header";
 import { colors } from "../../../themeConfig";
-import { blueGrey } from "@mui/material/colors";
 import { SearchRounded } from "@mui/icons-material";
-import StudentExamCard from "../../StudentExamOperations/ExamsList/StudentExamCard";
-import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
+import UpcomingExams from "./UpcomingExams";
 
 export default observer(function GroupsListForStudent() {
   const {
@@ -44,33 +40,29 @@ export default observer(function GroupsListForStudent() {
 
   return (
     <Box>
-      <Header title="My Groups" />
+      <Header title="My Groups" subTitle="List Of My Groups" />
       <Grid container spacing={3} mt={1}>
         <Grid item xs={12} md={6} lg={8}>
-          <Paper
+          <Box
             sx={{
               p: 2,
-              backgroundColor:
-                theme.palette.mode === "dark"
-                  ? color.primary[500]
-                  : blueGrey[50],
+              boxShadow: 2,
+              backgroundColor: color.primary[400],
+              borderRadius: 2,
+              overflowY: "auto",
               minHeight: "70vh",
             }}
           >
             <TextField
               color="info"
               label="Search"
-              component={Paper}
               type="text"
               fullWidth
               value={groupSearchQuery}
               onChange={(e) => setGroupSearchQuery(e.target.value)}
               size="small"
               sx={{
-                backgroundColor:
-                  theme.palette.mode === "dark"
-                    ? color.primary[400]
-                    : blueGrey[100],
+                backgroundColor: "transparent",
               }}
               InputProps={{
                 endAdornment: (
@@ -87,30 +79,10 @@ export default observer(function GroupsListForStudent() {
                 </Grid>
               ))}
             </Grid>
-          </Paper>
+          </Box>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <Box p={2} display="flex" flexDirection="column" gap={2}>
-            <Typography variant="h6" fontWeight={600} textTransform="uppercase">
-              Upcoming Exams
-            </Typography>
-            <Box display="flex" flexDirection="column" gap={1}>
-              {getTop3ExamsByDate.length > 0 ? (
-                <>
-                  {getTop3ExamsByDate.map((exam) => (
-                    <StudentExamCard
-                      key={exam.id}
-                      exam={exam}
-                      isExamDetails
-                      forStudentUser
-                    />
-                  ))}
-                </>
-              ) : (
-                <NoRowsFound />
-              )}
-            </Box>
-          </Box>
+          <UpcomingExams top3Exams={getTop3ExamsByDate} />
         </Grid>
       </Grid>
     </Box>
