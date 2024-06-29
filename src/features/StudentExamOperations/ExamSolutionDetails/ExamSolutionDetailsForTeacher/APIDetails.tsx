@@ -106,7 +106,10 @@ export default observer(function APIDetails({ api, cardId }: Props) {
           </Box>
         </CardContent>
       </Card>
-      <APIBleedingForm apiBleeding={api} isView />
+      <APIBleedingForm
+        apiBleedingAssessmentModel={api.assessmentModel}
+        isView
+      />
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}

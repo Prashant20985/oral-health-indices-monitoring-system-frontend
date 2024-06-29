@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
-import { RiskFactorAssessment } from "../../app/models/RiskFactorAssesment";
 import {
   Box,
+  MenuItem,
   Paper,
   Table,
   TableBody,
@@ -9,279 +9,228 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
   Typography,
   useTheme,
 } from "@mui/material";
 import { colors } from "../../themeConfig";
-import { blueGrey } from "@mui/material/colors";
-import { Formik } from "formik";
-import { Form } from "react-router-dom";
-import CustomTextField from "../../app/common/formInputs/CustomTextField";
-import Header from "../../app/common/header/Header";
+import { RiskFactorAssessmentModel } from "../../app/models/RiskFactorAssesment";
 
 interface Props {
-  riskFactorAssessment?: RiskFactorAssessment;
-  isViewMode?: boolean;
+  riskFactorAssessment: RiskFactorAssessmentModel;
+  isView?: boolean;
+  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
 }
 
 export default observer(function RiskFactorAssessment({
   riskFactorAssessment,
-  isViewMode = false,
+  isView,
+  handleChange,
+  name,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
-  const initialValues: RiskFactorAssessment =
-    isViewMode && riskFactorAssessment
-      ? riskFactorAssessment
-      : {
-          riskFactorAssessmentModel: {
-            questions: [
-              {
-                questionText: "Fluoride exposure",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Consumption of sweetened products and beverages",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Regular dental care",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Systemic diseases",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Eating disorders",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Complex pharmacotherapy",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Alcohol/Nicotine",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "New caries foci within last 36 months",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Visible plaque",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText:
-                  "Tooth extraction for caries within the last 36 months",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Unusual tooth morphology",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "1 or more fills on tangent surfaces",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Exposed root surfaces",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Overhanging fills, no contact points",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Fixed braces",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-              {
-                questionText: "Xerostomy",
-                answer: {
-                  lowRisk: "",
-                  moderateRisk: "",
-                  highRisk: "",
-                },
-              },
-            ],
-          },
-        };
+  const riskFactorAssessmentOptions: {
+    [key: string]: {
+      options: string[];
+      disabled: { lowRisk: boolean; moderateRisk: boolean; highRisk: boolean };
+    };
+  } = {
+    "Fluoride exposure": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Consumption of sweetened products and beverages": {
+      options: ["During main meals", "In between meals"],
+      disabled: { lowRisk: false, moderateRisk: true, highRisk: false },
+    },
+    "Systematic Dental Care": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Systemic diseases": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Eating disorders": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Complex Pharmacotherapy": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Alcohol/Nicotine": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "New carious lesions in the last 36 months": {
+      options: ["None", "1-2", ">3"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: false },
+    },
+    "Visible Plaque": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Teeth extraction due to caries in the last 36 months": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: true, highRisk: false },
+    },
+    "Abnormal Tooth Morphology": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "1 or more proximal restorations": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Exposed root surfaces": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Overhanging fills, no contact points": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Fixed Orthodontic Braces": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    Xerostomy: {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
+    },
+    "Caries risk factor assessment": {
+      options: ["YES", "NO"],
+      disabled: { lowRisk: false, moderateRisk: false, highRisk: false },
+    },
+  };
 
   return (
     <Box>
-      <Box mb={2}>
-        <Header title="Risk Factor Assessment" />
-      </Box>
       <Box>
-        <Formik
-          initialValues={{
-            ...initialValues.riskFactorAssessmentModel,
-          }}
-          onSubmit={(values) => {
-            // Check if any cell is empty and fill it with "No"
-            const updatedValues = { ...values };
-            updatedValues.questions.forEach((question) => {
-              if (question.answer.lowRisk === "")
-                question.answer.lowRisk = "No";
-              if (question.answer.moderateRisk === "")
-                question.answer.moderateRisk = "No";
-              if (question.answer.highRisk === "")
-                question.answer.highRisk = "No";
-            });
-            console.log(updatedValues);
+        <TableContainer
+          elevation={3}
+          component={Paper}
+          sx={{
+            overflow: "auto",
+            height: "80vh",
+            boxShadow: 3,
+            borderRadius: 2,
+            backgroundColor: color.primary[400],
           }}
         >
-          {({ values, handleSubmit, handleChange }) => (
-            <Form onSubmit={handleSubmit}>
-              <TableContainer
-                elevation={3}
-                component={Paper}
-                sx={{
-                  overflow: "auto",
-                  height: "70vh",
-                  backgroundColor:
-                    theme.palette.mode === "dark"
-                      ? color.primary[400]
-                      : blueGrey[50],
-                }}
-              >
-                <Table stickyHeader>
-                  <TableHead>
-                    <TableRow>
-                      {[
-                        "Questions",
-                        "Low Risk",
-                        "Moderate Risk",
-                        "High Risk",
-                      ].map((value, index) => (
-                        <TableCell
-                          key={index}
-                          sx={{
-                            backgroundColor:
-                              theme.palette.mode === "dark"
-                                ? blueGrey[600]
-                                : blueGrey[200],
-                          }}
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell
+                  sx={{
+                    backgroundColor: color.primary[400],
+                    width: "300px",
+                  }}
+                >
+                  <Typography variant="h6" fontWeight={600}>
+                    Questions
+                  </Typography>
+                </TableCell>
+                <>
+                  {["Low Risk", "Moderate Risk", "High Risk"].map(
+                    (value, index) => (
+                      <TableCell
+                        key={index}
+                        sx={{
+                          backgroundColor: color.primary[400],
+                          width: "180px",
+                        }}
+                      >
+                        <Typography
+                          variant="h6"
+                          fontWeight={600}
+                          sx={{ display: "flex", justifyContent: "center" }}
                         >
-                          <Typography variant="h6" fontWeight={600}>
-                            {value}
-                          </Typography>
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {values.questions.map((row, index) => (
-                      <TableRow key={index}>
-                        <TableCell component="th" scope="row">
-                          <Typography variant="h6" fontWeight={600}>
-                            {row.questionText}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <CustomTextField
-                            name={`questions[${index}].answer.lowRisk`}
-                            type="text"
-                            label=""
-                            variant="outlined"
-                            value={row.answer.lowRisk}
-                            onChange={handleChange}
-                            readOnly={isViewMode}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <CustomTextField
-                            name={`questions[${index}].answer.moderateRisk`}
-                            type="text"
-                            label=""
-                            variant="outlined"
-                            value={row.answer.moderateRisk}
-                            onChange={handleChange}
-                            readOnly={isViewMode}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <CustomTextField
-                            name={`questions[${index}].answer.highRisk`}
-                            type="text"
-                            label=""
-                            variant="outlined"
-                            value={row.answer.highRisk}
-                            onChange={handleChange}
-                            readOnly={isViewMode}
-                          />
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Form>
-          )}
-        </Formik>
+                          {value}
+                        </Typography>
+                      </TableCell>
+                    )
+                  )}
+                </>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {riskFactorAssessment.questions.map((row, index) => {
+                const options =
+                  riskFactorAssessmentOptions[row.questionText].options || [];
+                const disabled =
+                  riskFactorAssessmentOptions[row.questionText].disabled || {};
+                return (
+                  <TableRow key={index}>
+                    <TableCell component="th" scope="row">
+                      <Typography variant="h6" fontWeight={600}>
+                        {row.questionText}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <TextField
+                        select={!isView}
+                        fullWidth
+                        color="secondary"
+                        name={`${name}.questions[${index}].answer.lowRisk`}
+                        value={row.answer.lowRisk}
+                        onChange={handleChange}
+                        disabled={disabled.lowRisk}
+                        inputProps={{ readOnly: isView }}
+                      >
+                        {options.map((option, idx) => (
+                          <MenuItem key={idx} value={option}>
+                            {option}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </TableCell>
+                    <TableCell>
+                      <TextField
+                        select={!isView}
+                        color="secondary"
+                        fullWidth
+                        name={`${name}.questions[${index}].answer.moderateRisk`}
+                        value={row.answer.moderateRisk}
+                        onChange={handleChange}
+                        inputProps={{ readOnly: isView }}
+                        disabled={disabled.moderateRisk}
+                      >
+                        {options.map((option, idx) => (
+                          <MenuItem key={idx} value={option}>
+                            {option}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </TableCell>
+                    <TableCell>
+                      <TextField
+                        select={!isView}
+                        fullWidth
+                        color="secondary"
+                        name={`${name}.questions[${index}].answer.highRisk`}
+                        value={row.answer.highRisk}
+                        onChange={handleChange}
+                        inputProps={{ readOnly: isView }}
+                        disabled={disabled.highRisk}
+                      >
+                        {options.map((option, idx) => (
+                          <MenuItem key={idx} value={option}>
+                            {option}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
     </Box>
   );

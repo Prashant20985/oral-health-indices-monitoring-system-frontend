@@ -10,12 +10,14 @@ interface Props {
   upperMouth: DMFT_DMFSAssessmentModelUpperMouth;
   isViewMode?: boolean;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
 }
 
 export default React.memo(function DMFT_DMFSUpperMouthInput({
   upperMouth,
   isViewMode,
   handleChange,
+  name,
 }: Props) {
   return (
     <Box>
@@ -28,7 +30,7 @@ export default React.memo(function DMFT_DMFSUpperMouthInput({
               (upperMouth as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`upperMouth.tooth_${toothNumber}`}
+            name={`${name}.upperMouth.tooth_${toothNumber}`}
             onChange={handleChange}
             readOnly={isViewMode}
           />
@@ -43,7 +45,7 @@ export default React.memo(function DMFT_DMFSUpperMouthInput({
               (upperMouth as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`upperMouth.tooth_${toothNumber}`}
+            name={`${name}.upperMouth.tooth_${toothNumber}`}
             onChange={handleChange}
             readOnly={isViewMode}
           />
@@ -58,7 +60,7 @@ export default React.memo(function DMFT_DMFSUpperMouthInput({
               (upperMouth as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`upperMouth.tooth_${toothNumber}`}
+            name={`${name}.upperMouth.tooth_${toothNumber}`}
             onChange={handleChange}
             readOnly={isViewMode}
           />
@@ -73,7 +75,7 @@ export default React.memo(function DMFT_DMFSUpperMouthInput({
               (upperMouth as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`upperMouth.tooth_${toothNumber}`}
+            name={`${name}.upperMouth.tooth_${toothNumber}`}
             onChange={handleChange}
             readOnly={isViewMode}
           />
