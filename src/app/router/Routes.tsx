@@ -29,6 +29,7 @@ import ExamSolutionDetailsForTeacher from "../../features/StudentExamOperations/
 import GroupsListForStudent from "../../features/StudentOperations/StudentGroupsList/GroupsListForStudent";
 import GroupDetailsForStudent from "../../features/StudentOperations/StudentGroupDetails/GroupDetailsForStudent";
 import ExamSolutionDetailsForStudent from "../../features/StudentExamOperations/ExamSolutionDetails/ExamSolutionDetailsForStudent/ExamSolutionDetailsForStudent";
+import SolveExamMultiStepForm from "../../features/StudentExamOperations/Forms/SolveExamForms/SolveExamMultiStepForm";
 
 const routes: RouteObject[] = [
   {
@@ -135,6 +136,10 @@ const routes: RouteObject[] = [
           {
             path: "exam/:examId",
             element: <ExamSolutionDetailsForStudent />,
+          },
+          {
+            path: "solve-exam/:examId",
+            element: <SolveExamMultiStepForm />,
           },
         ],
       },

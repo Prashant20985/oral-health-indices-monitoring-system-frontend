@@ -14,6 +14,7 @@ export class StudentExamStore {
   examCards: ExamSolution[] = [];
   examCard: ExamSolution | null = null;
   examSolutionByStudent: ExamSolution | null = null;
+  isEligibleToSubmitExam = false;
 
   loading = {
     studentExams: false,
@@ -32,6 +33,7 @@ export class StudentExamStore {
     commentDMFT_DMFSForm: false,
     markExamAsGraded: false,
     gradeExaminationCard: false,
+    isEligibleToSubmitExam: false,
   };
 
   constructor() {
@@ -73,6 +75,10 @@ export class StudentExamStore {
 
   clearExamSolutionByStudent = () => {
     this.examSolutionByStudent = null;
+  };
+
+  setEligibilityToSubmitExam = (isEligible: boolean) => {
+    this.isEligibleToSubmitExam = isEligible;
   };
 
   get groupedStudentExams() {
@@ -394,6 +400,21 @@ export class StudentExamStore {
     } catch (error) {
       console.error(error);
       this.loading.submitExamSolution = false;
+    }
+  };
+
+  checkEligibilityToSubmitExam = async (examId: string) => {
+    this.loading.isEligibleToSubmitExam = true;
+    try {
+      const isEligible =
+        await axiosAgent.StudentExamOperations.checkExamEligibility(examId);
+      runInAction(() => {
+        this.setEligibilityToSubmitExam(isEligible);
+        this.loading.isEligibleToSubmitExam = false;
+      });
+    } catch (error) {
+      console.error(error);
+      this.loading.isEligibleToSubmitExam = false;
     }
   };
 }
