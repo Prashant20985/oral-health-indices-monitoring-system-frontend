@@ -326,11 +326,11 @@ const StudentExamOperations = {
       {}
     ),
 
-    commentBleedingForm: (cardId: string, comment: string) =>
-      apiRequests.put<void>(
-        `/StudentExam/comment-bleeding-form/${cardId}?comment=${comment}`,
-        {}
-      ),
+  commentBleedingForm: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/StudentExam/comment-bleeding-form/${cardId}?comment=${comment}`,
+      {}
+    ),
 
   commentBeweForm: (cardId: string, comment: string) =>
     apiRequests.put<void>(
@@ -370,6 +370,9 @@ const StudentExamOperations = {
 
   getExamSolution: (examId: string) =>
     apiRequests.get<ExamSolution>(`/StudentExam/exam-solution/${examId}`),
+
+  checkExamEligibility: (examId: string) =>
+    apiRequests.get<boolean>(`/StudentExam/exam-eligibility/${examId}`),
 };
 
 const StudentOperations = {

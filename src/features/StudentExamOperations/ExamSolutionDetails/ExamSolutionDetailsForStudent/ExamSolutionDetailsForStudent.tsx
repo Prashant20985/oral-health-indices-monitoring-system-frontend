@@ -42,6 +42,8 @@ export default observer(function ExamSolutionDetailsForStudent() {
     examSolutionByStudent,
     clearExamDetails,
     clearExamSolutionByStudent,
+    checkEligibilityToSubmitExam,
+    isEligibleToSubmitExam,
   } = studentExamStore;
 
   const theme = useTheme();
@@ -58,11 +60,14 @@ export default observer(function ExamSolutionDetailsForStudent() {
 
   React.useEffect(() => {
     if (examDetails) {
-      const { ended } = CheckExamStatus(
+      const { ended, ongoing } = CheckExamStatus(
         examDetails.dateOfExamination.toString(),
-        examDetails.startTime,
-        examDetails.endTime
+        examDetails.endTime,
+        examDetails.startTime
       );
+      if (ongoing && examId) {
+        checkEligibilityToSubmitExam(examId);
+      }
       if (ended && examDetails.examStatus === "Graded" && examId) {
         fetchExamSolutionByStudent(examId);
       }
@@ -73,14 +78,15 @@ export default observer(function ExamSolutionDetailsForStudent() {
     examId,
     fetchExamSolutionByStudent,
     clearExamSolutionByStudent,
+    checkEligibilityToSubmitExam,
   ]);
 
   if (!examDetails) return null;
 
-  const { started, ongoing, ended } = CheckExamStatus(
+  const { ongoing, ended, started } = CheckExamStatus(
     examDetails.dateOfExamination.toString(),
-    examDetails.startTime,
-    examDetails.endTime
+    examDetails.endTime,
+    examDetails.startTime
   );
 
   return (
@@ -135,6 +141,7 @@ export default observer(function ExamSolutionDetailsForStudent() {
               subheader="Exam has started..."
               doctorComment=""
               isExamGoingOn
+              isEligibleForExam={isEligibleToSubmitExam}
               examId={examId}
             />
           </Grid>

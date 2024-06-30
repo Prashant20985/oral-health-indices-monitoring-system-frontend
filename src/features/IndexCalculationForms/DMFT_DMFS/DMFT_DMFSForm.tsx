@@ -31,6 +31,7 @@ export default observer(function DMFT_DMFSForm({
           upperMouth={dmft_dmfsAssessmentModel.upperMouth}
           lowerMouth={dmft_dmfsAssessmentModel.lowerMouth}
           isView={isView}
+          handleChange={handleChange}
           name={name}
         />
         <DMFT_DMFSLowerMouthInput

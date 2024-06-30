@@ -75,7 +75,7 @@ export default React.memo(function DMFT_DMFSLowerMouthInput({
               (lowerMouth as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`lowerMouth.tooth_${toothNumber}`}
+            name={`${name}.lowerMouth.tooth_${toothNumber}`}
             onChange={handleChange}
             readOnly={isView}
           />
