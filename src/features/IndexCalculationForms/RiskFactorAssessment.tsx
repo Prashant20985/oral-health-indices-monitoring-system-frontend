@@ -34,76 +34,112 @@ export default observer(function RiskFactorAssessment({
 
   const riskFactorAssessmentOptions: {
     [key: string]: {
-      options: string[];
+      optionLowRisk: string;
+      optionModerateRisk: string;
+      optionHighRisk: string;
       disabled: { lowRisk: boolean; moderateRisk: boolean; highRisk: boolean };
     };
   } = {
     "Fluoride exposure": {
-      options: ["YES", "NO"],
+      optionLowRisk: "Yes",
+      optionModerateRisk: "No",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Consumption of sweetened products and beverages": {
-      options: ["During main meals", "In between meals"],
+      optionLowRisk: "During main meals",
+      optionModerateRisk: "",
+      optionHighRisk: "In between meals",
       disabled: { lowRisk: false, moderateRisk: true, highRisk: false },
     },
     "Systematic Dental Care": {
-      options: ["YES", "NO"],
+      optionLowRisk: "Yes",
+      optionModerateRisk: "No",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Systemic diseases": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Eating disorders": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Complex Pharmacotherapy": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Alcohol/Nicotine": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "New carious lesions in the last 36 months": {
-      options: ["None", "1-2", ">3"],
+      optionLowRisk: "None",
+      optionModerateRisk: "1-2",
+      optionHighRisk: ">3",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: false },
     },
     "Visible Plaque": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Teeth extraction due to caries in the last 36 months": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "",
+      optionHighRisk: "Yes",
       disabled: { lowRisk: false, moderateRisk: true, highRisk: false },
     },
     "Abnormal Tooth Morphology": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "1 or more proximal restorations": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Exposed root surfaces": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Overhanging fills, no contact points": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Fixed Orthodontic Braces": {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     Xerostomy: {
-      options: ["YES", "NO"],
+      optionLowRisk: "No",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Caries risk factor assessment": {
-      options: ["YES", "NO"],
+      optionLowRisk: "Yes",
+      optionModerateRisk: "Yes",
+      optionHighRisk: "Yes",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: false },
     },
   };
@@ -160,14 +196,33 @@ export default observer(function RiskFactorAssessment({
             </TableHead>
             <TableBody>
               {riskFactorAssessment.questions.map((row, index) => {
-                const options =
-                  riskFactorAssessmentOptions[row.questionText].options || [];
+                const optionLowRisk =
+                  riskFactorAssessmentOptions[row.questionText].optionLowRisk ||
+                  "";
+
+                const optionModerateRisk =
+                  riskFactorAssessmentOptions[row.questionText]
+                    .optionModerateRisk || "";
+
+                const optionHighRisk =
+                  riskFactorAssessmentOptions[row.questionText]
+                    .optionHighRisk || "";
+
                 const disabled =
                   riskFactorAssessmentOptions[row.questionText].disabled || {};
+
+                const carriesQ =
+                  row.questionText === "Caries risk factor assessment";
+
                 return (
                   <TableRow key={index}>
                     <TableCell component="th" scope="row">
-                      <Typography variant="h6" fontWeight={600}>
+                      <Typography
+                        variant={carriesQ ? "h5" : "h6"}
+                        fontWeight={carriesQ ? 700 : 400}
+                        sx={{ textTransform: carriesQ ? "uppercase" : "none" }}
+                        noWrap
+                      >
                         {row.questionText}
                       </Typography>
                     </TableCell>
@@ -181,12 +236,18 @@ export default observer(function RiskFactorAssessment({
                         onChange={handleChange}
                         disabled={disabled.lowRisk}
                         inputProps={{ readOnly: isView }}
+                        sx={{
+                          backgroundColor: carriesQ
+                            ? color.pinkAccent[700]
+                            : "inherit",
+                        }}
                       >
-                        {options.map((option, idx) => (
-                          <MenuItem key={idx} value={option}>
-                            {option}
-                          </MenuItem>
-                        ))}
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={optionLowRisk}>
+                          {optionLowRisk}
+                        </MenuItem>
                       </TextField>
                     </TableCell>
                     <TableCell>
@@ -199,12 +260,18 @@ export default observer(function RiskFactorAssessment({
                         onChange={handleChange}
                         inputProps={{ readOnly: isView }}
                         disabled={disabled.moderateRisk}
+                        sx={{
+                          backgroundColor: carriesQ
+                            ? color.pinkAccent[700]
+                            : "inherit",
+                        }}
                       >
-                        {options.map((option, idx) => (
-                          <MenuItem key={idx} value={option}>
-                            {option}
-                          </MenuItem>
-                        ))}
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={optionModerateRisk}>
+                          {optionModerateRisk}
+                        </MenuItem>
                       </TextField>
                     </TableCell>
                     <TableCell>
@@ -217,12 +284,18 @@ export default observer(function RiskFactorAssessment({
                         onChange={handleChange}
                         inputProps={{ readOnly: isView }}
                         disabled={disabled.highRisk}
+                        sx={{
+                          backgroundColor: carriesQ
+                            ? color.pinkAccent[700]
+                            : "inherit",
+                        }}
                       >
-                        {options.map((option, idx) => (
-                          <MenuItem key={idx} value={option}>
-                            {option}
-                          </MenuItem>
-                        ))}
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={optionHighRisk}>
+                          {optionHighRisk}
+                        </MenuItem>
                       </TextField>
                     </TableCell>
                   </TableRow>

@@ -44,6 +44,10 @@ const CreatePracticeBleedingForm = React.lazy(
   () => import("./CreatePracticeBleedingForm")
 );
 
+const Summary = React.lazy(
+  () => import("../../../IndexCalculationForms/SummaryForm")
+);
+
 const steps = [
   "Patient Information",
   "Risk Factor Assessment",
@@ -51,6 +55,7 @@ const steps = [
   "BEWE",
   "API",
   "Bleeding",
+  "Summary",
 ];
 
 function renderStepContent(
@@ -113,6 +118,17 @@ function renderStepContent(
           <CreatePracticeBleedingForm
             handleChange={handleChnage}
             bleedingFormValues={values.practiceBleeding}
+          />
+        </React.Suspense>
+      );
+
+    case 6:
+      return (
+        <React.Suspense fallback={<ButtonLoadingComponent />}>
+          <Summary
+            summary={values.summary}
+            handleChange={handleChnage}
+            name="summary"
           />
         </React.Suspense>
       );
@@ -235,6 +251,20 @@ export default observer(function SolveExamForm() {
         "Other Data 3 must be at most 50 characters"
       ),
     }),
+    summary: Yup.object({
+      needForDentalInterventions: Yup.string().max(1, "Max 1 character`"),
+      patientRecommendations: Yup.string()
+        .max(500)
+        .required("Patient Recommendations is required"),
+      description: Yup.string().max(
+        500,
+        "Description must be at most 500 characters"
+      ),
+      proposedTreatment: Yup.string().max(
+        500,
+        "Proposed Treatment must be at most 500 characters"
+      ),
+    }),
   });
 
   return (
@@ -343,7 +373,6 @@ export default observer(function SolveExamForm() {
                             variant="outlined"
                             onClick={() => handleNext(values)}
                             endIcon={<ArrowForward />}
-                            disabled={!isValid || !dirty}
                           >
                             Next
                           </Button>

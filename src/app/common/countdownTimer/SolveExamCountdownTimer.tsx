@@ -33,7 +33,6 @@ export default function SolveExamCountdownTimer({ duration, onSubmit }: Props) {
   const totalDurationInMs = React.useRef<number>(0);
 
   const startTimer = () => {
-    duration = "00:02:00";
     const [hours, minutes, seconds] = duration.split(":").map(Number);
     totalDurationInMs.current =
       hours * 3600000 + minutes * 60000 + seconds * 1000;

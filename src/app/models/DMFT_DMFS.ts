@@ -4,6 +4,7 @@ export interface PracticeDMFT_DMFSFormValues {
   assessmentModel: DMFT_DMFSAssessmentModel;
   dmftResult: number;
   dmfsResult: number;
+  prostheticStatus: string;
 }
 
 export interface DMFT_DMFS extends PracticeDMFT_DMFSFormValues {
