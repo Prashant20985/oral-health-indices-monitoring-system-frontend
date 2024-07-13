@@ -56,10 +56,6 @@ const routes: RouteObject[] = [
             path: "archived-patients",
             element: <ArchivedPatientsList />,
           },
-          {
-            path: "patient-profile/:id",
-            element: <PatientProfile />,
-          },
         ],
       },
       {
@@ -142,6 +138,23 @@ const routes: RouteObject[] = [
           {
             path: "solve-exam/:examId",
             element: <SolveExamMultiStepForm />,
+          },
+        ],
+      },
+      {
+        element: (
+          <RequireAuthentication
+            roles={[
+              "Student",
+              "Dentist_Teacher_Examiner",
+              "Dentist_Teacher_Researcher",
+            ]}
+          />
+        ),
+        children: [
+          {
+            path: "patient-profile/:id",
+            element: <PatientProfile />,
           },
         ],
       },
