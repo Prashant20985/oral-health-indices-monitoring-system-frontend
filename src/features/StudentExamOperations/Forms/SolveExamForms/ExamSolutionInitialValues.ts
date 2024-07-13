@@ -15,6 +15,12 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
     location: "",
     age: 0,
   },
+  summary: {
+    description: "",
+    patientRecommendations: "",
+    needForDentalInterventions: "",
+    proposedTreatment: "",
+  },
   riskFactorAssessmentModel: {
     questions: [
       {
@@ -445,6 +451,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
   practiceDMFT_DMFS: {
     dmftResult: 0,
     dmfsResult: 0,
+    prostheticStatus: "",
     assessmentModel: {
       upperMouth: {
         tooth_18: {
