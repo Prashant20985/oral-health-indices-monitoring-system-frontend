@@ -36,6 +36,7 @@ export default observer(function PatientDetails({
           theme.palette.mode === "dark" ? color.primary[500] : blueGrey[50],
         p: 2,
         borderRadius: 2,
+        width: "100%",
       }}
     >
       <Grid container spacing={3}>

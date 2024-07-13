@@ -25,7 +25,6 @@ interface Props {
   loading?: boolean;
   height?: string;
   isDashboard?: boolean;
-  isListForDoctor?: boolean;
 }
 
 export default observer(function PatientList({
@@ -33,13 +32,13 @@ export default observer(function PatientList({
   loading = false,
   height = "75vh",
   isDashboard = false,
-  isListForDoctor = false,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
   const {
     patientStore: { unarchivePatient },
+    userStore: { user },
   } = useStore();
 
   const [patientDetailsOpen, setPatientDetailsOpen] = React.useState(false);
@@ -57,6 +56,13 @@ export default observer(function PatientList({
   const [selectedPatient, setSelectedPatient] = React.useState<Patient | null>(
     null
   );
+
+  const isListForDoctor =
+    user?.role === "Dentist_Teacher_Examiner" || "Dentist_Teacher_Researcher";
+
+  const isListForStudent = user?.role === "Student";
+
+  const isListForAdmin = user?.role === "Admin";
 
   const statusColumn: GridColDef = {
     field: "isArchived",
@@ -149,7 +155,9 @@ export default observer(function PatientList({
             flex: 1,
           },
         ]),
-    ...(!isDashboard && isListForDoctor ? [statusColumn] : []),
+    ...(!isDashboard && isListForDoctor && !isListForStudent && !isListForAdmin
+      ? [statusColumn]
+      : []),
     {
       field: "actions",
       headerName: "Actions",
@@ -172,7 +180,7 @@ export default observer(function PatientList({
             <Tooltip title="View details">
               <IconButton
                 onClick={() => {
-                  if (!isListForDoctor) {
+                  if (isListForAdmin) {
                     setSelectedPatientId(patient.id);
                     setPatientDetailsOpen(true);
                   } else {
@@ -183,7 +191,7 @@ export default observer(function PatientList({
                 <AccountCircle color="primary" />
               </IconButton>
             </Tooltip>
-            {isListForDoctor && (
+            {isListForDoctor && !isListForStudent && !isListForAdmin && (
               <Tooltip title="Edit">
                 <IconButton
                   onClick={() => {
@@ -195,7 +203,7 @@ export default observer(function PatientList({
                 </IconButton>
               </Tooltip>
             )}
-            {!isListForDoctor && (
+            {isListForAdmin && (
               <Tooltip
                 title="Delete"
                 onClick={() => {

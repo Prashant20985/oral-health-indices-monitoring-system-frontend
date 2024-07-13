@@ -38,7 +38,7 @@ export default observer(function ActivePatientListShortcut() {
         >
           Active Patients
         </Typography>
-        <PatientList 
+        <PatientList
           patients={patientStore.activePatients}
           loading={patientStore.loading.activePatients}
           height="30vh"
@@ -47,7 +47,7 @@ export default observer(function ActivePatientListShortcut() {
         <Box display="flex" justifyContent="flex-end">
           <Button
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
-            onClick={() => router.navigate("/admin/active-patients")}
+            onClick={() => router.navigate("/active-patients")}
             size="small"
           >
             View All

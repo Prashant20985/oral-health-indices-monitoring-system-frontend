@@ -27,17 +27,17 @@ export default observer(function PatientDetailsDialog({
 }: Props) {
   const [patient, setPatient] = React.useState<Patient | null>(null);
   const {
-    patientStore: { getPatientByIdForAdmin },
+    patientStore: { getPatientById },
   } = useStore();
 
   React.useEffect(() => {
     if (patientId) {
-      const patientDetails = getPatientByIdForAdmin(patientId);
+      const patientDetails = getPatientById(patientId);
       if (patientDetails) {
         setPatient(patientDetails);
       }
     }
-  }, [patientId, getPatientByIdForAdmin]);
+  }, [patientId, getPatientById]);
 
   return (
     <Dialog
@@ -58,7 +58,13 @@ export default observer(function PatientDetailsDialog({
         justifyContent="space-between"
         alignContent="center"
       >
-        <Typography variant="h5">Patient Details</Typography>
+        <Typography
+          variant="h5"
+          fontWeight={700}
+          sx={{ textTransform: "uppercase" }}
+        >
+          Patient Details
+        </Typography>
         <IconButton onClick={onClose}>
           <Close />
         </IconButton>
@@ -69,12 +75,13 @@ export default observer(function PatientDetailsDialog({
             <Box
               display="grid"
               gap={2}
-              p={3}
+              p={2}
               gridTemplateColumns="repeat(4, minmax(0, 1fr))"
             >
               <CustomTextField
                 label="First Name"
                 name="firstName"
+                variant="outlined"
                 value={patient.firstName}
                 readOnly={true}
                 gridColumn="span 2"
@@ -83,6 +90,7 @@ export default observer(function PatientDetailsDialog({
               <CustomTextField
                 label="Last Name"
                 name="lastName"
+                variant="outlined"
                 value={patient.lastName}
                 readOnly={true}
                 gridColumn="span 2"
@@ -91,6 +99,7 @@ export default observer(function PatientDetailsDialog({
               <CustomTextField
                 label="Email"
                 name="email"
+                variant="outlined"
                 value={patient.email}
                 readOnly={true}
                 gridColumn="span 4"
@@ -98,6 +107,7 @@ export default observer(function PatientDetailsDialog({
               <CustomTextField
                 label="Gender"
                 name="gender"
+                variant="outlined"
                 value={patient.gender}
                 readOnly={true}
                 gridColumn="span 2"
@@ -106,6 +116,7 @@ export default observer(function PatientDetailsDialog({
               <CustomTextField
                 label="Ethnic Group"
                 name="ethnicGroup"
+                variant="outlined"
                 value={patient.ethnicGroup}
                 readOnly={true}
                 gridColumn="span 2"
@@ -114,6 +125,7 @@ export default observer(function PatientDetailsDialog({
               <CustomTextField
                 label="Other Group"
                 name="otherGroup"
+                variant="outlined"
                 value={patient.otherGroup}
                 readOnly={true}
                 gridColumn="span 2"
@@ -122,6 +134,7 @@ export default observer(function PatientDetailsDialog({
               <CustomTextField
                 label="Years In School"
                 name="yearsInSchool"
+                variant="outlined"
                 value={patient.yearsInSchool.toString()}
                 readOnly={true}
                 gridColumn="span 2"
@@ -132,6 +145,7 @@ export default observer(function PatientDetailsDialog({
                 name="otherData"
                 value={patient.otherData}
                 readOnly={true}
+                variant="outlined"
                 gridColumn="span 2"
               />
 
@@ -140,6 +154,7 @@ export default observer(function PatientDetailsDialog({
                 name="otherData2"
                 value={patient.otherData2}
                 readOnly={true}
+                variant="outlined"
                 gridColumn="span 2"
               />
 
@@ -148,6 +163,7 @@ export default observer(function PatientDetailsDialog({
                 name="otherData3"
                 value={patient.otherData3}
                 readOnly={true}
+                variant="outlined"
                 gridColumn="span 2"
               />
 
@@ -156,6 +172,7 @@ export default observer(function PatientDetailsDialog({
                 name="location"
                 value={patient.location}
                 readOnly={true}
+                variant="outlined"
                 gridColumn="span 2"
               />
 
@@ -164,6 +181,7 @@ export default observer(function PatientDetailsDialog({
                 name="age"
                 value={patient.age.toString()}
                 readOnly={true}
+                variant="outlined"
                 gridColumn="span 2"
               />
 
@@ -172,6 +190,7 @@ export default observer(function PatientDetailsDialog({
                 name="createdAt"
                 value={new Date(patient.createdAt).toDateString()}
                 readOnly={true}
+                variant="outlined"
                 gridColumn="span 2"
               />
 
@@ -181,6 +200,7 @@ export default observer(function PatientDetailsDialog({
                   name="archiveComment"
                   value={patient.archiveComment}
                   readOnly={true}
+                  variant="outlined"
                   gridColumn="span 4"
                 />
               )}
@@ -190,6 +210,7 @@ export default observer(function PatientDetailsDialog({
                 name="doctorName"
                 value={patient.doctorName}
                 readOnly={true}
+                variant="outlined"
                 gridColumn="span 2"
               />
 
@@ -198,6 +219,7 @@ export default observer(function PatientDetailsDialog({
                 name="researchGroupName"
                 value={patient.researchGroupName}
                 readOnly={true}
+                variant="outlined"
                 gridColumn="span 2"
               />
             </Box>
