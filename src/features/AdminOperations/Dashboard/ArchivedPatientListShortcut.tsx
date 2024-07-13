@@ -47,7 +47,7 @@ export default observer(function ArchivedPatientListShortcut() {
         <Box display="flex" justifyContent="flex-end">
           <Button
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
-            onClick={() => router.navigate("/admin/archived-patients")}
+            onClick={() => router.navigate("/archived-patients")}
             size="small"
           >
             View All

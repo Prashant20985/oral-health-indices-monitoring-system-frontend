@@ -17,10 +17,6 @@ import UserRequestListForAdmin from "../../features/UserRequestOperations/List/U
 import ResearchGroupList from "../../features/DentistTeacherOperations/List/ResearchGroup/ResearchGroupList";
 import ResearchGroupDetails from "../../features/DentistTeacherOperations/List/ResearchGroup/ResearchGroupDetails";
 import PatientsNotInResearchGroupList from "../../features/DentistTeacherOperations/List/ResearchGroup/PatientsNotInResearchGroupList";
-import ActivePatientsList from "../../features/PatientOperations/List/ActivePatientsForAdmin/ActivePatientsList";
-import ArchivedPatientsList from "../../features/PatientOperations/List/ArchivedPatientsForAdmin/ArchivedPatientsList";
-import ActivePatientList from "../../features/PatientOperations/List/ActivePatientsForDoctor/ActivePatientList";
-import ArchivedPatientList from "../../features/PatientOperations/List/ArchivedPatientListForDoctor/ArchivedPatientList";
 import StudentGroupDetails from "../../features/DentistTeacherOperations/List/StudentGroup/StudentGroupDetails";
 import StudentsNotInStudentGroupList from "../../features/DentistTeacherOperations/List/StudentGroup/StudentsNotInStudentGroupList";
 import PatientProfile from "../../features/PatientOperations/PatientProfile/PatientProfile";
@@ -30,6 +26,8 @@ import GroupsListForStudent from "../../features/StudentOperations/StudentGroups
 import GroupDetailsForStudent from "../../features/StudentOperations/StudentGroupDetails/GroupDetailsForStudent";
 import ExamSolutionDetailsForStudent from "../../features/StudentExamOperations/ExamSolutionDetails/ExamSolutionDetailsForStudent/ExamSolutionDetailsForStudent";
 import SolveExamMultiStepForm from "../../features/StudentExamOperations/Forms/SolveExamForms/SolveExamMultiStepForm";
+import ActivePatientsList from "../../features/PatientOperations/List/ActivePatients/ActivePatientsList";
+import ArchivedPatientsList from "../../features/PatientOperations/List/ArchivedPatients/ArchivedPatientsList";
 
 const routes: RouteObject[] = [
   {
@@ -50,6 +48,14 @@ const routes: RouteObject[] = [
         children: [
           { path: "/", element: <Dashboard /> },
           { path: "my-requests", element: <UserRequestListForCurrentuser /> },
+          {
+            path: "active-patients",
+            element: <ActivePatientsList />,
+          },
+          {
+            path: "archived-patients",
+            element: <ArchivedPatientsList />,
+          },
         ],
       },
       {
@@ -70,14 +76,6 @@ const routes: RouteObject[] = [
           {
             path: "admin/requests",
             element: <UserRequestListForAdmin />,
-          },
-          {
-            path: "admin/active-patients",
-            element: <ActivePatientsList />,
-          },
-          {
-            path: "admin/archived-patients",
-            element: <ArchivedPatientsList />,
           },
         ],
       },
@@ -154,14 +152,6 @@ const routes: RouteObject[] = [
           />
         ),
         children: [
-          {
-            path: "active-patients",
-            element: <ActivePatientList />,
-          },
-          {
-            path: "archived-patients",
-            element: <ArchivedPatientList />,
-          },
           {
             path: "patient-profile/:id",
             element: <PatientProfile />,

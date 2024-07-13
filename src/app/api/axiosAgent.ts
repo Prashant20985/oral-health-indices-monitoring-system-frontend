@@ -290,16 +290,6 @@ const PatientOperations = {
       .get<Patient[]>(`/patient/archived-patients`, { params })
       .then(responseBody),
 
-  getActivePatientsByDoctorId: (params: URLSearchParams) =>
-    axios
-      .get<Patient[]>(`/patient/active-patients-by-doctorId`, { params })
-      .then(responseBody),
-
-  getArchivedPatientsByDoctorId: (params: URLSearchParams) =>
-    axios
-      .get<Patient[]>(`/patient/archived-patients-by-doctorId`, { params })
-      .then(responseBody),
-
   getPatientDetails: (patientId: string) =>
     apiRequests.get<Patient>(`/patient/patient-details/${patientId}`),
 };

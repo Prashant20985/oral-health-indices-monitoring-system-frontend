@@ -5,23 +5,15 @@ import axiosAgent from "../api/axiosAgent";
 export class PatientStore {
   activePatients: Patient[] = [];
   archivedPatients: Patient[] = [];
-  activePatientsByDoctorId: Patient[] = [];
-  archivedPatientsByDoctorId: Patient[] = [];
   patientDetails: Patient | null = null;
 
   activePatientsSerachParams = { name: "", email: "" };
 
   archivedPatientsSearchParams = { name: "", email: "" };
 
-  activePatientsByDoctorIdSearchParams = { name: "", email: "" };
-
-  archivedPatientsByDoctorIdSearchParams = { name: "", email: "" };
-
   loading = {
     activePatients: false,
     archivedPatients: false,
-    activePatientsByDoctorId: false,
-    archivedPatientsByDoctorId: false,
     createPatient: false,
     updatePatient: false,
     archivePatient: false,
@@ -42,16 +34,6 @@ export class PatientStore {
       () => this.archivedPatientsSearchParams,
       () => this.fetchArchivedPatients()
     );
-
-    reaction(
-      () => this.activePatientsByDoctorIdSearchParams,
-      () => this.fetchActivePatientsByDoctorId()
-    );
-
-    reaction(
-      () => this.archivedPatientsByDoctorIdSearchParams,
-      () => this.fetchArchivedPatientsByDoctorId()
-    );
   }
 
   setActivePatients = (patients: Patient[]) => {
@@ -60,14 +42,6 @@ export class PatientStore {
 
   setArchivedPatients = (patients: Patient[]) => {
     this.archivedPatients = patients;
-  };
-
-  setActivePatientsByDoctorId = (patients: Patient[]) => {
-    this.activePatientsByDoctorId = patients;
-  };
-
-  setArchivedPatientsByDoctorId = (patients: Patient[]) => {
-    this.archivedPatientsByDoctorId = patients;
   };
 
   setPatientDetails = (patient: Patient) => {
@@ -88,20 +62,6 @@ export class PatientStore {
     this.archivedPatientsSearchParams = searchParams;
   };
 
-  setActivePatientsByDoctorIdSearchParams = (searchParams: {
-    name: string;
-    email: string;
-  }) => {
-    this.activePatientsByDoctorIdSearchParams = searchParams;
-  };
-
-  setArchivedPatientsByDoctorIdSearchParams = (searchParams: {
-    name: string;
-    email: string;
-  }) => {
-    this.archivedPatientsByDoctorIdSearchParams = searchParams;
-  };
-
   clearActivePatientNameSearch = () => {
     this.activePatientsSerachParams.name = "";
   };
@@ -118,22 +78,6 @@ export class PatientStore {
     this.archivedPatientsSearchParams.email = "";
   };
 
-  clearActivePatientsByDoctorIdEmailSearch = () => {
-    this.activePatientsByDoctorIdSearchParams.email = "";
-  };
-
-  clearActivePatientsByDoctorIdNameSearch = () => {
-    this.activePatientsByDoctorIdSearchParams.name = "";
-  };
-
-  clearArchivedPatientsByDoctorIdEmailSearch = () => {
-    this.archivedPatientsByDoctorIdSearchParams.email = "";
-  };
-
-  clearArchivedPatientsByDoctorIdNameSearch = () => {
-    this.archivedPatientsByDoctorIdSearchParams.name = "";
-  };
-
   get activePatientAxiosParams() {
     const params = new URLSearchParams();
     params.append("name", this.activePatientsSerachParams.name);
@@ -148,29 +92,9 @@ export class PatientStore {
     return params;
   }
 
-  get activePatientsByDoctorIdAxiosParams() {
-    const params = new URLSearchParams();
-    params.append("name", this.activePatientsByDoctorIdSearchParams.name);
-    params.append("email", this.activePatientsByDoctorIdSearchParams.email);
-    return params;
-  }
-
-  get archivedPatientsByDoctorIdAxiosParams() {
-    const params = new URLSearchParams();
-    params.append("name", this.archivedPatientsByDoctorIdSearchParams.name);
-    params.append("email", this.archivedPatientsByDoctorIdSearchParams.email);
-    return params;
-  }
-
-  getPatientByIdForAdmin = (patientId: string) => {
+  getPatientById = (patientId: string) => {
     return this.activePatients
       .concat(this.archivedPatients)
-      .find((p) => p.id === patientId);
-  };
-
-  getPatientByIdForDoctor = (patientId: string) => {
-    return this.activePatientsByDoctorId
-      .concat(this.archivedPatientsByDoctorId)
       .find((p) => p.id === patientId);
   };
 
@@ -208,48 +132,12 @@ export class PatientStore {
     }
   };
 
-  fetchActivePatientsByDoctorId = async () => {
-    this.loading.activePatientsByDoctorId = true;
-    try {
-      const patients =
-        await axiosAgent.PatientOperations.getActivePatientsByDoctorId(
-          this.activePatientsByDoctorIdAxiosParams
-        );
-      runInAction(() => {
-        this.setActivePatientsByDoctorId(patients);
-        this.loading.activePatientsByDoctorId = false;
-      });
-    } catch (error) {
-      runInAction(() => (this.loading.activePatientsByDoctorId = false));
-      console.log(error);
-      throw error;
-    }
-  };
-
-  fetchArchivedPatientsByDoctorId = async () => {
-    this.loading.archivedPatientsByDoctorId = true;
-    try {
-      const patients =
-        await axiosAgent.PatientOperations.getArchivedPatientsByDoctorId(
-          this.archivedPatientsByDoctorIdAxiosParams
-        );
-      runInAction(() => {
-        this.setArchivedPatientsByDoctorId(patients);
-        this.loading.archivedPatientsByDoctorId = false;
-      });
-    } catch (error) {
-      runInAction(() => (this.loading.archivedPatientsByDoctorId = false));
-      console.log(error);
-      throw error;
-    }
-  };
-
   createPatient = async (values: CreateUpdatePatientFormValues) => {
     this.loading.createPatient = true;
     try {
       await axiosAgent.PatientOperations.createPatient(values);
       runInAction(() => {
-        this.fetchActivePatientsByDoctorId();
+        this.fetchActivePatients();
         this.loading.createPatient = false;
       });
     } catch (error) {
@@ -267,14 +155,12 @@ export class PatientStore {
     try {
       await axiosAgent.PatientOperations.updatePatient(patientId, values);
       runInAction(() => {
-        this.activePatientsByDoctorId = this.activePatientsByDoctorId.map(
-          (p) => {
-            if (p.id === patientId) {
-              return { ...p, ...values };
-            }
-            return p;
+        this.activePatients = this.activePatients.map((p) => {
+          if (p.id === patientId) {
+            return { ...p, ...values };
           }
-        );
+          return p;
+        });
         this.loading.updatePatient = false;
       });
     } catch (error) {
@@ -292,13 +178,11 @@ export class PatientStore {
         archiveComment
       );
       runInAction(() => {
-        const patient = this.activePatientsByDoctorId.find(
-          (p) => p.id === patientId
-        );
+        const patient = this.activePatients.find((p) => p.id === patientId);
         if (patient) {
           patient.isArchived = true;
-          this.archivedPatientsByDoctorId.push(patient);
-          this.activePatientsByDoctorId = this.activePatientsByDoctorId.filter(
+          this.archivedPatients.push(patient);
+          this.activePatients = this.activePatients.filter(
             (p) => p.id !== patientId
           );
         }
@@ -316,14 +200,13 @@ export class PatientStore {
     try {
       await axiosAgent.PatientOperations.unarchivePatient(patientId);
       runInAction(() => {
-        const patient = this.archivedPatientsByDoctorId.find(
-          (p) => p.id === patientId
-        );
+        const patient = this.archivedPatients.find((p) => p.id === patientId);
         if (patient) {
           patient.isArchived = false;
-          this.activePatientsByDoctorId.push(patient);
-          this.archivedPatientsByDoctorId =
-            this.archivedPatientsByDoctorId.filter((p) => p.id !== patientId);
+          this.activePatients.push(patient);
+          this.archivedPatients = this.archivedPatients.filter(
+            (p) => p.id !== patientId
+          );
         }
         this.loading.unarchivePatient = false;
       });
@@ -336,7 +219,7 @@ export class PatientStore {
 
   deletePatient = async (patientId: string) => {
     this.loading.deletePatient = true;
-    const patient = this.getPatientByIdForAdmin(patientId);
+    const patient = this.getPatientById(patientId);
     try {
       await axiosAgent.PatientOperations.deletePatient(patientId);
       runInAction(() => {
@@ -358,7 +241,7 @@ export class PatientStore {
 
   fetchPatientDetails = async (patientId: string) => {
     this.loading.patientDetails = true;
-    const patient = this.getPatientByIdForAdmin(patientId);
+    const patient = this.getPatientById(patientId);
     if (patient) {
       runInAction(() => {
         this.setPatientDetails(patient);

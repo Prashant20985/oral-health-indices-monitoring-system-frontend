@@ -2,8 +2,8 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../../app/stores/Store";
 import * as React from "react";
 import { Box } from "@mui/material";
-import PatientList from "../DataGrid/PatientList";
 import PatientListFilter from "../Filters/PatientListFilter";
+import PatientList from "../DataGrid/PatientList";
 
 export default observer(function ArchivedPatientsList() {
   const {

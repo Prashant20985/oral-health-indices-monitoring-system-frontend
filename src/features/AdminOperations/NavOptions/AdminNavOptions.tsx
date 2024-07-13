@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default observer(function AdminNavOptions({ open }: Props) {
-  const options = [
+  const userOptions = [
     {
       title: "Active Users",
       path: "active-users",
@@ -31,6 +31,14 @@ export default observer(function AdminNavOptions({ open }: Props) {
       icon: <DeleteSweepOutlined />,
     },
     {
+      title: "User Requests",
+      path: "requests",
+      icon: <QuestionAnswerOutlined />,
+    },
+  ];
+
+  const patientOptions = [
+    {
       title: "Active Patients",
       path: "active-patients",
       icon: <LocalHospitalOutlined />,
@@ -40,24 +48,32 @@ export default observer(function AdminNavOptions({ open }: Props) {
       path: "archived-patients",
       icon: <ArchiveOutlined />,
     },
-    {
-      title: "User Requests",
-      path: "requests",
-      icon: <QuestionAnswerOutlined />,
-    },
   ];
 
   return (
     <>
-      {options.map((option) => (
-        <SidebarListItem
-          open={open}
-          key={option.path}
-          path={`/admin/${option.path}`}
-          icon={option.icon}
-          text={option.title}
-        />
-      ))}
+      <>
+        {userOptions.map((option) => (
+          <SidebarListItem
+            open={open}
+            key={option.path}
+            path={`/admin/${option.path}`}
+            icon={option.icon}
+            text={option.title}
+          />
+        ))}
+      </>
+      <>
+        {patientOptions.map((option) => (
+          <SidebarListItem
+            open={open}
+            key={option.path}
+            path={`/${option.path}`}
+            icon={option.icon}
+            text={option.title}
+          />
+        ))}
+      </>
     </>
   );
 });
