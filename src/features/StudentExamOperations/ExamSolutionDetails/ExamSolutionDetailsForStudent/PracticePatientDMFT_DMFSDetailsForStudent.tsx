@@ -73,6 +73,7 @@ export default observer(function PracticePatientDMFT_DMFSDetailsForStudent({
       </Card>
       <DMFT_DMFSForm
         dmft_dmfsAssessmentModel={dmft_dmfs.assessmentModel}
+        prostheticStatus={dmft_dmfs.prostheticStatus}
         isView
       />
     </Box>

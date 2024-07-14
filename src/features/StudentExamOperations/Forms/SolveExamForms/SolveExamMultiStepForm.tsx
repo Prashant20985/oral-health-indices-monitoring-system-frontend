@@ -121,7 +121,6 @@ function renderStepContent(
           />
         </React.Suspense>
       );
-
     case 6:
       return (
         <React.Suspense fallback={<ButtonLoadingComponent />}>
@@ -253,9 +252,10 @@ export default observer(function SolveExamForm() {
     }),
     summary: Yup.object({
       needForDentalInterventions: Yup.string().max(1, "Max 1 character`"),
-      patientRecommendations: Yup.string()
-        .max(500)
-        .required("Patient Recommendations is required"),
+      patientRecommendations: Yup.string().max(
+        500,
+        "Patient Recommendations must be at most 500 characters"
+      ),
       description: Yup.string().max(
         500,
         "Description must be at most 500 characters"
@@ -280,6 +280,7 @@ export default observer(function SolveExamForm() {
               padding: 2,
               "& .MuiStepIcon-root": {
                 transition: "color 0.3s, font-size 0.3s",
+                cursor: "pointer",
               },
               "& .MuiStepConnector-line": {
                 transition: "border-color 0.5s",
@@ -306,7 +307,9 @@ export default observer(function SolveExamForm() {
           >
             {steps.map((label) => (
               <Step key={label}>
-                <StepLabel>{label}</StepLabel>
+                <StepLabel onClick={() => setActiveStep(steps.indexOf(label))}>
+                  {label}
+                </StepLabel>
               </Step>
             ))}
           </Stepper>

@@ -36,6 +36,10 @@ const RiskFactorAssessment = React.lazy(
   () => import("../../../IndexCalculationForms/RiskFactorAssessment")
 );
 
+const Summary = React.lazy(
+  () => import("../../../IndexCalculationForms/SummaryForm")
+);
+
 export default observer(function ExamSolutionDetailsForTeacher() {
   const { cardId } = useParams<{ cardId: string }>();
   const [value, setValue] = React.useState("1");
@@ -215,6 +219,12 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                   }
                   value="6"
                 />
+                <Tab
+                  label={
+                    <Typography color={color.grey[100]}>Summary</Typography>
+                  }
+                  value="7"
+                />
               </TabList>
               <TabPanel value="1">
                 <PatientDetails
@@ -267,6 +277,11 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                     }
                     cardId={examCard.id}
                   />
+                </React.Suspense>
+              </TabPanel>
+              <TabPanel value="7">
+                <React.Suspense fallback={<ButtonLoadingComponent />}>
+                  <Summary summary={examCard.summary} isView />
                 </React.Suspense>
               </TabPanel>
             </Box>
