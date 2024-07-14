@@ -32,6 +32,10 @@ const PracticePatientBleedingDetailsForStudent = React.lazy(
   () => import("./PracticePatientBleedingDetailsForStudent")
 );
 
+const Summary = React.lazy(
+  () => import("../../../IndexCalculationForms/SummaryForm")
+);
+
 export default observer(function ExamSolutionDetailsForStudent() {
   const { examId } = useParams();
   const { studentExamStore } = useStore();
@@ -232,6 +236,12 @@ export default observer(function ExamSolutionDetailsForStudent() {
                   }
                   value="6"
                 />
+                <Tab
+                  label={
+                    <Typography color={color.grey[100]}>Summary</Typography>
+                  }
+                  value="7"
+                />
               </TabList>
               <TabPanel value="1">
                 <PatientDetails
@@ -287,6 +297,11 @@ export default observer(function ExamSolutionDetailsForStudent() {
                         .bleeding
                     }
                   />
+                </React.Suspense>
+              </TabPanel>
+              <TabPanel value="7">
+                <React.Suspense fallback={<ButtonLoadingComponent />}>
+                  <Summary summary={examSolutionByStudent.summary} isView />
                 </React.Suspense>
               </TabPanel>
             </Box>
