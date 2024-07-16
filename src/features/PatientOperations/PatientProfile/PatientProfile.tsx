@@ -8,6 +8,7 @@ import { colors } from "../../../themeConfig";
 import { Details, Assessment, ChevronLeft, Add } from "@mui/icons-material";
 import PatientDetails from "./PatientDetails";
 import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
+import PatientExaminationCardsList from "../../ExaminationCardOperations/List/PatientExaminationCardsList";
 
 export default observer(function PatientProfile() {
   const { id } = useParams();
@@ -19,6 +20,11 @@ export default observer(function PatientProfile() {
 
   const {
     patientStore: { fetchPatientDetails, patientDetails, loading },
+    patientExaminationCardStore: {
+      groupedPatientExaminationCards,
+      getPatientExaminationCards,
+      loading: { getPatientExaminationCards: loadingPatientExaminationCards },
+    },
   } = useStore();
 
   const [value, setValue] = React.useState("1");
@@ -33,6 +39,12 @@ export default observer(function PatientProfile() {
     };
     fetchDetails();
   }, [fetchPatientDetails, id]);
+
+  React.useEffect(() => {
+    if (id) {
+      getPatientExaminationCards(id);
+    }
+  }, [getPatientExaminationCards, id]);
 
   return (
     <Box>
@@ -89,7 +101,10 @@ export default observer(function PatientProfile() {
                     <PatientDetails patientDetails={patientDetails} />
                   </TabPanel>
                   <TabPanel value="2">
-                    <Typography>Patient Cards</Typography>
+                    <PatientExaminationCardsList
+                      patientExaminationCards={groupedPatientExaminationCards}
+                      loading={loadingPatientExaminationCards}
+                    />
                   </TabPanel>
                 </>
               )}
