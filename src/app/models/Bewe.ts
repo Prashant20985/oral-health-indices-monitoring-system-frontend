@@ -10,6 +10,19 @@ export interface Bewe extends PracticeBeweFormValues {
   comment: string;
 }
 
+export interface BeweValues {
+  id: string;
+  beweResult: number;
+  doctorComment: string;
+  studentComment: string;
+  assessmentModel: BeweAssessmentModel;
+}
+
+export interface BeweFormValues {
+  comment: string;
+  beweAssessmentModel: BeweAssessmentModel;
+}
+
 export interface BeweAssessmentModel {
   sectant1: {
     tooth_17: FiveSurfaceToothBewe;

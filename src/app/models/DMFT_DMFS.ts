@@ -17,6 +17,31 @@ export interface DMFT_DMFSAssessmentModel {
   lowerMouth: DMFT_DMFSAssessmentModelLowerMouth;
 }
 
+export interface DMFT_DMFSValues {
+  id: string;
+  dmftResult: number;
+  dmfsResult: number;
+  prostheticStatus: string;
+  doctorComment: string;
+  studentComment: string;
+  assessmentModel: DMFT_DMFSAssessmentModel;
+}
+ 
+export interface DMFT_DMFSFormValues {
+  comment: string;
+  dmftResult: number;
+  dmfsResult: number;
+  prostheticStatus: string;
+  dmfT_DMFSAssessmentModel: DMFT_DMFSAssessmentModel;
+}
+ 
+export interface UpdateDMFT_DMFSFormValues {
+  dmftResult: number;
+  dmfsResult: number;
+  prostheticStatus: string;
+  dmfT_DMFSAssessmentModel: DMFT_DMFSAssessmentModel;
+}
+
 export interface DMFT_DMFSAssessmentModelUpperMouth {
   tooth_18: SixSurfaceTooth;
   tooth_17: SixSurfaceTooth;

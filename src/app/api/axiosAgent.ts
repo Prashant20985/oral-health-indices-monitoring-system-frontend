@@ -27,6 +27,19 @@ import {
   PublishExam,
   UpdateExam,
 } from "../models/StudentExam";
+import {
+  APIUpdateResponse,
+  BleedingUpdateResponse,
+  DMFT_DMFSUpdateResponse,
+  PatientExaminationCard,
+  PatientExaminationCardByDoctorFormValues,
+  PatientExaminationCardByStudentFormValues,
+} from "../models/PatientExaminationCard";
+import { RiskFactorAssessmentModel } from "../models/RiskFactorAssesment";
+import { UpdateDMFT_DMFSFormValues } from "../models/DMFT_DMFS";
+import { APIBleedingAssessmentModel } from "../models/APIBleeding";
+import { BeweAssessmentModel } from "../models/Bewe";
+import { Summary } from "../models/Summary";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -375,6 +388,124 @@ const StudentOperations = {
     ),
 };
 
+const PatientExamintionCardOperations = {
+  commentPatientExaminationCard: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/PatientExaminationCard/comment-patient-examination-card/${cardId}?comment=${comment}`,
+      {}
+    ),
+
+  commentAPIForm: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/PatientExaminationCard/comment-api-form/${cardId}?comment=${comment}`,
+      {}
+    ),
+
+  commentBleedingForm: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/PatientExaminationCard/comment-bleeding-form/${cardId}?comment=${comment}`,
+      {}
+    ),
+
+  commentBeweForm: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/PatientExaminationCard/comment-beweForm/${cardId}?comment=${comment}`,
+      {}
+    ),
+
+  commentDMFT_DMFSForm: (cardId: string, comment: string) =>
+    apiRequests.put<void>(
+      `/PatientExaminationCard/comment-dmft-dmfsForm/${cardId}?comment=${comment}`,
+      {}
+    ),
+
+  updateAPIForm: (cardId: string, values: APIBleedingAssessmentModel) =>
+    apiRequests.put<APIUpdateResponse>(
+      `/PatientExaminationCard/update-api-form/${cardId}`,
+      values
+    ),
+
+  updateBleedingForm: (cardId: string, values: APIBleedingAssessmentModel) =>
+    apiRequests.put<BleedingUpdateResponse>(
+      `/PatientExaminationCard/update-bleeding-form/${cardId}`,
+      values
+    ),
+
+  updateBeweForm: (cardId: string, values: BeweAssessmentModel) =>
+    apiRequests.put<number>(
+      `/PatientExaminationCard/update-bewe-form/${cardId}`,
+      values
+    ),
+
+  updateDMFT_DMFSForm: (cardId: string, values: UpdateDMFT_DMFSFormValues) =>
+    apiRequests.put<DMFT_DMFSUpdateResponse>(
+      `/PatientExaminationCard/update-dmft-dmfs-form/${cardId}`,
+      values
+    ),
+
+  updateRiskFactorAssessment: (
+    cardId: string,
+    values: RiskFactorAssessmentModel
+  ) =>
+    apiRequests.put<void>(
+      `/PatientExaminationCard/update-risk-factor-assessment/${cardId}`,
+      values
+    ),
+
+  createPatientExaminationCardByDoctor: (
+    patientId: string,
+    values: PatientExaminationCardByDoctorFormValues
+  ) =>
+    apiRequests.post<PatientExaminationCard>(
+      `/PatientExaminationCard/create-patient-examination-card-by-doctor/${patientId}`,
+      values
+    ),
+
+  createPatientExaminationCardByStudent: (
+    patientId: string,
+    values: PatientExaminationCardByStudentFormValues
+  ) =>
+    apiRequests.post<PatientExaminationCard>(
+      `/PatientExaminationCard/create-patient-examination-card-by-student/${patientId}`,
+      values
+    ),
+
+  deletePatientExaminationCard: (cardId: string) =>
+    apiRequests.del<void>(
+      `/PatientExaminationCard/delete-patient-examination-card/${cardId}`
+    ),
+
+  gradePatientExaminationCard: (cardId: string, score: number) =>
+    apiRequests.put<void>(
+      `/PatientExaminationCard/grade-patient-examination-card/${cardId}?totalScore=${score}`,
+      {}
+    ),
+
+  getPatientExaminationCardDetails: (cardId: string) =>
+    apiRequests.get<PatientExaminationCard>(
+      `/PatientExaminationCard/patient-examination-card/${cardId}`
+    ),
+
+  getPatientExaminationCards: (patientId: string) =>
+    apiRequests.get<PatientExaminationCard[]>(
+      `/PatientExaminationCard/patient-examination-cards/${patientId}`
+    ),
+
+  getPatientExaminationCardsAssignedToDoctor: (params: URLSearchParams) =>
+    axios
+      .get<PatientExaminationCard[]>(
+        "/PatientExaminationCard/patient-examination-cards-assigned-to-doctor",
+        { params }
+      )
+      .then(responseBody),
+
+  updatePatientExaminationCardSummary: (cardId: string, summary: Summary) =>
+    apiRequests.put<void>(
+      `/PatientExaminationCard/update-patient-examination-card-summary/${cardId}`,
+      summary
+    ),
+};
+
 const axiosAgent = {
   AccountOperations,
   AdminOperations,
@@ -383,6 +514,7 @@ const axiosAgent = {
   PatientOperations,
   StudentExamOperations,
   StudentOperations,
+  PatientExamintionCardOperations,
 };
 
 export default axiosAgent;
