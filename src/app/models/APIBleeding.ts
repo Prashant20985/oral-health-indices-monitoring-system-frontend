@@ -46,3 +46,33 @@ export interface API {
   comment: string;
   assessmentModel: APIBleedingAssessmentModel;
 }
+
+export interface APIValues {
+  id: string;
+  apiResult: number;
+  maxilla: number;
+  mandible: number;
+  doctorComment: string;
+  studentComment: string;
+  assessmentModel: APIBleedingAssessmentModel;
+}
+ 
+export interface BleedingValues {
+  id: string;
+  bleedingResult: number;
+  maxilla: number;
+  mandible: number;
+  doctorComment: string;
+  studentComment: string;
+  assessmentModel: APIBleedingAssessmentModel;
+}
+ 
+export interface BleedingFormValues {
+  comment: string;
+  bleedingAssessmentModel: APIBleedingAssessmentModel;
+}
+ 
+export interface APIFormValues {
+  comment: string;
+  apiAssessmentModel: APIBleedingAssessmentModel;
+}
