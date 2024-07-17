@@ -31,7 +31,11 @@ export default React.memo(function BeweLowerMouthInput({
               (beweAssessmentModel.sectant6 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`${name}.sectant6.tooth_${toothNumber}`}
+            name={
+              name !== undefined
+                ? `${name}.sectant6.tooth_${toothNumber}`
+                : `sectant6.tooth_${toothNumber}`
+            }
             onChange={handleChange}
             readOnly={isView}
           />
@@ -47,7 +51,11 @@ export default React.memo(function BeweLowerMouthInput({
               (beweAssessmentModel.sectant5 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`${name}.sectant5.tooth_${toothNumber}`}
+            name={
+              name !== undefined
+                ? `${name}.sectant5.tooth_${toothNumber}`
+                : `sectant5.tooth_${toothNumber}`
+            }
             onChange={handleChange}
             readOnly={isView}
           />
@@ -62,7 +70,11 @@ export default React.memo(function BeweLowerMouthInput({
               (beweAssessmentModel.sectant5 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`${name}.sectant5.tooth_${toothNumber}`}
+            name={
+              name !== undefined
+                ? `${name}.sectant5.tooth_${toothNumber}`
+                : `sectant5.tooth_${toothNumber}`
+            }
             onChange={handleChange}
             readOnly={isView}
           />
@@ -78,7 +90,11 @@ export default React.memo(function BeweLowerMouthInput({
               (beweAssessmentModel.sectant4 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`${name}.sectant4.tooth_${toothNumber}`}
+            name={
+              name !== undefined
+                ? `${name}.sectant4.tooth_${toothNumber}`
+                : `sectant4.tooth_${toothNumber}`
+            }
             onChange={handleChange}
             readOnly={isView}
           />

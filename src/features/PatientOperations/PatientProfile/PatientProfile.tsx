@@ -103,6 +103,7 @@ export default observer(function PatientProfile() {
                   <TabPanel value="2">
                     <PatientExaminationCardsList
                       patientExaminationCards={groupedPatientExaminationCards}
+                      patientId={id!}
                       loading={loadingPatientExaminationCards}
                     />
                   </TabPanel>

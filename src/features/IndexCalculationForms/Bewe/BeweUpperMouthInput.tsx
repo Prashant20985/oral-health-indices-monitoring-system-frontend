@@ -31,7 +31,11 @@ export default React.memo(function BeweUpperMouthInput({
               (beweAssessmentModel?.sectant1 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`${name}.sectant1.tooth_${toothNumber}`}
+            name={
+              name !== undefined
+                ? `${name}.sectant1.tooth_${toothNumber}`
+                : `sectant1.tooth_${toothNumber}`
+            }
             onChange={handleChange}
             readOnly={isView}
           />
@@ -47,7 +51,11 @@ export default React.memo(function BeweUpperMouthInput({
               (beweAssessmentModel?.sectant2 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`${name}.sectant2.tooth_${toothNumber}`}
+            name={
+              name !== undefined
+                ? `${name}.sectant2.tooth_${toothNumber}`
+                : `sectant2.tooth_${toothNumber}`
+            }
             onChange={handleChange}
             readOnly={isView}
           />
@@ -62,7 +70,11 @@ export default React.memo(function BeweUpperMouthInput({
               (beweAssessmentModel?.sectant2 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`${name}.sectant2.tooth_${toothNumber}`}
+            name={
+              name !== undefined
+                ? `${name}.sectant2.tooth_${toothNumber}`
+                : `sectant2.tooth_${toothNumber}`
+            }
             onChange={handleChange}
             readOnly={isView}
           />
@@ -78,7 +90,11 @@ export default React.memo(function BeweUpperMouthInput({
               (beweAssessmentModel?.sectant3 as any)[`tooth_${toothNumber}`]
             }
             toothNumber={`tooth_${toothNumber}`}
-            name={`${name}.sectant3.tooth_${toothNumber}`}
+            name={
+              name !== undefined
+                ? `${name}.sectant3.tooth_${toothNumber}`
+                : `sectant3.tooth_${toothNumber}`
+            }
             onChange={handleChange}
             readOnly={isView}
           />

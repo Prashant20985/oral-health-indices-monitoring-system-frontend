@@ -17,13 +17,16 @@ import {
 } from "@mui/material";
 import { Delete, DoubleArrow, Medication } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
+import { router } from "../../../app/router/Routes";
 
 interface Props {
   patientExaminationCard: PatientExaminationCard;
+  patientId: string;
 }
 
 export default observer(function ExaminationCardItem({
   patientExaminationCard,
+  patientId,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -110,6 +113,11 @@ export default observer(function ExaminationCardItem({
             variant="outlined"
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
             endIcon={<DoubleArrow />}
+            onClick={() =>
+              router.navigate(
+                `/patient-profile/${patientId}/${patientExaminationCard.id}`
+              )
+            }
           >
             View Card
           </Button>
