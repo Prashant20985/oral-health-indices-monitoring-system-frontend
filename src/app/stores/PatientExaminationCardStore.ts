@@ -560,7 +560,7 @@ export class PatientExaminationCardStore {
       runInAction(() => {
         if (this.patientExaminationCardDetails) {
           this.patientExaminationCardDetails.patientExaminationResult.dmfT_DMFS.assessmentModel =
-            values.dmfT_DMFSAssessmentModel;
+            values.assessmentModel;
 
           this.patientExaminationCardDetails.patientExaminationResult.dmfT_DMFS.dmftResult =
             dmft_dmfsUpdateResponse.dmftResult;
