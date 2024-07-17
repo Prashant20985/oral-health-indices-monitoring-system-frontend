@@ -38,20 +38,26 @@ export default observer(function DMFT_DMFSForm({
           upperMouth={dmft_dmfsAssessmentModel.upperMouth}
           isViewMode={isView}
           handleChange={handleChange}
-          name={name?.concat(".assessmentModel")}
+          name={
+            name !== undefined ? `${name}.assessmentModel` : "assessmentModel"
+          }
         />
         <DMFT_DMFSExtraToothInput
           upperMouth={dmft_dmfsAssessmentModel.upperMouth}
           lowerMouth={dmft_dmfsAssessmentModel.lowerMouth}
           isView={isView}
           handleChange={handleChange}
-          name={name?.concat(".assessmentModel")}
+          name={
+            name !== undefined ? `${name}.assessmentModel` : "assessmentModel"
+          }
         />
         <DMFT_DMFSLowerMouthInput
           lowerMouth={dmft_dmfsAssessmentModel.lowerMouth}
           isView={isView}
           handleChange={handleChange}
-          name={name?.concat(".assessmentModel")}
+          name={
+            name !== undefined ? `${name}.assessmentModel` : "assessmentModel"
+          }
         />
       </Box>
       <Box display="flex" justifyContent="center">
@@ -101,7 +107,11 @@ export default observer(function DMFT_DMFSForm({
             sx={{ width: 100 }}
             onChange={handleChange}
             value={prostheticStatus}
-            name={`${name}.prostheticStatus`}
+            name={
+              name !== undefined
+                ? `${name}.prostheticStatus`
+                : "prostheticStatus"
+            }
             inputProps={{ readOnly: isView }}
           >
             <MenuItem value="">

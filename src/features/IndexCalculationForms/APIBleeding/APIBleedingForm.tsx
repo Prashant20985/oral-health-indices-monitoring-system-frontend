@@ -65,7 +65,12 @@ export default observer(function APIBleedingForm({
                 <Box>
                   <StyledTextField
                     variant="outlined"
-                    name={`${name}.quadrant1.value${value}`}
+                    inputProps={{ maxLength: 1 }}
+                    name={
+                      name !== undefined
+                        ? `${name}.quadrant1.value${value}`
+                        : `quadrant1.value${value}`
+                    }
                     value={
                       // eslint-disable-next-line @typescript-eslint/no-explicit-any
                       (apiBleedingAssessmentModel.quadrant1 as any)[
@@ -105,7 +110,12 @@ export default observer(function APIBleedingForm({
                 <Box>
                   <StyledTextField
                     variant="outlined"
-                    name={`${name}.quadrant2.value${value}`}
+                    inputProps={{ maxLength: 1 }}
+                    name={
+                      name !== undefined
+                        ? `${name}.quadrant2.value${value}`
+                        : `quadrant2.value${value}`
+                    }
                     value={
                       // eslint-disable-next-line @typescript-eslint/no-explicit-any
                       (apiBleedingAssessmentModel.quadrant2 as any)[
@@ -130,7 +140,7 @@ export default observer(function APIBleedingForm({
             </Box>
           </Box>
         </Box>
-        {/* Quadrant 3 */}
+        {/* Quadrant 4 */}
         <Box component={Stack} direction="row" spacing={1}>
           <Box display="inline-flex" flexDirection="column" gap={1}>
             <Box component={Stack} direction="row" spacing={1}>
@@ -144,10 +154,15 @@ export default observer(function APIBleedingForm({
               {[7, 6, 5, 4, 3, 2, 1].map((value) => (
                 <StyledTextField
                   variant="outlined"
-                  name={`${name}.quadrant3.value${value}`}
+                  inputProps={{ maxLength: 1 }}
+                  name={
+                    name !== undefined
+                      ? `${name}.quadrant4.value${value}`
+                      : `quadrant4.value${value}`
+                  }
                   value={
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    (apiBleedingAssessmentModel.quadrant3 as any)[
+                    (apiBleedingAssessmentModel.quadrant4 as any)[
                       `value${value}`
                     ]
                   }
@@ -165,18 +180,23 @@ export default observer(function APIBleedingForm({
                 sx={{ backgroundColor: color.grey[400] }}
               />
             </Box>
-            <Header title="Quadrant 3" />
+            <Header title="Quadrant 4" />
           </Box>
-          {/* Quadrant 4 */}
+          {/* Quadrant 3 */}
           <Box display="inline-flex" flexDirection="column" gap={1}>
             <Box component={Stack} direction="row" spacing={1}>
               {[1, 2, 3, 4, 5, 6, 7].map((value) => (
                 <StyledTextField
                   variant="outlined"
-                  name={`${name}.quadrant4.value${value}`}
+                  inputProps={{ maxLength: 1 }}
+                  name={
+                    name !== undefined
+                      ? `${name}.quadrant3.value${value}`
+                      : `quadrant3.value${value}`
+                  }
                   value={
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    (apiBleedingAssessmentModel.quadrant4 as any)[
+                    (apiBleedingAssessmentModel.quadrant3 as any)[
                       `value${value}`
                     ]
                   }
@@ -191,7 +211,7 @@ export default observer(function APIBleedingForm({
               ))}
             </Box>
             <Box display="flex" justifyContent="flex-end">
-              <Header title="Quadrant 4" />
+              <Header title="Quadrant 3" />
             </Box>
           </Box>
         </Box>

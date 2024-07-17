@@ -28,6 +28,7 @@ import ExamSolutionDetailsForStudent from "../../features/StudentExamOperations/
 import SolveExamMultiStepForm from "../../features/StudentExamOperations/Forms/SolveExamForms/SolveExamMultiStepForm";
 import ActivePatientsList from "../../features/PatientOperations/List/ActivePatients/ActivePatientsList";
 import ArchivedPatientsList from "../../features/PatientOperations/List/ArchivedPatients/ArchivedPatientsList";
+import PatientExaminationCardDetails from "../../features/ExaminationCardOperations/Details/PatientExaminationCardDetails";
 
 const routes: RouteObject[] = [
   {
@@ -155,6 +156,10 @@ const routes: RouteObject[] = [
           {
             path: "patient-profile/:id",
             element: <PatientProfile />,
+          },
+          {
+            path: "patient-profile/:id/:cardId",
+            element: <PatientExaminationCardDetails />,
           },
         ],
       },

@@ -231,7 +231,11 @@ export default observer(function RiskFactorAssessment({
                         select={!isView}
                         fullWidth
                         color="secondary"
-                        name={`${name}.questions[${index}].answer.lowRisk`}
+                        name={
+                          name !== undefined
+                            ? `${name}.questions[${index}].answer.lowRisk`
+                            : `questions[${index}].answer.lowRisk`
+                        }
                         value={row.answer.lowRisk}
                         onChange={handleChange}
                         disabled={disabled.lowRisk}
@@ -255,7 +259,11 @@ export default observer(function RiskFactorAssessment({
                         select={!isView}
                         color="secondary"
                         fullWidth
-                        name={`${name}.questions[${index}].answer.moderateRisk`}
+                        name={
+                          name !== undefined
+                            ? `${name}.questions[${index}].answer.moderateRisk`
+                            : `questions[${index}].answer.moderateRisk`
+                        }
                         value={row.answer.moderateRisk}
                         onChange={handleChange}
                         inputProps={{ readOnly: isView }}
@@ -279,7 +287,11 @@ export default observer(function RiskFactorAssessment({
                         select={!isView}
                         fullWidth
                         color="secondary"
-                        name={`${name}.questions[${index}].answer.highRisk`}
+                        name={
+                          name !== undefined
+                            ? `${name}.questions[${index}].answer.highRisk`
+                            : `questions[${index}].answer.highRisk`
+                        }
                         value={row.answer.highRisk}
                         onChange={handleChange}
                         inputProps={{ readOnly: isView }}

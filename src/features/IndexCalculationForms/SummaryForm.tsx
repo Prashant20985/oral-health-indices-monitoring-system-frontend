@@ -73,7 +73,11 @@ export default function SummaryForm({
           value={summary.needForDentalInterventions}
           fullWidth
           label="Need for Dental Interventions"
-          name={`${name}.needForDentalInterventions`}
+          name={
+            name !== undefined
+              ? `${name}.needForDentalInterventions`
+              : "needForDentalInterventions"
+          }
           InputProps={{
             readOnly: isView,
           }}
@@ -99,7 +103,9 @@ export default function SummaryForm({
         onChange={handleChange}
         value={summary.proposedTreatment}
         rows={4}
-        name={`${name}.proposedTreatment`}
+        name={
+          name !== undefined ? `${name}.proposedTreatment` : "proposedTreatment"
+        }
         inputProps={{ maxLength: 500 }}
         InputProps={{
           readOnly: isView,
@@ -114,7 +120,7 @@ export default function SummaryForm({
         multiline
         value={summary.description}
         rows={4}
-        name={`${name}.description`}
+        name={name !== undefined ? `${name}.description` : "description"}
         inputProps={{ maxLength: 500 }}
         InputProps={{
           readOnly: isView,
@@ -129,7 +135,11 @@ export default function SummaryForm({
         onChange={handleChange}
         value={summary.patientRecommendations}
         rows={4}
-        name={`${name}.patientRecommendations`}
+        name={
+          name !== undefined
+            ? `${name}.patientRecommendations`
+            : "patientRecommendations"
+        }
         inputProps={{ maxLength: 500 }}
         InputProps={{
           readOnly: isView,

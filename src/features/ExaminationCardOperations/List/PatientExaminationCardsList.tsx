@@ -7,11 +7,13 @@ import PatientExaminationCardItem from "./PatientExaminationCardItem";
 interface Props {
   patientExaminationCards: [string, PatientExaminationCard[]][];
   loading: boolean;
+  patientId: string;
 }
 
 export default observer(function PatientExaminationCardsList({
   patientExaminationCards,
   loading,
+  patientId,
 }: Props) {
   return (
     <Box>
@@ -44,6 +46,7 @@ export default observer(function PatientExaminationCardsList({
                         >
                           <PatientExaminationCardItem
                             patientExaminationCard={patientExaminationCard}
+                            patientId={patientId}
                           />
                         </Grid>
                       ))}

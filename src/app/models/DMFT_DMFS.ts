@@ -39,7 +39,7 @@ export interface UpdateDMFT_DMFSFormValues {
   dmftResult: number;
   dmfsResult: number;
   prostheticStatus: string;
-  dmfT_DMFSAssessmentModel: DMFT_DMFSAssessmentModel;
+  assessmentModel: DMFT_DMFSAssessmentModel;
 }
 
 export interface DMFT_DMFSAssessmentModelUpperMouth {
