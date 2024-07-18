@@ -18,18 +18,36 @@ import {
 import { Delete, DoubleArrow, Medication } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
 import { router } from "../../../app/router/Routes";
+import React from "react";
+import { useStore } from "../../../app/stores/Store";
+import DeleteConfirmation from "../Forms/DeleteConfirmation";
 
 interface Props {
   patientExaminationCard: PatientExaminationCard;
   patientId: string;
+  setOpenDeleteSnackbar: (value: boolean) => void;
 }
 
 export default observer(function ExaminationCardItem({
   patientExaminationCard,
   patientId,
+  setOpenDeleteSnackbar,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [openDeleteConfirmation, setOpenDeleteConfirmation] =
+    React.useState(false);
+
+  const {
+    patientExaminationCardStore: { deletePatientExaminationCard },
+  } = useStore();
+
+  const handleDelete = async () => {
+    await deletePatientExaminationCard(patientExaminationCard.id);
+    setOpenDeleteConfirmation(false);
+    setOpenDeleteSnackbar(true);
+  };
 
   return (
     <Card
@@ -45,8 +63,8 @@ export default observer(function ExaminationCardItem({
             sx={{
               backgroundColor:
                 theme.palette.mode === "dark" ? blueGrey[400] : blueGrey[600],
-              width: 70,
-              height: 70,
+              width: 85,
+              height: 85,
             }}
             aria-label="patient-card-avatar"
           >
@@ -105,7 +123,7 @@ export default observer(function ExaminationCardItem({
         />
       </CardContent>
       <CardActions>
-        <IconButton>
+        <IconButton onClick={() => setOpenDeleteConfirmation(true)}>
           <Delete />
         </IconButton>
         <Box display="flex" justifyContent="flex-end" width="100%">
@@ -123,6 +141,11 @@ export default observer(function ExaminationCardItem({
           </Button>
         </Box>
       </CardActions>
+      <DeleteConfirmation
+        isOpen={openDeleteConfirmation}
+        onClose={() => setOpenDeleteConfirmation(false)}
+        handleDelete={handleDelete}
+      />
     </Card>
   );
 });
