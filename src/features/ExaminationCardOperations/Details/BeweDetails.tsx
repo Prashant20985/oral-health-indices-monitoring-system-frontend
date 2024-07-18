@@ -5,12 +5,15 @@ import {
   Button,
   Paper,
   TextField,
-  Typography,
   useTheme,
 } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import { Comment } from "@mui/icons-material";
 import BeweEditForm from "../Forms/BeweEditForm";
+import { useStore } from "../../../app/stores/Store";
+import React from "react";
+import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import CommentForm from "../Forms/CommentForm";
 
 interface Props {
   cardId: string;
@@ -31,6 +34,31 @@ export default observer(function BeweDetails({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const {
+    userStore: { user },
+    patientExaminationCardStore: { commentBeweForm },
+  } = useStore();
+
+  const [openCommentDialog, setOpenCommentDialog] = React.useState(false);
+  const [commentSnackbarOpen, setCommentSnackbarOpen] = React.useState(false);
+
+  const isStudent = user?.role === "Student";
+  const isDoctor =
+    user?.role === "Dentist_Teacher_Examiner" ||
+    user?.role === "Dentist_Teacher_Researcher";
+
+  const comment = isStudent
+    ? bewe.studentComment
+    : isDoctor
+    ? bewe.doctorComment
+    : "";
+
+  const handleComment = async (comment: string) => {
+    await commentBeweForm(cardId, comment).then(() => {
+      setCommentSnackbarOpen(true);
+    });
+  };
 
   return (
     <Box>
@@ -76,12 +104,10 @@ export default observer(function BeweDetails({
             <Button
               color="secondary"
               startIcon={<Comment />}
-              variant="contained"
-              size="small"
+              variant="outlined"
+              onClick={() => setOpenCommentDialog(true)}
             >
-              <Typography variant="h6" fontWeight={600}>
-                Comment BEWE Form
-              </Typography>
+              {comment ? "Edit Comment" : "Add Comment"}
             </Button>
           </Box>
         )}
@@ -91,6 +117,21 @@ export default observer(function BeweDetails({
         assessmentModel={bewe.assessmentModel}
         setIsEditMode={setIsEditMode}
         isUserEligibleToEdit={isUserEligibleToEdit}
+      />
+      <CommentForm
+        isOpen={openCommentDialog}
+        onClose={() => setOpenCommentDialog(false)}
+        title="Comment BEWE Form"
+        description="Please provide your comment for the BEWE Form."
+        handleSubmit={(comment) => {
+          handleComment(comment);
+        }}
+        comment={comment}
+      />
+      <CustomSanckbar
+        snackbarOpen={commentSnackbarOpen}
+        snackbarClose={() => setCommentSnackbarOpen(false)}
+        message="Comment has been successfully added."
       />
     </Box>
   );

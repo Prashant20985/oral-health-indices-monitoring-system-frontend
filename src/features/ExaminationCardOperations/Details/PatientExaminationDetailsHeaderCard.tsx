@@ -1,7 +1,13 @@
 import { observer } from "mobx-react-lite";
 import { PatientExaminationCard } from "../../../app/models/PatientExaminationCard";
 import { colors } from "../../../themeConfig";
-import { Medication, Download, Person2, Mail } from "@mui/icons-material";
+import {
+  Medication,
+  Download,
+  Person2,
+  Mail,
+  Assessment,
+} from "@mui/icons-material";
 import {
   Box,
   Card,
@@ -19,6 +25,11 @@ import {
 } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
 import { Add, Comment } from "@mui/icons-material";
+import React from "react";
+import { useStore } from "../../../app/stores/Store";
+import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import CommentForm from "../Forms/CommentForm";
+import GradeCardForm from "../Forms/GradeCardForm";
 
 interface Props {
   patientExaminationCard: PatientExaminationCard;
@@ -33,6 +44,50 @@ export default observer(function PatientExaminationDetailsHeaderCard({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const {
+    userStore: { user },
+    patientExaminationCardStore: {
+      commentPatientExaminationCard,
+      gradePatientExaminationCard,
+    },
+  } = useStore();
+
+  const [openCommentDialog, setOpenCommentDialog] = React.useState(false);
+  const [openGradeDialog, setOpenGradeDialog] = React.useState(false);
+  const [commentSnackbarOpen, setCommentSnackbarOpen] = React.useState(false);
+  const [totalScoreSnackbarOpen, setTotalScoreSnackbarOpen] =
+    React.useState(false);
+
+  const isStudent = user?.role === "Student";
+  const isDoctor =
+    user?.role === "Dentist_Teacher_Examiner" ||
+    user?.role === "Dentist_Teacher_Researcher";
+
+  const comment = isStudent
+    ? patientExaminationCard.studentComment
+    : isDoctor
+    ? patientExaminationCard.doctorComment
+    : "";
+
+  const handleComment = async (comment: string) => {
+    await commentPatientExaminationCard(
+      patientExaminationCard.id,
+      comment
+    ).then(() => {
+      setCommentSnackbarOpen(true);
+    });
+  };
+
+  const handleTotalScore = async (totalScore: number) => {
+    await gradePatientExaminationCard(
+      patientExaminationCard.id,
+      totalScore ?? 0
+    ).then(() => {
+      setTotalScoreSnackbarOpen(true);
+    });
+  };
+
   return (
     <Box>
       <Card
@@ -146,11 +201,20 @@ export default observer(function PatientExaminationDetailsHeaderCard({
                   >
                     Student Information
                   </Typography>
-                  <Box display="flex" alignItems="center" gap={1}>
-                    <Person2 />
-                    <Typography variant="h6" color="textSecondary">
-                      {patientExaminationCard.studentName.split("(")[0]}
-                    </Typography>
+                  <Box display="flex" alignItems="center" gap={6}>
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Person2 />
+                      <Typography variant="h6" color="textSecondary">
+                        {patientExaminationCard.studentName.split("(")[0]}
+                      </Typography>
+                    </Box>
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Assessment />
+                      <Typography variant="h5" color="textSecondary">
+                        Grade:{" "}
+                        {patientExaminationCard.totalScore ?? "Not Graded"}
+                      </Typography>
+                    </Box>
                   </Box>
                   <Box display="flex" alignItems="center" gap={1}>
                     <Mail />
@@ -193,23 +257,58 @@ export default observer(function PatientExaminationDetailsHeaderCard({
           </Box>
         </CardContent>
         <CardActions sx={{ gap: 2, p: 2 }}>
-          {isUserEligibleToEdit &&
-            patientExaminationCard.totalScore === null && (
-              <Button color="info" variant="outlined" startIcon={<Add />}>
-                Mark Card
-              </Button>
-            )}
+          {isUserEligibleToEdit && (
+            <Button
+              color="info"
+              variant="outlined"
+              startIcon={<Add />}
+              onClick={() => setOpenGradeDialog(true)}
+            >
+              {patientExaminationCard.totalScore ? "Edit Grade" : "Grade Card"}
+            </Button>
+          )}
           {isUserEligibleToComment && (
             <Button
               color="secondary"
               variant="outlined"
               startIcon={<Comment />}
+              onClick={() => setOpenCommentDialog(true)}
             >
-              Comment Card
+              {comment ? "Edit Comment" : "Add Comment"}
             </Button>
           )}
         </CardActions>
       </Card>
+      <CommentForm
+        isOpen={openCommentDialog}
+        onClose={() => setOpenCommentDialog(false)}
+        title="Comment Examination Card"
+        description="Please provide your comment for the Examination Card."
+        handleSubmit={(comment) => {
+          handleComment(comment);
+        }}
+        comment={comment}
+      />
+      <GradeCardForm
+        isOpen={openGradeDialog}
+        onClose={() => setOpenGradeDialog(false)}
+        title="Grade Examination Card"
+        description={`Please provide your grade for the Examination Card by ${patientExaminationCard.studentName}.`}
+        totalScore={patientExaminationCard.totalScore ?? 0}
+        handleSubmit={(totalScore) => {
+          handleTotalScore(totalScore);
+        }}
+      />
+      <CustomSanckbar
+        snackbarOpen={commentSnackbarOpen}
+        snackbarClose={() => setCommentSnackbarOpen(false)}
+        message="Comment has been successfully added."
+      />
+      <CustomSanckbar
+        snackbarOpen={totalScoreSnackbarOpen}
+        snackbarClose={() => setTotalScoreSnackbarOpen(false)}
+        message="Total Score has been successfully added."
+      />
     </Box>
   );
 });

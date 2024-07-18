@@ -5,12 +5,15 @@ import {
   Button,
   Paper,
   TextField,
-  Typography,
   useTheme,
 } from "@mui/material";
 import { Comment } from "@mui/icons-material";
 import { BleedingValues } from "../../../app/models/APIBleeding";
 import APIBleedingEditForm from "../Forms/APIBleedingEditForm";
+import { useStore } from "../../../app/stores/Store";
+import React from "react";
+import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import CommentForm from "../Forms/CommentForm";
 
 interface Props {
   cardId: string;
@@ -31,6 +34,32 @@ export default observer(function BleedingDetails({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const {
+    userStore: { user },
+    patientExaminationCardStore: { commentBleedingForm },
+  } = useStore();
+
+  const [openCommentDialog, setOpenCommentDialog] = React.useState(false);
+  const [commentSnackbarOpen, setCommentSnackbarOpen] = React.useState(false);
+
+  const isStudent = user?.role === "Student";
+  const isDoctor =
+    user?.role === "Dentist_Teacher_Examiner" ||
+    user?.role === "Dentist_Teacher_Researcher";
+
+  const comment = isStudent
+    ? bleeding.studentComment
+    : isDoctor
+    ? bleeding.doctorComment
+    : "";
+
+  const handleComment = async (comment: string) => {
+    await commentBleedingForm(cardId, comment).then(() => {
+      setCommentSnackbarOpen(true);
+    });
+  };
+
   return (
     <Box width="100%">
       <Box
@@ -89,12 +118,10 @@ export default observer(function BleedingDetails({
             <Button
               color="secondary"
               startIcon={<Comment />}
-              variant="contained"
-              size="small"
+              variant="outlined"
+              onClick={() => setOpenCommentDialog(true)}
             >
-              <Typography variant="h6" fontWeight={600}>
-                Comment bleeding Form
-              </Typography>
+              {comment ? "Edit Comment" : "Add Comment"}
             </Button>
           </Box>
         )}
@@ -105,6 +132,21 @@ export default observer(function BleedingDetails({
         setIsEditMode={setIsEditMode}
         isUserEligibleToEdit={isUserEligibleToEdit}
         isAPIForm={false}
+      />
+      <CommentForm
+        isOpen={openCommentDialog}
+        onClose={() => setOpenCommentDialog(false)}
+        title="Comment Bleeding Form"
+        description="Please provide your comment for the Bleeding Form."
+        handleSubmit={(comment) => {
+          handleComment(comment);
+        }}
+        comment={comment}
+      />
+      <CustomSanckbar
+        snackbarOpen={commentSnackbarOpen}
+        snackbarClose={() => setCommentSnackbarOpen(false)}
+        message="Comment has been successfully added."
       />
     </Box>
   );

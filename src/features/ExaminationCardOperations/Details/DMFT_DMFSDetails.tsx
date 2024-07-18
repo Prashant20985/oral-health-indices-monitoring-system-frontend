@@ -3,17 +3,14 @@ import {
   DMFT_DMFSValues,
   UpdateDMFT_DMFSFormValues,
 } from "../../../app/models/DMFT_DMFS";
-import {
-  Box,
-  Button,
-  Paper,
-  TextField,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Paper, TextField, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import DMFT_DMFSEditForm from "../Forms/DMFT_DMFSEditForm";
 import { Comment } from "@mui/icons-material";
+import React from "react";
+import CommentForm from "../Forms/CommentForm";
+import { useStore } from "../../../app/stores/Store";
+import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 
 interface Props {
   cardId: string;
@@ -35,12 +32,38 @@ export default observer(function DMFT_DMFSDetails({
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const {
+    userStore: { user },
+    patientExaminationCardStore: { commentDMFT_DMFSForm },
+  } = useStore();
+
+  const [openCommentDialog, setOpenCommentDialog] = React.useState(false);
+  const [commentSnackbarOpen, setCommentSnackbarOpen] = React.useState(false);
+
   const updateDMFT_DMFSFromValues: UpdateDMFT_DMFSFormValues = {
     dmftResult: dmft_dmfs.dmftResult,
     dmfsResult: dmft_dmfs.dmfsResult,
     assessmentModel: dmft_dmfs.assessmentModel,
     prostheticStatus: dmft_dmfs.prostheticStatus,
   };
+
+  const isStudent = user?.role === "Student";
+  const isDoctor =
+    user?.role === "Dentist_Teacher_Examiner" ||
+    user?.role === "Dentist_Teacher_Researcher";
+
+  const comment = isStudent
+    ? dmft_dmfs.studentComment
+    : isDoctor
+    ? dmft_dmfs.doctorComment
+    : "";
+
+  const handleComment = async (comment: string) => {
+    await commentDMFT_DMFSForm(cardId, comment).then(() => {
+      setCommentSnackbarOpen(true);
+    });
+  };
+
   return (
     <Box width="100%">
       <Box
@@ -79,12 +102,10 @@ export default observer(function DMFT_DMFSDetails({
             <Button
               color="secondary"
               startIcon={<Comment />}
-              variant="contained"
-              size="small"
+              variant="outlined"
+              onClick={() => setOpenCommentDialog(true)}
             >
-              <Typography variant="h6" fontWeight={600}>
-                Comment DMF/DMFS Form
-              </Typography>
+              {comment ? "Edit Comment" : "Add Comment"}
             </Button>
           </Box>
         )}
@@ -94,6 +115,21 @@ export default observer(function DMFT_DMFSDetails({
         updateDMFT_DMFSFromValues={updateDMFT_DMFSFromValues}
         setIsEditMode={setIsEditMode}
         isUserEligibleToEdit={isUserEligibleToEdit}
+      />
+      <CommentForm
+        isOpen={openCommentDialog}
+        onClose={() => setOpenCommentDialog(false)}
+        title="Comment DMFT/DMFS Form"
+        description="Please provide your comment for the DMFT/DMFS Form."
+        handleSubmit={(comment) => {
+          handleComment(comment);
+        }}
+        comment={comment}
+      />
+      <CustomSanckbar
+        snackbarOpen={commentSnackbarOpen}
+        snackbarClose={() => setCommentSnackbarOpen(false)}
+        message="Comment has been successfully added."
       />
     </Box>
   );
