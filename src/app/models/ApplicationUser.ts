@@ -25,3 +25,8 @@ export interface ApplicationUserFormValues {
   guestUserComment?: string;
   role: ApplicationRole;
 }
+
+export interface Supervisor {
+  id: string;
+  doctorName: string;
+}

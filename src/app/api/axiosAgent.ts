@@ -10,6 +10,7 @@ import { store } from "../stores/Store";
 import {
   ApplicationUser,
   ApplicationUserFormValues,
+  Supervisor,
 } from "../models/ApplicationUser";
 import { router } from "../router/Routes";
 import { StudentGroup, Student, GroupWithExams } from "../models/Group";
@@ -233,6 +234,21 @@ const DentistTeacherOperations = {
 
   removePatientFromResearchGroup: (patientId: string) =>
     apiRequests.del<void>(`/dentistTeacher/remove-patient/${patientId}`),
+
+  superviseStudent: (studentId: string) =>
+    apiRequests.post<void>(
+      `/dentistTeacher/supervise-student/${studentId}`,
+      {}
+    ),
+
+  unsuperviseStudent: (studentId: string) =>
+    apiRequests.del<void>(`/dentistTeacher/unsupervise-student/${studentId}`),
+
+  getSupervisedStudents: () =>
+    apiRequests.get<Student[]>(`/dentistTeacher/students-supervised`),
+
+  getUnsupervisedStudents: () =>
+    apiRequests.get<Student[]>(`/dentistTeacher/students-not-supervised`),
 };
 
 const UserRequestOperations = {
@@ -386,6 +402,8 @@ const StudentOperations = {
     apiRequests.get<GroupWithExams>(
       `/student/student-group-details/${groupId}`
     ),
+
+  getSupervisors: () => apiRequests.get<Supervisor[]>("student/supervisors"),
 };
 
 const PatientExamintionCardOperations = {
