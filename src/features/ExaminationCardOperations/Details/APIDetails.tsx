@@ -5,12 +5,15 @@ import {
   Button,
   Paper,
   TextField,
-  Typography,
   useTheme,
 } from "@mui/material";
 import { APIValues } from "../../../app/models/APIBleeding";
 import { Comment } from "@mui/icons-material";
 import APIBleedingEditForm from "../Forms/APIBleedingEditForm";
+import React from "react";
+import { useStore } from "../../../app/stores/Store";
+import CommentForm from "../Forms/CommentForm";
+import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 
 interface Props {
   cardId: string;
@@ -31,6 +34,32 @@ export default observer(function APIDetails({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const {
+    userStore: { user },
+    patientExaminationCardStore: { commentAPIForm },
+  } = useStore();
+
+  const [openCommentDialog, setOpenCommentDialog] = React.useState(false);
+  const [commentSnackbarOpen, setCommentSnackbarOpen] = React.useState(false);
+
+  const isStudent = user?.role === "Student";
+  const isDoctor =
+    user?.role === "Dentist_Teacher_Examiner" ||
+    user?.role === "Dentist_Teacher_Researcher";
+
+  const comment = isStudent
+    ? api.studentComment
+    : isDoctor
+    ? api.doctorComment
+    : "";
+
+  const handleComment = async (comment: string) => {
+    await commentAPIForm(cardId, comment).then(() => {
+      setCommentSnackbarOpen(true);
+    });
+  };
+
   return (
     <Box width="100%">
       <Box
@@ -89,12 +118,10 @@ export default observer(function APIDetails({
             <Button
               color="secondary"
               startIcon={<Comment />}
-              variant="contained"
-              size="small"
+              variant="outlined"
+              onClick={() => setOpenCommentDialog(true)}
             >
-              <Typography variant="h6" fontWeight={600}>
-                Comment API Form
-              </Typography>
+              {comment ? "Edit Comment" : "Add Comment"}
             </Button>
           </Box>
         )}
@@ -105,6 +132,21 @@ export default observer(function APIDetails({
         setIsEditMode={setIsEditMode}
         isUserEligibleToEdit={isUserEligibleToEdit}
         isAPIForm
+      />
+      <CommentForm
+        isOpen={openCommentDialog}
+        onClose={() => setOpenCommentDialog(false)}
+        title="Comment API Form"
+        description="Please provide your comment for the API Form."
+        handleSubmit={(comment) => {
+          handleComment(comment);
+        }}
+        comment={comment}
+      />
+      <CustomSanckbar
+        snackbarOpen={commentSnackbarOpen}
+        snackbarClose={() => setCommentSnackbarOpen(false)}
+        message="Comment has been successfully added."
       />
     </Box>
   );

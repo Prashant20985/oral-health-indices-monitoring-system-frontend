@@ -409,13 +409,13 @@ const PatientExamintionCardOperations = {
 
   commentBeweForm: (cardId: string, comment: string) =>
     apiRequests.put<void>(
-      `/PatientExaminationCard/comment-beweForm/${cardId}?comment=${comment}`,
+      `/PatientExaminationCard/comment-bewe-form/${cardId}?comment=${comment}`,
       {}
     ),
 
   commentDMFT_DMFSForm: (cardId: string, comment: string) =>
     apiRequests.put<void>(
-      `/PatientExaminationCard/comment-dmft-dmfsForm/${cardId}?comment=${comment}`,
+      `/PatientExaminationCard/comment-dmft-dmfs-form/${cardId}?comment=${comment}`,
       {}
     ),
 
