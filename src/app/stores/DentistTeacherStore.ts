@@ -17,6 +17,8 @@ export default class DentistTeacherStore {
   email: string = "";
   selectedResearchGroup: ResearchGroup | undefined;
   selectedStudentGroup: StudentGroup | undefined;
+  supervisedStudents: Student[] = [];
+  unsupervisedStudents: Student[] = [];
 
   loading = {
     createStudentGroup: false,
@@ -35,6 +37,10 @@ export default class DentistTeacherStore {
     updateResearchGroup: false,
     addPatientToResearchGroup: false,
     removePatientFromResearchGroup: false,
+    superviseStudent: false,
+    unsuperviseStudent: false,
+    supervisedStudents: false,
+    unsupervisedStudents: false,
   };
 
   constructor() {
@@ -100,12 +106,30 @@ export default class DentistTeacherStore {
     this.patientsNotInResearchGroup = patients;
   };
 
+  setSupervisedStudents = (students: Student[]) => {
+    this.supervisedStudents = students;
+  };
+
+  setUnsupervisedStudents = (students: Student[]) => {
+    this.unsupervisedStudents = students;
+  };
+
   private getReseatchGroupDetails = (researchGroupId: string) => {
     return this.researchGroups.find((rg) => rg.id === researchGroupId);
   };
 
   private getStudentGroupDetails = (studentGroupId: string) => {
     return this.studentGroups.find((sg) => sg.id === studentGroupId);
+  };
+
+  private supervisedStudent = (studentId: string) => {
+    return this.supervisedStudents.find((student) => student.id === studentId);
+  };
+
+  private unsupervisedStudent = (studentId: string) => {
+    return this.unsupervisedStudents.find(
+      (student) => student.id === studentId
+    );
   };
 
   createStudentGroup = async (groupName: string) => {
@@ -478,6 +502,78 @@ export default class DentistTeacherStore {
       runInAction(() => {
         this.loading.removePatientFromResearchGroup = false;
       });
+      throw error;
+    }
+  };
+
+  fetchSupervisedStudents = async () => {
+    this.loading.supervisedStudents = true;
+    try {
+      const result =
+        await axiosAgent.DentistTeacherOperations.getSupervisedStudents();
+      runInAction(() => {
+        this.setSupervisedStudents(result);
+        this.loading.supervisedStudents = false;
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.loading.supervisedStudents = false));
+    }
+  };
+
+  fetchUnsupervisedStudents = async () => {
+    this.loading.unsupervisedStudents = true;
+    try {
+      const result =
+        await axiosAgent.DentistTeacherOperations.getUnsupervisedStudents();
+      runInAction(() => {
+        this.setUnsupervisedStudents(result);
+        this.loading.unsupervisedStudents = false;
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.loading.unsupervisedStudents = false));
+    }
+  };
+
+  superviseStudent = async (studentId: string) => {
+    this.loading.superviseStudent = true;
+    try {
+      await axiosAgent.DentistTeacherOperations.superviseStudent(studentId);
+      runInAction(() => {
+        const student = this.unsupervisedStudent(studentId);
+        if (student) {
+          this.supervisedStudents.push(student);
+        }
+        this.unsupervisedStudents = this.unsupervisedStudents.filter(
+          (student) => student.id !== studentId
+        );
+        this.loading.superviseStudent = false;
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.loading.superviseStudent = false));
+      throw error;
+    }
+  };
+
+  unsuperviseStudent = async (studentId: string) => {
+    this.loading.unsuperviseStudent = true;
+    try {
+      await axiosAgent.DentistTeacherOperations.unsuperviseStudent(studentId);
+      runInAction(() => {
+        const student = this.supervisedStudent(studentId);
+        if (student) {
+          this.unsupervisedStudents.push(student);
+        }
+        this.supervisedStudents = this.supervisedStudents.filter(
+          (student) => student.id !== studentId
+        );
+        this.loading.unsuperviseStudent = false;
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.loading.unsuperviseStudent = false));
       throw error;
     }
   };
