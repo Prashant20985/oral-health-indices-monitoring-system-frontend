@@ -3,6 +3,8 @@ import { PatientExaminationCard } from "../../../app/models/PatientExaminationCa
 import { Box, Alert, Typography, Grid } from "@mui/material";
 import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
 import PatientExaminationCardItem from "./PatientExaminationCardItem";
+import React from "react";
+import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 
 interface Props {
   patientExaminationCards: [string, PatientExaminationCard[]][];
@@ -15,6 +17,7 @@ export default observer(function PatientExaminationCardsList({
   loading,
   patientId,
 }: Props) {
+  const [openDeleteSnackbar, setOpenDeleteSnackbar] = React.useState(false);
   return (
     <Box>
       {loading ? (
@@ -47,10 +50,16 @@ export default observer(function PatientExaminationCardsList({
                           <PatientExaminationCardItem
                             patientExaminationCard={patientExaminationCard}
                             patientId={patientId}
+                            setOpenDeleteSnackbar={setOpenDeleteSnackbar}
                           />
                         </Grid>
                       ))}
                     </Grid>
+                    <CustomSanckbar
+                      snackbarClose={() => setOpenDeleteSnackbar(false)}
+                      snackbarOpen={openDeleteSnackbar}
+                      message="Card has been deleted successfully"
+                    />
                   </Box>
                 )
               )}

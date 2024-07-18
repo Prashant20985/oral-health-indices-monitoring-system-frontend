@@ -257,7 +257,7 @@ export default observer(function PatientExaminationDetailsHeaderCard({
           </Box>
         </CardContent>
         <CardActions sx={{ gap: 2, p: 2 }}>
-          {isUserEligibleToEdit && (
+          {isUserEligibleToEdit && !patientExaminationCard.isRegularMode && (
             <Button
               color="info"
               variant="outlined"
