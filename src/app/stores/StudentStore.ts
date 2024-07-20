@@ -2,14 +2,17 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { GroupWithExams } from "../models/Group";
 import axiosAgent from "../api/axiosAgent";
 import { Exam } from "../models/StudentExam";
+import { Supervisor } from "../models/ApplicationUser";
 
 export default class StudentStore {
   studentGroupsWithExams: GroupWithExams[] = [];
   studentGroupDetails: GroupWithExams | null = null;
+  supervisors: Supervisor[] = [];
 
   loading = {
     studentGroupsWithExams: false,
     studentGroupDetails: false,
+    supervisors: false,
   };
 
   constructor() {
@@ -22,6 +25,10 @@ export default class StudentStore {
 
   setStudentGroupDetails(group: GroupWithExams | null) {
     this.studentGroupDetails = group;
+  }
+
+  setSupervisors(supervisors: Supervisor[]) {
+    this.supervisors = supervisors;
   }
 
   get groupedStudentExams() {
@@ -106,6 +113,21 @@ export default class StudentStore {
     } catch (error) {
       this.loading.studentGroupDetails = false;
       console.log(error);
+    }
+  };
+
+  fetchSupervisors = async () => {
+    this.loading.supervisors = true;
+    try {
+      const supervisors = await axiosAgent.StudentOperations.getSupervisors();
+      runInAction(() => {
+        this.setSupervisors(supervisors);
+        this.loading.supervisors = false;
+      });
+    } catch (error) {
+      this.loading.supervisors = false;
+      console.log(error);
+      throw error;
     }
   };
 }

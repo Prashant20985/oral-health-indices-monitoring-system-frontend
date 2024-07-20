@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as React from "react";
 import { useStore } from "../../../app/stores/Store";
 import { Box, Typography, useTheme, Tab, Button } from "@mui/material";
@@ -9,14 +9,13 @@ import { Details, Assessment, ChevronLeft, Add } from "@mui/icons-material";
 import PatientDetails from "./PatientDetails";
 import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
 import PatientExaminationCardsList from "../../ExaminationCardOperations/List/PatientExaminationCardsList";
+import { router } from "../../../app/router/Routes";
 
 export default observer(function PatientProfile() {
   const { id } = useParams();
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
-
-  const navigate = useNavigate();
 
   const {
     patientStore: { fetchPatientDetails, patientDetails, loading },
@@ -53,12 +52,23 @@ export default observer(function PatientProfile() {
           variant="text"
           color="info"
           startIcon={<ChevronLeft />}
-          onClick={() => navigate(-1)}
+          onClick={() => {
+            if (patientDetails?.isArchived) {
+              router.navigate("/archived-patients");
+            } else {
+              router.navigate("/active-patients");
+            }
+          }}
           size="small"
         >
           Back
         </Button>
-        <Button variant="contained" color="success" startIcon={<Add />}>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => router.navigate(`/create-card/${id!}`)}
+          startIcon={<Add />}
+        >
           Add Examination Card
         </Button>
       </Box>

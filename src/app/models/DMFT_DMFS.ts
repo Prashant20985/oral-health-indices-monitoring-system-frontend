@@ -32,7 +32,7 @@ export interface DMFT_DMFSFormValues {
   dmftResult: number;
   dmfsResult: number;
   prostheticStatus: string;
-  dmfT_DMFSAssessmentModel: DMFT_DMFSAssessmentModel;
+  assessmentModel: DMFT_DMFSAssessmentModel;
 }
  
 export interface UpdateDMFT_DMFSFormValues {

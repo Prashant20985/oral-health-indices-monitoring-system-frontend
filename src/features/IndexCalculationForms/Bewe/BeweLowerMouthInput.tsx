@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import * as React from "react";
 import { BeweAssessmentModel } from "../../../app/models/Bewe";
 import FiveSurfaceBeweToothInput from "../../../app/common/formInputs/ToothInputs/FiveSurfaceBeweToothInput";
@@ -20,9 +20,9 @@ export default React.memo(function BeweLowerMouthInput({
   name,
 }: Props) {
   return (
-    <Box>
+    <Box display="flex" gap={2}>
       {/* Sectant 6 */}
-      <>
+      <Box>
         {[47, 46, 45, 44].map((toothNumber) => (
           <FiveSurfaceBeweToothInput
             key={toothNumber}
@@ -40,48 +40,60 @@ export default React.memo(function BeweLowerMouthInput({
             readOnly={isView}
           />
         ))}
-      </>
+        <Box width="100%" display="flex" justifyContent="center" mt={0.5}>
+          <Typography variant="h4" fontWeight={600}>
+            Sectant 6
+          </Typography>
+        </Box>
+      </Box>
       {/* Sectant 5 */}
-      <>
-        {[43, 42, 41].map((toothNumber) => (
-          <FourSurfaceToothInput
-            key={toothNumber}
-            surfaces={
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (beweAssessmentModel.sectant5 as any)[`tooth_${toothNumber}`]
-            }
-            toothNumber={`tooth_${toothNumber}`}
-            name={
-              name !== undefined
-                ? `${name}.sectant5.tooth_${toothNumber}`
-                : `sectant5.tooth_${toothNumber}`
-            }
-            onChange={handleChange}
-            readOnly={isView}
-          />
-        ))}
-      </>
-      <>
-        {[31, 32, 33].map((toothNumber) => (
-          <InverseFourSurfaceToothInput
-            key={toothNumber}
-            surfaces={
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (beweAssessmentModel.sectant5 as any)[`tooth_${toothNumber}`]
-            }
-            toothNumber={`tooth_${toothNumber}`}
-            name={
-              name !== undefined
-                ? `${name}.sectant5.tooth_${toothNumber}`
-                : `sectant5.tooth_${toothNumber}`
-            }
-            onChange={handleChange}
-            readOnly={isView}
-          />
-        ))}
-      </>
+      <Box>
+        <>
+          {[43, 42, 41].map((toothNumber) => (
+            <FourSurfaceToothInput
+              key={toothNumber}
+              surfaces={
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (beweAssessmentModel.sectant5 as any)[`tooth_${toothNumber}`]
+              }
+              toothNumber={`tooth_${toothNumber}`}
+              name={
+                name !== undefined
+                  ? `${name}.sectant5.tooth_${toothNumber}`
+                  : `sectant5.tooth_${toothNumber}`
+              }
+              onChange={handleChange}
+              readOnly={isView}
+            />
+          ))}
+        </>
+        <>
+          {[31, 32, 33].map((toothNumber) => (
+            <InverseFourSurfaceToothInput
+              key={toothNumber}
+              surfaces={
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (beweAssessmentModel.sectant5 as any)[`tooth_${toothNumber}`]
+              }
+              toothNumber={`tooth_${toothNumber}`}
+              name={
+                name !== undefined
+                  ? `${name}.sectant5.tooth_${toothNumber}`
+                  : `sectant5.tooth_${toothNumber}`
+              }
+              onChange={handleChange}
+              readOnly={isView}
+            />
+          ))}
+        </>
+        <Box width="100%" display="flex" justifyContent="center" mt={0.5}>
+          <Typography variant="h4" fontWeight={600}>
+            Sectant 5
+          </Typography>
+        </Box>
+      </Box>
       {/* Sectant 4 */}
-      <>
+      <Box>
         {[34, 35, 36, 37].map((toothNumber) => (
           <InverseFiveSurfaceBeweToothInput
             key={toothNumber}
@@ -99,7 +111,12 @@ export default React.memo(function BeweLowerMouthInput({
             readOnly={isView}
           />
         ))}
-      </>
+        <Box width="100%" display="flex" justifyContent="center" mt={0.5}>
+          <Typography variant="h4" fontWeight={600}>
+            Sectant 4
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   );
 });

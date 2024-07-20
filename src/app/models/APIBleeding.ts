@@ -56,7 +56,7 @@ export interface APIValues {
   studentComment: string;
   assessmentModel: APIBleedingAssessmentModel;
 }
- 
+
 export interface BleedingValues {
   id: string;
   bleedingResult: number;
@@ -66,13 +66,13 @@ export interface BleedingValues {
   studentComment: string;
   assessmentModel: APIBleedingAssessmentModel;
 }
- 
+
 export interface BleedingFormValues {
   comment: string;
-  bleedingAssessmentModel: APIBleedingAssessmentModel;
+  assessmentModel: APIBleedingAssessmentModel;
 }
- 
+
 export interface APIFormValues {
   comment: string;
-  apiAssessmentModel: APIBleedingAssessmentModel;
+  assessmentModel: APIBleedingAssessmentModel;
 }

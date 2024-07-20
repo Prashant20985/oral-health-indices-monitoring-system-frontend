@@ -29,6 +29,7 @@ import SolveExamMultiStepForm from "../../features/StudentExamOperations/Forms/S
 import ActivePatientsList from "../../features/PatientOperations/List/ActivePatients/ActivePatientsList";
 import ArchivedPatientsList from "../../features/PatientOperations/List/ArchivedPatients/ArchivedPatientsList";
 import PatientExaminationCardDetails from "../../features/ExaminationCardOperations/Details/PatientExaminationCardDetails";
+import CreatePatientExaminationCardMultiStepForm from "../../features/ExaminationCardOperations/Forms/CreatePatientExaminationCard/CreatePatientExaminationCardMultiStepForm";
 
 const routes: RouteObject[] = [
   {
@@ -160,6 +161,10 @@ const routes: RouteObject[] = [
           {
             path: "patient-profile/:id/:cardId",
             element: <PatientExaminationCardDetails />,
+          },
+          {
+            path: "create-card/:id",
+            element: <CreatePatientExaminationCardMultiStepForm />,
           },
         ],
       },
