@@ -32,6 +32,7 @@ import PatientExaminationCardDetails from "../../features/ExaminationCardOperati
 import CreatePatientExaminationCardMultiStepForm from "../../features/ExaminationCardOperations/Forms/CreatePatientExaminationCard/CreatePatientExaminationCardMultiStepForm";
 import SupervisedStduents from "../../features/DentistTeacherOperations/List/SuperviseStudents/SupervisedStduents";
 import UnsupervisedStudents from "../../features/DentistTeacherOperations/List/SuperviseStudents/UnsupervisedStudents";
+import PatientExaminationCardsAssignedToDoctor from "../../features/DentistTeacherOperations/List/ExaminationCardsAssignedToDoctor/PatientExaminationCardsAssignedToDoctor";
 
 const routes: RouteObject[] = [
   {
@@ -141,6 +142,10 @@ const routes: RouteObject[] = [
           {
             path: "unsupervised-students",
             element: <UnsupervisedStudents />,
+          },
+          {
+            path: "assigned-cards",
+            element: <PatientExaminationCardsAssignedToDoctor />,
           },
         ],
       },

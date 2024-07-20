@@ -9,7 +9,7 @@ import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 interface Props {
   patientExaminationCards: [string, PatientExaminationCard[]][];
   loading: boolean;
-  patientId: string;
+  patientId?: string;
 }
 
 export default observer(function PatientExaminationCardsList({
@@ -24,8 +24,8 @@ export default observer(function PatientExaminationCardsList({
         <ButtonLoadingComponent />
       ) : (
         <>
-          {patientExaminationCards.length < 0 ? (
-            <Alert severity="info" variant="outlined">
+          {patientExaminationCards.length <= 0 ? (
+            <Alert severity="info" variant="outlined" sx={{ mt: 4 }}>
               <Typography variant="h5">No examination cards found</Typography>
             </Alert>
           ) : (

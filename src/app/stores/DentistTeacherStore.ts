@@ -132,6 +132,13 @@ export default class DentistTeacherStore {
     );
   };
 
+  get supervisedStudentNameEmailWithId() {
+    return this.supervisedStudents.map((student) => ({
+      name: `${student.firstName} ${student.lastName} (${student.email})`,
+      id: student.id,
+    }));
+  }
+
   createStudentGroup = async (groupName: string) => {
     this.loading.createStudentGroup = true;
     try {

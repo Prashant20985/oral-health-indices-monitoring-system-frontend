@@ -1,5 +1,6 @@
 import {
   ArchiveOutlined,
+  Assignment,
   BiotechOutlined,
   Groups3,
   LocalHospitalOutlined,
@@ -50,6 +51,11 @@ export default observer(function DentistTeacherNavOptions({ open }: Props) {
       title: "Supervised Students",
       path: "/supervised-students",
       icon: <SchoolOutlined />,
+    },
+    {
+      title: "Assigned Cards",
+      path: "/assigned-cards",
+      icon: <Assignment />,
     },
   ];
 

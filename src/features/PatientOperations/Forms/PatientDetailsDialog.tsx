@@ -15,29 +15,36 @@ import { Patient } from "../../../app/models/Patient";
 import { Close } from "@mui/icons-material";
 
 interface Props {
-  patientId: string;
+  patientId?: string;
   isOpen: boolean;
   onClose: () => void;
+  patientDetails?: Patient;
 }
 
 export default observer(function PatientDetailsDialog({
   patientId,
   isOpen,
   onClose,
+  patientDetails,
 }: Props) {
-  const [patient, setPatient] = React.useState<Patient | null>(null);
+  const [patient, setPatient] = React.useState<Patient | null>(
+    patientDetails ?? null
+  );
+
   const {
     patientStore: { getPatientById },
   } = useStore();
 
   React.useEffect(() => {
-    if (patientId) {
-      const patientDetails = getPatientById(patientId);
-      if (patientDetails) {
-        setPatient(patientDetails);
+    if (!patientDetails) {
+      if (patientId) {
+        const patientDetails = getPatientById(patientId);
+        if (patientDetails) {
+          setPatient(patientDetails);
+        }
       }
     }
-  }, [patientId, getPatientById]);
+  }, [patientId, getPatientById, patientDetails]);
 
   return (
     <Dialog

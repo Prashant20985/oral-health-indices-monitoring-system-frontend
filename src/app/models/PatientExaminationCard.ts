@@ -6,6 +6,7 @@ import {
 } from "./APIBleeding";
 import { BeweFormValues, BeweValues } from "./Bewe";
 import { DMFT_DMFSFormValues, DMFT_DMFSValues } from "./DMFT_DMFS";
+import { Patient } from "./Patient";
 import {
   RiskFactorAssessment,
   RiskFactorAssessmentModel,
@@ -22,6 +23,7 @@ export interface PatientExaminationCard {
   isRegularMode: boolean;
   totalScore: number;
   dateOfExamination: Date;
+  patient: Patient;
   summary: Summary;
   riskFactorAssessment: RiskFactorAssessment;
   patientExaminationResult: {

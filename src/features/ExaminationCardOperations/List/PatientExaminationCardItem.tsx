@@ -15,16 +15,17 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { Delete, DoubleArrow, Medication } from "@mui/icons-material";
+import { Delete, DoubleArrow, Medication, Person } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
 import { router } from "../../../app/router/Routes";
 import React from "react";
 import { useStore } from "../../../app/stores/Store";
 import DeleteConfirmation from "../Forms/DeleteConfirmation";
+import PatientDetailsDialog from "../../PatientOperations/Forms/PatientDetailsDialog";
 
 interface Props {
   patientExaminationCard: PatientExaminationCard;
-  patientId: string;
+  patientId?: string;
   setOpenDeleteSnackbar: (value: boolean) => void;
 }
 
@@ -38,6 +39,8 @@ export default observer(function ExaminationCardItem({
 
   const [openDeleteConfirmation, setOpenDeleteConfirmation] =
     React.useState(false);
+
+  const [openPatientDetails, setOpenPatientDetails] = React.useState(false);
 
   const {
     patientExaminationCardStore: { deletePatientExaminationCard },
@@ -123,28 +126,56 @@ export default observer(function ExaminationCardItem({
         />
       </CardContent>
       <CardActions>
-        <IconButton onClick={() => setOpenDeleteConfirmation(true)}>
+        <IconButton
+          onClick={() => {
+            setOpenDeleteConfirmation(true);
+            console.log(patientExaminationCard);
+          }}
+        >
           <Delete />
         </IconButton>
         <Box display="flex" justifyContent="flex-end" width="100%">
-          <Button
-            variant="outlined"
-            color={theme.palette.mode === "dark" ? "secondary" : "info"}
-            endIcon={<DoubleArrow />}
-            onClick={() =>
-              router.navigate(
-                `/patient-profile/${patientId}/${patientExaminationCard.id}`
-              )
-            }
-          >
-            View Card
-          </Button>
+          <Box display="flex" gap={2}>
+            {patientExaminationCard.patient && (
+              <Button
+                color="info"
+                variant="outlined"
+                startIcon={<Person />}
+                onClick={() => setOpenPatientDetails(true)}
+              >
+                Patient Details
+              </Button>
+            )}
+            <Button
+              variant="outlined"
+              color={theme.palette.mode === "dark" ? "secondary" : "info"}
+              endIcon={<DoubleArrow />}
+              onClick={() => {
+                if (patientExaminationCard.patient) {
+                  router.navigate(
+                    `/patient-profile/${patientExaminationCard.patient.id}/${patientExaminationCard.id}`
+                  );
+                } else {
+                  router.navigate(
+                    `/patient-profile/${patientId}/${patientExaminationCard.id}`
+                  );
+                }
+              }}
+            >
+              View Card
+            </Button>
+          </Box>
         </Box>
       </CardActions>
       <DeleteConfirmation
         isOpen={openDeleteConfirmation}
         onClose={() => setOpenDeleteConfirmation(false)}
         handleDelete={handleDelete}
+      />
+      <PatientDetailsDialog
+        isOpen={openPatientDetails}
+        onClose={() => setOpenPatientDetails(false)}
+        patientDetails={patientExaminationCard.patient}
       />
     </Card>
   );
