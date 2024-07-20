@@ -20,7 +20,7 @@ export interface BeweValues {
 
 export interface BeweFormValues {
   comment: string;
-  beweAssessmentModel: BeweAssessmentModel;
+  assessmentModel: BeweAssessmentModel;
 }
 
 export interface BeweAssessmentModel {

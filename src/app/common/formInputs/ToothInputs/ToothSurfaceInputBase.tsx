@@ -39,7 +39,7 @@ export default React.memo(function InPutBaseToothSurface({
       error={error}
       readOnly={readOnly}
       sx={{
-        border: `1px solid ${color.grey[100]}`,
+        border: disabled ? `1px, solid` : `1px solid ${color.grey[100]}`,
         borderRadius: 1,
         height: height,
         width: width,
