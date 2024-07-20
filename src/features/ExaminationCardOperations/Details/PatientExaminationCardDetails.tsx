@@ -2,16 +2,13 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/Store";
 import { useParams } from "react-router-dom";
 import React from "react";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
 import PatientExaminationDetailsHeaderCard from "./PatientExaminationDetailsHeaderCard";
 import IndexFormTabs from "./IndexFormTabs";
-import { ChevronLeft } from "@mui/icons-material";
-import { router } from "../../../app/router/Routes";
 
 export default observer(function PatientExaminationCardDetails() {
   const { cardId } = useParams<{ cardId: string }>();
-  const { id } = useParams<{ id: string }>();
 
   const {
     patientExaminationCardStore: {
@@ -45,17 +42,6 @@ export default observer(function PatientExaminationCardDetails() {
         </Box>
       ) : patientExaminationCardDetails !== null ? (
         <Box>
-          <Box mb={1}>
-            <Button
-              variant="text"
-              color="info"
-              startIcon={<ChevronLeft />}
-              onClick={() => router.navigate(`/patient-profile/${id}`)}
-              size="small"
-            >
-              Back
-            </Button>
-          </Box>
           <PatientExaminationDetailsHeaderCard
             patientExaminationCard={patientExaminationCardDetails}
             isUserEligibleToComment={isUserEligibleToComment}

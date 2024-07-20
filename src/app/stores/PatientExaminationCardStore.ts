@@ -88,6 +88,18 @@ export class PatientExaminationCardStore {
     });
   }
 
+  setYear = (year: number) => {
+    this.year = year;
+  };
+
+  setMonth = (month: number) => {
+    this.month = month;
+  };
+
+  setStudentId = (studentId: string) => {
+    this.studentId = studentId;
+  };
+
   getExaminationCardById(id: string) {
     return Array.from(this.patientExaminationCards.values())
       .concat(Array.from(this.patientExaminationCardsAssignedToDoctor.values()))
@@ -126,9 +138,11 @@ export class PatientExaminationCardStore {
     return Object.entries(
       this.patientExaminationCardsAssignedToDoctorByDate.reduce(
         (patientExaminationCards, patientExaminationCard) => {
-          const year = patientExaminationCard.dateOfExamination.getFullYear();
+          const year = new Date(
+            patientExaminationCard.dateOfExamination
+          ).getFullYear();
           const month = (
-            patientExaminationCard.dateOfExamination.getMonth() + 1
+            new Date(patientExaminationCard.dateOfExamination).getMonth() + 1
           )
             .toString()
             .padStart(2, "0");
@@ -166,7 +180,7 @@ export class PatientExaminationCardStore {
     const params = new URLSearchParams();
     params.append("year", this.year.toString());
     params.append("month", this.month.toString());
-    params.append("studentId", this.studentId);
+    params.append("studentId", this.studentId ?? "");
     return params;
   }
 
@@ -264,6 +278,7 @@ export class PatientExaminationCardStore {
           this.patientExaminationCardsAssignedToDoctorAxiosParams
         );
       runInAction(() => {
+        this.clearPatientExaminationCardsAssignedToDoctor();
         this.setPatientExaminationCardsAssignedToDoctor(
           patientExaminationCards
         );
