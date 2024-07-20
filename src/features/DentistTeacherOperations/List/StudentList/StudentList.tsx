@@ -1,12 +1,5 @@
 import { observer } from "mobx-react-lite";
-import {
-  Avatar,
-  Box,
-  IconButton,
-  Tooltip,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Avatar, Box, Button, Typography, useTheme } from "@mui/material";
 import * as React from "react";
 import { colors } from "../../../../themeConfig";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
@@ -20,7 +13,9 @@ interface Props {
   students: Student[];
   loading?: boolean;
   studentsInGroupList?: boolean;
-  groupId: string;
+  groupId?: string;
+  isSupervisedStudents?: boolean;
+  isUnsupervisedStudents?: boolean;
 }
 
 export default observer(function StudentList({
@@ -28,6 +23,8 @@ export default observer(function StudentList({
   loading = false,
   studentsInGroupList = true,
   groupId,
+  isSupervisedStudents,
+  isUnsupervisedStudents,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -42,7 +39,7 @@ export default observer(function StudentList({
 
   const handleRemoveStudentFromGroupClick = async (studentId: string) => {
     await dentistTeacherStore
-      .removeStudentFromStudentGroup(groupId, studentId)
+      .removeStudentFromStudentGroup(groupId!, studentId)
       .then(() => {
         const updatedStudents = studentsList.filter((s) => s.id !== studentId);
         setStudentsList(updatedStudents);
@@ -51,11 +48,25 @@ export default observer(function StudentList({
 
   const handleAddStudentsToGroupClick = async (student: Student) => {
     await dentistTeacherStore
-      .addStudentToStudentGroup(groupId, student)
+      .addStudentToStudentGroup(groupId!, student)
       .then(() => {
         const updatedStudents = studentsList.filter((s) => s.id !== student.id);
         setStudentsList(updatedStudents);
       });
+  };
+
+  const handleSuperviseStudentClick = async (studentId: string) => {
+    await dentistTeacherStore.superviseStudent(studentId).then(() => {
+      const updatedStudents = studentsList.filter((s) => s.id !== studentId);
+      setStudentsList(updatedStudents);
+    });
+  };
+
+  const handleUnSpuerviseStudentClick = async (studentId: string) => {
+    await dentistTeacherStore.unsuperviseStudent(studentId).then(() => {
+      const updatedStudents = studentsList.filter((s) => s.id !== studentId);
+      setStudentsList(updatedStudents);
+    });
   };
 
   const columns: GridColDef[] = [
@@ -108,37 +119,52 @@ export default observer(function StudentList({
       renderCell: ({ row }) => {
         const { id } = row || {};
         return (
-          <Box display="flex" justifyContent="center" width="100%">
-            <Box
-              display="flex"
-              width="50%"
-              justifyContent="center"
-              sx={{
-                backgroundColor: studentsInGroupList
-                  ? color.redAccent[600]
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{
+              backgroundColor:
+                studentsInGroupList || isSupervisedStudents
+                  ? color.pinkAccent[600]
                   : color.greenAccent[600],
-                borderRadius: "4px",
-              }}
-            >
-              {studentsInGroupList ? (
-                <Tooltip title="Remove From Group">
-                  <IconButton
-                    onClick={() => handleRemoveStudentFromGroupClick(id)}
-                  >
-                    <DeleteForever color="primary" />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Add To Group">
-                  <IconButton
-                    onClick={() => handleAddStudentsToGroupClick(row)}
-                  >
-                    <PersonAdd color="primary" />
-                  </IconButton>
-                </Tooltip>
-              )}
-            </Box>
-          </Box>
+              "&:hover": {
+                backgroundColor:
+                  studentsInGroupList || isSupervisedStudents
+                    ? color.pinkAccent[700]
+                    : color.greenAccent[700],
+              },
+            }}
+            onClick={() => {
+              if (isSupervisedStudents) {
+                handleUnSpuerviseStudentClick(id);
+              } else if (isUnsupervisedStudents) {
+                handleSuperviseStudentClick(id);
+              } else if (studentsInGroupList) {
+                handleRemoveStudentFromGroupClick(id);
+              } else {
+                handleAddStudentsToGroupClick(row as Student);
+              }
+            }}
+            startIcon={
+              <>
+                {studentsInGroupList || isSupervisedStudents ? (
+                  <DeleteForever />
+                ) : !studentsInGroupList || isUnsupervisedStudents ? (
+                  <PersonAdd />
+                ) : null}
+              </>
+            }
+          >
+            {studentsInGroupList || isSupervisedStudents
+              ? isSupervisedStudents
+                ? "Unsupervise Student"
+                : "Remove From Group"
+              : !studentsInGroupList || isUnsupervisedStudents
+              ? isUnsupervisedStudents
+                ? "Supervise Student"
+                : "Add To Group"
+              : null}
+          </Button>
         );
       },
     },

@@ -30,6 +30,8 @@ import ActivePatientsList from "../../features/PatientOperations/List/ActivePati
 import ArchivedPatientsList from "../../features/PatientOperations/List/ArchivedPatients/ArchivedPatientsList";
 import PatientExaminationCardDetails from "../../features/ExaminationCardOperations/Details/PatientExaminationCardDetails";
 import CreatePatientExaminationCardMultiStepForm from "../../features/ExaminationCardOperations/Forms/CreatePatientExaminationCard/CreatePatientExaminationCardMultiStepForm";
+import SupervisedStduents from "../../features/DentistTeacherOperations/List/SuperviseStudents/SupervisedStduents";
+import UnsupervisedStudents from "../../features/DentistTeacherOperations/List/SuperviseStudents/UnsupervisedStudents";
 
 const routes: RouteObject[] = [
   {
@@ -83,10 +85,25 @@ const routes: RouteObject[] = [
       },
       {
         element: (
-          <RequireAuthentication
-            roles={["Dentist_Teacher_Examiner", "Dentist_Teacher_Researcher"]}
-          />
+          <RequireAuthentication roles={["Dentist_Teacher_Researcher"]} />
         ),
+        children: [
+          {
+            path: "research-groups",
+            element: <ResearchGroupList />,
+          },
+          {
+            path: "research-groups/:id",
+            element: <ResearchGroupDetails />,
+          },
+          {
+            path: "research-groups/:id/add-patients",
+            element: <PatientsNotInResearchGroupList />,
+          },
+        ],
+      },
+      {
+        element: <RequireAuthentication roles={["Dentist_Teacher_Examiner"]} />,
         children: [
           {
             path: "student-groups",
@@ -101,24 +118,29 @@ const routes: RouteObject[] = [
             element: <StudentsNotInStudentGroupList />,
           },
           {
-            path: "research-groups",
-            element: <ResearchGroupList />,
-          },
-          {
-            path: "research-groups/:id",
-            element: <ResearchGroupDetails />,
-          },
-          {
-            path: "research-groups/:id/add-patients",
-            element: <PatientsNotInResearchGroupList />,
-          },
-          {
             path: "exam-details/:examId",
             element: <ExamDetails />,
           },
           {
             path: "exam-details/:examId/:cardId",
             element: <ExamSolutionDetailsForTeacher />,
+          },
+        ],
+      },
+      {
+        element: (
+          <RequireAuthentication
+            roles={["Dentist_Teacher_Examiner", "Dentist_Teacher_Researcher"]}
+          />
+        ),
+        children: [
+          {
+            path: "supervised-students",
+            element: <SupervisedStduents />,
+          },
+          {
+            path: "unsupervised-students",
+            element: <UnsupervisedStudents />,
           },
         ],
       },
