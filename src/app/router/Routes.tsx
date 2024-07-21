@@ -33,6 +33,7 @@ import CreatePatientExaminationCardMultiStepForm from "../../features/Examinatio
 import SupervisedStduents from "../../features/DentistTeacherOperations/List/SuperviseStudents/SupervisedStduents";
 import UnsupervisedStudents from "../../features/DentistTeacherOperations/List/SuperviseStudents/UnsupervisedStudents";
 import PatientExaminationCardsAssignedToDoctor from "../../features/DentistTeacherOperations/List/ExaminationCardsAssignedToDoctor/PatientExaminationCardsAssignedToDoctor";
+import Logs from "../../features/AdminOperations/Logs/Logs";
 
 const routes: RouteObject[] = [
   {
@@ -81,6 +82,10 @@ const routes: RouteObject[] = [
           {
             path: "admin/requests",
             element: <UserRequestListForAdmin />,
+          },
+          {
+            path: "admin/logs",
+            element: <Logs />,
           },
         ],
       },
