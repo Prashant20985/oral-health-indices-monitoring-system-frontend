@@ -4,6 +4,7 @@ import {
   ApplicationUserFormValues,
 } from "../models/ApplicationUser";
 import axiosAgent from "../api/axiosAgent";
+import { LogResponse } from "../models/Logs";
 
 export default class AdminStore {
   selectedApplicationUser: ApplicationUser | undefined;
@@ -11,6 +12,7 @@ export default class AdminStore {
   deactivatedApplicationUsers: ApplicationUser[] = [];
   deletedApplicationUsers: ApplicationUser[] = [];
   csvAddResponse: string = "";
+  logResponse: LogResponse = { logs: [], totalCount: 0 };
 
   activeApplicationUsersSearchTerm: string = "";
   activeApplicationUsersUserType: string = "";
@@ -24,6 +26,22 @@ export default class AdminStore {
   deletedApplicationUsersUserType: string = "";
   deletedApplicationUsersRole: string = "";
 
+  logsSearchParams: {
+    startDate: Date;
+    endDate: Date;
+    userName: string;
+    level: string;
+    pageNumber: number;
+    pageSize: number;
+  } = {
+    startDate: new Date(),
+    endDate: new Date(),
+    userName: "",
+    level: "",
+    pageNumber: 1,
+    pageSize: 50,
+  };
+
   loading = {
     activeApplicationUsers: false,
     deactivatdApplicationUsers: false,
@@ -34,6 +52,7 @@ export default class AdminStore {
     changeActivationStatus: false,
     updateUser: false,
     userDetails: false,
+    logs: false,
   };
 
   constructor() {
@@ -69,6 +88,20 @@ export default class AdminStore {
       }),
       () => {
         this.fetchDeletedApplicationUsers();
+      }
+    );
+
+    reaction(
+      () => ({
+        startDate: this.logsSearchParams.startDate,
+        endDate: this.logsSearchParams.endDate,
+        userName: this.logsSearchParams.userName,
+        level: this.logsSearchParams.level,
+        pageNumber: this.logsSearchParams.pageNumber,
+        pageSize: this.logsSearchParams.pageSize,
+      }),
+      () => {
+        this.loadLogs();
       }
     );
   }
@@ -129,6 +162,30 @@ export default class AdminStore {
     this.selectedApplicationUser = undefined;
   };
 
+  setLogSearchhParamsStartDate = (date: Date) => {
+    this.logsSearchParams.startDate = date;
+  };
+
+  setLogSearchParamsEndDate = (date: Date) => {
+    this.logsSearchParams.endDate = date;
+  };
+
+  setLogSearchParamsUserName = (userName: string) => {
+    this.logsSearchParams.userName = userName;
+  };
+
+  setLogSearchParamsLevel = (level: string) => {
+    this.logsSearchParams.level = level;
+  };
+
+  setLogSearchParamsPageNumber = (pageNumber: number) => {
+    this.logsSearchParams.pageNumber = pageNumber;
+  };
+
+  setLogSearchParamsPageSize = (pageSize: number) => {
+    this.logsSearchParams.pageSize = pageSize;
+  };
+
   clearActiveApplicationUsersFilters = () => {
     this.setActiveApplicationUsersSearchTerm("");
     this.setActiveApplicationUsersUserType("");
@@ -168,6 +225,17 @@ export default class AdminStore {
     params.append("searchTerm", this.deletedApplicationUsersSearchTerm);
     params.append("userType", this.deletedApplicationUsersUserType);
     params.append("role", this.deletedApplicationUsersRole);
+    return params;
+  }
+
+  get logsAxiosParams() {
+    const params = new URLSearchParams();
+    params.append("startDate", this.logsSearchParams.startDate.toISOString());
+    params.append("endDate", this.logsSearchParams.endDate.toISOString());
+    params.append("userName", this.logsSearchParams.userName);
+    params.append("level", this.logsSearchParams.level);
+    params.append("pageNumber", this.logsSearchParams.pageNumber.toString());
+    params.append("pageSize", this.logsSearchParams.pageSize.toString());
     return params;
   }
 
@@ -370,6 +438,25 @@ export default class AdminStore {
       console.log(error);
       runInAction(() => {
         this.loading.changeActivationStatus = false;
+      });
+      throw error;
+    }
+  };
+
+  loadLogs = async () => {
+    this.loading.logs = true;
+    try {
+      const response = await axiosAgent.AdminOperations.logs(
+        this.logsAxiosParams
+      );
+      runInAction(() => {
+        this.loading.logs = false;
+        this.logResponse = response;
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => {
+        this.loading.logs = false;
       });
       throw error;
     }

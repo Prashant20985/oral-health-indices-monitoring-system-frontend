@@ -41,6 +41,7 @@ import { UpdateDMFT_DMFSFormValues } from "../models/DMFT_DMFS";
 import { APIBleedingAssessmentModel } from "../models/APIBleeding";
 import { BeweAssessmentModel } from "../models/Bewe";
 import { Summary } from "../models/Summary";
+import { LogResponse } from "../models/Logs";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -151,6 +152,9 @@ const AdminOperations = {
 
   changeActivationStatus: (userName: string) =>
     apiRequests.put<void>(`/admin/change-activation-status/${userName}`, {}),
+
+  logs: (params: URLSearchParams) =>
+    axios.get<LogResponse>("/log/filtered-logs", { params }).then(responseBody),
 };
 
 const DentistTeacherOperations = {

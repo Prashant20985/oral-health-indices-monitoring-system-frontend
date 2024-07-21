@@ -4,6 +4,7 @@ import {
   DeleteSweepOutlined,
   GppBadOutlined,
   GppGoodOutlined,
+  LibraryBooksOutlined,
   LocalHospitalOutlined,
   QuestionAnswerOutlined,
 } from "@mui/icons-material";
@@ -74,6 +75,12 @@ export default observer(function AdminNavOptions({ open }: Props) {
           />
         ))}
       </>
+      <SidebarListItem
+        open={open}
+        path="/admin/logs"
+        icon={<LibraryBooksOutlined />}
+        text="Logs"
+      />
     </>
   );
 });
