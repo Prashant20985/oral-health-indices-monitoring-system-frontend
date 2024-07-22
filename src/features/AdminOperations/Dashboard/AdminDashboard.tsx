@@ -5,8 +5,8 @@ import AddApplicationUserFromCsvButton from "./AddApplicationUserFromCsvButton";
 import ActiveApplicationUsersListShortcut from "./ActiveApplicationUsersListShortcut";
 import UserRequestForAdminShortcut from "./UserRequestForAdminShortcut";
 import DeactivatedApplicationUserListShortcut from "./DeactivatedApplicationUserListShortcut";
-import ActivePatientListShortcut from "./ActivePatientListShortcut";
-import ArchivedPatientListShortcut from "./ArchivedPatientListShortcut";
+import ActivePatientListShortcut from "../../Dashboard/CommonDashboardComponents/ActivePatientListShortcut";
+import ArchivedPatientListShortcut from "../../Dashboard/CommonDashboardComponents/ArchivedPatientListShortcut";
 
 export default function AdminDashboard() {
   return (

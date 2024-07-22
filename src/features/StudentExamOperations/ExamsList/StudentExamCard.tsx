@@ -75,6 +75,7 @@ export default observer(function StudentExamCard({
             theme.palette.mode === "dark"
               ? color.primary[400]
               : color.grey[900],
+              width: "100%"
         }}
       >
         <CardHeader
