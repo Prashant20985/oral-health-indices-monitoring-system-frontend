@@ -158,6 +158,10 @@ export class PatientExaminationCardStore {
     );
   }
 
+  get getTop4PatientExaminationCardsAssignedToDoctor() {
+    return this.groupedPatientExaminationCardsAssignedToDoctor.slice(0, 4);
+  }
+
   get patientExaminationCardsByDate() {
     return Array.from(this.patientExaminationCards.values()).sort(
       (a, b) =>

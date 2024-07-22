@@ -6,9 +6,13 @@ import { colors } from "../../../themeConfig";
 
 interface Props {
   top3Exams: Exam[];
+  direction?: "row" | "column";
 }
 
-export default observer(function UpcomingExams({ top3Exams }: Props) {
+export default observer(function UpcomingExams({
+  top3Exams,
+  direction = "column",
+}: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
@@ -22,12 +26,13 @@ export default observer(function UpcomingExams({ top3Exams }: Props) {
         boxShadow: 2,
         borderRadius: 2,
         backgroundColor: color.primary[400],
+        minHeight: "25vh",
       }}
     >
       <Typography variant="h6" fontWeight={600} textTransform="uppercase">
         Upcoming Exams
       </Typography>
-      <Box display="flex" flexDirection="column" gap={1}>
+      <Box display="flex" flexDirection={direction} gap={1}>
         {top3Exams.length > 0 ? (
           <>
             {top3Exams.map((exam) => (
@@ -40,7 +45,7 @@ export default observer(function UpcomingExams({ top3Exams }: Props) {
             ))}
           </>
         ) : (
-          <Alert severity="info" variant="outlined">
+          <Alert severity="info" variant="outlined" sx={{ width: "100%" }}>
             <Typography variant="h6">No upcoming Exams</Typography>
           </Alert>
         )}
