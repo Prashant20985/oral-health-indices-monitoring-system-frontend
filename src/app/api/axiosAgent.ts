@@ -528,6 +528,68 @@ const PatientExamintionCardOperations = {
     ),
 };
 
+const ExportOperations = {
+  exportExamSolution: async (examSolution: ExamSolution): Promise<void> => {
+    try {
+      const response = await axios({
+        url: "export/export-exam-solution",
+        method: "POST",
+        responseType: "blob",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: examSolution,
+      });
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute(
+        "download",
+        `${examSolution.studentName}_ExamSolution.xlsx`
+      );
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading the Excel file", error);
+    }
+  },
+
+  exportExamaminationCard: async (
+    examinationCard: PatientExaminationCard
+  ): Promise<void> => {
+    try {
+      const response = await axios({
+        url: "export/export-examination-card",
+        method: "POST",
+        responseType: "blob",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: examinationCard,
+      });
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute(
+        "download",
+        `${examinationCard.patientName}_${new Date(
+          examinationCard.dateOfExamination
+        ).toDateString()}.xlsx`
+      );
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading the Excel file", error);
+    }
+  },
+};
+
 const axiosAgent = {
   AccountOperations,
   AdminOperations,
@@ -537,6 +599,7 @@ const axiosAgent = {
   StudentExamOperations,
   StudentOperations,
   PatientExamintionCardOperations,
+  ExportOperations,
 };
 
 export default axiosAgent;

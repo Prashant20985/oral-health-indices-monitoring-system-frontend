@@ -22,6 +22,7 @@ import {
   Stack,
   TextField,
   CardActions,
+  CircularProgress,
 } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
 import { Add, Comment } from "@mui/icons-material";
@@ -30,6 +31,8 @@ import { useStore } from "../../../app/stores/Store";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import CommentForm from "../Forms/CommentForm";
 import GradeCardForm from "../Forms/GradeCardForm";
+import { useParams } from "react-router-dom";
+import axiosAgent from "../../../app/api/axiosAgent";
 
 interface Props {
   patientExaminationCard: PatientExaminationCard;
@@ -45,12 +48,15 @@ export default observer(function PatientExaminationDetailsHeaderCard({
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const { id } = useParams<{ id: string }>();
+
   const {
     userStore: { user },
     patientExaminationCardStore: {
       commentPatientExaminationCard,
       gradePatientExaminationCard,
     },
+    patientStore: { patientDetails, fetchPatientDetails },
   } = useStore();
 
   const [openCommentDialog, setOpenCommentDialog] = React.useState(false);
@@ -58,6 +64,17 @@ export default observer(function PatientExaminationDetailsHeaderCard({
   const [commentSnackbarOpen, setCommentSnackbarOpen] = React.useState(false);
   const [totalScoreSnackbarOpen, setTotalScoreSnackbarOpen] =
     React.useState(false);
+
+  const [loading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    const fetchDetails = async () => {
+      if (patientExaminationCard.patient === undefined) {
+        await fetchPatientDetails(id!);
+      }
+    };
+    fetchDetails();
+  }, [fetchPatientDetails, id, patientExaminationCard.patient]);
 
   const isStudent = user?.role === "Student";
   const isDoctor =
@@ -77,6 +94,24 @@ export default observer(function PatientExaminationDetailsHeaderCard({
     ).then(() => {
       setCommentSnackbarOpen(true);
     });
+  };
+
+  const handleDownloadClick = async () => {
+    setLoading(true);
+    try {
+      if (patientExaminationCard.patient === undefined) {
+        if (patientDetails) {
+          patientExaminationCard.patient = patientDetails;
+        }
+      }
+      await axiosAgent.ExportOperations.exportExamaminationCard(
+        patientExaminationCard
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleTotalScore = async (totalScore: number) => {
@@ -146,11 +181,17 @@ export default observer(function PatientExaminationDetailsHeaderCard({
               <Button
                 color="secondary"
                 variant="contained"
-                startIcon={<Download />}
+                startIcon={
+                  loading ? (
+                    <CircularProgress color="info" size={24} />
+                  ) : (
+                    <Download />
+                  )
+                }
+                onClick={handleDownloadClick}
+                disabled={loading}
               >
-                <Typography variant="h6" fontWeight={600}>
-                  Download Report CSV
-                </Typography>
+                {loading ? "Downloading..." : "Download Report"}
               </Button>
             </Box>
           }

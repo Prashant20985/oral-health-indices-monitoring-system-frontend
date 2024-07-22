@@ -10,6 +10,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  CircularProgress,
   Tab,
   TextField,
   Typography,
@@ -21,6 +22,7 @@ import { colors } from "../../../../themeConfig";
 import ButtonLoadingComponent from "../../../../app/common/loadingComponents/ButtonLoadingComponent";
 import {
   AssignmentOutlined,
+  Download,
   MessageOutlined,
   SchoolOutlined,
 } from "@mui/icons-material";
@@ -31,6 +33,7 @@ import PracticePatientDMFT_DMFSDetailsForTeacher from "./PracticePatientDMFT_DMF
 import PracticePatientBeweDetailsForTeacher from "./PracticePatientBeweDetailsForTeacher";
 import PracticePatientAPIDetailsForTeacher from "./PracticePatientAPIDetailsForTeacher";
 import PracticePatientBleedingDetailsForTeacher from "./PracticePatientBleedingDetailsForTeacher";
+import axiosAgent from "../../../../app/api/axiosAgent";
 
 const RiskFactorAssessment = React.lazy(
   () => import("../../../IndexCalculationForms/RiskFactorAssessment")
@@ -45,6 +48,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
   const [value, setValue] = React.useState("1");
   const [openCommentDialog, setOpenCommentDialog] = React.useState(false);
   const [openMarksDialog, setOpenMarksDialog] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -67,6 +71,19 @@ export default observer(function ExamSolutionDetailsForTeacher() {
   const handleGrade = async (marks: number) => {
     if (examCard) {
       await gradeExaminationCard(examCard.id, marks);
+    }
+  };
+
+  const handleDownloadClick = async () => {
+    if (examCard) {
+      setLoading(true);
+      try {
+        await axiosAgent.ExportOperations.exportExamSolution(examCard);
+      } catch (error) {
+        console.error("Error downloading the Excel file", error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -107,7 +124,28 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 </Avatar>
               }
               title={
-                <Typography variant="h4">Exam Solution Details</Typography>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignContent="center"
+                >
+                  <Typography variant="h4">Exam Solution Details</Typography>
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    startIcon={
+                      loading ? (
+                        <CircularProgress color="info" size={24} />
+                      ) : (
+                        <Download />
+                      )
+                    }
+                    onClick={handleDownloadClick}
+                    disabled={loading}
+                  >
+                    {loading ? "Downloading..." : "Download Exam Solution"}
+                  </Button>
+                </Box>
               }
               subheader={
                 <Typography variant="h6">
