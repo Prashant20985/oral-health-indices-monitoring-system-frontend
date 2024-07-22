@@ -78,12 +78,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
     if (examCard) {
       setLoading(true);
       try {
-        // Simulate a delay for testing purposes (e.g., 2 seconds)
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        // Actual download request
         await axiosAgent.ExportOperations.exportExamSolution(examCard);
-        console.log("exam card", examCard);
       } catch (error) {
         console.error("Error downloading the Excel file", error);
       } finally {

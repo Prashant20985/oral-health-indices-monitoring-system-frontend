@@ -108,10 +108,6 @@ export default observer(function ExamSolutionDetailsForStudent() {
     if (examSolutionByStudent) {
       setLoading(true);
       try {
-        // Simulate a delay for testing purposes (e.g., 2 seconds)
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        // Actual download request
         await axiosAgent.ExportOperations.exportExamSolution(
           examSolutionByStudent
         );

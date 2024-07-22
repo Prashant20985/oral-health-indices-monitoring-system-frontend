@@ -104,8 +104,6 @@ export default observer(function PatientExaminationDetailsHeaderCard({
           patientExaminationCard.patient = patientDetails;
         }
       }
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
       await axiosAgent.ExportOperations.exportExamaminationCard(
         patientExaminationCard
       );
@@ -184,7 +182,11 @@ export default observer(function PatientExaminationDetailsHeaderCard({
                 color="secondary"
                 variant="contained"
                 startIcon={
-                  loading ? <CircularProgress color="info" size={24} /> : <Download />
+                  loading ? (
+                    <CircularProgress color="info" size={24} />
+                  ) : (
+                    <Download />
+                  )
                 }
                 onClick={handleDownloadClick}
                 disabled={loading}
