@@ -1,16 +1,26 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Alert, Box, Grid, Tab, Typography, useTheme } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  Tab,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { useParams } from "react-router-dom";
 import { colors } from "../../../../themeConfig";
 import { useStore } from "../../../../app/stores/Store";
 import StudentExamCard from "../../ExamsList/StudentExamCard";
-import { Info, Warning } from "@mui/icons-material";
+import { Download, Info, Warning } from "@mui/icons-material";
 import StudentGradeCard from "./StudentGradeCard";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import ButtonLoadingComponent from "../../../../app/common/loadingComponents/ButtonLoadingComponent";
 import PatientDetails from "../../../PatientOperations/PatientProfile/PatientDetails";
 import { CheckExamStatus } from "../../../../app/helper/CheckExamStatus";
+import axiosAgent from "../../../../app/api/axiosAgent";
 
 const RiskFactorAssessment = React.lazy(
   () => import("../../../IndexCalculationForms/RiskFactorAssessment")
@@ -54,6 +64,7 @@ export default observer(function ExamSolutionDetailsForStudent() {
   const color = colors(theme.palette.mode);
 
   const [value, setValue] = React.useState("1");
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (examId) {
@@ -93,8 +104,48 @@ export default observer(function ExamSolutionDetailsForStudent() {
     examDetails.startTime
   );
 
+  const handleDownloadClick = async () => {
+    if (examSolutionByStudent) {
+      setLoading(true);
+      try {
+        // Simulate a delay for testing purposes (e.g., 2 seconds)
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        // Actual download request
+        await axiosAgent.ExportOperations.exportExamSolution(
+          examSolutionByStudent
+        );
+      } catch (error) {
+        console.error("Error downloading the Excel file", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   return (
     <Box>
+      <Box display="flex" justifyContent="flex-end" mb={1}>
+        {ended &&
+          examDetails.examStatus === "Graded" &&
+          examSolutionByStudent !== null && (
+            <Button
+              color="secondary"
+              variant="contained"
+              startIcon={
+                loading ? (
+                  <CircularProgress color="info" size={24} />
+                ) : (
+                  <Download />
+                )
+              }
+              onClick={handleDownloadClick}
+              disabled={loading}
+            >
+              {loading ? "Downloading..." : "Download Exam Solution"}
+            </Button>
+          )}
+      </Box>
       <Grid container spacing={2}>
         <Grid item xs={12} lg={6} md={6}>
           <StudentExamCard exam={examDetails} isExamDetails isForStudentUser />
