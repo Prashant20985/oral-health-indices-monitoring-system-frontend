@@ -21,6 +21,7 @@ import * as Yup from "yup";
 import { useStore } from "../../../app/stores/Store";
 import * as React from "react";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen: boolean;
@@ -69,44 +70,46 @@ export default observer(function CreateEditPatientForm({
     age: patient?.age || 0,
   };
 
+  const [t] = useTranslation("global");
+
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
-      .required("First Name is required")
-      .max(50, "First Name must be at most 50 characters"),
+      .required(t("patient-operations.form.create-edit-patient.first-name-required"))
+      .max(50, t("patient-operations.form.create-edit-patient.first-name-validation")),
     lastName: Yup.string()
-      .required("Last Name is required")
-      .max(50, "Last Name must be at most 50 characters"),
+      .required(t("patient-operations.form.create-edit-patient.last-name-required"))
+      .max(50, t("patient-operations.form.create-edit-patient.last-name-validation")),
     email: Yup.string()
-      .required("Email is required")
-      .email("Invalid email format")
-      .max(255, "Email must be at most 255 characters"),
-    gender: Yup.string().required("Gender is required"),
+      .required(t("patient-operations.form.create-edit-patient.email-required"))
+      .email(t("patient-operations.form.create-edit-patient.email-invalid"))
+      .max(255, t("patient-operations.form.create-edit-patient.email-validation")),
+    gender: Yup.string().required(t("patient-operations.form.create-edit-patient.gemder-required")),
     ethnicGroup: Yup.string()
-      .required("Ethnic Group is required")
-      .max(50, "Ethnic Group must be at most 50 characters"),
+      .required(t("patient-operations.form.create-edit-patient.ethnic-group-required"))
+      .max(50, t("patient-operations.form.create-edit-patient.ethnic-group-validation")),
     otherGroup: Yup.string().max(
       50,
-      "Other Group must be at most 50 characters"
+      t("patient-operations.form.create-edit-patient.other-group-validation")
     ),
-    otherData: Yup.string().max(50, "Other Data must be at most 50 characters"),
+    otherData: Yup.string().max(50, t("patient-operations.form.create-edit-patient.other-data-validation")),
     otherData2: Yup.string().max(
       50,
-      "Other Data 2 must be at most 50 characters"
+      t("patient-operations.form.create-edit-patient.other-data-2-validation")
     ),
     otherData3: Yup.string().max(
       50,
-      "Other Data 3 must be at most 50 characters"
+      t("patient-operations.form.create-edit-patient.other-data-3-validation")
     ),
     location: Yup.string()
-      .required("Location is required")
-      .max(50, "Location must be at most 50 characters"),
-    age: Yup.number().required("Age is required"),
+      .required(t("patient-operations.form.create-edit-patient.location-required"))
+      .max(50,t("patient-operations.form.create-edit-patient.location-validation")),
+    age: Yup.number().required(t("patient-operations.form.create-edit-patient.age-required"))
   });
 
   return (
     <>
       <Dialog open={isOpen} fullWidth TransitionComponent={SlideUpTransition}>
-        <DialogTitle>{isEdit ? "Edit Patient" : "Add Patient"}</DialogTitle>
+        <DialogTitle>{isEdit ? t("patient-operations.form.create-edit-patient.edit-patient") : t("patient-operations.form.create-edit-patient.add-patient")}</DialogTitle>
         <DialogContent>
           <Box width="100%">
             <Formik
@@ -133,7 +136,7 @@ export default observer(function CreateEditPatientForm({
                     gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                   >
                     <CustomTextField
-                      label="First Name"
+                      label={t("patient-operations.form.create-edit-patient.first-name")}
                       name="firstName"
                       onChange={handleChange}
                       required={true}
@@ -144,7 +147,7 @@ export default observer(function CreateEditPatientForm({
                     />
 
                     <CustomTextField
-                      label="Last Name"
+                      label={t("patient-operations.form.create-edit-patient.last-name")}
                       name="lastName"
                       onChange={handleChange}
                       required={true}
@@ -155,7 +158,7 @@ export default observer(function CreateEditPatientForm({
                     />
 
                     <CustomTextField
-                      label="Email"
+                      label={t("patient-operations.form.create-edit-patient.email")}
                       name="email"
                       onChange={handleChange}
                       required={true}
@@ -167,7 +170,7 @@ export default observer(function CreateEditPatientForm({
 
                     <Box component={FormControl} sx={{ gridColumn: "span 2" }}>
                       <CustomSelect
-                        label="Gender"
+                        label={t("patient-operations.form.create-edit-patient.gender")}
                         onChange={(e) => {
                           handleChange({
                             target: {
@@ -177,13 +180,13 @@ export default observer(function CreateEditPatientForm({
                           });
                         }}
                         required={true}
-                        options={["Male", "Female"]}
+                        options={[t("patient-operations.form.create-edit-patient.male"), t("patient-operations.form.create-edit-patient.female")]}
                         value={values.gender}
                       />
                     </Box>
 
                     <CustomTextField
-                      label="Age"
+                      label={t("patient-operations.form.create-edit-patient.age")}
                       name="age"
                       onChange={handleChange}
                       required={true}
@@ -195,7 +198,7 @@ export default observer(function CreateEditPatientForm({
                     />
 
                     <CustomTextField
-                      label="Ethnic Group"
+                      label={t("patient-operations.form.create-edit-patient.ethnic-group")}
                       name="ethnicGroup"
                       onChange={handleChange}
                       required={true}
@@ -206,7 +209,7 @@ export default observer(function CreateEditPatientForm({
                     />
 
                     <CustomTextField
-                      label="Other Group"
+                      label={t("patient-operations.form.create-edit-patient.other-group")}
                       name="otherGroup"
                       onChange={handleChange}
                       value={values.otherGroup}
@@ -216,7 +219,7 @@ export default observer(function CreateEditPatientForm({
                     />
 
                     <CustomTextField
-                      label="Years In School"
+                      label={t("patient-operations.form.create-edit-patient.years-in-school")}
                       name="yearsInSchool"
                       onChange={handleChange}
                       required={true}
@@ -230,7 +233,7 @@ export default observer(function CreateEditPatientForm({
                     />
 
                     <CustomTextField
-                      label="Location"
+                      label={t("patient-operations.form.create-edit-patient.location")}
                       name="location"
                       onChange={handleChange}
                       required={true}
@@ -241,7 +244,7 @@ export default observer(function CreateEditPatientForm({
                     />
 
                     <CustomTextField
-                      label="Other Data"
+                      label={t("patient-operations.form.create-edit-patient.other-data")}
                       name="otherData"
                       onChange={handleChange}
                       value={values.otherData}
@@ -251,7 +254,7 @@ export default observer(function CreateEditPatientForm({
                     />
 
                     <CustomTextField
-                      label="Other Data 2"
+                      label={t("patient-operations.form.create-edit-patient.other-data2")}
                       name="otherData2"
                       onChange={handleChange}
                       value={values.otherData2}
@@ -261,7 +264,7 @@ export default observer(function CreateEditPatientForm({
                     />
 
                     <CustomTextField
-                      label="Other Data 3"
+                      label={t("patient-operations.form.create-edit-patient.other-data3")}
                       name="otherData3"
                       onChange={handleChange}
                       value={values.otherData3}
@@ -279,7 +282,7 @@ export default observer(function CreateEditPatientForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText={isEdit ? "Edit Patient" : "Add Patient"}
+                        buttonText={isEdit ? t("patient-operations.form.create-edit-patient.edit-patient") : t("patient-operations.form.create-edit-patient.add-patient")}
                       />
                       <CustomCancelButton handleCancel={onClose} />
                     </Box>
@@ -295,8 +298,8 @@ export default observer(function CreateEditPatientForm({
         snackbarClose={() => setOpenSnackbar(false)}
         message={
           isEdit
-            ? "Patient Updated Successfully!!"
-            : "Patient Created Successfully!!"
+            ? t("patient-operations.form.create-edit-patient.patient-updated-message")
+            : t("patient-operations.form.create-edit-patient.patient-created-message")
         }
       />
     </>

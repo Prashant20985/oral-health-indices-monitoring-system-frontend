@@ -24,6 +24,7 @@ import DurationPicker from "../../../app/common/formInputs/DurationPicker";
 import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
 import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
 import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButtom";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   exam: Exam;
@@ -47,6 +48,8 @@ export default observer(function UpdateExamForm({
     await updateExam(exam.id, values).then(() => onClose());
   };
 
+  const [t] = useTranslation("global");
+
   const initialValues: UpdateExam = {
     dateOfExamination: exam.dateOfExamination,
     examTitle: exam.examTitle,
@@ -59,33 +62,88 @@ export default observer(function UpdateExamForm({
 
   const validationSchema = Yup.object().shape({
     dateOfExamination: Yup.date()
-      .required("Date of Examination is required")
-      .min(new Date(), "Date of Examination cannot be in the past"),
+      .required(
+        t(
+          "student-exam-operations.forms.update-exam-form.date-of-examination-required"
+        )
+      )
+      .min(
+        new Date(),
+        t(
+          "student-exam-operations.forms.update-exam-form.date-of-examination-validation"
+        )
+      ),
     examTitle: Yup.string()
-      .required("Exam Title is required")
-      .min(2, "Exam Title should be at least 2 characters")
-      .max(100, "Exam Title should not exceed 100 characters"),
+      .required(
+        t("student-exam-operations.forms.update-exam-form.exam-title-required")
+      )
+      .min(
+        2,
+        t(
+          "student-exam-operations.forms.update-exam-form.exam-title-min-validation"
+        )
+      )
+      .max(
+        100,
+        t(
+          "student-exam-operations.forms.update-exam-form.exam-title-max-validation"
+        )
+      ),
     description: Yup.string()
-      .required("Description is required")
-      .min(10, "Description should be at least 10 characters")
-      .max(1000, "Description should not exceed 1000 characters"),
-    startTime: Yup.string().required("Start Time is required"),
+      .required(
+        t("student-exam-operations.forms.update-exam-form.description-required")
+      )
+      .min(
+        10,
+        t(
+          "student-exam-operations.forms.update-exam-form.description-min-validation"
+        )
+      )
+      .max(
+        1000,
+        t(
+          "student-exam-operations.forms.update-exam-form.description-max-validation"
+        )
+      ),
+    startTime: Yup.string().required(
+      t("student-exam-operations.forms.update-exam-form.start-time-required")
+    ),
     endTime: Yup.string()
-      .required("End Time is required")
+      .required(
+        t("student-exam-operations.forms.update-exam-form.end-time-required")
+      )
       .test(
-        "is-greater",
-        "End Time must be after Start Time",
+        t("student-exam-operations.forms.update-exam-form.end-time-is-greater"),
+        t(
+          "student-exam-operations.forms.update-exam-form.end-time-must-be-after-start-time"
+        ),
         function (value) {
           const { startTime } = this.parent;
           if (!startTime || !value) return true;
           return startTime < value;
         }
       ),
-    durationInterval: Yup.string().required("Duration Interval is required"),
+    durationInterval: Yup.string().required(
+      t(
+        "student-exam-operations.forms.update-exam-form.duration-interval-is-required"
+      )
+    ),
     maxMark: Yup.number()
-      .required("Max Mark is required")
-      .min(1, "Max Mark must be at least 1")
-      .max(100, "Max Mark must not exceed 100"),
+      .required(
+        t("student-exam-operations.forms.update-exam-form.max-mark-required")
+      )
+      .min(
+        1,
+        t(
+          "student-exam-operations.forms.update-exam-form.max-mark-min-validation"
+        )
+      )
+      .max(
+        100,
+        t(
+          "student-exam-operations.forms.update-exam-form.max-mark-max-validation"
+        )
+      ),
   });
 
   const padZero = (num: number) => String(num).padStart(2, "0");
@@ -121,7 +179,9 @@ export default observer(function UpdateExamForm({
                     gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                   >
                     <CustomTextField
-                      label="Exam Title"
+                      label={t(
+                        "student-exam-operations.forms.update-exam-form.exam-title"
+                      )}
                       name="examTitle"
                       onChange={handleChange}
                       value={values.examTitle}
@@ -131,7 +191,9 @@ export default observer(function UpdateExamForm({
                     />
 
                     <TextField
-                      label="Description"
+                      label={t(
+                        "student-exam-operations.forms.update-exam-form.description"
+                      )}
                       name="description"
                       onChange={handleChange}
                       error={touched.description && !!errors.description}
@@ -155,7 +217,9 @@ export default observer(function UpdateExamForm({
                             !!errors.dateOfExamination,
                         },
                       }}
-                      label="Date of Examination"
+                      label={t(
+                        "student-exam-operations.forms.update-exam-form.date-of-examination"
+                      )}
                       name="dateOfExamination"
                       value={values.dateOfExamination}
                       minDate={new Date()}
@@ -166,7 +230,9 @@ export default observer(function UpdateExamForm({
 
                     <TimePicker
                       name="startTime"
-                      label="Start Time"
+                      label={t(
+                        "student-exam-operations.forms.update-exam-form.start-time"
+                      )}
                       value={new Date(`1970-01-01T${values.startTime}`)}
                       onChange={(date: Date | null) => {
                         const hours = date?.getHours();
@@ -196,7 +262,9 @@ export default observer(function UpdateExamForm({
 
                     <TimePicker
                       name="endTime"
-                      label="End Time"
+                      label={t(
+                        "student-exam-operations.forms.update-exam-form.end-time"
+                      )}
                       value={new Date(`1970-01-01T${values.endTime}`)}
                       onChange={(date: Date | null) => {
                         const hours = date?.getHours();
@@ -226,7 +294,9 @@ export default observer(function UpdateExamForm({
 
                     <Box sx={{ gridColumn: "span 4" }}>
                       <Typography variant="subtitle1" sx={{ mb: 1 }}>
-                        Duration Of Exam
+                        {t(
+                          "student-exam-operations.forms.update-exam-form.duration-of-exam"
+                        )}
                       </Typography>
                       <Field name="durationInterval">
                         {({ field }: FieldProps) => (
@@ -251,7 +321,9 @@ export default observer(function UpdateExamForm({
                     </Box>
 
                     <CustomTextField
-                      label="Max Mark"
+                      label={t(
+                        "student-exam-operations.forms.update-exam-form.max-mark"
+                      )}
                       name="maxMark"
                       value={values.maxMark}
                       onChange={handleChange}
@@ -270,7 +342,9 @@ export default observer(function UpdateExamForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Update Exam"
+                        buttonText={t(
+                          "student-exam-operations.forms.update-exam-form.update-button"
+                        )}
                       />
                       <CustomCancelButton handleCancel={onClose} />
                     </Box>

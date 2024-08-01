@@ -7,6 +7,7 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Header from "../../../../app/common/header/Header";
 import { Clear } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default observer(function PatientExaminationCardsAssignedToDoctor() {
   const {
@@ -23,6 +24,7 @@ export default observer(function PatientExaminationCardsAssignedToDoctor() {
     dentistTeacherStore: {
       fetchSupervisedStudents,
       supervisedStudentNameEmailWithId,
+      loading: { supervisedStudents: loadingFetchSupervisedStudents },
     },
   } = useStore();
 
@@ -32,6 +34,8 @@ export default observer(function PatientExaminationCardsAssignedToDoctor() {
     };
     fetchCards();
   }, [getPatientExaminationCardsAssignedToDoctor]);
+
+  const [t] = useTranslation("global");
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -44,15 +48,19 @@ export default observer(function PatientExaminationCardsAssignedToDoctor() {
       >
         <Box>
           <Header
-            title="Examination Cards"
-            subTitle="Examination Cards assigned to Doctor"
+            title={t(
+              "dentist-teacher-operations.list.examinationscards-assigned-to-doctor.header"
+            )}
+            subTitle={t(
+              "dentist-teacher-operations.list.examinationscards-assigned-to-doctor.sub-header"
+            )}
           />
         </Box>
         <Box display="flex" gap={4}>
           <Box>
             <Autocomplete
               options={supervisedStudentNameEmailWithId}
-              loading={supervisedStudentNameEmailWithId.length === 0}
+              loading={loadingFetchSupervisedStudents}
               onFocus={() => {
                 if (supervisedStudentNameEmailWithId.length === 0) {
                   fetchSupervisedStudents();
@@ -70,7 +78,9 @@ export default observer(function PatientExaminationCardsAssignedToDoctor() {
                 <TextField
                   {...params}
                   fullWidth
-                  label="Select Student"
+                  label={t(
+                    "dentist-teacher-operations.list.examinationscards-assigned-to-doctor.select-student-label"
+                  )}
                   variant="outlined"
                   color="secondary"
                   sx={{
@@ -89,7 +99,9 @@ export default observer(function PatientExaminationCardsAssignedToDoctor() {
                 },
               }}
               value={new Date(year, month - 1)}
-              label="Select Year and Month"
+              label={t(
+                "dentist-teacher-operations.list.examinationscards-assigned-to-doctor.select-year-and-month-label"
+              )}
               views={["month", "year"]}
               onChange={(date: Date | null) => {
                 console.log(date);

@@ -14,6 +14,7 @@ import React from "react";
 import { useStore } from "../../../app/stores/Store";
 import CommentForm from "../Forms/CommentForm";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   cardId: string;
@@ -34,6 +35,7 @@ export default observer(function APIDetails({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
 
   const {
     userStore: { user },
@@ -79,7 +81,7 @@ export default observer(function APIDetails({
           <TextField
             fullWidth
             color="secondary"
-            label="API Result"
+            label={t("examination-card-operations.details.api-details.api-result")}
             value={api.apiResult}
           />
           <TextField
@@ -99,18 +101,18 @@ export default observer(function APIDetails({
           multiline
           fullWidth
           color="secondary"
-          label="Doctor API Comment"
+          label={t("examination-card-operations.details.api-details.doctor-api-comment")}
           rows={3}
-          value={api.doctorComment ?? "No Comment Provided."}
+          value={api.doctorComment ?? t("examination-card-operations.details.api-details.no-comment")}
         />
         {!isRegularMode && (
           <TextField
             multiline
             fullWidth
             color="secondary"
-            label="Student API Comment"
+            label={t("examination-card-operations.details.api-details.student-api-comment")}
             rows={3}
-            value={api.studentComment ?? "No Comment Provided."}
+            value={api.studentComment ?? t("examination-card-operations.details.api-details.no-comment")}
           />
         )}
         {isUserEligibleToComment && (
@@ -121,7 +123,7 @@ export default observer(function APIDetails({
               variant="outlined"
               onClick={() => setOpenCommentDialog(true)}
             >
-              {comment ? "Edit Comment" : "Add Comment"}
+              {comment ? t("examination-card-operations.details.api-details.edit-comment") : t("examination-card-operations.details.api-details.add-comment")}
             </Button>
           </Box>
         )}
@@ -136,8 +138,8 @@ export default observer(function APIDetails({
       <CommentForm
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title="Comment API Form"
-        description="Please provide your comment for the API Form."
+        title={t("examination-card-operations.details.api-details.comment-api-form")}
+        description={t("examination-card-operations.details.api-details.description")}
         handleSubmit={(comment) => {
           handleComment(comment);
         }}
@@ -146,7 +148,7 @@ export default observer(function APIDetails({
       <CustomSanckbar
         snackbarOpen={commentSnackbarOpen}
         snackbarClose={() => setCommentSnackbarOpen(false)}
-        message="Comment has been successfully added."
+        message={t("examination-card-operations.details.api-details.message")}
       />
     </Box>
   );

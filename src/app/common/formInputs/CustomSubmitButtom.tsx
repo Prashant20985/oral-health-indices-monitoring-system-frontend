@@ -1,6 +1,7 @@
 import { useTheme, Button } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import ButtonLoadingComponent from "../loadingComponents/ButtonLoadingComponent";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isSubmitting: boolean;
@@ -15,10 +16,11 @@ export default function CustomSubmitButton({
   buttonText,
   fullwidth = false,
   width = "25%",
-  loadingText = "Saving...",
+  loadingText = "common.submit-button-loading-text",
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
 
   return (
     <Button
@@ -37,7 +39,7 @@ export default function CustomSubmitButton({
       }}
     >
       {isSubmitting ? (
-        <ButtonLoadingComponent content={loadingText} />
+        <ButtonLoadingComponent content={t(loadingText)} />
       ) : (
         <p>{buttonText}</p>
       )}

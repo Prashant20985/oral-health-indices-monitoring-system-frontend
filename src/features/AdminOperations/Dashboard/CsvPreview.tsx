@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { FilePresent } from "@mui/icons-material";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   file: File;
@@ -17,12 +18,14 @@ interface Props {
 export default function CsvPreview({ file, handleSave, loading }: Props) {
   const isCSVFile = file?.name.toLocaleLowerCase().endsWith(".csv");
 
+  const [t] = useTranslation("global");
+
   if (!isCSVFile) {
-    toast.warn("Incorrect File format");
+    toast.warn(t("admin-operations.dashboard.csv-preview.warn-toast"));
   }
 
   return (
-    <Box component={Tooltip} title="click to add users">
+    <Box component={Tooltip} title={t("admin-operations.dashboard.csv-preview.add-button")}>
       <Box
         component={IconButton}
         onClick={() => {

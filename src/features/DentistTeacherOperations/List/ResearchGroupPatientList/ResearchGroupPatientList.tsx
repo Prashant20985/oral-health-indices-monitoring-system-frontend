@@ -7,6 +7,7 @@ import LinearProgressComponent from "../../../../app/common/loadingComponents/Li
 import { DeleteForever, PersonAdd } from "@mui/icons-material";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import { useStore } from "../../../../app/stores/Store";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   patients: ResearchGroupPatient[];
@@ -25,52 +26,54 @@ export default observer(function ResearchGroupPatientList({
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const [t] = useTranslation("global");
+
   const columns: GridColDef[] = [
     {
       field: "firstName",
-      headerName: "First Name",
+      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.first-name"),
       cellClassName: "name-column--cell",
       flex: 1.5,
     },
     {
       field: "lastName",
-      headerName: "Last Name",
+      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.last-name"),
       cellClassName: "name-column--cell",
       flex: 1.5,
     },
     {
       field: "email",
-      headerName: "Email",
+      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.email"),
       cellClassName: "name-column--cell",
       flex: 2,
     },
     {
       field: "gender",
-      headerName: "Gender",
+      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.gender"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "age",
-      headerName: "Age",
+      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.age"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "location",
-      headerName: "Location",
+      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.location"),
       cellClassName: "name-column--cell",
       flex: 2,
     },
     {
       field: "addedBy",
-      headerName: "Added By",
+      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.added-by"),
       cellClassName: "name-column--cell",
       flex: 2,
     },
     {
       field: "actions",
-      headerName: "Actions",
+      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.actions"),
       headerAlign: "center",
       flex: 2,
       renderCell: ({ row }) => {
@@ -87,7 +90,7 @@ export default observer(function ResearchGroupPatientList({
             }}
           >
             {patientsInGroupList ? (
-              <Tooltip title="Remove From Group">
+              <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-patient.remove-from-group-button")}>
                 <IconButton
                   onClick={async () => {
                     await dentistTeacherStore.removePatientFromResearchGroup(
@@ -99,7 +102,7 @@ export default observer(function ResearchGroupPatientList({
                 </IconButton>
               </Tooltip>
             ) : (
-              <Tooltip title="Remove From Group">
+              <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-patient.remove-from-group-button")}>
                 <IconButton
                   onClick={async () => {
                     await dentistTeacherStore.addPatientToResearchGroup(

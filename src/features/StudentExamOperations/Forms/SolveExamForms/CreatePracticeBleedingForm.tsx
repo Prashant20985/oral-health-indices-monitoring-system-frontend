@@ -2,6 +2,7 @@ import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
 import { PracticeBleedingFormValues } from "../../../../app/models/APIBleeding";
 import APIBleedingForm from "../../../IndexCalculationForms/APIBleeding/APIBleedingForm";
 import { colors } from "../../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   bleedingFormValues: PracticeBleedingFormValues;
@@ -14,6 +15,8 @@ export default function CreatePracticeBleedingForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Box
@@ -38,12 +41,12 @@ export default function CreatePracticeBleedingForm({
               fontweight: 600,
             }}
           >
-            Add Calculated Bleeding Result
+             {t("student-exam-operations.form.practice-bleeding-form.add-calculated-bleeding-result")}
           </Typography>
         </Box>
         <Box display="flex" gap={2}>
           <TextField
-            label="Bleeding Result"
+            label= {t("student-exam-operations.form.practice-bleeding-form.bleeding-result")}
             variant="outlined"
             type="number"
             color="secondary"

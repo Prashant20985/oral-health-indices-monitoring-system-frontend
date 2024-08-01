@@ -10,6 +10,34 @@
       "pl": "Polski"
     }
   },
+  "common": {
+    "calendar": {
+      "choose-date": "Wybierz Datę",
+      "clear-button": "Wyczyść"
+    },
+    "countdown-timer": {
+      "hours": "Godziny",
+      "minutes": "Minuty",
+      "seconds": "Sekundy"
+    },
+    "file-dropzone": {
+      "title": "Upuść plik tutaj"
+    },
+    "cancel-button": "Anuluj",
+    "submit-button-loading-text": "Zapisywanie...",
+    "loading-text": "Ładowanie...",
+    "user-options": {
+      "title": "Opcje użytkownika",
+      "view-profile": "Zobacz profil",
+      "log-out": "Wyloguj się"
+    },
+    "no-rows-found": "Brak wierszy",
+    "side-bar": {
+      "login": "Zaloguj się",
+      "dashboard": "Panel sterowania",
+      "my-requests": "Moje zgłoszenia"
+    }
+  },
   "login": {
     "header": "Zaloguj się",
     "email": "Adres e-mail",
@@ -18,5 +46,900 @@
     "buttonLoading": "Logowanie...",
     "forgotPassword": "Zapomniałeś hasła?",
     "rememberMe": "Zapamiętaj mnie"
+  },
+  "forgotpassword": {
+    "header": "Wpisz adres e-mail powiązany z Twoim kontem, a my wyślemy Ci link umożliwiający zresetowanie hasła",
+    "email": "Adres e-mail",
+    "button": "Wysłać email",
+    "loading": "Wysyłanie..."
+  },
+  "resetpassword": {
+    "header": "Resetowanie hasła dla",
+    "password": "Hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "button": "Zresetuj hasło",
+    "buttonLoading": "Resetowanie hasła..."
+  },
+  "errors": {
+    "go-to-homepage-button": "Przejdź do strony głównej",
+    "not-found": {
+      "ooops": "Ooops...",
+      "page-not-found": "Strona nie znaleziona",
+      "message": "Strona, której szukasz nie istnieje. Wróć do strony głównej"
+    },
+    "server-error": {
+      "ooops": "Ooops...",
+      "server-error": "Wewnętrzny błąd serwera",
+      "message": "Wystąpił wewnętrzny błąd serwera. Spróbuj ponownie później"
+    },
+    "unauthorized": {
+      "header": "Nieautoryzowany dostęp",
+      "message": "Nie masz uprawnień, aby uzyskać dostęp do tej strony. Sprawdź swoje dane logowania lub skontaktuj się z administratorem, aby uzyskać dostęp."
+    }
+  },
+  "admin-operations": {
+    "dashboard": {
+      "header": "Panel administracyjny",
+      "activation-status": {
+        "header": "Kliknij, aby zmienić status aktywacji"
+      },
+      "active-users": {
+        "header": "Aktywni użytkownicy",
+        "button": "Pokaż wszystkie"
+      },
+      "active-patients": {
+        "header": "Aktywni pacjenci",
+        "button": "Pokaż wszystkie"
+      },
+      "add-user-button": "Dodaj użytkownika aplikacji",
+      "add-user-tooltip": "Dodaj użytkownika aplikacji",
+      "upload-csv": {
+        "button": "Prześlij plik CSV",
+        "title": "Dodaj użytkowników z pliku csv",
+        "message": "Upuść tylko pliki .csv",
+        "close-button": "Zamknij"
+      },
+      "csv-preview": {
+        "warn-toast": "Nieprawidłowy format pliku",
+        "add-button": "kliknij, aby dodać użytkowników"
+      },
+      "archived-users": {
+        "header": "Zarchiwizowani użytkownicy",
+        "button": "Pokaż wszystkie"
+      },
+      "deactivated-users": {
+        "header": "Dezaktywowani użytkownicy",
+        "button": "Pokaż wszystkie"
+      },
+      "user-requests": {
+        "header": "żądania użytkowników",
+        "button": "Pokaż wszystkie"
+      }
+    },
+    "forms": {
+      "add-application-user-form": {
+        "header": "Dodaj użytkownika",
+        "first-name": "Imię",
+        "last-name": "Nazwisko",
+        "phone-number": "Numer telefonu",
+        "role": "Rola",
+        "email": "adres e-mail",
+        "is-guest": "Jest uzytkownikiem gościnnym",
+        "comment": "Komentarz",
+        "save-button": "Zapisz",
+        "user-added-message": "Użytkownik został dodany pomyślnie!!"
+      },
+      "change-password-form": {
+        "current-password": "Aktualne hasło",
+        "new-password": "Nowe hasło",
+        "button": "Zmień hasło",
+        "buttonLoading": "aktualizacja...",
+        "message": "Hasło zostało zmienione pomyślnie!!"
+      },
+      "profile-form": {
+        "first-name": "Imię",
+        "last-name": "Nazwisko",
+        "username": "Nazwa użytkownika",
+        "role": "Rola",
+        "email": "adres e-mail",
+        "phone-number": "Numer telefonu",
+        "create-date": "Data utworzenia",
+        "comment": "Komentarz",
+        "delete-comment": "Komentarz usunięty",
+        "delete-date": "Data usunięcia",
+        "close-button": "Zamknij"
+      },
+      "user-delete-form": {
+        "header": "Czy na pewno chcesz usunąć",
+        "comment": "Usuń komentarz",
+        "cancel-button": "Anuluj",
+        "delete-button": "Usuń",
+        "delete-loading": "Usuwanie...",
+        "delete-message": "Użytkownik został usunięty pomyślnie!!"
+      },
+      "user-edit-form": {
+        "phone-validation": "Numer telefonu jest nieprawidłowy",
+        "first-name": "Imię",
+        "last-name": "Nazwisko",
+        "phone-number": "Numer telefonu",
+        "role": "Rola",
+        "comment": "Komentarz",
+        "button": "aktualizacja",
+        "loading": "aktualizacja..."
+      }
+    },
+    "list": {
+      "data-grid": {
+        "activation-status": "Status aktywacji",
+        "actions": "działania",
+        "view-profile": "Zobacz profil",
+        "delete-user": "Usuń użytkownika",
+        "user-name": "Nazwa użytkownika",
+        "first-name": "Imię",
+        "last-name": "Nazwisko",
+        "email": "adres e-mail",
+        "delete-date": "Data usunięcia",
+        "role": "Rola",
+        "activation-message": "Status aktywacji został pomyślnie zmieniony!!"
+      },
+      "active-users": {
+        "header": "Aktywni użytkownicy",
+        "sub-header": "Lista aktywnych użytkowników"
+      },
+      "deactivated-users": {
+        "header": "Deaktywowani użytkownicy",
+        "sub-header": "Lista dezaktywowanych użytkowników"
+      },
+      "deleted-users": {
+        "header": "Usunięci użytkownicy",
+        "sub-header": "Lista usuniętych użytkowników"
+      },
+      "filter": {
+        "search": "Szukaj",
+        "user-type": "Typ użytkownika",
+        "role": "Rola"
+      }
+    },
+    "logs": {
+      "title": "Logi użytkownika",
+      "sub-title": "Przeglądaj logi użytkownika",
+      "filter-title": "Filtry dziennika",
+      "tablerow-no.": "No.",
+      "tablerow-date": "Data",
+      "tablerow-executedby": "Wykonane przez",
+      "tablerow-requestname": "Nazwa żądania",
+      "tablerow-level": "Poziom",
+      "tablerow-message": "Wiadomość",
+      "filter-username": "Nazwa użytkownika",
+      "filter-level": "Poziom dziennika",
+      "filter-startdate": "Data rozpoczęcia",
+      "filter-enddate": "Data zakończenia"
+    },
+    "nav-options": {
+      "active-users": "Aktywni użytkownicy",
+      "deactivated-users": "Dezaktywowani użytkownicy",
+      "deleted-users": "Usunięci użytkownicy",
+      "active-patients": "Aktywni pacjenci",
+      "archived-patients": "Zarchiwizowani pacjenci",
+      "user-requests": "żądania użytkowników"
+    },
+    "user-profile": {
+      "header": "Dane użytkownika",
+      "edit-user": "Edytuj użytkownika",
+      "change-password": "Zmień hasło"
+    }
+  },
+  "dentist-teacher-operations": {
+    "dashboard": {
+      "add-patient-button": "Dodaj pacjenta",
+      "header": "Panel nauczyciela dentysty",
+      "assigned-cards": "Przypisane karty"
+    },
+    "forms": {
+      "add-student-group-form": {
+        "header": "Dodaj nową grupę",
+        "group-name": "Nazwa grupy",
+        "add-button": "Dodaj",
+        "group-added-message": "Grupa została utworzona pomyślnie!!"
+      },
+      "edit-student-group-form": {
+        "header": "Edytuj nazwę grupy",
+        "group-name": "Nazwa grupy",
+        "save-button": "Zapisz",
+        "group-edited-message": "Nazwa grupy została zmieniona pomyślnie!!"
+      },
+      "research-group-form": {
+        "group-name-validation": "Nazwa grupy musi mieć co najwyżej 50 znaków",
+        "description-validation": "Opis grupy musi mieć co najwyżej 500 znaków",
+        "add-new-research-group": "Dodaj nową grupę badawczą",
+        "edit-research-group": "Edytuj grupę badawczą",
+        "group-name": "Nazwa grupy (maks. 50 znaków)",
+        "description": "Opis (maks. 500 znaków)",
+        "update-button": "Aktualizacja",
+        "create-button": "Utwórz"
+      },
+      "student-and-research-group-delete-confirmation-form": {
+        "header": "Czy na pewno chcesz usunąć",
+        "cancel-button": "Anuluj",
+        "delete-button": "Usuń"
+      }
+    },
+    "list": {
+      "examinationscards-assigned-to-doctor": {
+        "header": "Karty egzaminacyjne",
+        "sub-header": "Karty badań przydzielone lekarzowi",
+        "select-student-label": "Wybierz studenta",
+        "select-year-and-month-label": "Wybierz rok i miesiąc"
+      },
+      "research-group": {
+        "header": "Grupy badawcze",
+        "add-button": "Dodaj nową grupę badawczą",
+        "search": "Szukaj",
+        "patients-not-in-research-group": {
+          "back-button": "Wróć",
+          "header": "Pacjenci nie należący do grupy badawczej"
+        },
+        "research-group-card": {
+          "created-by": "Utworzony przez: ",
+          "number-of-patients": "liczba pacjentów: ",
+          "delete-button": "Usuń",
+          "edit-button": "Edytuj"
+        },
+        "research-group-details": {
+          "back-button": "Wróć",
+          "edit-button": "Edytuj grupę",
+          "created-by": "Utworzony przez: ",
+          "title": "Pacjenci ",
+          "add-patient-button": "Dodaj pacjenta"
+        },
+        "research-group-patient": {
+          "first-name": "Imię",
+          "last-name": "Nazwisko",
+          "email": "adres e-mail",
+          "gender": "Płeć",
+          "age": "Wiek",
+          "location": "Lokalizacja",
+          "added-by": "Dodany przez",
+          "actions": "Działania",
+          "remove-from-group-button": "Usuń z grupy"
+        }
+      },
+      "student-group": {
+        "header": "Grupy studentów",
+        "add-button": "Dodaj nową grupę studentów",
+        "search": "Szukaj",
+        "user-name": "Nazwa użytkownika",
+        "first-name": "Imię",
+        "last-name": "Nazwisko",
+        "email": "adres e-mail",
+        "group-name": "Nazwa grupy",
+        "actions": "działania",
+        "remove-from-group-button": "Usuń z grupy",
+        "add-to-group-button": "Dodaj do grupy",
+        "supervise-student-button": "Nadzoruj studenta",
+        "unsupervise-student-button": "Przestań nadzorować studenta",
+        "students-in-group": {
+          "header": "Studenci w grupie"
+        },
+        "students-not-in-group": {
+          "header": "Dodaj uczniów do grupy"
+        },
+        "student-group-card": {
+          "sub-header": "liczba studentów: ",
+          "add-student-button": "Dodaj studenta",
+          "edit-group-button": "Edytuj grupę nazwę",
+          "delete-group-button": "Usuń grupę",
+          "view-details-button": "Pokaż szczegóły",
+          "back-button": "Wróć",
+          "edit-research-group-button": "Edytuj grupę badawczą",
+          "students-label": "Studenci",
+          "exams-label": "Egzaminy",
+          "publish-new-exam-button": "Opublikuj nowy egzamin"
+        },
+        "supervise-students": {
+          "header": "Studenci pod opieką",
+          "sub-header": "Studenci pod moim okiem",
+          "add-student-button": "Dodaj Ucznia"
+        },
+        "unsupervised-students": {
+          "header": "Studenci bez nadzoru",
+          "sub-header": "Studenci nie pod moim nadzorem"
+        }
+      },
+      "patient-examination-card": {
+        "assigned-doctor": "Przypisany lekarz:",
+        "created-by": "Utworzony przez:",
+        "description-of-the-treatment": "Opis leczenia:",
+        "patient-details": "Szczegóły pacjenta",
+        "view-card": "Zobacz kartę",
+        "no-examination-cards-found": "Nie znaleziono kart badania",
+        "delete-message": "Karta została pomyślnie usunięta!!"
+      }
+    },
+    "nav-options": {
+      "research-groups": "Grupy badawcze",
+      "student-groups": "Grupy studentów",
+      "active-patients": "Aktywni pacjenci",
+      "archived-patients": "Zarchiwizowani pacjenci",
+      "supervised-students": "Studenci pod nadzorem",
+      "assigned-cards": "Przypisane karty"
+    }
+  },
+  "patient-operations": {
+    "form": {
+      "archive-patient": {
+        "header": "Zarchiwizowani pacjenci",
+        "dialog": "Czy na pewno chcesz zarchiwizować pacjenta?",
+        "cancel-button": "Anuluj",
+        "archive-button": "Archiwizuj",
+        "comment": "Archiwum komentarza"
+      },
+      "create-edit-patient": {
+        "first-name-required": "Imię jest wymagane",
+        "first-name-validation": "Imię musi mieć co najwyżej 50 znaków",
+        "last-name-required": "Nazwisko jest wymagane",
+        "last-name-validation": "Nazwisko musi mieć co najwyżej 50 znaków",
+        "email-required": "Email jest wymagany",
+        "email-invalid": "Nieprawidłowy adres e-mail",
+        "email-validation": "Email musi mieć co najwyżej 255 znak",
+        "gender-required": "Płeć jest wym",
+        "ethnic-group-required": "Grupa etniczna jest wymagana",
+        "ethnic-group-validation": "Grupa etniczna musi mieć co najwyżej 50 znaków",
+        "other-group-validation": "Inna grupa musi mieć co najwyżej 50 znaków",
+        "other-data-validation": "Inne dane muszą mieć co najwyżej 50 znaków",
+        "other-data2-validation": "Inne dane 2 muszą mieć co najwyżej 50 znaków",
+        "other-data3-validation": "Inne dane 3 muszą mieć co najwyżej 50 znaków",
+        "location-required": "Lokalizacja jest wymagana",
+        "location-validation": "Lokalizacja musi mieć co najwyżej 50 znaków",
+        "age-required": "Wiek jest wymagany",
+        "edit-patient": "Edytuj pacjenta",
+        "add-patient": "Dodaj pacjenta",
+        "first-name": "Imię",
+        "last-name": "Nazwisko",
+        "email": "adres e-mail",
+        "gender": "Płeć",
+        "male": "mężczyzna",
+        "female": "Kobieta",
+        "age": "Wiek",
+        "ethnic-group": "Grupa etniczna",
+        "other-group": "Inna grupa",
+        "years-in-school": "Lata w szkole",
+        "location": "Lokalizacja",
+        "other-data": "inne dane",
+        "other-data2": "inne dane 2",
+        "other-data3": "inne dane 3",
+        "patient-created-message": "Pacjent został dodany pomyślnie!!",
+        "patient-updated-message": "Pacjent został zaktualizowany pomyślnie!!"
+      }
+    },
+    "delete-confirmation": {
+      "header": "Czy na pewno chcesz usunąć pacjenta?",
+      "cancel-button": "Anuluj",
+      "delete-button": "Usuń",
+      "message": "Pacjent został usunięty pomyślnie!!"
+    },
+    "patient-details-dialog": {
+      "header": "Szczegóły pacjenta",
+      "first-name": "Imię",
+      "last-name": "Nazwisko",
+      "email": "adres e-mail",
+      "gender": "Płeć",
+      "ethnic-group": "Grupa etniczna",
+      "other-group": "Inna grupa",
+      "years-in-school": "Lata w szkole",
+      "other-data": "inne dane",
+      "other-data2": "inne dane 2",
+      "other-data3": "inne dane 3",
+      "location": "Lokalizacja",
+      "age": "Wiek",
+      "created-at": "Utworzono w",
+      "archive-comment": "Komentarz archiwum",
+      "doctor-name": "Imię i nazwisko lekarza",
+      "research-group-name": "Nazwa grupy badawczej"
+    },
+    "list": {
+      "active-patients": {
+        "header": "Aktywni pacjenci",
+        "sub-header": "Lista aktywnych pacjentów"
+      },
+      "archived-patients": {
+        "header": "Zarchiwizowani pacjenci",
+        "sub-header": "Lista zarchiwizowanych pacjentów"
+      }
+    },
+    "data-grid": {
+      "unarchive-patient": "Kliknij, aby przywrócić",
+      "archive-patient": "Kliknij, aby zarchiwizować",
+      "first-name": "Imię",
+      "last-name": "Nazwisko",
+      "email": "adres e-mail",
+      "gender": "Płeć",
+      "ethnic-group": "Grupa etniczna",
+      "location": "Lokalizacja",
+      "age": "Wiek",
+      "actions": "Działania",
+      "view-details": "Pokaż szczegóły",
+      "edit-patient": "Edytować",
+      "delete-patient": "Usuń"
+    },
+    "filter": {
+      "patient-name": "Imię pacjenta",
+      "email": "adres e-mail"
+    },
+    "patient-profile": {
+      "header": "Informacja o pacjencie",
+      "years-in-school": "Lata w szkole",
+      "created-at": "Utworzono w",
+      "first-name": "Imię",
+      "last-name": "Nazwisko",
+      "gender": "Płeć",
+      "ethnic-group": "Grupa etniczna",
+      "doctor-name": "Imię lekarza",
+      "research-group-name": "Nazwa grupy badawczej",
+      "other-group": "Inna grupa",
+      "other-data": "Inne dane",
+      "other-data2": "Inne dane 2",
+      "other-data3": "Inne dane 3",
+      "archive-comment": "Komentarz archiwum",
+      "back-button": "Wróć",
+      "add-examination-card": "Dodaj kartę badania",
+      "patient-details": "Szczegóły pacjenta",
+      "patient-cards": "Karty pacjenta",
+      "loading-patient-details": "Ładowanie informacji o pacjencie..."
+    }
+  },
+  "user-request-operations": {
+    "form": {
+      "add-user-request": {
+        "new-request": "Nowe żądanie",
+        "request-title": "Tytuł żądania",
+        "description": "Opis",
+        "add-button": "Dodaj",
+        "request-created-message": "Żądanie zostało utworzone pomyślnie!!"
+      },
+      "edit-user-request": {
+        "edit-request": "Edytuj żądanie",
+        "request-title": "Tytuł żądania",
+        "description": "Opis",
+        "update-button": "Aktualizacja",
+        "request-updated-message": "Żądanie zostało zaktualizowane pomyślnie!!"
+      },
+      "delete-confirmation": {
+        "header": "Czy na pewno chcesz usunąć ",
+        "cancel-button": "Anuluj",
+        "delete-button": "Usuń"
+      }
+    },
+    "list": {
+      "user-request-actions": {
+        "mark-in-progress": "Oznacz jako w trakcie",
+        "mark-as-completed": "Oznacz jako zakończone",
+        "message": "Żądanie ustawione na W toku",
+        "edit-button": "Edytuj"
+      },
+      "user-request-card": {
+        "requester": "Żądający: ",
+        "submit-date": "Data złożenia: ",
+        "complete-date": "Data zakończenia: ",
+        "comment-label": "Komentarze (opcjonalnie)",
+        "completed-button": "Zakończono",
+        "cancel-button": "Anuluj",
+        "description": "Opis: ",
+        "no-description": "Brak opisu.",
+        "admin-comment": "Komentarz administratora: "
+      },
+      "user-request-admin": {
+        "header": "Wszystkie żądania",
+        "search-label": "Wyszukaj według nazwy osoby żądającej",
+        "status-label": "Status"
+      },
+      "user-request-for-current-user": {
+        "header": "Moje żądania",
+        "new-request-button": "Nowe żądanie",
+        "request-status-label": "Status żądania"
+      }
+    }
+  },
+  "student-exam-operations": {
+    "exam-details": {
+      "exam-solution-card": {
+        "score": "Wynik: ",
+        "no-comment": "Brak komentarzy.",
+        "doctor-comment": "Komentarz lekarza",
+        "view-solution": "Zobacz rozwiązanie"
+      },
+      "exam-solution-list": {
+        "header": "Rozwiązania egzaminacyjne",
+        "sub-header": "Liczba przesłanych rozwiązań: "
+      }
+    },
+    "exams-list": {
+      "student-exam-card": {
+        "publish-date": "Data publikacji: ",
+        "status": "Status: ",
+        "duration": "Czas trwania: ",
+        "max-marks": "Maks. liczba punktów: ",
+        "view-exam-button": "Wyświetl egzamin",
+        "edit-exam-button": "Edytuj egzamin",
+        "delete-exam-button": "Usuń egzamin",
+        "mark-as-graded-button": "Oznacz jako oceniony"
+      }
+    },
+    "exam-solution-details": {
+      "exam-solutions-details-for-student": {
+        "error-downloading-message": "Błąd podczas pobierania pliku Excel",
+        "loading-download-message": "Ściąganie...",
+        "download-button": "Pobierz rozwiązanie egzaminu",
+        "doctor-comment1": "Nie przesłałeś rozwiązania tego egzaminu.",
+        "solution-not-submitted": "Rozwiązanie nie zostało przesłane",
+        "doctor-comment2": "Ten egzamin nie został jeszcze oceniony.",
+        "not-graded": "Jeszcze nie ocenione",
+        "doctor-comment3": "Egzamin jeszcze się nie zaczął..",
+        "not-started": "Jeszcze nie rozpoczęte",
+        "exam-has-started": "Egzamin się rozpoczął...",
+        "exam-has-not-started-yet": "Egzamin jeszcze się nie zaczął.",
+        "exam-not-graded-yet": "Egzamin jeszcze nie oceniony",
+        "solution-not-submitted2": "Rozwiązanie nie zostało przesłane",
+        "exam-has-started2": "Egzamin rozpoczęty",
+        "patient-details": "Szczegóły pacjenta",
+        "risk-factor-assessment": "Ocena czynników ryzyka próchnicy",
+        "dmft-dmfs": "DMFT/DMFS",
+        "bewe": "BEWE",
+        "api": "API",
+        "bleeding": "Bleeding",
+        "summary": "Streszczenie"
+      },
+      "practice-patient-api-details-for-student": {
+        "title": "Szczegóły API",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarzy."
+      },
+      "practice-patient-bewe-details-for-student": {
+        "title": "Szczegóły BEWE",
+        "bewe-result": "Wynik BEWE",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarzy."
+      },
+      "practice-patient-bleeding-details-for-student": {
+        "title": "Szczegóły Bleeding",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarzy."
+      },
+      "practice-patient-dmft-dmfs-details-for-student": {
+        "title": "Szczegóły DMFT/DMFS",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarzy."
+      },
+      "student-grade-card": {
+        "graded-by": "Ocenione przez:",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarzy.",
+        "solve-exam": "Rozwiąż egzamin"
+      }
+    },
+    "exam-solution-details-for-teacher": {
+      "title": "Szczegóły rozwiązania egzaminu",
+      "error-downloading-message": "Błąd podczas pobierania pliku Excel",
+      "loading-download-message": "Ściąganie...",
+      "download-button": "Pobierz rozwiązanie egzaminu",
+      "exam-solution-by": "Rozwiązanie egzaminu przez: ",
+      "student-mark": "Ocena studenta: ",
+      "doctor-comment": "Komentarz lekarza",
+      "no-comment": "Brak komentarzy.",
+      "add-comment": "Dodaj komentarz",
+      "edit-comment": "Edytuj komentarz",
+      "add-marks": "Dodaj ocenę",
+      "edit-marks": "Edytuj ocenę",
+      "patient-details": "Szczegóły pacjenta",
+      "risk-factor-assessment": "Ocenia czynników ryzyka próchnicy",
+      "dmft-dmfs": "DMFT/DMFS",
+      "bewe": "BEWE",
+      "api": "API",
+      "bleeding": "Bleeding",
+      "summary": "Streszczenie",
+      "comment-practice-patient-examintation-card": "Komentarz Karta badania pacjenta",
+      "description": "Aby przesłać uwagi dotyczące karty badania pacjenta w gabinecie lekarskim, prosimy o wypełnienie poniższego formularza.",
+      "add-student-marks": "Dodaj ocenę studenta",
+      "student-mark-description": "Proszę wpisać oceny uczniów poniżej.",
+      "practice-patient-api-details-for-teacher": {
+        "title": "Szczegóły API",
+        "api-result": "Wynik API",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarzy.",
+        "add-comment": "Dodaj komentarz",
+        "edit-comment": "Edytuj komentarz",
+        "comment-api-form": "Formularz komentarzy API",
+        "description": "Proszę napisać swój komentarz dotyczący formularza API krwawienia."
+      },
+      "practice-patient-bewe-details-for-teacher": {
+        "title": "Szczegóły BEWE",
+        "bewe-result": "Wynik BEWE",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarzy.",
+        "add-comment": "Dodaj komentarz",
+        "edit-comment": "Edytuj komentarz",
+        "comment-bewe-form": "Formularz komentarzy BEWE",
+        "description": "Proszę napisać swój komentarz dotyczący formularza BEWE."
+      },
+      "practice-patient-bleeding-details-for-teacher": {
+        "title": "Szczegóły krwawienia",
+        "bleeding-result": "Wynik krwawienia",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarzy.",
+        "add-comment": "Dodaj komentarz",
+        "edit-comment": "Edytuj komentarz",
+        "comment-bleeding-form": "Formularz komentarzy dotyczący krwawienia",
+        "description": "Proszę napisać swój komentarz dotyczący formularza krwawienia."
+      },
+      "practice-patient-dmft-dmfs-details-for-teacher": {
+        "title": "Szczegóły DMFT/DMFS",
+        "dmft-dmfs-result": "Wynik DMFT/DMFS",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarzy.",
+        "add-comment": "Dodaj komentarz",
+        "edit-comment": "Edytuj komentarz",
+        "comment-dmft-dmfs-form": "Formularz komentarzy DMFT/DMFS",
+        "description": "Aby skomentować formularz egzaminacyjny DMFT/DMFS studenta, proszę wypełnić poniższy formularz."
+      }
+    },
+    "forms": {
+      "practice-api-form": {
+        "add-calculated-api-result": "Dodaj obliczony wynik API",
+        "api-result": "Wynik API"
+      },
+      "practice-bewe-form": {
+        "add-calculated-bewe-result": "Dodaj obliczony wynik BEWE",
+        "bewe-result": "Wynik BEWE"
+      },
+      "practice-bleeding-form": {
+        "add-calculated-bleeding-result": "Dodaj obliczony wynik krwawienia",
+        "bleeding-result": "Wynik krwawienia"
+      },
+      "practice-dmft-dmfs-form": {
+        "add-calculated-dmft-dmfs-result": "Dodaj obliczony wynik DMFT/DMFS",
+        "dmft-result": "Wynik DMFT",
+        "dmfs-result": "Wynik DMFS"
+      },
+      "create-patient-form": {
+        "first-name": "Imię",
+        "last-name": "Nazwisko",
+        "gender": "Płeć",
+        "male": "Mężczyzna",
+        "female": "Kobieta",
+        "age": "Wiek",
+        "email": "Email",
+        "years-in-school": "Lata w szkole",
+        "location": "Lokalizacja",
+        "ethnic-group": "Grupa etniczna",
+        "other-group": "Inna grupa",
+        "other-data": "Inne dane",
+        "other-data2": "Inne dane 2",
+        "other-data3": "Inne dane 3"
+      },
+      "exam-solution-initial-values": {
+        "question1": "Ekspozycja na fluor",
+        "question2": "Spożywanie słodzonych produktów i napojów",
+        "question3": "Systematyczna opieka stomatologiczna",
+        "question4": "Choroby ogólnoustrojowe",
+        "question5": "Zaburzenia odżywiania",
+        "question6": "Złożona farmakoterapia",
+        "question7": "Alkohol/Nikotyna",
+        "question8": "Nowe zmiany próchnicowe w ciągu ostatnich 36 miesięcy",
+        "question9": "Widoczna płytka nazębna",
+        "question10": "Ekstrakcja zębów z powodu próchnicy w ciągu ostatnich 36 miesięcy",
+        "question11": "Nieprawidłowa morfologia zębów",
+        "question12": "1 lub więcej odbudów w powierzchniach stycznych",
+        "question13": "Odsłonięte powierzchnie korzeni",
+        "question14": "Wystające wypełnienia, brak punktów styku",
+        "question15": "Stałe aparaty ortodontyczne",
+        "question16": "Kserostomia",
+        "question17": "Ocena czynników ryzyka próchnicy"
+      },
+      "exam-submit-success-dialog": {
+        "submitted": "Wysłano",
+        "message": "Egzamin został pomyślnie wysłany!",
+        "return-to-exam-details": "Powrót do szczegółów egzaminu"
+      },
+      "solve-exam-multi-step-form": {
+        "are-you-sure": "Czy na pewno chcesz opuścić stronę?",
+        "first-name-required": "Imię jest wymagane",
+        "first-name-validation": "Imię musi mieć maksymalnie 50 znaków",
+        "last-name-required": "Nazwisko jest wymagane",
+        "last-name-validation": "Nazwisko musi mieć maksymalnie 50 znaków",
+        "gender-required": "Płeć jest wymagana",
+        "ethnic-group-required": "Grupa etniczna jest wymagana",
+        "ethnic-group-validation": "Grupa etniczna musi mieć maksymalnie 50 znaków",
+        "age-required": "Wiek jest wymagany",
+        "location-required": "Lokalizacja jest wymagana",
+        "email-required": "Email jest wymagany",
+        "years-in-school-required": "Lata w szkole są wymagane",
+        "other-group-validation": "Inna grupa musi mieć maksymalnie 50 znaków",
+        "other-data-validation": "Inne dane muszą mieć maksymalnie 50 znaków",
+        "other-data2-validation": "Inne dane 2 muszą mieć maksymalnie 50 znaków",
+        "other-data3-validation": "Inne dane 3 muszą mieć maksymalnie 50 znaków",
+        "max-1-characters": "Maksymalnie 1 znak",
+        "patient-recommendation-validation": "Rekomendacje dla pacjenta muszą mieć maksymalnie 500 znaków",
+        "description-validation": "Opis musi mieć maksymalnie 500 znaków",
+        "proposed-treatment-validation": "Proponowane leczenie musi mieć maksymalnie 500 znaków",
+        "back-button": "Wstecz",
+        "submit-button": "Wyślij",
+        "next-button": "Dalej"
+      },
+      "add-student-marks-dialog": {
+        "student-mark": "Ocena studenta",
+        "cancel-button": "Anuluj",
+        "add-button": "Dodaj",
+        "edit-button": "Edytuj"
+      },
+      "comment-student-exam-card-dialog": {
+        "comment": "Komentarz",
+        "cancel-button": "Anuluj",
+        "add-comment": "Dodaj komentarz",
+        "edit-comment": "Edytuj komentarz"
+      },
+      "delete-exam-confirmation-form": {
+        "delete-exam": "Usuń egzamin:",
+        "delete-warning": "Egzamin zostanie trwale usunięty. Czy na pewno chcesz usunąć ten egzamin?",
+        "cancel-button": "Anuluj",
+        "delete-button": "Usuń"
+      },
+      "mark-as-graded-confirmation-dialog": {
+        "mark-as-graded": "Oznacz jako oceniony",
+        "mark-as-graded-warning": "Czy na pewno chcesz oznaczyć ten egzamin jako oceniony?",
+        "cancel-button": "Anuluj",
+        "yes-button": "Tak"
+      },
+      "publish-exam-form": {
+        "date-of-examination-required": "Data egzaminu jest wymagana",
+        "date-of-examination-validation": "Data egzaminu nie może być w przeszłości",
+        "exam-title-required": "Tytuł egzaminu jest wymagany",
+        "exam-title-min-validation": "Tytuł egzaminu musi mieć co najmniej 2 znaki",
+        "exam-title-max-validation": "Tytuł egzaminu nie powinien przekraczać 100 znaków",
+        "description-required": "Opis jest wymagany",
+        "description-min-validation": "Opis musi mieć co najmniej 10 znaków",
+        "description-max-validation": "Opis nie powinien przekraczać 1000 znaków",
+        "start-time-required": "Godzina rozpoczęcia jest wymagana",
+        "end-time-required": "Godzina zakończenia jest wymagana",
+        "end-time-is-greater": "jest późniejsza",
+        "end-time-must-be-after-start-time": "Godzina zakończenia musi być po godzinie rozpoczęcia",
+        "duration-interval-is-required": "Czas trwania jest wymagany",
+        "max-mark-required": "Maksymalna liczba punktów jest wymagana",
+        "max-mark-min-validation": "Maksymalna liczba punktów musi wynosić co najmniej 1",
+        "max-mark-max-validation": "Maksymalna liczba punktów nie może przekraczać 100",
+        "exam-title": "Tytuł egzaminu",
+        "description": "Opis",
+        "date-of-examination": "Data egzaminu",
+        "start-time": "Godzina rozpoczęcia",
+        "end-time": "Godzina zakończenia",
+        "duration-of-exam": "Czas trwania egzaminu",
+        "max-mark": "Maksymalna liczba punktów",
+        "publish-button": "Opublikuj egzamin",
+        "publish-message": "Egzamin opublikowany pomyślnie!!"
+      },
+      "update-exam-form": {
+        "date-of-examination-required": "Data egzaminu jest wymagana",
+        "date-of-examination-validation": "Data egzaminu nie może być w przeszłości",
+        "exam-title-required": "Tytuł egzaminu jest wymagany",
+        "exam-title-min-validation": "Tytuł egzaminu musi mieć co najmniej 2 znaki",
+        "exam-title-max-validation": "Tytuł egzaminu nie powinien przekraczać 100 znaków",
+        "description-required": "Opis jest wymagany",
+        "description-min-validation": "Opis musi mieć co najmniej 10 znaków",
+        "description-max-validation": "Opis nie powinien przekraczać 1000 znaków",
+        "start-time-required": "Godzina rozpoczęcia jest wymagana",
+        "end-time-required": "Godzina zakończenia jest wymagana",
+        "end-time-is-greater": "jest późniejsza",
+        "end-time-must-be-after-start-time": "Godzina zakończenia musi być po godzinie rozpoczęcia",
+        "duration-interval-is-required": "Czas trwania jest wymagany",
+        "max-mark-required": "Maksymalna liczba punktów jest wymagana",
+        "max-mark-min-validation": "Maksymalna liczba punktów musi wynosić co najmniej 1",
+        "max-mark-max-validation": "Maksymalna liczba punktów nie może przekraczać 100",
+        "exam-title": "Tytuł egzaminu",
+        "description": "Opis",
+        "date-of-examination": "Data egzaminu",
+        "start-time": "Godzina rozpoczęcia",
+        "end-time": "Godzina zakończenia",
+        "duration-of-exam": "Czas trwania egzaminu",
+        "max-mark": "Maksymalna liczba punktów",
+        "update-button": "Zaktualizuj egzamin"
+      }
+    }
+  },
+  "student-operations": {
+    "dashboard": {
+      "title": "Panel studenta"
+    },
+    "nav-options": {
+      "my-groups": "Moje grupy",
+      "active-patients": "Aktywni pacjenci",
+      "archived-patients": "Archiwizowani pacjenci"
+    },
+    "student-group-details": {
+      "teacher": "Nauczyciel:",
+      "no-exams-found": "Nie znaleziono egzaminów"
+    },
+    "student-group-list": {
+      "group-for-student-card": {
+        "teacher": "Nauczyciel:",
+        "view-group-details-button": "Zobacz szczegóły grupy"
+      },
+      "group-list-for-student": {
+        "title": "Moje Grupy",
+        "sub-title": "Lista Moich Grup",
+        "search": "Szukaj"
+      },
+      "upcoming-exams": {
+        "title": "Nadchodzące Egzaminy",
+        "no-upcoming-exams": "Brak Nadchodzących Egzaminów"
+      }
+    }
+  },
+  "examination-card-operations": {
+    "details": {
+      "api-details": {
+        "api-result": "Wynik API",
+        "doctor-api-comment": "Komentarz lekarza do API",
+        "no-comment": "Nie dodano komentarza.",
+        "student-api-comment": "Komentarz studenta do API",
+        "edit-comment": "Edytuj komentarz",
+        "add-comment": "Dodaj komentarz",
+        "comment-api-form": "Formularz komentarza API",
+        "description": "Proszę podać komentarz do formularza API.",
+        "message": "Komentarz został pomyślnie dodany."
+      },
+      "bewe-details": {
+        "bewe-result": "Wynik BEWE",
+        "doctor-bewe-comment": "Komentarz lekarza do BEWE",
+        "no-comment": "Nie dodano komentarza.",
+        "student-bewe-comment": "Komentarz studenta do BEWE",
+        "edit-comment": "Edytuj komentarz",
+        "add-comment": "Dodaj komentarz",
+        "comment-bewe-form": "Formularz komentarza BEWE",
+        "description": "Proszę podać komentarz do formularza BEWE.",
+        "message": "Komentarz został pomyślnie dodany."
+      },
+      "bleeding-details": {
+        "bleeding-result": "Wynik krwawienia",
+        "doctor-bleeding-comment": "Komentarz lekarza dotyczący krwawienia",
+        "no-comment": "Nie dodano komentarza.",
+        "student-bleeding-comment": "Komentarz studenta dotyczący krwawienia",
+        "edit-comment": "Edytuj komentarz",
+        "add-comment": "Dodaj komentarz",
+        "comment-bleeding-form": "Formularz komentarza dotyczącego krwawienia",
+        "description": "Proszę podać komentarz do formularza dotyczącego krwawienia.",
+        "message": "Komentarz został pomyślnie dodany."
+      },
+      "dmft-dmfs-details": {
+        "doctor-dmft-dmfs-comment": "Komentarz lekarza dotyczący DMFT/DMFS",
+        "no-comment": "Nie dodano komentarza.",
+        "student-dmft-dmfs-comment": "Komentarz studenta dotyczący DMFT/DMFS",
+        "edit-comment": "Edytuj komentarz",
+        "add-comment": "Dodaj komentarz",
+        "comment-dmft-dmfs-form": "Formularz komentarza dotyczącego DMFT/DMFS",
+        "description": "Proszę podać komentarz do formularza dotyczącego DMFT/DMFS.",
+        "message": "Komentarz został pomyślnie dodany."
+      },
+      "patient-examination-details-header-card": {
+        "downloading": "Pobieranie...",
+        "download-button": "Pobierz raport",
+        "patient-name": "Imię pacjenta",
+        "doctor-information": "Informacje o lekarzu",
+        "student-information": "Informacje o studencie",
+        "grade": "Ocena:",
+        "not-graded": "Nieocenione",
+        "doctor-comment": "Komentarz lekarza",
+        "no-comment": "Brak komentarza.",
+        "student-comment": "Komentarz studenta",
+        "edit-grade": "Edytuj ocenę",
+        "grade-card": "Karta ocen",
+        "edit-comment": "Edytuj komentarz",
+        "add-comment": "Dodaj komentarz",
+        "comment-examination-card": "Komentarz do karty badania",
+        "description": "Proszę podać komentarz do karty badania.",
+        "grade-examination-card": "Ocena karty badania",
+        "description2": "Proszę podać ocenę dla karty badania do",
+        "message": "Komentarz został pomyślnie dodany.",
+        "message2": "Całkowity wynik został pomyślnie dodany."
+      }
+    }
   }
 }

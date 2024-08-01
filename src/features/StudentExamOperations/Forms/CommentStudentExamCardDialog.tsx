@@ -10,6 +10,7 @@ import {
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 import { SendOutlined } from "@mui/icons-material";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   title: string;
@@ -35,6 +36,8 @@ export default function CommentStudentExamCardDialog({
       setCommentValue(comment);
     }
   }, [comment]);
+
+  const [t] = useTranslation("global");
 
   return (
     <Dialog
@@ -67,7 +70,9 @@ export default function CommentStudentExamCardDialog({
           margin="dense"
           id="comment"
           name="comment"
-          label="Comment"
+          label={t(
+            "student-exam-operations.forms.comment-student-exam-card-dialog.comment"
+          )}
           type="text"
           fullWidth
           variant="standard"
@@ -80,7 +85,9 @@ export default function CommentStudentExamCardDialog({
           onClick={onClose}
           color="error"
         >
-          Cancel
+          {t(
+            "student-exam-operations.forms.comment-student-exam-card-dialog.cancel-button"
+          )}
         </Button>
         <Button
           size="small"
@@ -89,7 +96,13 @@ export default function CommentStudentExamCardDialog({
           variant="contained"
           startIcon={<SendOutlined />}
         >
-          {comment === "" ? "Add Comment" : "Edit Comment"}
+          {comment === ""
+            ? t(
+                "student-exam-operations.forms.comment-student-exam-card-dialog.add-comment"
+              )
+            : t(
+                "student-exam-operations.forms.comment-student-exam-card-dialog.edit-comment"
+              )}
         </Button>
       </DialogActions>
     </Dialog>

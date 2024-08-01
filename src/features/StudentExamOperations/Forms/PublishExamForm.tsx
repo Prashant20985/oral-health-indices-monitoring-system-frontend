@@ -27,6 +27,7 @@ import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButto
 import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
 import * as React from "react";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   groupId: string;
@@ -57,6 +58,8 @@ export default observer(function PublishExamForm({
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
 
+  const [t] = useTranslation("global");
+
   const initalValues: PublishExam = {
     groupId: groupId,
     dateOfExamination: new Date(),
@@ -70,33 +73,89 @@ export default observer(function PublishExamForm({
 
   const validationSchema = Yup.object().shape({
     dateOfExamination: Yup.date()
-      .required("Date of Examination is required")
-      .min(new Date(), "Date of Examination cannot be in the past"),
+      .required(
+        t(
+          "student-exam-operations.forms.publish-exam-form.date-of-examination-required"
+        )
+      )
+      .min(
+        new Date(),
+        t(
+          "student-exam-operations.forms.publish-exam-form.date-of-examination-validation"
+        )
+      ),
     examTitle: Yup.string()
-      .required("Exam Title is required")
-      .min(2, "Exam Title should be at least 2 characters")
-      .max(100, "Exam Title should not exceed 100 characters"),
+      .required(
+        t("student-exam-operations.forms.publish-exam-form.exam-title-required")
+      )
+      .min(
+        2,
+        t(
+          "student-exam-operations.forms.publish-exam-form.exam-title-min-validation"
+        )
+      )
+      .max(
+        100,
+        t(
+          "student-exam-operations.forms.publish-exam-form.exam-title-max-validation"
+        )
+      ),
     description: Yup.string()
-      .required("Description is required")
-      .min(10, "Description should be at least 10 characters")
-      .max(1000, "Description should not exceed 1000 characters"),
-    startTime: Yup.string().required("Start Time is required"),
+      .required(
+        t(
+          "student-exam-operations.forms.publish-exam-form.description-required"
+        )
+      )
+      .min(
+        10,
+        t(
+          "student-exam-operations.forms.publish-exam-form.description-min-validation"
+        )
+      )
+      .max(
+        1000,
+        t(
+          "student-exam-operations.forms.publish-exam-form.description-max-validation"
+        )
+      ),
+    startTime: Yup.string().required(
+      t("student-exam-operations.forms.publish-exam-form.start-time-required")
+    ),
     endTime: Yup.string()
-      .required("End Time is required")
+      .required(
+        t("student-exam-operations.forms.publish-exam-form.end-time-required")
+      )
       .test(
-        "is-greater",
-        "End Time must be after Start Time",
+        t(
+          "student-exam-operations.forms.publish-exam-form.end-time-is-greater"
+        ),
+        t(
+          "student-exam-operations.forms.publish-exam-form.end-time-must-be-greater"
+        ),
         function (value) {
           const { startTime } = this.parent;
           if (!startTime || !value) return true;
+          4;
           return startTime < value;
         }
       ),
     durationInterval: Yup.string().required("Duration Interval is required"),
     maxMark: Yup.number()
-      .required("Max Mark is required")
-      .min(1, "Max Mark must be at least 1")
-      .max(100, "Max Mark must not exceed 100"),
+      .required(
+        t("student-exam-operations.forms.publish-exam-form.max-mark-required")
+      )
+      .min(
+        1,
+        t(
+          "student-exam-operations.forms.publish-exam-form.max-mark-min-validation"
+        )
+      )
+      .max(
+        100,
+        t(
+          "student-exam-operations.forms.publish-exam-form.max-mark-max-validation"
+        )
+      ),
   });
 
   return (
@@ -131,7 +190,9 @@ export default observer(function PublishExamForm({
                     gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                   >
                     <CustomTextField
-                      label="Exam Title"
+                      label={t(
+                        "student-exam-operations.forms.publish-exam-form.exam-title"
+                      )}
                       name="examTitle"
                       onChange={handleChange}
                       value={values.examTitle}
@@ -141,7 +202,9 @@ export default observer(function PublishExamForm({
                     />
 
                     <TextField
-                      label="Description"
+                      label={t(
+                        "student-exam-operations.forms.publish-exam-form.description"
+                      )}
                       name="description"
                       onChange={handleChange}
                       error={touched.description && !!errors.description}
@@ -165,7 +228,9 @@ export default observer(function PublishExamForm({
                             !!errors.dateOfExamination,
                         },
                       }}
-                      label="Date of Examination"
+                      label={t(
+                        "student-exam-operations.forms.publish-exam-form.date-of-examination"
+                      )}
                       name="dateOfExamination"
                       value={values.dateOfExamination}
                       minDate={new Date()}
@@ -176,7 +241,9 @@ export default observer(function PublishExamForm({
 
                     <TimePicker
                       name="startTime"
-                      label="Start Time"
+                      label={t(
+                        "student-exam-operations.forms.publish-exam-form.start-time"
+                      )}
                       onChange={(date: Date | null) => {
                         const hours = date?.getHours();
                         const minutes = date?.getMinutes();
@@ -205,7 +272,9 @@ export default observer(function PublishExamForm({
 
                     <TimePicker
                       name="endTime"
-                      label="End Time"
+                      label={t(
+                        "student-exam-operations.forms.publish-exam-form.end-time"
+                      )}
                       onChange={(date: Date | null) => {
                         const hours = date?.getHours();
                         const minutes = date?.getMinutes();
@@ -234,7 +303,9 @@ export default observer(function PublishExamForm({
 
                     <Box sx={{ gridColumn: "span 4" }}>
                       <Typography variant="subtitle1" sx={{ mb: 1 }}>
-                        Duration Of Exam
+                        {t(
+                          "student-exam-operations.forms.publish-exam-form.duration-of-exam"
+                        )}
                       </Typography>
                       <Field name="durationInterval">
                         {({ field }: FieldProps) => (
@@ -259,7 +330,9 @@ export default observer(function PublishExamForm({
                     </Box>
 
                     <CustomTextField
-                      label="Max Mark"
+                      label={t(
+                        "student-exam-operations.forms.publish-exam-form.max-mark"
+                      )}
                       name="maxMark"
                       value={values.maxMark}
                       onChange={handleChange}
@@ -278,7 +351,9 @@ export default observer(function PublishExamForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Publish Exam"
+                        buttonText={t(
+                          "student-exam-operations.forms.publish-exam-form.publish-button"
+                        )}
                       />
                       <CustomCancelButton handleCancel={onClose} />
                     </Box>
@@ -292,7 +367,9 @@ export default observer(function PublishExamForm({
       <CustomSanckbar
         snackbarOpen={openSnackbar}
         snackbarClose={() => setOpenSnackbar(false)}
-        message="Exam Published Successfully!!"
+        message={t(
+          "student-exam-operations.forms.publish-exam-form.publish-message"
+        )}
       />
     </LocalizationProvider>
   );

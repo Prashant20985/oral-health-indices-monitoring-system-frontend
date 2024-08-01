@@ -17,6 +17,7 @@ import { blueGrey } from "@mui/material/colors";
 import { Send } from "@mui/icons-material";
 import CommentStudentExamCardDialog from "../../Forms/CommentStudentExamCardDialog";
 import { useStore } from "../../../../app/stores/Store";
+import { useTranslation } from "react-i18next";
 
 const DMFT_DMFSForm = React.lazy(
   () => import("../../../IndexCalculationForms/DMFT_DMFS/DMFT_DMFSForm")
@@ -42,6 +43,8 @@ export default observer(function PracticePatientDMFT_DMFSDetailsForTeacher({
     await commentDMFT_DMFSForm(cardId, commnet);
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Card
@@ -54,7 +57,7 @@ export default observer(function PracticePatientDMFT_DMFSDetailsForTeacher({
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              DMFT/DMFS Details
+              {t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-dmft-dmfs-details-for-teacher.title")}
             </Typography>
           }
         />
@@ -78,13 +81,13 @@ export default observer(function PracticePatientDMFT_DMFSDetailsForTeacher({
           <Box display="flex" flexDirection="column" gap={1}>
             <TextField
               fullWidth
-              label="Doctor's Comment"
+              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-dmft-dmfs-details-for-teacher.doctor-comment")}
               name="comment"
               color="secondary"
               multiline
               rows={3}
               inputProps={{ readonly: true }}
-              value={dmft_dmfs.comment ?? "No comment yet."}
+              value={dmft_dmfs.comment ?? t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-dmft-dmfs-details-for-teacher.no-comment")}
             />
             <Box display="flex" justifyContent="flex-end">
               <Button
@@ -94,7 +97,7 @@ export default observer(function PracticePatientDMFT_DMFSDetailsForTeacher({
                 onClick={() => setOpenCommentDialog(true)}
                 startIcon={<Send />}
               >
-                {dmft_dmfs.comment === null ? "Add Comment" : "Edit Comment"}
+                {dmft_dmfs.comment === null ? t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-dmft-dmfs-details-for-teacher.add-comment") : t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-dmft-dmfs-details-for-teacher.edit-comment")}
               </Button>
             </Box>
           </Box>
@@ -108,8 +111,8 @@ export default observer(function PracticePatientDMFT_DMFSDetailsForTeacher({
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title="Comment DMFT/DMFS"
-        description="To comment on the student exam DMFT/DMFS form, please fill in the form below."
+        title={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-dmft-dmfs-details-for-teacher.comment-dmft-dmfs-form")}
+        description={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-dmft-dmfs-details-for-teacher.description")}
         handleSubmit={handleComment}
         comment={dmft_dmfs.comment ?? ""}
       />

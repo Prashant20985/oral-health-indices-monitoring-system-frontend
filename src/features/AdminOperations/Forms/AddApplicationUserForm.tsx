@@ -22,6 +22,7 @@ import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButto
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import CustomSelect from "../../../app/common/formInputs/CustomSelect";
 import { roles } from "../../../app/models/Role";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen: boolean;
@@ -63,6 +64,8 @@ export default observer(function AddApplicationUserForm({
     onClose();
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       <Dialog open={isOpen} fullWidth TransitionComponent={SlideUpTransition}>
@@ -101,7 +104,7 @@ export default observer(function AddApplicationUserForm({
                     sx={{ mb: "15px" }}
                     align="left"
                   >
-                    Add User
+                    {t("admin-operations.forms.add-application-user-form.header")}
                   </Typography>
                   <Box
                     display="grid"
@@ -114,7 +117,7 @@ export default observer(function AddApplicationUserForm({
                     }}
                   >
                     <CustomTextField
-                      label="First Name"
+                      label={t("admin-operations.forms.add-application-user-form.first-name")}
                       name="firstName"
                       onChange={handleChange}
                       required={true}
@@ -124,7 +127,7 @@ export default observer(function AddApplicationUserForm({
                     />
 
                     <CustomTextField
-                      label="Last Name"
+                      label={t("admin-operations.forms.add-application-user-form.last-name")}
                       name="lastName"
                       onChange={handleChange}
                       error={touched.lastName && !!errors.lastName}
@@ -133,7 +136,7 @@ export default observer(function AddApplicationUserForm({
                     />
 
                     <CustomTextField
-                      label="Phone Number"
+                      label={t("admin-operations.forms.add-application-user-form.phone-number")}
                       name="phoneNumber"
                       onChange={handleChange}
                       error={touched.phoneNumber && !!errors.phoneNumber}
@@ -144,7 +147,7 @@ export default observer(function AddApplicationUserForm({
 
                     <Box component={FormControl} sx={{ gridColumn: "span 2" }}>
                       <CustomSelect
-                        label="Role"
+                        label={t("admin-operations.forms.add-application-user-form.role")}
                         value={values.role}
                         options={roles}
                         required={true}
@@ -160,7 +163,7 @@ export default observer(function AddApplicationUserForm({
                     </Box>
 
                     <CustomTextField
-                      label="Email"
+                      label={t("admin-operations.forms.add-application-user-form.email")}
                       name="email"
                       onChange={handleChange}
                       error={touched.email && !!errors.email}
@@ -178,13 +181,13 @@ export default observer(function AddApplicationUserForm({
                           onClick={() => setIsGuest(!isGuest)}
                         />
                       }
-                      label="Is Guest User"
+                      label={t("admin-operations.forms.add-application-user-form.is-guest")}
                       sx={{ gridColumn: "span 2" }}
                     />
 
                     {isGuest && (
                       <CustomTextField
-                        label="Comment"
+                        label={t("admin-operations.forms.add-application-user-form.comment")}
                         name="guestUserComment"
                         onChange={handleChange}
                         error={
@@ -209,7 +212,7 @@ export default observer(function AddApplicationUserForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Save"
+                        buttonText={t("admin-operations.forms.add-application-user-form.save-button")}
                       />
                       <CustomCancelButton
                         handleCancel={() => {
@@ -228,7 +231,7 @@ export default observer(function AddApplicationUserForm({
       <CustomSanckbar
         snackbarOpen={snackbarOpen}
         snackbarClose={() => setSnackbarOpen(false)}
-        message="User added successfully!!"
+        message={t("admin-operations.forms.add-application-user-form.user-added-message")}
       />
     </>
   );

@@ -22,6 +22,7 @@ import React from "react";
 import { useStore } from "../../../app/stores/Store";
 import DeleteConfirmation from "../Forms/DeleteConfirmation";
 import PatientDetailsDialog from "../../PatientOperations/Forms/PatientDetailsDialog";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   patientExaminationCard: PatientExaminationCard;
@@ -36,6 +37,8 @@ export default observer(function ExaminationCardItem({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   const [openDeleteConfirmation, setOpenDeleteConfirmation] =
     React.useState(false);
@@ -104,13 +107,13 @@ export default observer(function ExaminationCardItem({
         }
         subheader={
           <Typography variant="h6" color="textSecondary">
-            Created By:{" "}
+            {t("dentist-teacher-operations.list.patient-examination-card.created-by")}{" "}
             {patientExaminationCard.isRegularMode
               ? patientExaminationCard.doctorName
               : patientExaminationCard.studentName}
             <br />
             {!patientExaminationCard.isRegularMode &&
-              `Assigned Doctor: ${patientExaminationCard.doctorName}`}
+              `${t("dentist-teacher-operations.list.patient-examination-card.assigned-doctor")} ${patientExaminationCard.doctorName}`}
           </Typography>
         }
       />
@@ -121,7 +124,7 @@ export default observer(function ExaminationCardItem({
           multiline
           rows={3}
           color="secondary"
-          label="Description of the treatment"
+          label={t("dentist-teacher-operations.list.patient-examination-card.description-of-the-treatment")}
           value={patientExaminationCard.summary.description}
         />
       </CardContent>
@@ -143,7 +146,7 @@ export default observer(function ExaminationCardItem({
                 startIcon={<Person />}
                 onClick={() => setOpenPatientDetails(true)}
               >
-                Patient Details
+                {t("dentist-teacher-operations.list.patient-examination-card.patient-details")}
               </Button>
             )}
             <Button
@@ -162,7 +165,7 @@ export default observer(function ExaminationCardItem({
                 }
               }}
             >
-              View Card
+              {t("dentist-teacher-operations.list.patient-examination-card.view-card")}
             </Button>
           </Box>
         </Box>

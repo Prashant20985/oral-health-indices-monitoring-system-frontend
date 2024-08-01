@@ -12,6 +12,7 @@ import {
 import { colors } from "../../../../themeConfig";
 import { blueGrey } from "@mui/material/colors";
 import DMFT_DMFSForm from "../../../IndexCalculationForms/DMFT_DMFS/DMFT_DMFSForm";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   dmft_dmfs: DMFT_DMFS;
@@ -22,6 +23,9 @@ export default observer(function PracticePatientDMFT_DMFSDetailsForStudent({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Card
@@ -34,7 +38,7 @@ export default observer(function PracticePatientDMFT_DMFSDetailsForStudent({
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              DMFT/DMFS Details
+              {t("student-exam-operations.exam-solution-details.practice-patient-dmft-dmfs-details-for-student.title")}
             </Typography>
           }
         />
@@ -60,13 +64,13 @@ export default observer(function PracticePatientDMFT_DMFSDetailsForStudent({
           <Box display="flex" flexDirection="column" gap={1}>
             <TextField
               fullWidth
-              label="Doctor Comment"
+              label={t("student-exam-operations.exam-solution-details.practice-patient-dmft-dmfs-details-for-student.doctor-comment")}
               name="comment"
               color="secondary"
               multiline
               rows={3}
               inputProps={{ readonly: true }}
-              value={dmft_dmfs.comment ?? "No comment yet."}
+              value={dmft_dmfs.comment ?? t("student-exam-operations.exam-solution-details.practice-patient-dmft-dmfs-details-for-student.no-comment")}
             />
           </Box>
         </CardContent>

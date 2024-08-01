@@ -19,20 +19,22 @@ export default observer(function PatientExaminationCardDetails() {
     userStore: { user },
   } = useStore();
 
-  const isUserEligibleToEdit =
-    patientExaminationCardDetails?.doctorName.split("(")[1].split(")")[0] ===
-    user?.email;
-
-  const isUserEligibleToComment =
-    isUserEligibleToEdit ||
-    patientExaminationCardDetails?.studentName.split("(")[1].split(")")[0] ===
-      user?.email;
-
   React.useEffect(() => {
     if (cardId) {
       getPatientExaminationCardDetails(cardId);
     }
   }, [cardId, getPatientExaminationCardDetails]);
+
+  const isUserEligibleToEdit =
+    patientExaminationCardDetails?.doctorName.split("(")[1].split(")")[0] ===
+    user?.email;
+
+  const isUserEligibleToComment =
+    isUserEligibleToEdit || patientExaminationCardDetails?.studentName
+      ? patientExaminationCardDetails?.studentName
+          .split("(")[1]
+          .split(")")[0] === user?.email
+      : false;
 
   return (
     <Box>

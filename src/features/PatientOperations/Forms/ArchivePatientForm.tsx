@@ -12,6 +12,7 @@ import SlideUpTransition from "../../../app/common/transition/SlideUpTransition"
 import * as React from "react";
 import { ArchiveOutlined } from "@mui/icons-material";
 import { useStore } from "../../../app/stores/Store";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   patientId: string;
@@ -27,6 +28,9 @@ export default observer(function ArchivePatientForm({
   const {
     patientStore: { archivePatient },
   } = useStore();
+
+  const [t] = useTranslation("global");
+  
   return (
     <Dialog
       open={isOpen}
@@ -46,10 +50,10 @@ export default observer(function ArchivePatientForm({
         },
       }}
     >
-      <DialogTitle>Archive Patient</DialogTitle>
+      <DialogTitle>{t("patient-operations.form.archive-patient.header")}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Are you sure you want to archive this patient?
+        {t("patient-operations.form.archive-patient.dialog")}
         </DialogContentText>
         <TextField
           color="secondary"
@@ -58,7 +62,7 @@ export default observer(function ArchivePatientForm({
           margin="dense"
           id="archiveComment"
           name="archiveComment"
-          label="Archive Comment"
+          label={t("patient-operations.form.archive-patient.comment")}
           type="text"
           variant="standard"
           fullWidth
@@ -71,7 +75,7 @@ export default observer(function ArchivePatientForm({
           onClick={onClose}
           color="error"
         >
-          Cancel
+          {t("patient-operations.form.archive-patient.cancel-button")}
         </Button>
         <Button
           size="small"
@@ -80,7 +84,7 @@ export default observer(function ArchivePatientForm({
           variant="contained"
           startIcon={<ArchiveOutlined />}
         >
-          Archive
+          {t("patient-operations.form.archive-patient.archive-button")}
         </Button>
       </DialogActions>
     </Dialog>

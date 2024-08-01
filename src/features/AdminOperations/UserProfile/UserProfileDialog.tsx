@@ -15,6 +15,7 @@ import { Edit } from "@mui/icons-material";
 import ProfileForm from "../Forms/ProfileForm";
 import UserEditForm from "../Forms/UserEditForm";
 import ChangePasswordForm from "../Forms/ChangePasswordForm";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   userName: string | undefined;
@@ -51,6 +52,8 @@ export default observer(function UserProfileDialog({
     return () => clearSelectedApplicationUser();
   }, [userName, fetchUserDetails, clearSelectedApplicationUser]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       {!loading.userDetails && (
@@ -80,10 +83,10 @@ export default observer(function UserProfileDialog({
                     fontWeight="bold"
                   >
                     {editMode
-                      ? "Edit User"
+                      ? t("admin-operations.user-profile.edit-user")
                       : changePasswordMode
-                      ? "Change Password"
-                      : "User Details"}
+                      ? t("admin-operations.user-profile.change-password")
+                      : t("admin-operations.user-profile.header")}
                   </Typography>
                 </Box>
                 <Box
@@ -106,7 +109,7 @@ export default observer(function UserProfileDialog({
                         },
                       }}
                     >
-                      Change Password
+                      {t("admin-operations.user-profile.change-password")}
                     </Button>
                   ) : (
                     user?.role === "Admin" &&
@@ -127,7 +130,7 @@ export default observer(function UserProfileDialog({
                               },
                             }}
                           >
-                            Edit User
+                            {t("admin-operations.user-profile.edit-user")}
                           </Button>
                         )}
                       </>

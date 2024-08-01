@@ -17,6 +17,7 @@ import StudentGroupCard from "./StudentGroupCard";
 import AddStudentGroupForm from "../../Forms/AddStudentGroupForm";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 export default observer(function StudentGroupList() {
   const { dentistTeacherStore } = useStore();
@@ -38,23 +39,25 @@ export default observer(function StudentGroupList() {
     group.groupName.toLowerCase().includes(groupSearchQuery.toLowerCase())
   );
 
+  const [t] = useTranslation("global");
+
   return (
     <Box display="flex" flexDirection="column">
       <Box display="flex" justifyContent="space-between" alignContent="center">
-        <Header title="Student Groups" />
+        <Header title={t("dentist-teacher-operations.list.student-group.header")} />
         <Button
           variant="contained"
           color="success"
           startIcon={<Add />}
           onClick={() => setAddFormOpen(true)}
         >
-          Add New Group
+          {t("dentist-teacher-operations.list.student-group.add-button")}
         </Button>
       </Box>
       <Box display="flex" mt={2} mb={2} width="40%">
         <TextField
           color="info"
-          label="Search"
+          label={t("dentist-teacher-operations.list.student-group.search")}
           variant="outlined"
           type="text"
           fullWidth

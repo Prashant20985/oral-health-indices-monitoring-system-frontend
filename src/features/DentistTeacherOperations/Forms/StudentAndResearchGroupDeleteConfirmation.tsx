@@ -13,6 +13,7 @@ import { Diversity2, Groups3 } from "@mui/icons-material";
 import { colors } from "../../../themeConfig";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 import { useStore } from "../../../app/stores/Store";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   groupId: string;
@@ -46,6 +47,8 @@ export default observer(function StudentAndResearchGroupDeleteConfirmation({
     }
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       <Dialog
@@ -64,7 +67,7 @@ export default observer(function StudentAndResearchGroupDeleteConfirmation({
                 {isResearchGroup ? <Diversity2 /> : <Groups3 />}
               </Avatar>
             }
-            title={`Are you sure you want to delete ${groupName} ?`}
+            title={t("dentist-teacher-operations.forms.student-and-research-group-delete-confirmation-form.header")+` ${groupName} ?`}
           />
           <CardActions>
             <Box display="flex" justifyContent="flex-end" width="100%" gap={2}>
@@ -79,7 +82,7 @@ export default observer(function StudentAndResearchGroupDeleteConfirmation({
                   },
                 }}
               >
-                Cancel
+                {t("dentist-teacher-operations.forms.student-and-research-group-delete-confirmation-form.cancel-button")}
               </Button>
               <Button
                 variant="contained"
@@ -93,7 +96,7 @@ export default observer(function StudentAndResearchGroupDeleteConfirmation({
                   },
                 }}
               >
-                Delete
+                {t("dentist-teacher-operations.forms.student-and-research-group-delete-confirmation-form.delete-button")}
               </Button>
             </Box>
           </CardActions>

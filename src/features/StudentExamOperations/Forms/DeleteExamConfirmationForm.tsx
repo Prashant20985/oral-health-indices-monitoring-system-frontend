@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   examId: string;
@@ -30,6 +31,8 @@ export default observer(function DeleteExamConfirmationForm({
     await deleteExam(examId);
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Dialog
       open={isOpen}
@@ -37,13 +40,19 @@ export default observer(function DeleteExamConfirmationForm({
       keepMounted
       TransitionComponent={SlideUpTransition}
     >
-      <DialogTitle>{`Delete Exam: ${examTitle}`}</DialogTitle>
+      <DialogTitle>{`${t(
+        "student-exam-operations.forms.delete-exam-confirmation-form.delete-exam"
+      )} ${examTitle}`}</DialogTitle>
       <DialogContent>
-        Exam will be deleted permanently. Are you sure you want to delete this
+        {t(
+          "student-exam-operations.forms.delete-exam-confirmation-form.delete-warning"
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="info" variant="contained" size="small">
-          Cancel
+          {t(
+            "student-exam-operations.forms.delete-exam-confirmation-form.cancel-button"
+          )}
         </Button>
         <Button
           variant="contained"
@@ -51,7 +60,9 @@ export default observer(function DeleteExamConfirmationForm({
           size="small"
           onClick={handleDeleteExam}
         >
-          Delete
+          {t(
+            "student-exam-operations.forms.delete-exam-confirmation-form.delete-button"
+          )}
         </Button>
       </DialogActions>
     </Dialog>

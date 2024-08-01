@@ -9,6 +9,7 @@ import {
 import { observer } from "mobx-react-lite";
 import SidebarListItem from "../../../app/common/sidebar/SidebarListItem";
 import { useStore } from "../../../app/stores/Store";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -18,21 +19,24 @@ export default observer(function DentistTeacherNavOptions({ open }: Props) {
   const {
     userStore: { user },
   } = useStore();
+
+  const [t] = useTranslation("global");
+  
   const options = [
     {
-      title: "Active Patients",
+      title: t("dentist-teacher-operations.nav-options.active-patients"),
       path: "/active-patients",
       icon: <LocalHospitalOutlined />,
     },
     {
-      title: "Archived Patients",
+      title: t("dentist-teacher-operations.nav-options.archived-patients"),
       path: "/archived-patients",
       icon: <ArchiveOutlined />,
     },
     ...(user?.role === "Dentist_Teacher_Examiner"
       ? [
           {
-            title: "Student Groups",
+            title: t("dentist-teacher-operations.nav-options.student-groups"),
             path: "/student-groups",
             icon: <Groups3 />,
           },
@@ -41,19 +45,19 @@ export default observer(function DentistTeacherNavOptions({ open }: Props) {
     ...(user?.role === "Dentist_Teacher_Researcher"
       ? [
           {
-            title: "Research Groups",
+            title: t("dentist-teacher-operations.nav-options.research-groups"),
             path: "/research-groups",
             icon: <BiotechOutlined />,
           },
         ]
       : []),
     {
-      title: "Supervised Students",
+      title: t("dentist-teacher-operations.nav-options.supervised-students"),
       path: "/supervised-students",
       icon: <SchoolOutlined />,
     },
     {
-      title: "Assigned Cards",
+      title: t("dentist-teacher-operations.nav-options.assigned-cards"),
       path: "/assigned-cards",
       icon: <Assignment />,
     },

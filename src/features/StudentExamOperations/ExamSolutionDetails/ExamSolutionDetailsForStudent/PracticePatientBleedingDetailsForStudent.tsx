@@ -11,6 +11,7 @@ import { observer } from "mobx-react-lite";
 import { Bleeding } from "../../../../app/models/APIBleeding";
 import { colors } from "../../../../themeConfig";
 import APIBleedingForm from "../../../IndexCalculationForms/APIBleeding/APIBleedingForm";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   bleeding: Bleeding;
@@ -21,6 +22,9 @@ export default observer(function PracticePatientBleedingDetailsForStudent({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Card
@@ -32,7 +36,7 @@ export default observer(function PracticePatientBleedingDetailsForStudent({
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              Bleeding Details
+              {t("student-exam-operations.exam-solution-details.practice-patient-bleeding-details-for-student.title")}
             </Typography>
           }
         />
@@ -57,8 +61,8 @@ export default observer(function PracticePatientBleedingDetailsForStudent({
             ))}
           </Box>
           <TextField
-            label="Doctor Comment"
-            value={bleeding.comment ? bleeding.comment : "No Comment yet."}
+            label={t("student-exam-operations.exam-solution-details.practice-patient-bleeding-details-for-student.doctor-comment")}
+            value={bleeding.comment ? bleeding.comment : t("student-exam-operations.exam-solution-details.practice-patient-bleeding-details-for-student.no-comment")}
             fullWidth
             color="secondary"
             rows={3}

@@ -4,6 +4,7 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import PatientListFilter from "../Filters/PatientListFilter";
 import PatientList from "../DataGrid/PatientList";
+import { useTranslation } from "react-i18next";
 
 export default observer(function ArchivedPatientsList() {
   const {
@@ -22,11 +23,13 @@ export default observer(function ArchivedPatientsList() {
     fetchArchivedPatients();
   }, [fetchArchivedPatients]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <PatientListFilter
-        title="Archived Patients"
-        subTitle="List Of Archived Patients"
+        title={t("patient-operations.list.archived-patients.header")}
+        subTitle={t("patient-operations.list.archived-patients.sub-header")}
         searchTerm={archivedPatientsSearchParams}
         setSearchTerm={setArchivedPatientsSearchParams}
         clearEmailSearch={clearArchivedPatientEmailSearch}

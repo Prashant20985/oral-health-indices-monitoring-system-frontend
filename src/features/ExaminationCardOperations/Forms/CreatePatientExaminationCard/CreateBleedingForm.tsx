@@ -37,7 +37,7 @@ export default function CreateBleedingForm({
           color="secondary"
           onChange={handleChange}
           value={bleedingFormValues.comment}
-          name="api.comment"
+          name="bleeding.comment"
           multiline
           rows={4}
         />

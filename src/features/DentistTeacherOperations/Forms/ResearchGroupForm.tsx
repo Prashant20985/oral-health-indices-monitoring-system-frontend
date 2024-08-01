@@ -9,6 +9,7 @@ import CustomTextField from "../../../app/common/formInputs/CustomTextField";
 import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
 import * as Yup from "yup";
 import { useStore } from "../../../app/stores/Store";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen: boolean;
@@ -48,6 +49,8 @@ export default observer(function ResearchGroupForm({
     }
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       <Dialog
@@ -68,11 +71,11 @@ export default observer(function ResearchGroupForm({
               validationSchema={Yup.object().shape({
                 groupName: Yup.string().max(
                   50,
-                  "Group Name must be at most 50 characters"
+                  t("dentist-teacher-operations.forms.research-group-form.group-name-validation")
                 ),
                 description: Yup.string().max(
                   500,
-                  "Description must be at most 500 characters"
+                  t("dentist-teacher-operations.forms.research-group-form.description-validation")
                 ),
               })}
               onSubmit={async (values, { setErrors }) => {
@@ -97,7 +100,7 @@ export default observer(function ResearchGroupForm({
                     sx={{ mb: "15px" }}
                     align="left"
                   >
-                    {!isEdit ? "Add New Research Group" : "Edit Research Group"}
+                    {!isEdit ? t("dentist-teacher-operations.forms.research-group-form.add-new-research-group") : t("dentist-teacher-operations.forms.research-group-form.edit-research-group")}
                   </Typography>
                   <Box
                     display="grid"
@@ -111,7 +114,7 @@ export default observer(function ResearchGroupForm({
                   >
                     <CustomTextField
                       name="groupName"
-                      label="Group Name (Max 50 characters)"
+                      label={t("dentist-teacher-operations.forms.research-group-form.group-name")}
                       onChange={handleChange}
                       required={true}
                       value={values.groupName}
@@ -121,7 +124,7 @@ export default observer(function ResearchGroupForm({
                     />
 
                     <TextField
-                      label="Description (Max 500 characters)"
+                      label={t("dentist-teacher-operations.forms.research-group-form.description")}
                       name="description"
                       onChange={handleChange}
                       value={values.description}
@@ -145,7 +148,7 @@ export default observer(function ResearchGroupForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText={isEdit ? "Update" : "Create"}
+                        buttonText={isEdit ? t("dentist-teacher-operations.forms.research-group-form.update-button") : t("dentist-teacher-operations.forms.research-group-form.create-button")}
                       />
                       <CustomCancelButton handleCancel={() => onClose()} />
                     </Box>

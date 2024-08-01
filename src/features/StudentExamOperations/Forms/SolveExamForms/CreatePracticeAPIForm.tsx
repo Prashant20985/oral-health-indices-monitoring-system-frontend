@@ -2,6 +2,7 @@ import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
 import { PracticeAPIFormValues } from "../../../../app/models/APIBleeding";
 import APIBleedingForm from "../../../IndexCalculationForms/APIBleeding/APIBleedingForm";
 import { colors } from "../../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   apiFormValues: PracticeAPIFormValues;
@@ -14,6 +15,8 @@ export default function CreatePracticeAPIForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   return (
     <Box>
@@ -39,12 +42,12 @@ export default function CreatePracticeAPIForm({
               fontweight: 600,
             }}
           >
-            Add Calculated API Result
+            {t("student-exam-operations.form.practice-api-form.add-calculated-api-result")}
           </Typography>
         </Box>
         <Box display="flex" gap={2}>
           <TextField
-            label="API Result"
+            label={t("student-exam-operations.form.practice-api-form.api-result")}
             variant="outlined"
             type="number"
             value={apiFormValues.apiResult}

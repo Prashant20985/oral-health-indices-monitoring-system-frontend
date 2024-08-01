@@ -15,6 +15,7 @@ import { colors } from "../../../themeConfig";
 import { AssessmentOutlined } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
 import { router } from "../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   examSolution: ExamSolution;
@@ -27,6 +28,9 @@ export default observer(function ExamSolutionCard({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
+
   return (
     <Card
       elevation={3}
@@ -59,7 +63,7 @@ export default observer(function ExamSolutionCard({
           <Typography
             variant="h6"
             color="textSecondary"
-          >{`Score: ${examSolution.studentMark}`}</Typography>
+          >{`${t("student-exam-operations.exam-details.exam-solution-card.score")} ${examSolution.studentMark}`}</Typography>
         }
       />
       <CardContent>
@@ -67,13 +71,13 @@ export default observer(function ExamSolutionCard({
           value={
             examSolution.doctorComment
               ? examSolution.doctorComment
-              : "No Comments Yet."
+              : t("student-exam-operations.exam-details.exam-solution-card.no-comment")
           }
           fullWidth
           multiline
           color="info"
           size="small"
-          label="Doctor's Comment"
+          label={t("student-exam-operations.exam-details.exam-solution-card.doctor-comment")}
         />
       </CardContent>
       <CardActions>
@@ -85,7 +89,7 @@ export default observer(function ExamSolutionCard({
             router.navigate(`/exam-details/${examId}/${examSolution.id}`)
           }
         >
-          View Solution
+          {t("student-exam-operations.exam-details.exam-solution-card.view-solution")}
         </Button>
       </CardActions>
     </Card>

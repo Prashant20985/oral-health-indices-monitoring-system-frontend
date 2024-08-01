@@ -18,6 +18,7 @@ import ResearchGroupForm from "../../Forms/ResearchGroupForm";
 import StudentAndResearchGroupDeleteConfirmation from "../../Forms/StudentAndResearchGroupDeleteConfirmation";
 import { router } from "../../../../app/router/Routes";
 import { useStore } from "../../../../app/stores/Store";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   researchGroup: ResearchGroup;
@@ -39,6 +40,9 @@ export default observer(function ResearchGroupCardActions({
     setSelectedResearchGroup(researchGroup);
     router.navigate(`/research-groups/${researchGroup.id}`);
   };
+
+  const [t] = useTranslation("global");
+  
   return (
     <>
       <CardActions
@@ -61,12 +65,12 @@ export default observer(function ResearchGroupCardActions({
           </Button>
         </Box>
         <Box display="flex">
-          <Tooltip title="Edit">
+          <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-card.edit-button")}>
             <IconButton onClick={() => setOpenEditGroupDialog(true)}>
               <Edit color="warning" />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Delete">
+          <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-card.delete-button")}>
             <IconButton onClick={() => setOpenDeleteConfirmation(true)}>
               <DeleteSweep color="error" />
             </IconButton>

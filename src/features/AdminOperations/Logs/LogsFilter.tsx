@@ -5,6 +5,7 @@ import { Search, Close } from "@mui/icons-material";
 import { TextField, IconButton, MenuItem, Grid } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { useTranslation } from "react-i18next";
 
 export default observer(function LogsFilter() {
   const {
@@ -19,12 +20,14 @@ export default observer(function LogsFilter() {
 
   const [userName, setUserName] = React.useState(logsSearchParams.userName);
 
+  const [t] = useTranslation("global");
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Grid container spacing={2} sx={{ mt: 1 }}>
         <Grid item xs={12} lg={6} md={6}>
           <TextField
-            label="User Name"
+            label={t("admin-operations.logs.filter-username")}
             color="secondary"
             variant="outlined"
             fullWidth
@@ -58,7 +61,7 @@ export default observer(function LogsFilter() {
         <Grid item xs={12} lg={6} md={6}>
           <TextField
             select
-            label="Log Level"
+            label={t("admin-operations.logs.filter-level")}
             color="secondary"
             fullWidth
             variant="outlined"
@@ -85,7 +88,7 @@ export default observer(function LogsFilter() {
               },
             }}
             value={new Date(logsSearchParams.startDate)}
-            label="Start Date"
+            label={t("admin-operations.logs.filter-startdate")}
             onChange={(date: Date | null) => {
               console.log(date);
               if (date) {
@@ -104,7 +107,7 @@ export default observer(function LogsFilter() {
               },
             }}
             value={new Date(logsSearchParams.endDate)}
-            label="End Date"
+            label={t("admin-operations.logs.filter-enddate")}
             onChange={(date: Date | null) => {
               console.log(date);
               if (date) {

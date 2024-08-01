@@ -2,6 +2,7 @@ import { Button, Tooltip, useTheme } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { colors } from "../../../themeConfig";
 import { DeleteSweep, GppGood, GppBad } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isAccountActive: boolean;
@@ -19,8 +20,10 @@ export default observer(function ChangeActivationStatusButton({
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const [t] = useTranslation("global");
+
   return (
-    <Tooltip title={!disabled ? "Click to change activation status" : ""}>
+    <Tooltip title={!disabled ? t("admin-operations.dashboard.activation-status.header") : ""}>
       <Button
         disabled={disabled}
         onClick={() => {

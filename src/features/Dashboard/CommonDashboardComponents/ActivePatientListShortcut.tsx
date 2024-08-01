@@ -5,11 +5,14 @@ import { colors } from "../../../themeConfig";
 import * as React from "react";
 import PatientList from "../../PatientOperations/List/DataGrid/PatientList";
 import { router } from "../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 export default observer(function ActivePatientListShortcut() {
   const { patientStore } = useStore();
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   React.useEffect(() => {
     const fetchPatients = async () => {
@@ -36,7 +39,7 @@ export default observer(function ActivePatientListShortcut() {
           textTransform="uppercase"
           fontWeight={600}
         >
-          Active Patients
+          {t("admin-operations.dashboard.active-patients.header")}
         </Typography>
         <PatientList
           patients={patientStore.activePatients}
@@ -50,7 +53,7 @@ export default observer(function ActivePatientListShortcut() {
             onClick={() => router.navigate("/active-patients")}
             size="small"
           >
-            View All
+            {t("admin-operations.dashboard.active-patients.button")}
           </Button>
         </Box>
       </Paper>

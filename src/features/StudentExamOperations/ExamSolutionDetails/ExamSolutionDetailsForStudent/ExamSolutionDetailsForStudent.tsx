@@ -21,6 +21,7 @@ import ButtonLoadingComponent from "../../../../app/common/loadingComponents/But
 import PatientDetails from "../../../PatientOperations/PatientProfile/PatientDetails";
 import { CheckExamStatus } from "../../../../app/helper/CheckExamStatus";
 import axiosAgent from "../../../../app/api/axiosAgent";
+import { useTranslation } from "react-i18next";
 
 const RiskFactorAssessment = React.lazy(
   () => import("../../../IndexCalculationForms/RiskFactorAssessment")
@@ -60,6 +61,8 @@ export default observer(function ExamSolutionDetailsForStudent() {
     isEligibleToSubmitExam,
   } = studentExamStore;
 
+  const [t] = useTranslation("global");
+  
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
@@ -112,7 +115,12 @@ export default observer(function ExamSolutionDetailsForStudent() {
           examSolutionByStudent
         );
       } catch (error) {
-        console.error("Error downloading the Excel file", error);
+        console.error(
+          t(
+            "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.error-downloading-message"
+          ),
+          error
+        );
       } finally {
         setLoading(false);
       }
@@ -138,7 +146,13 @@ export default observer(function ExamSolutionDetailsForStudent() {
               onClick={handleDownloadClick}
               disabled={loading}
             >
-              {loading ? "Downloading..." : "Download Exam Solution"}
+              {loading
+                ? t(
+                    "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.loading-download-message"
+                  )
+                : t(
+                    "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.download-button"
+                  )}
             </Button>
           )}
       </Box>
@@ -160,16 +174,24 @@ export default observer(function ExamSolutionDetailsForStudent() {
                 <StudentGradeCard
                   studentMark={0}
                   doctorName=""
-                  doctorComment="You have not submitted your solution for this exam."
-                  subheader="Solution Not Submitted"
+                  doctorComment={t(
+                    "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.doctor-comment1"
+                  )}
+                  subheader={t(
+                    "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.solution-not-submitted"
+                  )}
                 />
               )
             ) : (
               <StudentGradeCard
                 studentMark={0}
                 doctorName=""
-                doctorComment="This exam has not been graded yet."
-                subheader="Not Graded Yet"
+                doctorComment={t(
+                  "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.doctor-comment2"
+                )}
+                subheader={t(
+                  "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.not-graded"
+                )}
               />
             )}
           </Grid>
@@ -179,8 +201,12 @@ export default observer(function ExamSolutionDetailsForStudent() {
             <StudentGradeCard
               studentMark={0}
               doctorName=""
-              doctorComment="Exam hasn't started yet.."
-              subheader="Not Started Yet"
+              doctorComment={t(
+                "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.doctor-comment3"
+              )}
+              subheader={t(
+                "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.not-started"
+              )}
             />
           </Grid>
         )}
@@ -189,7 +215,9 @@ export default observer(function ExamSolutionDetailsForStudent() {
             <StudentGradeCard
               studentMark={0}
               doctorName=""
-              subheader="Exam has started..."
+              subheader={t(
+                "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.exam-has-started"
+              )}
               doctorComment=""
               isExamGoingOn
               isEligibleForExam={isEligibleToSubmitExam}
@@ -205,7 +233,11 @@ export default observer(function ExamSolutionDetailsForStudent() {
             variant="outlined"
             icon={<Warning color="warning" />}
           >
-            <Typography variant="h6">The exam has not started yet.</Typography>
+            <Typography variant="h6">
+              {t(
+                "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.exam-has-not-started-yet"
+              )}
+            </Typography>
           </Alert>
         ) : ended && examDetails.examStatus === "Published" ? (
           <Alert
@@ -213,7 +245,11 @@ export default observer(function ExamSolutionDetailsForStudent() {
             variant="outlined"
             icon={<Warning color="info" />}
           >
-            <Typography variant="h6">Exam Not Graded Yet</Typography>
+            <Typography variant="h6">
+              {t(
+                "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.exam-not-graded-yet"
+              )}
+            </Typography>
           </Alert>
         ) : ended && examSolutionByStudent === null ? (
           <Alert
@@ -221,7 +257,11 @@ export default observer(function ExamSolutionDetailsForStudent() {
             variant="outlined"
             icon={<Warning color="info" />}
           >
-            <Typography variant="h6">Solution Not Submitted</Typography>
+            <Typography variant="h6">
+              {t(
+                "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.solution-not-submitted2"
+              )}
+            </Typography>
           </Alert>
         ) : ongoing ? (
           <Alert
@@ -229,7 +269,11 @@ export default observer(function ExamSolutionDetailsForStudent() {
             variant="outlined"
             icon={<Info color="info" />}
           >
-            <Typography variant="h6">Exam Has Started</Typography>
+            <Typography variant="h6">
+              {t(
+                "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.exam-has-started2"
+              )}
+            </Typography>
           </Alert>
         ) : ended &&
           examDetails.examStatus === "Graded" &&
@@ -250,7 +294,9 @@ export default observer(function ExamSolutionDetailsForStudent() {
                 <Tab
                   label={
                     <Typography color={color.grey[100]}>
-                      Patient Details
+                      {t(
+                        "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.patient-details"
+                      )}
                     </Typography>
                   }
                   value="1"
@@ -258,34 +304,60 @@ export default observer(function ExamSolutionDetailsForStudent() {
                 <Tab
                   label={
                     <Typography color={color.grey[100]}>
-                      Risk Factor Assessment
+                      {t(
+                        "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.risk-factor-assessment"
+                      )}
                     </Typography>
                   }
                   value="2"
                 />
                 <Tab
                   label={
-                    <Typography color={color.grey[100]}>DMFT/DMFS</Typography>
+                    <Typography color={color.grey[100]}>
+                      {t(
+                        "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.dmft-dmfs"
+                      )}
+                    </Typography>
                   }
                   value="3"
                 />
                 <Tab
-                  label={<Typography color={color.grey[100]}>BEWE</Typography>}
+                  label={
+                    <Typography color={color.grey[100]}>
+                      {t(
+                        "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.bewe"
+                      )}
+                    </Typography>
+                  }
                   value="4"
                 />
                 <Tab
-                  label={<Typography color={color.grey[100]}>API</Typography>}
+                  label={
+                    <Typography color={color.grey[100]}>
+                      {t(
+                        "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.api"
+                      )}
+                    </Typography>
+                  }
                   value="5"
                 />
                 <Tab
                   label={
-                    <Typography color={color.grey[100]}>Bleeding</Typography>
+                    <Typography color={color.grey[100]}>
+                      {t(
+                        "student-exam-operations.exam-solution-details.exam-solutions-details-for-student.bleeding"
+                      )}
+                    </Typography>
                   }
                   value="6"
                 />
                 <Tab
                   label={
-                    <Typography color={color.grey[100]}>Summary</Typography>
+                    <Typography color={color.grey[100]}>
+                      {t(
+                        "student-exam-operations.exam-solution-details.summary"
+                      )}
+                    </Typography>
                   }
                   value="7"
                 />

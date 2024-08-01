@@ -21,6 +21,7 @@ import { observer } from "mobx-react-lite";
 import AdminNavOptions from "../../../features/AdminOperations/NavOptions/AdminNavOptions";
 import DentistTeacherNavOptions from "../../../features/DentistTeacherOperations/NavOptions/DentistTeacherNavOptions";
 import StudentNavOptions from "../../../features/StudentOperations/NavOptions/StudentNavOptions";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -90,6 +91,7 @@ export default observer(function SidebarComponent({
   const {
     userStore: { user, isUserLoggedIn },
   } = useStore();
+  const [t] = useTranslation("global");
   return (
     <Sidebar variant="permanent" open={open}>
       <SidebarHeader>
@@ -116,7 +118,7 @@ export default observer(function SidebarComponent({
             open={open}
             path="/login"
             icon={<LoginOutlined />}
-            text="Login"
+            text={t("common.side-bar.login")}
           />
         )}
         {isUserLoggedIn && (
@@ -125,7 +127,7 @@ export default observer(function SidebarComponent({
               open={open}
               path="/"
               icon={<DashboardOutlined />}
-              text="Dashboard"
+              text={t("common.side-bar.dashboard")}
             />
             <>{user?.role === "Admin" && <AdminNavOptions open={open} />}</>
             <>
@@ -141,7 +143,7 @@ export default observer(function SidebarComponent({
                   open={open}
                   path="/my-requests"
                   icon={<MessageOutlined />}
-                  text="My Requests"
+                  text={t("common.side-bar.my-requests")}
                 />
               )}
             </>

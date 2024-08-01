@@ -11,6 +11,7 @@ import { UserRequest } from "../../../app/models/UserRequest";
 import { useStore } from "../../../app/stores/Store";
 import { colors } from "../../../themeConfig";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   userRequest: UserRequest;
@@ -33,6 +34,9 @@ export default function UserRequestDeleteConfirmation({
   const handleDeleteClick = async () => {
     await deleteUserRequest(userRequest.id).then(() => onClose());
   };
+
+  const [t] = useTranslation("global");
+  
   return (
     <Dialog
       open={isOpen}
@@ -41,7 +45,7 @@ export default function UserRequestDeleteConfirmation({
     >
       <Card sx={{ backgroundColor: color.primary[400], p: 2 }}>
         <CardHeader
-          title={`Are you sure you want to delete ${userRequest.requestTitle} ?`}
+          title={t("user-request-operations.form.delete-confirmation.header")+`${userRequest.requestTitle} ?`}
         />
         <CardActions>
           <Box display="flex" justifyContent="flex-end" width="100%" gap={2}>
@@ -56,7 +60,7 @@ export default function UserRequestDeleteConfirmation({
                 },
               }}
             >
-              Cancel
+              {t("user-request-operations.form.delete-confirmation.cancel-button")}
             </Button>
             <Button
               variant="contained"
@@ -69,7 +73,7 @@ export default function UserRequestDeleteConfirmation({
                 },
               }}
             >
-              Delete
+              {t("user-request-operations.form.delete-confirmation.delete-button")}
             </Button>
           </Box>
         </CardActions>

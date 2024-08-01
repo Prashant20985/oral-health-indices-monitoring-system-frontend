@@ -20,6 +20,7 @@ import CustomSelect from "../../../app/common/formInputs/CustomSelect";
 import { RequestStatus } from "../../../app/models/UserRequest";
 import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 export default observer(function UserRequestListForCurrentuser() {
   const { userRequestStore } = useStore();
@@ -48,17 +49,19 @@ export default observer(function UserRequestListForCurrentuser() {
     );
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Box display="flex" justifyContent="space-between" alignContent="center">
-        <Header title="My Requests" />
+        <Header title={t("user-request-operations.list.user-request-for-current-user.header")} />
         <Button
           variant="contained"
           color="success"
           startIcon={<Add />}
           onClick={() => setOpenAddRequestForm(true)}
         >
-          New Request
+          {t("user-request-operations.list.user-request-for-current-user.new-request-button")}
         </Button>
       </Box>
 
@@ -101,7 +104,7 @@ export default observer(function UserRequestListForCurrentuser() {
         <Box display="flex" flexDirection="column" gap={4}>
           <Box component={FormControl}>
             <CustomSelect
-              label="Request Status"
+              label={t("user-request-operations.list.user-request-for-current-user.request-status-label")}
               value={userRequestStore.requestStatusForCurrentUser}
               options={["Completed", "In_Progress", "Submitted"]}
               onChange={handleRequestStatusChange}

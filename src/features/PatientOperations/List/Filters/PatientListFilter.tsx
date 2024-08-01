@@ -2,6 +2,7 @@ import { Box, IconButton, TextField } from "@mui/material";
 import Header from "../../../../app/common/header/Header";
 import { Clear, SearchOutlined } from "@mui/icons-material";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 interface Props {
   title: string;
   subTitle: string;
@@ -55,6 +56,8 @@ export default function PatientListFilter({
     clearEmailSearch();
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Box
       display="flex"
@@ -69,7 +72,7 @@ export default function PatientListFilter({
         <Box gap={2} display="flex">
           <TextField
             color="secondary"
-            label="Patient Name"
+            label={t("patient-operations.filter.patient-name")}
             variant="filled"
             type="text"
             value={searchValue.name}
@@ -94,7 +97,7 @@ export default function PatientListFilter({
           />
           <TextField
             color="secondary"
-            label="Email"
+            label={t("patient-operations.filter.email")}
             variant="filled"
             type="text"
             fullWidth

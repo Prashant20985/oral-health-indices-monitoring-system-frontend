@@ -10,6 +10,7 @@ import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButto
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import * as React from "react";
 import { colors } from "../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen: boolean;
@@ -32,6 +33,8 @@ export default observer(function AddUserRequestForm({
       setSnackbarOpen(true);
     });
   };
+
+  const [t] = useTranslation("global");
   
   return (
     <Box>
@@ -78,7 +81,7 @@ export default observer(function AddUserRequestForm({
                     sx={{ mb: "15px" }}
                     align="left"
                   >
-                    New Request
+                    {t("user-request-operations.form.add-user-request.new-request")}
                   </Typography>
                   <Box
                     display="grid"
@@ -91,7 +94,7 @@ export default observer(function AddUserRequestForm({
                     }}
                   >
                     <CustomTextField
-                      label="Request Title"
+                      label={t("user-request-operations.form.add-user-request.request-title")}
                       name="requestTitle"
                       required={true}
                       onChange={handleChange}
@@ -103,7 +106,7 @@ export default observer(function AddUserRequestForm({
                     />
 
                     <TextField
-                      label="Description"
+                      label={t("user-request-operations.form.add-user-request.description")}
                       name="description"
                       onChange={handleChange}
                       error={touched.description && !!errors.description}
@@ -127,7 +130,7 @@ export default observer(function AddUserRequestForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Add"
+                        buttonText={t("user-request-operations.form.add-user-request.add-button")}
                       />
                       <CustomCancelButton handleCancel={() => onClose()} />
                     </Box>
@@ -141,7 +144,7 @@ export default observer(function AddUserRequestForm({
       <CustomSanckbar
         snackbarOpen={snackbarOpen}
         snackbarClose={() => setSnackbarOpen(false)}
-        message="Request Created successfully!!"
+        message={t("user-request-operations.form.add-user-request.request-created-message")}
       />
     </Box>
   );

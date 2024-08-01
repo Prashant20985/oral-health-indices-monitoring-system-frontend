@@ -3,9 +3,12 @@ import { observer } from "mobx-react-lite";
 import * as React from "react";
 import CreateEditPatientForm from "../../PatientOperations/Forms/CreateEditPatientForm";
 import { PersonAddAlt1Rounded } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default observer(function AddPatientButton() {
   const [openForm, setOpenForm] = React.useState(false);
+
+  const [t] = useTranslation("global")
 
   return (
     <>
@@ -15,7 +18,7 @@ export default observer(function AddPatientButton() {
         onClick={() => setOpenForm(true)}
         startIcon={<PersonAddAlt1Rounded />}
       >
-        Add New Patient
+        {t("dentist-teacher-operations.dashboard.add-patient-button")}
       </Button>
       <CreateEditPatientForm
         isOpen={openForm}

@@ -5,6 +5,7 @@ import { Edit, DeleteSweep } from "@mui/icons-material";
 import * as React from "react";
 import EditUserRequestForm from "../Forms/EditUserRequestForm";
 import UserRequestDeleteConfirmation from "../Forms/UserRequestDeleteConfirmation";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   userRequest: UserRequest;
@@ -24,6 +25,8 @@ export default observer(function UserRequestCardActionsForCurrentUser({
 
   const [openEditForm, setOpenEditForm] = React.useState(false);
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       <Box
@@ -39,7 +42,7 @@ export default observer(function UserRequestCardActionsForCurrentUser({
           disabled={isDisabled}
           onClick={() => setOpenEditForm(true)}
         >
-          Edit
+          {t("user-request-operations.list.user-request-actions.edit-button")}
         </Button>
         <IconButton
           disabled={isDisabled}

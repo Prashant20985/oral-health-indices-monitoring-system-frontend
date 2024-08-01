@@ -5,6 +5,7 @@ import { Card, CardHeader, Avatar, useTheme } from "@mui/material";
 import { colors } from "../../../../themeConfig";
 import StudentGroupCardActions from "./StudentGroupCardActions";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   group: StudentGroup;
@@ -13,6 +14,8 @@ interface Props {
 export default observer(function GroupCard({ group }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   return (
     <>
@@ -37,7 +40,7 @@ export default observer(function GroupCard({ group }: Props) {
             </Avatar>
           }
           title={group.groupName}
-          subheader={`Number of Students: ${group.students.length}`}
+          subheader={t("dentist-teacher-operations.list.student-group.student-group-card.sub-header")+`${group.students.length}`}
         />
         <StudentGroupCardActions
           group={group}

@@ -11,6 +11,7 @@ import {
 import SlideUpTransition from "../../../../app/common/transition/SlideUpTransition";
 import { DoneAll, KeyboardReturn } from "@mui/icons-material";
 import { colors } from "../../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -20,6 +21,8 @@ interface Props {
 export default function ExamSubmitSuccessDialog({ open, onClose }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
+
   return (
     <Dialog
       open={open}
@@ -69,7 +72,7 @@ export default function ExamSubmitSuccessDialog({ open, onClose }: Props) {
               fontWeight={500}
               sx={{ textTransform: "uppercase" }}
             >
-              Submitted
+              {t("student-exam-operations.forms.exam-submit-success-dialog.submitted")}
             </Typography>
             <Typography
               variant="h4"
@@ -78,7 +81,7 @@ export default function ExamSubmitSuccessDialog({ open, onClose }: Props) {
               fontWeight={400}
               sx={{ textTransform: "uppercase" }}
             >
-              Exam Submitted Successfully!!
+              {t("student-exam-operations.forms.exam-submit-success-dialog.message")}
             </Typography>
           </Box>
         </Box>
@@ -91,7 +94,7 @@ export default function ExamSubmitSuccessDialog({ open, onClose }: Props) {
           color={theme.palette.mode === "dark" ? "warning" : "info"}
           startIcon={<KeyboardReturn />}
         >
-          Return to Exam Details
+          {t("student-exam-operations.forms.exam-submit-success-dialog.return-to-exam-details")}
         </Button>
       </DialogActions>
     </Dialog>

@@ -12,6 +12,7 @@ import {
 import { colors } from "../../../../themeConfig";
 import { blueGrey } from "@mui/material/colors";
 import BeweForm from "../../../IndexCalculationForms/Bewe/BeweForm";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   bewe: Bewe;
@@ -22,6 +23,8 @@ export default observer(function PracticePatientBeweDetailsForStudent({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   return (
     <Box>
@@ -35,14 +38,14 @@ export default observer(function PracticePatientBeweDetailsForStudent({
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              BEWE Details
+              {t("student-exam-operations.exam-solution-details.practice-patient-bewe-details-for-student.title")}
             </Typography>
           }
         />
         <CardContent>
           <Box display="flex" mb={2}>
             <TextField
-              label="BEWE Result"
+              label={t("student-exam-operations.exam-solution-details.practice-patient-bewe-details-for-student.bewe-result")}
               value={bewe.beweResult}
               fullWidth
               color="secondary"
@@ -55,13 +58,13 @@ export default observer(function PracticePatientBeweDetailsForStudent({
           <Box display="flex" flexDirection="column" gap={1}>
             <TextField
               fullWidth
-              label="Doctor's Comment"
+              label={t("student-exam-operations.exam-solution-details.practice-patient-bewe-details-for-student.doctor-comment")}
               name="comment"
               color="secondary"
               multiline
               rows={3}
               inputProps={{ readonly: true }}
-              value={bewe.comment ?? "No comment yet."}
+              value={bewe.comment ?? t("student-exam-operations.exam-solution-details.practice-patient-bewe-details-for-student.no-comment")}
             />
           </Box>
         </CardContent>

@@ -6,6 +6,7 @@ import { useStore } from "../../../app/stores/Store";
 import { ApplicationUser } from "../../../app/models/ApplicationUser";
 import CustomTextField from "../../../app/common/formInputs/CustomTextField";
 import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   applicationUser: ApplicationUser;
@@ -20,6 +21,8 @@ export default observer(function ProfileForm({
   const {
     userStore: { user },
   } = useStore();
+
+  const [t] = useTranslation("global");
 
   return (
     <>
@@ -42,7 +45,7 @@ export default observer(function ProfileForm({
                 }}
               >
                 <CustomTextField
-                  label="First Name"
+                  label={t("admin-operations.forms.profile-form.first-name")}
                   name="firstName"
                   value={values.firstName}
                   readOnly={true}
@@ -50,7 +53,7 @@ export default observer(function ProfileForm({
                 />
 
                 <CustomTextField
-                  label="Last Name"
+                  label={t("admin-operations.forms.profile-form.last-name")}
                   name="lastName"
                   value={values.lastName}
                   readOnly={true}
@@ -58,21 +61,21 @@ export default observer(function ProfileForm({
                 />
 
                 <CustomTextField
-                  label="User Name"
+                  label={t("admin-operations.forms.profile-form.username")}
                   name="userName"
                   value={values.userName}
                   readOnly={true}
                 />
 
                 <CustomTextField
-                  label="Role"
+                  label={t("admin-operations.forms.profile-form.role")}
                   name="role"
                   value={values.role}
                   readOnly={true}
                 />
 
                 <CustomTextField
-                  label="Email"
+                  label={t("admin-operations.forms.profile-form.email")}
                   name="email"
                   value={values.email}
                   readOnly={true}
@@ -81,7 +84,7 @@ export default observer(function ProfileForm({
                 />
 
                 <CustomTextField
-                  label="Phone Number"
+                  label={t("admin-operations.forms.profile-form.phone-number")}
                   name="phoneNumber"
                   value={values.phoneNumber}
                   readOnly={true}
@@ -91,7 +94,7 @@ export default observer(function ProfileForm({
                 {values.userName !== user?.userName && (
                   <>
                     <CustomTextField
-                      label="Create Date"
+                      label={t("admin-operations.forms.profile-form.create-date")}
                       name="createdAt"
                       value={values.createdAt.slice(0, 16)}
                       gridColumn="span 2"
@@ -100,7 +103,7 @@ export default observer(function ProfileForm({
                     />
                     {values.guestUserComment !== null && (
                       <CustomTextField
-                        label="Comment"
+                        label={t("admin-operations.forms.profile-form.comment")}
                         name="guestUserComment"
                         value={values.guestUserComment}
                         readOnly={true}
@@ -113,7 +116,7 @@ export default observer(function ProfileForm({
                 {values.deletedAt !== null && (
                   <>
                     <CustomTextField
-                      label="Delete Comment"
+                      label={t("admin-operations.forms.profile-form.delete-comment")}
                       name="deleteUserComment"
                       value={values.deleteUserComment}
                       readOnly={true}
@@ -121,7 +124,7 @@ export default observer(function ProfileForm({
                     />
 
                     <CustomTextField
-                      label="Delete Date"
+                      label={t("admin-operations.forms.profile-form.delete-date")}
                       name="deletedAt"
                       value={values.deletedAt.slice(0, 16)}
                       gridColumn="span 2"
@@ -137,7 +140,7 @@ export default observer(function ProfileForm({
                   sx={{ gridColumn: "span 4", gap: 2 }}
                 >
                   <CustomCancelButton
-                    buttonText={"close"}
+                    buttonText={t("admin-operations.forms.profile-form.close-button")}
                     handleCancel={() => {
                       onClose();
                     }}

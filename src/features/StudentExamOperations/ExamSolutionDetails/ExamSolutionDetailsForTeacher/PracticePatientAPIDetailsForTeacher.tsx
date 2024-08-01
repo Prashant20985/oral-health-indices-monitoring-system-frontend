@@ -17,6 +17,7 @@ import { Send } from "@mui/icons-material";
 import { useStore } from "../../../../app/stores/Store";
 import CommentStudentExamCardDialog from "../../Forms/CommentStudentExamCardDialog";
 import { API } from "../../../../app/models/APIBleeding";
+import { useTranslation } from "react-i18next";
 
 const APIBleedingForm = React.lazy(
   () => import("../../../IndexCalculationForms/APIBleeding/APIBleedingForm")
@@ -43,6 +44,8 @@ export default observer(function PracticePatientAPIDetailsForTeacher({
     await commentAPIForm(cardId, commnet);
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Card
@@ -55,7 +58,7 @@ export default observer(function PracticePatientAPIDetailsForTeacher({
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              API Details
+              {t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.title")}
             </Typography>
           }
         />
@@ -64,7 +67,7 @@ export default observer(function PracticePatientAPIDetailsForTeacher({
           <Box display="flex" gap={2} mb={2}>
             <CustomTextField
               variant="outlined"
-              label="API Result"
+              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.api-result")}
               name="apiResult"
               value={`${api.apiResult} %`}
               readOnly
@@ -87,13 +90,13 @@ export default observer(function PracticePatientAPIDetailsForTeacher({
           <Box display="flex" flexDirection="column" gap={1}>
             <TextField
               fullWidth
-              label="Doctor's Comment"
+              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.doctor-comment")}
               name="comment"
               color="secondary"
               multiline
               rows={3}
               inputProps={{ readonly: true }}
-              value={api.comment ?? "No comment yet."}
+              value={api.comment ?? t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.no-comment")}
             />
             <Box display="flex" justifyContent="flex-end">
               <Button
@@ -116,8 +119,8 @@ export default observer(function PracticePatientAPIDetailsForTeacher({
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title="Comment API Bleeding Form"
-        description="Please write your comment about the API Bleeding form."
+        title={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.comment-api-form")}
+        description={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.description")}
         comment={api.comment ?? ""}
         handleSubmit={handleComment}
       />

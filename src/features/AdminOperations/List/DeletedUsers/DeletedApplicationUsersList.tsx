@@ -4,6 +4,7 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
 import ApplicationUserList from "../DataGrid/ApplicationUserList";
+import { useTranslation } from "react-i18next";
 
 export default observer(function DeletedApplicationUsersList() {
   const { adminStore } = useStore();
@@ -28,11 +29,14 @@ export default observer(function DeletedApplicationUsersList() {
     };
     fetchUsers();
   }, [adminStore]);
+
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <ApplicationUsersListFilter
-        title="Deleted Users"
-        subTitle="List of Deleted Users"
+        title={t("admin-operations.list.deleted-users.header")}
+        subTitle={t("admin-operations.list.deleted-users.sub-header")}
         onRoleChange={setDeletedApplicationUsersRole}
         setSearchTerm={setDeletedApplicationUsersSearchTerm}
         onUserTypeChange={setDeletedApplicationUsersUserType}

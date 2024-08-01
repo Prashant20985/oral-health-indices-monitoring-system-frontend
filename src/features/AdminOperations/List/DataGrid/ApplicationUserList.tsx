@@ -19,6 +19,7 @@ import CustomSanckbar from "../../../../app/common/snackbar/CustomSnackbar";
 import UserProfileDialog from "../../UserProfile/UserProfileDialog";
 import UserDeleteForm from "../../Forms/UserDeleteForm";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   applicationUsers: ApplicationUser[];
@@ -41,6 +42,8 @@ export default observer(function AppplicationUsersList({
     adminStore,
     userStore: { user },
   } = useStore();
+
+  const [t] = useTranslation("global");
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -74,7 +77,7 @@ export default observer(function AppplicationUsersList({
 
   const statusColums: GridColDef = {
     field: "isAccountActive",
-    headerName: "Activation Status",
+    headerName: t("admin-operations.list.data-grid.activation-status"),
     flex: 1,
     headerAlign: "center",
     renderCell: ({ row }) => {
@@ -94,7 +97,7 @@ export default observer(function AppplicationUsersList({
 
   const actionsColumn: GridColDef = {
     field: "actions",
-    headerName: "Actions",
+    headerName: t("admin-operations.list.data-grid.actions"),
     minWidth: 100,
     flex: 1,
     headerAlign: "center",
@@ -111,7 +114,7 @@ export default observer(function AppplicationUsersList({
             backgroundColor: color.blueAccent[600],
           }}
         >
-          <Tooltip title="View Profile">
+          <Tooltip title={t("admin-operations.list.data-grid.view-profile")}>
             <IconButton
               onClick={() => {
                 setOpenProfileDialog(true);
@@ -122,7 +125,7 @@ export default observer(function AppplicationUsersList({
             </IconButton>
           </Tooltip>
           {!deletedUsersList && (
-            <Tooltip title="Delete User">
+            <Tooltip title={t("admin-operations.list.data-grid.delete-user")}>
               <IconButton
                 onClick={() => {
                   setOpenDeleteDialog(true);
@@ -140,7 +143,7 @@ export default observer(function AppplicationUsersList({
 
   const userNameColumn: GridColDef = {
     field: "userName",
-    headerName: "User Name",
+    headerName: t("admin-operations.list.data-grid.user-name"),
     cellClassName: "name-column--cell",
     flex: 1,
     renderCell: ({ row }) => {
@@ -171,19 +174,19 @@ export default observer(function AppplicationUsersList({
     ...[userNameColumn],
     {
       field: "firstName",
-      headerName: "First Name",
+      headerName: t("admin-operations.list.data-grid.first-name"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "lastName",
-      headerName: "Last Name",
+      headerName: t("admin-operations.list.data-grid.last-name"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "email",
-      headerName: "Email",
+      headerName: t("admin-operations.list.data-grid.email"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
@@ -192,7 +195,7 @@ export default observer(function AppplicationUsersList({
       : [
           {
             field: "deletedAt",
-            headerName: "Delete Date",
+            headerName: t("admin-operations.list.data-grid.delete-date"),
             cellClassName: "name-column--cell",
             valueGetter: getDate,
             flex: 1,
@@ -203,7 +206,7 @@ export default observer(function AppplicationUsersList({
       : [
           {
             field: "role",
-            headerName: "Role",
+            headerName: t("admin-operations.list.data-grid.role"),
             cellClassName: "name-column--cell",
             flex: 1,
           },
@@ -265,7 +268,7 @@ export default observer(function AppplicationUsersList({
       </>
       <CustomSanckbar
         snackbarOpen={activationChangeSanckbar}
-        message="Activation status changed successfully!!"
+        message={t("admin-operations.list.data-grid.activation-message")}
         snackbarClose={() => setActivationChangeSanckbar(false)}
       />
       <UserProfileDialog

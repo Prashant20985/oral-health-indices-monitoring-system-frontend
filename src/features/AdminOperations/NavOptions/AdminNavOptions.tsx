@@ -9,30 +9,33 @@ import {
   QuestionAnswerOutlined,
 } from "@mui/icons-material";
 import SidebarListItem from "../../../app/common/sidebar/SidebarListItem";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
 }
 
 export default observer(function AdminNavOptions({ open }: Props) {
+  const [t] = useTranslation("global");
+  
   const userOptions = [
     {
-      title: "Active Users",
+      title: t("admin-operations.nav-options.active-users"),
       path: "active-users",
       icon: <GppGoodOutlined />,
     },
     {
-      title: "Deactivated Users",
+      title: t("admin-operations.nav-options.deactivated-users"),
       path: "deactivated-users",
       icon: <GppBadOutlined />,
     },
     {
-      title: "Deleted Users",
+      title: t("admin-operations.nav-options.deleted-users"),
       path: "deleted-users",
       icon: <DeleteSweepOutlined />,
     },
     {
-      title: "User Requests",
+      title: t("admin-operations.nav-options.user-requests"),
       path: "requests",
       icon: <QuestionAnswerOutlined />,
     },
@@ -40,12 +43,12 @@ export default observer(function AdminNavOptions({ open }: Props) {
 
   const patientOptions = [
     {
-      title: "Active Patients",
+      title: t("admin-operations.nav-options.active-patients"),
       path: "active-patients",
       icon: <LocalHospitalOutlined />,
     },
     {
-      title: "Archived Patients",
+      title: t("admin-operations.nav-options.archived-patients"),
       path: "archived-patients",
       icon: <ArchiveOutlined />,
     },

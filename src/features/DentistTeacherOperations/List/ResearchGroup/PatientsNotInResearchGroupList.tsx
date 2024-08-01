@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../../../app/common/header/Header";
 import { router } from "../../../../app/router/Routes";
 import { ArrowBackIos } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default observer(function PatientsNotInResearchGroupList() {
   const { dentistTeacherStore } = useStore();
@@ -25,6 +26,8 @@ export default observer(function PatientsNotInResearchGroupList() {
     getPatientsNotInResearchGroup();
   }, [dentistTeacherStore, id]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Button
@@ -33,11 +36,11 @@ export default observer(function PatientsNotInResearchGroupList() {
         onClick={() => router.navigate(`/research-groups/${id}`)}
         startIcon={<ArrowBackIos />}
       >
-        Back
+        {t("dentist-teacher-operations.list.research-group.patients-not-in-research-group.back-button")}
       </Button>
       <Box sx={{ mt: 2, mb: 2 }}>
         <Header
-          title={`Add Patients to ${dentistTeacherStore.selectedResearchGroup?.groupName}`}
+          title={t("dentist-teacher-operations.list.research-group.patients-not-in-research-group.header")+` ${dentistTeacherStore.selectedResearchGroup?.groupName}`}
         />
       </Box>
       <ResearchGroupPatientList

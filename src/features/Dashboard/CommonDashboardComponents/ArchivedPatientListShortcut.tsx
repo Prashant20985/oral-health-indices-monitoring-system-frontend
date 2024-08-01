@@ -5,6 +5,7 @@ import { colors } from "../../../themeConfig";
 import * as React from "react";
 import PatientList from "../../PatientOperations/List/DataGrid/PatientList";
 import { router } from "../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 export default observer(function ArchivedPatientListShortcut() {
   const { patientStore } = useStore();
@@ -19,6 +20,8 @@ export default observer(function ArchivedPatientListShortcut() {
     };
     fetchPatients();
   }, [patientStore]);
+
+  const [t] = useTranslation("global");
 
   return (
     <Grid item xs={12} md={6} lg={4}>
@@ -36,7 +39,7 @@ export default observer(function ArchivedPatientListShortcut() {
           textTransform="uppercase"
           fontWeight={600}
         >
-          Archived Patients
+          {t("admin-operations.dashboard.archived-users.header")}
         </Typography>
         <PatientList
           patients={patientStore.archivedPatients}
@@ -50,7 +53,7 @@ export default observer(function ArchivedPatientListShortcut() {
             onClick={() => router.navigate("/archived-patients")}
             size="small"
           >
-            View All
+            {t("admin-operations.dashboard.archived-users.button")}
           </Button>
         </Box>
       </Paper>
