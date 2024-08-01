@@ -18,6 +18,7 @@ import { useStore } from "../../stores/Store";
 import * as React from "react";
 import { AssignmentIndOutlined, LogoutOutlined } from "@mui/icons-material";
 import UserProfileDialog from "../../../features/AdminOperations/UserProfile/UserProfileDialog";
+import { useTranslation } from "react-i18next";
 
 export default observer(function UserOptions() {
   const theme = useTheme();
@@ -33,6 +34,8 @@ export default observer(function UserOptions() {
   const [selectedUserName, setSelectedUserName] = React.useState("");
   const [openprofileDialog, setOpenProfileDialog] = React.useState(false);
 
+  const [t] = useTranslation("global");
+
   const isPortrait = useMediaQuery("(orientation: portrait)");
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -41,7 +44,7 @@ export default observer(function UserOptions() {
 
   return (
     <>
-      <Tooltip title="User Options">
+      <Tooltip title={t("common.user-options.title")}>
         <Button
           variant="text"
           color="info"
@@ -115,7 +118,9 @@ export default observer(function UserOptions() {
             <ListItemIcon>
               <AssignmentIndOutlined color="info" />
             </ListItemIcon>
-            <Typography variant="h6">View Profile</Typography>
+            <Typography variant="h6">
+              {t("common.user-options.view-profile")}
+            </Typography>
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -126,7 +131,9 @@ export default observer(function UserOptions() {
             <ListItemIcon>
               <LogoutOutlined color="error" />
             </ListItemIcon>
-            <Typography variant="h6">Logout</Typography>
+            <Typography variant="h6">
+              {t("common.user-options.log-out")}
+            </Typography>
           </MenuItem>
         </MenuList>
       </Popover>

@@ -1,7 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import GoToHomePageButton from "./GoToHomePageButton";
+import { useTranslation } from "react-i18next";
 
 export default function Unauthorized() {
+
+  const [t] = useTranslation("global");
+  
   return (
     <Box
       sx={{
@@ -19,12 +23,11 @@ export default function Unauthorized() {
       >
         <Box>
           <Typography fontSize={35} fontFamily="cursive">
-            Unauthorized Area
+          {t("errors.unauthorized.header")}
           </Typography>
           <br />
           <Typography variant="h5">
-            You are not authorized to access this page. Please check your login
-            credentials or contact administrator for access.
+          {t("errors.unauthorized.message")}
           </Typography>
           <GoToHomePageButton />
         </Box>

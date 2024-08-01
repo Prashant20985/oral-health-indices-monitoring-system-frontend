@@ -5,6 +5,7 @@ import { colors } from "../../../themeConfig";
 import * as React from "react";
 import ApplicationUserList from "../List/DataGrid/ApplicationUserList";
 import { router } from "../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 export default observer(function DeactivatedApplicationUserListShortcut() {
   const { adminStore } = useStore();
@@ -19,6 +20,8 @@ export default observer(function DeactivatedApplicationUserListShortcut() {
     };
     fetchUsers();
   }, [adminStore]);
+
+  const [t] = useTranslation("global");
 
   return (
     <Grid item xs={12} md={6} lg={6}>
@@ -36,7 +39,7 @@ export default observer(function DeactivatedApplicationUserListShortcut() {
           textTransform="uppercase"
           fontWeight={600}
         >
-          Deactivated Users
+          {t("admin-operations.dashboard.deactivated-users.header")}
         </Typography>
         <ApplicationUserList
           applicationUsers={adminStore.deactivatedApplicationUsers}
@@ -50,7 +53,7 @@ export default observer(function DeactivatedApplicationUserListShortcut() {
             onClick={() => router.navigate("/admin/deactivated-users")}
             size="small"
           >
-            View All
+            {t("admin-operations.dashboard.deactivated-users.button")}
           </Button>
         </Box>
       </Paper>

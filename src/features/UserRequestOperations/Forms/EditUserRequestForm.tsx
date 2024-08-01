@@ -11,6 +11,7 @@ import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButto
 import CustomTextField from "../../../app/common/formInputs/CustomTextField";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen: boolean;
@@ -48,6 +49,8 @@ export default observer(function EditUserRequestForm({
       }
     );
   };
+
+  const [t] = useTranslation("global");
 
   return (
     <Box>
@@ -97,7 +100,7 @@ export default observer(function EditUserRequestForm({
                     sx={{ mb: "15px" }}
                     align="left"
                   >
-                    Edit Request
+                    {t("user-request-operations.form.edit-user-request.edit-request")}
                   </Typography>
                   <Box
                     display="grid"
@@ -110,7 +113,7 @@ export default observer(function EditUserRequestForm({
                     }}
                   >
                     <CustomTextField
-                      label="Request Title"
+                      label={t("user-request-operations.form.edit-user-request.request-title")}
                       name="requestTitle"
                       required={true}
                       onChange={handleChange}
@@ -123,7 +126,7 @@ export default observer(function EditUserRequestForm({
                     />
 
                     <TextField
-                      label="Description"
+                      label={t("user-request-operations.form.edit-user-request.description")}
                       name="description"
                       onChange={handleChange}
                       error={touched.description && !!errors.description}
@@ -148,7 +151,7 @@ export default observer(function EditUserRequestForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Update"
+                        buttonText={t("user-request-operations.form.edit-user-request.update-button")}
                       />
                       <CustomCancelButton handleCancel={() => onClose()} />
                     </Box>
@@ -162,7 +165,7 @@ export default observer(function EditUserRequestForm({
       <CustomSanckbar
         snackbarOpen={snackbarOpen}
         snackbarClose={() => setSnackbarOpen(false)}
-        message="Request Updated successfully!!"
+        message={t("user-request-operations.form.edit-user-request.request-updated-message")}
       />
     </Box>
   );

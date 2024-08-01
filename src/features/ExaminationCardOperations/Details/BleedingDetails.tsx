@@ -14,6 +14,7 @@ import { useStore } from "../../../app/stores/Store";
 import React from "react";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import CommentForm from "../Forms/CommentForm";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   cardId: string;
@@ -34,6 +35,7 @@ export default observer(function BleedingDetails({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
 
   const {
     userStore: { user },
@@ -79,7 +81,7 @@ export default observer(function BleedingDetails({
           <TextField
             fullWidth
             color="secondary"
-            label="Bleeding Result"
+            label={t("examination-card-operations.details.bleeding-details.bleeding-result")}
             value={bleeding.bleedingResult}
           />
           <TextField
@@ -99,18 +101,18 @@ export default observer(function BleedingDetails({
           multiline
           fullWidth
           color="secondary"
-          label="Doctor Bleeding Comment"
+          label={t("examination-card-operations.details.bleeding-details.doctor-bleeding-comment")}
           rows={3}
-          value={bleeding.doctorComment ?? "No Comment Provided."}
+          value={bleeding.doctorComment ?? t("examination-card-operations.details.bleeding-details.no-comment")}
         />
         {!isRegularMode && (
           <TextField
             multiline
             fullWidth
             color="secondary"
-            label="Student Bleeding Comment"
+            label={t("examination-card-operations.details.bleeding-details.student-bleeding-comment")}
             rows={3}
-            value={bleeding.studentComment ?? "No Comment Provided."}
+            value={bleeding.studentComment ?? t("examination-card-operations.details.bleeding-details.no-comment")}
           />
         )}
         {isUserEligibleToComment && (
@@ -121,7 +123,7 @@ export default observer(function BleedingDetails({
               variant="outlined"
               onClick={() => setOpenCommentDialog(true)}
             >
-              {comment ? "Edit Comment" : "Add Comment"}
+              {comment ? t("examination-card-operations.details.bleeding-details.edit-comment"): t("examination-card-operations.details.bleeding-details.add-comment")}
             </Button>
           </Box>
         )}
@@ -136,8 +138,8 @@ export default observer(function BleedingDetails({
       <CommentForm
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title="Comment Bleeding Form"
-        description="Please provide your comment for the Bleeding Form."
+        title={t("examination-card-operations.details.bleeding-details.comment-bleeding-form")}
+        description={t("examination-card-operations.details.bleeding-details.desription")}
         handleSubmit={(comment) => {
           handleComment(comment);
         }}
@@ -146,7 +148,7 @@ export default observer(function BleedingDetails({
       <CustomSanckbar
         snackbarOpen={commentSnackbarOpen}
         snackbarClose={() => setCommentSnackbarOpen(false)}
-        message="Comment has been successfully added."
+        message={t("examination-card-operations.details.bleeding-details.message")}
       />
     </Box>
   );

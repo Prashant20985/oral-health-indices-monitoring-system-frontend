@@ -10,6 +10,7 @@ import {
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 import { SendOutlined } from "@mui/icons-material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   title: string;
@@ -29,12 +30,14 @@ export default function AddStudentMarksDialog({
   handleSubmit,
 }: Props) {
   const [marksValue, setMarksValue] = React.useState(marks);
-  
+
   React.useEffect(() => {
     if (marks !== 0) {
       setMarksValue(marks);
     }
   }, [marks]);
+
+  const [t] = useTranslation("global");
 
   return (
     <Dialog
@@ -68,7 +71,9 @@ export default function AddStudentMarksDialog({
           margin="dense"
           id="studentMarks"
           name="studentMarks"
-          label="Student Mark"
+          label={t(
+            "student-exam-operations.forms.add-student-marks-dialog.student-mark"
+          )}
           fullWidth
           variant="standard"
         />
@@ -80,7 +85,9 @@ export default function AddStudentMarksDialog({
           onClick={onClose}
           color="error"
         >
-          Cancel
+          {t(
+            "student-exam-operations.forms.add-student-marks-dialog.cancel-button"
+          )}
         </Button>
         <Button
           size="small"
@@ -89,7 +96,13 @@ export default function AddStudentMarksDialog({
           variant="contained"
           startIcon={<SendOutlined />}
         >
-          {marks === 0 ? "Add" : "Edit"}
+          {marks === 0
+            ? t(
+                "student-exam-operations.forms.add-student-marks-dialog.add-button"
+              )
+            : t(
+                "student-exam-operations.forms.add-student-marks-dialog.edit-button"
+              )}
         </Button>
       </DialogActions>
     </Dialog>

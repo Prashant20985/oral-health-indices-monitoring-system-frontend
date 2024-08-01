@@ -17,12 +17,15 @@ import Header from "../../../app/common/header/Header";
 import StudentExamCard from "../../StudentExamOperations/ExamsList/StudentExamCard";
 import { blueGrey } from "@mui/material/colors";
 import { Groups3, Email } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default observer(function GroupDetailsForStudent() {
   const { groupId } = useParams<{ groupId: string }>();
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   const {
     studentStore: {
@@ -73,9 +76,9 @@ export default observer(function GroupDetailsForStudent() {
               title={
                 <Header
                   title={studentGroupDetails.groupName}
-                  subTitle={`Teacher:  ${
-                    studentGroupDetails.teacher.split("(")[0]
-                  }`}
+                  subTitle={`${t(
+                    "student-operations.student-group-details.teacher"
+                  )}  ${studentGroupDetails.teacher.split("(")[0]}`}
                 />
               }
               subheader={
@@ -118,7 +121,9 @@ export default observer(function GroupDetailsForStudent() {
               </>
             ) : (
               <Alert severity="info" variant="outlined">
-                <Typography variant="h6">No Exams Found</Typography>
+                <Typography variant="h6">
+                  {t("student-operations.student-group-details.no-exams-found")}
+                </Typography>
               </Alert>
             )}
           </Box>

@@ -14,6 +14,7 @@ import { useStore } from "../../../app/stores/Store";
 import React from "react";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import CommentForm from "../Forms/CommentForm";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   cardId: string;
@@ -34,6 +35,8 @@ export default observer(function BeweDetails({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   const {
     userStore: { user },
@@ -78,25 +81,25 @@ export default observer(function BeweDetails({
         <TextField
           fullWidth
           color="secondary"
-          label="Bewe Result"
+          label={t("examination-card-operations.details.bewe-details.bewe-result")}
           value={bewe.beweResult}
         />
         <TextField
           multiline
           fullWidth
           color="secondary"
-          label="Doctor DMFT/DMFS Comment"
+          label={t("examination-card-operations.details.bewe-details.doctor-bewe-comment")}
           rows={3}
-          value={bewe.doctorComment ?? "No Comment Provided."}
+          value={bewe.doctorComment ?? t("examination-card-operations.details.bewe-details.no-comment")}
         />
         {!isRegularMode && (
           <TextField
             multiline
             fullWidth
             color="secondary"
-            label="Student DMFT/DMFS Comment"
+            label={t("examination-card-operations.details.bewe-details.student-bewe-comment")}
             rows={3}
-            value={bewe.studentComment ?? "No Comment Provided."}
+            value={bewe.studentComment ?? t("examination-card-operations.details.bewe-details.no-comment")}
           />
         )}
         {isUserEligibleToComment && (
@@ -107,7 +110,7 @@ export default observer(function BeweDetails({
               variant="outlined"
               onClick={() => setOpenCommentDialog(true)}
             >
-              {comment ? "Edit Comment" : "Add Comment"}
+              {comment ? t("examination-card-operations.details.bewe-details.edit-comment") : t("examination-card-operations.details.bewe-details.add-comment")}
             </Button>
           </Box>
         )}
@@ -121,8 +124,8 @@ export default observer(function BeweDetails({
       <CommentForm
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title="Comment BEWE Form"
-        description="Please provide your comment for the BEWE Form."
+        title={t("examination-card-operations.details.bewe-details.comment-bewe-form")}
+        description={t("examination-card-operations.details.bewe-details.description")}
         handleSubmit={(comment) => {
           handleComment(comment);
         }}
@@ -131,7 +134,7 @@ export default observer(function BeweDetails({
       <CustomSanckbar
         snackbarOpen={commentSnackbarOpen}
         snackbarClose={() => setCommentSnackbarOpen(false)}
-        message="Comment has been successfully added."
+        message={t("examination-card-operations.details.bewe-details.message")}
       />
     </Box>
   );

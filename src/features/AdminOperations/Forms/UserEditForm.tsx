@@ -11,6 +11,7 @@ import CustomSelect from "../../../app/common/formInputs/CustomSelect";
 import CustomTextField from "../../../app/common/formInputs/CustomTextField";
 import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButtom";
 import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   applicationUser: ApplicationUser;
@@ -28,10 +29,13 @@ export default observer(function UserEditForm({
   const [hasChanges, setHasChanges] = React.useState(false);
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const [t] = useTranslation("global");
+
+  const phoneValidation = t("admin-operations.forms.user-edit-form.phone-validation");
   const phoneRegExp = /^\d{6,11}$/;
   const validationSchema = Yup.object().shape({
     phoneNumber: Yup.string()
-      .matches(phoneRegExp, "Phone Number is Invalid")
+      .matches(phoneRegExp, phoneValidation)
       .nullable(),
   });
 
@@ -78,7 +82,7 @@ export default observer(function UserEditForm({
                     }}
                   >
                     <CustomTextField
-                      label="First Name"
+                      label={t("admin-operations.forms.user-edit-form.first-name")}
                       name="firstName"
                       onChange={(e) => handleFieldChange(e, handleChange)}
                       value={values.firstName}
@@ -90,7 +94,7 @@ export default observer(function UserEditForm({
                     />
 
                     <CustomTextField
-                      label="Last Name"
+                      label={t("admin-operations.forms.user-edit-form.last-name")}
                       name="lastName"
                       onChange={(e) => handleFieldChange(e, handleChange)}
                       value={values.lastName}
@@ -101,7 +105,7 @@ export default observer(function UserEditForm({
                     />
 
                     <CustomTextField
-                      label="Phone Number"
+                      label={t("admin-operations.forms.user-edit-form.phone-number")}
                       name="phoneNumber"
                       onChange={(e) => handleFieldChange(e, handleChange)}
                       value={values.phoneNumber}
@@ -113,7 +117,7 @@ export default observer(function UserEditForm({
 
                     <Box component={FormControl} sx={{ gridColumn: "span 2" }}>
                       <CustomSelect
-                        label="Role"
+                        label={t("admin-operations.forms.user-edit-form.role")}
                         value={values.role}
                         options={roles}
                         required={true}
@@ -131,7 +135,7 @@ export default observer(function UserEditForm({
 
                     {values.guestUserComment !== null && (
                       <CustomTextField
-                        label="Comment"
+                        label={t("admin-operations.forms.user-edit-form.comment")}
                         name="guestUserComment"
                         onChange={handleChange}
                         required={true}
@@ -159,8 +163,8 @@ export default observer(function UserEditForm({
                       {hasChanges && (
                         <CustomSubmitButton
                           isSubmitting={isSubmitting}
-                          buttonText="Update"
-                          loadingText="Updating..."
+                          buttonText={t("admin-operations.forms.user-edit-form.button")}
+                          loadingText={t("admin-operations.forms.user-edit-form.loading")}
                         />
                       )}
 

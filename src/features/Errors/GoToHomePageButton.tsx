@@ -1,10 +1,14 @@
 import { Button, useTheme } from "@mui/material";
 import { colors } from "../../themeConfig";
 import { router } from "../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 export default function GoToHomePageButton() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
+  
   return (
     <Button
       onClick={() => router.navigate("/")}
@@ -17,7 +21,7 @@ export default function GoToHomePageButton() {
         },
       }}
     >
-      Go To Homepage
+      {t("errors.go-to-homepage-button")}
     </Button>
   );
 }

@@ -7,6 +7,7 @@ import Header from "../../../../app/common/header/Header";
 import { router } from "../../../../app/router/Routes";
 import { useStore } from "../../../../app/stores/Store";
 import StudentList from "../StudentList/StudentList";
+import { useTranslation } from "react-i18next";
 
 export default observer(function StudentsNotInResearchGroupList() {
   const { dentistTeacherStore } = useStore();
@@ -25,6 +26,8 @@ export default observer(function StudentsNotInResearchGroupList() {
     getStudentsNotInStudentGroup();
   }, [dentistTeacherStore, id]);
 
+  const[t] = useTranslation("global");
+
   return (
     <Box>
       <Button
@@ -37,7 +40,7 @@ export default observer(function StudentsNotInResearchGroupList() {
       </Button>
       <Box sx={{ mt: 2, mb: 2 }}>
         <Header
-          title={`Add Students to ${dentistTeacherStore.selectedStudentGroup?.groupName}`}
+          title={t("dentist-teacher-operations.list.student-group.students-not-in-group.header") +` ${dentistTeacherStore.selectedStudentGroup?.groupName}`}
         />
       </Box>
       <StudentList

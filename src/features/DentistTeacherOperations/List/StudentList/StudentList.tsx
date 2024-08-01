@@ -8,6 +8,7 @@ import { Student } from "../../../../app/models/Group";
 import { DeleteForever, PersonAdd } from "@mui/icons-material";
 import { useStore } from "../../../../app/stores/Store";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   students: Student[];
@@ -32,6 +33,8 @@ export default observer(function StudentList({
   const { dentistTeacherStore } = useStore();
 
   const [studentsList, setStudentsList] = React.useState<Student[]>([]);
+
+  const [t] = useTranslation("global");
 
   React.useEffect(() => {
     setStudentsList(students);
@@ -72,7 +75,7 @@ export default observer(function StudentList({
   const columns: GridColDef[] = [
     {
       field: "userName",
-      headerName: "User Name",
+      headerName: t("dentist-teacher-operations.list.student-group.user-name"),
       cellClassName: "name-column--cell",
       flex: 1,
       renderCell: ({ row }) => {
@@ -95,25 +98,25 @@ export default observer(function StudentList({
     },
     {
       field: "firstName",
-      headerName: "First Name",
+      headerName: t("dentist-teacher-operations.list.student-group.first-name"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
-      field: "lastName",
+      field: t("dentist-teacher-operations.list.student-group.last-name"),
       headerName: "Last Name",
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "email",
-      headerName: "Email",
+      headerName: t("dentist-teacher-operations.list.student-group.email"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "actions",
-      headerName: "Actions",
+      headerName: t("dentist-teacher-operations.list.student-group.actions"),
       headerAlign: "center",
       flex: 1,
       renderCell: ({ row }) => {
@@ -157,12 +160,12 @@ export default observer(function StudentList({
           >
             {studentsInGroupList || isSupervisedStudents
               ? isSupervisedStudents
-                ? "Unsupervise Student"
-                : "Remove From Group"
+                ? t("dentist-teacher-operations.list.student-group.unsupervise-student-button")
+                : t("dentist-teacher-operations.list.student-group.remove-from-group-button")
               : !studentsInGroupList || isUnsupervisedStudents
               ? isUnsupervisedStudents
-                ? "Supervise Student"
-                : "Add To Group"
+                ? t("dentist-teacher-operations.list.student-group.supervise-student-button")
+                : t("dentist-teacher-operations.list.student-group.add-to-group-button")
               : null}
           </Button>
         );

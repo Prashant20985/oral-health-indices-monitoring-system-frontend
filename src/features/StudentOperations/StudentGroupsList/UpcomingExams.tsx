@@ -3,6 +3,7 @@ import { Exam } from "../../../app/models/StudentExam";
 import { Alert, Box, Typography, useTheme } from "@mui/material";
 import StudentExamCard from "../../StudentExamOperations/ExamsList/StudentExamCard";
 import { colors } from "../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   top3Exams: Exam[];
@@ -15,6 +16,8 @@ export default observer(function UpcomingExams({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   return (
     <Box
@@ -30,7 +33,7 @@ export default observer(function UpcomingExams({
       }}
     >
       <Typography variant="h6" fontWeight={600} textTransform="uppercase">
-        Upcoming Exams
+        {t("student-operations.student-group-list.upcoming-exams.title")}
       </Typography>
       <Box display="flex" flexDirection={direction} gap={1}>
         {top3Exams.length > 0 ? (
@@ -46,7 +49,11 @@ export default observer(function UpcomingExams({
           </>
         ) : (
           <Alert severity="info" variant="outlined" sx={{ width: "100%" }}>
-            <Typography variant="h6">No upcoming Exams</Typography>
+            <Typography variant="h6">
+              {t(
+                "student-operations.student-group-list.upcoming-exams.no-upcoming-exams"
+              )}
+            </Typography>
           </Alert>
         )}
       </Box>

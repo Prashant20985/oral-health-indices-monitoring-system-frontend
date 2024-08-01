@@ -11,6 +11,7 @@ import { observer } from "mobx-react-lite";
 import { API } from "../../../../app/models/APIBleeding";
 import { colors } from "../../../../themeConfig";
 import APIBleedingForm from "../../../IndexCalculationForms/APIBleeding/APIBleedingForm";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   api: API;
@@ -21,6 +22,9 @@ export default observer(function PracticePatientAPIDetailsForStudent({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Card
@@ -32,7 +36,7 @@ export default observer(function PracticePatientAPIDetailsForStudent({
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              API Details
+              {t("student-exam-operations.exam-solution-details.practice-patient-api-details-for-student.title")}
             </Typography>
           }
         />
@@ -57,8 +61,8 @@ export default observer(function PracticePatientAPIDetailsForStudent({
             ))}
           </Box>
           <TextField
-            label="Doctor Comment"
-            value={api.comment ? api.comment : "No Comment yet."}
+            label={t("student-exam-operations.exam-solution-details.practice-patient-api-details-for-student.doctor-comment")}
+            value={api.comment ? api.comment : t("student-exam-operations.practice-patient-api-details-for-student.no-comment")}
             fullWidth
             rows={3}
             multiline

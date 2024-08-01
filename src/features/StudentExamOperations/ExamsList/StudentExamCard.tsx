@@ -33,6 +33,7 @@ import DeleteExamConfirmationForm from "../Forms/DeleteExamConfirmationForm";
 import { router } from "../../../app/router/Routes";
 import { CheckExamStatus } from "../../../app/helper/CheckExamStatus";
 import MarkAsGradedConformationDialog from "../Forms/MarkAsGradedConformationDialog";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   exam: Exam;
@@ -66,6 +67,8 @@ export default observer(function StudentExamCard({
   const isMarkAsGradedButtonVisible =
     ended && exam.examStatus === "Published" && !isForStudentUser;
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       <Card
@@ -75,7 +78,7 @@ export default observer(function StudentExamCard({
             theme.palette.mode === "dark"
               ? color.primary[400]
               : color.grey[900],
-              width: "100%"
+          width: "100%",
         }}
       >
         <CardHeader
@@ -102,7 +105,12 @@ export default observer(function StudentExamCard({
           subheader={
             <>
               <Typography variant="h6" color="textSecondary">
-                <b>Publish Date:</b> {new Date(exam.publishDate).toDateString()}
+                <b>
+                  {t(
+                    "student-exam-operations.exams-list.student-exam-card.publish-date"
+                  )}
+                </b>{" "}
+                {new Date(exam.publishDate).toDateString()}
               </Typography>
             </>
           }
@@ -122,7 +130,10 @@ export default observer(function StudentExamCard({
                   <Box display="flex" alignItems="center" gap={1}>
                     <AssignmentTurnedIn />
                     <Typography variant="h6" color="textSecondary">
-                      Status: {exam.examStatus}
+                      {t(
+                        "student-exam-operations.exams-list.student-exam-card.status"
+                      )}{" "}
+                      {exam.examStatus}
                     </Typography>
                   </Box>
                 )}
@@ -145,13 +156,19 @@ export default observer(function StudentExamCard({
                 <Box display="flex" alignItems="center" gap={1}>
                   <Timelapse />
                   <Typography variant="h6" color="textSecondary">
-                    Duration: {exam.durationInterval}
+                    {t(
+                      "student-exam-operations.exams-list.student-exam-card.duration"
+                    )}{" "}
+                    {exam.durationInterval}
                   </Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap={1}>
                   <Assessment />
                   <Typography variant="h6" color="textSecondary">
-                    Max Marks: {exam.maxMark}
+                    {t(
+                      "student-exam-operations.exams-list.student-exam-card.max-marks"
+                    )}{" "}
+                    {exam.maxMark}
                   </Typography>
                 </Box>
               </>
@@ -175,16 +192,26 @@ export default observer(function StudentExamCard({
                         router.navigate(`/exam-details/${exam.id}`)
                       }
                     >
-                      View Exam
+                      {t(
+                        "student-exam-operations.exams-list.student-exam-card.view-exam-button"
+                      )}
                     </Button>
                   </Box>
                   <Box display="flex" width="100%" justifyContent="flex-end">
-                    <Tooltip title="Edit Exam">
+                    <Tooltip
+                      title={t(
+                        "student-exam-operations.exams-list.student-exam-card.edit-exam-button"
+                      )}
+                    >
                       <IconButton onClick={() => setOpenEditDialog(true)}>
                         <Edit color="warning" />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Delete Exam">
+                    <Tooltip
+                      title={t(
+                        "student-exam-operations.exams-list.student-exam-card.delete-exam-button"
+                      )}
+                    >
                       <IconButton onClick={() => setOpenDeleteDialog(true)}>
                         <DeleteSweep color="error" />
                       </IconButton>
@@ -199,7 +226,9 @@ export default observer(function StudentExamCard({
                   onClick={() => router.navigate(`/exam/${exam.id}`)}
                   fullWidth
                 >
-                  View Exam
+                  {t(
+                    "student-exam-operations.exams-list.student-exam-card.view-exam-button"
+                  )}
                 </Button>
               )}
             </>
@@ -210,7 +239,9 @@ export default observer(function StudentExamCard({
               color="secondary"
               onClick={() => setOpenMarkAsGradedDialog(true)}
             >
-              Mark as graded
+              {t(
+                "student-exam-operations.exams-list.student-exam-card.mark-as-graded-button"
+              )}
             </Button>
           ) : null}
         </CardActions>

@@ -18,6 +18,7 @@ import { useStore } from "../../../../app/stores/Store";
 import EditStudentGroupForm from "../../Forms/EditStudentGroupForm";
 import StudentAndResearchGroupDeleteConfirmation from "../../Forms/StudentAndResearchGroupDeleteConfirmation";
 import { router } from "../../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   group: StudentGroup;
@@ -60,6 +61,8 @@ export default observer(function StudentGroupCardActions({ group }: Props) {
     router.navigate(`/student-groups/${group.id}`);
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       <CardActions
@@ -78,16 +81,16 @@ export default observer(function StudentGroupCardActions({ group }: Props) {
             endIcon={<KeyboardDoubleArrowRight />}
             onClick={handleViewDetails}
           >
-            View Details
+            {t("dentist-teacher-operations.list.student-group.student-group-card.view-details-button")}
           </Button>
         </Box>
         <Box display="flex">
-          <Tooltip title="Edit Group Name">
+          <Tooltip title={t("dentist-teacher-operations.list.student-group.student-group-card.edit-group-button")}>
             <IconButton onClick={() => setOpenEditGroupDialog(true)}>
               <Edit color="warning" />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Delete Group">
+          <Tooltip title={t("dentist-teacher-operations.list.student-group.student-group-card.delete-group-button")}>
             <IconButton onClick={() => handleDeleteClick()}>
               <DeleteSweep color="error" />
             </IconButton>

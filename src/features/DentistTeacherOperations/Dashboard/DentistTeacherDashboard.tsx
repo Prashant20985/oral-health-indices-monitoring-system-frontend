@@ -9,8 +9,12 @@ import { useStore } from "../../../app/stores/Store";
 import React from "react";
 import PatientExaminationCardsList from "../../ExaminationCardOperations/List/PatientExaminationCardsList";
 import { colors } from "../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 export default observer(function DentistTeacherDashboard() {
+
+  const [t] = useTranslation("global");
+  
   const {
     patientExaminationCardStore: {
       getPatientExaminationCardsAssignedToDoctor,
@@ -37,7 +41,7 @@ export default observer(function DentistTeacherDashboard() {
         alignItems="center"
         mb={3}
       >
-        <Header title="Dentist Teacher Dashboard" />
+        <Header title={t("dentist-teacher-operations.dashboard.header")} />
         <AddPatientButton />
       </Box>
       <Grid container spacing={2}>
@@ -60,7 +64,7 @@ export default observer(function DentistTeacherDashboard() {
                 textTransform="uppercase"
                 fontWeight={600}
               >
-                Assigned Cards
+                {t("dentist-teacher-operations.dashboard.header")}
               </Typography>
             </Box>
             <Divider />

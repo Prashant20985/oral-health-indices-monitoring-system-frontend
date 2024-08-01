@@ -3,6 +3,7 @@ import { Box, Button, Tooltip, useTheme } from "@mui/material";
 import { useState } from "react";
 import { colors } from "../../../themeConfig";
 import AddApplicationUserForm from "../Forms/AddApplicationUserForm";
+import { useTranslation } from "react-i18next";
 
 export default function AddApplicationUserButton() {
   const theme = useTheme();
@@ -18,9 +19,11 @@ export default function AddApplicationUserButton() {
     setIsOpen(false);
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
-      <Tooltip title="Add User">
+      <Tooltip title={t("admin-operations.dashboard.add-user-tooltip")}>
         <Button
           startIcon={<PersonAddAlt1Rounded />}
           variant="contained"
@@ -31,7 +34,7 @@ export default function AddApplicationUserButton() {
             "&:hover": { backgroundColor: color.blueAccent[300] },
           }}
         >
-          Add User
+          {t("admin-operations.dashboard.add-user-button")}
         </Button>
       </Tooltip>
       <AddApplicationUserForm isOpen={isOpen} onClose={handleClose} />

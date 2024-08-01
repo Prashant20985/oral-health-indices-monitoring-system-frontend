@@ -5,6 +5,7 @@ import ButtonLoadingComponent from "../../../app/common/loadingComponents/Button
 import PatientExaminationCardItem from "./PatientExaminationCardItem";
 import React from "react";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   patientExaminationCards: [string, PatientExaminationCard[]][];
@@ -18,6 +19,7 @@ export default observer(function PatientExaminationCardsList({
   patientId,
 }: Props) {
   const [openDeleteSnackbar, setOpenDeleteSnackbar] = React.useState(false);
+  const [t] = useTranslation("global");
   return (
     <Box>
       {loading ? (
@@ -26,7 +28,7 @@ export default observer(function PatientExaminationCardsList({
         <>
           {patientExaminationCards.length <= 0 ? (
             <Alert severity="info" variant="outlined" sx={{ mt: 4 }}>
-              <Typography variant="h5">No examination cards found</Typography>
+              <Typography variant="h5">{t("dentist-teacher-operations.list.patient-examination-card.no-examination-cards-found")}</Typography>
             </Alert>
           ) : (
             <>
@@ -58,7 +60,7 @@ export default observer(function PatientExaminationCardsList({
                     <CustomSanckbar
                       snackbarClose={() => setOpenDeleteSnackbar(false)}
                       snackbarOpen={openDeleteSnackbar}
-                      message="Card has been deleted successfully"
+                      message={t("dentist-teacher-operations.list.patient-examination-card.delete-message")}
                     />
                   </Box>
                 )

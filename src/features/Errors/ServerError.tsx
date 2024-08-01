@@ -1,7 +1,11 @@
 import { Typography, Box } from "@mui/material";
 import GoToHomePageButton from "./GoToHomePageButton";
+import { useTranslation } from "react-i18next";
 
 export default function ServerError() {
+  
+  const [t] = useTranslation("global");
+
   return (
     <Box
       sx={{
@@ -19,11 +23,11 @@ export default function ServerError() {
       >
         <Box>
           <Typography fontSize={35} fontFamily="cursive">
-            Ooops... <br /> Internal Server Error
+          {t("errors.server-error.ooops")} <br /> {t("errors.server-error.server-error")}
           </Typography>
           <br />
           <Typography variant="h5">
-            We are experiencing internal server error please try again later
+            {t("errors.server-error.message")}
           </Typography>
           <GoToHomePageButton />
         </Box>

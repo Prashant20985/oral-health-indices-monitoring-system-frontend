@@ -1,10 +1,12 @@
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   message?: string;
 }
 
-export default function NoRowsFound({ message = "No Rows Found" }: Props) {
+export default function NoRowsFound({ message = "common.no-rows-found" }: Props) {
+  const [t] = useTranslation("global");
   return (
     <Box
       sx={{
@@ -23,7 +25,7 @@ export default function NoRowsFound({ message = "No Rows Found" }: Props) {
         width={200}
       />
       <Typography variant="h6" fontWeight={600} textTransform="uppercase">
-        {message}
+        {t(message)}
       </Typography>
     </Box>
   );

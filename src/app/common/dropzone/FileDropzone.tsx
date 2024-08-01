@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogTitle, Typography } from "@mui/material";
 import SlideUpTransition from "../transition/SlideUpTransition";
 import { useDropzone } from "react-dropzone";
 import Header from "../header/Header";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -30,6 +31,8 @@ export default function FileDropzone({
     borderColor: "green",
   };
 
+  const [t] = useTranslation("global");
+
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       setFiles(
@@ -55,7 +58,7 @@ export default function FileDropzone({
       TransitionComponent={SlideUpTransition}
     >
       <DialogTitle display="flex" justifyContent="center">
-        <Header title="Drop file here" />
+        <Header title={t("common.file-dropzone.title")} />
       </DialogTitle>
       <DialogContent>
         <div

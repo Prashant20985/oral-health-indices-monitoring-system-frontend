@@ -17,6 +17,7 @@ import { colors } from "../../../../themeConfig";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import ResearchGroupForm from "../../Forms/ResearchGroupForm";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 export default observer(function ResearchGroupList() {
   const { dentistTeacherStore } = useStore();
@@ -33,23 +34,25 @@ export default observer(function ResearchGroupList() {
     fetchResearchGroups();
   }, [dentistTeacherStore]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Box display="flex" alignContent="center" justifyContent="space-between">
-        <Header title="Research Groups" />
+        <Header title={t("dentist-teacher-operations.list.research-group.header")} />
         <Button
           variant="contained"
           color="success"
           startIcon={<Add />}
           onClick={() => setAddFormOpen(true)}
         >
-          Add New Research Group
+          {t("dentist-teacher-operations.list.research-group.add-button")}
         </Button>
       </Box>
       <Box display="flex" mt={2} mb={2} width="40%">
         <TextField
           color="info"
-          label="Search"
+          label={t("dentist-teacher-operations.list.research-group.search")}
           variant="outlined"
           type="text"
           fullWidth

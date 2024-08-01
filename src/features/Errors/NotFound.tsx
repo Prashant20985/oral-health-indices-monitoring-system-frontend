@@ -1,7 +1,11 @@
 import { Typography, Box } from "@mui/material";
 import GoToHomePageButton from "./GoToHomePageButton";
+import { useTranslation } from "react-i18next";
 
 export default function NotFound() {
+
+  const [t] = useTranslation("global");
+  
   return (
     <Box
       sx={{
@@ -19,11 +23,11 @@ export default function NotFound() {
       >
         <Box>
           <Typography fontSize={35} fontFamily="cursive">
-            Ooops... <br /> Page not Found!
+          {t("errors.not-found.ooops")} <br /> {t("errors.not-found.page-not-found")}
           </Typography>
           <br />
           <Typography variant="h5">
-            The Page you are looking for doesn't exists, go back to home page
+          {t("errors.not-found.message")}
           </Typography>
           <GoToHomePageButton />
         </Box>

@@ -34,6 +34,7 @@ import PracticePatientBeweDetailsForTeacher from "./PracticePatientBeweDetailsFo
 import PracticePatientAPIDetailsForTeacher from "./PracticePatientAPIDetailsForTeacher";
 import PracticePatientBleedingDetailsForTeacher from "./PracticePatientBleedingDetailsForTeacher";
 import axiosAgent from "../../../../app/api/axiosAgent";
+import { useTranslation } from "react-i18next";
 
 const RiskFactorAssessment = React.lazy(
   () => import("../../../IndexCalculationForms/RiskFactorAssessment")
@@ -52,6 +53,8 @@ export default observer(function ExamSolutionDetailsForTeacher() {
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   const {
     studentExamStore: {
@@ -80,7 +83,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
       try {
         await axiosAgent.ExportOperations.exportExamSolution(examCard);
       } catch (error) {
-        console.error("Error downloading the Excel file", error);
+        console.error(t("student-exam-operations.exam-solution-details-for-teacher.error-downloading-message"), error);
       } finally {
         setLoading(false);
       }
@@ -143,13 +146,13 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                     onClick={handleDownloadClick}
                     disabled={loading}
                   >
-                    {loading ? "Downloading..." : "Download Exam Solution"}
+                    {loading ? t("student-exam-operations.exam-solution-details-for-teacher.loading-download-message"): t("student-exam-operations.exam-solution-details-for-teacher.download-button")}
                   </Button>
                 </Box>
               }
               subheader={
                 <Typography variant="h6">
-                  Exam Solution by {examCard?.studentName}
+                  {t("student-exam-operations.exam-solution-details-for-teacher.exam-solution-by")} {examCard?.studentName}
                 </Typography>
               }
             />
@@ -161,17 +164,17 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                     fontWeight={600}
                     sx={{ textTransform: "uppercase" }}
                   >
-                    Student Mark: {examCard.studentMark}
+                    {t("student-exam-operations.exam-solution-details-for-teacher.student-mark")} {examCard.studentMark}
                   </Typography>
                 </Box>
                 <TextField
-                  label="Doctor's Comment"
+                  label={t("student-exam-operations.exam-solution-details-for-teacher.doctor-comment")}
                   variant="outlined"
                   fullWidth
                   multiline
                   rows={2}
                   color="secondary"
-                  value={examCard.doctorComment ?? "No Comment Yet."}
+                  value={examCard.doctorComment ?? t("student-exam-operations.exam-solution-details-for-teacher.no-comment")}
                   inputProps={{
                     readOnly: true,
                   }}
@@ -193,8 +196,8 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                   onClick={() => setOpenCommentDialog(true)}
                 >
                   {examCard.doctorComment === null
-                    ? "Add Comment"
-                    : "Edit Comment"}
+                    ? t("student-exam-operations.exam-solution-details-for-teacher.add-comment")
+                    : t("student-exam-operations.exam-solution-details-for-teacher.edit-comment")}
                 </Button>
                 <Button
                   color="success"
@@ -203,7 +206,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                   onClick={() => setOpenMarksDialog(true)}
                   startIcon={<SchoolOutlined />}
                 >
-                  {examCard.studentMark === 0 ? "Add Marks" : "Edit Marks"}
+                  {examCard.studentMark === 0 ? t("student-exam-operations.exam-solution-details-for-teacher.add-marks") : t("student-exam-operations.exam-solution-details-for-teacher.edit-marks")}
                 </Button>
               </Box>
             </CardActions>
@@ -224,7 +227,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 <Tab
                   label={
                     <Typography color={color.grey[100]}>
-                      Patient Details
+                      {t("student-exam-operations.exam-solution-details-for-teacher.patient-details")}
                     </Typography>
                   }
                   value="1"
@@ -232,7 +235,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 <Tab
                   label={
                     <Typography color={color.grey[100]}>
-                      Risk Factor Assessment
+                      {t("student-exam-operations.exam-solution-details-for-teacher.risk-factor-assessment")}
                     </Typography>
                   }
                   value="2"
@@ -259,7 +262,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 />
                 <Tab
                   label={
-                    <Typography color={color.grey[100]}>Summary</Typography>
+                    <Typography color={color.grey[100]}>{t("student-exam-operations.exam-solution-details-for-teacher.summary")}</Typography>
                   }
                   value="7"
                 />
@@ -329,14 +332,14 @@ export default observer(function ExamSolutionDetailsForTeacher() {
             onClose={() => setOpenCommentDialog(false)}
             comment={examCard.doctorComment ?? ""}
             handleSubmit={handleComment}
-            title="Comment Practice Patient Examination Card"
-            description="To comment on the practice patient examination card, please fill in the form below."
+            title={t("student-exam-operations.exam-solution-details-for-teacher.comment-practice-patient-examintation-card")}
+            description={t("student-exam-operations.exam-solution-details-for-teacher.description")}
           />
           <AddStudentMarksDialog
             isOpen={openMarksDialog}
             onClose={() => setOpenMarksDialog(false)}
-            title="Add Student Marks"
-            description="Please enter the student marks below."
+            title={t("student-exam-operations.exam-solution-details-for-teacher.add-student-marks")}
+            description={t("student-exam-operations.exam-solution-details-for-teacher.student-mark-description")}
             marks={examCard.studentMark}
             handleSubmit={handleGrade}
           />

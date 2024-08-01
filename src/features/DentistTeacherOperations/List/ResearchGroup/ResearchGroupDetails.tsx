@@ -22,6 +22,7 @@ import Header from "../../../../app/common/header/Header";
 import ResearchGroupForm from "../../Forms/ResearchGroupForm";
 import { router } from "../../../../app/router/Routes";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 export default observer(function ResearchGroupDetails() {
   const { dentistTeacherStore } = useStore();
@@ -38,6 +39,8 @@ export default observer(function ResearchGroupDetails() {
     }
   }, [id, dentistTeacherStore]);
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       <Button
@@ -47,7 +50,7 @@ export default observer(function ResearchGroupDetails() {
         onClick={() => router.navigate("/research-groups")}
         sx={{ mb: 2 }}
       >
-        Back
+        {t("dentist-teacher-operations.list.research-group.research-group-details.back-button")}
       </Button>
       <Box display="flex" flexDirection="column" gap={4}>
         <Card
@@ -68,7 +71,7 @@ export default observer(function ResearchGroupDetails() {
               justifyContent: "flex-end",
             }}
           >
-            <Tooltip title="Edit Research Group">
+            <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-details.edit-button")}>
               <IconButton onClick={() => setOpenEdit(true)}>
                 <Edit
                   color={theme.palette.mode === "dark" ? "secondary" : "info"}
@@ -99,7 +102,7 @@ export default observer(function ResearchGroupDetails() {
             }
             subheader={
               <Typography variant="h6">
-                Created By: {selectedResearchGroup?.createdBy}
+                {t("dentist-teacher-operations.list.research-group.research-group-details.created-by")}{selectedResearchGroup?.createdBy}
               </Typography>
             }
           />
@@ -117,7 +120,7 @@ export default observer(function ResearchGroupDetails() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Header title="Patients" />
+            <Header title={t("dentist-teacher-operations.list.research-group.research-group-details.title")} />
             <Button
               color="success"
               startIcon={<Add />}

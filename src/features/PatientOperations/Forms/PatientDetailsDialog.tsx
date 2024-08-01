@@ -13,6 +13,7 @@ import * as React from "react";
 import { useStore } from "../../../app/stores/Store";
 import { Patient } from "../../../app/models/Patient";
 import { Close } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   patientId?: string;
@@ -46,6 +47,8 @@ export default observer(function PatientDetailsDialog({
     }
   }, [patientId, getPatientById, patientDetails]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Dialog
       open={isOpen}
@@ -70,7 +73,7 @@ export default observer(function PatientDetailsDialog({
           fontWeight={700}
           sx={{ textTransform: "uppercase" }}
         >
-          Patient Details
+          {t("patient-operations.patient-details-dialog.header")}
         </Typography>
         <IconButton onClick={onClose}>
           <Close />
@@ -86,7 +89,7 @@ export default observer(function PatientDetailsDialog({
               gridTemplateColumns="repeat(4, minmax(0, 1fr))"
             >
               <CustomTextField
-                label="First Name"
+                label={t("patient-operations.patient-details-dialog.first-name")}
                 name="firstName"
                 variant="outlined"
                 value={patient.firstName}
@@ -95,7 +98,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Last Name"
+                label={t("patient-operations.patient-details-dialog.last-name")}
                 name="lastName"
                 variant="outlined"
                 value={patient.lastName}
@@ -104,7 +107,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Email"
+                label={t("patient-operations.patient-details-dialog.email")}
                 name="email"
                 variant="outlined"
                 value={patient.email}
@@ -112,7 +115,7 @@ export default observer(function PatientDetailsDialog({
                 gridColumn="span 4"
               />
               <CustomTextField
-                label="Gender"
+                label={t("patient-operations.patient-details-dialog.gender")}
                 name="gender"
                 variant="outlined"
                 value={patient.gender}
@@ -121,7 +124,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Ethnic Group"
+                label={t("patient-operations.patient-details-dialog.ethnic-group")}
                 name="ethnicGroup"
                 variant="outlined"
                 value={patient.ethnicGroup}
@@ -130,7 +133,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Other Group"
+                label={t("patient-operations.patient-details-dialog.other-group")}
                 name="otherGroup"
                 variant="outlined"
                 value={patient.otherGroup}
@@ -139,7 +142,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Years In School"
+                label={t("patient-operations.patient-details-dialog.years-in-school")}
                 name="yearsInSchool"
                 variant="outlined"
                 value={patient.yearsInSchool.toString()}
@@ -148,7 +151,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Other Data"
+                label={t("patient-operations.patient-details-dialog.other-data")}
                 name="otherData"
                 value={patient.otherData}
                 readOnly={true}
@@ -157,7 +160,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Other Data2"
+                label={t("patient-operations.patient-details-dialog.other-data2")}
                 name="otherData2"
                 value={patient.otherData2}
                 readOnly={true}
@@ -166,7 +169,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Other Data3"
+                label={t("patient-operations.patient-details-dialog.other-data3")}
                 name="otherData3"
                 value={patient.otherData3}
                 readOnly={true}
@@ -175,7 +178,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Location"
+                label={t("patient-operations.patient-details-dialog.location")}
                 name="location"
                 value={patient.location}
                 readOnly={true}
@@ -184,7 +187,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Age"
+                label={t("patient-operations.patient-details-dialog.age")}
                 name="age"
                 value={patient.age.toString()}
                 readOnly={true}
@@ -193,7 +196,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Created At"
+                label={t("patient-operations.patient-details-dialog.created-at")}
                 name="createdAt"
                 value={new Date(patient.createdAt).toDateString()}
                 readOnly={true}
@@ -203,7 +206,7 @@ export default observer(function PatientDetailsDialog({
 
               {patient.isArchived && (
                 <CustomTextField
-                  label="Archive Comment"
+                  label={t("patient-operations.patient-details-dialog.archive-comment")}
                   name="archiveComment"
                   value={patient.archiveComment}
                   readOnly={true}
@@ -213,7 +216,7 @@ export default observer(function PatientDetailsDialog({
               )}
 
               <CustomTextField
-                label="Doctor Name"
+                label={t("patient-operations.patient-details-dialog.doctor-name")}
                 name="doctorName"
                 value={patient.doctorName}
                 readOnly={true}
@@ -222,7 +225,7 @@ export default observer(function PatientDetailsDialog({
               />
 
               <CustomTextField
-                label="Research Group Name"
+                label={t("patient-operations.patient-details-dialog.research-group-name")}
                 name="researchGroupName"
                 value={patient.researchGroupName}
                 readOnly={true}

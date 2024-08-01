@@ -4,6 +4,7 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import PatientList from "../DataGrid/PatientList";
 import PatientListFilter from "../Filters/PatientListFilter";
+import { useTranslation } from "react-i18next";
 
 export default observer(function ActivePatientsList() {
   const {
@@ -22,11 +23,13 @@ export default observer(function ActivePatientsList() {
     fetchActivePatients();
   }, [fetchActivePatients]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <PatientListFilter
-        title="Active Patients"
-        subTitle="List Of Active Patients"
+        title={t("patient-operations.list.active-patients.header")}
+        subTitle={t("patient-operations.list.active-patients.header")}
         searchTerm={activePatientsSerachParams}
         setSearchTerm={setActivePatientsSearchParams}
         clearEmailSearch={clearActivePatientEmailSearch}

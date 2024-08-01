@@ -7,6 +7,7 @@ import CustomTextField from "../../app/common/formInputs/CustomTextField";
 import { useStore } from "../../app/stores/Store";
 import CustomSubmitButton from "../../app/common/formInputs/CustomSubmitButtom";
 import { colors } from "../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 export default observer(function ForgotPassword() {
   const theme = useTheme();
@@ -20,6 +21,8 @@ export default observer(function ForgotPassword() {
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is required"),
   });
+
+  const [t] = useTranslation("global");
 
   return (
     <Box
@@ -49,8 +52,7 @@ export default observer(function ForgotPassword() {
                 sx={{ mb: "20px" }}
                 align="left"
               >
-                Enter the email address associated with your account and we'll
-                send you a link to reset your password
+                {t("forgotpassword.header")}
               </Typography>
               <Box
                 display="grid"
@@ -61,7 +63,7 @@ export default observer(function ForgotPassword() {
                 }}
               >
                 <CustomTextField
-                  label="Email"
+                  label={t("forgotpassword.email")}
                   name="email"
                   onChange={handleChange}
                   error={touched.email && !!errors.email}
@@ -78,8 +80,8 @@ export default observer(function ForgotPassword() {
                     isSubmitting={isSubmitting}
                     fullwidth={true}
                     width="100%"
-                    buttonText="Send Email"
-                    loadingText="Sending Email..."
+                    buttonText={t("forgotpassword.button")}
+                    loadingText={t("forgotpassword.loading")}
                   />
                 </Box>
               </Box>

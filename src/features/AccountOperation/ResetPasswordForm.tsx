@@ -11,6 +11,7 @@ import { useStore } from "../../app/stores/Store";
 import CustomSubmitButton from "../../app/common/formInputs/CustomSubmitButtom";
 import { colors } from "../../themeConfig";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 export default observer(function ResetPassword() {
   const theme = useTheme();
@@ -22,6 +23,8 @@ export default observer(function ResetPassword() {
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get("token") || "";
   const email = searchParams.get("email") || "";
+
+  const [t] = useTranslation("global");
 
   const validationSchema = Yup.object().shape({
     password: Yup.string().required("Password is required"),
@@ -73,7 +76,7 @@ export default observer(function ResetPassword() {
                 sx={{ mb: "20px" }}
                 align="left"
               >
-                Password Reset for {email}
+               {t("resetpassword.header")} {email}
               </Typography>
               <Box
                 display="grid"
@@ -84,7 +87,7 @@ export default observer(function ResetPassword() {
                 }}
               >
                 <CustomTextField
-                  label="Password"
+                  label={t("resetpassword.password")}
                   name="password"
                   onChange={handleChange}
                   error={touched.password && !!errors.password}
@@ -95,7 +98,7 @@ export default observer(function ResetPassword() {
                 />
 
                 <CustomPasswordTextField
-                  label="Confirm Password"
+                  label={t("resetpassword.confirmPassword")}
                   name="confirmPassword"
                   onChange={handleChange}
                   error={touched.confirmPassword && !!errors.confirmPassword}
@@ -112,8 +115,8 @@ export default observer(function ResetPassword() {
                     isSubmitting={isSubmitting}
                     fullwidth={true}
                     width="100%"
-                    buttonText="Reset Password"
-                    loadingText="Resetting..."
+                    buttonText={t("resetpassword.button")}
+                    loadingText={t("resetpassword.buttonLoading")}
                   />
                 </Box>
               </Box>

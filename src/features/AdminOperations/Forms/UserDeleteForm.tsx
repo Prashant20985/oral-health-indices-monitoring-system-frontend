@@ -16,6 +16,7 @@ import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessag
 import CustomTextField from "../../../app/common/formInputs/CustomTextField";
 import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   userName: string;
@@ -42,6 +43,8 @@ export default observer(function UserDeleteForm({
     setSnackbarOpen(true);
     onClose();
   };
+
+  const [t] = useTranslation("global");
 
   return (
     <>
@@ -88,7 +91,7 @@ export default observer(function UserDeleteForm({
                     sx={{ mb: "15px" }}
                     align="left"
                   >
-                    {`Are you sure you want to delete ${userName}?`}
+                    {t("admin-operations.forms.user-delete-form.header")} {userName}?
                   </Typography>
                   <Box
                     display="grid"
@@ -101,7 +104,7 @@ export default observer(function UserDeleteForm({
                     }}
                   >
                     <CustomTextField
-                      label="Delete Comment"
+                      label={t("admin-operations.forms.user-delete-form.comment")}
                       name="deleteUserComment"
                       required={true}
                       onChange={handleChange}
@@ -135,7 +138,7 @@ export default observer(function UserDeleteForm({
                           },
                         }}
                       >
-                        Cancel
+                        {t("admin-operations.forms.user-delete-form.cancel-button")}
                       </Button>
                       <Button
                         variant="contained"
@@ -153,9 +156,9 @@ export default observer(function UserDeleteForm({
                         }}
                       >
                         {isSubmitting ? (
-                          <ButtonLoadingComponent content="Deleting..." />
+                          <ButtonLoadingComponent content={t("admin-operations.forms.user-delete-form.delete-loading")} />
                         ) : (
-                          <p>Delete</p>
+                          <p>{t("admin-operations.forms.user-delete-form.delete-button")}</p>
                         )}
                       </Button>
                     </Box>
@@ -169,7 +172,7 @@ export default observer(function UserDeleteForm({
       <CustomSanckbar
         snackbarOpen={snackbarOpen}
         snackbarClose={() => setSnackbarOpen(false)}
-        message="User deleted successfully!!"
+        message={t("admin-operations.forms.user-delete-form.delete-message")}
       />
     </>
   );

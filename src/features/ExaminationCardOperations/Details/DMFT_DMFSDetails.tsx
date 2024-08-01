@@ -11,6 +11,7 @@ import React from "react";
 import CommentForm from "../Forms/CommentForm";
 import { useStore } from "../../../app/stores/Store";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   cardId: string;
@@ -31,6 +32,8 @@ export default observer(function DMFT_DMFSDetails({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   const {
     userStore: { user },
@@ -83,18 +86,32 @@ export default observer(function DMFT_DMFSDetails({
           multiline
           fullWidth
           color="secondary"
-          label="Doctor DMFT/DMFS Comment"
+          label={t(
+            "examination-card-operations.details.dmft-dmfs-details.doctor-dmft-dmfs-comment"
+          )}
           rows={3}
-          value={dmft_dmfs.doctorComment ?? "No Comment Provided."}
+          value={
+            dmft_dmfs.doctorComment ??
+            t(
+              "examination-card-operations.details.dmft-dmfs-details.no-comment"
+            )
+          }
         />
         {!isRegularMode && (
           <TextField
             multiline
             fullWidth
             color="secondary"
-            label="Student DMFT/DMFS Comment"
+            label={t(
+              "examination-card-operations.details.dmft-dmfs-details.student-dmft-dmfs-comment"
+            )}
             rows={3}
-            value={dmft_dmfs.studentComment ?? "No Comment Provided."}
+            value={
+              dmft_dmfs.studentComment ??
+              t(
+                "examination-card-operations.details.dmft-dmfs-details.no-comment"
+              )
+            }
           />
         )}
         {isUserEligibleToComment && (
@@ -105,7 +122,13 @@ export default observer(function DMFT_DMFSDetails({
               variant="outlined"
               onClick={() => setOpenCommentDialog(true)}
             >
-              {comment ? "Edit Comment" : "Add Comment"}
+              {comment
+                ? t(
+                    "examination-card-operations.details.dmft-dmfs-details.edit-comment"
+                  )
+                : t(
+                    "examination-card-operations.details.dmft-dmfs-details.add-comment"
+                  )}
             </Button>
           </Box>
         )}
@@ -119,8 +142,12 @@ export default observer(function DMFT_DMFSDetails({
       <CommentForm
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title="Comment DMFT/DMFS Form"
-        description="Please provide your comment for the DMFT/DMFS Form."
+        title={t(
+          "examination-card-operations.details.dmft-dmfs-details.comment-dmft-dmfs-form"
+        )}
+        description={t(
+          "examination-card-operations.details.dmft-dmfs-details.description"
+        )}
         handleSubmit={(comment) => {
           handleComment(comment);
         }}
@@ -129,7 +156,9 @@ export default observer(function DMFT_DMFSDetails({
       <CustomSanckbar
         snackbarOpen={commentSnackbarOpen}
         snackbarClose={() => setCommentSnackbarOpen(false)}
-        message="Comment has been successfully added."
+        message={t(
+          "examination-card-operations.details.dmft-dmfs-details.message"
+        )}
       />
     </Box>
   );

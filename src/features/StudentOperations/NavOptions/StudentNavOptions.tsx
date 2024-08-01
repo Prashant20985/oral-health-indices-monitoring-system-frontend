@@ -5,25 +5,27 @@ import {
 } from "@mui/icons-material";
 import { observer } from "mobx-react-lite";
 import SidebarListItem from "../../../app/common/sidebar/SidebarListItem";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
 }
 
 export default observer(function StudentNavOptions({ open }: Props) {
+  const [t] = useTranslation("global");
   const options = [
     {
-      title: "My Groups",
+      title: t("student-operations.nav-options.my-groups"),
       path: "/my-groups",
       icon: <SchoolOutlined />,
     },
     {
-      title: "Active Patients",
+      title: t("student-operations.nav-options.active-patients"),
       path: "/active-patients",
       icon: <LocalHospitalOutlined />,
     },
     {
-      title: "Archived Patients",
+      title: t("student-operations.nav-options.archived-patients"),
       path: "/archived-patients",
       icon: <ArchiveOutlined />,
     },

@@ -10,6 +10,34 @@
       "pl": "Polish"
     }
   },
+  "common":{
+    "calendar":{
+      "choose-date": "Choose Date",
+      "clear-button": "Clear"
+    },
+    "countdown-timer":{
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    },
+    "file-dropzone":{
+      "title": "Drop file here"
+    },
+    "cancel-button": "Cancel",
+    "submit-button-loading-text": "Saving...",
+    "loading-text": "Loading...",
+    "user-options":{
+      "title": "User Options",
+      "view-profile": "View Profile",
+      "log-out": "Log Out"
+    },
+    "no-rows-found": "No rows found",
+    "side-bar":{
+      "login": "Login",
+      "dashboard": "Dashboard",
+      "my-requests": "My Requests"
+    }
+  },
   "login": {
     "header": "Login",
     "email": "Email or UserName",
@@ -18,5 +46,900 @@
     "buttonLoading": "Logging in...",
     "forgotPassword": "Forgot Password?",
     "rememberMe": "Remember Me"
+  },
+  "forgotpassword": {
+    "header": "Enter the email address associated with your account and we'll send you a link to reset your password",
+    "email": "Email",
+    "button": "Send Email",
+    "loading": "Sending Email..."
+  },
+  "resetpassword": {
+    "header": "Password Reset for",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "button": "Reset Password",
+    "buttonLoading": "Resetting Password..."
+  },
+  "errors": {
+    "go-to-homepage-button": "Go to Homepage",
+    "not-found": {
+      "ooops": "Ooops...",
+      "page-not-found": "Page not found!",
+      "message": "The Page you are looking for doesn't exists, go back to home page"
+    },
+    "server-error": {
+      "ooops": "Ooops...",
+      "server-error": "Internal Server Error",
+      "message": " We are experiencing internal server error please try again later"
+    },
+    "unauthorized": {
+      "header": "Unauthorized Area",
+      "message": "You are not authorized to access this page. Please check your login credentials or contact administrator for access."
+    }
+  },
+  "admin-operations": {
+    "dashboard": {
+      "header": "Admin Dashboard",
+      "activation-status": {
+        "header": "Click to change activation status"
+      },
+      "active-users": {
+        "header": "Active Users",
+        "button": "View All"
+      },
+      "active-patients": {
+        "header": "Active Patients",
+        "button": "View All"
+      },
+      "add-user-button": "Add User",
+      "add-user-tooltip": "Add User",
+      "upload-csv": {
+        "button": "Upload CSV",
+        "title": "Add Users from csv file",
+        "message": "Drop only .csv files",
+        "close-button": "Close"
+      },
+      "csv-preview": {
+        "warn-toast": "Incorrect File format",
+        "add-button": "click to add users"
+      },
+      "archived-users": {
+        "header": "Archived Users",
+        "button": "View All"
+      },
+      "deactivated-users": {
+        "header": "Deactivated Users",
+        "button": "View All"
+      },
+      "user-requests": {
+        "header": "User Requests",
+        "button": "View All"
+      }
+    },
+    "forms": {
+      "add-application-user-form": {
+        "header": "Add User",
+        "first-name": "First Name",
+        "last-name": "Last Name",
+        "phone-number": "Phone Number",
+        "role": "Role",
+        "email": "Email",
+        "is-guest": "Is Guest User",
+        "comment": "Comment",
+        "save-button": "Save",
+        "user-added-message": "User added successfully!!"
+      },
+      "change-password-form": {
+        "current-password": "Current Password",
+        "new-password": "New Password",
+        "button": "Change Password",
+        "buttonLoading": "Updating...",
+        "message": "Password changed successfully!!"
+      },
+      "profile-form": {
+        "first-name": "First Name",
+        "last-name": "Last Name",
+        "username": "Username",
+        "role": "Role",
+        "email": "Email",
+        "phone-number": "Phone Number",
+        "create-date": "Create Date",
+        "comment": "Comment",
+        "delete-comment": "Delete Comment",
+        "delete-date": "Delete Date",
+        "close-button": "Close"
+      },
+      "user-delete-form": {
+        "header": "Are you sure you want to delete",
+        "comment": "Delete Comment",
+        "cancel-button": "Cancel",
+        "delete-button": "Delete",
+        "delete-loading": "Deleting...",
+        "delete-message": "User Deleted successfully!!"
+      },
+      "user-edit-form": {
+        "phone-validation": "Phone number is Invalid",
+        "first-name": "First Name",
+        "last-name": "Last Name",
+        "phone-number": "Phone Number",
+        "role": "Role",
+        "comment": "Comment",
+        "button": "Update",
+        "loading": "Updating..."
+      }
+    },
+    "list": {
+      "data-grid": {
+        "activation-status": "Activation Status",
+        "actions": "Actions",
+        "view-profile": "View Profile",
+        "delete-user": "Delete User",
+        "user-name": "User Name",
+        "first-name": "First Name",
+        "last-name": "Last Name",
+        "email": "Email",
+        "delete-date": "Delete Date",
+        "role": "Role",
+        "activation-message": "Activation status changed successfully!!"
+      },
+      "active-users": {
+        "header": "Active Users",
+        "sub-header": "List of Active Users"
+      },
+      "deactivated-users": {
+        "header": "Deactivated Users",
+        "sub-header": "List of Deactivated Users"
+      },
+      "deleted-users": {
+        "header": "Deleted Users",
+        "sub-header": "List of Deleted Users"
+      },
+      "filter": {
+        "search": "Search",
+        "user-type": "User Type",
+        "role": "Role"
+      }
+    },
+    "logs": {
+      "title": "User logs",
+      "sub-title": "View User logs",
+      "filter-title": "Log Filters",
+      "tablerow-no.": "No.",
+      "tablerow-date": "Date",
+      "tablerow-executedby": "Executed By",
+      "tablerow-requestname": "Request Name",
+      "tablerow-level": "Level",
+      "tablerow-message": "Message",
+      "filter-username": "User Name",
+      "filter-level": "Log level",
+      "filter-startdate": "Start Date",
+      "filter-enddate": "End Date"
+    },
+    "nav-options": {
+      "active-users": "Active Users",
+      "deactivated-users": "Deactivated Users",
+      "deleted-users": "Deleted Users",
+      "active-patients": "Active Patients",
+      "archived-patients": "Archived Patients",
+      "user-requests": "User Requests"
+    },
+    "user-profile": {
+      "header": "User Details",
+      "edit-user": "Edit User",
+      "change-password": "Change Password"
+    }
+  },
+  "dentist-teacher-operations": {
+    "dashboard": {
+      "add-patient-button": "Add New Patient",
+      "header": "Dentist Teacher Dashboard",
+      "assigned-cards": "Assigned Cards"
+    },
+    "forms": {
+      "add-student-group-form": {
+        "header": "Add New Group",
+        "group-name": "Group",
+        "add-button": "Add",
+        "group-added-message": "Group Created Successfully!!"
+      },
+      "edit-student-group-form": {
+        "header": "Edit Group Name",
+        "group-name": "Group Name",
+        "save-button": "Save",
+        "group-edited-message": "Group Name updated Successfully!!"
+      },
+      "research-group-form": {
+        "group-name-validation": "Group Name must be at most 50 characters",
+        "description-validation": "Description must be at most 500 characters",
+        "add-new-research-group": "Add New Research Group",
+        "edit-research-group": "Edit Research Group",
+        "group-name": "Group Name (Max 50 characters)",
+        "description": "Description (Max 500 characters)",
+        "update-button": "Update",
+        "create-button": "Create"
+      },
+      "student-and-research-group-delete-confirmation-form": {
+        "header": "Are you sure you want to delete",
+        "cancel-button": "Cancel",
+        "delete-button": "Delete"
+      }
+    },
+    "list": {
+      "examinationscards-assigned-to-doctor": {
+        "header": "Examination Cards",
+        "sub-header": "Examination Cards assigned to Doctor",
+        "select-student-label": "Select Student",
+        "select-year-and-month-label": "Select Year and Month"
+      },
+      "research-group": {
+        "header": "Research Groups",
+        "add-button": "Add New Research Group",
+        "search": "Search",
+        "patients-not-in-research-group": {
+          "back-button": "Back",
+          "header": "Add Patients to"
+        },
+        "research-group-card": {
+          "created-by": "Created By: ",
+          "number-of-patients": "Number of Patients: ",
+          "delete-button": "Delete",
+          "edit-button": "Edit"
+        },
+        "research-group-details": {
+          "back-button": "Back",
+          "edit-button": "Edit Research Group",
+          "created-by": "Created By: ",
+          "title": "Patients",
+          "add-patient-button": "Add Patient"
+        },
+        "research-group-patient": {
+          "first-name": "First Name",
+          "last-name": "Last Name",
+          "email": "Email",
+          "gender": "Gender",
+          "age": "Age",
+          "location": "Location",
+          "added-by": "Added By",
+          "actions": "Actions",
+          "remove-from-group-button": "Remove from Group"
+        }
+      },
+      "student-group": {
+        "header": "Student Groups",
+        "add-button": "Add New Group",
+        "search": "Search",
+        "user-name": "User Name",
+        "first-name": "First Name",
+        "last-name": "Last Name",
+        "email": "Email",
+        "group-name": "Group Name",
+        "actions": "Actions",
+        "remove-from-group-button": "Remove from Group",
+        "add-to-group-button": "Add to Group",
+        "supervise-student-button": "Supervise Student",
+        "unsupervise-student-button": "Unsupervise Student",
+        "students-in-group": {
+          "header": "Students in Group"
+        },
+        "students-not-in-group": {
+          "header": "Add Students to Group"
+        },
+        "student-group-card": {
+          "sub-header": "Number of Students: ",
+          "add-student-button": "Add Student",
+          "edit-group-button": "Edit Group Name",
+          "delete-group-button": "Delete Group",
+          "view-details-button": "View Details",
+          "back-button": "Back",
+          "edit-research-group-button": "Edit Research Group",
+          "students-label": "Students",
+          "exams-label": "Exams",
+          "publish-new-exam-button": "Publish New Exam"
+        },
+        "supervise-students": {
+          "header": "Supervised Students",
+          "sub-header": "Students Under My Supervison",
+          "add-student-button": "Add Student"
+        },
+        "unsupervised-students": {
+          "header": "Unsupervised Students",
+          "sub-header": "Students Not Under My Supervison"
+        }
+      },
+      "patient-examination-card": {
+        "assigned-doctor": "Assigned Doctor:",
+        "created-by": "Created By:",
+        "description-of-the-treatment": "Description of the Treatment:",
+        "patient-details": "Patient Details",
+        "view-card": "View Card",
+        "no-examination-cards-found": "No Examination Cards Found",
+        "delete-message": "Card has been deleted successfully!!"
+      }
+    },
+    "nav-options": {
+      "research-groups": "Research Groups",
+      "student-groups": "Student Groups",
+      "active-patients": "Active Patients",
+      "archived-patients": "Archived Patients",
+      "supervised-students": "Supervised Students",
+      "assigned-cards": "Assigned Cards"
+    }
+  },
+  "patient-operations": {
+    "form": {
+      "archive-patient": {
+        "header": "Archive Patient",
+        "dialog": "Are you sure you want to archive this patient ?",
+        "cancel-button": "Cancel",
+        "archive-button": "Archive",
+        "comment": "Archive Comment"
+      },
+      "create-edit-patient": {
+        "first-name-required": "First Name is required",
+        "first-name-validation": "First Name must be at most 50 characters",
+        "last-name-required": "Last Name is required",
+        "last-name-validation": "Last Name must be at most 50 characters",
+        "email-required": "Email is required",
+        "email-invalid": "Invalid email format",
+        "email-validation": "Email must be at most 255 characters",
+        "gender-required": "Gender is required",
+        "ethnic-group-required": "Ethnic Group is required",
+        "ethnic-group-validation": "Ethnic Group must be at most 50 characters",
+        "other-group-validation": "Other Group must be at most 50 characters",
+        "other-data-validation": "Other Data must be at most 50 characters",
+        "other-data2-validation": "Other Data 2 must be at most 50 characters",
+        "other-data3-validation": "Other Data 3 must be at most 50 characters",
+        "location-required": "Location is required",
+        "location-validation": "Location must be at most 50 characters",
+        "age-required": "Age is required",
+        "edit-patient": "Edit Patient",
+        "add-patient": "Add Patient",
+        "first-name": "First Name",
+        "last-name": "Last Name",
+        "email": "Email",
+        "gender": "Gender",
+        "male": "Male",
+        "female": "Female",
+        "age": "Age",
+        "ethnic-group": "Ethnic Group",
+        "other-group": "Other Group",
+        "years-in-school": "Years in School",
+        "location": "Location",
+        "other-data": "Other Data",
+        "other-data2": "Other Data 2",
+        "other-data3": "Other Data 3",
+        "patient-created-message": "Patient Created Successfully!!",
+        "patient-updated-message": "Patient Updated Successfully!!"
+      }
+    },
+    "delete-confirmation": {
+      "header": "Are you sure you want to delete this patient?",
+      "cancel-button": "Cancel",
+      "delete-button": "Delete",
+      "message": "Patient Deleted successfully!!"
+    },
+    "patient-details-dialog": {
+      "header": "Patient Details",
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "email": "Email",
+      "gender": "Gender",
+      "ethnic-group": "Ethnic Group",
+      "other-group": "Other Group",
+      "years-in-school": "Years in School",
+      "other-data": "Other Data",
+      "other-data2": "Other Data 2",
+      "other-data3": "Other Data 3",
+      "location": "Location",
+      "age": "Age",
+      "created-at": "Created At",
+      "archive-comment": "Archive Comment",
+      "doctor-name": "Doctor Name",
+      "research-group-name": "Research Group Name"
+    },
+    "list": {
+      "active-patients": {
+        "header": "Active Patients",
+        "sub-header": "List of Active Patients"
+      },
+      "archived-patients": {
+        "header": "Archived Patients",
+        "sub-header": "List of Archived Patients"
+      }
+    },
+    "data-grid": {
+      "unarchive-patient": "Click to unarchive",
+      "archive-patient": "Click to archive",
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "email": "Email",
+      "gender": "Gender",
+      "ethnic-group": "Ethnic Group",
+      "location": "Location",
+      "age": "Age",
+      "actions": "Actions",
+      "view-details": "View details",
+      "edit-patient": "Edit",
+      "delete-patient": "Delete"
+    },
+    "filter": {
+      "patient-name": "Patient Name",
+      "email": "Email"
+    },
+    "patient-profile": {
+      "header": "Patient Information",
+      "years-in-school": "Years in School:",
+      "created-at": "Created At:",
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "gender": "Gender",
+      "ethnic-group": "Ethnic Group",
+      "doctor-name": "Doctor Name",
+      "research-group-name": "Research Group Name",
+      "other-group": "Other Group",
+      "other-data": "Other Data",
+      "other-data2": "Other Data 2",
+      "other-data3": "Other Data 3",
+      "archive-comment": "Archive Comment",
+      "back-button": "Back",
+      "add-examination-card": "Add Examination Card",
+      "patient-details": "Patient Details",
+      "patient-cards": "Patient Cards",
+      "loading-patient-details": "Loading Patient Details..."
+    }
+  },
+  "user-request-operations": {
+    "form": {
+      "add-user-request": {
+        "new-request": "New Request",
+        "request-title": "Request Title",
+        "description": "Description",
+        "add-button": "Add",
+        "request-created-message": "Request Created successfully!!"
+      },
+      "edit-user-request": {
+        "edit-request": "Edit Request",
+        "request-title": "Request Title",
+        "description": "Description",
+        "update-button": "Update",
+        "request-updated-message": "Request Updated successfully!!"
+      },
+      "delete-confirmation": {
+        "header": "Are you sure you want to delete ",
+        "cancel-button": "Cancel",
+        "delete-button": "Delete"
+      }
+    },
+    "list": {
+      "user-request-actions": {
+        "mark-in-progress": "Mark as In Progress",
+        "mark-as-completed": "Mark as Completed",
+        "message": "Request set to In Progress",
+        "edit-button": "Edit"
+      },
+      "user-request-card": {
+        "requester": "Requester: ",
+        "submit-date": "Submit Date: ",
+        "complete-date": "Complete Date: ",
+        "comment-label": "Comments (Optional)",
+        "completed-button": "Completed",
+        "cancel-button": "Cancel",
+        "description": "Description:",
+        "no-description": "No Description.",
+        "admin-comment": "Admin Comment:"
+      },
+      "user-request-admin": {
+        "header": "All Requests",
+        "search-label": "Search by Requestor Name",
+        "status-label": "Status"
+      },
+      "user-request-for-current-user": {
+        "header": "My Requests",
+        "new-request-button": "New Request",
+        "request-status-label": "Request Status"
+      }
+    }
+  },
+  "student-exam-operations": {
+    "exam-details": {
+      "exam-solution-card": {
+        "score": "Score: ",
+        "no-comment": "No Comments Yet.",
+        "doctor-comment": "Doctor's Comment",
+        "view-solution": "View Solution"
+      },
+      "exam-solution-list": {
+        "header": "Exam Solutions",
+        "sub-header": "Number of solutions submitted: "
+      }
+    },
+    "exams-list": {
+      "student-exam-card": {
+        "publish-date": "Publish Date: ",
+        "status": "Status: ",
+        "duration": "Duration: ",
+        "max-marks": "Max Marks: ",
+        "view-exam-button": "View Exam",
+        "edit-exam-button": "Edit Exam",
+        "delete-exam-button": "Delete Exam",
+        "mark-as-graded-button": "Mark as Graded"
+      }
+    },
+    "exam-solution-details": {
+      "exam-solutions-details-for-student": {
+        "error-downloading-message": "Error downloading the Excel file",
+        "loading-download-message": "Downloading...",
+        "download-button": "Download Exam Solution",
+        "doctor-comment1": "You have not submitted your solution for this exam.",
+        "solution-not-submitted": "Solution Not Submitted",
+        "doctor-comment2": "This exam has not been graded yet.",
+        "not-graded": "Not Graded Yet",
+        "doctor-comment3": "Exam hasn't started yet..",
+        "not-started": "Not Started Yet",
+        "exam-has-started": "Exam has started...",
+        "exam-has-not-started-yet": "Exam has not started yet.",
+        "exam-not-graded-yet": "Exam Not Graded Yet",
+        "solution-not-submitted2": "Solution Not Submitted",
+        "exam-has-started2": "Exam Has Started",
+        "patient-details": "Patient Details",
+        "risk-factor-assessment": "Risk Factor Assessment",
+        "dmft-dmfs": "DMFT/DMFS",
+        "bewe": "BEWE",
+        "api": "API",
+        "bleeding": "Bleeding",
+        "summary": "Summary"
+      },
+      "practice-patient-api-details-for-student": {
+        "title": "API Details",
+        "doctor-comment": "Doctor Comment",
+        "no-comment": "No Comment yet."
+      },
+      "practice-patient-bewe-details-for-student": {
+        "title": "BEWE Details",
+        "bewe-result": "BEWE Result",
+        "doctor-comment": "Doctor Comment",
+        "no-comment": "No Comment yet."
+      },
+      "practice-patient-bleeding-details-for-student": {
+        "title": "Bleeding Details",
+        "doctor-comment": "Doctor Comment",
+        "no-comment": "No Comment yet."
+      },
+      "practice-patient-dmft-dmfs-details-for-student": {
+        "title": "DMFT/DMFS Details",
+        "doctor-comment": "Doctor Comment",
+        "no-comment": "No Comment yet."
+      },
+      "student-grade-card": {
+        "graded-by": "Graded By:",
+        "doctor-comment": "Doctor's Comment",
+        "no-comment": "No Comment Provided",
+        "solve-exam": "Solve Exam"
+      }
+    },
+    "exam-solution-details-for-teacher": {
+      "title": "Exam Solution Details",
+      "error-downloading-message": "Error downloading the Excel file",
+      "loading-download-message": "Downloading...",
+      "download-button": "Download Exam Solution",
+      "exam-solution-by": "Exam Solution by",
+      "student-mark": "Student Mark: ",
+      "doctor-comment": "Doctor's Comment",
+      "no-comment": "No Comment Yet.",
+      "add-comment": "Add Comment",
+      "edit-comment": "Edit Comment",
+      "add-marks": "Add Marks",
+      "edit-marks": "Edit Marks",
+      "patient-details": "Patient Details",
+      "risk-factor-assessment": "Risk Factor Assessment",
+      "dmft-dmfs": "DMFT/DMFS",
+      "bewe": "BEWE",
+      "api": "API",
+      "bleeding": "Bleeding",
+      "summary": "Summary",
+      "comment-practice-patient-examintation-card": "Comment Practice Patient Examination Card",
+      "description": "To comment on the practice patient examination card, please fill in the form below.",
+      "add-student-marks": "Add Student Marks",
+      "student-mark-description": "Please enter the student marks below.",
+      "practice-patient-api-details-for-teacher": {
+        "title": "API Details",
+        "api-result": "API Result",
+        "doctor-comment": "Doctor Comment",
+        "no-comment": "No Comment yet.",
+        "add-comment": "Add Comment",
+        "edit-comment": "Edit Comment",
+        "comment-api-form": "Comment API Form ",
+        "description": "Please write your comment about the API Bleeding form."
+      },
+      "practice-patient-bewe-details-for-teacher": {
+        "title": "BEWE Details",
+        "bewe-result": "BEWE Result",
+        "doctor-comment": "Doctor Comment",
+        "no-comment": "No Comment yet.",
+        "add-comment": "Add Comment",
+        "edit-comment": "Edit Comment",
+        "comment-bewe-form": "Comment BEWE Form",
+        "description": "Please write your comment about the BEWE form."
+      },
+      "practice-patient-bleeding-details-for-teacher": {
+        "title": "Bleeding Details",
+        "bleeding-result": "Bleeding Result",
+        "doctor-comment": "Doctor Comment",
+        "no-comment": "No Comment yet.",
+        "add-comment": "Add Comment",
+        "edit-comment": "Edit Comment",
+        "comment-bleeding-form": "Comment Bleeding Form",
+        "description": "Please write your comment about the Bleeding form."
+      },
+      "practice-patient-dmft-dmfs-details-for-teacher": {
+        "title": "DMFT/DMFS Details",
+        "dmft-dmfs-result": "DMFT/DMFS Result",
+        "doctor-comment": "Doctor Comment",
+        "no-comment": "No Comment yet.",
+        "add-comment": "Add Comment",
+        "edit-comment": "Edit Comment",
+        "comment-dmft-dmfs-form": "Comment DMFT/DMFS Form",
+        "description": "To comment on the student exam DMFT/DMFS form, please fill in the form below."
+      }
+    },
+    "forms": {
+      "practice-api-form": {
+        "add-calculated-api-result": "Add Calculated API Result",
+        "api-result": "API Result"
+      },
+      "practice-bewe-form": {
+        "add-calculated-bewe-result": "Add Calculated BEWE Result",
+        "bewe-result": "BEWE Result"
+      },
+      "practice-bleeding-form": {
+        "add-calculated-bleeding-result": "Add Calculated Bleeding Result",
+        "bleeding-result": "Bleeding Result"
+      },
+      "practice-dmft-dmfs-form": {
+        "add-calculated-dmft-dmfs-result": "Add Calculated DMFT/DMFS Result",
+        "dmft-result": "DMFT Result",
+        "dmfs-result": "DMFS Result"
+      },
+      "create-patient-form": {
+        "first-name": "First Name",
+        "last-name": "Last Name",
+        "gender": "Gender",
+        "male": "Male",
+        "female": "Female",
+        "age": "Age",
+        "email": "Email",
+        "years-in-school": "Years in School",
+        "location": "Location",
+        "ethnic-group": "Ethnic Group",
+        "other-group": "Other Group",
+        "other-data": "Other Data",
+        "other-data2": "Other Data 2",
+        "other-data3": "Other Data 3"
+      },
+      "exam-solution-initial-values": {
+        "question1": "Fluoride exposure",
+        "question2": "Consumption of sweetened products and beverages",
+        "question3": "Systematic Dental Care",
+        "question4": "Systemic diseases",
+        "question5": "Eating disorders",
+        "question6": "Complex Pharmacotherapy",
+        "question7": "Alcohol/Nicotine",
+        "question8": "New carious lesions in the last 36 months",
+        "question9": "Visible Plaque",
+        "question10": "Teeth extraction due to caries in the last 36 months",
+        "question11": "Abnormal Tooth Morphology",
+        "question12": "1 or more proximal restorations",
+        "question13": "Exposed root surfaces",
+        "question14": "Overhanging fills, no contact points",
+        "question15": "Fixed Orthodontic Braces",
+        "question16": "Xerostomy",
+        "question17": "Caries risk factor assessment"
+      },
+      "exam-submit-success-dialog": {
+        "submitted": "Submitted",
+        "message": "Exam Submitted Successfully!!",
+        "return-to-exam-details": "Return to Exam Details"
+      },
+      "solve-exam-multi-step-form": {
+        "are-you-sure": "Are you sure you want to leave?",
+        "first-name-required": "First Name is required",
+        "first-name-validation": "First Name must be at most 50 characters",
+        "last-name-required": "Last Name is required",
+        "last-name-validation": "Last Name must be at most 50 characters",
+        "gender-required": "Gender is required",
+        "ethnic-group-required": "Ethnic Group is required",
+        "ethnic-group-validation": "Ethnic Group must be at most 50 characters",
+        "age-required": "Age is required",
+        "location-required": "Location is required",
+        "email-required": "Email is required",
+        "years-in-school-required": "Years in School is required",
+        "other-group-validation": "Other Group must be at most 50 characters",
+        "other-data-validation": "Other Data must be at most 50 characters",
+        "other-data2-validation": "Other Data 2 must be at most 50 characters",
+        "other-data3-validation": "Other Data 3 must be at most 50 characters",
+        "max-1-characters": "Max 1 character",
+        "patient-recommendation-validation": "Patient Recommendation must be at most 500 characters",
+        "description-validation": "Description must be at most 500 characters",
+        "proposed-treatment-validation": "Proposed Treatment must be at most 500 characters",
+        "back-button": "Back",
+        "submit-button": "Submit",
+        "next-button": "Next"
+      },
+      "add-student-marks-dialog": {
+        "student-mark": "Student Mark",
+        "cancel-button": "Cancel",
+        "add-button": "Add",
+        "edit-button": "Edit"
+      },
+      "comment-student-exam-card-dialog": {
+        "comment": "Comment",
+        "cancel-button": "Cancel",
+        "add-comment": "Add Comment",
+        "edit-comment": "Edit Comment"
+      },
+      "delete-exam-confirmation-form": {
+        "delete-exam": "Delete Exam:",
+        "delete-warning": "Exam will be deleted permanently. Are you sure you want to delete this",
+        "cancel-button": "Cancel",
+        "delete-button": "Delete"
+      },
+      "mark-as-graded-confirmation-dialog": {
+        "mark-as-graded": "Mark as Graded",
+        "mark-as-graded-warning": "Are you sure you want to mark this exam as graded?",
+        "cancel-button": "Cancel",
+        "yes-button": "Yes"
+      },
+      "publish-exam-form": {
+        "date-of-examination-required": "Date of Examination is required",
+        "date-of-examination-validation": "Date of Examination cannot be in the past",
+        "exam-title-required": "Exam Title is required",
+        "exam-title-min-validation": "Exam Title must be at least 2 characters",
+        "exam-title-max-validation": "Exam Title should not exceed 100 characters",
+        "description-required": "Description is required",
+        "description-min-validation": "Description must be at least 10 characters",
+        "description-max-validation": "Description should not exceed 1000 characters",
+        "start-time-required": "Start Time is required",
+        "end-time-required": "End Time is required",
+        "end-time-is-greater": "is-greater",
+        "end-time-must-be-after-start-time": "End Time must be after Start Time",
+        "duration-interval-is-required": "Duration Interval is required",
+        "max-mark-required": "Max Mark is required",
+        "max-mark-min-validation": "Max Mark must be at least 1",
+        "max-mark-max-validation": "Max Mark must not exceed 100",
+        "exam-title": "Exam Title",
+        "description": "Description",
+        "date-of-examination": "Date of Examination",
+        "start-time": "Start Time",
+        "end-time": "End Time",
+        "duration-of-exam": "Duration of Exam",
+        "max-mark": "Max Mark",
+        "publish-button": "Publish Exam",
+        "publish-message": "Exam Published Successfully!!"
+      },
+      "update-exam-form": {
+        "date-of-examination-required": "Date of Examination is required",
+        "date-of-examination-validation": "Date of Examination cannot be in the past",
+        "exam-title-required": "Exam Title is required",
+        "exam-title-min-validation": "Exam Title must be at least 2 characters",
+        "exam-title-max-validation": "Exam Title should not exceed 100 characters",
+        "description-required": "Description is required",
+        "description-min-validation": "Description must be at least 10 characters",
+        "description-max-validation": "Description should not exceed 1000 characters",
+        "start-time-required": "Start Time is required",
+        "end-time-required": "End Time is required",
+        "end-time-is-greater": "is-greater",
+        "end-time-must-be-after-start-time": "End Time must be after Start Time",
+        "duration-interval-is-required": "Duration Interval is required",
+        "max-mark-required": "Max Mark is required",
+        "max-mark-min-validation": "Max Mark must be at least 1",
+        "max-mark-max-validation": "Max Mark must not exceed 100",
+        "exam-title": "Exam Title",
+        "description": "Description",
+        "date-of-examination": "Date of Examination",
+        "start-time": "Start Time",
+        "end-time": "End Time",
+        "duration-of-exam": "Duration of Exam",
+        "max-mark": "Max Mark",
+        "update-button": "Update Exam"
+      }
+    }
+  },
+  "student-operations":{
+    "dashboard":{
+      "title": "Student Dashboard"
+    },
+    "nav-options": {
+      "my-groups": "My Groups",
+      "active-patients": "Active Patients",
+      "archived-patients": "Archived Patients"
+    },
+    "student-group-details": {
+      "teacher": "Teacher:",
+      "no-exams-found": "No Exams Found"
+    },
+    "student-group-list":{
+      "group-for-student-card":{
+        "teacher": "Teacher:",
+        "view-group-details-button": "View Group Details"
+      },
+      "group-list-for-student":{
+        "title": "My Groups",
+        "sub-title": "List of My Groups",
+        "search": "Search"
+      },
+      "upcoming-exams":{
+        "title": "Upcoming Exams",
+        "no-upcoming-exams": "No Upcoming Exams"
+      }
+    }
+  },
+  "examination-card-operations":{
+    "details":{
+      "api-details":{
+        "api-result": "API Result",
+        "doctor-api-comment": "Doctor API Comment",
+        "no-comment": "No Comment Provided.",
+        "student-api-comment": "Student API Comment",
+        "edit-comment": "Edit Comment",
+        "add-comment": "Add Comment",
+        "comment-api-form": "Comment API Form",
+        "description": "Please provide your comment for the API Form.",
+        "message": "Comment has been added successfully."
+      },
+      "bewe-details":{
+        "bewe-result": "BEWE Result",
+        "doctor-bewe-comment": "Doctor BEWE Comment",
+        "no-comment": "No Comment Provided.",
+        "student-bewe-comment": "Student BEWE Comment",
+        "edit-comment": "Edit Comment",
+        "add-comment": "Add Comment",
+        "comment-bewe-form": "Comment BEWE Form",
+        "description": "Please provide your comment for the BEWE Form.",
+        "message": "Comment has been added successfully."
+      },
+      "bleeding-details":{
+        "bleeding-result": "Bleeding Result",
+        "doctor-bleeding-comment": "Doctor Bleeding Comment",
+        "no-comment": "No Comment Provided.",
+        "student-bleeding-comment": "Student Bleeding Comment",
+        "edit-comment": "Edit Comment",
+        "add-comment": "Add Comment",
+        "comment-bleeding-form": "Comment Bleeding Form",
+        "description": "Please provide your comment for the Bleeding Form.",
+        "message": "Comment has been added successfully."
+      },
+      "dmft-dmfs-details":{
+        "doctor-dmft-dmfs-comment": "Doctor DMFT/DMFS Comment",
+        "no-comment": "No Comment Provided.",
+        "student-dmft-dmfs-comment": "Student DMFT/DMFS Comment",
+        "edit-comment": "Edit Comment",
+        "add-comment": "Add Comment",
+        "comment-dmft-dmfs-form": "Comment DMFT/DMFS Form",
+        "description": "Please provide your comment for the DMFT/DMFS Form.",
+        "message": "Comment has been added successfully."
+      },
+      "patient-examination-details-header-card":{
+        "downloading": "Downloading...",
+        "download-button": "Download Report",
+        "patient-name": "Patient Name",
+        "doctor-information": "Doctor Information",
+        "student-information": "Student Information",
+        "grade": "Grade:",
+        "not-graded": "Not Graded",
+        "doctor-comment": "Doctor Comment",
+        "no-comment": "No Comment Provided.",
+        "student-comment": "Student Comment",
+        "edit-grade": "Edit Grade",
+        "grade-card": "Grade Card",
+        "edit-comment": "Edit Comment",
+        "add-comment": "Add Comment",
+        "comment-examination-card": "Comment Examination Card",
+        "description": "Please provide your comment for the Examination Card.",
+        "grade-examination-card": "Grade Examination Card",
+        "description2": "Please provide your grade for the Examination Card by",
+        "message": "Comment has been successfully added.",
+        "message2": "Total Score has been successfully added."
+      }
+    }
   }
 }

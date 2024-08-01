@@ -18,6 +18,7 @@ import { blueGrey } from "@mui/material/colors";
 import CustomTextField from "../../../../app/common/formInputs/CustomTextField";
 import { useStore } from "../../../../app/stores/Store";
 import CommentStudentExamCardDialog from "../../Forms/CommentStudentExamCardDialog";
+import { useTranslation } from "react-i18next";
 
 const BeweForm = React.lazy(
   () => import("../../../IndexCalculationForms/Bewe/BeweForm")
@@ -45,6 +46,8 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
     await commentBeweForm(cardId, commnet);
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Card
@@ -57,7 +60,7 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              BEWE Details
+              {t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.title")}
             </Typography>
           }
         />
@@ -65,7 +68,7 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
           <Box display="flex" gap={2} mb={2}>
             <CustomTextField
               variant="outlined"
-              label="BEWE Result"
+              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.bewe-result")}
               name="beweResult"
               value={bewe.beweResult}
               readOnly
@@ -74,13 +77,13 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
           <Box display="flex" flexDirection="column" gap={1}>
             <TextField
               fullWidth
-              label="Doctor's Comment"
+              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.doctor-comment")}
               name="comment"
               color="secondary"
               multiline
               rows={3}
               inputProps={{ readonly: true }}
-              value={bewe.comment ?? "No comment yet."}
+              value={bewe.comment ?? t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.no-comment")}
             />
             <Box display="flex" justifyContent="flex-end">
               <Button
@@ -90,7 +93,7 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
                 onClick={() => setOpenCommentDialog(true)}
                 startIcon={<Send />}
               >
-                {bewe.comment === null ? "Add Comment" : "Edit Comment"}
+                {bewe.comment === null ? t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.add-comment") : t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.edit-comment")}
               </Button>
             </Box>
           </Box>
@@ -100,8 +103,8 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title="Comment BEWE Form"
-        description="Please write your comment about the BEWE form."
+        title={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.comment-bewe-form")}
+        description={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.description")}
         comment={bewe.comment ?? ""}
         handleSubmit={handleComment}
       />

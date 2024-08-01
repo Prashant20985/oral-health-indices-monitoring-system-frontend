@@ -9,6 +9,7 @@ import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButto
 import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
 import { useStore } from "../../../app/stores/Store";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   email: string;
@@ -29,6 +30,8 @@ export default observer(function ChangePasswordForm({ email, onClose }: Props) {
     currentPassword: "",
     newPassword: "",
   };
+
+  const [t] = useTranslation("global");
 
   const handleChangePass = async (values: ChangePasswordValues) => {
     await changePassword(values).then(() => setChnagePassSnackbarOpen(true));
@@ -67,7 +70,7 @@ export default observer(function ChangePasswordForm({ email, onClose }: Props) {
                     }}
                   >
                     <CustomPasswordTextField
-                      label="Current Password"
+                      label={t("admin-operations.forms.change-password-form.current-password")}
                       name="currentPassword"
                       onChange={handleChange}
                       error={
@@ -80,7 +83,7 @@ export default observer(function ChangePasswordForm({ email, onClose }: Props) {
                     />
 
                     <CustomPasswordTextField
-                      label="New Password"
+                      label={t("admin-operations.forms.change-password-form.new-password")}
                       name="newPassword"
                       onChange={handleChange}
                       error={touched.newPassword && !!errors.newPassword}
@@ -97,8 +100,8 @@ export default observer(function ChangePasswordForm({ email, onClose }: Props) {
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Change Password"
-                        loadingText="Updating..."
+                        buttonText={t("admin-operations.forms.change-password-form.button")}
+                        loadingText={t("admin-operations.forms.change-password-form.buttonLoading")}
                       />
                       <CustomCancelButton
                         handleCancel={() => {
@@ -119,7 +122,7 @@ export default observer(function ChangePasswordForm({ email, onClose }: Props) {
           setChnagePassSnackbarOpen(false);
           onClose();
         }}
-        message="Password changed successfully!!"
+        message={t("admin-operations.forms.change-password-form.message")}
       />
     </>
   );

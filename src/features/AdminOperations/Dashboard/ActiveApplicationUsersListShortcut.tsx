@@ -5,11 +5,14 @@ import { Box, Button, Grid, Paper, Typography, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import { router } from "../../../app/router/Routes";
 import ApplicationUserList from "../List/DataGrid/ApplicationUserList";
+import { useTranslation } from "react-i18next";
 
 export default observer(function ActiveApplicationUserListShortcut() {
   const { adminStore } = useStore();
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   React.useEffect(() => {
     const fetchUsers = async () => {
@@ -36,7 +39,7 @@ export default observer(function ActiveApplicationUserListShortcut() {
           textTransform="uppercase"
           fontWeight={600}
         >
-          Active Users
+          {t("admin-operations.dashboard.active-users.header")}
         </Typography>
         <ApplicationUserList
           applicationUsers={adminStore.activeApplicationUsers}
@@ -50,7 +53,7 @@ export default observer(function ActiveApplicationUserListShortcut() {
             onClick={() => router.navigate("/admin/active-users")}
             size="small"
           >
-            View All
+            {t("admin-operations.dashboard.active-users.button")}
           </Button>
         </Box>
       </Paper>

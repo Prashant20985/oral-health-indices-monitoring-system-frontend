@@ -21,6 +21,7 @@ import { colors } from "../../../themeConfig";
 import Header from "../../../app/common/header/Header";
 import LogsFilter from "./LogsFilter";
 import { ExpandMore } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default observer(function Logs() {
   const {
@@ -54,13 +55,15 @@ export default observer(function Logs() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
-      <Header title="User Logs" subTitle="View User logs" />
+      <Header title={t("admin-operations.logs.title")} subTitle={t("admin-operations.logs.sub-title")} />
       <Accordion sx={{ backgroundColor: color.primary[400], mt: 4, mb: 2 }}>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Typography variant="h6" fontWeight={600} color="textsecondary">
-            Log Filters
+          {t("admin-operations.logs.filter-title")}
           </Typography>
         </AccordionSummary>
         <AccordionDetails
@@ -86,12 +89,12 @@ export default observer(function Logs() {
             <TableHead>
               <TableRow>
                 {[
-                  "No",
-                  "Date",
-                  "Executed By",
-                  "Request Name",
-                  "Level",
-                  "Message",
+                  t("admin-operations.logs.tablerow-no."),
+                  t("admin-operations.logs.tablerow-date"),
+                  t("admin-operations.logs.tablerow-executedby"),
+                  t("admin-operations.logs.tablerow-requestname"),
+                  t("admin-operations.logs.tablerow-level"),
+                  t("admin-operations.logs.tablerow-message"),
                 ].map((value, index) => (
                   <TableCell
                     key={index}

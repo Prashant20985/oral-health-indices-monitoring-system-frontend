@@ -16,6 +16,7 @@ import CustomTextField from "../../../app/common/formInputs/CustomTextField";
 import { colors } from "../../../themeConfig";
 import { Mail, LocationCity, EditCalendar, School } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   patientDetails: Patient;
@@ -28,6 +29,9 @@ export default observer(function PatientDetails({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] =  useTranslation("global");
+
   return (
     <Paper
       elevation={5}
@@ -108,14 +112,14 @@ export default observer(function PatientDetails({
                   <Box display="flex" alignItems="center" gap={1}>
                     <School />
                     <Typography variant="h6" color="textSecondary">
-                      Years in School: {patientDetails.yearsInSchool}
+                      {t("patient-operations.patient-profile.years-in-school")} {patientDetails.yearsInSchool}
                     </Typography>
                   </Box>
                   {!isPracticePatient && (
                     <Box display="flex" alignItems="center" gap={1}>
                       <EditCalendar />
                       <Typography variant="h6" color="textSecondary">
-                        Created At:{" "}
+                      {t("patient-operations.patient-profile.created-at")}{" "}
                         {new Date(patientDetails.createdAt).toDateString()}
                       </Typography>
                     </Box>
@@ -135,7 +139,7 @@ export default observer(function PatientDetails({
                   : blueGrey[50],
             }}
           >
-            <CardHeader title="Paient Information" />
+            <CardHeader title={t("patient-operations.patient-profile.header")} />
             <CardContent>
               <Box
                 display="grid"
@@ -143,7 +147,7 @@ export default observer(function PatientDetails({
                 gridTemplateColumns="repeat(4, minmax(0, 1fr))"
               >
                 <CustomTextField
-                  label="First Name"
+                  label={t("patient-operations.patient-profile.first-name")}
                   name="firstName"
                   value={patientDetails.firstName}
                   readOnly={true}
@@ -152,7 +156,7 @@ export default observer(function PatientDetails({
                 />
 
                 <CustomTextField
-                  label="Last Name"
+                  label={t("patient-operations.patient-profile.last-name")}
                   name="lastName"
                   value={patientDetails.lastName}
                   readOnly={true}
@@ -161,7 +165,7 @@ export default observer(function PatientDetails({
                 />
 
                 <CustomTextField
-                  label="Gender"
+                  label={t("patient-operations.patient-profile.gender")}
                   name="gender"
                   value={patientDetails.gender}
                   readOnly={true}
@@ -170,7 +174,7 @@ export default observer(function PatientDetails({
                 />
 
                 <CustomTextField
-                  label="Ethnic Group"
+                  label={t("patient-operations.patient-profile.ethnic-group")}
                   name="ethnicGroup"
                   value={patientDetails.ethnicGroup}
                   readOnly={true}
@@ -181,7 +185,7 @@ export default observer(function PatientDetails({
                 {!isPracticePatient && (
                   <>
                     <CustomTextField
-                      label="Doctor Name"
+                      label={t("patient-operations.patient-profile.doctor-name")}
                       name="doctorName"
                       value={patientDetails.doctorName}
                       readOnly={true}
@@ -190,7 +194,7 @@ export default observer(function PatientDetails({
                     />
 
                     <CustomTextField
-                      label="Research Group Name"
+                      label={t("patient-operations.patient-profile.research-group-name")}
                       name="researchGroupName"
                       value={patientDetails.researchGroupName}
                       readOnly={true}
@@ -201,7 +205,7 @@ export default observer(function PatientDetails({
                 )}
 
                 <CustomTextField
-                  label="Other Group"
+                  label={t("patient-operations.patient-profile.other-group")}
                   name="otherGroup"
                   value={patientDetails.otherGroup}
                   readOnly={true}
@@ -210,7 +214,7 @@ export default observer(function PatientDetails({
                 />
 
                 <CustomTextField
-                  label="Other Data"
+                  label={t("patient-operations.patient-profile.other-data")}
                   name="otherData"
                   value={patientDetails.otherData}
                   readOnly={true}
@@ -219,7 +223,7 @@ export default observer(function PatientDetails({
                 />
 
                 <CustomTextField
-                  label="Other Data2"
+                  label={t("patient-operations.patient-profile.other-data2")}
                   name="otherData2"
                   value={patientDetails.otherData2}
                   readOnly={true}
@@ -228,7 +232,7 @@ export default observer(function PatientDetails({
                 />
 
                 <CustomTextField
-                  label="Other Data3"
+                  label={t("patient-operations.patient-profile.other-data3")}
                   name="otherData3"
                   value={patientDetails.otherData3}
                   readOnly={true}
@@ -238,7 +242,7 @@ export default observer(function PatientDetails({
 
                 {patientDetails.isArchived && (
                   <CustomTextField
-                    label="Archive Comment"
+                    label={t("patient-operations.patient-profile.archive-comment")}
                     name="archiveComment"
                     value={patientDetails.archiveComment}
                     readOnly={true}

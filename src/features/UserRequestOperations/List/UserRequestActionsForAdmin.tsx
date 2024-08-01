@@ -4,6 +4,7 @@ import { Box, Button, useTheme } from "@mui/material";
 import { useStore } from "../../../app/stores/Store";
 import * as React from "react";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   userRequest: UserRequest;
@@ -28,6 +29,8 @@ export default observer(function UserRequestListForAdmin({
     );
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Box
       display="flex"
@@ -41,7 +44,7 @@ export default observer(function UserRequestListForAdmin({
           color={theme.palette.mode === "dark" ? "secondary" : "info"}
           onClick={handleMarkInProgressClick}
         >
-          Mark as In Progress
+          {t("user-request-operations.list.user-request-actions.mark-in-progress")}
         </Button>
       ) : userRequest.requestStatus === "In_Progress" ? (
         <Button
@@ -49,7 +52,7 @@ export default observer(function UserRequestListForAdmin({
           color={theme.palette.mode === "dark" ? "secondary" : "info"}
           onClick={openMarkAsComplete}
         >
-          Mark as Completed
+          {t("user-request-operations.list.user-request-actions.mark-as-completed")}
         </Button>
       ) : (
         <></>
@@ -57,7 +60,7 @@ export default observer(function UserRequestListForAdmin({
       <CustomSanckbar
         snackbarOpen={openSnackbar}
         snackbarClose={() => setOpenSnackbar(false)}
-        message="Request set to In Progress"
+        message={t("user-request-operations.list.user-request-actions.message")}
       />
     </Box>
   );

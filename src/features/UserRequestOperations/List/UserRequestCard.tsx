@@ -22,6 +22,7 @@ import UserRequestActionsForCurrentUser from "./UserRequestActionsForCurrentUser
 import UserRequestActionsForAdmin from "./UserRequestActionsForAdmin";
 import { useStore } from "../../../app/stores/Store";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   userRequest: UserRequest;
@@ -50,6 +51,8 @@ export default observer(function UserRequestCard({
       }
     );
   };
+
+  const [t] = useTranslation("global");
 
   return (
     <Card
@@ -83,16 +86,16 @@ export default observer(function UserRequestCard({
         }
         subheader={
           <Box>
-            <Typography>{`Requestor: ${userRequest.userName}`}</Typography>
+            <Typography>{t("user-request-operations.list.user-request-card.requester")+`${userRequest.userName}`}</Typography>
             <Typography>
-              {`Submit Date: ${
+            {t("user-request-operations.list.user-request-card.submit-date")+`${
                 userRequest.dateSubmitted.toString().split("T")[0]
               }`}
             </Typography>
 
             {userRequest.requestStatus === "Completed" && (
               <Typography>
-                {`Complete Date: ${
+                 {t("user-request-operations.list.user-request-card.complete-date")+`${
                   userRequest.dateCompleted?.toString().split("T")[0]
                 }`}
               </Typography>
@@ -127,7 +130,7 @@ export default observer(function UserRequestCard({
                 size="small"
                 fullWidth
                 color="info"
-                label="Comment (Optional)"
+                label={t("user-request-operations.list.user-request-card.comment-label")}
                 value={adminComment}
                 onChange={(e) => setAdminComment(e.target.value)}
               />
@@ -138,14 +141,14 @@ export default observer(function UserRequestCard({
                 color="success"
                 onClick={hanldeCompleteClick}
               >
-                Completed
+                 {t("user-request-operations.list.user-request-card.completed-button")}
               </Button>
               <Button
                 size="small"
                 color="error"
                 onClick={() => setOpenMarkAsComplete(false)}
               >
-                Cancel
+                {t("user-request-operations.list.user-request-card.cancel-button")}
               </Button>
             </Box>
           </CardContent>
@@ -154,14 +157,14 @@ export default observer(function UserRequestCard({
       )}
       {dropdownDescription && (
         <CardContent>
-          <Typography variant="h6">Description:</Typography>
+          <Typography variant="h6">{t("user-request-operations.list.user-request-card.description")}</Typography>
           {userRequest.description === null
-            ? "No Description."
+            ? t("user-request-operations.list.user-request-card.no-description")
             : userRequest.description}
           {userRequest.adminComment && (
             <>
               <Typography variant="h6" sx={{ mt: ".5rem" }}>
-                Admin Comment:
+              {t("user-request-operations.list.user-request-card.admin-comment")}
               </Typography>
               <Typography>{userRequest.adminComment}</Typography>
             </>

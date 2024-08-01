@@ -20,6 +20,7 @@ import Calendar from "../../../app/common/calendar/Calendar";
 import { SearchRounded } from "@mui/icons-material";
 import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 export default observer(function UserRequestListForAdmin() {
   const { userRequestStore } = useStore();
@@ -53,13 +54,15 @@ export default observer(function UserRequestListForAdmin() {
     request.userName.toLocaleLowerCase().includes(searchQuery)
   );
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
-      <Header title="All Requests" />
+      <Header title={t("user-request-operations.list.user-request-admin.header")} />
       <Box display="flex" mt="1.5rem">
         <Box width="50%">
           <TextField
-            label="Search by Requestor Name"
+            label={t("user-request-operations.list.user-request-admin.search-label")}
             size="small"
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
             type="text"
@@ -115,7 +118,7 @@ export default observer(function UserRequestListForAdmin() {
         <Box display="flex" flexDirection="column" gap={4}>
           <Box component={FormControl}>
             <CustomSelect
-              label="Status"
+              label={t("user-request-operations.list.user-request-admin.status-label")}
               options={["Completed", "In_Progress", "Submitted"]}
               value={userRequestStore.requestStatusForAdmin}
               onChange={handleRequestStatusChange}

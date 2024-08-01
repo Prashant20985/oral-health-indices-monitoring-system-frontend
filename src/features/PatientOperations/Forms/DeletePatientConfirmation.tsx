@@ -13,6 +13,7 @@ import { colors } from "../../../themeConfig";
 import * as React from "react";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   patientId: string;
@@ -41,11 +42,13 @@ export default observer(function DeletePatientConfirmation({
     onClose();
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       <Dialog open={isOpen} fullWidth TransitionComponent={SlideUpTransition}>
         <Card sx={{ backgroundColor: color.primary[400], p: 2 }}>
-          <CardHeader title="Are you sure you want to delete this patient?" />
+          <CardHeader title={t("patient-operations.delete-confirmation.header")} />
           <CardActions>
             <Box display="flex" justifyContent="flex-end" width="100%" gap={2}>
               <Button
@@ -59,7 +62,7 @@ export default observer(function DeletePatientConfirmation({
                   },
                 }}
               >
-                Cancel
+                {t("patient-operations.delete-confirmation.cancel-button")}
               </Button>
               <Button
                 onClick={handleDelete}
@@ -72,7 +75,7 @@ export default observer(function DeletePatientConfirmation({
                   },
                 }}
               >
-                Delete
+                {t("patient-operations.delete-confirmation.delete-button")}
               </Button>
             </Box>
           </CardActions>
@@ -80,7 +83,7 @@ export default observer(function DeletePatientConfirmation({
       </Dialog>
       <CustomSanckbar
         snackbarOpen={snakbarOpen}
-        message="Patient Deleted Successfully!!"
+        message={t("patient-operations.delete-confirmation.snackbar-message")}
         snackbarClose={() => setSnackbarOpen(false)}
       />
     </>

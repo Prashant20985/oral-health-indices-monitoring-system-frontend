@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import { colors } from "../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
@@ -28,6 +29,8 @@ export default function SolveExamCountdownTimer({ duration, onSubmit }: Props) {
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   const interval = React.useRef<NodeJS.Timeout | undefined>();
   const totalDurationInMs = React.useRef<number>(0);
@@ -83,17 +86,17 @@ export default function SolveExamCountdownTimer({ duration, onSubmit }: Props) {
       <Stack direction="row" spacing={1.5}>
         <Box display="flex" flexDirection="column" alignItems="center">
           <StyledTypography variant="h3">{timerHours}</StyledTypography>
-          <Typography>Hours</Typography>
+          <Typography>{t("common.countdown-timer.hours")}</Typography>
         </Box>
         <StyledTypography variant="h3">:</StyledTypography>
         <Box display="flex" flexDirection="column" alignItems="center">
           <StyledTypography variant="h3">{timerMinutes}</StyledTypography>
-          <Typography>Minutes</Typography>
+          <Typography>{t("common.countdown-timer.minutes")}</Typography>
         </Box>
         <StyledTypography variant="h3">:</StyledTypography>
         <Box display="flex" flexDirection="column" alignItems="center">
           <StyledTypography variant="h3">{timerSeconds}</StyledTypography>
-          <Typography>Seconds</Typography>
+          <Typography>{t("common.countdown-timer.seconds")}</Typography>
         </Box>
       </Stack>
       <CircularProgress

@@ -1,14 +1,16 @@
 import { useTheme, Button } from "@mui/material";
 import { colors } from "../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   handleCancel: () => void;
   buttonText?: string;
 }
 
-export default function CustomCancelButton({ handleCancel, buttonText="Cancel" }: Props) {
+export default function CustomCancelButton({ handleCancel, buttonText="common.cancel-button" }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
   return (
     <Button
       onClick={handleCancel}
@@ -22,7 +24,7 @@ export default function CustomCancelButton({ handleCancel, buttonText="Cancel" }
         },
       }}
     >
-      {buttonText}
+      {t(buttonText)}
     </Button>
   );
 }

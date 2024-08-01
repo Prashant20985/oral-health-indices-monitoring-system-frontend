@@ -24,6 +24,7 @@ import StudentList from "../StudentList/StudentList";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import ExamsList from "../../../StudentExamOperations/ExamsList/ExamsList";
 import PublishExamForm from "../../../StudentExamOperations/Forms/PublishExamForm";
+import { useTranslation } from "react-i18next";
 
 export default observer(function StudentGroupDetails() {
   const {
@@ -44,6 +45,8 @@ export default observer(function StudentGroupDetails() {
     }
   }, [id, getStudentGroup]);
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       <Button
@@ -53,7 +56,7 @@ export default observer(function StudentGroupDetails() {
         onClick={() => router.navigate("/student-groups")}
         sx={{ mb: 2 }}
       >
-        Back
+        {t("dentist-teacher-operations.list.student-group.student-group-card.back-button")}
       </Button>
       <Box display="flex" flexDirection="column" gap={4}>
         <Card
@@ -91,7 +94,7 @@ export default observer(function StudentGroupDetails() {
             }
             subheader={
               <Typography variant="h6">
-                Number of Students: {selectedStudentGroup?.students.length}
+                {t("dentist-teacher-operations.list.student-group.student-group-card.sub-header") + selectedStudentGroup?.students.length}
               </Typography>
             }
           />
@@ -103,7 +106,7 @@ export default observer(function StudentGroupDetails() {
               justifyContent: "flex-end",
             }}
           >
-            <Tooltip title="Edit Research Group">
+            <Tooltip title={t("dentist-teacher-operations.list.student-group.student-group-card.edit-research-group-button")}>
               <IconButton onClick={() => setOpenEdit(true)}>
                 <Edit
                   color={theme.palette.mode === "dark" ? "secondary" : "info"}
@@ -125,12 +128,12 @@ export default observer(function StudentGroupDetails() {
             >
               <Tab
                 label={
-                  <Typography color={color.grey[100]}>Students</Typography>
+                  <Typography color={color.grey[100]}>{t("dentist-teacher-operations.list.student-group.student-group-card.students-label")}</Typography>
                 }
                 value="1"
               />
               <Tab
-                label={<Typography color={color.grey[100]}>Exams</Typography>}
+                label={<Typography color={color.grey[100]}>{t("dentist-teacher-operations.list.student-group.student-group-card.exams-label")}</Typography>}
                 value="2"
               />
             </TabList>
@@ -145,7 +148,7 @@ export default observer(function StudentGroupDetails() {
                       router.navigate(`/student-groups/${id}/add-students`)
                     }
                   >
-                    Add Students
+                    {t("dentist-teacher-operations.list.student-group.student-group-card.add-student-button")}
                   </Button>
                 </Box>
                 {selectedStudentGroup?.students && (
@@ -165,7 +168,7 @@ export default observer(function StudentGroupDetails() {
                     variant="contained"
                     onClick={() => setOpenAdd(true)}
                   >
-                    Publish New Exam
+                    {t("dentist-teacher-operations.list.student-group.student-group-card.publish-new-exam-button")}
                   </Button>
                 </Box>
                 <ExamsList />

@@ -3,6 +3,7 @@ import CustomTextField from "../../../../app/common/formInputs/CustomTextField";
 import { PracticePatient } from "../../../../app/models/Patient";
 import { colors } from "../../../../themeConfig";
 import { FormikErrors, FormikTouched } from "formik";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -19,6 +20,8 @@ export default function CreatePracticePatientForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
+
   return (
     <Box
       width="100%"
@@ -35,7 +38,7 @@ export default function CreatePracticePatientForm({
         gridTemplateColumns="repeat(4, minmax(0, 1fr))"
       >
         <CustomTextField
-          label="First Name"
+          label= {t("student-exam-operations.form.create-patient-form.first-name")}
           name="patientDto.firstName"
           value={patient.firstName}
           onChange={handleChange}
@@ -47,7 +50,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label="Last Name"
+          label={t("student-exam-operations.form.create-patient-form.last-name")}
           name="patientDto.lastName"
           onChange={handleChange}
           value={patient.lastName}
@@ -60,7 +63,7 @@ export default function CreatePracticePatientForm({
 
         <TextField
           select
-          label="Gender"
+          label={t("student-exam-operations.form.create-patient-form.gender")}
           name="patientDto.gender"
           value={patient.gender}
           onChange={handleChange}
@@ -71,12 +74,12 @@ export default function CreatePracticePatientForm({
           helperText={touched?.gender ? errors?.gender : ""}
           required
         >
-          <MenuItem value="Male">Male</MenuItem>
-          <MenuItem value="Female">Female</MenuItem>
+          <MenuItem value="Male">{t("student-exam-operations.form.create-patient-form.male")}</MenuItem>
+          <MenuItem value="Female">{t("student-exam-operations.form.create-patient-form.female")}</MenuItem>
         </TextField>
 
         <CustomTextField
-          label="Age"
+          label={t("student-exam-operations.form.create-patient-form.age")}
           name="patientDto.age"
           onChange={handleChange}
           value={patient.age}
@@ -89,7 +92,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label="Email"
+          label={t("student-exam-operations.form.create-patient-form.email")}
           name="patientDto.email"
           onChange={handleChange}
           value={patient.email}
@@ -101,7 +104,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label="Years In School"
+          label={t("student-exam-operations.form.create-patient-form.years-in-school")}
           name="patientDto.yearsInSchool"
           onChange={handleChange}
           value={patient.yearsInSchool}
@@ -114,7 +117,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label="Location"
+          label={t("student-exam-operations.form.create-patient-form.location")}
           name="patientDto.location"
           onChange={handleChange}
           value={patient.location}
@@ -126,7 +129,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label="Ethnic Group"
+          label={t("student-exam-operations.form.create-patient-form.ethnic-group")}
           name="patientDto.ethnicGroup"
           onChange={handleChange}
           value={patient.ethnicGroup}
@@ -138,7 +141,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label="Other Group"
+          label={t("student-exam-operations.form.create-patient-form.other-group")}
           name="patientDto.otherGroup"
           onChange={handleChange}
           variant="outlined"
@@ -149,7 +152,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label="Other Data"
+          label={t("student-exam-operations.form.create-patient-form.other-data")}
           name="patientDto.otherData"
           onChange={handleChange}
           variant="outlined"
@@ -160,7 +163,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label="Other Data 2"
+          label={t("student-exam-operations.form.create-patient-form.other-data2")}
           name="patientDto.otherData2"
           onChange={handleChange}
           value={patient.otherData2}
@@ -171,7 +174,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label="Other Data 3"
+          label={t("student-exam-operations.form.create-patient-form.other-data3")}
           name="patientDto.otherData3"
           onChange={handleChange}
           value={patient.otherData3}

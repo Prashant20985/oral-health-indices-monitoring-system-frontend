@@ -33,6 +33,7 @@ import CommentForm from "../Forms/CommentForm";
 import GradeCardForm from "../Forms/GradeCardForm";
 import { useParams } from "react-router-dom";
 import axiosAgent from "../../../app/api/axiosAgent";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   patientExaminationCard: PatientExaminationCard;
@@ -47,6 +48,8 @@ export default observer(function PatientExaminationDetailsHeaderCard({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   const { id } = useParams<{ id: string }>();
 
@@ -191,14 +194,23 @@ export default observer(function PatientExaminationDetailsHeaderCard({
                 onClick={handleDownloadClick}
                 disabled={loading}
               >
-                {loading ? "Downloading..." : "Download Report"}
+                {loading
+                  ? t(
+                      "examination-card-operations.details.patient-examination-details-header-card.downloading"
+                    )
+                  : t(
+                      "examination-card-operations.details.patient-examination-details-header-card.download-button"
+                    )}
               </Button>
             </Box>
           }
           subheader={
             <Box display="flex" flexDirection="column" gap={1}>
               <Typography variant="h5" fontWeight="bold">
-                Patient Name: {patientExaminationCard.patientName}
+                {t(
+                  "examination-card-operations.details.patient-examination-details-header-card.patient-name"
+                )}{" "}
+                {patientExaminationCard.patientName}
               </Typography>
             </Box>
           }
@@ -212,7 +224,9 @@ export default observer(function PatientExaminationDetailsHeaderCard({
                   fontWeight={700}
                   textTransform={"uppercase"}
                 >
-                  Doctor Information
+                  {t(
+                    "examination-card-operations.details.patient-examination-details-header-card.doctor-information"
+                  )}
                 </Typography>
                 <Box display="flex" alignItems="center" gap={1}>
                   <Person2 />
@@ -240,7 +254,9 @@ export default observer(function PatientExaminationDetailsHeaderCard({
                     fontWeight={700}
                     textTransform={"uppercase"}
                   >
-                    Student Information
+                    {t(
+                      "examination-card-operations.details.patient-examination-details-header-card.student-information"
+                    )}
                   </Typography>
                   <Box display="flex" alignItems="center" gap={6}>
                     <Box display="flex" alignItems="center" gap={1}>
@@ -252,8 +268,13 @@ export default observer(function PatientExaminationDetailsHeaderCard({
                     <Box display="flex" alignItems="center" gap={1}>
                       <Assessment />
                       <Typography variant="h5" color="textSecondary">
-                        Grade:{" "}
-                        {patientExaminationCard.totalScore ?? "Not Graded"}
+                        {t(
+                          "examination-card-operations.details.patient-examination-details-header-card.grade"
+                        )}{" "}
+                        {patientExaminationCard.totalScore ??
+                          t(
+                            "examination-card-operations.details.patient-examination-details-header-card.not-graded"
+                          )}
                       </Typography>
                     </Box>
                   </Box>
@@ -277,9 +298,14 @@ export default observer(function PatientExaminationDetailsHeaderCard({
               multiline
               rows={3}
               color="secondary"
-              label="Doctor Comment"
+              label={t(
+                "examination-card-operations.details.patient-examination-details-header-card.downloading.doctor-comment"
+              )}
               value={
-                patientExaminationCard.doctorComment ?? "No Comment Provided."
+                patientExaminationCard.doctorComment ??
+                t(
+                  "examination-card-operations.details.patient-examination-details-header-card.no-comment"
+                )
               }
             />
             {!patientExaminationCard.isRegularMode && (
@@ -288,10 +314,14 @@ export default observer(function PatientExaminationDetailsHeaderCard({
                 multiline
                 rows={3}
                 color="secondary"
-                label="Student Comment"
+                label={t(
+                  "examination-card-operations.details.patient-examination-details-header-card.student-comment"
+                )}
                 value={
                   patientExaminationCard.studentComment ??
-                  "No Comment Provided."
+                  t(
+                    "examination-card-operations.details.patient-examination-details-header-card.no-comment"
+                  )
                 }
               />
             )}
@@ -305,7 +335,13 @@ export default observer(function PatientExaminationDetailsHeaderCard({
               startIcon={<Add />}
               onClick={() => setOpenGradeDialog(true)}
             >
-              {patientExaminationCard.totalScore ? "Edit Grade" : "Grade Card"}
+              {patientExaminationCard.totalScore
+                ? t(
+                    "examination-card-operations.details.patient-examination-details-header-card.edit-grade"
+                  )
+                : t(
+                    "examination-card-operations.details.patient-examination-details-header-card.grade-card"
+                  )}
             </Button>
           )}
           {isUserEligibleToComment && (
@@ -315,7 +351,13 @@ export default observer(function PatientExaminationDetailsHeaderCard({
               startIcon={<Comment />}
               onClick={() => setOpenCommentDialog(true)}
             >
-              {comment ? "Edit Comment" : "Add Comment"}
+              {comment
+                ? t(
+                    "examination-card-operations.details.patient-examination-details-header-card.edit-comment"
+                  )
+                : t(
+                    "examination-card-operations.details.patient-examination-details-header-card.add-comment"
+                  )}
             </Button>
           )}
         </CardActions>
@@ -323,8 +365,12 @@ export default observer(function PatientExaminationDetailsHeaderCard({
       <CommentForm
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title="Comment Examination Card"
-        description="Please provide your comment for the Examination Card."
+        title={t(
+          "examination-card-operations.details.patient-examination-details-header-card.comment-examination-card"
+        )}
+        description={t(
+          "examination-card-operations.details.patient-examination-details-header-card.description"
+        )}
         handleSubmit={(comment) => {
           handleComment(comment);
         }}
@@ -333,8 +379,12 @@ export default observer(function PatientExaminationDetailsHeaderCard({
       <GradeCardForm
         isOpen={openGradeDialog}
         onClose={() => setOpenGradeDialog(false)}
-        title="Grade Examination Card"
-        description={`Please provide your grade for the Examination Card by ${patientExaminationCard.studentName}.`}
+        title={t(
+          "examination-card-operations.details.patient-examination-details-header-card.grade-examination-card"
+        )}
+        description={`${t(
+          "examination-card-operations.details.patient-examination-details-header-card.description2"
+        )} ${patientExaminationCard.studentName}.`}
         totalScore={patientExaminationCard.totalScore ?? 0}
         handleSubmit={(totalScore) => {
           handleTotalScore(totalScore);
@@ -343,12 +393,16 @@ export default observer(function PatientExaminationDetailsHeaderCard({
       <CustomSanckbar
         snackbarOpen={commentSnackbarOpen}
         snackbarClose={() => setCommentSnackbarOpen(false)}
-        message="Comment has been successfully added."
+        message={t(
+          "examination-card-operations.details.patient-examination-details-header-card.message"
+        )}
       />
       <CustomSanckbar
         snackbarOpen={totalScoreSnackbarOpen}
         snackbarClose={() => setTotalScoreSnackbarOpen(false)}
-        message="Total Score has been successfully added."
+        message={t(
+          "examination-card-operations.details.patient-examination-details-header-card.message2"
+        )}
       />
     </Box>
   );

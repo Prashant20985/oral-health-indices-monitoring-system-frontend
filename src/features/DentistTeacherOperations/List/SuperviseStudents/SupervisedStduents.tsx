@@ -6,6 +6,7 @@ import { Box, Button } from "@mui/material";
 import Header from "../../../../app/common/header/Header";
 import { Add } from "@mui/icons-material";
 import { router } from "../../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 export default observer(function SupervisedStduents() {
   const {
@@ -20,6 +21,8 @@ export default observer(function SupervisedStduents() {
     fetchSupervisedStudents();
   }, [fetchSupervisedStudents]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Box
@@ -30,8 +33,8 @@ export default observer(function SupervisedStduents() {
       >
         <Box>
           <Header
-            title="Supervised Students"
-            subTitle="Students Under My Supervison"
+            title={t("dentist-teacher-operations.list.student-group.supervise-students.header")}
+            subTitle={t("dentist-teacher-operations.list.student-group.supervise-students.sub-header")}
           />
         </Box>
         <Button
@@ -40,7 +43,7 @@ export default observer(function SupervisedStduents() {
           color="success"
           onClick={() => router.navigate("/unsupervised-students")}
         >
-          Add Student
+          {t("dentist-teacher-operations.list.student-group.supervise-students.add-student-button")}
         </Button>
       </Box>
       <StudentList

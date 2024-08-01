@@ -5,6 +5,7 @@ import { colors } from "../../../../themeConfig";
 import { Diversity2 } from "@mui/icons-material";
 import ResearchGroupCardActions from "./ResearchGroupCardActions";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   researchGroup: ResearchGroup;
@@ -13,6 +14,9 @@ interface Props {
 export default observer(function ResearchGroupList({ researchGroup }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
+
   return (
     <Card
       elevation={3}
@@ -38,10 +42,10 @@ export default observer(function ResearchGroupList({ researchGroup }: Props) {
         subheader={
           <>
             <Typography variant="body2" color="text.secondary">
-              {`Created By: ${researchGroup.createdBy}`}
+              {t("dentist-teacher-operations.list.research-group.research-group-card.created-by")+`${researchGroup.createdBy}`}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {`Number of Patients: ${researchGroup.patients.length}`}
+            {t("dentist-teacher-operations.list.research-group.research-group-card.number-of-patients")+`${researchGroup.patients.length}`}
             </Typography>
           </>
         }

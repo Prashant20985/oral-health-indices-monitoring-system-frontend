@@ -9,6 +9,7 @@ import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButto
 import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen: boolean;
@@ -32,6 +33,8 @@ export default observer(function EditGroupForm({
       setSnackbarOpen(true);
     });
   };
+
+  const [t] = useTranslation("global");
 
   return (
     <>
@@ -75,7 +78,7 @@ export default observer(function EditGroupForm({
                     sx={{ mb: "15px" }}
                     align="left"
                   >
-                    {`Edit Group Name`}
+                    {t("dentist-teacher-operations.forms.edit-student-group-form.header")}
                   </Typography>
                   <Box
                     display="grid"
@@ -88,7 +91,7 @@ export default observer(function EditGroupForm({
                     }}
                   >
                     <CustomTextField
-                      label="Group Name"
+                      label={t("dentist-teacher-operations.forms.edit-student-group-form.group-name")}
                       name="groupName"
                       required={true}
                       value={values.groupName}
@@ -107,7 +110,7 @@ export default observer(function EditGroupForm({
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Save"
+                        buttonText={t("dentist-teacher-operations.forms.edit-student-group-form.save-button")}
                       />
                       <CustomCancelButton handleCancel={() => onClose()} />
                     </Box>
@@ -121,7 +124,7 @@ export default observer(function EditGroupForm({
       <CustomSanckbar
         snackbarOpen={snackbarOpen}
         snackbarClose={() => setSnackbarOpen(false)}
-        message="Group Name updated successfully!!"
+        message={t("dentist-teacher-operations.forms.edit-student-group-form.group-edited-message")}
       />
     </>
   );

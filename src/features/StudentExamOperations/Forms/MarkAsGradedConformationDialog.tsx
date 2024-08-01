@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useStore } from "../../../app/stores/Store";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen: boolean;
@@ -23,6 +24,9 @@ export default function MarkAsGradedConformationDialog({
   const {
     studentExamStore: { markExamAsGraded },
   } = useStore();
+
+  const [t] = useTranslation("global");
+
   return (
     <Dialog
       open={isOpen}
@@ -30,10 +34,16 @@ export default function MarkAsGradedConformationDialog({
       TransitionComponent={SlideUpTransition}
       fullWidth
     >
-      <DialogTitle>Mark as Graded</DialogTitle>
+      <DialogTitle>
+        {t(
+          "student-exam-operations.forms.mark-as-graded-confirmation-dialog.mark-as-graded"
+        )}
+      </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Are you sure you want to mark this exam as graded?
+          {t(
+            "student-exam-operations.forms.mark-as-graded-confirmation-dialog.mark-as-graded-warning"
+          )}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -43,7 +53,9 @@ export default function MarkAsGradedConformationDialog({
           onClick={onClose}
           color="error"
         >
-          Cancel
+          {t(
+            "student-exam-operations.forms.mark-as-graded-confirmation-dialog.cancel-button"
+          )}
         </Button>
         <Button
           size="small"
@@ -55,7 +67,9 @@ export default function MarkAsGradedConformationDialog({
             onClose();
           }}
         >
-          Yes
+          {t(
+            "student-exam-operations.forms.mark-as-graded-confirmation-dialog.yes-button"
+          )}
         </Button>
       </DialogActions>
     </Dialog>

@@ -4,6 +4,7 @@ import React from "react";
 import StudentList from "../StudentList/StudentList";
 import { Box } from "@mui/material";
 import Header from "../../../../app/common/header/Header";
+import { useTranslation } from "react-i18next";
 
 export default observer(function UnsupervisedStduents() {
   const {
@@ -18,12 +19,14 @@ export default observer(function UnsupervisedStduents() {
     fetchUnsupervisedStudents();
   }, [fetchUnsupervisedStudents]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Box mb={3}>
         <Header
-          title="Unsupervised Students"
-          subTitle="Students Not Under My Supervison"
+          title={t("dentist-teacher-operations.list.student-group.unsupervised-students.header")}
+          subTitle={t("dentist-teacher-operations.list.student-group.unsupervised-students.sub-header")}
         />
       </Box>
       <StudentList

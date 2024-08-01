@@ -12,6 +12,7 @@ import {
 import { colors } from "../../../../themeConfig";
 import { blueGrey } from "@mui/material/colors";
 import { router } from "../../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   studentMark: number;
@@ -34,6 +35,9 @@ export default function StudentGradeCard({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
+
   return (
     <Card
       sx={{
@@ -68,7 +72,7 @@ export default function StudentGradeCard({
         }
         title={
           <Typography variant="h4" sx={{ fontWeight: 500 }}>
-            {doctorName && `Graded By: ${doctorName}`}
+            {doctorName && `${t("student-exam-operations.exam-solution-details.student-grade-card.graded-by")} ${doctorName}`}
           </Typography>
         }
         subheader={
@@ -83,8 +87,8 @@ export default function StudentGradeCard({
             color="secondary"
             multiline
             rows={5}
-            label="Doctor's Comment"
-            value={doctorComment ?? "No Comment Provided"}
+            label={t("student-exam-operations.exam-solution-details.student-grade-card.doctor-comment")}
+            value={doctorComment ?? t("student-exam-operations.exam-solution-details.student-grade-card.no-comment")}
             variant="outlined"
             fullWidth
           />
@@ -99,7 +103,7 @@ export default function StudentGradeCard({
             disabled={!isEligibleForExam}
             onClick={() => router.navigate(`/solve-exam/${examId}`)}
           >
-            Solve Exam
+            {t("student-exam-operations.exam-solution-details.student-grade-card.solve-exam")}
           </Button>
         </CardActions>
       )}

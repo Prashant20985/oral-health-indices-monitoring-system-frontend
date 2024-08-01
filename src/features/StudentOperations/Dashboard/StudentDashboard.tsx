@@ -8,6 +8,7 @@ import { useStore } from "../../../app/stores/Store";
 import UpcomingExams from "../StudentGroupsList/UpcomingExams";
 import React from "react";
 import UserRequestShortcut from "../../Dashboard/CommonDashboardComponents/UserRequestShortcut";
+import { useTranslation } from "react-i18next";
 
 export default observer(function StudentDashboard() {
   const {
@@ -18,6 +19,8 @@ export default observer(function StudentDashboard() {
     fetchStudentGroupsWithExams();
   }, [fetchStudentGroupsWithExams]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Box
@@ -26,12 +29,12 @@ export default observer(function StudentDashboard() {
         alignItems="center"
         mb={3}
       >
-        <Header title="Student Dashboard" />
+        <Header title={t("student-operations.dashboard.title")} />
         <AddPatientButton />
       </Box>
       <Grid container spacing={2}>
         <Grid item xs={12} md={12} lg={12}>
-            <UpcomingExams top3Exams={getTop3ExamsByDate} direction="row" />
+          <UpcomingExams top3Exams={getTop3ExamsByDate} direction="row" />
         </Grid>
         <ActivePatientListShortcut />
         <ArchivedPatientListShortcut />

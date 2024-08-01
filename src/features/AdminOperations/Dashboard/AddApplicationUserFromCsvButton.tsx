@@ -17,6 +17,7 @@ import CsvPreview from "./CsvPreview";
 import FileDropzone from "../../../app/common/dropzone/FileDropzone";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 import { colors } from "../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 export default observer(function AddApplicationUserFromCsvButton() {
   const { adminStore } = useStore();
@@ -55,6 +56,8 @@ export default observer(function AddApplicationUserFromCsvButton() {
     }
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <>
       {files.length > 0 ? (
@@ -71,7 +74,7 @@ export default observer(function AddApplicationUserFromCsvButton() {
           )}
         </>
       ) : (
-        <Tooltip title="Add Users from csv file">
+        <Tooltip title={t("admin-operations.dashboard.upload-csv.title")}>
           <Button
             variant="contained"
             startIcon={<CloudUploadRounded />}
@@ -82,7 +85,7 @@ export default observer(function AddApplicationUserFromCsvButton() {
             }}
             onClick={openDropzone}
           >
-            Upload CSV
+           {t("admin-operations.dashboard.upload-csv.button")}
           </Button>
         </Tooltip>
       )}
@@ -91,7 +94,7 @@ export default observer(function AddApplicationUserFromCsvButton() {
         open={isDropzoneOpen}
         onClose={closeDropzone}
         setFiles={setFiles}
-        message="Drop only .csv files"
+        message={t("admin-operations.dashboard.upload-csv.message")}
       />
 
       <Dialog

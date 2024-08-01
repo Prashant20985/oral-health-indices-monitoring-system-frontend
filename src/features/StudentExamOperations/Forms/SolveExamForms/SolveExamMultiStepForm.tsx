@@ -23,6 +23,7 @@ import { ExamSolutionInitialValues } from "./ExamSolutionInitialValues";
 import { CheckExamStatus } from "../../../../app/helper/CheckExamStatus";
 import * as Yup from "yup";
 import CustomErrorMessage from "../../../../app/common/formInputs/CustomErrorMessage";
+import { useTranslation } from "react-i18next";
 
 const RiskFactorAssessment = React.lazy(
   () => import("../../../IndexCalculationForms/RiskFactorAssessment")
@@ -174,6 +175,8 @@ export default observer(function SolveExamForm() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const [t] = useTranslation("global");
+
   React.useEffect(() => {
     if (examId) {
       fetchExamDetails(examId);
@@ -183,7 +186,9 @@ export default observer(function SolveExamForm() {
   React.useEffect(() => {
     const unloadCallback = (event: BeforeUnloadEvent) => {
       event.preventDefault();
-      return (event.returnValue = "Are you sure you want to leave?");
+      return (event.returnValue = t(
+        "student-exam-operations.forms.solve-exam-multi-step-form.are-you-sure"
+      ));
     };
 
     window.addEventListener("beforeunload", unloadCallback);
@@ -220,49 +225,117 @@ export default observer(function SolveExamForm() {
   const validationSchema = Yup.object({
     patientDto: Yup.object({
       firstName: Yup.string()
-        .required("First Name is required")
-        .max(50, "First Name must be at most 50 characters"),
+        .required(
+          t(
+            "student-exam-operations.forms.solve-exam-multi-step-form.first-name-required"
+          )
+        )
+        .max(
+          50,
+          t(
+            "student-exam-operations.forms.solve-exam-multi-step-form.first-name-validation"
+          )
+        ),
       lastName: Yup.string()
-        .required("Last Name is required")
-        .max(50, "Last Name must be at most 50 characters"),
-      gender: Yup.string().required("Gender is required"),
+        .required(
+          t(
+            "student-exam-operations.forms.solve-exam-multi-step-form.last-name-required"
+          )
+        )
+        .max(
+          50,
+          t(
+            "student-exam-operations.forms.solve-exam-multi-step-form.last-name-validation"
+          )
+        ),
+      gender: Yup.string().required(
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.gender-required"
+        )
+      ),
       ethnicGroup: Yup.string()
-        .required("Ethnic Group is required")
-        .max(50, "Ethnic Group must be at most 50 characters"),
-      age: Yup.number().required("Age is required"),
-      location: Yup.string().required("Location is required"),
-      email: Yup.string().email().required("Email is required"),
-      yearsInSchool: Yup.string().required("Years In School is required"),
+        .required(
+          t(
+            "student-exam-operations.forms.solve-exam-multi-step-form.ethnic-group-required"
+          )
+        )
+        .max(
+          50,
+          t(
+            "student-exam-operations.forms.solve-exam-multi-step-form.ethnic-group-validation"
+          )
+        ),
+      age: Yup.number().required(
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.age-required"
+        )
+      ),
+      location: Yup.string().required(
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.location-required"
+        )
+      ),
+      email: Yup.string()
+        .email()
+        .required(
+          t(
+            "student-exam-operations.forms.solve-exam-multi-step-form.email-required"
+          )
+        ),
+      yearsInSchool: Yup.string().required(
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.years-in-school-required"
+        )
+      ),
       otherGroup: Yup.string().max(
         50,
-        "Other Group must be at most 50 characters"
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.other-group-validation"
+        )
       ),
       otherData: Yup.string().max(
         50,
-        "Other Data must be at most 50 characters"
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.other-data-validation"
+        )
       ),
       otherData2: Yup.string().max(
         50,
-        "Other Data 2 must be at most 50 characters"
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.other-data2-validation"
+        )
       ),
       otherData3: Yup.string().max(
         50,
-        "Other Data 3 must be at most 50 characters"
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.other-data3-validation"
+        )
       ),
     }),
     summary: Yup.object({
-      needForDentalInterventions: Yup.string().max(1, "Max 1 character`"),
+      needForDentalInterventions: Yup.string().max(
+        1,
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.max-1-character"
+        )
+      ),
       patientRecommendations: Yup.string().max(
         500,
-        "Patient Recommendations must be at most 500 characters"
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.patient-recommendation-validation"
+        )
       ),
       description: Yup.string().max(
         500,
-        "Description must be at most 500 characters"
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.description-validation"
+        )
       ),
       proposedTreatment: Yup.string().max(
         500,
-        "Proposed Treatment must be at most 500 characters"
+        t(
+          "student-exam-operations.forms.solve-exam-multi-step-form.proposed-treatment-validation"
+        )
       ),
     }),
   });
@@ -355,7 +428,9 @@ export default observer(function SolveExamForm() {
                         disabled={activeStep === 0}
                         startIcon={<ArrowBack />}
                       >
-                        Back
+                        {t(
+                          "student-exam-operations.forms.solve-exam-multi-step-form.back-button"
+                        )}
                       </Button>
                       <>
                         {isLastStep ? (
@@ -368,7 +443,11 @@ export default observer(function SolveExamForm() {
                             endIcon={<Send />}
                             loadingPosition="end"
                           >
-                            <span>Submit</span>
+                            <span>
+                              {t(
+                                "student-exam-operations.forms.solve-exam-multi-step-form.submit-button"
+                              )}
+                            </span>
                           </LoadingButton>
                         ) : (
                           <Button
@@ -377,7 +456,9 @@ export default observer(function SolveExamForm() {
                             onClick={() => handleNext(values)}
                             endIcon={<ArrowForward />}
                           >
-                            Next
+                            {t(
+                              "student-exam-operations.forms.solve-exam-multi-step-form.next-button"
+                            )}
                           </Button>
                         )}
                       </>

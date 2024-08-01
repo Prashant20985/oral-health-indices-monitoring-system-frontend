@@ -9,6 +9,7 @@ import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButto
 import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen: boolean;
@@ -25,6 +26,8 @@ export default observer(function AddGroupForm({ isOpen, onClose }: Props) {
       setSnackbarOpen(true);
     });
   };
+
+  const [t] = useTranslation("global");
 
   return (
     <>
@@ -67,7 +70,7 @@ export default observer(function AddGroupForm({ isOpen, onClose }: Props) {
                     sx={{ mb: "15px" }}
                     align="left"
                   >
-                    Add New Group
+                    {t("dentist-teacher-operations.forms.add-student-group-form.header")}
                   </Typography>
                   <Box
                     display="grid"
@@ -80,7 +83,7 @@ export default observer(function AddGroupForm({ isOpen, onClose }: Props) {
                     }}
                   >
                     <CustomTextField
-                      label="Group Name"
+                      label={t("dentist-teacher-operations.forms.add-student-group-form.group-name")}
                       name="groupName"
                       required={true}
                       onChange={handleChange}
@@ -98,7 +101,7 @@ export default observer(function AddGroupForm({ isOpen, onClose }: Props) {
                     >
                       <CustomSubmitButton
                         isSubmitting={isSubmitting}
-                        buttonText="Add"
+                        buttonText={t("dentist-teacher-operations.forms.add-student-group-form.add-button")}
                       />
                       <CustomCancelButton handleCancel={() => onClose()} />
                     </Box>
@@ -112,7 +115,7 @@ export default observer(function AddGroupForm({ isOpen, onClose }: Props) {
       <CustomSanckbar
         snackbarOpen={snackbarOpen}
         snackbarClose={() => setSnackbarOpen(false)}
-        message="Group Created successfully!!"
+        message={t("dentist-teacher-operations.forms.add-student-group-form.group-added-message")}
       />
     </>
   );

@@ -19,6 +19,7 @@ import ArchivePatientForm from "../../Forms/ArchivePatientForm";
 import { useStore } from "../../../../app/stores/Store";
 import CreateEditPatientForm from "../../Forms/CreateEditPatientForm";
 import { router } from "../../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   patients: Patient[];
@@ -64,6 +65,8 @@ export default observer(function PatientList({
 
   const isListForAdmin = user?.role === "Admin";
 
+  const [t] = useTranslation("global");
+
   const statusColumn: GridColDef = {
     field: "isArchived",
     headerName: "Status",
@@ -74,7 +77,7 @@ export default observer(function PatientList({
       const patient = (row as Patient) || {};
       return (
         <Tooltip
-          title={patient.isArchived ? "Click to unarchive" : "Click to archive"}
+          title={patient.isArchived ? t("patient-operations.data-grid.unarchive-patient") : t("patient-operations.data-grid.archive-patient")}
         >
           <Button
             sx={{
@@ -111,25 +114,25 @@ export default observer(function PatientList({
   const columns: GridColDef[] = [
     {
       field: "firstName",
-      headerName: "First Name",
+      headerName: t("patient-operations.data-grid.first-name"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "lastName",
-      headerName: "Last Name",
+      headerName: t("patient-operations.data-grid.email"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "email",
-      headerName: "Email",
+      headerName: t("patient-operations.data-grid.email"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "gender",
-      headerName: "Gender",
+      headerName: t("patient-operations.data-grid.gender"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
@@ -138,19 +141,19 @@ export default observer(function PatientList({
       : [
           {
             field: "ethnicGroup",
-            headerName: "Ethnic Group",
+            headerName: t("patient-operations.data-grid.ethnic-group"),
             cellClassName: "name-column--cell",
             flex: 1,
           },
           {
             field: "location",
-            headerName: "Location",
+            headerName: t("patient-operations.data-grid.location"),
             cellClassName: "name-column--cell",
             flex: 1,
           },
           {
             field: "age",
-            headerName: "Age",
+            headerName: t("patient-operations.data-grid.age"),
             cellClassName: "name-column--cell",
             flex: 1,
           },
@@ -160,7 +163,7 @@ export default observer(function PatientList({
       : []),
     {
       field: "actions",
-      headerName: "Actions",
+      headerName: t("patient-operations.data-grid.actions"),
       minWidth: 150,
       headerAlign: "center",
       flex: 1,
@@ -177,7 +180,7 @@ export default observer(function PatientList({
               backgroundColor: color.blueAccent[600],
             }}
           >
-            <Tooltip title="View details">
+            <Tooltip title={t("patient-operations.data-grid.view-details")}>
               <IconButton
                 onClick={() => {
                   if (isListForAdmin) {
@@ -192,7 +195,7 @@ export default observer(function PatientList({
               </IconButton>
             </Tooltip>
             {isListForDoctor && !isListForStudent && !isListForAdmin && (
-              <Tooltip title="Edit">
+              <Tooltip title={t("patient-operations.data-grid.edit-patient")}>
                 <IconButton
                   onClick={() => {
                     setSelectedPatient(patient);
@@ -205,7 +208,7 @@ export default observer(function PatientList({
             )}
             {isListForAdmin && (
               <Tooltip
-                title="Delete"
+                title={t("patient-operations.data-grid.delete-patient")}
                 onClick={() => {
                   setDeleteConfirmationOpen(true);
                   setSelectedPatientId(patient.id);

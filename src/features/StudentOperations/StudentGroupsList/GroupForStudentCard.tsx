@@ -13,6 +13,7 @@ import { colors } from "../../../themeConfig";
 import { blueGrey } from "@mui/material/colors";
 import { DoubleArrow, Groups3 } from "@mui/icons-material";
 import { router } from "../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   group: GroupWithExams;
@@ -21,6 +22,8 @@ interface Props {
 export default observer(function GroupForStudentCard({ group }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
+
   return (
     <Card
       elevation={2}
@@ -51,7 +54,12 @@ export default observer(function GroupForStudentCard({ group }: Props) {
         }
         subheader={
           <Typography variant="h6" color="textSecondary">
-            <b>Teacher:</b> {`${group.teacher.split("(")[0]}`}
+            <b>
+              {t(
+                "student-operations.student-group-list.group-for-student-card.teacher"
+              )}
+            </b>{" "}
+            {`${group.teacher.split("(")[0]}`}
           </Typography>
         }
       />
@@ -64,7 +72,9 @@ export default observer(function GroupForStudentCard({ group }: Props) {
           fullWidth
           endIcon={<DoubleArrow />}
         >
-          View Group Details
+          {t(
+            "student-operations.student-group-list.group-for-student-card.view-group-details-button"
+          )}
         </Button>
       </CardActions>
     </Card>

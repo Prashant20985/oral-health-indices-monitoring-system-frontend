@@ -15,6 +15,7 @@ import { RequestStatus } from "../../../app/models/UserRequest";
 import UserRequestCard from "../../UserRequestOperations/List/UserRequestCard";
 import { router } from "../../../app/router/Routes";
 import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
+import { useTranslation } from "react-i18next";
 
 export default observer(function UserRequestForAdminShortcut() {
   const { userRequestStore } = useStore();
@@ -38,6 +39,8 @@ export default observer(function UserRequestForAdminShortcut() {
     setSelectedStatus(status);
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Grid item xs={12} md={6} lg={4}>
       <Paper
@@ -50,7 +53,7 @@ export default observer(function UserRequestForAdminShortcut() {
       >
         <Box display="flex" justifyContent="space-between" p={1}>
           <Typography variant="h6" textTransform="uppercase" fontWeight={600}>
-            User Requests
+            {t("admin-operations.dashboard.user-requests.header")}
           </Typography>
           <ButtonGroup
             size="small"
@@ -94,7 +97,7 @@ export default observer(function UserRequestForAdminShortcut() {
             onClick={() => router.navigate("/admin/requests")}
             size="small"
           >
-            View All
+            {t("admin-operations.dashboard.user-requests.button")}
           </Button>
         </Box>
       </Paper>

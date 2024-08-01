@@ -10,6 +10,7 @@ import PatientDetails from "./PatientDetails";
 import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
 import PatientExaminationCardsList from "../../ExaminationCardOperations/List/PatientExaminationCardsList";
 import { router } from "../../../app/router/Routes";
+import { useTranslation } from "react-i18next";
 
 export default observer(function PatientProfile() {
   const { id } = useParams();
@@ -45,6 +46,8 @@ export default observer(function PatientProfile() {
     }
   }, [getPatientExaminationCards, id]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Box>
       <Box display="flex" justifyContent="space-between" alignContent="center">
@@ -61,7 +64,7 @@ export default observer(function PatientProfile() {
           }}
           size="small"
         >
-          Back
+          {t("patient-operations.patient-profile.back-button")}
         </Button>
         <Button
           variant="contained"
@@ -69,7 +72,7 @@ export default observer(function PatientProfile() {
           onClick={() => router.navigate(`/create-card/${id!}`)}
           startIcon={<Add />}
         >
-          Add Examination Card
+         {t("patient-operations.patient-profile.add-examination-card")}
         </Button>
       </Box>
       <TabContext value={value}>
@@ -87,7 +90,7 @@ export default observer(function PatientProfile() {
               icon={<Details color="info" />}
               iconPosition="start"
               label={
-                <Typography color={color.grey[100]}>Patient Details</Typography>
+                <Typography color={color.grey[100]}>{t("patient-operations.patient-profile.patient-details")}</Typography>
               }
             />
             <Tab
@@ -95,14 +98,14 @@ export default observer(function PatientProfile() {
               icon={<Assessment color="info" />}
               iconPosition="start"
               label={
-                <Typography color={color.grey[100]}>Patient Cards</Typography>
+                <Typography color={color.grey[100]}>{t("patient-operations.patient-profile.patient-cards")}</Typography>
               }
             />
           </TabList>
         </Box>
         <>
           {loading.patientDetails ? (
-            <ButtonLoadingComponent content="Loading Patient Details..." />
+            <ButtonLoadingComponent content={t("patient-operations.patient-profile.loading-patient-details")} />
           ) : (
             <>
               {patientDetails && (

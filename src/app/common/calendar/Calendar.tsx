@@ -4,6 +4,7 @@ import { Button, useTheme, Typography, Box } from "@mui/material";
 import * as React from "react";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { colors } from "../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   setDate: (date: Date | null) => void;
@@ -14,6 +15,8 @@ export default function Calendar({ setDate }: Props) {
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   const handleChange = (newValue: Date | null) => {
     if (newValue) {
@@ -33,7 +36,7 @@ export default function Calendar({ setDate }: Props) {
         mb=".5rem"
       >
         <Typography variant="h6" fontWeight={600} textTransform="uppercase">
-          Choose Date
+          {t("common.calendar.choose-date")}
         </Typography>
         <Button
           variant="outlined"
@@ -45,7 +48,7 @@ export default function Calendar({ setDate }: Props) {
             setDate(null);
           }}
         >
-          Clear
+          {t("common.calendar.clear-button")}
         </Button>
       </Box>
       <DateCalendar

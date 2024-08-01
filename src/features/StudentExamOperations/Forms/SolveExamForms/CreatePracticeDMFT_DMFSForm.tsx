@@ -2,6 +2,7 @@ import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
 import DMFT_DMFSForm from "../../../IndexCalculationForms/DMFT_DMFS/DMFT_DMFSForm";
 import { PracticeDMFT_DMFSFormValues } from "../../../../app/models/DMFT_DMFS";
 import { colors } from "../../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   dmft_dmfsFormValues: PracticeDMFT_DMFSFormValues;
@@ -14,6 +15,8 @@ export default function CreatePracticeDMFT_DMFSForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
+  
   return (
     <Box>
       <Box
@@ -37,11 +40,11 @@ export default function CreatePracticeDMFT_DMFSForm({
             fontweight: 600,
           }}
         >
-          Add Calculated DMFT/DMFS Result
+           {t("student-exam-operations.form.practice-dmft-dmfs-form.add-calculated-dmft-dmfs-result")}
         </Typography>
 
         <TextField
-          label="DMFT Result"
+          label= {t("student-exam-operations.form.practice-dmft-dmfs-form.dmft-result")}
           variant="outlined"
           fullWidth
           type="number"
@@ -51,7 +54,7 @@ export default function CreatePracticeDMFT_DMFSForm({
         />
 
         <TextField
-          label="DMFS Result"
+          label= {t("student-exam-operations.form.practice-dmft-dmfs-form.dmfs-result")}
           variant="outlined"
           fullWidth
           type="number"

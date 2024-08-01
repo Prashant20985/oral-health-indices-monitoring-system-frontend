@@ -2,6 +2,7 @@ import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
 import { PracticeBeweFormValues } from "../../../../app/models/Bewe";
 import BeweForm from "../../../IndexCalculationForms/Bewe/BeweForm";
 import { colors } from "../../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   beweFormValues: PracticeBeweFormValues;
@@ -14,6 +15,7 @@ export default function CreatePracticeBeweForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
   return (
     <Box>
       <Box
@@ -37,10 +39,10 @@ export default function CreatePracticeBeweForm({
             fontweight: 600,
           }}
         >
-          Add Calculated BEWE Result
+           {t("student-exam-operations.form.practice-bewe-form.add-calculated-bewe-result")}
         </Typography>
         <TextField
-          label="BEWE Result"
+          label= {t("student-exam-operations.form.practice-bewe-form.bewe-result")}
           variant="outlined"
           fullWidth
           type="number"

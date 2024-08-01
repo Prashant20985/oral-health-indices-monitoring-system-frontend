@@ -5,6 +5,7 @@ import { Box, Grid, Paper, useTheme } from "@mui/material";
 import ExamSolutionCard from "./ExamSolutionCard";
 import { colors } from "../../../themeConfig";
 import { blueGrey } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   examSolutions: ExamSolution[];
@@ -14,6 +15,9 @@ interface Props {
 export default observer(function ExamSolutionList({ examSolutions, examId }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
+
   return (
     <Paper
       elevation={3}
@@ -26,8 +30,8 @@ export default observer(function ExamSolutionList({ examSolutions, examId }: Pro
     >
       <Box mb={2}>
         <Header
-          title="Exam Solutions"
-          subTitle={`Number of solutions submitted: ${examSolutions.length}`}
+          title={t("student-exam-operations.exam-details.exam-solution-list.header")}
+          subTitle={`${t("student-exam-operations.exam-details.exam-solution-list.sub-header")} ${examSolutions.length}`}
         />
       </Box>
       <Grid container spacing={1}>
