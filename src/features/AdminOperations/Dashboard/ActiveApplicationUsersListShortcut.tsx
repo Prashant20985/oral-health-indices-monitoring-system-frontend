@@ -5,20 +5,15 @@ import { Box, Button, Grid, Paper, Typography, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import { router } from "../../../app/router/Routes";
 import ApplicationUserList from "../List/DataGrid/ApplicationUserList";
-import { useTranslation } from "react-i18next";
 
 export default observer(function ActiveApplicationUserListShortcut() {
   const { adminStore } = useStore();
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
-  const [t] = useTranslation("global");
-
   React.useEffect(() => {
     const fetchUsers = async () => {
-      if (adminStore.activeApplicationUsers.length <= 0) {
-        await adminStore.fetchActiveApplicationUsers();
-      }
+      await adminStore.fetchActiveApplicationUsers();
     };
     fetchUsers();
   }, [adminStore]);
@@ -39,13 +34,22 @@ export default observer(function ActiveApplicationUserListShortcut() {
           textTransform="uppercase"
           fontWeight={600}
         >
-          {t("admin-operations.dashboard.active-users.header")}
+          Active Users
         </Typography>
         <ApplicationUserList
+          page={adminStore.activeApplicationUsersSearchParams.pageNumber}
+          pageSize={adminStore.activeApplicationUsersSearchParams.pageSize}
+          setPaginationParams={(page: number, pageSize: number) => {
+            adminStore.setActiveApplicationUserSearchParam({
+              ...adminStore.activeApplicationUsersSearchParams,
+              pageNumber: page,
+              pageSize: pageSize,
+            });
+          }}
           applicationUsers={adminStore.activeApplicationUsers}
           loading={adminStore.loading.activeApplicationUsers}
           isDashboard={true}
-          height="30vh"
+          height="45vh"
         />
         <Box display="flex" justifyContent="flex-end">
           <Button
@@ -53,7 +57,7 @@ export default observer(function ActiveApplicationUserListShortcut() {
             onClick={() => router.navigate("/admin/active-users")}
             size="small"
           >
-            {t("admin-operations.dashboard.active-users.button")}
+            View All
           </Button>
         </Box>
       </Paper>

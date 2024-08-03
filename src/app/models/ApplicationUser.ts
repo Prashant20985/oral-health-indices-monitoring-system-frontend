@@ -2,6 +2,11 @@ import { ApplicationRole } from "./Role";
 
 export type UserType = "RegularUser" | "GuestUser";
 
+export interface PaginatedApplicationUserList {
+  users: ApplicationUser[];
+  totalUsersCount: number;
+}
+
 export interface ApplicationUser {
   userName: string;
   firstName: string;

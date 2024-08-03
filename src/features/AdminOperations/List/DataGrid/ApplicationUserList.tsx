@@ -1,5 +1,8 @@
 import { observer } from "mobx-react-lite";
-import { ApplicationUser } from "../../../../app/models/ApplicationUser";
+import {
+  ApplicationUser,
+  PaginatedApplicationUserList,
+} from "../../../../app/models/ApplicationUser";
 import { useStore } from "../../../../app/stores/Store";
 import {
   Avatar,
@@ -19,15 +22,17 @@ import CustomSanckbar from "../../../../app/common/snackbar/CustomSnackbar";
 import UserProfileDialog from "../../UserProfile/UserProfileDialog";
 import UserDeleteForm from "../../Forms/UserDeleteForm";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
-import { useTranslation } from "react-i18next";
 
 interface Props {
-  applicationUsers: ApplicationUser[];
+  applicationUsers: PaginatedApplicationUserList;
   loading?: boolean;
   deletedUsersList?: boolean;
   changeActivationStatusDisabled?: boolean;
   isDashboard?: boolean;
   height?: string;
+  page: number;
+  pageSize: number;
+  setPaginationParams: (page: number, pageSize: number) => void;
 }
 
 export default observer(function AppplicationUsersList({
@@ -36,28 +41,47 @@ export default observer(function AppplicationUsersList({
   deletedUsersList = false,
   changeActivationStatusDisabled = false,
   isDashboard = false,
+  page,
+  pageSize,
   height = "75vh",
+  setPaginationParams,
 }: Props) {
   const {
     adminStore,
     userStore: { user },
   } = useStore();
 
-  const [t] = useTranslation("global");
-
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
-  const [users, setUsers] = React.useState<ApplicationUser[]>(applicationUsers);
+  const [users, setUsers] = React.useState<ApplicationUser[]>(
+    applicationUsers.users
+  );
   const [activationChangeSanckbar, setActivationChangeSanckbar] =
     React.useState(false);
   const [selectedUserName, setSelectedUserName] = React.useState("");
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
 
+  const [pageModel, setPageModel] = React.useState({
+    page: page,
+    pageSize: pageSize,
+  });
+
+  const handlePageModelChange = ({
+    page,
+    pageSize,
+  }: {
+    page: number;
+    pageSize: number;
+  }) => {
+    setPaginationParams(page, pageSize);
+    setPageModel({ page, pageSize });
+  };
+
   React.useEffect(() => {
     const filterOutCurrentUser = () => {
-      const filteredUsers = applicationUsers.filter(
+      const filteredUsers = applicationUsers.users.filter(
         (u) => u.userName !== user?.userName
       );
       setUsers(filteredUsers);
@@ -77,7 +101,7 @@ export default observer(function AppplicationUsersList({
 
   const statusColums: GridColDef = {
     field: "isAccountActive",
-    headerName: t("admin-operations.list.data-grid.activation-status"),
+    headerName: "Activation Status",
     flex: 1,
     headerAlign: "center",
     renderCell: ({ row }) => {
@@ -97,7 +121,7 @@ export default observer(function AppplicationUsersList({
 
   const actionsColumn: GridColDef = {
     field: "actions",
-    headerName: t("admin-operations.list.data-grid.actions"),
+    headerName: "Actions",
     minWidth: 100,
     flex: 1,
     headerAlign: "center",
@@ -114,7 +138,7 @@ export default observer(function AppplicationUsersList({
             backgroundColor: color.blueAccent[600],
           }}
         >
-          <Tooltip title={t("admin-operations.list.data-grid.view-profile")}>
+          <Tooltip title="View Profile">
             <IconButton
               onClick={() => {
                 setOpenProfileDialog(true);
@@ -125,7 +149,7 @@ export default observer(function AppplicationUsersList({
             </IconButton>
           </Tooltip>
           {!deletedUsersList && (
-            <Tooltip title={t("admin-operations.list.data-grid.delete-user")}>
+            <Tooltip title="Delete User">
               <IconButton
                 onClick={() => {
                   setOpenDeleteDialog(true);
@@ -143,7 +167,7 @@ export default observer(function AppplicationUsersList({
 
   const userNameColumn: GridColDef = {
     field: "userName",
-    headerName: t("admin-operations.list.data-grid.user-name"),
+    headerName: "User Name",
     cellClassName: "name-column--cell",
     flex: 1,
     renderCell: ({ row }) => {
@@ -174,19 +198,19 @@ export default observer(function AppplicationUsersList({
     ...[userNameColumn],
     {
       field: "firstName",
-      headerName: t("admin-operations.list.data-grid.first-name"),
+      headerName: "First Name",
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "lastName",
-      headerName: t("admin-operations.list.data-grid.last-name"),
+      headerName: "Last Name",
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "email",
-      headerName: t("admin-operations.list.data-grid.email"),
+      headerName: "Email",
       cellClassName: "name-column--cell",
       flex: 1,
     },
@@ -195,7 +219,7 @@ export default observer(function AppplicationUsersList({
       : [
           {
             field: "deletedAt",
-            headerName: t("admin-operations.list.data-grid.delete-date"),
+            headerName: "Delete Date",
             cellClassName: "name-column--cell",
             valueGetter: getDate,
             flex: 1,
@@ -206,7 +230,7 @@ export default observer(function AppplicationUsersList({
       : [
           {
             field: "role",
-            headerName: t("admin-operations.list.data-grid.role"),
+            headerName: "Role",
             cellClassName: "name-column--cell",
             flex: 1,
           },
@@ -254,12 +278,13 @@ export default observer(function AppplicationUsersList({
           columns={columns}
           getRowId={(row) => row.userName}
           loading={loading}
-          autoPageSize
-          disableColumnMenu
-          getRowSpacing={(params) => ({
-            top: params.isFirstVisible ? 0 : 5,
-            bottom: params.isLastVisible ? 0 : 5,
-          })}
+          pageSizeOptions={[5, 10, 20, 50, 100]}
+          rowCount={applicationUsers.totalUsersCount}
+          paginationModel={pageModel}
+          onPaginationModelChange={(newModel) =>
+            handlePageModelChange(newModel)
+          }
+          paginationMode="server"
           slots={{
             loadingOverlay: LinearProgressComponent,
             noRowsOverlay: NoRowsFound,
@@ -268,7 +293,7 @@ export default observer(function AppplicationUsersList({
       </>
       <CustomSanckbar
         snackbarOpen={activationChangeSanckbar}
-        message={t("admin-operations.list.data-grid.activation-message")}
+        message="Activation status changed successfully!!"
         snackbarClose={() => setActivationChangeSanckbar(false)}
       />
       <UserProfileDialog

@@ -9,6 +9,7 @@ import {
 import { store } from "../stores/Store";
 import {
   ApplicationUser,
+  PaginatedApplicationUserList,
   ApplicationUserFormValues,
   Supervisor,
 } from "../models/ApplicationUser";
@@ -109,21 +110,21 @@ const AccountOperations = {
 const AdminOperations = {
   activeUsersList: (params: URLSearchParams) =>
     axios
-      .get<ApplicationUser[]>("/admin/active-users", {
+      .get<PaginatedApplicationUserList>("/admin/active-users", {
         params,
       })
       .then(responseBody),
 
   deactivatedUsersList: (params: URLSearchParams) =>
     axios
-      .get<ApplicationUser[]>("/admin/deactivated-users", {
+      .get<PaginatedApplicationUserList>("/admin/deactivated-users", {
         params,
       })
       .then(responseBody),
 
   deletedUsersList: (params: URLSearchParams) =>
     axios
-      .get<ApplicationUser[]>("/admin/deleted-users", {
+      .get<PaginatedApplicationUserList>("/admin/deleted-users", {
         params,
       })
       .then(responseBody),
