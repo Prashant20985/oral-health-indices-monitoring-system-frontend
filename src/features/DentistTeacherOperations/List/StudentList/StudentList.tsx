@@ -103,8 +103,8 @@ export default observer(function StudentList({
       flex: 1,
     },
     {
-      field: t("dentist-teacher-operations.list.student-group.last-name"),
-      headerName: "Last Name",
+      field: "lastName",
+      headerName: t("dentist-teacher-operations.list.student-group.last-name"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
@@ -160,12 +160,20 @@ export default observer(function StudentList({
           >
             {studentsInGroupList || isSupervisedStudents
               ? isSupervisedStudents
-                ? t("dentist-teacher-operations.list.student-group.unsupervise-student-button")
-                : t("dentist-teacher-operations.list.student-group.remove-from-group-button")
+                ? t(
+                    "dentist-teacher-operations.list.student-group.unsupervise-student-button"
+                  )
+                : t(
+                    "dentist-teacher-operations.list.student-group.remove-from-group-button"
+                  )
               : !studentsInGroupList || isUnsupervisedStudents
               ? isUnsupervisedStudents
-                ? t("dentist-teacher-operations.list.student-group.supervise-student-button")
-                : t("dentist-teacher-operations.list.student-group.add-to-group-button")
+                ? t(
+                    "dentist-teacher-operations.list.student-group.supervise-student-button"
+                  )
+                : t(
+                    "dentist-teacher-operations.list.student-group.add-to-group-button"
+                  )
               : null}
           </Button>
         );

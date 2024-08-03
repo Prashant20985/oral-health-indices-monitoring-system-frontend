@@ -316,8 +316,8 @@
         "actions": "Actions",
         "remove-from-group-button": "Remove from Group",
         "add-to-group-button": "Add to Group",
-        "supervise-student-button": "Supervise Student",
-        "unsupervise-student-button": "Unsupervise Student",
+        "supervise-student-button": "Supervise",
+        "unsupervise-student-button": "Unsupervise",
         "students-in-group": {
           "header": "Students in Group"
         },
