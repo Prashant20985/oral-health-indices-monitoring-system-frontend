@@ -316,8 +316,8 @@
         "actions": "działania",
         "remove-from-group-button": "Usuń z grupy",
         "add-to-group-button": "Dodaj do grupy",
-        "supervise-student-button": "Nadzoruj studenta",
-        "unsupervise-student-button": "Przestań nadzorować studenta",
+        "supervise-student-button": "Nadzoruj",
+        "unsupervise-student-button": "Przestań nadzorować",
         "students-in-group": {
           "header": "Studenci w grupie"
         },
