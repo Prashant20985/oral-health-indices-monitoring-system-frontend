@@ -5,7 +5,6 @@ import { colors } from "../../../themeConfig";
 import * as React from "react";
 import ApplicationUserList from "../List/DataGrid/ApplicationUserList";
 import { router } from "../../../app/router/Routes";
-import { useTranslation } from "react-i18next";
 
 export default observer(function DeactivatedApplicationUserListShortcut() {
   const { adminStore } = useStore();
@@ -14,14 +13,10 @@ export default observer(function DeactivatedApplicationUserListShortcut() {
 
   React.useEffect(() => {
     const fetchUsers = async () => {
-      if (adminStore.deactivatedApplicationUsers.length <= 0) {
-        await adminStore.fetchDeactivatedApplicationUsers();
-      }
+      await adminStore.fetchDeactivatedApplicationUsers();
     };
     fetchUsers();
   }, [adminStore]);
-
-  const [t] = useTranslation("global");
 
   return (
     <Grid item xs={12} md={6} lg={6}>
@@ -39,13 +34,22 @@ export default observer(function DeactivatedApplicationUserListShortcut() {
           textTransform="uppercase"
           fontWeight={600}
         >
-          {t("admin-operations.dashboard.deactivated-users.header")}
+          Deactivated Users
         </Typography>
         <ApplicationUserList
+          page={adminStore.deactivatedApplicationUsersSearchParams.pageNumber}
+          pageSize={adminStore.deactivatedApplicationUsersSearchParams.pageSize}
+          setPaginationParams={(page: number, pageSize: number) => {
+            adminStore.setDeactivatedApplicationUserSearchParam({
+              ...adminStore.deactivatedApplicationUsersSearchParams,
+              pageNumber: page,
+              pageSize: pageSize,
+            });
+          }}
           applicationUsers={adminStore.deactivatedApplicationUsers}
           loading={adminStore.loading.deactivatdApplicationUsers}
           isDashboard={true}
-          height="30vh"
+          height="45vh"
         />
         <Box display="flex" justifyContent="flex-end">
           <Button
@@ -53,7 +57,7 @@ export default observer(function DeactivatedApplicationUserListShortcut() {
             onClick={() => router.navigate("/admin/deactivated-users")}
             size="small"
           >
-            {t("admin-operations.dashboard.deactivated-users.button")}
+            View All
           </Button>
         </Box>
       </Paper>

@@ -2,29 +2,69 @@ import { makeAutoObservable, reaction, runInAction } from "mobx";
 import {
   ApplicationUser,
   ApplicationUserFormValues,
+  PaginatedApplicationUserList,
 } from "../models/ApplicationUser";
 import axiosAgent from "../api/axiosAgent";
 import { LogResponse } from "../models/Logs";
 
 export default class AdminStore {
   selectedApplicationUser: ApplicationUser | undefined;
-  activeApplicationUsers: ApplicationUser[] = [];
-  deactivatedApplicationUsers: ApplicationUser[] = [];
-  deletedApplicationUsers: ApplicationUser[] = [];
+  activeApplicationUsers: PaginatedApplicationUserList = {
+    users: [],
+    totalUsersCount: 0,
+  };
+  deactivatedApplicationUsers: PaginatedApplicationUserList = {
+    users: [],
+    totalUsersCount: 0,
+  };
+  deletedApplicationUsers: PaginatedApplicationUserList = {
+    users: [],
+    totalUsersCount: 0,
+  };
   csvAddResponse: string = "";
   logResponse: LogResponse = { logs: [], totalCount: 0 };
 
-  activeApplicationUsersSearchTerm: string = "";
-  activeApplicationUsersUserType: string = "";
-  activeApplicationUsersRole: string = "";
+  activeApplicationUsersSearchParams: {
+    searchTerm: string;
+    userType: string;
+    role: string;
+    pageNumber: number;
+    pageSize: number;
+  } = {
+    searchTerm: "",
+    userType: "",
+    role: "",
+    pageNumber: 0,
+    pageSize: 20,
+  };
 
-  deactivatedApplicationUsersSearchTerm: string = "";
-  deactivatedApplicationUsersUserType: string = "";
-  deactivatedApplicationUsersRole: string = "";
+  deactivatedApplicationUsersSearchParams: {
+    searchTerm: string;
+    userType: string;
+    role: string;
+    pageNumber: number;
+    pageSize: number;
+  } = {
+    searchTerm: "",
+    userType: "",
+    role: "",
+    pageNumber: 0,
+    pageSize: 20,
+  };
 
-  deletedApplicationUsersSearchTerm: string = "";
-  deletedApplicationUsersUserType: string = "";
-  deletedApplicationUsersRole: string = "";
+  deletedApplicationUsersSearchParams: {
+    searchTerm: string;
+    userType: string;
+    role: string;
+    pageNumber: number;
+    pageSize: number;
+  } = {
+    searchTerm: "",
+    userType: "",
+    role: "",
+    pageNumber: 0,
+    pageSize: 20,
+  };
 
   logsSearchParams: {
     startDate: Date;
@@ -60,9 +100,11 @@ export default class AdminStore {
 
     reaction(
       () => ({
-        searchTerm: this.activeApplicationUsersSearchTerm,
-        userType: this.activeApplicationUsersUserType,
-        role: this.activeApplicationUsersRole,
+        searchTerm: this.activeApplicationUsersSearchParams.searchTerm,
+        userType: this.activeApplicationUsersSearchParams.userType,
+        role: this.activeApplicationUsersSearchParams.role,
+        page: this.activeApplicationUsersSearchParams.pageNumber,
+        pageSize: this.activeApplicationUsersSearchParams.pageSize,
       }),
       () => {
         this.fetchActiveApplicationUsers();
@@ -71,9 +113,11 @@ export default class AdminStore {
 
     reaction(
       () => ({
-        searchTerm: this.deactivatedApplicationUsersSearchTerm,
-        userType: this.deactivatedApplicationUsersUserType,
-        role: this.deactivatedApplicationUsersRole,
+        searchTerm: this.deactivatedApplicationUsersSearchParams.searchTerm,
+        userType: this.deactivatedApplicationUsersSearchParams.userType,
+        role: this.deactivatedApplicationUsersSearchParams.role,
+        page: this.deactivatedApplicationUsersSearchParams.pageNumber,
+        pageSize: this.deactivatedApplicationUsersSearchParams.pageSize,
       }),
       () => {
         this.fetchDeactivatedApplicationUsers();
@@ -82,9 +126,11 @@ export default class AdminStore {
 
     reaction(
       () => ({
-        searchTerm: this.deletedApplicationUsersSearchTerm,
-        userType: this.deletedApplicationUsersUserType,
-        role: this.deletedApplicationUsersRole,
+        searchTerm: this.deletedApplicationUsersSearchParams.searchTerm,
+        userType: this.deletedApplicationUsersSearchParams.userType,
+        role: this.deletedApplicationUsersSearchParams.role,
+        page: this.deletedApplicationUsersSearchParams.pageNumber,
+        pageSize: this.deletedApplicationUsersSearchParams.pageSize,
       }),
       () => {
         this.fetchDeletedApplicationUsers();
@@ -106,55 +152,49 @@ export default class AdminStore {
     );
   }
 
-  setActiveApplicationUsersSearchTerm = (searchTerm: string) => {
-    this.activeApplicationUsersSearchTerm = searchTerm;
+  setActiveApplicationUserSearchParam = (searchParam: {
+    searchTerm: string;
+    userType: string;
+    role: string;
+    pageNumber: number;
+    pageSize: number;
+  }) => {
+    this.activeApplicationUsersSearchParams = searchParam;
   };
 
-  setActiveApplicationUsersUserType = (userType: string) => {
-    this.activeApplicationUsersUserType = userType;
+  setDeactivatedApplicationUserSearchParam = (searchParam: {
+    searchTerm: string;
+    userType: string;
+    role: string;
+    pageNumber: number;
+    pageSize: number;
+  }) => {
+    this.deactivatedApplicationUsersSearchParams = searchParam;
   };
 
-  setActiveApplicationUsersRole = (role: string) => {
-    this.activeApplicationUsersRole = role;
-  };
-
-  setDeactivatedApplicationUsersSearchTerm = (searchTerm: string) => {
-    this.deactivatedApplicationUsersSearchTerm = searchTerm;
-  };
-
-  setDeactivatedApplicationUsersUserType = (userType: string) => {
-    this.deactivatedApplicationUsersUserType = userType;
-  };
-
-  setDeactivatedApplicationUsersRole = (role: string) => {
-    this.deactivatedApplicationUsersRole = role;
-  };
-
-  setDeletedApplicationUsersSearchTerm = (searchTerm: string) => {
-    this.deletedApplicationUsersSearchTerm = searchTerm;
-  };
-
-  setDeletedApplicationUsersUserType = (userType: string) => {
-    this.deletedApplicationUsersUserType = userType;
-  };
-
-  setDeletedApplicationUsersRole = (role: string) => {
-    this.deletedApplicationUsersRole = role;
+  setDeletedApplicationUserSearchParam = (searchParam: {
+    searchTerm: string;
+    userType: string;
+    role: string;
+    pageNumber: number;
+    pageSize: number;
+  }) => {
+    this.deletedApplicationUsersSearchParams = searchParam;
   };
 
   setCsvAddResponse = (response: string) => {
     this.csvAddResponse = response;
   };
 
-  setActiveApplicationUsers = (applicationUsers: ApplicationUser[]) => {
+  setActiveApplicationUsers = (applicationUsers: PaginatedApplicationUserList) => {
     this.activeApplicationUsers = applicationUsers;
   };
 
-  setDeactivatedApplicationUsers = (applicationUsers: ApplicationUser[]) => {
+  setDeactivatedApplicationUsers = (applicationUsers: PaginatedApplicationUserList) => {
     this.deactivatedApplicationUsers = applicationUsers;
   };
 
-  setDeletedApplicationUsers = (applicationUsers: ApplicationUser[]) => {
+  setDeletedApplicationUsers = (applicationUsers: PaginatedApplicationUserList) => {
     this.deletedApplicationUsers = applicationUsers;
   };
 
@@ -187,44 +227,95 @@ export default class AdminStore {
   };
 
   clearActiveApplicationUsersFilters = () => {
-    this.setActiveApplicationUsersSearchTerm("");
-    this.setActiveApplicationUsersUserType("");
-    this.setActiveApplicationUsersRole("");
+    this.setActiveApplicationUserSearchParam({
+      searchTerm: "",
+      userType: "",
+      role: "",
+      pageNumber: 0,
+      pageSize: 20,
+    });
   };
 
   clearDeactivatedApplicationUsersFilters = () => {
-    this.setDeactivatedApplicationUsersSearchTerm("");
-    this.setDeactivatedApplicationUsersUserType("");
-    this.setDeactivatedApplicationUsersRole("");
+    this.setDeactivatedApplicationUserSearchParam({
+      searchTerm: "",
+      userType: "",
+      role: "",
+      pageNumber: 0,
+      pageSize: 20,
+    });
   };
 
   clearDeletedApplicationUsersFilters = () => {
-    this.setDeletedApplicationUsersSearchTerm("");
-    this.setDeletedApplicationUsersUserType("");
-    this.setDeletedApplicationUsersRole("");
+    this.setDeletedApplicationUserSearchParam({
+      searchTerm: "",
+      userType: "",
+      role: "",
+      pageNumber: 0,
+      pageSize: 20,
+    });
   };
 
   get activeApplicationUsersAxiosParams() {
     const params = new URLSearchParams();
-    params.append("searchTerm", this.activeApplicationUsersSearchTerm);
-    params.append("userType", this.activeApplicationUsersUserType);
-    params.append("role", this.activeApplicationUsersRole);
+    params.append(
+      "searchTerm",
+      this.activeApplicationUsersSearchParams.searchTerm
+    );
+    params.append("userType", this.activeApplicationUsersSearchParams.userType);
+    params.append("role", this.activeApplicationUsersSearchParams.role);
+    params.append(
+      "page",
+      this.activeApplicationUsersSearchParams.pageNumber.toString()
+    );
+    params.append(
+      "pageSize",
+      this.activeApplicationUsersSearchParams.pageSize.toString()
+    );
     return params;
   }
 
   get deactivatedApplicationUsersAxiosParams() {
     const params = new URLSearchParams();
-    params.append("searchTerm", this.deactivatedApplicationUsersSearchTerm);
-    params.append("userType", this.deactivatedApplicationUsersUserType);
-    params.append("role", this.deactivatedApplicationUsersRole);
+    params.append(
+      "searchTerm",
+      this.deactivatedApplicationUsersSearchParams.searchTerm
+    );
+    params.append(
+      "userType",
+      this.deactivatedApplicationUsersSearchParams.userType
+    );
+    params.append("role", this.deactivatedApplicationUsersSearchParams.role);
+    params.append(
+      "page",
+      this.deactivatedApplicationUsersSearchParams.pageNumber.toString()
+    );
+    params.append(
+      "pageSize",
+      this.deactivatedApplicationUsersSearchParams.pageSize.toString()
+    );
     return params;
   }
 
   get deletedApplicationUsersAxiosParams() {
     const params = new URLSearchParams();
-    params.append("searchTerm", this.deletedApplicationUsersSearchTerm);
-    params.append("userType", this.deletedApplicationUsersUserType);
-    params.append("role", this.deletedApplicationUsersRole);
+    params.append(
+      "searchTerm",
+      this.deletedApplicationUsersSearchParams.searchTerm
+    );
+    params.append(
+      "userType",
+      this.deletedApplicationUsersSearchParams.userType
+    );
+    params.append("role", this.deletedApplicationUsersSearchParams.role);
+    params.append(
+      "page",
+      this.deletedApplicationUsersSearchParams.pageNumber.toString()
+    );
+    params.append(
+      "pageSize",
+      this.deletedApplicationUsersSearchParams.pageSize.toString()
+    );
     return params;
   }
 
@@ -240,8 +331,11 @@ export default class AdminStore {
   }
 
   private getUserDetails = (userName: string) => {
-    return this.activeApplicationUsers
-      .concat(this.deletedApplicationUsers, this.deactivatedApplicationUsers)
+    return this.activeApplicationUsers.users
+      .concat(
+        this.deletedApplicationUsers.users,
+        this.deactivatedApplicationUsers.users
+      )
       .find((user) => user.userName === userName);
   };
 

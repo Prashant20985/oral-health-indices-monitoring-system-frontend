@@ -17,39 +17,38 @@ import {
 import CustomSelect from "../../../../app/common/formInputs/CustomSelect";
 import * as React from "react";
 import Header from "../../../../app/common/header/Header";
-import { useTranslation } from "react-i18next";
 
 interface Props {
   title: string;
   subTitle: string;
-  userType: string;
-  role: string;
-  searchTerm: string | undefined;
-  setSearchTerm: (searchTerm: string) => void;
-  onUserTypeChange: (userType: string) => void;
-  onRoleChange: (role: string) => void;
+  initalValues: {
+    userType: string;
+    role: string;
+    searchTerm: string;
+  };
+  handleSeachParamChange: (
+    role: string,
+    userType: string,
+    searchTerm: string
+  ) => void;
   clearFilters: () => void;
 }
 
 export default function ApplicationUsersListFilter({
   title,
   subTitle,
-  userType,
-  role,
-  searchTerm,
-  setSearchTerm,
-  onRoleChange,
-  onUserTypeChange,
+  initalValues: { userType, role, searchTerm },
+  handleSeachParamChange,
   clearFilters,
 }: Props) {
   const [searchValue, setSearchValue] = React.useState(searchTerm);
 
-  const handleUserTypeChange = (event: SelectChangeEvent<UserType>) => {
-    onUserTypeChange(event.target.value!);
+  const handleUserTypeChange = (event: SelectChangeEvent<string>) => {
+    handleSeachParamChange(role, event.target.value!, searchTerm);
   };
 
-  const handleRoleChange = (event: SelectChangeEvent<ApplicationRole>) => {
-    onRoleChange(event.target.value!);
+  const handleRoleChange = (event: SelectChangeEvent<string>) => {
+    handleSeachParamChange(event.target.value!, userType, searchTerm);
   };
 
   const handleSearchValueChange = (
@@ -59,7 +58,7 @@ export default function ApplicationUsersListFilter({
   };
 
   const handleSearchClick = () => {
-    setSearchTerm(searchValue!);
+    handleSeachParamChange(role, userType, searchValue);
   };
 
   const handleClear = () => {
@@ -71,8 +70,6 @@ export default function ApplicationUsersListFilter({
     userType !== "" || role !== "" || searchValue !== "" || searchTerm !== "";
 
   const userTypes: UserType[] = ["RegularUser", "GuestUser"];
-
-  const [t] = useTranslation("global");
 
   return (
     <Box
@@ -88,7 +85,7 @@ export default function ApplicationUsersListFilter({
         <Box>
           <TextField
             color="secondary"
-            label={t("admin-operations.list.filter.search")}
+            label="Search"
             variant="filled"
             type="text"
             value={searchValue}
@@ -107,7 +104,7 @@ export default function ApplicationUsersListFilter({
         </Box>
         <Box component={FormControl} sx={{ width: "10rem" }} size="small">
           <CustomSelect
-            label={t("admin-operations.list.filter.user-type")}
+            label="User Type"
             value={userType as UserType}
             options={userTypes}
             onChange={handleUserTypeChange}
@@ -115,7 +112,7 @@ export default function ApplicationUsersListFilter({
         </Box>
         <Box component={FormControl} sx={{ width: "10rem" }} size="small">
           <CustomSelect
-            label={t("admin-operations.list.filter.role")}
+            label="Role"
             value={role as ApplicationRole}
             options={roles}
             onChange={handleRoleChange}

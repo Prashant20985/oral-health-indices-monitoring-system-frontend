@@ -4,48 +4,63 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
 import ApplicationUserList from "../DataGrid/ApplicationUserList";
-import { useTranslation } from "react-i18next";
 
 export default observer(function DeactivatedApplicationUsersList() {
   const { adminStore } = useStore();
 
   const {
-    setDeactivatedApplicationUsersRole,
-    setDeactivatedApplicationUsersSearchTerm,
-    setDeactivatedApplicationUsersUserType,
     clearDeactivatedApplicationUsersFilters,
-    deactivatedApplicationUsersSearchTerm,
-    deactivatedApplicationUsersRole,
-    deactivatedApplicationUsersUserType,
     deactivatedApplicationUsers,
     loading,
+    setDeactivatedApplicationUserSearchParam,
+    deactivatedApplicationUsersSearchParams,
   } = adminStore;
 
   React.useEffect(() => {
     const fetchUsers = async () => {
-      if (adminStore.deactivatedApplicationUsers.length <= 0) {
-        await adminStore.fetchDeactivatedApplicationUsers();
-      }
+      await adminStore.fetchDeactivatedApplicationUsers();
     };
     fetchUsers();
   }, [adminStore]);
 
-  const [t] = useTranslation("global");
+  const handlePagination = (page: number, pageSize: number) => {
+    setDeactivatedApplicationUserSearchParam({
+      ...deactivatedApplicationUsersSearchParams,
+      pageNumber: page,
+      pageSize: pageSize,
+    });
+  };
+
+  const handleSeachParamChange = (
+    role: string,
+    userType: string,
+    searchTerm: string
+  ) => {
+    setDeactivatedApplicationUserSearchParam({
+      ...deactivatedApplicationUsersSearchParams,
+      role: role,
+      userType: userType,
+      searchTerm: searchTerm,
+    });
+  };
 
   return (
     <Box>
       <ApplicationUsersListFilter
-        title={t("admin-operations.list.deactivated-users.header")}
-        subTitle={t("admin-operations.list.deactivated-users.sub-header")}
-        onRoleChange={setDeactivatedApplicationUsersRole}
-        setSearchTerm={setDeactivatedApplicationUsersSearchTerm}
-        onUserTypeChange={setDeactivatedApplicationUsersUserType}
-        userType={deactivatedApplicationUsersUserType}
-        role={deactivatedApplicationUsersRole}
+        title="Deactivated Users"
+        subTitle="List Of Deactivated Users"
+        initalValues={{
+          userType: deactivatedApplicationUsersSearchParams.userType,
+          role: deactivatedApplicationUsersSearchParams.role,
+          searchTerm: deactivatedApplicationUsersSearchParams.searchTerm,
+        }}
+        handleSeachParamChange={handleSeachParamChange}
         clearFilters={clearDeactivatedApplicationUsersFilters}
-        searchTerm={deactivatedApplicationUsersSearchTerm}
       />
       <ApplicationUserList
+        setPaginationParams={handlePagination}
+        page={deactivatedApplicationUsersSearchParams.pageNumber}
+        pageSize={deactivatedApplicationUsersSearchParams.pageSize}
         applicationUsers={deactivatedApplicationUsers}
         loading={loading.deactivatdApplicationUsers}
       />
