@@ -14,25 +14,29 @@ import SlideUpTransition from "../../../app/common/transition/SlideUpTransition"
 interface Props {
   title: string;
   description: string;
-  totalScore: number;
+  totalScore?: number;
   isOpen: boolean;
   onClose: () => void;
   handleSubmit: (totalScore: number) => void;
 }
 
 export default function GradeCardForm({
-  totalScore,
+  totalScore = 0,
   isOpen,
   onClose,
   title,
   description,
   handleSubmit,
 }: Props) {
-  const [totalScoreValue, setTotalScoreValue] = React.useState(0);
+  const [totalScoreValue, setTotalScoreValue] = React.useState<number | string>(
+    ""
+  );
 
   React.useEffect(() => {
     if (totalScore !== 0) {
       setTotalScoreValue(totalScore);
+    } else {
+      setTotalScoreValue("");
     }
   }, [totalScore]);
 
@@ -46,9 +50,10 @@ export default function GradeCardForm({
         component: "form",
         onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
           event.preventDefault();
-          console.log(totalScoreValue);
-          handleSubmit(totalScoreValue);
-          setTotalScoreValue(0);
+          const numericScore =
+            totalScoreValue === "" ? 0 : Number(totalScoreValue);
+          handleSubmit(numericScore);
+          setTotalScoreValue("");
           onClose();
         },
       }}
@@ -63,7 +68,7 @@ export default function GradeCardForm({
           label="Total Score"
           margin="dense"
           value={totalScoreValue}
-          onChange={(event) => setTotalScoreValue(Number(event.target.value))}
+          onChange={(event) => setTotalScoreValue(event.target.value)}
         />
       </DialogContent>
       <DialogActions>
@@ -82,3 +87,4 @@ export default function GradeCardForm({
     </Dialog>
   );
 }
+
