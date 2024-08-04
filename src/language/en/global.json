@@ -301,7 +301,8 @@
           "location": "Location",
           "added-by": "Added By",
           "actions": "Actions",
-          "remove-from-group-button": "Remove from Group"
+          "remove-from-group-button": "Remove from Group",
+          "add-to-group-button": "Add to Group"
         }
       },
       "student-group": {
