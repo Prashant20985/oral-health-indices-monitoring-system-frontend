@@ -77,7 +77,11 @@ export default observer(function PatientList({
       const patient = (row as Patient) || {};
       return (
         <Tooltip
-          title={patient.isArchived ? t("patient-operations.data-grid.unarchive-patient") : t("patient-operations.data-grid.archive-patient")}
+          title={
+            patient.isArchived
+              ? t("patient-operations.data-grid.unarchive-patient")
+              : t("patient-operations.data-grid.archive-patient")
+          }
         >
           <Button
             sx={{
@@ -194,18 +198,21 @@ export default observer(function PatientList({
                 <AccountCircle color="primary" />
               </IconButton>
             </Tooltip>
-            {isListForDoctor && !isListForStudent && !isListForAdmin && (
-              <Tooltip title={t("patient-operations.data-grid.edit-patient")}>
-                <IconButton
-                  onClick={() => {
-                    setSelectedPatient(patient);
-                    setOpenEditForm(true);
-                  }}
-                >
-                  <Edit color="primary" />
-                </IconButton>
-              </Tooltip>
-            )}
+            {isListForDoctor &&
+              !isListForStudent &&
+              !isListForAdmin &&
+              !patient.isArchived && (
+                <Tooltip title={t("patient-operations.data-grid.edit-patient")}>
+                  <IconButton
+                    onClick={() => {
+                      setSelectedPatient(patient);
+                      setOpenEditForm(true);
+                    }}
+                  >
+                    <Edit color="primary" />
+                  </IconButton>
+                </Tooltip>
+              )}
             {isListForAdmin && (
               <Tooltip
                 title={t("patient-operations.data-grid.delete-patient")}
