@@ -6,8 +6,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  IconButton,
-  Tooltip,
+  TextField,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -50,49 +49,31 @@ export default observer(function ResearchGroupDetails() {
         onClick={() => router.navigate("/research-groups")}
         sx={{ mb: 2 }}
       >
-        {t("dentist-teacher-operations.list.research-group.research-group-details.back-button")}
+        {t(
+          "dentist-teacher-operations.list.research-group.research-group-details.back-button"
+        )}
       </Button>
       <Box display="flex" flexDirection="column" gap={4}>
         <Card
           elevation={3}
           sx={{
-            backgroundColor:
-              theme.palette.mode === "dark"
-                ? color.primary[400]
-                : blueGrey[100],
-            padding: 1,
+            backgroundColor: color.primary[400],
           }}
         >
-          <CardActions
-            sx={{
-              width: "100%",
-              height: "2rem",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-details.edit-button")}>
-              <IconButton onClick={() => setOpenEdit(true)}>
-                <Edit
-                  color={theme.palette.mode === "dark" ? "secondary" : "info"}
-                />
-              </IconButton>
-            </Tooltip>
-          </CardActions>
           <CardHeader
             avatar={
               <Avatar
                 variant="rounded"
                 sx={{
-                  height: 100,
-                  width: 100,
+                  height: 70,
+                  width: 70,
                   backgroundColor:
                     theme.palette.mode === "dark"
                       ? blueGrey[500]
                       : blueGrey[600],
                 }}
               >
-                <Biotech sx={{ fontSize: 80, color: "whitesmoke" }} />
+                <Biotech sx={{ fontSize: 50, color: "whitesmoke" }} />
               </Avatar>
             }
             title={
@@ -102,17 +83,40 @@ export default observer(function ResearchGroupDetails() {
             }
             subheader={
               <Typography variant="h6">
-                {t("dentist-teacher-operations.list.research-group.research-group-details.created-by")}{selectedResearchGroup?.createdBy}
+                {t(
+                  "dentist-teacher-operations.list.research-group.research-group-details.created-by"
+                )}
+                {selectedResearchGroup?.createdBy}
               </Typography>
             }
           />
           <CardContent>
-            <Box width="60%">
-              <Typography variant="body1">
-                {selectedResearchGroup?.description}
-              </Typography>
-            </Box>
+            <TextField
+              fullWidth
+              multiline
+              rows={4}
+              color="secondary"
+              value={selectedResearchGroup?.description}
+              label={t(
+                "dentist-teacher-operations.list.research-group.research-group-details.description"
+              )}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
           </CardContent>
+          <CardActions>
+            <Button
+              startIcon={<Edit />}
+              color={theme.palette.mode === "dark" ? "secondary" : "info"}
+              variant="outlined"
+              onClick={() => setOpenEdit(true)}
+            >
+              {t(
+                "dentist-teacher-operations.list.research-group.research-group-details.edit-button"
+              )}
+            </Button>
+          </CardActions>
         </Card>
         <Box display="flex" flexDirection="column" gap={1}>
           <Box
@@ -120,7 +124,11 @@ export default observer(function ResearchGroupDetails() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Header title={t("dentist-teacher-operations.list.research-group.research-group-details.title")} />
+            <Header
+              title={t(
+                "dentist-teacher-operations.list.research-group.research-group-details.title"
+              )}
+            />
             <Button
               color="success"
               startIcon={<Add />}

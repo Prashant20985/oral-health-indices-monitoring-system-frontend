@@ -4,10 +4,11 @@ import { Box, IconButton, Tooltip, useTheme } from "@mui/material";
 import { colors } from "../../../../themeConfig";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import LinearProgressComponent from "../../../../app/common/loadingComponents/LinearProgressComponent";
-import { DeleteForever, PersonAdd } from "@mui/icons-material";
+import { AccountCircle, DeleteForever, PersonAdd } from "@mui/icons-material";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import { useStore } from "../../../../app/stores/Store";
 import { useTranslation } from "react-i18next";
+import { router } from "../../../../app/router/Routes";
 
 interface Props {
   patients: ResearchGroupPatient[];
@@ -31,90 +32,135 @@ export default observer(function ResearchGroupPatientList({
   const columns: GridColDef[] = [
     {
       field: "firstName",
-      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.first-name"),
+      headerName: t(
+        "dentist-teacher-operations.list.research-group.research-group-patient.first-name"
+      ),
       cellClassName: "name-column--cell",
       flex: 1.5,
     },
     {
       field: "lastName",
-      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.last-name"),
+      headerName: t(
+        "dentist-teacher-operations.list.research-group.research-group-patient.last-name"
+      ),
       cellClassName: "name-column--cell",
       flex: 1.5,
     },
     {
       field: "email",
-      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.email"),
+      headerName: t(
+        "dentist-teacher-operations.list.research-group.research-group-patient.email"
+      ),
       cellClassName: "name-column--cell",
       flex: 2,
     },
     {
       field: "gender",
-      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.gender"),
+      headerName: t(
+        "dentist-teacher-operations.list.research-group.research-group-patient.gender"
+      ),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "age",
-      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.age"),
+      headerName: t(
+        "dentist-teacher-operations.list.research-group.research-group-patient.age"
+      ),
       cellClassName: "name-column--cell",
       flex: 1,
     },
     {
       field: "location",
-      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.location"),
+      headerName: t(
+        "dentist-teacher-operations.list.research-group.research-group-patient.location"
+      ),
       cellClassName: "name-column--cell",
       flex: 2,
     },
     {
       field: "addedBy",
-      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.added-by"),
+      headerName: t(
+        "dentist-teacher-operations.list.research-group.research-group-patient.added-by"
+      ),
       cellClassName: "name-column--cell",
       flex: 2,
     },
     {
       field: "actions",
-      headerName: t("dentist-teacher-operations.list.research-group.research-group-patient.actions"),
+      headerName: t(
+        "dentist-teacher-operations.list.research-group.research-group-patient.actions"
+      ),
       headerAlign: "center",
       flex: 2,
       renderCell: ({ row }) => {
         return (
-          <Box
-            display="flex"
-            width="100%"
-            justifyContent="center"
-            sx={{
-              backgroundColor: patientsInGroupList
-                ? color.redAccent[600]
-                : color.greenAccent[600],
-              borderRadius: "4px",
-            }}
-          >
-            {patientsInGroupList ? (
-              <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-patient.remove-from-group-button")}>
+          <Box display="flex" alignItems="center" gap={1} width="100%">
+            <Box
+              display="flex"
+              width="100%"
+              justifyContent="center"
+              sx={{
+                backgroundColor: color.blueAccent[600],
+                borderRadius: "4px",
+              }}
+            >
+              <Tooltip title="Patient Details">
                 <IconButton
-                  onClick={async () => {
-                    await dentistTeacherStore.removePatientFromResearchGroup(
-                      row
-                    );
-                  }}
+                  onClick={() => router.navigate(`/patient-profile/${row.id}`)}
                 >
-                  <DeleteForever color="primary" />
+                  <AccountCircle color="primary" />
                 </IconButton>
               </Tooltip>
-            ) : (
-              <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-patient.add-to-group-button")}>
-                <IconButton
-                  onClick={async () => {
-                    await dentistTeacherStore.addPatientToResearchGroup(
-                      researchGroupId,
-                      row
-                    );
-                  }}
+            </Box>
+            <Box
+              display="flex"
+              width="100%"
+              justifyContent="center"
+              sx={{
+                backgroundColor: patientsInGroupList
+                  ? color.redAccent[500]
+                  : color.greenAccent[600],
+                borderRadius: "4px",
+              }}
+            >
+              {patientsInGroupList ? (
+                <Box display="flex" gap={1}>
+                  <Tooltip
+                    title={t(
+                      "dentist-teacher-operations.list.research-group.research-group-patient.remove-from-group-button"
+                    )}
+                  >
+                    <IconButton
+                      onClick={async () => {
+                        await dentistTeacherStore.removePatientFromResearchGroup(
+                          row
+                        );
+                      }}
+                    >
+                      <DeleteForever color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+              ) : (
+                <Tooltip
+                  title={t(
+                    "dentist-teacher-operations.list.research-group.research-group-patient.add-to-group-button"
+                  )}
                 >
-                  <PersonAdd color="primary" />
-                </IconButton>
-              </Tooltip>
-            )}
+                  <IconButton
+                    onClick={async () => {
+                      await dentistTeacherStore.addPatientToResearchGroup(
+                        researchGroupId,
+                        row
+                      );
+                    }}
+                  >
+                    <PersonAdd color="primary" />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Box>
           </Box>
         );
       },

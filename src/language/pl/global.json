@@ -290,7 +290,8 @@
           "edit-button": "Edytuj grupę",
           "created-by": "Utworzony przez: ",
           "title": "Pacjenci ",
-          "add-patient-button": "Dodaj pacjenta"
+          "add-patient-button": "Dodaj pacjenta",
+          "description": "Opis"
         },
         "research-group-patient": {
           "first-name": "Imię",
