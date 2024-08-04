@@ -66,14 +66,16 @@ export default observer(function PatientProfile() {
         >
           {t("patient-operations.patient-profile.back-button")}
         </Button>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={() => router.navigate(`/create-card/${id!}`)}
-          startIcon={<Add />}
-        >
-         {t("patient-operations.patient-profile.add-examination-card")}
-        </Button>
+        {!patientDetails?.isArchived && (
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => router.navigate(`/create-card/${id!}`)}
+            startIcon={<Add />}
+          >
+            {t("patient-operations.patient-profile.add-examination-card")}
+          </Button>
+        )}
       </Box>
       <TabContext value={value}>
         <Box>
@@ -90,7 +92,9 @@ export default observer(function PatientProfile() {
               icon={<Details color="info" />}
               iconPosition="start"
               label={
-                <Typography color={color.grey[100]}>{t("patient-operations.patient-profile.patient-details")}</Typography>
+                <Typography color={color.grey[100]}>
+                  {t("patient-operations.patient-profile.patient-details")}
+                </Typography>
               }
             />
             <Tab
@@ -98,14 +102,20 @@ export default observer(function PatientProfile() {
               icon={<Assessment color="info" />}
               iconPosition="start"
               label={
-                <Typography color={color.grey[100]}>{t("patient-operations.patient-profile.patient-cards")}</Typography>
+                <Typography color={color.grey[100]}>
+                  {t("patient-operations.patient-profile.patient-cards")}
+                </Typography>
               }
             />
           </TabList>
         </Box>
         <>
           {loading.patientDetails ? (
-            <ButtonLoadingComponent content={t("patient-operations.patient-profile.loading-patient-details")} />
+            <ButtonLoadingComponent
+              content={t(
+                "patient-operations.patient-profile.loading-patient-details"
+              )}
+            />
           ) : (
             <>
               {patientDetails && (
