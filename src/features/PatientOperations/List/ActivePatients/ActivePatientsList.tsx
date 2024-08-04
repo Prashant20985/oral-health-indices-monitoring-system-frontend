@@ -25,17 +25,45 @@ export default observer(function ActivePatientsList() {
 
   const [t] = useTranslation("global");
 
+  const handlePagination = (page: number, pageSize: number) => {
+    setActivePatientsSearchParams({
+      ...activePatientsSerachParams,
+      page: page,
+      pageSize: pageSize,
+    });
+  };
+
+  const handleSeachParamChange = ({
+    email,
+    name,
+  }: {
+    email: string;
+    name: string;
+  }) => {
+    setActivePatientsSearchParams({
+      ...activePatientsSerachParams,
+      name: name,
+      email: email,
+    });
+  };
+
   return (
     <Box>
       <PatientListFilter
         title={t("patient-operations.list.active-patients.header")}
         subTitle={t("patient-operations.list.active-patients.header")}
         searchTerm={activePatientsSerachParams}
-        setSearchTerm={setActivePatientsSearchParams}
+        setSearchTerm={handleSeachParamChange}
         clearEmailSearch={clearActivePatientEmailSearch}
         clearNameSearch={clearActivePatientNameSearch}
       />
-      <PatientList patients={activePatients} loading={loading.activePatients} />
+      <PatientList
+        patients={activePatients}
+        loading={loading.activePatients}
+        page={activePatientsSerachParams.page}
+        pageSize={activePatientsSerachParams.pageSize}
+        setPaginationParams={handlePagination}
+      />
     </Box>
   );
 });

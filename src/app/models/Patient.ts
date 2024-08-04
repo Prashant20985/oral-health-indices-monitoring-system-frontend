@@ -13,6 +13,11 @@ export interface CreateUpdatePatientFormValues {
   age: number;
 }
 
+export interface PaginatedPatient {
+  patients: Patient[];
+  totalPatientsCount: number;
+}
+
 export interface Patient extends CreateUpdatePatientFormValues {
   id: string;
   createdAt: string;

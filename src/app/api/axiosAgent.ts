@@ -21,7 +21,11 @@ import {
   ResearchGroupFormValues,
   ResearchGroupPatient,
 } from "../models/ResearchGroup";
-import { CreateUpdatePatientFormValues, Patient } from "../models/Patient";
+import {
+  CreateUpdatePatientFormValues,
+  PaginatedPatient,
+  Patient,
+} from "../models/Patient";
 import {
   Exam,
   ExamSolution,
@@ -314,14 +318,14 @@ const PatientOperations = {
   deletePatient: (patientId: string) =>
     apiRequests.del<void>(`/patient/delete-patient/${patientId}`),
 
-  getActicePatients: (params: URLSearchParams) =>
+  getActivePatients: (params: URLSearchParams) =>
     axios
-      .get<Patient[]>(`/patient/active-patients`, { params })
+      .get<PaginatedPatient>(`/patient/active-patients`, { params })
       .then(responseBody),
 
   getArchivedPatients: (params: URLSearchParams) =>
     axios
-      .get<Patient[]>(`/patient/archived-patients`, { params })
+      .get<PaginatedPatient>(`/patient/archived-patients`, { params })
       .then(responseBody),
 
   getPatientDetails: (patientId: string) =>

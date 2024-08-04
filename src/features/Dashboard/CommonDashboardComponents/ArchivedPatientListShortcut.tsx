@@ -14,7 +14,7 @@ export default observer(function ArchivedPatientListShortcut() {
 
   React.useEffect(() => {
     const fetchPatients = async () => {
-      if (patientStore.archivedPatients.length <= 0) {
+      if (patientStore.archivedPatients.patients.length <= 0) {
         await patientStore.fetchArchivedPatients();
       }
     };
@@ -46,6 +46,15 @@ export default observer(function ArchivedPatientListShortcut() {
           loading={patientStore.loading.archivedPatients}
           height="30vh"
           isDashboard={true}
+          page={patientStore.archivedPatientsSearchParams.page}
+          pageSize={patientStore.archivedPatientsSearchParams.pageSize}
+          setPaginationParams={(page: number, pageSize: number) => {
+            patientStore.setArchivedPatientsSearchParams({
+              ...patientStore.archivedPatientsSearchParams,
+              page: page,
+              pageSize: pageSize,
+            });
+          }}
         />
         <Box display="flex" justifyContent="flex-end">
           <Button

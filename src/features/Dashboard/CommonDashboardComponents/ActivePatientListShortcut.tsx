@@ -16,7 +16,7 @@ export default observer(function ActivePatientListShortcut() {
 
   React.useEffect(() => {
     const fetchPatients = async () => {
-      if (patientStore.activePatients.length <= 0) {
+      if (patientStore.activePatients.patients.length <= 0) {
         await patientStore.fetchActivePatients();
       }
     };
@@ -46,6 +46,15 @@ export default observer(function ActivePatientListShortcut() {
           loading={patientStore.loading.activePatients}
           height="30vh"
           isDashboard={true}
+          page={patientStore.activePatientsSerachParams.page}
+          pageSize={patientStore.activePatientsSerachParams.pageSize}
+          setPaginationParams={(page: number, pageSize: number) => {
+            patientStore.setActivePatientsSearchParams({
+              ...patientStore.activePatientsSerachParams,
+              page: page,
+              pageSize: pageSize,
+            });
+          }}
         />
         <Box display="flex" justifyContent="flex-end">
           <Button
