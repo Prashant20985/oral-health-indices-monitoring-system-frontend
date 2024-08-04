@@ -32,7 +32,6 @@ import {
   Send,
   Close,
 } from "@mui/icons-material";
-import { blueGrey } from "@mui/material/colors";
 import { CreatePatientExaminationCardInitialValues } from "./CreatePatientExaminationCardInitialValues";
 import {
   PatientExaminationCardByDoctorFormValues,
@@ -260,10 +259,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
               container
               component={Paper}
               sx={{
-                backgroundColor:
-                  theme.palette.mode === "dark"
-                    ? color.primary[400]
-                    : blueGrey[100],
+                backgroundColor: color.primary[400],
                 mt: 2,
                 p: 2,
               }}
@@ -281,7 +277,6 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                     >
                       <CardHeader
                         title={
-                          <Box display="flex" justifyContent="center" gap={1}>
                             <Typography
                               variant="h3"
                               noWrap
@@ -292,7 +287,6 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                             >
                               Patient Details
                             </Typography>
-                          </Box>
                         }
                       />
                       <CardContent>
