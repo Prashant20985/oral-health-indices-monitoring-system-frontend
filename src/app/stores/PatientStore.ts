@@ -1,15 +1,19 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
-import { CreateUpdatePatientFormValues, Patient } from "../models/Patient";
+import {
+  CreateUpdatePatientFormValues,
+  PaginatedPatient,
+  Patient,
+} from "../models/Patient";
 import axiosAgent from "../api/axiosAgent";
 
 export class PatientStore {
-  activePatients: Patient[] = [];
-  archivedPatients: Patient[] = [];
+  activePatients: PaginatedPatient = { patients: [], totalPatientsCount: 0 };
+  archivedPatients: PaginatedPatient = { patients: [], totalPatientsCount: 0 };
   patientDetails: Patient | null = null;
 
-  activePatientsSerachParams = { name: "", email: "" };
+  activePatientsSerachParams = { name: "", email: "", page: 0, pageSize: 20 };
 
-  archivedPatientsSearchParams = { name: "", email: "" };
+  archivedPatientsSearchParams = { name: "", email: "", page: 0, pageSize: 20 };
 
   loading = {
     activePatients: false,
@@ -26,21 +30,33 @@ export class PatientStore {
     makeAutoObservable(this);
 
     reaction(
-      () => this.activePatientsSerachParams,
-      () => this.fetchActivePatients()
+      () => ({
+        name: this.activePatientsSerachParams.name,
+        email: this.activePatientsSerachParams.email,
+        page: this.activePatientsSerachParams.page,
+        pageSize: this.activePatientsSerachParams.pageSize,
+      }),
+      () => {
+        this.fetchActivePatients();
+      }
     );
 
     reaction(
-      () => this.archivedPatientsSearchParams,
+      () => ({
+        name: this.archivedPatientsSearchParams.name,
+        email: this.archivedPatientsSearchParams.email,
+        page: this.archivedPatientsSearchParams.page,
+        pageSize: this.archivedPatientsSearchParams.pageSize,
+      }),
       () => this.fetchArchivedPatients()
     );
   }
 
-  setActivePatients = (patients: Patient[]) => {
+  setActivePatients = (patients: PaginatedPatient) => {
     this.activePatients = patients;
   };
 
-  setArchivedPatients = (patients: Patient[]) => {
+  setArchivedPatients = (patients: PaginatedPatient) => {
     this.archivedPatients = patients;
   };
 
@@ -51,6 +67,8 @@ export class PatientStore {
   setActivePatientsSearchParams = (searchParams: {
     name: string;
     email: string;
+    page: number;
+    pageSize: number;
   }) => {
     this.activePatientsSerachParams = searchParams;
   };
@@ -58,6 +76,8 @@ export class PatientStore {
   setArchivedPatientsSearchParams = (searchParams: {
     name: string;
     email: string;
+    page: number;
+    pageSize: number;
   }) => {
     this.archivedPatientsSearchParams = searchParams;
   };
@@ -82,6 +102,11 @@ export class PatientStore {
     const params = new URLSearchParams();
     params.append("name", this.activePatientsSerachParams.name);
     params.append("email", this.activePatientsSerachParams.email);
+    params.append("page", this.activePatientsSerachParams.page.toString());
+    params.append(
+      "pageSize",
+      this.activePatientsSerachParams.pageSize.toString()
+    );
     return params;
   }
 
@@ -89,19 +114,24 @@ export class PatientStore {
     const params = new URLSearchParams();
     params.append("name", this.archivedPatientsSearchParams.name);
     params.append("email", this.archivedPatientsSearchParams.email);
+    params.append("page", this.archivedPatientsSearchParams.page.toString());
+    params.append(
+      "pageSize",
+      this.archivedPatientsSearchParams.pageSize.toString()
+    );
     return params;
   }
 
   getPatientById = (patientId: string) => {
-    return this.activePatients
-      .concat(this.archivedPatients)
+    return this.activePatients.patients
+      .concat(this.archivedPatients.patients)
       .find((p) => p.id === patientId);
   };
 
   fetchActivePatients = async () => {
     this.loading.activePatients = true;
     try {
-      const patients = await axiosAgent.PatientOperations.getActicePatients(
+      const patients = await axiosAgent.PatientOperations.getActivePatients(
         this.activePatientAxiosParams
       );
       runInAction(() => {
@@ -155,7 +185,7 @@ export class PatientStore {
     try {
       await axiosAgent.PatientOperations.updatePatient(patientId, values);
       runInAction(() => {
-        this.activePatients = this.activePatients.map((p) => {
+        this.activePatients.patients = this.activePatients.patients.map((p) => {
           if (p.id === patientId) {
             return { ...p, ...values };
           }
@@ -178,13 +208,20 @@ export class PatientStore {
         archiveComment
       );
       runInAction(() => {
-        const patient = this.activePatients.find((p) => p.id === patientId);
+        const patient = this.activePatients.patients.find(
+          (p) => p.id === patientId
+        );
         if (patient) {
           patient.isArchived = true;
-          this.archivedPatients.push(patient);
-          this.activePatients = this.activePatients.filter(
+          this.archivedPatients.patients.push(patient);
+          this.activePatients.patients = this.activePatients.patients.filter(
             (p) => p.id !== patientId
           );
+
+          this.activePatients.totalPatientsCount =
+            this.activePatients.patients.length;
+          this.archivedPatients.totalPatientsCount =
+            this.archivedPatients.patients.length;
         }
         this.loading.archivePatient = false;
       });
@@ -200,13 +237,19 @@ export class PatientStore {
     try {
       await axiosAgent.PatientOperations.unarchivePatient(patientId);
       runInAction(() => {
-        const patient = this.archivedPatients.find((p) => p.id === patientId);
+        const patient = this.archivedPatients.patients.find(
+          (p) => p.id === patientId
+        );
         if (patient) {
           patient.isArchived = false;
-          this.activePatients.push(patient);
-          this.archivedPatients = this.archivedPatients.filter(
-            (p) => p.id !== patientId
-          );
+          this.activePatients.patients.push(patient);
+          this.archivedPatients.patients =
+            this.archivedPatients.patients.filter((p) => p.id !== patientId);
+
+          this.activePatients.totalPatientsCount =
+            this.activePatients.patients.length;
+          this.archivedPatients.totalPatientsCount =
+            this.archivedPatients.patients.length;
         }
         this.loading.unarchivePatient = false;
       });

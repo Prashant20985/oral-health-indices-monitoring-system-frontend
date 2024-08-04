@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Patient } from "../../../../app/models/Patient";
+import { PaginatedPatient, Patient } from "../../../../app/models/Patient";
 import { Box, Button, IconButton, Tooltip, useTheme } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { colors } from "../../../../themeConfig";
@@ -22,10 +22,13 @@ import { router } from "../../../../app/router/Routes";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  patients: Patient[];
+  patients: PaginatedPatient;
   loading?: boolean;
   height?: string;
   isDashboard?: boolean;
+  page: number;
+  pageSize: number;
+  setPaginationParams: (page: number, pageSize: number) => void;
 }
 
 export default observer(function PatientList({
@@ -33,6 +36,9 @@ export default observer(function PatientList({
   loading = false,
   height = "75vh",
   isDashboard = false,
+  page,
+  pageSize,
+  setPaginationParams,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -57,6 +63,22 @@ export default observer(function PatientList({
   const [selectedPatient, setSelectedPatient] = React.useState<Patient | null>(
     null
   );
+
+  const [pageModel, setPageModel] = React.useState({
+    page: page,
+    pageSize: pageSize,
+  });
+
+  const handlePageModelChange = ({
+    page,
+    pageSize,
+  }: {
+    page: number;
+    pageSize: number;
+  }) => {
+    setPaginationParams(page, pageSize);
+    setPageModel({ page, pageSize });
+  };
 
   const isListForDoctor =
     user?.role === "Dentist_Teacher_Examiner" || "Dentist_Teacher_Researcher";
@@ -266,16 +288,17 @@ export default observer(function PatientList({
     >
       <>
         <DataGrid
-          rows={patients}
+          rows={patients.patients}
           columns={columns}
           getRowId={(row) => row.id}
           loading={loading}
-          autoPageSize
-          disableColumnMenu
-          getRowSpacing={(params) => ({
-            top: params.isFirstVisible ? 0 : 5,
-            bottom: params.isLastVisible ? 0 : 5,
-          })}
+          pageSizeOptions={[5, 10, 20, 50, 100]}
+          rowCount={patients.totalPatientsCount}
+          paginationModel={pageModel}
+          onPaginationModelChange={(newModel) =>
+            handlePageModelChange(newModel)
+          }
+          paginationMode="server"
           slots={{
             loadingOverlay: LinearProgressComponent,
             noRowsOverlay: NoRowsFound,
