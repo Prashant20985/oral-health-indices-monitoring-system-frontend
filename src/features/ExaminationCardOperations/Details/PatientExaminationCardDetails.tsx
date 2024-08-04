@@ -29,12 +29,14 @@ export default observer(function PatientExaminationCardDetails() {
     patientExaminationCardDetails?.doctorName.split("(")[1].split(")")[0] ===
     user?.email;
 
-  const isUserEligibleToComment =
-    isUserEligibleToEdit || patientExaminationCardDetails?.studentName
+   const isCardAssociatedToStudent =
+    patientExaminationCardDetails?.studentName !== ""
       ? patientExaminationCardDetails?.studentName
           .split("(")[1]
           .split(")")[0] === user?.email
       : false;
+
+  const isUserEligibleToComment = isUserEligibleToEdit || isCardAssociatedToStudent;
 
   return (
     <Box>
