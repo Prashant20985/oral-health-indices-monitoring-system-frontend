@@ -392,6 +392,7 @@
         "location-required": "Location is required",
         "location-validation": "Location must be at most 50 characters",
         "age-required": "Age is required",
+        "age-min-validation": "Age must be at least 1",
         "edit-patient": "Edit Patient",
         "add-patient": "Add Patient",
         "first-name": "First Name",
