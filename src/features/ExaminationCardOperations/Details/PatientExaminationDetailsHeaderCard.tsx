@@ -299,7 +299,7 @@ export default observer(function PatientExaminationDetailsHeaderCard({
               rows={3}
               color="secondary"
               label={t(
-                "examination-card-operations.details.patient-examination-details-header-card.downloading.doctor-comment"
+                "examination-card-operations.details.patient-examination-details-header-card.doctor-comment"
               )}
               value={
                 patientExaminationCard.doctorComment ??
