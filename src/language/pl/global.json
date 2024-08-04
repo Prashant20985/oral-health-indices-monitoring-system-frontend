@@ -392,6 +392,7 @@
         "location-required": "Lokalizacja jest wymagana",
         "location-validation": "Lokalizacja musi mieć co najwyżej 50 znaków",
         "age-required": "Wiek jest wymagany",
+        "age-min-validation": "Wiek musi być większy lub równy 1",
         "edit-patient": "Edytuj pacjenta",
         "add-patient": "Dodaj pacjenta",
         "first-name": "Imię",
