@@ -301,7 +301,8 @@
           "location": "Lokalizacja",
           "added-by": "Dodany przez",
           "actions": "Działania",
-          "remove-from-group-button": "Usuń z grupy"
+          "remove-from-group-button": "Usuń z grupy",
+          "add-to-group-button": "Dodaj do grupy"
         }
       },
       "student-group": {

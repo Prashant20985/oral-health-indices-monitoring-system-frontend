@@ -102,7 +102,7 @@ export default observer(function ResearchGroupPatientList({
                 </IconButton>
               </Tooltip>
             ) : (
-              <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-patient.remove-from-group-button")}>
+              <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-patient.add-to-group-button")}>
                 <IconButton
                   onClick={async () => {
                     await dentistTeacherStore.addPatientToResearchGroup(
