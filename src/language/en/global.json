@@ -290,7 +290,8 @@
           "edit-button": "Edit Research Group",
           "created-by": "Created By: ",
           "title": "Patients",
-          "add-patient-button": "Add Patient"
+          "add-patient-button": "Add Patient",
+          "description": "Description"
         },
         "research-group-patient": {
           "first-name": "First Name",

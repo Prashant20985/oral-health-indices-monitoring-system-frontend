@@ -207,7 +207,7 @@ const DentistTeacherOperations = {
 
   getResearchGroup: (researchGroupId: string) =>
     apiRequests.get<ResearchGroup>(
-      `/dentistTeacher/research-group/${researchGroupId}`
+      `/dentistTeacher/research-group-details/${researchGroupId}`
     ),
 
   getPatientsNotInResearchGroup: (params: URLSearchParams) =>
