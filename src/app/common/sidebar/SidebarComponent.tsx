@@ -97,7 +97,7 @@ export default observer(function SidebarComponent({
       <SidebarHeader>
         <Box display="flex" alignItems="center" p={1} gap={1}>
           <Typography
-            variant="h4"
+            variant="h5"
             noWrap
             color="inherit"
             sx={{
