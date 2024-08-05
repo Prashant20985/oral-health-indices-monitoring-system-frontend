@@ -9,12 +9,17 @@ import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import { useStore } from "../../../../app/stores/Store";
 import { useTranslation } from "react-i18next";
 import { router } from "../../../../app/router/Routes";
+import React from "react";
 
 interface Props {
   patients: ResearchGroupPatient[];
   loading?: boolean;
   patientsInGroupList?: boolean;
   researchGroupId: string;
+  page?: number;
+  pageSize?: number;
+  setPaginationParams?: (page: number, pageSize: number) => void;
+  rowCount?: number;
 }
 
 export default observer(function ResearchGroupPatientList({
@@ -22,12 +27,34 @@ export default observer(function ResearchGroupPatientList({
   loading = false,
   patientsInGroupList = true,
   researchGroupId,
+  page,
+  pageSize,
+  setPaginationParams,
+  rowCount,
 }: Props) {
   const { dentistTeacherStore } = useStore();
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
   const [t] = useTranslation("global");
+
+  const [pageModel, setPageModel] = React.useState({
+    page: page || 0,
+    pageSize: pageSize || 20,
+  });
+
+  const handlePageModelChange = ({
+    page,
+    pageSize,
+  }: {
+    page: number;
+    pageSize: number;
+  }) => {
+    if (setPaginationParams) {
+      setPaginationParams(page, pageSize);
+    }
+    setPageModel({ page, pageSize });
+  };
 
   const columns: GridColDef[] = [
     {
@@ -202,13 +229,12 @@ export default observer(function ResearchGroupPatientList({
       <DataGrid
         columns={columns}
         rows={patients.map((item, index) => ({ Id: index + 1, ...item }))}
-        autoPageSize
+        rowCount={rowCount}
+        pageSizeOptions={[5, 10, 20, 50, 100]}
+        paginationModel={pageModel ? pageModel : { page: 0, pageSize: 20 }}
         loading={loading}
-        disableColumnMenu
-        getRowSpacing={(params) => ({
-          top: params.isFirstVisible ? 0 : 5,
-          bottom: params.isLastVisible ? 0 : 5,
-        })}
+        paginationMode={rowCount ? "server" : "client"}
+        onPaginationModelChange={(newModel) => handlePageModelChange(newModel)}
         slots={{
           toolbar: GridToolbar,
           loadingOverlay: LinearProgressComponent,

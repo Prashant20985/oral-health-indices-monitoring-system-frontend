@@ -1,5 +1,5 @@
 import { ArrowBackIos } from "@mui/icons-material";
-import { Box, Button, useTheme } from "@mui/material";
+import { Box, Button, TextField, useTheme } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { useParams } from "react-router-dom";
@@ -26,7 +26,7 @@ export default observer(function StudentsNotInResearchGroupList() {
     getStudentsNotInStudentGroup();
   }, [dentistTeacherStore, id]);
 
-  const[t] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   return (
     <Box>
@@ -38,15 +38,64 @@ export default observer(function StudentsNotInResearchGroupList() {
       >
         Back
       </Button>
-      <Box sx={{ mt: 2, mb: 2 }}>
-        <Header
-          title={t("dentist-teacher-operations.list.student-group.students-not-in-group.header") +` ${dentistTeacherStore.selectedStudentGroup?.groupName}`}
-        />
+      <Box display="flex" justifyContent="space-between" alignContent="center">
+        <Box sx={{ mt: 2, mb: 2 }}>
+          <Header
+            title={
+              t(
+                "dentist-teacher-operations.list.student-group.students-not-in-group.header"
+              ) + ` ${dentistTeacherStore.selectedStudentGroup?.groupName}`
+            }
+          />
+        </Box>
+        <Box display="flex" gap={2} alignItems="center" width="50%">
+          <TextField
+            label="Email"
+            fullWidth
+            variant="filled"
+            color="secondary"
+            sx={{ mb: 2 }}
+            value={dentistTeacherStore.studentsNotInGroupSearchParams.email}
+            onChange={(e) => {
+              dentistTeacherStore.setStudentsNotInGroupSearchParams({
+                ...dentistTeacherStore.studentsNotInGroupSearchParams,
+                email: e.target.value,
+              });
+            }}
+          />
+          <TextField
+            label="Student Name"
+            variant="filled"
+            fullWidth
+            value={
+              dentistTeacherStore.studentsNotInGroupSearchParams.studentName
+            }
+            color="secondary"
+            sx={{ mb: 2 }}
+            onChange={(e) => {
+              dentistTeacherStore.setStudentsNotInGroupSearchParams({
+                ...dentistTeacherStore.studentsNotInGroupSearchParams,
+                studentName: e.target.value,
+              });
+            }}
+          />
+        </Box>
       </Box>
       <StudentList
-        students={dentistTeacherStore.studentsNotInGroup}
+        students={dentistTeacherStore.studentsNotInGroup.students}
         groupId={id!}
         studentsInGroupList={false}
+        loading={dentistTeacherStore.loading.studentsNotInGroup}
+        rowCount={dentistTeacherStore.studentsNotInGroup.totalStudents}
+        page={dentistTeacherStore.studentsNotInGroupSearchParams.page}
+        pageSize={dentistTeacherStore.studentsNotInGroupSearchParams.pageSize}
+        setPaginationParams={(page: number, pageSize: number) => {
+          dentistTeacherStore.setStudentsNotInGroupSearchParams({
+            ...dentistTeacherStore.studentsNotInGroupSearchParams,
+            page: page,
+            pageSize: pageSize,
+          });
+        }}
       />
     </Box>
   );

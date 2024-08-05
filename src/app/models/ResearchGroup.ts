@@ -6,6 +6,11 @@ export interface ResearchGroup {
   patients: ResearchGroupPatient[];
 }
 
+export interface PaginatedResearchGroupPatients {
+  totalNumberOfPatients: number;
+  patients: ResearchGroupPatient[];
+}
+
 export interface ResearchGroupPatient {
   id: string;
   firstName: string;

@@ -8,6 +8,11 @@ export interface Student {
   userName: string;
 }
 
+export interface PaginatedStudentNotInGroupList {
+  students: Student[];
+  totalStudents: number;
+}
+
 export interface StudentGroup {
   id: string;
   groupName: string;
