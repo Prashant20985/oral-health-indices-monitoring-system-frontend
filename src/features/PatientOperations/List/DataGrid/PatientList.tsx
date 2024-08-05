@@ -146,7 +146,7 @@ export default observer(function PatientList({
     },
     {
       field: "lastName",
-      headerName: t("patient-operations.data-grid.email"),
+      headerName: t("patient-operations.data-grid.last-name"),
       cellClassName: "name-column--cell",
       flex: 1,
     },
