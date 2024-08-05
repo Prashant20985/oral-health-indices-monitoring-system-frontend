@@ -24,9 +24,7 @@ export default observer(function UserRequesthortcut() {
 
   React.useEffect(() => {
     const fetchUserRequests = async () => {
-      if (userRequestStore.userRequestsForCurrentUser.length <= 0) {
-        await userRequestStore.fetchUserRequestsForCurrentUser();
-      }
+      await userRequestStore.fetchUserRequestsForCurrentUser();
     };
     fetchUserRequests();
   }, [userRequestStore]);
@@ -53,7 +51,7 @@ export default observer(function UserRequesthortcut() {
       >
         <Box display="flex" justifyContent="space-between" p={1}>
           <Typography variant="h6" textTransform="uppercase" fontWeight={600}>
-          {t("admin-operations.dashboard.user-requests.header")}
+            {t("admin-operations.dashboard.user-requests.header")}
           </Typography>
           <ButtonGroup
             size="small"
@@ -78,15 +76,19 @@ export default observer(function UserRequesthortcut() {
             backgroundColor: color.primary[400],
           }}
         >
-          {userRequestStore.userRequestsForAdmin.length > 0 ? (
+          {userRequestStore.userRequestsForCurrentUser.length > 0 ? (
             <>
-              {userRequestStore.userRequestsForAdmin.map((userRequest) => (
-                <UserRequestCard
-                  key={userRequest.id}
-                  userRequest={userRequest}
-                  isCurrentUserRequest
-                />
-              ))}
+              {userRequestStore.userRequestsForCurrentUser.map(
+                (userRequest) => (
+                  <Box mb={1} mt={1} key={userRequest.id}>
+                    <UserRequestCard
+                      key={userRequest.id}
+                      userRequest={userRequest}
+                      isCurrentUserRequest
+                    />
+                  </Box>
+                )
+              )}
             </>
           ) : (
             <NoRowsFound />
