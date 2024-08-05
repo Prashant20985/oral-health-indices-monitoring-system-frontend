@@ -181,27 +181,29 @@ export default observer(function PatientExaminationDetailsHeaderCard({
                   color="secondary"
                 />
               </Box>
-              <Button
-                color="secondary"
-                variant="contained"
-                startIcon={
-                  loading ? (
-                    <CircularProgress color="info" size={24} />
-                  ) : (
-                    <Download />
-                  )
-                }
-                onClick={handleDownloadClick}
-                disabled={loading}
-              >
-                {loading
-                  ? t(
-                      "examination-card-operations.details.patient-examination-details-header-card.downloading"
+              {!isStudent && (
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  startIcon={
+                    loading ? (
+                      <CircularProgress color="info" size={24} />
+                    ) : (
+                      <Download />
                     )
-                  : t(
-                      "examination-card-operations.details.patient-examination-details-header-card.download-button"
-                    )}
-              </Button>
+                  }
+                  onClick={handleDownloadClick}
+                  disabled={loading}
+                >
+                  {loading
+                    ? t(
+                        "examination-card-operations.details.patient-examination-details-header-card.downloading"
+                      )
+                    : t(
+                        "examination-card-operations.details.patient-examination-details-header-card.download-button"
+                      )}
+                </Button>
+              )}
             </Box>
           }
           subheader={
