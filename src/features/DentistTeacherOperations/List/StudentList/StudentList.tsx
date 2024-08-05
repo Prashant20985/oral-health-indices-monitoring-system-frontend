@@ -17,6 +17,10 @@ interface Props {
   groupId?: string;
   isSupervisedStudents?: boolean;
   isUnsupervisedStudents?: boolean;
+  page?: number;
+  pageSize?: number;
+  setPaginationParams?: (page: number, pageSize: number) => void;
+  rowCount?: number;
 }
 
 export default observer(function StudentList({
@@ -26,6 +30,10 @@ export default observer(function StudentList({
   groupId,
   isSupervisedStudents,
   isUnsupervisedStudents,
+  page,
+  setPaginationParams,
+  pageSize,
+  rowCount,
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -33,6 +41,23 @@ export default observer(function StudentList({
   const { dentistTeacherStore } = useStore();
 
   const [studentsList, setStudentsList] = React.useState<Student[]>([]);
+  const [pageModel, setPageModel] = React.useState({
+    page: page || 0,
+    pageSize: pageSize || 20,
+  });
+
+  const handlePageModelChange = ({
+    page,
+    pageSize,
+  }: {
+    page: number;
+    pageSize: number;
+  }) => {
+    if (setPaginationParams) {
+      setPaginationParams(page, pageSize);
+    }
+    setPageModel({ page, pageSize });
+  };
 
   const [t] = useTranslation("global");
 
@@ -216,12 +241,12 @@ export default observer(function StudentList({
       <DataGrid
         columns={columns}
         rows={studentsList.map((item, index) => ({ Id: index + 1, ...item }))}
-        autoPageSize
+        rowCount={rowCount}
+        pageSizeOptions={[5, 10, 20, 50, 100]}
+        paginationModel={pageModel ? pageModel : { page: 0, pageSize: 20 }}
         loading={loading}
-        getRowSpacing={(params) => ({
-          top: params.isFirstVisible ? 0 : 5,
-          bottom: params.isLastVisible ? 0 : 5,
-        })}
+        paginationMode={rowCount ? "server" : "client"}
+        onPaginationModelChange={(newModel) => handlePageModelChange(newModel)}
         slots={{
           toolbar: GridToolbar,
           loadingOverlay: LinearProgressComponent,

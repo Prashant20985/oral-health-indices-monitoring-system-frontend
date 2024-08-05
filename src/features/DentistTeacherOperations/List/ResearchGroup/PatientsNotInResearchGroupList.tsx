@@ -36,15 +36,21 @@ export default observer(function PatientsNotInResearchGroupList() {
         onClick={() => router.navigate(`/research-groups/${id}`)}
         startIcon={<ArrowBackIos />}
       >
-        {t("dentist-teacher-operations.list.research-group.patients-not-in-research-group.back-button")}
+        {t(
+          "dentist-teacher-operations.list.research-group.patients-not-in-research-group.back-button"
+        )}
       </Button>
       <Box sx={{ mt: 2, mb: 2 }}>
         <Header
-          title={t("dentist-teacher-operations.list.research-group.patients-not-in-research-group.header")+` ${dentistTeacherStore.selectedResearchGroup?.groupName}`}
+          title={
+            t(
+              "dentist-teacher-operations.list.research-group.patients-not-in-research-group.header"
+            ) + ` ${dentistTeacherStore.selectedResearchGroup?.groupName}`
+          }
         />
       </Box>
       <ResearchGroupPatientList
-        patients={dentistTeacherStore.patientsNotInResearchGroup}
+        patients={dentistTeacherStore.patientsNotInResearchGroup.patients}
         loading={dentistTeacherStore.loading.patientsNotInResearchGroup}
         patientsInGroupList={false}
         researchGroupId={id !== undefined ? id : ""}

@@ -14,12 +14,17 @@ import {
   Supervisor,
 } from "../models/ApplicationUser";
 import { router } from "../router/Routes";
-import { StudentGroup, Student, GroupWithExams } from "../models/Group";
+import {
+  StudentGroup,
+  Student,
+  GroupWithExams,
+  PaginatedStudentNotInGroupList,
+} from "../models/Group";
 import { UserRequest } from "../models/UserRequest";
 import {
+  PaginatedResearchGroupPatients,
   ResearchGroup,
   ResearchGroupFormValues,
-  ResearchGroupPatient,
 } from "../models/ResearchGroup";
 import {
   CreateUpdatePatientFormValues,
@@ -189,10 +194,13 @@ const DentistTeacherOperations = {
       {}
     ),
 
-  getStudentsNotInStudentGroup: (groupId: string) =>
-    apiRequests.get<Student[]>(
-      `/dentistTeacher/get-studentsNotInGroup/${groupId}`
-    ),
+  getStudentsNotInStudentGroup: (groupId: string, params: URLSearchParams) =>
+    axios
+      .get<PaginatedStudentNotInGroupList>(
+        `/dentistTeacher/students-not-in-group/${groupId}`,
+        { params }
+      )
+      .then(responseBody),
 
   getStudentGroups: () =>
     apiRequests.get<StudentGroup[]>(`/dentistTeacher/groups`),
@@ -212,7 +220,7 @@ const DentistTeacherOperations = {
 
   getPatientsNotInResearchGroup: (params: URLSearchParams) =>
     axios
-      .get<ResearchGroupPatient[]>(
+      .get<PaginatedResearchGroupPatients>(
         `/dentistTeacher/patients-not-in-research-group`,
         { params }
       )

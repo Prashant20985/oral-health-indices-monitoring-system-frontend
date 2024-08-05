@@ -1,24 +1,58 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
-import { StudentGroup, Student } from "../models/Group";
+import {
+  StudentGroup,
+  Student,
+  PaginatedStudentNotInGroupList,
+} from "../models/Group";
 import axiosAgent from "../api/axiosAgent";
 import {
+  PaginatedResearchGroupPatients,
   ResearchGroup,
   ResearchGroupFormValues,
   ResearchGroupPatient,
 } from "../models/ResearchGroup";
 
 export default class DentistTeacherStore {
-  studentsNotInGroup: Student[] = [];
+  studentsNotInGroup: PaginatedStudentNotInGroupList = {
+    students: [],
+    totalStudents: 0,
+  };
   studentGroups: StudentGroup[] = [];
   researchGroups: ResearchGroup[] = [];
-  patientsNotInResearchGroup: ResearchGroupPatient[] = [];
-  researchGroupName: string = "";
-  patientName: string = "";
-  email: string = "";
+  patientsNotInResearchGroup: PaginatedResearchGroupPatients = {
+    totalNumberOfPatients: 0,
+    patients: [],
+  };
   selectedResearchGroup: ResearchGroup | undefined;
   selectedStudentGroup: StudentGroup | undefined;
   supervisedStudents: Student[] = [];
   unsupervisedStudents: Student[] = [];
+
+  researchGroupName: string = "";
+
+  patientnNotInResearchGroupSearchParams: {
+    patientName: string;
+    email: string;
+    page: number;
+    pageSize: number;
+  } = {
+    patientName: "",
+    email: "",
+    page: 0,
+    pageSize: 20,
+  };
+
+  studentsNotInGroupSearchParams: {
+    studentName: string;
+    email: string;
+    page: number;
+    pageSize: number;
+  } = {
+    studentName: "",
+    email: "",
+    page: 0,
+    pageSize: 20,
+  };
 
   loading = {
     createStudentGroup: false,
@@ -55,20 +89,71 @@ export default class DentistTeacherStore {
     );
 
     reaction(
-      () => ({ patientName: this.patientName, email: this.email }),
+      () => ({
+        patientName: this.patientnNotInResearchGroupSearchParams.patientName,
+        email: this.patientnNotInResearchGroupSearchParams.email,
+        page: this.patientnNotInResearchGroupSearchParams.page,
+        pageSize: this.patientnNotInResearchGroupSearchParams.pageSize,
+      }),
       () => {
-        this.setPatientsNotInResearchGroup([]);
         this.getPatientsNotInResearchGroup();
+      }
+    );
+
+    reaction(
+      () => ({
+        studentName: this.studentsNotInGroupSearchParams.studentName,
+        email: this.studentsNotInGroupSearchParams.email,
+        page: this.studentsNotInGroupSearchParams.page,
+        pageSize: this.studentsNotInGroupSearchParams.pageSize,
+      }),
+      () => {
+        this.getStudentsNotInStudentGroup(this.selectedStudentGroup!.id);
       }
     );
   }
 
-  get patientsNotInGroupParams() {
+  get patientsNotInResearchGroupParams() {
     const params = new URLSearchParams();
-    params.append("patientName", this.patientName);
-    params.append("email", this.email);
+    params.append(
+      "patientName",
+      this.patientnNotInResearchGroupSearchParams.patientName
+    );
+    params.append("email", this.patientnNotInResearchGroupSearchParams.email);
+    params.append(
+      "page",
+      this.patientnNotInResearchGroupSearchParams.page.toString()
+    );
+    params.append(
+      "pageSize",
+      this.patientnNotInResearchGroupSearchParams.pageSize.toString()
+    );
     return params;
   }
+
+  get studentsNotInGroupParams() {
+    const params = new URLSearchParams();
+    params.append(
+      "studentName",
+      this.studentsNotInGroupSearchParams.studentName
+    );
+    params.append("email", this.studentsNotInGroupSearchParams.email);
+    params.append("page", this.studentsNotInGroupSearchParams.page.toString());
+    params.append(
+      "pageSize",
+      this.studentsNotInGroupSearchParams.pageSize.toString()
+    );
+    return params;
+  }
+
+  setStudentsNotInGroupSearchParams = (params: {
+    studentName: string;
+    email: string;
+    page: number;
+    pageSize: number;
+  }) => {
+    this.studentsNotInGroupSearchParams = params;
+  };
 
   setSelectedStudentGroup = (studentGroup: StudentGroup) => {
     this.selectedStudentGroup = studentGroup;
@@ -90,7 +175,7 @@ export default class DentistTeacherStore {
     this.researchGroupName = researchGroupName;
   };
 
-  setStudentsNotInGroup = (students: Student[]) => {
+  setStudentsNotInGroup = (students: PaginatedStudentNotInGroupList) => {
     this.studentsNotInGroup = students;
   };
 
@@ -102,7 +187,9 @@ export default class DentistTeacherStore {
     this.researchGroups = researchGroups;
   };
 
-  setPatientsNotInResearchGroup = (patients: ResearchGroupPatient[]) => {
+  setPatientsNotInResearchGroup = (
+    patients: PaginatedResearchGroupPatients
+  ) => {
     this.patientsNotInResearchGroup = patients;
   };
 
@@ -174,7 +261,6 @@ export default class DentistTeacherStore {
           updatedGroups[groupIndex] = updatedGroup;
           this.setStudentGroups(updatedGroups);
         }
-
         this.loading.addStudentToGroup = false;
       });
     } catch (error) {
@@ -277,11 +363,11 @@ export default class DentistTeacherStore {
 
   getStudentsNotInStudentGroup = async (groupId: string) => {
     this.loading.studentsNotInGroup = true;
-    this.studentsNotInGroup = [];
     try {
       const result =
         await axiosAgent.DentistTeacherOperations.getStudentsNotInStudentGroup(
-          groupId
+          groupId,
+          this.studentsNotInGroupParams
         );
       runInAction(() => {
         this.setStudentsNotInGroup(result);
@@ -376,7 +462,7 @@ export default class DentistTeacherStore {
     try {
       const result =
         await axiosAgent.DentistTeacherOperations.getPatientsNotInResearchGroup(
-          this.patientsNotInGroupParams
+          this.patientsNotInResearchGroupParams
         );
       runInAction(() => {
         this.setPatientsNotInResearchGroup(result);
@@ -476,8 +562,11 @@ export default class DentistTeacherStore {
 
       runInAction(() => {
         this.selectedResearchGroup?.patients.push(patient);
-        this.patientsNotInResearchGroup =
-          this.patientsNotInResearchGroup.filter((p) => p.id !== patient.id);
+        this.patientsNotInResearchGroup.patients =
+          this.patientsNotInResearchGroup.patients.filter(
+            (p) => p.id !== patient.id
+          );
+        this.patientsNotInResearchGroup.totalNumberOfPatients--;
         this.loading.addPatientToResearchGroup = false;
       });
     } catch (error) {
@@ -500,7 +589,8 @@ export default class DentistTeacherStore {
           this.selectedResearchGroup?.patients.filter(
             (p) => p.id !== patient.id
           );
-        this.patientsNotInResearchGroup.push(patient);
+        this.patientsNotInResearchGroup.patients.push(patient);
+        this.patientsNotInResearchGroup.totalNumberOfPatients++;
         this.selectedResearchGroup!.patients = updatedResearchGroup!;
         this.loading.removePatientFromResearchGroup = false;
       });
