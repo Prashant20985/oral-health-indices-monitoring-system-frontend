@@ -81,10 +81,9 @@ export default observer(function UserRequestForAdminShortcut() {
           {userRequestStore.userRequestsForAdmin.length > 0 ? (
             <>
               {userRequestStore.userRequestsForAdmin.map((userRequest) => (
-                <UserRequestCard
-                  key={userRequest.id}
-                  userRequest={userRequest}
-                />
+                <Box mb={1} mt={1} key={userRequest.id}>
+                  <UserRequestCard userRequest={userRequest} />
+                </Box>
               ))}
             </>
           ) : (
