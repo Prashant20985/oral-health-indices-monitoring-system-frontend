@@ -408,7 +408,7 @@ const StudentExamOperations = {
     apiRequests.get<ExamSolution>(`/StudentExam/exam-solution/${examId}`),
 
   checkExamEligibility: (examId: string) =>
-    apiRequests.get<boolean>(`/StudentExam/exam-eligibility/${examId}`),
+    apiRequests.get<boolean>(`/Student/exam-eligibility/${examId}`),
 };
 
 const StudentOperations = {
