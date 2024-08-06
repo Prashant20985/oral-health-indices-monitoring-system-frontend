@@ -24,6 +24,8 @@ export default observer(function PatientExaminationCardsAssignedToDoctor() {
     dentistTeacherStore: {
       fetchSupervisedStudents,
       supervisedStudentNameEmailWithId,
+      setSupervisedStudentSearchParams,
+      supervisedStudentsSearchParam,
       loading: { supervisedStudents: loadingFetchSupervisedStudents },
     },
   } = useStore();
@@ -34,6 +36,10 @@ export default observer(function PatientExaminationCardsAssignedToDoctor() {
     };
     fetchCards();
   }, [getPatientExaminationCardsAssignedToDoctor]);
+
+  React.useEffect(() => {
+    fetchSupervisedStudents();
+  }, [fetchSupervisedStudents]);
 
   const [t] = useTranslation("global");
 
@@ -61,10 +67,14 @@ export default observer(function PatientExaminationCardsAssignedToDoctor() {
             <Autocomplete
               options={supervisedStudentNameEmailWithId}
               loading={loadingFetchSupervisedStudents}
-              onFocus={() => {
-                if (supervisedStudentNameEmailWithId.length === 0) {
-                  fetchSupervisedStudents();
-                }
+              onInputChange={(_event, value) => {
+                setSupervisedStudentSearchParams({
+                  ...supervisedStudentsSearchParam,
+                  studentName: value,
+                  page: 0,
+                  pageSize: 5,
+                });
+                fetchSupervisedStudents();
               }}
               getOptionLabel={(option) => option.name}
               onChange={(_event, value) => {

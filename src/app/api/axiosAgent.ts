@@ -12,14 +12,10 @@ import {
   PaginatedApplicationUserList,
   ApplicationUserFormValues,
   Supervisor,
+  PaginatedStudentList,
 } from "../models/ApplicationUser";
 import { router } from "../router/Routes";
-import {
-  StudentGroup,
-  Student,
-  GroupWithExams,
-  PaginatedStudentNotInGroupList,
-} from "../models/Group";
+import { StudentGroup, GroupWithExams } from "../models/Group";
 import { UserRequest } from "../models/UserRequest";
 import {
   PaginatedResearchGroupPatients,
@@ -196,7 +192,7 @@ const DentistTeacherOperations = {
 
   getStudentsNotInStudentGroup: (groupId: string, params: URLSearchParams) =>
     axios
-      .get<PaginatedStudentNotInGroupList>(
+      .get<PaginatedStudentList>(
         `/dentistTeacher/students-not-in-group/${groupId}`,
         { params }
       )
@@ -261,11 +257,19 @@ const DentistTeacherOperations = {
   unsuperviseStudent: (studentId: string) =>
     apiRequests.del<void>(`/dentistTeacher/unsupervise-student/${studentId}`),
 
-  getSupervisedStudents: () =>
-    apiRequests.get<Student[]>(`/dentistTeacher/students-supervised`),
+  getSupervisedStudents: (params: URLSearchParams) =>
+    axios
+      .get<PaginatedStudentList>(`/dentistTeacher/students-supervised`, {
+        params,
+      })
+      .then(responseBody),
 
-  getUnsupervisedStudents: () =>
-    apiRequests.get<Student[]>(`/dentistTeacher/students-not-supervised`),
+  getUnsupervisedStudents: (params: URLSearchParams) =>
+    axios
+      .get<PaginatedStudentList>(`/dentistTeacher/students-not-supervised`, {
+        params,
+      })
+      .then(responseBody),
 };
 
 const UserRequestOperations = {

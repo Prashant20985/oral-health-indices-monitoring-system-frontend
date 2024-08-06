@@ -4,11 +4,11 @@ import * as React from "react";
 import { colors } from "../../../../themeConfig";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import LinearProgressComponent from "../../../../app/common/loadingComponents/LinearProgressComponent";
-import { Student } from "../../../../app/models/Group";
 import { DeleteForever, PersonAdd } from "@mui/icons-material";
 import { useStore } from "../../../../app/stores/Store";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import { useTranslation } from "react-i18next";
+import { Student } from "../../../../app/models/ApplicationUser";
 
 interface Props {
   students: Student[];
