@@ -12,6 +12,8 @@ export default observer(function SupervisedStduents() {
   const {
     dentistTeacherStore: {
       supervisedStudents,
+      supervisedStudentsSearchParam,
+      setSupervisedStudentSearchParams,
       fetchSupervisedStudents,
       loading,
     },
@@ -33,8 +35,12 @@ export default observer(function SupervisedStduents() {
       >
         <Box>
           <Header
-            title={t("dentist-teacher-operations.list.student-group.supervise-students.header")}
-            subTitle={t("dentist-teacher-operations.list.student-group.supervise-students.sub-header")}
+            title={t(
+              "dentist-teacher-operations.list.student-group.supervise-students.header"
+            )}
+            subTitle={t(
+              "dentist-teacher-operations.list.student-group.supervise-students.sub-header"
+            )}
           />
         </Box>
         <Button
@@ -43,14 +49,26 @@ export default observer(function SupervisedStduents() {
           color="success"
           onClick={() => router.navigate("/unsupervised-students")}
         >
-          {t("dentist-teacher-operations.list.student-group.supervise-students.add-student-button")}
+          {t(
+            "dentist-teacher-operations.list.student-group.supervise-students.add-student-button"
+          )}
         </Button>
       </Box>
       <StudentList
-        students={supervisedStudents}
+        students={supervisedStudents.students}
         loading={loading.supervisedStudents}
         isSupervisedStudents
         studentsInGroupList={false}
+        rowCount={supervisedStudents.totalStudents}
+        page={supervisedStudentsSearchParam.page}
+        pageSize={supervisedStudentsSearchParam.pageSize}
+        setPaginationParams={(page: number, pageSize: number) => {
+          setSupervisedStudentSearchParams({
+            ...supervisedStudentsSearchParam,
+            page: page,
+            pageSize: pageSize,
+          });
+        }}
       />
     </Box>
   );

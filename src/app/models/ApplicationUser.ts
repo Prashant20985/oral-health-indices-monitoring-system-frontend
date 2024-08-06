@@ -7,6 +7,19 @@ export interface PaginatedApplicationUserList {
   totalUsersCount: number;
 }
 
+export interface PaginatedStudentList {
+  students: Student[];
+  totalStudents: number;
+}
+
+export interface Student {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  userName: string;
+}
+
 export interface ApplicationUser {
   userName: string;
   firstName: string;

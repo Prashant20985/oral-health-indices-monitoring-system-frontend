@@ -11,6 +11,8 @@ export default observer(function UnsupervisedStduents() {
     dentistTeacherStore: {
       unsupervisedStudents,
       fetchUnsupervisedStudents,
+      setUnsupervisedStudentSearchParams,
+      unsupervisedStudentsSearchParam,
       loading,
     },
   } = useStore();
@@ -25,15 +27,29 @@ export default observer(function UnsupervisedStduents() {
     <Box>
       <Box mb={3}>
         <Header
-          title={t("dentist-teacher-operations.list.student-group.unsupervised-students.header")}
-          subTitle={t("dentist-teacher-operations.list.student-group.unsupervised-students.sub-header")}
+          title={t(
+            "dentist-teacher-operations.list.student-group.unsupervised-students.header"
+          )}
+          subTitle={t(
+            "dentist-teacher-operations.list.student-group.unsupervised-students.sub-header"
+          )}
         />
       </Box>
       <StudentList
-        students={unsupervisedStudents}
+        students={unsupervisedStudents.students}
         loading={loading.unsupervisedStudents}
         isUnsupervisedStudents
         studentsInGroupList={false}
+        page={unsupervisedStudentsSearchParam.page}
+        pageSize={unsupervisedStudentsSearchParam.pageSize}
+        rowCount={unsupervisedStudents.totalStudents}
+        setPaginationParams={(page: number, pageSize: number) => {
+          setUnsupervisedStudentSearchParams({
+            ...unsupervisedStudentsSearchParam,
+            page: page,
+            pageSize: pageSize,
+          });
+        }}
       />
     </Box>
   );

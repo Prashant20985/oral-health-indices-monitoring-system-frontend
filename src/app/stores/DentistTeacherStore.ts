@@ -1,9 +1,5 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
-import {
-  StudentGroup,
-  Student,
-  PaginatedStudentNotInGroupList,
-} from "../models/Group";
+import { StudentGroup } from "../models/Group";
 import axiosAgent from "../api/axiosAgent";
 import {
   PaginatedResearchGroupPatients,
@@ -11,9 +7,10 @@ import {
   ResearchGroupFormValues,
   ResearchGroupPatient,
 } from "../models/ResearchGroup";
+import { PaginatedStudentList, Student } from "../models/ApplicationUser";
 
 export default class DentistTeacherStore {
-  studentsNotInGroup: PaginatedStudentNotInGroupList = {
+  studentsNotInGroup: PaginatedStudentList = {
     students: [],
     totalStudents: 0,
   };
@@ -25,8 +22,12 @@ export default class DentistTeacherStore {
   };
   selectedResearchGroup: ResearchGroup | undefined;
   selectedStudentGroup: StudentGroup | undefined;
-  supervisedStudents: Student[] = [];
-  unsupervisedStudents: Student[] = [];
+
+  supervisedStudents: PaginatedStudentList = { totalStudents: 0, students: [] };
+  unsupervisedStudents: PaginatedStudentList = {
+    totalStudents: 0,
+    students: [],
+  };
 
   researchGroupName: string = "";
 
@@ -43,6 +44,30 @@ export default class DentistTeacherStore {
   };
 
   studentsNotInGroupSearchParams: {
+    studentName: string;
+    email: string;
+    page: number;
+    pageSize: number;
+  } = {
+    studentName: "",
+    email: "",
+    page: 0,
+    pageSize: 20,
+  };
+
+  supervisedStudentsSearchParam: {
+    studentName: string;
+    email: string;
+    page: number;
+    pageSize: number;
+  } = {
+    studentName: "",
+    email: "",
+    page: 0,
+    pageSize: 20,
+  };
+
+  unsupervisedStudentsSearchParam: {
     studentName: string;
     email: string;
     page: number;
@@ -111,6 +136,30 @@ export default class DentistTeacherStore {
         this.getStudentsNotInStudentGroup(this.selectedStudentGroup!.id);
       }
     );
+
+    reaction(
+      () => ({
+        studentName: this.supervisedStudentsSearchParam.studentName,
+        email: this.supervisedStudentsSearchParam.email,
+        page: this.supervisedStudentsSearchParam.page,
+        pageSize: this.supervisedStudentsSearchParam.pageSize,
+      }),
+      () => {
+        this.fetchSupervisedStudents();
+      }
+    );
+
+    reaction(
+      () => ({
+        studentName: this.unsupervisedStudentsSearchParam.studentName,
+        email: this.unsupervisedStudentsSearchParam.email,
+        page: this.unsupervisedStudentsSearchParam.page,
+        pageSize: this.unsupervisedStudentsSearchParam.pageSize,
+      }),
+      () => {
+        this.fetchUnsupervisedStudents();
+      }
+    );
   }
 
   get patientsNotInResearchGroupParams() {
@@ -146,6 +195,54 @@ export default class DentistTeacherStore {
     return params;
   }
 
+  get supervisedStudentsParams() {
+    const params = new URLSearchParams();
+    params.append(
+      "studentName",
+      this.supervisedStudentsSearchParam.studentName
+    );
+    params.append("email", this.supervisedStudentsSearchParam.email);
+    params.append("page", this.supervisedStudentsSearchParam.page.toString());
+    params.append(
+      "pageSize",
+      this.supervisedStudentsSearchParam.pageSize.toString()
+    );
+    return params;
+  }
+
+  get unsupervisedStudentsParams() {
+    const params = new URLSearchParams();
+    params.append(
+      "studentName",
+      this.unsupervisedStudentsSearchParam.studentName
+    );
+    params.append("email", this.unsupervisedStudentsSearchParam.email);
+    params.append("page", this.unsupervisedStudentsSearchParam.page.toString());
+    params.append(
+      "pageSize",
+      this.unsupervisedStudentsSearchParam.pageSize.toString()
+    );
+    return params;
+  }
+
+  setSupervisedStudentSearchParams = (params: {
+    studentName: string;
+    email: string;
+    page: number;
+    pageSize: number;
+  }) => {
+    this.supervisedStudentsSearchParam = params;
+  };
+
+  setUnsupervisedStudentSearchParams = (params: {
+    studentName: string;
+    email: string;
+    page: number;
+    pageSize: number;
+  }) => {
+    this.unsupervisedStudentsSearchParam = params;
+  };
+
   setStudentsNotInGroupSearchParams = (params: {
     studentName: string;
     email: string;
@@ -175,7 +272,7 @@ export default class DentistTeacherStore {
     this.researchGroupName = researchGroupName;
   };
 
-  setStudentsNotInGroup = (students: PaginatedStudentNotInGroupList) => {
+  setStudentsNotInGroup = (students: PaginatedStudentList) => {
     this.studentsNotInGroup = students;
   };
 
@@ -193,11 +290,11 @@ export default class DentistTeacherStore {
     this.patientsNotInResearchGroup = patients;
   };
 
-  setSupervisedStudents = (students: Student[]) => {
+  setSupervisedStudents = (students: PaginatedStudentList) => {
     this.supervisedStudents = students;
   };
 
-  setUnsupervisedStudents = (students: Student[]) => {
+  setUnsupervisedStudents = (students: PaginatedStudentList) => {
     this.unsupervisedStudents = students;
   };
 
@@ -210,17 +307,19 @@ export default class DentistTeacherStore {
   };
 
   private supervisedStudent = (studentId: string) => {
-    return this.supervisedStudents.find((student) => student.id === studentId);
+    return this.supervisedStudents.students.find(
+      (student) => student.id === studentId
+    );
   };
 
   private unsupervisedStudent = (studentId: string) => {
-    return this.unsupervisedStudents.find(
+    return this.unsupervisedStudents.students.find(
       (student) => student.id === studentId
     );
   };
 
   get supervisedStudentNameEmailWithId() {
-    return this.supervisedStudents.map((student) => ({
+    return this.supervisedStudents.students.map((student) => ({
       name: `${student.firstName} ${student.lastName} (${student.email})`,
       id: student.id,
     }));
@@ -607,7 +706,9 @@ export default class DentistTeacherStore {
     this.loading.supervisedStudents = true;
     try {
       const result =
-        await axiosAgent.DentistTeacherOperations.getSupervisedStudents();
+        await axiosAgent.DentistTeacherOperations.getSupervisedStudents(
+          this.supervisedStudentsParams
+        );
       runInAction(() => {
         this.setSupervisedStudents(result);
         this.loading.supervisedStudents = false;
@@ -622,7 +723,9 @@ export default class DentistTeacherStore {
     this.loading.unsupervisedStudents = true;
     try {
       const result =
-        await axiosAgent.DentistTeacherOperations.getUnsupervisedStudents();
+        await axiosAgent.DentistTeacherOperations.getUnsupervisedStudents(
+          this.unsupervisedStudentsParams
+        );
       runInAction(() => {
         this.setUnsupervisedStudents(result);
         this.loading.unsupervisedStudents = false;
@@ -640,11 +743,14 @@ export default class DentistTeacherStore {
       runInAction(() => {
         const student = this.unsupervisedStudent(studentId);
         if (student) {
-          this.supervisedStudents.push(student);
+          this.supervisedStudents.students.push(student);
         }
-        this.unsupervisedStudents = this.unsupervisedStudents.filter(
-          (student) => student.id !== studentId
-        );
+        this.unsupervisedStudents.students =
+          this.unsupervisedStudents.students.filter(
+            (student) => student.id !== studentId
+          );
+        this.supervisedStudents.totalStudents++;
+        this.unsupervisedStudents.totalStudents--;
         this.loading.superviseStudent = false;
       });
     } catch (error) {
@@ -661,11 +767,14 @@ export default class DentistTeacherStore {
       runInAction(() => {
         const student = this.supervisedStudent(studentId);
         if (student) {
-          this.unsupervisedStudents.push(student);
+          this.unsupervisedStudents.students.push(student);
         }
-        this.supervisedStudents = this.supervisedStudents.filter(
-          (student) => student.id !== studentId
-        );
+        this.supervisedStudents.students =
+          this.supervisedStudents.students.filter(
+            (student) => student.id !== studentId
+          );
+        this.supervisedStudents.totalStudents--;
+        this.unsupervisedStudents.totalStudents++;
         this.loading.unsuperviseStudent = false;
       });
     } catch (error) {
