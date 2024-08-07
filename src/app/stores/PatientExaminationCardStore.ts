@@ -77,6 +77,10 @@ export class PatientExaminationCardStore {
     });
   }
 
+  clearPatientExamiantionCards = () => {
+    this.patientExaminationCards.clear();
+  };
+
   setPatientExaminationCardsAssignedToDoctor(
     patientExaminationCards: PatientExaminationCard[]
   ) {

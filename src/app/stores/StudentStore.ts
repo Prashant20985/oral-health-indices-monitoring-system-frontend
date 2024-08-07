@@ -60,18 +60,6 @@ export default class StudentStore {
     );
   };
 
-  get getTop3ExamsByDate() {
-    return this.studentGroupsWithExams
-      .flatMap((group) => group.exams)
-      .sort(
-        (a, b) =>
-          new Date(a.dateOfExamination).getTime() -
-          new Date(b.dateOfExamination).getTime()
-      )
-      .filter((exam) => new Date(exam.dateOfExamination) >= new Date())
-      .slice(0, 3);
-  }
-
   getStudentGroup = (groupId: string) => {
     return this.studentGroupsWithExams.find((group) => group.id === groupId);
   };
