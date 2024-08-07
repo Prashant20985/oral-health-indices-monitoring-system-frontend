@@ -23,6 +23,7 @@ export default observer(function PatientProfile() {
     patientExaminationCardStore: {
       groupedPatientExaminationCards,
       getPatientExaminationCards,
+      clearPatientExamiantionCards,
       loading: { getPatientExaminationCards: loadingPatientExaminationCards },
     },
   } = useStore();
@@ -44,7 +45,8 @@ export default observer(function PatientProfile() {
     if (id) {
       getPatientExaminationCards(id);
     }
-  }, [getPatientExaminationCards, id]);
+    return () => clearPatientExamiantionCards();
+  }, [getPatientExaminationCards, id, clearPatientExamiantionCards]);
 
   const [t] = useTranslation("global");
 
