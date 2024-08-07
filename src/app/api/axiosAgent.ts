@@ -349,7 +349,7 @@ const StudentExamOperations = {
     apiRequests.post<Exam>("/StudentExam/publish-exam", values),
 
   deleteExam: (examId: string) =>
-    apiRequests.del<void>(`/StudentExam/delete-exam/${examId}`),
+    apiRequests.del<void>(`/StudentExam/exam/${examId}`),
 
   updateExam: (examId: string, values: UpdateExam) =>
     apiRequests.put<Exam>(`/StudentExam/update-exam/${examId}`, values),
