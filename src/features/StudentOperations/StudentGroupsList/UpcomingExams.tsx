@@ -1,60 +1,90 @@
 import { observer } from "mobx-react-lite";
-import { Exam } from "../../../app/models/StudentExam";
 import { Alert, Box, Typography, useTheme } from "@mui/material";
 import StudentExamCard from "../../StudentExamOperations/ExamsList/StudentExamCard";
 import { colors } from "../../../themeConfig";
 import { useTranslation } from "react-i18next";
+import { useStore } from "../../../app/stores/Store";
+import React from "react";
+import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
 
 interface Props {
-  top3Exams: Exam[];
   direction?: "row" | "column";
 }
 
 export default observer(function UpcomingExams({
-  top3Exams,
   direction = "column",
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const {
+    studentExamStore: {
+      upcomingExams,
+      getUpcomingExams,
+      loading: { upcomingExams: loadingUpcomingExams },
+    },
+  } = useStore();
+
   const [t] = useTranslation("global");
+
+  React.useEffect(() => {
+    const loadUpcomingExams = async () => {
+      await getUpcomingExams();
+    };
+    loadUpcomingExams();
+  }, [getUpcomingExams]);
 
   return (
     <Box
-      p={2}
-      display="flex"
-      flexDirection="column"
-      gap={2}
       sx={{
         boxShadow: 2,
-        borderRadius: 2,
+        padding: 2,
         backgroundColor: color.primary[400],
-        minHeight: "25vh",
       }}
     >
-      <Typography variant="h6" fontWeight={600} textTransform="uppercase">
-        {t("student-operations.student-group-list.upcoming-exams.title")}
-      </Typography>
-      <Box display="flex" flexDirection={direction} gap={1}>
-        {top3Exams.length > 0 ? (
-          <>
-            {top3Exams.map((exam) => (
-              <StudentExamCard
-                key={exam.id}
-                exam={exam}
-                isTop3
-                isForStudentUser
-              />
-            ))}
-          </>
+      <Box m={2}>
+        <Typography variant="h6" fontWeight={600} textTransform="uppercase">
+          {t("student-operations.student-group-list.upcoming-exams.title")}
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: direction,
+          gap: 1,
+          height: direction === "column" ? "70vh" : "auto",
+          overflowY: direction === "column" ? "auto" : "hidden",
+          overflowX: direction === "row" ? "auto" : "hidden",
+          width: "100%",
+          alignItems: "flex-start",
+        }}
+      >
+        {loadingUpcomingExams ? (
+          <ButtonLoadingComponent content="Loading Upcoming Exams..." />
         ) : (
-          <Alert severity="info" variant="outlined" sx={{ width: "100%" }}>
-            <Typography variant="h6">
-              {t(
-                "student-operations.student-group-list.upcoming-exams.no-upcoming-exams"
-              )}
-            </Typography>
-          </Alert>
+          <>
+            {upcomingExams.length > 0 ? (
+              upcomingExams.map((exam) => (
+                <Box
+                  key={exam.id}
+                  sx={{
+                    width: direction === "row" ? "300px" : "100%",
+                    flexShrink: 0,
+                  }}
+                >
+                  <StudentExamCard exam={exam} isTop3 isForStudentUser />
+                </Box>
+              ))
+            ) : (
+              <Alert severity="info" variant="outlined" sx={{ width: "100%" }}>
+                <Typography variant="h6">
+                  {t(
+                    "student-operations.student-group-list.upcoming-exams.no-upcoming-exams"
+                  )}
+                </Typography>
+              </Alert>
+            )}
+          </>
         )}
       </Box>
     </Box>

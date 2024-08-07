@@ -413,6 +413,9 @@ const StudentExamOperations = {
 
   checkExamEligibility: (examId: string) =>
     apiRequests.get<boolean>(`/Student/exam-eligibility/${examId}`),
+
+  getUpcomingExams: () =>
+    apiRequests.get<Exam[]>(`/StudentExam/upcoming-exams`),
 };
 
 const StudentOperations = {
