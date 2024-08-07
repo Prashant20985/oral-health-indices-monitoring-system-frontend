@@ -11,11 +11,7 @@ import { useTranslation } from "react-i18next";
 
 export default observer(function GroupsListForStudent() {
   const {
-    studentStore: {
-      fetchStudentGroupsWithExams,
-      studentGroupsWithExams,
-      getTop3ExamsByDate,
-    },
+    studentStore: { fetchStudentGroupsWithExams, studentGroupsWithExams },
   } = useStore();
 
   const theme = useTheme();
@@ -88,7 +84,7 @@ export default observer(function GroupsListForStudent() {
           </Box>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <UpcomingExams top3Exams={getTop3ExamsByDate} />
+          <UpcomingExams />
         </Grid>
       </Grid>
     </Box>

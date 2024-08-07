@@ -16,6 +16,8 @@ export class StudentExamStore {
   examSolutionByStudent: ExamSolution | null = null;
   isEligibleToSubmitExam = false;
 
+  upcomingExams: Exam[] = [];
+
   loading = {
     studentExams: false,
     examDetails: false,
@@ -34,11 +36,16 @@ export class StudentExamStore {
     markExamAsGraded: false,
     gradeExaminationCard: false,
     isEligibleToSubmitExam: false,
+    upcomingExams: false,
   };
 
   constructor() {
     makeAutoObservable(this);
   }
+
+  setUpcmoingExams = (exams: Exam[]) => {
+    this.upcomingExams = exams;
+  };
 
   setStudentExams = (studentExam: Exam) => {
     studentExam.dateOfExamination = new Date(studentExam.dateOfExamination);
@@ -415,6 +422,20 @@ export class StudentExamStore {
     } catch (error) {
       console.error(error);
       this.loading.isEligibleToSubmitExam = false;
+    }
+  };
+
+  getUpcomingExams = async () => {
+    this.loading.upcomingExams = true;
+    try {
+      const exams = await axiosAgent.StudentExamOperations.getUpcomingExams();
+      runInAction(() => {
+        this.setUpcmoingExams(exams);
+        this.loading.upcomingExams = false;
+      });
+    } catch (error) {
+      console.error(error);
+      this.loading.upcomingExams = false;
     }
   };
 }
