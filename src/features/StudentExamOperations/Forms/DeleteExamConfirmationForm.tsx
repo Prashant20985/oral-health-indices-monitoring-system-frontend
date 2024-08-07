@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 import { useTranslation } from "react-i18next";
+import React from "react";
+import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 
 interface Props {
   examId: string;
@@ -27,44 +29,61 @@ export default observer(function DeleteExamConfirmationForm({
     studentExamStore: { deleteExam },
   } = useStore();
 
-  const handleDeleteExam = async () => {
-    await deleteExam(examId);
+  const [deleteSuccessSnackbarOpen, setDeleteSuccessSnackbarOpen] =
+    React.useState(false);
+
+  const handleDeleteExam = () => {
+    deleteExam(examId);
+    onClose();
+    setDeleteSuccessSnackbarOpen(true);
   };
 
   const [t] = useTranslation("global");
 
   return (
-    <Dialog
-      open={isOpen}
-      onClose={onClose}
-      keepMounted
-      TransitionComponent={SlideUpTransition}
-    >
-      <DialogTitle>{`${t(
-        "student-exam-operations.forms.delete-exam-confirmation-form.delete-exam"
-      )} ${examTitle}`}</DialogTitle>
-      <DialogContent>
-        {t(
-          "student-exam-operations.forms.delete-exam-confirmation-form.delete-warning"
-        )}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="info" variant="contained" size="small">
+    <>
+      <Dialog
+        open={isOpen}
+        onClose={onClose}
+        keepMounted
+        TransitionComponent={SlideUpTransition}
+      >
+        <DialogTitle>{`${t(
+          "student-exam-operations.forms.delete-exam-confirmation-form.delete-exam"
+        )} ${examTitle}`}</DialogTitle>
+        <DialogContent>
           {t(
-            "student-exam-operations.forms.delete-exam-confirmation-form.cancel-button"
+            "student-exam-operations.forms.delete-exam-confirmation-form.delete-warning"
           )}
-        </Button>
-        <Button
-          variant="contained"
-          color="error"
-          size="small"
-          onClick={handleDeleteExam}
-        >
-          {t(
-            "student-exam-operations.forms.delete-exam-confirmation-form.delete-button"
-          )}
-        </Button>
-      </DialogActions>
-    </Dialog>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={onClose}
+            color="info"
+            variant="contained"
+            size="small"
+          >
+            {t(
+              "student-exam-operations.forms.delete-exam-confirmation-form.cancel-button"
+            )}
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            size="small"
+            onClick={handleDeleteExam}
+          >
+            {t(
+              "student-exam-operations.forms.delete-exam-confirmation-form.delete-button"
+            )}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <CustomSanckbar
+        snackbarOpen={deleteSuccessSnackbarOpen}
+        snackbarClose={() => setDeleteSuccessSnackbarOpen(false)}
+        message="Exam deleted successfully"
+      />
+    </>
   );
 });
