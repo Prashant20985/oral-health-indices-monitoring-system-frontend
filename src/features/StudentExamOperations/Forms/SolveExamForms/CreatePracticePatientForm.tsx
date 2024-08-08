@@ -38,7 +38,7 @@ export default function CreatePracticePatientForm({
         gridTemplateColumns="repeat(4, minmax(0, 1fr))"
       >
         <CustomTextField
-          label= {t("student-exam-operations.form.create-patient-form.first-name")}
+          label= {t("student-exam-operations.forms.create-patient-form.first-name")}
           name="patientDto.firstName"
           value={patient.firstName}
           onChange={handleChange}
@@ -50,7 +50,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.last-name")}
+          label={t("student-exam-operations.forms.create-patient-form.last-name")}
           name="patientDto.lastName"
           onChange={handleChange}
           value={patient.lastName}
@@ -63,7 +63,7 @@ export default function CreatePracticePatientForm({
 
         <TextField
           select
-          label={t("student-exam-operations.form.create-patient-form.gender")}
+          label={t("student-exam-operations.forms.create-patient-form.gender")}
           name="patientDto.gender"
           value={patient.gender}
           onChange={handleChange}
@@ -74,12 +74,12 @@ export default function CreatePracticePatientForm({
           helperText={touched?.gender ? errors?.gender : ""}
           required
         >
-          <MenuItem value="Male">{t("student-exam-operations.form.create-patient-form.male")}</MenuItem>
-          <MenuItem value="Female">{t("student-exam-operations.form.create-patient-form.female")}</MenuItem>
+          <MenuItem value="Male">{t("student-exam-operations.forms.create-patient-form.male")}</MenuItem>
+          <MenuItem value="Female">{t("student-exam-operations.forms.create-patient-form.female")}</MenuItem>
         </TextField>
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.age")}
+          label={t("student-exam-operations.forms.create-patient-form.age")}
           name="patientDto.age"
           onChange={handleChange}
           value={patient.age}
@@ -92,7 +92,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.email")}
+          label={t("student-exam-operations.forms.create-patient-form.email")}
           name="patientDto.email"
           onChange={handleChange}
           value={patient.email}
@@ -104,7 +104,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.years-in-school")}
+          label={t("student-exam-operations.forms.create-patient-form.years-in-school")}
           name="patientDto.yearsInSchool"
           onChange={handleChange}
           value={patient.yearsInSchool}
@@ -117,7 +117,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.location")}
+          label={t("student-exam-operations.forms.create-patient-form.location")}
           name="patientDto.location"
           onChange={handleChange}
           value={patient.location}
@@ -129,7 +129,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.ethnic-group")}
+          label={t("student-exam-operations.forms.create-patient-form.ethnic-group")}
           name="patientDto.ethnicGroup"
           onChange={handleChange}
           value={patient.ethnicGroup}
@@ -141,7 +141,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.other-group")}
+          label={t("student-exam-operations.forms.create-patient-form.other-group")}
           name="patientDto.otherGroup"
           onChange={handleChange}
           variant="outlined"
@@ -152,7 +152,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.other-data")}
+          label={t("student-exam-operations.forms.create-patient-form.other-data")}
           name="patientDto.otherData"
           onChange={handleChange}
           variant="outlined"
@@ -163,7 +163,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.other-data2")}
+          label={t("student-exam-operations.forms.create-patient-form.other-data2")}
           name="patientDto.otherData2"
           onChange={handleChange}
           value={patient.otherData2}
@@ -174,7 +174,7 @@ export default function CreatePracticePatientForm({
         />
 
         <CustomTextField
-          label={t("student-exam-operations.form.create-patient-form.other-data3")}
+          label={t("student-exam-operations.forms.create-patient-form.other-data3")}
           name="patientDto.otherData3"
           onChange={handleChange}
           value={patient.otherData3}
