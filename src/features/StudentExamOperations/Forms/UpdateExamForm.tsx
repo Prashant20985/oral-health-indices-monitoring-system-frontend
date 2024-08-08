@@ -25,6 +25,7 @@ import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessag
 import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButton";
 import CustomSubmitButton from "../../../app/common/formInputs/CustomSubmitButtom";
 import { useTranslation } from "react-i18next";
+import { isSameDay, startOfDay } from "date-fns";
 
 interface Props {
   exam: Exam;
@@ -67,11 +68,16 @@ export default observer(function UpdateExamForm({
           "student-exam-operations.forms.update-exam-form.date-of-examination-required"
         )
       )
-      .min(
-        new Date(),
+      .test(
+        "is-today-or-later",
         t(
           "student-exam-operations.forms.update-exam-form.date-of-examination-validation"
-        )
+        ),
+        function (value) {
+          if (!value) return false;
+          const today = startOfDay(new Date());
+          return isSameDay(value, today) || value > today;
+        }
       ),
     examTitle: Yup.string()
       .required(
