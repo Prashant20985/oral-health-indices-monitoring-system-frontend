@@ -8,6 +8,11 @@ import UpcomingExams from "../StudentGroupsList/UpcomingExams";
 import UserRequestShortcut from "../../Dashboard/CommonDashboardComponents/UserRequestShortcut";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the student dashboard component.
+ * 
+ * @returns The rendered student dashboard component.
+ */
 export default observer(function StudentDashboard() {
   const [t] = useTranslation("global");
 

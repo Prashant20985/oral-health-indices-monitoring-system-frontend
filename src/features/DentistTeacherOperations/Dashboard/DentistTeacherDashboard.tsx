@@ -11,6 +11,14 @@ import PatientExaminationCardsList from "../../ExaminationCardOperations/List/Pa
 import { colors } from "../../../themeConfig";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the DentistTeacherDashboard component.
+ * 
+ * This component displays the dashboard for the dentist or teacher operations.
+ * It fetches and displays the patient examination cards assigned to the doctor.
+ * 
+ * @returns The DentistTeacherDashboard component.
+ */
 export default observer(function DentistTeacherDashboard() {
 
   const [t] = useTranslation("global");

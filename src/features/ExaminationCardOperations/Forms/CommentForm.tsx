@@ -20,6 +20,19 @@ interface Props {
   handleSubmit: (comment: string) => void;
 }
 
+/**
+ * Renders a comment form component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.comment - The initial comment value.
+ * @param {boolean} props.isOpen - Indicates if the form is open.
+ * @param {() => void} props.onClose - The function to close the form.
+ * @param {string} props.title - The title of the form.
+ * @param {string} props.description - The description of the form.
+ * @param {(comment: string) => void} props.handleSubmit - The function to handle form submission.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function CommentForm({
   comment,
   isOpen,

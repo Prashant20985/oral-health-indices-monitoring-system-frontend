@@ -8,16 +8,32 @@ import {
 } from "../models/StudentExam";
 import axiosAgent from "../api/axiosAgent";
 
+/**
+ * Represents a store for managing student exams.
+ */
 export class StudentExamStore {
+  // Represents the studentExams property.
   studentExams = new Map<string, Exam>();
+
+  // Represents the examDetails property.
   examDetails: Exam | null = null;
+
+  // Represents the examCards property.
   examCards: ExamSolution[] = [];
+
+  // Represents the examCard property.
   examCard: ExamSolution | null = null;
+
+  // Represents the examSolutionByStudent property.
   examSolutionByStudent: ExamSolution | null = null;
+
+  // Represents the isEligibleToSubmitExam property.
   isEligibleToSubmitExam = false;
 
+  // Represents the upcomingExams property.
   upcomingExams: Exam[] = [];
 
+  // Represents the loading state of various operations.
   loading = {
     studentExams: false,
     examDetails: false,
@@ -43,51 +59,71 @@ export class StudentExamStore {
     makeAutoObservable(this);
   }
 
+  // Sets the upcomingExams property.
   setUpcmoingExams = (exams: Exam[]) => {
     this.upcomingExams = exams;
   };
 
+  // Sets the studentExams property.
   setStudentExams = (studentExam: Exam) => {
     studentExam.dateOfExamination = new Date(studentExam.dateOfExamination);
     this.studentExams.set(studentExam.id, studentExam);
   };
 
+  // Sets the examDetails property.
   setExamDetails = (examDetails: Exam) => {
     this.examDetails = examDetails;
   };
 
+  // Sets the examCards property.
   setExamCards = (examCards: ExamSolution[]) => {
     this.examCards = examCards;
   };
 
+  // Sets the examCard property.
   setExamCard = (examCard: ExamSolution) => {
     this.examCard = examCard;
   };
 
+  // Sets the examSolutionByStudent property.
   setExamSolutionByStudent = (examSolutionByStudent: ExamSolution) => {
     this.examSolutionByStudent = examSolutionByStudent;
   };
 
+  // Gets the examDetails property by the provided examId.
   getExamDetails = (examId: string) => {
     return this.studentExams.get(examId);
   };
 
+  // Gets the examCard property by the provided cardId.
   getExamCard = (cardId: string) => {
     return this.examCards.find((card) => card.id === cardId);
   };
 
+  // Clears the examDetails property.
   clearExamDetails = () => {
     this.examDetails = null;
   };
 
+  // Clears the examSolutionByStudent property.
   clearExamSolutionByStudent = () => {
     this.examSolutionByStudent = null;
   };
 
+  // Sets the eligibility for students to submit exams.
   setEligibilityToSubmitExam = (isEligible: boolean) => {
     this.isEligibleToSubmitExam = isEligible;
   };
 
+  /**
+   * Returns an array of grouped student exams.
+   * The exams are grouped by year and month of examination date.
+   * Each group is represented as an entry in the returned array.
+   * The key of each entry is a string in the format "YYYY-MM" representing the year and month.
+   * The value of each entry is an array of exams that belong to that group.
+   *
+   * @returns {Array<[string, Exam[]]>} An array of grouped student exams.
+   */
   get groupedStudentExams() {
     return Object.entries(
       this.studentExamsByDate.reduce((studentExams, exam) => {
@@ -107,12 +143,24 @@ export class StudentExamStore {
     );
   }
 
+  /**
+   * Returns an array of student exams sorted by date of examination.
+   *
+   * @returns {StudentExam[]} The sorted array of student exams.
+   */
   get studentExamsByDate() {
     return Array.from(this.studentExams.values()).sort(
       (a, b) => a.dateOfExamination.getTime() - b.dateOfExamination.getTime()
     );
   }
 
+  /**
+   * Publishes an exam.
+   *
+   * @param values - The values needed to publish the exam.
+   * @returns A Promise that resolves to the published exam.
+   * @throws If an error occurs while publishing the exam.
+   */
   publishExam = async (values: PublishExam) => {
     this.loading.publishExam = true;
     try {
@@ -130,6 +178,13 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Deletes an exam.
+   * 
+   * @param examId - The ID of the exam to be deleted.
+   * @returns A promise that resolves when the exam is successfully deleted.
+   * @throws An error if the deletion fails.
+   */
   deleteExam = async (examId: string) => {
     this.loading.deleteExam = true;
     try {
@@ -144,6 +199,14 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Updates an exam with the given examId and values.
+   * 
+   * @param {string} examId - The ID of the exam to update.
+   * @param {UpdateExam} values - The updated values for the exam.
+   * @returns {Promise<void>} - A promise that resolves when the exam is updated.
+   * @throws {Error} - If an error occurs while updating the exam.
+   */
   updateExam = async (examId: string, values: UpdateExam) => {
     this.loading.updateExam = true;
     try {
@@ -163,6 +226,14 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Comments on a practice patient examination card.
+   * 
+   * @param cardId - The ID of the card to comment on.
+   * @param comment - The comment to add to the card.
+   * @returns A promise that resolves when the comment is successfully added.
+   * @throws An error if there was a problem adding the comment.
+   */
   commentPracticePatientExaminationCard = async (
     cardId: string,
     comment: string
@@ -185,6 +256,14 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Sends a comment to the API for a specific card.
+   * 
+   * @param {string} cardId - The ID of the card.
+   * @param {string} comment - The comment to be sent.
+   * @returns {Promise<void>} - A promise that resolves when the comment is successfully sent.
+   * @throws {Error} - If an error occurs while sending the comment.
+   */
   commentAPIForm = async (cardId: string, comment: string) => {
     this.loading.commentAPIForm = true;
     try {
@@ -201,6 +280,14 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Adds a comment to the bleeding form of a student exam card.
+   * 
+   * @param cardId - The ID of the exam card.
+   * @param comment - The comment to be added.
+   * @returns A promise that resolves when the comment is successfully added.
+   * @throws An error if there is an issue adding the comment.
+   */
   commentBleedingForm = async (cardId: string, comment: string) => {
     this.loading.commentBleedingForm = true;
     try {
@@ -221,6 +308,14 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Adds a comment to the bewe form of a student exam card.
+   * 
+   * @param cardId - The ID of the exam card.
+   * @param comment - The comment to be added.
+   * @returns A promise that resolves when the comment is successfully added.
+   * @throws An error if there is a problem adding the comment.
+   */
   commentBeweForm = async (cardId: string, comment: string) => {
     this.loading.commentBeweForm = true;
     try {
@@ -237,6 +332,14 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Adds a comment to the DMFT_DMFS form for a specific card.
+   * 
+   * @param cardId - The ID of the card.
+   * @param comment - The comment to be added.
+   * @returns A promise that resolves when the comment is successfully added.
+   * @throws An error if there is an issue adding the comment.
+   */
   commentDMFT_DMFSForm = async (cardId: string, comment: string) => {
     this.loading.commentDMFT_DMFSForm = true;
     try {
@@ -257,6 +360,13 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Marks an exam as graded.
+   * 
+   * @param examId - The ID of the exam to be marked as graded.
+   * @returns A Promise that resolves when the exam is successfully marked as graded.
+   * @throws An error if there is a problem marking the exam as graded.
+   */
   markExamAsGraded = async (examId: string) => {
     this.loading.markExamAsGraded = true;
     try {
@@ -281,6 +391,14 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Grades an examination card for a student.
+   * 
+   * @param {string} cardId - The ID of the examination card.
+   * @param {number} studentMark - The mark obtained by the student.
+   * @returns {Promise<void>} - A promise that resolves when the examination card is graded.
+   * @throws {Error} - If an error occurs while grading the examination card.
+   */
   gradeExaminationCard = async (cardId: string, studentMark: number) => {
     this.loading.gradeExaminationCard = true;
     try {
@@ -300,6 +418,13 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Fetches student exams for a given group ID.
+   * 
+   * @param groupId - The ID of the group.
+   * @returns A Promise that resolves to the fetched exams.
+   * @throws If an error occurs during the fetch process.
+   */
   fetchStudentExams = async (grouId: string) => {
     this.loading.studentExams = true;
     try {
@@ -316,6 +441,11 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Fetches the details of an exam.
+   * 
+   * @param examId - The ID of the exam to fetch details for.
+   */
   fetchExamDetails = async (examId: string) => {
     this.loading.examDetails = true;
     const examDetails = this.getExamDetails(examId);
@@ -340,6 +470,13 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Fetches exam cards for a given exam ID.
+   * 
+   * @param examId - The ID of the exam.
+   * @returns A promise that resolves to the fetched exam cards.
+   * @throws If an error occurs during the fetch operation.
+   */
   fetchExamCards = async (examId: string) => {
     this.loading.examCards = true;
     try {
@@ -356,6 +493,13 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Fetches an exam card by its ID.
+   * 
+   * @param cardId - The ID of the exam card to fetch.
+   * @returns A Promise that resolves to the fetched exam card.
+   * @throws If an error occurs during the fetch operation.
+   */
   fetchExamCard = async (cardId: string) => {
     this.loading.examCard = true;
     const examCard = this.getExamCard(cardId);
@@ -378,6 +522,13 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Fetches the exam solution for a specific student.
+   * 
+   * @param examId - The ID of the exam.
+   * @returns A promise that resolves to the exam solution.
+   * @throws If an error occurs while fetching the exam solution.
+   */
   fetchExamSolutionByStudent = async (examId: string) => {
     this.loading.examSolutionByStudent = true;
     try {
@@ -393,6 +544,13 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Submits the exam solution for a given exam.
+   * 
+   * @param examId - The ID of the exam.
+   * @param values - The values of the exam solution.
+   * @returns A boolean indicating whether the exam solution was successfully submitted.
+   */
   submitExamSolution = async (
     examId: string,
     values: ExamSolutionFormValues
@@ -410,6 +568,13 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Checks the eligibility of a student to submit an exam.
+   * 
+   * @param examId - The ID of the exam to check eligibility for.
+   * @returns A promise that resolves to a boolean indicating whether the student is eligible to submit the exam.
+   * @throws If an error occurs while checking the eligibility.
+   */
   checkEligibilityToSubmitExam = async (examId: string) => {
     this.loading.isEligibleToSubmitExam = true;
     try {
@@ -425,6 +590,10 @@ export class StudentExamStore {
     }
   };
 
+  /**
+   * Retrieves the upcoming exams for the student.
+   * @returns {Promise<void>} A promise that resolves when the upcoming exams are retrieved.
+   */
   getUpcomingExams = async () => {
     this.loading.upcomingExams = true;
     try {

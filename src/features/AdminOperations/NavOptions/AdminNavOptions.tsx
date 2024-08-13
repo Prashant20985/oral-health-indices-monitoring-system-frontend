@@ -15,6 +15,13 @@ interface Props {
   open: boolean;
 }
 
+/**
+ * Renders the navigation options for the admin panel.
+ *
+ * @param {Props} props - The component props.
+ * @param {boolean} props.open - Indicates whether the navigation options are open or closed.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function AdminNavOptions({ open }: Props) {
   const [t] = useTranslation("global");
   

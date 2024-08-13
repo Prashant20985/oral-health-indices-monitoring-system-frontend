@@ -9,6 +9,15 @@ interface Props {
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * Renders a form for creating a practice API.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {object} props.apiFormValues - The values of the API form.
+ * @param {Function} props.handleChange - The function to handle form field changes.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function CreatePracticeAPIForm({
   apiFormValues,
   handleChange,

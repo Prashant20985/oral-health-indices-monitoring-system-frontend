@@ -23,6 +23,16 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a dialog component for user profile management.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.userName - The username of the user.
+ * @param {boolean} props.isOpen - Indicates whether the dialog is open or not.
+ * @param {Function} props.onClose - The function to close the dialog.
+ * @returns {JSX.Element} The rendered UserProfileDialog component.
+ */
 export default observer(function UserProfileDialog({
   userName,
   isOpen,

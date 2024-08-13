@@ -15,6 +15,12 @@ interface Props {
   open: boolean;
 }
 
+/**
+ * Renders the navigation options for the DentistTeacherNavOptions component.
+ *
+ * @param {Props} open - Indicates whether the navigation options are open or not.
+ * @returns {JSX.Element} The rendered navigation options.
+ */
 export default observer(function DentistTeacherNavOptions({ open }: Props) {
   const {
     userStore: { user },

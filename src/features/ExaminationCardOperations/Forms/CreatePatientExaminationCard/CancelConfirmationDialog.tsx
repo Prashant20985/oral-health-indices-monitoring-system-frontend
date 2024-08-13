@@ -14,6 +14,16 @@ interface Props {
   onConfirm: () => void;
 }
 
+/**
+ * Renders a dialog component for confirming cancellation.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.open - Determines whether the dialog is open or not.
+ * @param {() => void} props.onClose - The function to call when the dialog is closed.
+ * @param {() => void} props.onConfirm - The function to call when the cancellation is confirmed.
+ * @returns {JSX.Element} The rendered CancelConfirmationDialog component.
+ */
 export default function CancelConfirmationDialog({
   open,
   onClose,

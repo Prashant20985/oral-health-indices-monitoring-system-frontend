@@ -23,6 +23,13 @@ import LogsFilter from "./LogsFilter";
 import { ExpandMore } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the Logs component.
+ * 
+ * This component displays logs and provides filtering and pagination functionality.
+ * 
+ * @returns The rendered Logs component.
+ */
 export default observer(function Logs() {
   const {
     adminStore: {

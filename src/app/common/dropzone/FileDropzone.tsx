@@ -13,6 +13,17 @@ interface Props {
   setFiles: (files: File[]) => void;
 }
 
+/**
+ * Renders a file dropzone component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.open - Determines if the dropzone is open.
+ * @param {Function} props.onClose - The function to close the dropzone.
+ * @param {Function} props.setFiles - The function to set the dropped files.
+ * @param {string} props.message - The message to display in the dropzone.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function FileDropzone({
   open,
   onClose,

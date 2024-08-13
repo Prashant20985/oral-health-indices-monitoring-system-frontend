@@ -25,6 +25,17 @@ const StyledTextField = styled(TextField)(() => ({
   },
 }));
 
+/**
+ * Renders the API Bleeding Form component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {APIBleedingAssessmentModel} props.apiBleedingAssessmentModel - The API Bleeding Assessment Model.
+ * @param {boolean} [props.isView=false] - Indicates if the form is in view mode.
+ * @param {Function} props.handleChange - The change event handler.
+ * @param {string} props.name - The name of the form.
+ * @returns {JSX.Element} The rendered API Bleeding Form component.
+ */
 export default observer(function APIBleedingForm({
   apiBleedingAssessmentModel,
   isView = false,

@@ -5,6 +5,11 @@ import { Box } from "@mui/material";
 import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
 import ApplicationUserList from "../DataGrid/ApplicationUserList";
 
+/**
+ * Renders a list of deleted application users.
+ *
+ * @returns The JSX element representing the deleted application users list.
+ */
 export default observer(function DeletedApplicationUsersList() {
   const { adminStore } = useStore();
 

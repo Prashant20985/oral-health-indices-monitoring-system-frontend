@@ -1,5 +1,10 @@
 import { LinearProgress, useTheme } from "@mui/material";
 
+/**
+ * Renders a linear progress component.
+ *
+ * @returns The linear progress component.
+ */
 export default function LinearProgressComponent() {
   const theme = useTheme();
   return (

@@ -13,6 +13,16 @@ interface Props {
   patientId?: string;
 }
 
+/**
+ * Renders a list of patient examination cards.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Array} props.patientExaminationCards - The array of patient examination cards.
+ * @param {boolean} props.loading - Indicates whether the data is loading.
+ * @param {string} props.patientId - The ID of the patient.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PatientExaminationCardsList({
   patientExaminationCards,
   loading,

@@ -7,6 +7,14 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the LogsFilter component.
+ * 
+ * This component is responsible for rendering a filter form for logs.
+ * It allows the user to filter logs based on username, log level, start date, and end date.
+ * 
+ * @returns The rendered LogsFilter component.
+ */
 export default observer(function LogsFilter() {
   const {
     adminStore: {

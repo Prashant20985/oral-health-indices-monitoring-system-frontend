@@ -12,6 +12,15 @@ interface Props {
   examId: string;
 }
 
+/**
+ * Renders a list of exam solutions.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Array} props.examSolutions - The array of exam solutions.
+ * @param {string} props.examId - The ID of the exam.
+ * @returns {JSX.Element} The rendered ExamSolutionList component.
+ */
 export default observer(function ExamSolutionList({ examSolutions, examId }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

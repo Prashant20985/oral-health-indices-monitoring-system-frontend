@@ -15,6 +15,24 @@ interface Props {
   variant?: "filled" | "outlined";
 }
 
+/**
+ * CustomTextField component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.label - The label for the text field.
+ * @param {string} props.name - The name of the text field.
+ * @param {string} props.value - The value of the text field.
+ * @param {Function} props.onChange - The function to handle the change event of the text field.
+ * @param {boolean} props.error - Indicates if there is an error in the text field.
+ * @param {string} props.helperText - The helper text to display below the text field.
+ * @param {boolean} [props.required=false] - Indicates if the text field is required.
+ * @param {string} [props.gridColumn="span 1"] - The CSS grid column property for the text field.
+ * @param {string} [props.type="text"] - The type of the text field.
+ * @param {boolean} [props.readOnly=false] - Indicates if the text field is read-only.
+ * @param {string} [props.variant="filled"] - The variant of the text field.
+ * @returns {JSX.Element} The rendered CustomTextField component.
+ */
 export default function CustomTextField({
   label,
   name,

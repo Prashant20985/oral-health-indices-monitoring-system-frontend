@@ -7,6 +7,12 @@ import PatientList from "../../PatientOperations/List/DataGrid/PatientList";
 import { router } from "../../../app/router/Routes";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the ActivePatientListShortcut component.
+ * This component displays a list of active patients in a shortcut format on the dashboard.
+ * It fetches the active patients from the patientStore and renders the PatientList component.
+ * The component also includes a button to navigate to the active patients page.
+ */
 export default observer(function ActivePatientListShortcut() {
   const { patientStore } = useStore();
   const theme = useTheme();

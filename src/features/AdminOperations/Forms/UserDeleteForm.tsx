@@ -24,6 +24,16 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a form for deleting a user.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.userName - The username of the user to be deleted.
+ * @param {boolean} props.isOpen - Indicates whether the form is open or not.
+ * @param {Function} props.onClose - The function to close the form.
+ * @returns {JSX.Element} The rendered UserDeleteForm component.
+ */
 export default observer(function UserDeleteForm({
   userName,
   isOpen,

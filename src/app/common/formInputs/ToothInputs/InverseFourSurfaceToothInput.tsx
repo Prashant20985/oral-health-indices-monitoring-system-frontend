@@ -15,6 +15,20 @@ interface Props {
   name: string;
 }
 
+/**
+ * Renders a tooth input component with four surfaces.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {object} props.surfaces - The surfaces object containing values for each surface.
+ * @param {string} props.toothNumber - The tooth number.
+ * @param {Function} props.onChange - The function to handle changes in the input.
+ * @param {string} [props.placeholder=""] - The placeholder text for the input.
+ * @param {string} props.error - The error message, if any.
+ * @param {string} props.name - The name of the input.
+ * @param {boolean} props.readOnly - Indicates if the input is read-only.
+ * @returns {JSX.Element} The rendered tooth input component.
+ */
 export default React.memo(function InverseFourSurfaceToothInput({
   surfaces,
   toothNumber,

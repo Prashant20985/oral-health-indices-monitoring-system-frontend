@@ -30,6 +30,12 @@ interface Props {
 
 const drawerWidth = 245;
 
+/**
+ * Defines the mixin for the opened state of the sidebar component.
+ * 
+ * @param theme - The theme object.
+ * @returns The CSS object representing the mixin.
+ */
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -39,6 +45,13 @@ const openedMixin = (theme: Theme): CSSObject => ({
   overflowX: "hidden",
 });
 
+/**
+ * Defines the closedMixin function.
+ * This function returns a CSSObject representing the styles for a closed sidebar.
+ *
+ * @param {Theme} theme - The theme object containing the transitions and breakpoints.
+ * @returns {CSSObject} - The CSSObject representing the styles for a closed sidebar.
+ */
 const closedMixin = (theme: Theme): CSSObject => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -51,6 +64,15 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
+/**
+ * Represents a styled sidebar component.
+ *
+ * @remarks
+ * This component extends the `Drawer` component and adds custom styling to create a sidebar.
+ * It accepts a `theme` and `open` prop to control its appearance.
+ *
+ * @public
+ */
 const Sidebar = styled(Drawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -76,6 +98,9 @@ const Sidebar = styled(Drawer, {
   }),
 }));
 
+/**
+ * Represents the header component of the sidebar.
+ */
 const SidebarHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -84,6 +109,15 @@ const SidebarHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
+/**
+ * Renders the sidebar component.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {boolean} props.open - Indicates whether the sidebar is open or not.
+ * @param {Function} props.setSidebarOpen - Callback function to set the sidebar open state.
+ * @returns {JSX.Element} The rendered sidebar component.
+ */
 export default observer(function SidebarComponent({
   open,
   setSidebarOpen,

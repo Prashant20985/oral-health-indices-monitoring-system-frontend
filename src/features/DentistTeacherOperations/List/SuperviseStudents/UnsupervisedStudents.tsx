@@ -6,6 +6,11 @@ import { Box } from "@mui/material";
 import Header from "../../../../app/common/header/Header";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a component for displaying a list of unsupervised students.
+ * 
+ * @returns The rendered UnsupervisedStudents component.
+ */
 export default observer(function UnsupervisedStduents() {
   const {
     dentistTeacherStore: {

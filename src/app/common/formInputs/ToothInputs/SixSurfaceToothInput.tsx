@@ -15,6 +15,20 @@ interface Props {
   name: string;
 }
 
+/**
+ * Renders a component for a tooth input with six surfaces.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {object} props.surfaces - The surfaces of the tooth.
+ * @param {string} props.toothNumber - The number of the tooth.
+ * @param {function} props.onChange - The function to handle changes in the input.
+ * @param {string} [props.placeholder=""] - The placeholder text for the input.
+ * @param {string} props.error - The error message for the input.
+ * @param {boolean} props.readOnly - Specifies if the input is read-only.
+ * @param {string} props.name - The name of the input.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default React.memo(function SixSurfaceToothInput({
   surfaces,
   toothNumber,

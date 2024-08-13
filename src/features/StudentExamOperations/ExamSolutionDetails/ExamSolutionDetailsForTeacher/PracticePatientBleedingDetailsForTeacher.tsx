@@ -28,6 +28,13 @@ interface Props {
   cardId: string;
 }
 
+/**
+ * Renders the details of bleeding for a practice patient in the teacher view.
+ * @param {Props} props - The component props.
+ * @param {Bleeding} props.bleeding - The bleeding details.
+ * @param {string} props.cardId - The ID of the card.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PracticePatientBleedingDetailsForTeacher({
   bleeding,
   cardId,

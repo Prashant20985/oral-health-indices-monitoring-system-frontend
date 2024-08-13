@@ -8,6 +8,15 @@ interface Props {
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * Renders a form for creating a DMFT/DMFS record.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Object} props.dmft_dmfsFormValues - The values for the DMFT/DMFS form.
+ * @param {Function} props.handleChange - The function to handle form field changes.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function CreateDMFT_DMFSForm({
   dmft_dmfsFormValues,
   handleChange,

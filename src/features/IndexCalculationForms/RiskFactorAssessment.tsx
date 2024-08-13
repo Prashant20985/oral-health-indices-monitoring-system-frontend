@@ -23,6 +23,17 @@ interface Props {
   name?: string;
 }
 
+/**
+ * Renders the RiskFactorAssessment component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Object} props.riskFactorAssessment - The risk factor assessment object.
+ * @param {boolean} props.isView - Indicates if the component is in view mode.
+ * @param {Function} props.handleChange - The change event handler.
+ * @param {string} props.name - The name of the component.
+ * @returns {JSX.Element} The RiskFactorAssessment component.
+ */
 export default observer(function RiskFactorAssessment({
   riskFactorAssessment,
   isView,

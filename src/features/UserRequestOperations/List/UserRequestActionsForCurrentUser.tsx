@@ -11,6 +11,14 @@ interface Props {
   userRequest: UserRequest;
 }
 
+/**
+ * Renders the actions for the current user request card.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {UserRequest} props.userRequest - The user request object.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function UserRequestCardActionsForCurrentUser({
   userRequest,
 }: Props) {

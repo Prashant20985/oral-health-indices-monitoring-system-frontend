@@ -15,6 +15,20 @@ interface Props {
   name: string;
 }
 
+/**
+ * React component for the InverseFiveSurfaceDMFT_DMFSToothInput.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {object} props.surfaces - The surfaces object.
+ * @param {string} props.toothNumber - The tooth number.
+ * @param {function} props.onChange - The change event handler.
+ * @param {string} [props.placeholder=""] - The input placeholder.
+ * @param {string} props.error - The error message.
+ * @param {boolean} props.readOnly - Indicates if the input is read-only.
+ * @param {string} props.name - The input name.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default React.memo(function InverseFiveSurfaceDMFT_DMFSToothInput({
   surfaces,
   toothNumber,

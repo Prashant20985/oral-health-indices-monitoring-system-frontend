@@ -17,6 +17,17 @@ interface Props {
   isUserEligibleToEdit: boolean;
 }
 
+/**
+ * Renders a form for editing DMFT/DMFS values.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.cardId - The ID of the examination card.
+ * @param {Function} props.updateDMFT_DMFSFromValues - The function to update DMFT/DMFS form values.
+ * @param {Function} props.setIsEditMode - The function to set the edit mode.
+ * @param {boolean} props.isUserEligibleToEdit - Indicates whether the user is eligible to edit.
+ * @returns {JSX.Element} The DMFT/DMFS edit form component.
+ */
 export default observer(function DMFT_DMFSEditForm({
   cardId,
   updateDMFT_DMFSFromValues,

@@ -17,6 +17,15 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a form for adding a user request.
+ * 
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the form is open or not.
+ * @param {Function} props.onClose - The function to close the form.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function AddUserRequestForm({
   isOpen,
   onClose,

@@ -6,6 +6,11 @@ import PatientList from "../DataGrid/PatientList";
 import PatientListFilter from "../Filters/PatientListFilter";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a list of active patients.
+ *
+ * @returns The ActivePatientsList component.
+ */
 export default observer(function ActivePatientsList() {
   const {
     patientStore: {

@@ -16,6 +16,17 @@ interface Props {
   isUserEligibleToEdit: boolean;
 }
 
+/**
+ * Renders a form for editing Bewe assessment.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.cardId - The ID of the examination card.
+ * @param {AssessmentModel} props.assessmentModel - The assessment model.
+ * @param {function} props.setIsEditMode - The function to set the edit mode.
+ * @param {boolean} props.isUserEligibleToEdit - Indicates if the user is eligible to edit.
+ * @returns {JSX.Element} The BeweEditForm component.
+ */
 export default observer(function BeweEditForm({
   cardId,
   assessmentModel,

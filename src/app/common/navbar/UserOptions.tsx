@@ -20,6 +20,11 @@ import { AssignmentIndOutlined, LogoutOutlined } from "@mui/icons-material";
 import UserProfileDialog from "../../../features/AdminOperations/UserProfile/UserProfileDialog";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the user options component.
+ *
+ * @returns The JSX element representing the user options component.
+ */
 export default observer(function UserOptions() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

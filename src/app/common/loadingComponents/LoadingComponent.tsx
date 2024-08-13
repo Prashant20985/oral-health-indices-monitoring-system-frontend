@@ -5,6 +5,12 @@ interface Props {
   content?: string;
 }
 
+/**
+ * Renders a loading component with a circular progress indicator and a text content.
+ * @param {Props} props - The component props.
+ * @param {string} props.content - The content to be displayed.
+ * @returns {JSX.Element} The rendered loading component.
+ */
 export default function LoadingComponent({
   content = "common.loading-text",
 }: Props) {

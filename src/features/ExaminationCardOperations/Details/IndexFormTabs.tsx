@@ -26,6 +26,16 @@ interface Props {
   isUserEligibleToComment: boolean;
 }
 
+/**
+ * Renders a set of tabs for displaying different forms in the index page.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {PatientExaminationCard} props.patientExaminationCard - The patient examination card.
+ * @param {boolean} props.isUserEligibleToEdit - Indicates whether the user is eligible to edit.
+ * @param {boolean} props.isUserEligibleToComment - Indicates whether the user is eligible to comment.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function IndexFormTabs({
   patientExaminationCard,
   isUserEligibleToEdit,

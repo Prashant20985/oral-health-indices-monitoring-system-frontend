@@ -9,6 +9,11 @@ import Header from "../../../../app/common/header/Header";
 import { Clear } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the component for displaying patient examination cards assigned to a doctor.
+ * This component includes functionality for filtering and selecting students and selecting a specific year and month.
+ * @returns The JSX element representing the patient examination cards assigned to a doctor component.
+ */
 export default observer(function PatientExaminationCardsAssignedToDoctor() {
   const {
     patientExaminationCardStore: {

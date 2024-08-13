@@ -5,6 +5,12 @@ interface Props {
   message?: string;
 }
 
+/**
+ * Renders a component to display a message when no rows are found.
+ * @param {Props} props - The component props.
+ * @param {string} props.message - The message to be displayed.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function NoRowsFound({ message = "common.no-rows-found" }: Props) {
   const [t] = useTranslation("global");
   return (

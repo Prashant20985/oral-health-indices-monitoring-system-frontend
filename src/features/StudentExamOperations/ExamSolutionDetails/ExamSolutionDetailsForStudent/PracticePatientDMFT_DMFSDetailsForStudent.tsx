@@ -18,6 +18,14 @@ interface Props {
   dmft_dmfs: DMFT_DMFS;
 }
 
+/**
+ * Renders the details of a practice patient's DMFT/DMFS for a student.
+ * 
+ * @component
+ * @param {Props} props - The component props.
+ * @param {DMFT_DMFS} props.dmft_dmfs - The DMFT/DMFS data for the patient.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PracticePatientDMFT_DMFSDetailsForStudent({
   dmft_dmfs,
 }: Props) {

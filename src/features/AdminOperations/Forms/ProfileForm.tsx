@@ -13,6 +13,15 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a form for editing user profile information.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {ApplicationUser} props.applicationUser - The user object containing profile information.
+ * @param {Function} props.onClose - The function to close the form.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function ProfileForm({
   applicationUser,
   onClose,

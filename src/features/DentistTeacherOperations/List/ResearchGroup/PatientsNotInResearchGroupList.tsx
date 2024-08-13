@@ -9,6 +9,11 @@ import { router } from "../../../../app/router/Routes";
 import { ArrowBackIos } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a list of patients who are not in a research group.
+ * 
+ * @returns The PatientsNotInResearchGroupList component.
+ */
 export default observer(function PatientsNotInResearchGroupList() {
   const { dentistTeacherStore } = useStore();
 

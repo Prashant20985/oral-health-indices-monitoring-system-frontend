@@ -6,6 +6,14 @@ interface props {
   subTitle?: string;
 }
 
+/**
+ * Renders a header component with a title and optional subtitle.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.title - The title to be displayed in the header.
+ * @param {string} [props.subTitle=""] - The optional subtitle to be displayed in the header.
+ * @returns {JSX.Element} The rendered header component.
+ */
 export default function Header({ title, subTitle = "" }: props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

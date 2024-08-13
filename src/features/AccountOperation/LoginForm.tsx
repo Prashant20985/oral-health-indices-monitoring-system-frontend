@@ -20,6 +20,11 @@ import CustomSubmitButton from "../../app/common/formInputs/CustomSubmitButtom";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a login form component.
+ *
+ * @returns The rendered login form component.
+ */
 export default observer(function LoginForm() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

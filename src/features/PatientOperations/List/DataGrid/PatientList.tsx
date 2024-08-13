@@ -31,6 +31,20 @@ interface Props {
   setPaginationParams: (page: number, pageSize: number) => void;
 }
 
+/**
+ * Renders a list of patients in a data grid.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {PaginatedPatient} props.patients - The paginated list of patients.
+ * @param {boolean} [props.loading=false] - Indicates if the data is currently being loaded.
+ * @param {string} [props.height="75vh"] - The height of the data grid.
+ * @param {boolean} [props.isDashboard=false] - Indicates if the list is being displayed in a dashboard.
+ * @param {number} props.page - The current page number.
+ * @param {number} props.pageSize - The number of patients to display per page.
+ * @param {(page: number, pageSize: number) => void} props.setPaginationParams - Callback function to update the pagination parameters.
+ * @returns {JSX.Element} The rendered PatientList component.
+ */
 export default observer(function PatientList({
   patients,
   loading = false,

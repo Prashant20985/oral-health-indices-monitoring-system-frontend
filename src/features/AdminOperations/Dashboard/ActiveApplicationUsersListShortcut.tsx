@@ -6,6 +6,11 @@ import { colors } from "../../../themeConfig";
 import { router } from "../../../app/router/Routes";
 import ApplicationUserList from "../List/DataGrid/ApplicationUserList";
 
+/**
+ * Renders a shortcut component for displaying active application users in the admin dashboard.
+ * Fetches active application users from the admin store and displays them in a list.
+ * Provides pagination functionality and a "View All" button to navigate to the full list of active users.
+ */
 export default observer(function ActiveApplicationUserListShortcut() {
   const { adminStore } = useStore();
   const theme = useTheme();

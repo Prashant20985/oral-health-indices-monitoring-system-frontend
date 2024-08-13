@@ -19,6 +19,11 @@ import SlideUpTransition from "../../../app/common/transition/SlideUpTransition"
 import { colors } from "../../../themeConfig";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a button component for adding application users from a CSV file.
+ *
+ * @returns The rendered AddApplicationUserFromCsvButton component.
+ */
 export default observer(function AddApplicationUserFromCsvButton() {
   const { adminStore } = useStore();
   const {

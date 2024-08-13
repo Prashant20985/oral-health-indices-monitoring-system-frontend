@@ -1,5 +1,8 @@
 import { FiveSurfaceToothDMFT_DMFS, SixSurfaceTooth } from "./Tooth";
 
+/**
+ * Represents the form values for the PracticeDMFT_DMFSForm.
+ */
 export interface PracticeDMFT_DMFSFormValues {
   assessmentModel: DMFT_DMFSAssessmentModel;
   dmftResult: number;
@@ -7,16 +10,29 @@ export interface PracticeDMFT_DMFSFormValues {
   prostheticStatus: string;
 }
 
+/**
+ * Represents the DMFT_DMFS interface.
+ * @remarks
+ * This interface extends the PracticeDMFT_DMFSFormValues interface and adds the following properties:
+ * - id: a string representing the ID of the DMFT_DMFS.
+ * - comment: a string representing the comment for the DMFT_DMFS.
+ */
 export interface DMFT_DMFS extends PracticeDMFT_DMFSFormValues {
   id: string;
   comment: string;
 }
 
+/**
+ * Represents an assessment model for DMFT/DMFS.
+ */
 export interface DMFT_DMFSAssessmentModel {
   upperMouth: DMFT_DMFSAssessmentModelUpperMouth;
   lowerMouth: DMFT_DMFSAssessmentModelLowerMouth;
 }
 
+/**
+ * Represents the values for DMFT_DMFS assessment.
+ */
 export interface DMFT_DMFSValues {
   id: string;
   dmftResult: number;
@@ -27,6 +43,9 @@ export interface DMFT_DMFSValues {
   assessmentModel: DMFT_DMFSAssessmentModel;
 }
  
+/**
+ * Represents the form values for DMFT_DMFS assessment.
+ */
 export interface DMFT_DMFSFormValues {
   comment: string;
   dmftResult: number;
@@ -35,6 +54,9 @@ export interface DMFT_DMFSFormValues {
   assessmentModel: DMFT_DMFSAssessmentModel;
 }
  
+/**
+ * Represents the form values for updating DMFT_DMFS data.
+ */
 export interface UpdateDMFT_DMFSFormValues {
   dmftResult: number;
   dmfsResult: number;
@@ -42,6 +64,9 @@ export interface UpdateDMFT_DMFSFormValues {
   assessmentModel: DMFT_DMFSAssessmentModel;
 }
 
+/**
+ * Represents the assessment model for the upper mouth in the DMFT_DMFS assessment.
+ */
 export interface DMFT_DMFSAssessmentModelUpperMouth {
   tooth_18: SixSurfaceTooth;
   tooth_17: SixSurfaceTooth;
@@ -71,6 +96,9 @@ export interface DMFT_DMFSAssessmentModelUpperMouth {
   tooth_65: string;
 }
 
+/**
+ * Represents the assessment model for the lower mouth in the DMFT_DMFS assessment.
+ */
 export interface DMFT_DMFSAssessmentModelLowerMouth {
   tooth_48: SixSurfaceTooth;
   tooth_47: SixSurfaceTooth;

@@ -35,6 +35,22 @@ interface Props {
   setPaginationParams: (page: number, pageSize: number) => void;
 }
 
+/**
+ * Renders a list of application users in a data grid.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {ApplicationUser[]} props.applicationUsers - The list of application users.
+ * @param {boolean} props.loading - Indicates if the data is currently being loaded.
+ * @param {boolean} [props.deletedUsersList=false] - Indicates if the list is for deleted users.
+ * @param {boolean} [props.changeActivationStatusDisabled=false] - Indicates if the activation status change is disabled.
+ * @param {boolean} [props.isDashboard=false] - Indicates if the list is for the dashboard.
+ * @param {number} props.page - The current page number.
+ * @param {number} props.pageSize - The number of items per page.
+ * @param {string} [props.height="75vh"] - The height of the data grid.
+ * @param {Function} props.setPaginationParams - The function to set the pagination parameters.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function AppplicationUsersList({
   applicationUsers,
   loading,

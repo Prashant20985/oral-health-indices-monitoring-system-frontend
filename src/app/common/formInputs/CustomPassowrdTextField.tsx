@@ -12,6 +12,18 @@ interface Props {
   gridColumn?: string;
 }
 
+/**
+ * Renders a custom password text field.
+ * @param {Props} props - The component props.
+ * @param {string} props.label - The label for the text field.
+ * @param {string} props.name - The name attribute for the text field.
+ * @param {Function} props.onChange - The event handler for the onChange event.
+ * @param {boolean} props.error - Indicates if the text field has an error.
+ * @param {string} props.helperText - The helper text to display below the text field.
+ * @param {boolean} [props.required=true] - Indicates if the text field is required.
+ * @param {string} [props.gridColumn="span 1"] - The CSS grid column property for the text field.
+ * @returns {JSX.Element} The rendered CustomPasswordTextField component.
+ */
 export default function CustomPasswordTextField({
   label,
   name,

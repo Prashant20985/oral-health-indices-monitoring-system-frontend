@@ -6,6 +6,13 @@ interface Props {
   status: RequestStatus;
 }
 
+/**
+ * Renders the status component.
+ *
+ * @param {Props} props - The component props.
+ * @param {string} props.status - The status value.
+ * @returns {JSX.Element} The rendered status component.
+ */
 export default function Status({ status }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

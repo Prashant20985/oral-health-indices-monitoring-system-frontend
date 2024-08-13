@@ -7,6 +7,11 @@ import LoadingComponent from "../../../app/common/loadingComponents/LoadingCompo
 import PatientExaminationDetailsHeaderCard from "./PatientExaminationDetailsHeaderCard";
 import IndexFormTabs from "./IndexFormTabs";
 
+/**
+ * Renders the details of a patient examination card.
+ *
+ * @returns The JSX element representing the patient examination card details.
+ */
 export default observer(function PatientExaminationCardDetails() {
   const { cardId } = useParams<{ cardId: string }>();
 

@@ -18,6 +18,17 @@ interface Props {
   name?: string;
 }
 
+/**
+ * Renders a form for editing a student group.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the form is open or not.
+ * @param {Function} props.onClose - The function to close the form.
+ * @param {string} props.groupId - The ID of the group.
+ * @param {string} props.name - The name of the group.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function EditGroupForm({
   isOpen,
   onClose,

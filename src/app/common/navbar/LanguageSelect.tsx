@@ -18,6 +18,14 @@ type Language = "en" | "pl";
 const EnglishFlag = "/assets/english.svg";
 const PolishFlag = "/assets/polish.svg";
 
+/**
+ * LanguageSelect component.
+ *
+ * This component renders a language select dropdown menu with language options.
+ * It uses the i18next library for internationalization and localization.
+ *
+ * @returns The LanguageSelect component.
+ */
 export default function LanguageSelect() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

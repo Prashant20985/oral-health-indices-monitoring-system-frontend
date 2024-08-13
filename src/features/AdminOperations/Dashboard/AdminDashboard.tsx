@@ -9,6 +9,11 @@ import ActivePatientListShortcut from "../../Dashboard/CommonDashboardComponents
 import ArchivedPatientListShortcut from "../../Dashboard/CommonDashboardComponents/ArchivedPatientListShortcut";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the admin dashboard component.
+ * 
+ * @returns The rendered admin dashboard component.
+ */
 export default function AdminDashboard() {
 
   const [t] = useTranslation("global");

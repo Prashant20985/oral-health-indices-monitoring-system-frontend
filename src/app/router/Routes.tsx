@@ -35,6 +35,14 @@ import UnsupervisedStudents from "../../features/DentistTeacherOperations/List/S
 import PatientExaminationCardsAssignedToDoctor from "../../features/DentistTeacherOperations/List/ExaminationCardsAssignedToDoctor/PatientExaminationCardsAssignedToDoctor";
 import Logs from "../../features/AdminOperations/Logs/Logs";
 
+/**
+ * Represents the routes configuration for the application.
+ * Each route object contains the path and the corresponding element/component to render.
+ * The routes are organized in a hierarchical structure using the `children` property.
+ * The `element` property represents the component to render for the given route.
+ * The `path` property represents the URL path for the given route.
+ * The `roles` property represents the roles required to access the route.
+ */
 const routes: RouteObject[] = [
   {
     path: "/",
@@ -210,4 +218,10 @@ const routes: RouteObject[] = [
   },
 ];
 
+/**
+ * Creates a browser router using the specified routes.
+ *
+ * @param routes - The routes to be used in the browser router.
+ * @returns The created browser router.
+ */
 export const router = createBrowserRouter(routes);

@@ -9,6 +9,11 @@ import CustomSubmitButton from "../../app/common/formInputs/CustomSubmitButtom";
 import { colors } from "../../themeConfig";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a form for the "Forgot Password" feature.
+ *
+ * @returns The JSX.Element representing the "Forgot Password" form.
+ */
 export default observer(function ForgotPassword() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

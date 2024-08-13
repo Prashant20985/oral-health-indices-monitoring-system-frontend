@@ -6,6 +6,11 @@ import PatientListFilter from "../Filters/PatientListFilter";
 import PatientList from "../DataGrid/PatientList";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a list of archived patients.
+ *
+ * @returns The JSX element representing the archived patients list.
+ */
 export default observer(function ArchivedPatientsList() {
   const {
     patientStore: {

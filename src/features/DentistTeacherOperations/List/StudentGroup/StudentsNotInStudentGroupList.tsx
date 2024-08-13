@@ -9,6 +9,10 @@ import { useStore } from "../../../../app/stores/Store";
 import StudentList from "../StudentList/StudentList";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a list of students who are not in a specific student group.
+ * @returns The JSX element representing the StudentsNotInResearchGroupList component.
+ */
 export default observer(function StudentsNotInResearchGroupList() {
   const { dentistTeacherStore } = useStore();
 

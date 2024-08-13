@@ -11,6 +11,15 @@ interface Props {
   openMarkAsComplete: () => void;
 }
 
+/**
+ * Renders a list of user request actions for an admin user.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {UserRequest} props.userRequest - The user request object.
+ * @param {Function} props.openMarkAsComplete - The function to open the mark as complete action.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function UserRequestListForAdmin({
   userRequest,
   openMarkAsComplete,

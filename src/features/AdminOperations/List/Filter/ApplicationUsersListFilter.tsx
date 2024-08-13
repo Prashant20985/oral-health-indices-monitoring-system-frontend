@@ -34,6 +34,21 @@ interface Props {
   clearFilters: () => void;
 }
 
+/**
+ * Renders a filter component for the application users list.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.title - The title of the filter.
+ * @param {string} props.subTitle - The subtitle of the filter.
+ * @param {Object} props.initalValues - The initial values for the filter.
+ * @param {string} props.initalValues.userType - The initial user type value.
+ * @param {string} props.initalValues.role - The initial role value.
+ * @param {string} props.initalValues.searchTerm - The initial search term value.
+ * @param {Function} props.handleSeachParamChange - The function to handle search parameter changes.
+ * @param {Function} props.clearFilters - The function to clear the filters.
+ * @returns {JSX.Element} The rendered filter component.
+ */
 export default function ApplicationUsersListFilter({
   title,
   subTitle,

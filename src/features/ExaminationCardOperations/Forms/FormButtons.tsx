@@ -10,6 +10,19 @@ interface Props {
   message?: string;
 }
 
+/**
+ * Renders the form buttons component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isView - Indicates if the form is in view mode.
+ * @param {Function} props.setIsView - Callback function to set the view mode.
+ * @param {Function} props.resetForm - Callback function to reset the form.
+ * @param {Function} props.setIsEditMode - Callback function to set the edit mode.
+ * @param {Function} props.handleSubmit - Callback function to handle form submission.
+ * @param {string} props.message - The message to display in the button.
+ * @returns {JSX.Element} The rendered form buttons component.
+ */
 export default function FormButtons({
   isView,
   setIsView,

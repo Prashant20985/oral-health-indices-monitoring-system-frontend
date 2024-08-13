@@ -13,6 +13,12 @@ import {
 } from "./RiskFactorAssesment";
 import { Summary } from "./Summary";
 
+/**
+ * Represents an update for an exam.
+ *
+ * @remarks
+ * This interface defines the properties that can be updated for an exam.
+ */
 export interface UpdateExam {
   dateOfExamination: Date;
   examTitle: string;
@@ -23,18 +29,45 @@ export interface UpdateExam {
   maxMark: number;
 }
 
+/**
+ * Represents the data structure for publishing an exam.
+ * Inherits properties from the UpdateExam interface.
+ */
 export interface PublishExam extends UpdateExam {
   groupId: string;
 }
 
+/**
+ * Represents an exam.
+ *
+ * @remarks
+ * This interface extends the `UpdateExam` interface and adds additional properties for an exam.
+ *
+ * @public
+ */
 export interface Exam extends UpdateExam {
   id: string;
   publishDate: Date;
   examStatus: ExamStatus;
 }
 
+/**
+ * Represents the status of an exam.
+ * 
+ * Possible values are:
+ * - "Published": The exam has been published.
+ * - "Graded": The exam has been graded.
+ */
 export type ExamStatus = "Published" | "Graded";
 
+/**
+ * Represents the form values for an exam solution.
+ *
+ * @remarks
+ * This interface defines the structure of the form values used for an exam solution.
+ * It includes properties for the patientDto, summary, riskFactorAssessmentModel,
+ * practiceAPI, practiceBleeding, practiceBewe, and practiceDMFT_DMFS.
+ */
 export interface ExamSolutionFormValues {
   patientDto: PracticePatient;
   summary: Summary;
@@ -45,6 +78,14 @@ export interface ExamSolutionFormValues {
   practiceDMFT_DMFS: PracticeDMFT_DMFSFormValues;
 }
 
+/**
+ * Represents the solution for an exam.
+ *
+ * @remarks
+ * This interface defines the structure of the ExamSolution object, which contains information about a student's exam solution.
+ *
+ * @public
+ */
 export interface ExamSolution {
   id: string;
   studentMark: number;

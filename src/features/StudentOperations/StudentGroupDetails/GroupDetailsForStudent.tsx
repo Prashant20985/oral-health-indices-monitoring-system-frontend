@@ -19,6 +19,11 @@ import { blueGrey } from "@mui/material/colors";
 import { Groups3, Email } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the details of a student group.
+ * 
+ * @returns The JSX element representing the group details for a student.
+ */
 export default observer(function GroupDetailsForStudent() {
   const { groupId } = useParams<{ groupId: string }>();
 

@@ -7,6 +7,11 @@ import PatientList from "../../PatientOperations/List/DataGrid/PatientList";
 import { router } from "../../../app/router/Routes";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a shortcut component for the archived patient list in the dashboard.
+ * Fetches archived patients from the patient store and displays them in a list.
+ * Provides a button to navigate to the archived patients page.
+ */
 export default observer(function ArchivedPatientListShortcut() {
   const { patientStore } = useStore();
   const theme = useTheme();

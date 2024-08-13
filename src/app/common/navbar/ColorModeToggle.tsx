@@ -11,6 +11,11 @@ import { Brightness4, LightMode } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a color mode toggle button.
+ *
+ * @returns The color mode toggle component.
+ */
 export default function ColorModeToggle() {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);

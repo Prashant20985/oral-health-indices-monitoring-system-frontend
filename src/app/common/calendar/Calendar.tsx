@@ -10,6 +10,14 @@ interface Props {
   setDate: (date: Date | null) => void;
 }
 
+/**
+ * Calendar component for selecting a date.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Function} props.setDate - The function to set the selected date.
+ * @returns {JSX.Element} The rendered Calendar component.
+ */
 export default function Calendar({ setDate }: Props) {
   const [value, setValue] = React.useState<Date | null>(null);
 

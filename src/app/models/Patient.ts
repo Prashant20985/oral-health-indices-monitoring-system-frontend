@@ -1,3 +1,6 @@
+/**
+ * Represents the form values for creating or updating a patient.
+ */
 export interface CreateUpdatePatientFormValues {
   firstName: string;
   lastName: string;
@@ -13,11 +16,17 @@ export interface CreateUpdatePatientFormValues {
   age: number;
 }
 
+/**
+ * Represents a paginated list of patients.
+ */
 export interface PaginatedPatient {
   patients: Patient[];
   totalPatientsCount: number;
 }
 
+/**
+ * Represents a patient in the oral health indices monitoring system.
+ */
 export interface Patient extends CreateUpdatePatientFormValues {
   id: string;
   createdAt: string;
@@ -27,6 +36,9 @@ export interface Patient extends CreateUpdatePatientFormValues {
   researchGroupName: string;
 }
 
+/**
+ * Represents a patient in a practice patient.
+ */
 export interface PracticePatient {
   firstName: string;
   lastName: string;
@@ -42,6 +54,10 @@ export interface PracticePatient {
   age: number;
 }
 
+/**
+ * Represents the details of a practice patient.
+ * Extends the PracticePatient interface.
+ */
 export interface PracticePatientDetails extends PracticePatient {
   id: string;
   createdAt: string;

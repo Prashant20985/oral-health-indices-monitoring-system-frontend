@@ -5,6 +5,11 @@ import { Box } from "@mui/material";
 import ApplicationUserList from "../DataGrid/ApplicationUserList";
 import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
 
+/**
+ * Renders a list of active application users.
+ *
+ * @returns The ActiveApplicationUsersList component.
+ */
 export default observer(function ActiveApplicationUsersList() {
   const { adminStore } = useStore();
 

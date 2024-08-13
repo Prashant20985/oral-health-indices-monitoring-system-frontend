@@ -28,6 +28,15 @@ interface Props {
   cardId: string;
 }
 
+/**
+ * Renders the details of the practice patient API for a teacher.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {API} props.api - The practice patient API data.
+ * @param {string} props.cardId - The ID of the card.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PracticePatientAPIDetailsForTeacher({
   api,
   cardId,

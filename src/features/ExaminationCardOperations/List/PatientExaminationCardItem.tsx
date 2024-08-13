@@ -30,6 +30,16 @@ interface Props {
   setOpenDeleteSnackbar: (value: boolean) => void;
 }
 
+/**
+ * Renders a card component for displaying a patient examination card item.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {PatientExaminationCard} props.patientExaminationCard - The patient examination card object.
+ * @param {string} props.patientId - The ID of the patient.
+ * @param {function} props.setOpenDeleteSnackbar - The function to set the state of the delete snackbar.
+ * @returns {JSX.Element} The rendered card component.
+ */
 export default observer(function ExaminationCardItem({
   patientExaminationCard,
   patientId,

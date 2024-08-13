@@ -15,6 +15,20 @@ interface Props {
   name: string;
 }
 
+/**
+ * React component for an input field representing a tooth with six surfaces.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {object} props.surfaces - The surfaces of the tooth.
+ * @param {string} props.toothNumber - The number of the tooth.
+ * @param {function} props.onChange - The function to handle changes in the input field.
+ * @param {string} [props.placeholder=""] - The placeholder text for the input field.
+ * @param {string} props.error - The error message for the input field.
+ * @param {boolean} props.readOnly - Specifies if the input field is read-only.
+ * @param {string} props.name - The name of the input field.
+ * @returns {JSX.Element} The ToothInput component.
+ */
 export default React.memo(function InverseSixSurfaceToothInput({
   surfaces,
   toothNumber,

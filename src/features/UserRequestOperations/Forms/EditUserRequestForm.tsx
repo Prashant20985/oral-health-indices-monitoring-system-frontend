@@ -21,6 +21,15 @@ interface Props {
   description: string;
 }
 
+/**
+ * Renders a form for editing a user request.
+ * 
+ * @param isOpen - Indicates whether the form is open or not.
+ * @param onClose - Callback function to close the form.
+ * @param userRequestId - The ID of the user request being edited.
+ * @param requestTitle - The title of the user request.
+ * @param description - The description of the user request.
+ */
 export default observer(function EditUserRequestForm({
   isOpen,
   onClose,

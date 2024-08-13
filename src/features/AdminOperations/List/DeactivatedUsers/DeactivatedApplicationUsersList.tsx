@@ -5,6 +5,11 @@ import { Box } from "@mui/material";
 import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
 import ApplicationUserList from "../DataGrid/ApplicationUserList";
 
+/**
+ * Renders a list of deactivated application users.
+ *
+ * @returns The DeactivatedApplicationUsersList component.
+ */
 export default observer(function DeactivatedApplicationUsersList() {
   const { adminStore } = useStore();
 

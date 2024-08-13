@@ -17,6 +17,14 @@ interface Props {
   api: API;
 }
 
+/**
+ * Renders the details of a practice patient API for a student.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {API} props.api - The practice patient API data.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PracticePatientAPIDetailsForStudent({
   api,
 }: Props) {

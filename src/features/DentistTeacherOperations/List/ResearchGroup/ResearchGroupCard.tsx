@@ -11,7 +11,13 @@ interface Props {
   researchGroup: ResearchGroup;
 }
 
-export default observer(function ResearchGroupList({ researchGroup }: Props) {
+/**
+ * Renders a card component for a research group.
+ *
+ * @param researchGroup - The research group object.
+ * @returns The rendered ResearchGroupCard component.
+ */
+export default observer(function ResearchGroupCard({ researchGroup }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 

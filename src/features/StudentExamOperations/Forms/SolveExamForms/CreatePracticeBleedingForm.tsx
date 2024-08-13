@@ -9,6 +9,15 @@ interface Props {
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * Renders a form for creating a practice bleeding record.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {object} props.bleedingFormValues - The values of the bleeding form.
+ * @param {Function} props.handleChange - The function to handle form field changes.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function CreatePracticeBleedingForm({
   bleedingFormValues,
   handleChange,

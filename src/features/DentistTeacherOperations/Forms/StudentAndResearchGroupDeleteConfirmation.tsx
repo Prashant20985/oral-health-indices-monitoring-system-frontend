@@ -23,6 +23,18 @@ interface Props {
   isResearchGroup?: boolean;
 }
 
+/**
+ * Renders a confirmation dialog for deleting a student or research group.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the dialog is open.
+ * @param {string} props.groupId - The ID of the group to be deleted.
+ * @param {Function} props.onClose - The function to close the dialog.
+ * @param {string} props.groupName - The name of the group to be deleted.
+ * @param {boolean} [props.isResearchGroup=false] - Indicates whether the group is a research group.
+ * @returns {JSX.Element} The rendered confirmation dialog component.
+ */
 export default observer(function StudentAndResearchGroupDeleteConfirmation({
   isOpen,
   groupId,

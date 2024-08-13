@@ -24,6 +24,20 @@ interface Props {
   isEligibleForExam?: boolean;
 }
 
+/**
+ * Renders a student grade card component.
+ * 
+ * @param {Props} props - The component props.
+ * @param {number} props.studentMark - The student's mark.
+ * @param {string} props.doctorName - The name of the doctor who graded the exam.
+ * @param {string} props.doctorComment - The comment provided by the doctor.
+ * @param {string} props.subheader - The subheader text.
+ * @param {boolean} [props.isExamGoingOn=false] - Indicates if the exam is currently ongoing.
+ * @param {number} props.examId - The ID of the exam.
+ * @param {boolean} props.isEligibleForExam - Indicates if the student is eligible to take the exam.
+ *
+ * @returns {JSX.Element} The rendered student grade card component.
+ */
 export default function StudentGradeCard({
   studentMark,
   doctorName,

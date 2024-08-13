@@ -30,6 +30,17 @@ interface Props {
   isEdit?: boolean;
 }
 
+/**
+ * Renders a form for creating or editing a patient.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the form is open or not.
+ * @param {Function} props.onClose - The function to close the form.
+ * @param {boolean} [props.isEdit=false] - Indicates whether the form is in edit mode or not.
+ * @param {Patient | undefined} [props.patient=undefined] - The patient object to edit.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function CreateEditPatientForm({
   isOpen,
   onClose,
