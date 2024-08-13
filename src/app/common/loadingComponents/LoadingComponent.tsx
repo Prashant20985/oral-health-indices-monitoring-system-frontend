@@ -1,11 +1,11 @@
-import { CircularProgress, Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 interface Props {
   content?: string;
 }
 
-export default function ButtonLoadingComponent({
+export default function LoadingComponent({
   content = "common.loading-text",
 }: Props) {
   const [t] = useTranslation("global");

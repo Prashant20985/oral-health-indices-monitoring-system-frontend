@@ -4,7 +4,7 @@ import React from "react";
 import { colors } from "../../../themeConfig";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { PatientExaminationCard } from "../../../app/models/PatientExaminationCard";
-import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
+import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 
 const SummaryEditForm = React.lazy(() => import("../Forms/SummaryEditForm"));
 
@@ -111,7 +111,7 @@ export default observer(function IndexFormTabs({
           />
         </TabList>
         <TabPanel value="1">
-          <React.Suspense fallback={<ButtonLoadingComponent />}>
+          <React.Suspense fallback={<LoadingComponent />}>
             <RiskFactorAssessmentEditForm
               riskfactorAssessmentModel={
                 patientExaminationCard.riskFactorAssessment
@@ -124,7 +124,7 @@ export default observer(function IndexFormTabs({
           </React.Suspense>
         </TabPanel>
         <TabPanel value="2">
-          <React.Suspense fallback={<ButtonLoadingComponent />}>
+          <React.Suspense fallback={<LoadingComponent />}>
             <DMFT_DMFSDetails
               dmft_dmfs={
                 patientExaminationCard.patientExaminationResult.dmfT_DMFS
@@ -138,7 +138,7 @@ export default observer(function IndexFormTabs({
           </React.Suspense>
         </TabPanel>
         <TabPanel value="3">
-          <React.Suspense fallback={<ButtonLoadingComponent />}>
+          <React.Suspense fallback={<LoadingComponent />}>
             <BeweDetails
               bewe={patientExaminationCard.patientExaminationResult.bewe}
               isUserEligibleToEdit={isUserEligibleToEdit}
@@ -150,7 +150,7 @@ export default observer(function IndexFormTabs({
           </React.Suspense>
         </TabPanel>
         <TabPanel value="4">
-          <React.Suspense fallback={<ButtonLoadingComponent />}>
+          <React.Suspense fallback={<LoadingComponent />}>
             <APIDetails
               api={patientExaminationCard.patientExaminationResult.api}
               isUserEligibleToEdit={isUserEligibleToEdit}
@@ -162,7 +162,7 @@ export default observer(function IndexFormTabs({
           </React.Suspense>
         </TabPanel>
         <TabPanel value="5">
-          <React.Suspense fallback={<ButtonLoadingComponent />}>
+          <React.Suspense fallback={<LoadingComponent />}>
             <BleedingDetails
               bleeding={
                 patientExaminationCard.patientExaminationResult.bleeding
@@ -176,7 +176,7 @@ export default observer(function IndexFormTabs({
           </React.Suspense>
         </TabPanel>
         <TabPanel value="6">
-          <React.Suspense fallback={<ButtonLoadingComponent />}>
+          <React.Suspense fallback={<LoadingComponent />}>
             <SummaryEditForm
               isUserEligibleToEdit={isUserEligibleToEdit}
               summary={patientExaminationCard.summary}

@@ -3,7 +3,7 @@ import { useStore } from "../../../app/stores/Store";
 import { useParams } from "react-router-dom";
 import React from "react";
 import { Box } from "@mui/material";
-import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
+import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 import PatientExaminationDetailsHeaderCard from "./PatientExaminationDetailsHeaderCard";
 import IndexFormTabs from "./IndexFormTabs";
 
@@ -42,7 +42,7 @@ export default observer(function PatientExaminationCardDetails() {
     <Box>
       {loading ? (
         <Box>
-          <ButtonLoadingComponent content="Loading Card..." />
+          <LoadingComponent content="Loading Card..." />
         </Box>
       ) : patientExaminationCardDetails !== null ? (
         <Box>

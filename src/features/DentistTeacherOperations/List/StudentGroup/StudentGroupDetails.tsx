@@ -8,8 +8,6 @@ import {
   Card,
   CardActions,
   CardHeader,
-  IconButton,
-  Tooltip,
   Typography,
   Tab,
   useTheme,
@@ -56,18 +54,15 @@ export default observer(function StudentGroupDetails() {
         onClick={() => router.navigate("/student-groups")}
         sx={{ mb: 2 }}
       >
-        {t("dentist-teacher-operations.list.student-group.student-group-card.back-button")}
+        {t(
+          "dentist-teacher-operations.list.student-group.student-group-card.back-button"
+        )}
       </Button>
       <Box display="flex" flexDirection="column" gap={4}>
         <Card
           elevation={3}
           sx={{
-            backgroundColor:
-              theme.palette.mode === "dark"
-                ? color.primary[400]
-                : blueGrey[200],
-            padding: 1,
-            display: "flex",
+            backgroundColor: color.primary[400],
           }}
         >
           <CardHeader
@@ -76,15 +71,15 @@ export default observer(function StudentGroupDetails() {
               <Avatar
                 variant="rounded"
                 sx={{
-                  height: 100,
-                  width: 100,
+                  height: 70,
+                  width: 70,
                   backgroundColor:
                     theme.palette.mode === "dark"
                       ? blueGrey[500]
                       : blueGrey[600],
                 }}
               >
-                <SchoolOutlined sx={{ fontSize: 80, color: "whitesmoke" }} />
+                <SchoolOutlined sx={{ fontSize: 50, color: "whitesmoke" }} />
               </Avatar>
             }
             title={
@@ -94,25 +89,25 @@ export default observer(function StudentGroupDetails() {
             }
             subheader={
               <Typography variant="h6">
-                {t("dentist-teacher-operations.list.student-group.student-group-card.sub-header") + selectedStudentGroup?.students.length}
+                {t(
+                  "dentist-teacher-operations.list.student-group.student-group-card.sub-header"
+                ) + selectedStudentGroup?.students.length}
               </Typography>
             }
           />
-          <CardActions
-            sx={{
-              width: "100%",
-              height: "2rem",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Tooltip title={t("dentist-teacher-operations.list.student-group.student-group-card.edit-research-group-button")}>
-              <IconButton onClick={() => setOpenEdit(true)}>
-                <Edit
-                  color={theme.palette.mode === "dark" ? "secondary" : "info"}
-                />
-              </IconButton>
-            </Tooltip>
+          <CardActions>
+            <Box display="flex" justifyContent="flex-end" width="100%">
+              <Button
+                variant="outlined"
+                color={theme.palette.mode === "dark" ? "secondary" : "info"}
+                startIcon={<Edit />}
+                onClick={() => setOpenEdit(true)}
+              >
+                {t(
+                  "dentist-teacher-operations.list.student-group.student-group-card.edit-group-button"
+                )}
+              </Button>
+            </Box>
           </CardActions>
         </Card>
 
@@ -128,12 +123,22 @@ export default observer(function StudentGroupDetails() {
             >
               <Tab
                 label={
-                  <Typography color={color.grey[100]}>{t("dentist-teacher-operations.list.student-group.student-group-card.students-label")}</Typography>
+                  <Typography color={color.grey[100]}>
+                    {t(
+                      "dentist-teacher-operations.list.student-group.student-group-card.students-label"
+                    )}
+                  </Typography>
                 }
                 value="1"
               />
               <Tab
-                label={<Typography color={color.grey[100]}>{t("dentist-teacher-operations.list.student-group.student-group-card.exams-label")}</Typography>}
+                label={
+                  <Typography color={color.grey[100]}>
+                    {t(
+                      "dentist-teacher-operations.list.student-group.student-group-card.exams-label"
+                    )}
+                  </Typography>
+                }
                 value="2"
               />
             </TabList>
@@ -148,7 +153,9 @@ export default observer(function StudentGroupDetails() {
                       router.navigate(`/student-groups/${id}/add-students`)
                     }
                   >
-                    {t("dentist-teacher-operations.list.student-group.student-group-card.add-student-button")}
+                    {t(
+                      "dentist-teacher-operations.list.student-group.student-group-card.add-student-button"
+                    )}
                   </Button>
                 </Box>
                 {selectedStudentGroup?.students && (
@@ -163,12 +170,15 @@ export default observer(function StudentGroupDetails() {
               <Box display="flex" flexDirection="column" gap={1}>
                 <Box display="flex" justifyContent="flex-end">
                   <Button
+                    size="small"
                     color="success"
                     startIcon={<Add />}
                     variant="contained"
                     onClick={() => setOpenAdd(true)}
                   >
-                    {t("dentist-teacher-operations.list.student-group.student-group-card.publish-new-exam-button")}
+                    {t(
+                      "dentist-teacher-operations.list.student-group.student-group-card.publish-new-exam-button"
+                    )}
                   </Button>
                 </Box>
                 <ExamsList />

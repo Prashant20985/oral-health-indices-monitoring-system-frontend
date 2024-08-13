@@ -8,7 +8,7 @@ import {
   FormikTouched,
   FormikValues,
 } from "formik";
-import ButtonLoadingComponent from "../../../../app/common/loadingComponents/ButtonLoadingComponent";
+import LoadingComponent from "../../../../app/common/loadingComponents/LoadingComponent";
 import { ArrowBack, ArrowForward, Send } from "@mui/icons-material";
 import { colors } from "../../../../themeConfig";
 import { ExamSolutionFormValues } from "../../../../app/models/StudentExam";
@@ -78,7 +78,7 @@ function renderStepContent(
       );
     case 1:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <RiskFactorAssessment
             riskFactorAssessment={values.riskFactorAssessmentModel}
             handleChange={handleChnage}
@@ -88,7 +88,7 @@ function renderStepContent(
       );
     case 2:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <CreatePracticeDMFT_DMFSForm
             dmft_dmfsFormValues={values.practiceDMFT_DMFS}
             handleChange={handleChnage}
@@ -97,7 +97,7 @@ function renderStepContent(
       );
     case 3:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <CreatePracticeBeweForm
             beweFormValues={values.practiceBewe}
             handleChange={handleChnage}
@@ -106,7 +106,7 @@ function renderStepContent(
       );
     case 4:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <CreatePracticeAPIForm
             apiFormValues={values.practiceAPI}
             handleChange={handleChnage}
@@ -115,7 +115,7 @@ function renderStepContent(
       );
     case 5:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <CreatePracticeBleedingForm
             handleChange={handleChnage}
             bleedingFormValues={values.practiceBleeding}
@@ -124,7 +124,7 @@ function renderStepContent(
       );
     case 6:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <Summary
             summary={values.summary}
             handleChange={handleChnage}

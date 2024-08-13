@@ -19,7 +19,7 @@ import {
 import PatientDetails from "../../../PatientOperations/PatientProfile/PatientDetails";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { colors } from "../../../../themeConfig";
-import ButtonLoadingComponent from "../../../../app/common/loadingComponents/ButtonLoadingComponent";
+import LoadingComponent from "../../../../app/common/loadingComponents/LoadingComponent";
 import {
   AssignmentOutlined,
   Download,
@@ -274,7 +274,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 />
               </TabPanel>
               <TabPanel value="2">
-                <React.Suspense fallback={<ButtonLoadingComponent />}>
+                <React.Suspense fallback={<LoadingComponent />}>
                   <RiskFactorAssessment
                     riskFactorAssessment={
                       examCard.practiceRiskFactorAssessment
@@ -285,7 +285,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 </React.Suspense>
               </TabPanel>
               <TabPanel value="3">
-                <React.Suspense fallback={<ButtonLoadingComponent />}>
+                <React.Suspense fallback={<LoadingComponent />}>
                   <PracticePatientDMFT_DMFSDetailsForTeacher
                     dmft_dmfs={
                       examCard.practicePatientExaminationResult.dmfT_DMFS
@@ -295,7 +295,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 </React.Suspense>
               </TabPanel>
               <TabPanel value="4">
-                <React.Suspense fallback={<ButtonLoadingComponent />}>
+                <React.Suspense fallback={<LoadingComponent />}>
                   <PracticePatientBeweDetailsForTeacher
                     bewe={examCard.practicePatientExaminationResult.bewe}
                     cardId={examCard.id}
@@ -303,7 +303,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 </React.Suspense>
               </TabPanel>
               <TabPanel value="5">
-                <React.Suspense fallback={<ButtonLoadingComponent />}>
+                <React.Suspense fallback={<LoadingComponent />}>
                   <PracticePatientAPIDetailsForTeacher
                     api={examCard.practicePatientExaminationResult.api}
                     cardId={examCard.id}
@@ -311,7 +311,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 </React.Suspense>
               </TabPanel>
               <TabPanel value="6">
-                <React.Suspense fallback={<ButtonLoadingComponent />}>
+                <React.Suspense fallback={<LoadingComponent />}>
                   <PracticePatientBleedingDetailsForTeacher
                     bleeding={
                       examCard.practicePatientExaminationResult.bleeding
@@ -321,7 +321,7 @@ export default observer(function ExamSolutionDetailsForTeacher() {
                 </React.Suspense>
               </TabPanel>
               <TabPanel value="7">
-                <React.Suspense fallback={<ButtonLoadingComponent />}>
+                <React.Suspense fallback={<LoadingComponent />}>
                   <Summary summary={examCard.summary} isView />
                 </React.Suspense>
               </TabPanel>

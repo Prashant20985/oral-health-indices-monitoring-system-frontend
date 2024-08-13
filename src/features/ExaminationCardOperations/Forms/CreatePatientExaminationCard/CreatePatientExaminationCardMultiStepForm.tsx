@@ -1,6 +1,6 @@
 import { Form, Formik, FormikValues } from "formik";
 import React from "react";
-import ButtonLoadingComponent from "../../../../app/common/loadingComponents/ButtonLoadingComponent";
+import LoadingComponent from "../../../../app/common/loadingComponents/LoadingComponent";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
 import { useStore } from "../../../../app/stores/Store";
@@ -78,7 +78,7 @@ function renderStepContent(
   switch (step) {
     case 0:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <RiskFactorAssessment
             riskFactorAssessment={values.riskFactorAssessmentModel}
             handleChange={handleChnage}
@@ -88,7 +88,7 @@ function renderStepContent(
       );
     case 1:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <CreateDMFT_DMFSForm
             dmft_dmfsFormValues={values.dmfT_DMFS}
             handleChange={handleChnage}
@@ -97,7 +97,7 @@ function renderStepContent(
       );
     case 2:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <CreateBeweForm
             beweFormValues={values.bewe}
             handleChange={handleChnage}
@@ -106,7 +106,7 @@ function renderStepContent(
       );
     case 3:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <CreateAPIForm
             apiFormValues={values.api}
             handleChange={handleChnage}
@@ -115,7 +115,7 @@ function renderStepContent(
       );
     case 4:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <CreateBleedingForm
             handleChange={handleChnage}
             bleedingFormValues={values.bleeding}
@@ -124,7 +124,7 @@ function renderStepContent(
       );
     case 5:
       return (
-        <React.Suspense fallback={<ButtonLoadingComponent />}>
+        <React.Suspense fallback={<LoadingComponent />}>
           <Summary
             summary={values.summary}
             handleChange={handleChnage}
@@ -266,7 +266,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
             >
               <Grid item xs={12} md={4}>
                 {loading.patientDetails ? (
-                  <ButtonLoadingComponent content="Loading Patient Details..." />
+                  <LoadingComponent content="Loading Patient Details..." />
                 ) : patientDetails ? (
                   <>
                     <Card

@@ -5,7 +5,7 @@ import { colors } from "../../../themeConfig";
 import { useTranslation } from "react-i18next";
 import { useStore } from "../../../app/stores/Store";
 import React from "react";
-import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
+import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 
 interface Props {
   direction?: "row" | "column";
@@ -60,7 +60,7 @@ export default observer(function UpcomingExams({
         }}
       >
         {loadingUpcomingExams ? (
-          <ButtonLoadingComponent content="Loading Upcoming Exams..." />
+          <LoadingComponent content="Loading Upcoming Exams..." />
         ) : (
           <>
             {upcomingExams.length > 0 ? (

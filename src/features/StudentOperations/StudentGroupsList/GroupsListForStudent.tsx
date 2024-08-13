@@ -8,10 +8,15 @@ import { colors } from "../../../themeConfig";
 import { SearchRounded } from "@mui/icons-material";
 import UpcomingExams from "./UpcomingExams";
 import { useTranslation } from "react-i18next";
+import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 
 export default observer(function GroupsListForStudent() {
   const {
-    studentStore: { fetchStudentGroupsWithExams, studentGroupsWithExams },
+    studentStore: {
+      fetchStudentGroupsWithExams,
+      studentGroupsWithExams,
+      loading,
+    },
   } = useStore();
 
   const theme = useTheme();
@@ -74,13 +79,21 @@ export default observer(function GroupsListForStudent() {
                 ),
               }}
             />
-            <Grid container spacing={1} sx={{ mt: 1 }}>
-              {filteredGroups.map((group) => (
-                <Grid item md={12} lg={6} sm={12} xs={12} key={group.id}>
-                  <GroupForStudentCard group={group} />
+            {loading.studentGroupsWithExams ? (
+              <Box mt={5}>
+                <LoadingComponent />
+              </Box>
+            ) : (
+              <>
+                <Grid container spacing={1} sx={{ mt: 1 }}>
+                  {filteredGroups.map((group) => (
+                    <Grid item md={12} lg={6} sm={12} xs={12} key={group.id}>
+                      <GroupForStudentCard group={group} />
+                    </Grid>
+                  ))}
                 </Grid>
-              ))}
-            </Grid>
+              </>
+            )}
           </Box>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
