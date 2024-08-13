@@ -41,12 +41,12 @@ export default function CreatePracticeBleedingForm({
               fontweight: 600,
             }}
           >
-             {t("student-exam-operations.form.practice-bleeding-form.add-calculated-bleeding-result")}
+             {t("student-exam-operations.forms.practice-bleeding-form.add-calculated-bleeding-result")}
           </Typography>
         </Box>
         <Box display="flex" gap={2}>
           <TextField
-            label= {t("student-exam-operations.form.practice-bleeding-form.bleeding-result")}
+            label= {t("student-exam-operations.forms.practice-bleeding-form.bleeding-result")}
             variant="outlined"
             type="number"
             color="secondary"

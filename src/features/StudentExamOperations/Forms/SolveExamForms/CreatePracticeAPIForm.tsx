@@ -42,12 +42,12 @@ export default function CreatePracticeAPIForm({
               fontweight: 600,
             }}
           >
-            {t("student-exam-operations.form.practice-api-form.add-calculated-api-result")}
+            {t("student-exam-operations.forms.practice-api-form.add-calculated-api-result")}
           </Typography>
         </Box>
         <Box display="flex" gap={2}>
           <TextField
-            label={t("student-exam-operations.form.practice-api-form.api-result")}
+            label={t("student-exam-operations.forms.practice-api-form.api-result")}
             variant="outlined"
             type="number"
             value={apiFormValues.apiResult}
