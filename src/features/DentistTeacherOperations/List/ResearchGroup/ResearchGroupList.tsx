@@ -18,6 +18,7 @@ import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import ResearchGroupForm from "../../Forms/ResearchGroupForm";
 import { blueGrey } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
+import LoadingComponent from "../../../../app/common/loadingComponents/LoadingComponent";
 
 export default observer(function ResearchGroupList() {
   const { dentistTeacherStore } = useStore();
@@ -39,7 +40,9 @@ export default observer(function ResearchGroupList() {
   return (
     <Box>
       <Box display="flex" alignContent="center" justifyContent="space-between">
-        <Header title={t("dentist-teacher-operations.list.research-group.header")} />
+        <Header
+          title={t("dentist-teacher-operations.list.research-group.header")}
+        />
         <Button
           variant="contained"
           color="success"
@@ -49,7 +52,19 @@ export default observer(function ResearchGroupList() {
           {t("dentist-teacher-operations.list.research-group.add-button")}
         </Button>
       </Box>
-      <Box display="flex" mt={2} mb={2} width="40%">
+      <Box display="flex" mt={2} mb={2} width="40%"></Box>
+      <Paper
+        elevation={3}
+        sx={{
+          overflow: "auto",
+          backgroundColor:
+            theme.palette.mode === "dark" ? color.primary[500] : blueGrey[50],
+          p: 1.5,
+          borderRadius: 2,
+          height: "75vh",
+          mt: 2,
+        }}
+      >
         <TextField
           color="info"
           label={t("dentist-teacher-operations.list.research-group.search")}
@@ -57,6 +72,7 @@ export default observer(function ResearchGroupList() {
           type="text"
           fullWidth
           size="small"
+          sx={{ mb: 1, backgroundColor: "transparent" }}
           value={dentistTeacherStore.researchGroupName}
           onChange={(e) =>
             dentistTeacherStore.setResearchGroupName(e.target.value)
@@ -69,28 +85,29 @@ export default observer(function ResearchGroupList() {
             ),
           }}
         />
-      </Box>
-      <Paper
-        elevation={3}
-        sx={{
-          overflow: "auto",
-          backgroundColor:
-            theme.palette.mode === "dark" ? color.primary[500] : blueGrey[50],
-          p: 1.5,
-          borderRadius: 2,
-          height: "75vh",
-        }}
-      >
-        {dentistTeacherStore.researchGroups.length > 0 ? (
-          <Grid container spacing={1} sx={{ p: 1 }}>
-            {dentistTeacherStore.researchGroups.map((researchGroup) => (
-              <Grid item lg={3} md={6} sm={12} xs={18} key={researchGroup.id}>
-                <ResearchGroupCard researchGroup={researchGroup} />
-              </Grid>
-            ))}
-          </Grid>
+        {dentistTeacherStore.loading.researchGroups ? (
+          <LoadingComponent />
         ) : (
-          <NoRowsFound />
+          <>
+            {dentistTeacherStore.researchGroups.length > 0 ? (
+              <Grid container spacing={1} sx={{ p: 1 }}>
+                {dentistTeacherStore.researchGroups.map((researchGroup) => (
+                  <Grid
+                    item
+                    lg={3}
+                    md={6}
+                    sm={12}
+                    xs={18}
+                    key={researchGroup.id}
+                  >
+                    <ResearchGroupCard researchGroup={researchGroup} />
+                  </Grid>
+                ))}
+              </Grid>
+            ) : (
+              <NoRowsFound />
+            )}
+          </>
         )}
       </Paper>
       <ResearchGroupForm

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { PatientExaminationCard } from "../../../app/models/PatientExaminationCard";
 import { Box, Alert, Typography, Grid } from "@mui/material";
-import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
+import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 import PatientExaminationCardItem from "./PatientExaminationCardItem";
 import React from "react";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
@@ -23,7 +23,7 @@ export default observer(function PatientExaminationCardsList({
   return (
     <Box>
       {loading ? (
-        <ButtonLoadingComponent />
+        <LoadingComponent />
       ) : (
         <>
           {patientExaminationCards.length <= 0 ? (

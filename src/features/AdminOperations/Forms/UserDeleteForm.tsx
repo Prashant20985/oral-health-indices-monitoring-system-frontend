@@ -14,7 +14,7 @@ import SlideUpTransition from "../../../app/common/transition/SlideUpTransition"
 import { Form, Formik } from "formik";
 import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
 import CustomTextField from "../../../app/common/formInputs/CustomTextField";
-import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
+import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import { useTranslation } from "react-i18next";
 
@@ -156,7 +156,7 @@ export default observer(function UserDeleteForm({
                         }}
                       >
                         {isSubmitting ? (
-                          <ButtonLoadingComponent content={t("admin-operations.forms.user-delete-form.delete-loading")} />
+                          <LoadingComponent content={t("admin-operations.forms.user-delete-form.delete-loading")} />
                         ) : (
                           <p>{t("admin-operations.forms.user-delete-form.delete-button")}</p>
                         )}

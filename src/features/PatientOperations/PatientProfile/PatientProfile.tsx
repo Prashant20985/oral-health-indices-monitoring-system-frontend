@@ -7,7 +7,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { colors } from "../../../themeConfig";
 import { Details, Assessment, ChevronLeft, Add } from "@mui/icons-material";
 import PatientDetails from "./PatientDetails";
-import ButtonLoadingComponent from "../../../app/common/loadingComponents/ButtonLoadingComponent";
+import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 import PatientExaminationCardsList from "../../ExaminationCardOperations/List/PatientExaminationCardsList";
 import { router } from "../../../app/router/Routes";
 import { useTranslation } from "react-i18next";
@@ -113,7 +113,7 @@ export default observer(function PatientProfile() {
         </Box>
         <>
           {loading.patientDetails ? (
-            <ButtonLoadingComponent
+            <LoadingComponent
               content={t(
                 "patient-operations.patient-profile.loading-patient-details"
               )}

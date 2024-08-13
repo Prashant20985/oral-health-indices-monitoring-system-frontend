@@ -18,6 +18,7 @@ import AddStudentGroupForm from "../../Forms/AddStudentGroupForm";
 import NoRowsFound from "../../../../app/common/NoRowsFound/NoRowsFound";
 import { blueGrey } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
+import LoadingComponent from "../../../../app/common/loadingComponents/LoadingComponent";
 
 export default observer(function StudentGroupList() {
   const { dentistTeacherStore } = useStore();
@@ -44,7 +45,9 @@ export default observer(function StudentGroupList() {
   return (
     <Box display="flex" flexDirection="column">
       <Box display="flex" justifyContent="space-between" alignContent="center">
-        <Header title={t("dentist-teacher-operations.list.student-group.header")} />
+        <Header
+          title={t("dentist-teacher-operations.list.student-group.header")}
+        />
         <Button
           variant="contained"
           color="success"
@@ -53,25 +56,6 @@ export default observer(function StudentGroupList() {
         >
           {t("dentist-teacher-operations.list.student-group.add-button")}
         </Button>
-      </Box>
-      <Box display="flex" mt={2} mb={2} width="40%">
-        <TextField
-          color="info"
-          label={t("dentist-teacher-operations.list.student-group.search")}
-          variant="outlined"
-          type="text"
-          fullWidth
-          value={groupSearchQuery}
-          onChange={(e) => setGroupSearchQuery(e.target.value)}
-          size="small"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <SearchRounded color="info" />
-              </InputAdornment>
-            ),
-          }}
-        />
       </Box>
       <Paper
         elevation={3}
@@ -82,18 +66,43 @@ export default observer(function StudentGroupList() {
           p: 1.5,
           borderRadius: 2,
           height: "75vh",
+          mt: 2,
         }}
       >
-        {filteredGroups.length > 0 ? (
-          <Grid container spacing={1} sx={{ p: 1 }}>
-            {filteredGroups.map((group) => (
-              <Grid item md={6} lg={3} key={group.id}>
-                <StudentGroupCard group={group} />
-              </Grid>
-            ))}
-          </Grid>
+        <TextField
+          color="info"
+          label={t("dentist-teacher-operations.list.student-group.search")}
+          variant="outlined"
+          type="text"
+          fullWidth
+          value={groupSearchQuery}
+          onChange={(e) => setGroupSearchQuery(e.target.value)}
+          size="small"
+          sx={{ mb: 1, backgroundColor: "transparent" }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <SearchRounded color="info" />
+              </InputAdornment>
+            ),
+          }}
+        />
+        {dentistTeacherStore.loading.studentGroups ? (
+          <LoadingComponent />
         ) : (
-          <NoRowsFound />
+          <>
+            {filteredGroups.length > 0 ? (
+              <Grid container spacing={1} sx={{ p: 1 }}>
+                {filteredGroups.map((group) => (
+                  <Grid item md={6} lg={3} key={group.id}>
+                    <StudentGroupCard group={group} />
+                  </Grid>
+                ))}
+              </Grid>
+            ) : (
+              <NoRowsFound />
+            )}
+          </>
         )}
       </Paper>
       <AddStudentGroupForm
