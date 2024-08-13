@@ -12,18 +12,32 @@ import { UpdateDMFT_DMFSFormValues } from "../models/DMFT_DMFS";
 import { RiskFactorAssessmentModel } from "../models/RiskFactorAssesment";
 import { Summary } from "../models/Summary";
 
+/**
+ * Represents a store for managing patient examination cards.
+ */
 export class PatientExaminationCardStore {
+  // Represents the patientExaminationCards property.
   patientExaminationCards = new Map<string, PatientExaminationCard>();
+
+  // Represents the patientExaminationCardDetails property.
   patientExaminationCardDetails: PatientExaminationCard | null = null;
+
+  // Represents the patientExaminationCardsAssignedToDoctor property.
   patientExaminationCardsAssignedToDoctor = new Map<
     string,
     PatientExaminationCard
   >();
 
+  // Represents the Year property.
   year: number = new Date().getFullYear();
+
+  // Represents the Month property.
   month: number = new Date().getMonth() + 1;
+
+  // Represents the studentId property.
   studentId: string = "";
 
+  // Represents the loading states for various operations.
   loading = {
     commentPatientExaminationCard: false,
     commentAPIForm: false,
@@ -48,6 +62,7 @@ export class PatientExaminationCardStore {
   constructor() {
     makeAutoObservable(this);
 
+    // Reaction to the year, month, and studentId properties.
     reaction(
       () => ({
         year: this.year,
@@ -60,12 +75,14 @@ export class PatientExaminationCardStore {
     );
   }
 
+  // Sets the patientExaminationCardDetails property.
   setPatientExaminationCardDetails(
     patientExaminationCard: PatientExaminationCard
   ) {
     this.patientExaminationCardDetails = patientExaminationCard;
   }
 
+  // Sets the patientExaminationCards property.
   setPatientExaminationCards(
     patientExaminationCards: PatientExaminationCard[]
   ) {
@@ -77,10 +94,12 @@ export class PatientExaminationCardStore {
     });
   }
 
+  // Clears the patientExaminationCardDetails property.
   clearPatientExamiantionCards = () => {
     this.patientExaminationCards.clear();
   };
 
+  // Sets the patientExaminationCardsAssignedToDoctor property.
   setPatientExaminationCardsAssignedToDoctor(
     patientExaminationCards: PatientExaminationCard[]
   ) {
@@ -92,28 +111,42 @@ export class PatientExaminationCardStore {
     });
   }
 
+  // Sets the year property.
   setYear = (year: number) => {
     this.year = year;
   };
 
+  // Sets the month property.
   setMonth = (month: number) => {
     this.month = month;
   };
 
+  // Sets the studentId property.
   setStudentId = (studentId: string) => {
     this.studentId = studentId;
   };
 
+  // Gets patient examination card by id.
   getExaminationCardById(id: string) {
     return Array.from(this.patientExaminationCards.values())
       .concat(Array.from(this.patientExaminationCardsAssignedToDoctor.values()))
       .find((card) => card.id === id);
   }
 
+  // Gets patient examination card assigned to doctor by id.
   getExaminationCardAssignedToDoctorById(id: string) {
     return this.patientExaminationCardsAssignedToDoctor.get(id);
   }
 
+  
+  /**
+   * Returns an array of grouped patient examination cards.
+   * The patient examination cards are grouped by year and month of examination date.
+   * Each group is represented by a key in the format "YYYY-MM".
+   * The value of each key is an array of patient examination cards belonging to that group.
+   *
+   * @returns {Array<[string, PatientExaminationCard[]]>} - An array of grouped patient examination cards.
+   */
   get groupedPatientExaminationCards() {
     return Object.entries(
       this.patientExaminationCardsByDate.reduce(
@@ -138,6 +171,12 @@ export class PatientExaminationCardStore {
     );
   }
 
+  /**
+   * Returns an array of grouped patient examination cards assigned to a doctor.
+   * The patient examination cards are grouped by year and month of examination date.
+   * Each group is represented by a key in the format "YYYY-MM".
+   * @returns An array of grouped patient examination cards.
+   */
   get groupedPatientExaminationCardsAssignedToDoctor() {
     return Object.entries(
       this.patientExaminationCardsAssignedToDoctorByDate.reduce(
@@ -162,10 +201,20 @@ export class PatientExaminationCardStore {
     );
   }
 
+  /**
+   * Retrieves the top 4 patient examination cards assigned to the doctor.
+   *
+   * @returns An array containing the top 4 patient examination cards assigned to the doctor.
+   */
   get getTop4PatientExaminationCardsAssignedToDoctor() {
     return this.groupedPatientExaminationCardsAssignedToDoctor.slice(0, 4);
   }
 
+  /**
+   * Returns an array of patient examination cards sorted by date of examination in descending order.
+   *
+   * @returns {PatientExaminationCard[]} The sorted array of patient examination cards.
+   */
   get patientExaminationCardsByDate() {
     return Array.from(this.patientExaminationCards.values()).sort(
       (a, b) =>
@@ -174,6 +223,11 @@ export class PatientExaminationCardStore {
     );
   }
 
+  /**
+   * Retrieves an array of patient examination cards assigned to the doctor, sorted by date of examination in descending order.
+   *
+   * @returns {PatientExaminationCard[]} An array of patient examination cards assigned to the doctor, sorted by date of examination.
+   */
   get patientExaminationCardsAssignedToDoctorByDate() {
     return Array.from(
       this.patientExaminationCardsAssignedToDoctor.values()
@@ -184,6 +238,7 @@ export class PatientExaminationCardStore {
     );
   }
 
+  // Returns the axios params for getting patient examination cards assigned to the doctor.
   get patientExaminationCardsAssignedToDoctorAxiosParams() {
     const params = new URLSearchParams();
     params.append("year", this.year.toString());
@@ -192,18 +247,29 @@ export class PatientExaminationCardStore {
     return params;
   }
 
+  // Clears the patientExaminationCardDetails property.
   clearPatientExaminationCardDetails() {
     this.patientExaminationCardDetails = null;
   }
 
+  // Clears the patientExaminationCards property.
   clearPatientExaminationCards() {
     this.patientExaminationCards.clear();
   }
 
+  // Clears the patientExaminationCardsAssignedToDoctor property.
   clearPatientExaminationCardsAssignedToDoctor() {
     this.patientExaminationCardsAssignedToDoctor.clear();
   }
 
+  /**
+   * Creates a patient examination card by a doctor.
+   * 
+   * @param {string} patientId - The ID of the patient.
+   * @param {PatientExaminationCardByDoctorFormValues} values - The values for the patient examination card.
+   * @returns {Promise<void>} - A promise that resolves when the patient examination card is created.
+   * @throws {Error} - If an error occurs while creating the patient examination card.
+   */
   createPatientExaminationCardByDoctor = async (
     patientId: string,
     values: PatientExaminationCardByDoctorFormValues
@@ -231,6 +297,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Creates a patient examination card by a student.
+   * 
+   * @param {string} patientId - The ID of the patient.
+   * @param {PatientExaminationCardByStudentFormValues} values - The values for the patient examination card.
+   * @returns {Promise<void>} - A promise that resolves when the patient examination card is created.
+   * @throws {Error} - If an error occurs while creating the patient examination card.
+   */
   createPatientExaminationCardByStudent = async (
     patientId: string,
     values: PatientExaminationCardByStudentFormValues
@@ -258,6 +332,13 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Retrieves the examination cards for a specific patient.
+   * 
+   * @param patientId - The ID of the patient.
+   * @returns A promise that resolves to the patient examination cards.
+   * @throws If an error occurs while retrieving the examination cards.
+   */
   getPatientExaminationCards = async (patientId: string) => {
     this.loading.getPatientExaminationCards = true;
     try {
@@ -278,6 +359,12 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Retrieves the patient examination cards assigned to a doctor.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   * @throws {Error} If an error occurs during the retrieval process.
+   */
   getPatientExaminationCardsAssignedToDoctor = async () => {
     this.loading.getPatientExaminationCardsAssignedToDoctor = true;
     try {
@@ -301,6 +388,13 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Retrieves the details of a patient examination card.
+   * 
+   * @param {string} cardId - The ID of the examination card.
+   * @returns {Promise<void>} - A promise that resolves when the details are retrieved.
+   * @throws {Error} - If an error occurs while retrieving the details.
+   */
   getPatientExaminationCardDetails = async (cardId: string) => {
     this.loading.getPatientExaminationCardDetails = true;
     const card = this.getExaminationCardById(cardId);
@@ -327,6 +421,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Comments on a patient examination card.
+   * 
+   * @param {string} cardId - The ID of the patient examination card.
+   * @param {string} comment - The comment to be added.
+   * @returns {Promise<void>} - A promise that resolves when the comment is successfully added.
+   * @throws {Error} - If an error occurs while adding the comment.
+   */
   commentPatientExaminationCard = async (cardId: string, comment: string) => {
     this.loading.commentPatientExaminationCard = true;
     try {
@@ -354,6 +456,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Sends a comment to the API for a patient examination card.
+   * 
+   * @param {string} cardId - The ID of the patient examination card.
+   * @param {string} comment - The comment to be sent to the API.
+   * @returns {Promise<void>} - A promise that resolves when the comment is successfully sent.
+   * @throws {Error} - If an error occurs while sending the comment.
+   */
   commentAPIForm = async (cardId: string, comment: string) => {
     this.loading.commentAPIForm = true;
     try {
@@ -383,6 +493,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Adds a comment to the bleeding form of a patient examination card.
+   * 
+   * @param cardId - The ID of the patient examination card.
+   * @param comment - The comment to be added.
+   * @returns A promise that resolves when the comment is successfully added.
+   * @throws If an error occurs while adding the comment.
+   */
   commentBleedingForm = async (cardId: string, comment: string) => {
     this.loading.commentBleedingForm = true;
     try {
@@ -412,6 +530,13 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Adds a comment to the Bewe form of a patient examination card.
+   * 
+   * @param cardId - The ID of the patient examination card.
+   * @param comment - The comment to be added.
+   * @throws {Error} If an error occurs while adding the comment.
+   */
   commentBeweForm = async (cardId: string, comment: string) => {
     this.loading.commentBeweForm = true;
     try {
@@ -441,6 +566,13 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Adds a comment to the DMFT_DMFS form of a patient examination card.
+   * 
+   * @param cardId - The ID of the patient examination card.
+   * @param comment - The comment to be added.
+   * @throws {Error} If an error occurs while adding the comment.
+   */
   commentDMFT_DMFSForm = async (cardId: string, comment: string) => {
     this.loading.commentDMFT_DMFSForm = true;
     try {
@@ -470,6 +602,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Updates the API form for a patient examination card.
+   * 
+   * @param cardId - The ID of the card.
+   * @param values - The values to update the API form with.
+   * @returns A promise that resolves when the API form is successfully updated.
+   * @throws If an error occurs during the update process.
+   */
   updateAPIForm = async (
     cardId: string,
     values: APIBleedingAssessmentModel
@@ -506,6 +646,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Updates the bleeding form for a patient examination card.
+   * 
+   * @param {string} cardId - The ID of the patient examination card.
+   * @param {APIBleedingAssessmentModel} values - The values to update the bleeding form with.
+   * @returns {Promise<void>} - A promise that resolves when the bleeding form is successfully updated.
+   * @throws {Error} - If an error occurs while updating the bleeding form.
+   */
   updateBleedingForm = async (
     cardId: string,
     values: APIBleedingAssessmentModel
@@ -542,6 +690,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Updates the Bewe form for a patient examination card.
+   * 
+   * @param {string} cardId - The ID of the card.
+   * @param {BeweAssessmentModel} values - The updated Bewe assessment model.
+   * @returns {Promise<void>} - A promise that resolves when the update is complete.
+   * @throws {Error} - If an error occurs during the update process.
+   */
   updateBeweForm = async (cardId: string, values: BeweAssessmentModel) => {
     this.loading.updateBeweForm = true;
     try {
@@ -569,6 +725,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Updates the DMFT_DMFS form for a patient examination card.
+   * 
+   * @param cardId - The ID of the patient examination card.
+   * @param values - The values to update the form with.
+   * @returns A promise that resolves when the form is successfully updated.
+   * @throws An error if the form update fails.
+   */
   updateDMFT_DMFSForm = async (
     cardId: string,
     values: UpdateDMFT_DMFSFormValues
@@ -605,6 +769,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Updates the risk factor assessment for a patient examination card.
+   * 
+   * @param {string} cardId - The ID of the card to update.
+   * @param {RiskFactorAssessmentModel} values - The updated risk factor assessment values.
+   * @returns {Promise<void>} - A promise that resolves when the update is complete.
+   * @throws {Error} - If an error occurs during the update process.
+   */
   updateRiskFactorAssessment = async (
     cardId: string,
     values: RiskFactorAssessmentModel
@@ -631,6 +803,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Updates the summary of a patient examination card.
+   * 
+   * @param {string} cardId - The ID of the card to update.
+   * @param {Summary} summary - The new summary to set.
+   * @returns {Promise<void>} - A promise that resolves when the summary is updated successfully.
+   * @throws {Error} - If an error occurs while updating the summary.
+   */
   updateSummary = async (cardId: string, summary: Summary) => {
     this.loading.updatePatientExaminationCardSummary = true;
     try {
@@ -653,6 +833,13 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Deletes a patient examination card.
+   *
+   * @param {string} cardId - The ID of the card to be deleted.
+   * @returns {Promise<void>} - A promise that resolves when the card is successfully deleted.
+   * @throws {Error} - If an error occurs during the deletion process.
+   */
   deletePatientExaminationCard = async (cardId: string) => {
     this.loading.deletePatientExaminationCard = true;
     try {
@@ -672,6 +859,14 @@ export class PatientExaminationCardStore {
     }
   };
 
+  /**
+   * Grades a patient examination card.
+   * 
+   * @param {string} cardId - The ID of the card to be graded.
+   * @param {number} grade - The grade to assign to the card.
+   * @returns {Promise<void>} - A promise that resolves when the grading is complete.
+   * @throws {Error} - If an error occurs during the grading process.
+   */
   gradePatientExaminationCard = async (cardId: string, grade: number) => {
     this.loading.gradePatientExaminationCard = true;
     try {

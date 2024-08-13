@@ -17,6 +17,11 @@ import { router } from "../../../app/router/Routes";
 import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a component for displaying user requests in the dashboard.
+ * 
+ * @returns The rendered UserRequestShortcut component.
+ */
 export default observer(function UserRequesthortcut() {
   const { userRequestStore } = useStore();
   const theme = useTheme();

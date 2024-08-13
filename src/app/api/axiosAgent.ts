@@ -51,9 +51,21 @@ import { LogResponse } from "../models/Logs";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
+/**
+ * Extracts the data from the Axios response.
+ *
+ * @param response The Axios response object.
+ * @returns The data extracted from the response.
+ * @template T The type of the data in the response.
+ */
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 axios.interceptors.request.use((config) => {
+  /**
+   * Retrieves the token from the common store.
+   *
+   * @returns The token value.
+   */
   const token = store.commonStore.token;
   if (token && config.headers) config.headers.Authorization = `Bearer ${token}`;
   return config;
@@ -64,6 +76,12 @@ axios.interceptors.response.use(
     return res;
   },
   (error: AxiosError) => {
+    /**
+     * Extracts the `data`, `status`, and `config` properties from the `error.response` object.
+     *
+     * @param {AxiosError} error - The Axios error object.
+     * @returns {AxiosResponse} - The extracted `data`, `status`, and `config` properties.
+     */
     const { data, status, config } = error.response as AxiosResponse;
     switch (status) {
       case 400:
@@ -84,6 +102,14 @@ axios.interceptors.response.use(
   }
 );
 
+/**
+ * A collection of API request methods.
+ * @typedef {Object} ApiRequests
+ * @property {<T>(url: string) => Promise<T>} get - Sends a GET request to the specified URL and returns the response body.
+ * @property {<T>(url: string, body: object) => Promise<T>} post - Sends a POST request to the specified URL with the given body and returns the response body.
+ * @property {<T>(url: string, body: object) => Promise<T>} put - Sends a PUT request to the specified URL with the given body and returns the response body.
+ * @property {<T>(url: string) => Promise<T>} del - Sends a DELETE request to the specified URL and returns the response body.
+ */
 const apiRequests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
   post: <T>(url: string, body: object) =>
@@ -93,6 +119,9 @@ const apiRequests = {
   del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 };
 
+/**
+ * AccountOperations is an object that contains various methods for performing account-related operations.
+ */
 const AccountOperations = {
   currentUser: () => apiRequests.get<UserResposne>("/account/current-user"),
 
@@ -112,6 +141,12 @@ const AccountOperations = {
     apiRequests.post<UserResposne>("/account/refreshToken", {}),
 };
 
+/**
+ * AdminOperations is an object that contains various methods for performing administrative operations.
+ * These methods are used for managing users, logs, and other administrative tasks.
+ * Each method corresponds to a specific operation and accepts different parameters.
+ * The methods in this object make use of the axios library for making HTTP requests.
+ */
 const AdminOperations = {
   activeUsersList: (params: URLSearchParams) =>
     axios
@@ -163,6 +198,10 @@ const AdminOperations = {
     axios.get<LogResponse>("/log/filtered-logs", { params }).then(responseBody),
 };
 
+/**
+ * DentistTeacherOperations represents a collection of operations related to dentist teachers.
+ * These operations provide functionality for managing student groups, research groups, and supervised students.
+ */
 const DentistTeacherOperations = {
   createStudentGroup: (groupName: string) =>
     apiRequests.post<void>(
@@ -272,6 +311,9 @@ const DentistTeacherOperations = {
       .then(responseBody),
 };
 
+/**
+ * UserRequestOperations is an object that contains various operations related to user requests.
+ */
 const UserRequestOperations = {
   userRequestListForAdmin: (params: URLSearchParams) =>
     axios.get<UserRequest[]>(`/userRequest/user-requests`, { params }),
@@ -311,6 +353,9 @@ const UserRequestOperations = {
     ),
 };
 
+/**
+ * PatientOperations represents a collection of functions for performing operations on patients.
+ */
 const PatientOperations = {
   createPatient: (values: CreateUpdatePatientFormValues) =>
     apiRequests.post<void>("/patient/create-patient", values),
@@ -344,6 +389,9 @@ const PatientOperations = {
     apiRequests.get<Patient>(`/patient/patient-details/${patientId}`),
 };
 
+/**
+ * StudentExamOperations is an object that contains various methods for interacting with student exams.
+ */
 const StudentExamOperations = {
   publishExam: (values: PublishExam) =>
     apiRequests.post<Exam>("/StudentExam/publish-exam", values),
@@ -418,6 +466,9 @@ const StudentExamOperations = {
     apiRequests.get<Exam[]>(`/StudentExam/upcoming-exams`),
 };
 
+/**
+ * Represents a collection of operations related to student data.
+ */
 const StudentOperations = {
   getStudentGroupsWithExams: () =>
     apiRequests.get<GroupWithExams[]>("/student/student-groups"),
@@ -430,6 +481,9 @@ const StudentOperations = {
   getSupervisors: () => apiRequests.get<Supervisor[]>("student/supervisors"),
 };
 
+/**
+ * Operations for manipulating patient examination cards.
+ */
 const PatientExamintionCardOperations = {
   commentPatientExaminationCard: (cardId: string, comment: string) =>
     apiRequests.put<void>(
@@ -548,6 +602,9 @@ const PatientExamintionCardOperations = {
     ),
 };
 
+/**
+ * Exports operations for downloading Excel files.
+ */
 const ExportOperations = {
   exportExamSolution: async (examSolution: ExamSolution): Promise<void> => {
     try {
@@ -610,6 +667,19 @@ const ExportOperations = {
   },
 };
 
+/**
+ * The axiosAgent object is responsible for handling various API operations.
+ * It contains the following properties:
+ * - AccountOperations: Handles account-related operations.
+ * - AdminOperations: Handles admin-related operations.
+ * - DentistTeacherOperations: Handles operations related to dentists and teachers.
+ * - UserRequestOperations: Handles user request operations.
+ * - PatientOperations: Handles patient-related operations.
+ * - StudentExamOperations: Handles student exam operations.
+ * - StudentOperations: Handles student-related operations.
+ * - PatientExamintionCardOperations: Handles patient examination card operations.
+ * - ExportOperations: Handles export operations.
+ */
 const axiosAgent = {
   AccountOperations,
   AdminOperations,

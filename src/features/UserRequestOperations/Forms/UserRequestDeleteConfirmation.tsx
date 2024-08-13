@@ -19,6 +19,16 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a dialog component for confirming the deletion of a user request.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {UserRequest} props.userRequest - The user request to be deleted.
+ * @param {boolean} props.isOpen - Indicates whether the dialog is open or not.
+ * @param {() => void} props.onClose - The function to close the dialog.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function UserRequestDeleteConfirmation({
   userRequest,
   isOpen,

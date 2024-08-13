@@ -44,6 +44,11 @@ const Summary = React.lazy(
   () => import("../../../IndexCalculationForms/SummaryForm")
 );
 
+/**
+ * Renders the details of an exam solution for a teacher.
+ * 
+ * @returns JSX element representing the exam solution details for a teacher.
+ */
 export default observer(function ExamSolutionDetailsForTeacher() {
   const { cardId } = useParams<{ cardId: string }>();
   const [value, setValue] = React.useState("1");

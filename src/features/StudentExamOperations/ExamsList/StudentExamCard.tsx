@@ -42,6 +42,17 @@ interface Props {
   isTop3?: boolean;
 }
 
+/**
+ * Renders an exam card component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Exam} props.exam - The exam object.
+ * @param {boolean} props.isForStudentUser - Indicates if the user is a student.
+ * @param {boolean} props.isExamDetails - Indicates if the card is for exam details.
+ * @param {boolean} props.isTop3 - Indicates if the card is one of the top 3 exams.
+ * @returns {JSX.Element} The exam card component.
+ */
 export default observer(function StudentExamCard({
   exam,
   isForStudentUser,

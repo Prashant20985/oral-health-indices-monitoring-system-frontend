@@ -14,6 +14,18 @@ interface Props {
   name?: string;
 }
 
+/**
+ * Component for rendering additional tooth inputs for DMFT_DMFS calculation form.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Object} props.upperMouth - The upper mouth object.
+ * @param {Object} props.lowerMouth - The lower mouth object.
+ * @param {Function} props.handleChange - The change event handler.
+ * @param {boolean} props.isView - Indicates if the form is in view mode.
+ * @param {string} props.name - The name of the component.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default React.memo(function DMFT_DMFSExtraToothInput({
   upperMouth,
   lowerMouth,

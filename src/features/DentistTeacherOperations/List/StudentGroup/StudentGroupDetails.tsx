@@ -24,6 +24,11 @@ import ExamsList from "../../../StudentExamOperations/ExamsList/ExamsList";
 import PublishExamForm from "../../../StudentExamOperations/Forms/PublishExamForm";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the details of a student group.
+ * 
+ * @returns The JSX element representing the student group details.
+ */
 export default observer(function StudentGroupDetails() {
   const {
     dentistTeacherStore: { selectedStudentGroup, getStudentGroup },

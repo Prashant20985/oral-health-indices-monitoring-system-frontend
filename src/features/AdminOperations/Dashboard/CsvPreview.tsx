@@ -15,6 +15,16 @@ interface Props {
   handleSave: (file: File) => void;
 }
 
+/**
+ * Renders a preview of a CSV file and provides functionality to handle saving the file.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {File} props.file - The CSV file to preview.
+ * @param {Function} props.handleSave - The function to handle saving the file.
+ * @param {boolean} props.loading - Indicates whether the file is currently being loaded.
+ * @returns {JSX.Element} The rendered CsvPreview component.
+ */
 export default function CsvPreview({ file, handleSave, loading }: Props) {
   const isCSVFile = file?.name.toLocaleLowerCase().endsWith(".csv");
 

@@ -24,6 +24,14 @@ interface Props {
   researchGroup: ResearchGroup;
 }
 
+/**
+ * Renders the actions for a research group card.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {ResearchGroup} props.researchGroup - The research group object.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function ResearchGroupCardActions({
   researchGroup,
 }: Props) {

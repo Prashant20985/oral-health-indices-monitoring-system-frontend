@@ -1,15 +1,27 @@
 import { FiveSurfaceToothBewe, FourSurfaceTooth } from "./Tooth";
 
+/**
+ * Represents the form values for the PracticeBeweForm.
+ */
 export interface PracticeBeweFormValues {
   assessmentModel: BeweAssessmentModel;
   beweResult: number;
 }
 
+/**
+ * Represents a Bewe object.
+ *
+ * @remarks
+ * This interface extends the `PracticeBeweFormValues` interface and adds the `id` and `comment` properties.
+ */
 export interface Bewe extends PracticeBeweFormValues {
   id: string;
   comment: string;
 }
 
+/**
+ * Represents the values of a Bewe assessment.
+ */
 export interface BeweValues {
   id: string;
   beweResult: number;
@@ -18,11 +30,17 @@ export interface BeweValues {
   assessmentModel: BeweAssessmentModel;
 }
 
+/**
+ * Represents the form values for Bewe.
+ */
 export interface BeweFormValues {
   comment: string;
   assessmentModel: BeweAssessmentModel;
 }
 
+/**
+ * Represents a Bewe assessment model.
+ */
 export interface BeweAssessmentModel {
   sectant1: {
     tooth_17: FiveSurfaceToothBewe;

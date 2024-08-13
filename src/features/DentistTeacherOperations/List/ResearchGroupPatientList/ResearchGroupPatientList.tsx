@@ -22,6 +22,21 @@ interface Props {
   rowCount?: number;
 }
 
+/**
+ * Renders a list of patients in a research group.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Array<Patient>} props.patients - The list of patients.
+ * @param {boolean} [props.loading=false] - Indicates if the list is currently loading.
+ * @param {boolean} [props.patientsInGroupList=true] - Indicates if the patients are in the group list.
+ * @param {number} props.researchGroupId - The ID of the research group.
+ * @param {number} props.page - The current page number.
+ * @param {number} props.pageSize - The number of patients to display per page.
+ * @param {Function} props.setPaginationParams - A function to set the pagination parameters.
+ * @param {number} props.rowCount - The total number of rows in the list.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function ResearchGroupPatientList({
   patients,
   loading = false,

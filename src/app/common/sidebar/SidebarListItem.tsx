@@ -16,6 +16,16 @@ interface Props {
   text: string;
 }
 
+/**
+ * Renders a sidebar list item.
+ *
+ * @param {Props} props - The component props.
+ * @param {boolean} props.open - Indicates if the sidebar item is open.
+ * @param {string} props.path - The path of the sidebar item.
+ * @param {ReactNode} props.icon - The icon of the sidebar item.
+ * @param {string} props.text - The text of the sidebar item.
+ * @returns {JSX.Element} The rendered sidebar list item.
+ */
 export default function SidebarListItem({ open, path, icon, text }: Props) {
   const theme = useTheme();
 

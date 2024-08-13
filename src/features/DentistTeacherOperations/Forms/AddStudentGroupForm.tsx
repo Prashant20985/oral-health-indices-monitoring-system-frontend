@@ -16,6 +16,15 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a form for adding a student group.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the form is open or not.
+ * @param {Function} props.onClose - The function to close the form.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function AddGroupForm({ isOpen, onClose }: Props) {
   const { dentistTeacherStore } = useStore();
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);

@@ -4,6 +4,11 @@ import * as React from "react";
 import ColorModeToggle from "./ColorModeToggle";
 import LanguageSelect from "./LanguageSelect";
 
+/**
+ * Renders a settings option component.
+ * 
+ * @returns The rendered settings option component.
+ */
 export default function SettingsOption() {
   const [anchorElSettings, setAnchorElSettings] =
     React.useState<null | HTMLElement>(null);

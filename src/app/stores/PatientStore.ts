@@ -6,15 +6,26 @@ import {
 } from "../models/Patient";
 import axiosAgent from "../api/axiosAgent";
 
+/**
+ * Represents a store for managing patient data.
+ */
 export class PatientStore {
+  // Represents the activePatients property.
   activePatients: PaginatedPatient = { patients: [], totalPatientsCount: 0 };
+
+  // Represents the archivedPatients property.
   archivedPatients: PaginatedPatient = { patients: [], totalPatientsCount: 0 };
+
+  // Represents the patientDetails property.
   patientDetails: Patient | null = null;
 
+  // Represents the activePatientsSerachParams property.
   activePatientsSerachParams = { name: "", email: "", page: 0, pageSize: 20 };
 
+  // Represents the archivedPatientsSearchParams property.
   archivedPatientsSearchParams = { name: "", email: "", page: 0, pageSize: 20 };
 
+  // Represents the loading state for various operations.
   loading = {
     activePatients: false,
     archivedPatients: false,
@@ -29,6 +40,7 @@ export class PatientStore {
   constructor() {
     makeAutoObservable(this);
 
+    // Reaction to the activePatientsSerachParams properties.
     reaction(
       () => ({
         name: this.activePatientsSerachParams.name,
@@ -41,6 +53,7 @@ export class PatientStore {
       }
     );
 
+    // Reaction to the archivedPatientsSearchParams properties.
     reaction(
       () => ({
         name: this.archivedPatientsSearchParams.name,
@@ -52,18 +65,22 @@ export class PatientStore {
     );
   }
 
+  // Sets the activePatients property.
   setActivePatients = (patients: PaginatedPatient) => {
     this.activePatients = patients;
   };
 
+  // Sets the archivedPatients property.
   setArchivedPatients = (patients: PaginatedPatient) => {
     this.archivedPatients = patients;
   };
 
+  // Sets the patientDetails property.
   setPatientDetails = (patient: Patient) => {
     this.patientDetails = patient;
   };
 
+  // Sets the activePatientsSerachParams property.
   setActivePatientsSearchParams = (searchParams: {
     name: string;
     email: string;
@@ -73,6 +90,7 @@ export class PatientStore {
     this.activePatientsSerachParams = searchParams;
   };
 
+  // Sets the archivedPatientsSearchParams property.
   setArchivedPatientsSearchParams = (searchParams: {
     name: string;
     email: string;
@@ -82,22 +100,27 @@ export class PatientStore {
     this.archivedPatientsSearchParams = searchParams;
   };
 
+  // Clears the activePatientsSerachParams name property.
   clearActivePatientNameSearch = () => {
     this.activePatientsSerachParams.name = "";
   };
 
+  // Clears the activePatientsSerachParams email property
   clearActivePatientEmailSearch = () => {
     this.activePatientsSerachParams.email = "";
   };
 
+  // Clears the archivedPatientsSearchParams name property.
   clearArchivedPatientNameSearch = () => {
     this.archivedPatientsSearchParams.name = "";
   };
 
+  // Clears the archivedPatientsSearchParams email property.
   clearArchivedPatientEmailSearch = () => {
     this.archivedPatientsSearchParams.email = "";
   };
 
+  // Gets the URLSearchParams for the activePatientsSerachParams property.
   get activePatientAxiosParams() {
     const params = new URLSearchParams();
     params.append("name", this.activePatientsSerachParams.name);
@@ -110,6 +133,7 @@ export class PatientStore {
     return params;
   }
 
+  // Gets the URLSearchParams for the archivedPatientsSearchParams property.
   get archivedPatientAxiosParams() {
     const params = new URLSearchParams();
     params.append("name", this.archivedPatientsSearchParams.name);
@@ -122,12 +146,19 @@ export class PatientStore {
     return params;
   }
 
+  // Gets the patient by ID.
   getPatientById = (patientId: string) => {
     return this.activePatients.patients
       .concat(this.archivedPatients.patients)
       .find((p) => p.id === patientId);
   };
 
+  /**
+   * Fetches active patients from the server.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the active patients are fetched successfully.
+   * @throws {Error} If there is an error while fetching the active patients.
+   */
   fetchActivePatients = async () => {
     this.loading.activePatients = true;
     try {
@@ -145,6 +176,12 @@ export class PatientStore {
     }
   };
 
+  /**
+   * Fetches the archived patients from the server.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   * @throws {Error} If an error occurs during the operation.
+   */
   fetchArchivedPatients = async () => {
     this.loading.archivedPatients = true;
     try {
@@ -162,6 +199,13 @@ export class PatientStore {
     }
   };
 
+  /**
+   * Creates a new patient.
+   *
+   * @param values - The values for creating the patient.
+   * @returns A promise that resolves when the patient is created.
+   * @throws If an error occurs during the creation process.
+   */
   createPatient = async (values: CreateUpdatePatientFormValues) => {
     this.loading.createPatient = true;
     try {
@@ -177,6 +221,14 @@ export class PatientStore {
     }
   };
 
+  /**
+   * Updates a patient's information.
+   *
+   * @param {string} patientId - The ID of the patient to update.
+   * @param {CreateUpdatePatientFormValues} values - The updated values for the patient.
+   * @returns {Promise<void>} - A promise that resolves when the patient is successfully updated.
+   * @throws {Error} - If an error occurs during the update process.
+   */
   updatePatient = async (
     patientId: string,
     values: CreateUpdatePatientFormValues
@@ -200,6 +252,14 @@ export class PatientStore {
     }
   };
 
+  /**
+   * Archives a patient.
+   *
+   * @param {string} patientId - The ID of the patient to be archived.
+   * @param {string} archiveComment - The comment for archiving the patient.
+   * @returns {Promise<void>} - A promise that resolves when the patient is successfully archived.
+   * @throws {Error} - If an error occurs while archiving the patient.
+   */
   archivePatient = async (patientId: string, archiveComment: string) => {
     this.loading.archivePatient = true;
     try {
@@ -232,6 +292,14 @@ export class PatientStore {
     }
   };
 
+  /**
+   * Unarchives a patient by setting their isArchived property to false.
+   * Moves the patient from the archivedPatients array to the activePatients array.
+   * Updates the totalPatientsCount for both arrays.
+   * 
+   * @param patientId - The ID of the patient to unarchive.
+   * @throws If an error occurs during the unarchiving process.
+   */
   unarchivePatient = async (patientId: string) => {
     this.loading.unarchivePatient = true;
     try {
@@ -260,6 +328,13 @@ export class PatientStore {
     }
   };
 
+  /**
+   * Deletes a patient from the system.
+   * 
+   * @param {string} patientId - The ID of the patient to be deleted.
+   * @returns {Promise<void>} - A promise that resolves when the patient is successfully deleted.
+   * @throws {Error} - If an error occurs while deleting the patient.
+   */
   deletePatient = async (patientId: string) => {
     this.loading.deletePatient = true;
     const patient = this.getPatientById(patientId);
@@ -282,6 +357,13 @@ export class PatientStore {
     }
   };
 
+  /**
+   * Fetches the details of a patient.
+   * 
+   * @param patientId - The ID of the patient.
+   * @returns A Promise that resolves to the patient details.
+   * @throws If an error occurs during the fetch operation.
+   */
   fetchPatientDetails = async (patientId: string) => {
     this.loading.patientDetails = true;
     const patient = this.getPatientById(patientId);

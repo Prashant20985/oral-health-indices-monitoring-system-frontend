@@ -6,6 +6,11 @@ import { useStore } from "../../../app/stores/Store";
 import { Box, Grid } from "@mui/material";
 import StudentExamCard from "../ExamsList/StudentExamCard";
 
+/**
+ * Renders the details of an exam.
+ *
+ * @returns The ExamDetails component.
+ */
 export default observer(function ExamDetails() {
   const {
     studentExamStore: {

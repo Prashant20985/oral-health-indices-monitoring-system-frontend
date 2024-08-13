@@ -11,6 +11,14 @@ interface Props {
   direction?: "row" | "column";
 }
 
+/**
+ * Renders a component that displays upcoming exams for students.
+ *
+ * @component
+ * @param {Object} Props - The component props.
+ * @param {string} Props.direction - The direction of the component layout. Defaults to "column".
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function UpcomingExams({
   direction = "column",
 }: Props) {

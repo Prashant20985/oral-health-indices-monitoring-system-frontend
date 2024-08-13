@@ -21,6 +21,20 @@ interface Props {
   onSubmit: () => void;
 }
 
+/**
+ * Component for displaying a countdown timer for solving an exam.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <SolveExamCountdownTimer duration="01:30:00" onSubmit={handleExamSubmission} />
+ * ```
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.duration - The duration of the exam in the format "HH:MM:SS".
+ * @param {Function} props.onSubmit - The function to be called when the exam time is up and the exam needs to be submitted.
+ * @returns {JSX.Element} The countdown timer component.
+ */
 export default function SolveExamCountdownTimer({ duration, onSubmit }: Props) {
   const [timerHours, setTimerHours] = React.useState("00");
   const [timerMinutes, setTimerMinutes] = React.useState("00");

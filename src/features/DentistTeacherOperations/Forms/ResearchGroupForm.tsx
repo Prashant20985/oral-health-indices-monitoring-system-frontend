@@ -20,6 +20,19 @@ interface Props {
   isEdit?: boolean;
 }
 
+/**
+ * Renders a form for creating or editing a research group.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the form is open or not.
+ * @param {Function} props.onClose - The function to close the form.
+ * @param {string} props.researchGroupId - The ID of the research group (optional).
+ * @param {string} props.groupName - The name of the research group (optional).
+ * @param {string} props.description - The description of the research group (optional).
+ * @param {boolean} props.isEdit - Indicates whether the form is in edit mode or not.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function ResearchGroupForm({
   isOpen,
   onClose,

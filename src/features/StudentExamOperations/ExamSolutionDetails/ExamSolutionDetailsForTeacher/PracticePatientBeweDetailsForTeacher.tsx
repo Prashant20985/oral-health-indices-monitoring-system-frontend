@@ -29,6 +29,15 @@ interface Props {
   cardId: string;
 }
 
+/**
+ * Renders the details of a practice patient BEWE for a teacher.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Bewe} props.bewe - The BEWE object.
+ * @param {string} props.cardId - The card ID.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PracticePatientBeweDetailsForTeacher({
   bewe,
   cardId,

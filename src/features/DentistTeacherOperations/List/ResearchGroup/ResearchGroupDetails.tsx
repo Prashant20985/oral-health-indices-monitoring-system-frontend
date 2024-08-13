@@ -23,6 +23,11 @@ import { router } from "../../../../app/router/Routes";
 import { blueGrey } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the details of a research group.
+ *
+ * @returns The JSX element representing the research group details.
+ */
 export default observer(function ResearchGroupDetails() {
   const { dentistTeacherStore } = useStore();
   const { selectedResearchGroup } = dentistTeacherStore;

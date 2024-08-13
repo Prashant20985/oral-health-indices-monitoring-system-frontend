@@ -12,6 +12,17 @@ interface Props {
   errors?: FormikErrors<PracticePatient>;
 }
 
+/**
+ * Renders a form for creating a practice patient.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Function} props.handleChange - The function to handle input change.
+ * @param {Patient} props.patient - The patient object.
+ * @param {boolean} props.touched - The touched state of the form fields.
+ * @param {Object} props.errors - The errors object for form validation.
+ * @returns {JSX.Element} The rendered CreatePracticePatientForm component.
+ */
 export default function CreatePracticePatientForm({
   handleChange,
   patient,

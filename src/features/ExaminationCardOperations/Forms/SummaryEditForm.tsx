@@ -16,6 +16,17 @@ interface Props {
   setIsEditMode: (value: boolean) => void;
 }
 
+/**
+ * Renders a form for editing the summary of an examination card.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.cardId - The ID of the examination card.
+ * @param {Summary} props.summary - The summary data of the examination card.
+ * @param {boolean} props.isUserEligibleToEdit - Indicates whether the user is eligible to edit the summary.
+ * @param {Function} props.setIsEditMode - A function to set the edit mode of the form.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function SummaryEditForm({
   cardId,
   summary,

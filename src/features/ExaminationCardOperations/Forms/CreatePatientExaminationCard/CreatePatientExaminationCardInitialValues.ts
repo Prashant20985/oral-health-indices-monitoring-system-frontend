@@ -3,6 +3,14 @@ import {
   PatientExaminationCardByStudentFormValues,
 } from "../../../../app/models/PatientExaminationCard";
 
+/**
+ * Initial values for creating a patient examination card.
+ *
+ * @remarks
+ * This object represents the initial values for creating a patient examination card.
+ * It includes properties for the assigned doctor ID, 
+ * patient examination card comment, summary, risk factor assessment model, dmfT_DMFS, and bewe.
+ */
 export const CreatePatientExaminationCardInitialValues:
   | PatientExaminationCardByDoctorFormValues
   | PatientExaminationCardByStudentFormValues = {

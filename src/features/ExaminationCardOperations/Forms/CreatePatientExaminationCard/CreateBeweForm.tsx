@@ -8,6 +8,15 @@ interface Props {
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * Renders a form for creating a practice BEWE (Basic Erosive Wear Examination) card.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {object} props.beweFormValues - The values of the BEWE form.
+ * @param {Function} props.handleChange - The function to handle form field changes.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function CreatePracticeBeweForm({
   beweFormValues,
   handleChange,

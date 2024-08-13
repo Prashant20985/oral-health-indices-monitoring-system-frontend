@@ -41,6 +41,16 @@ interface Props {
   isUserEligibleToEdit: boolean;
 }
 
+/**
+ * Renders the header card for patient examination details.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {PatientExaminationCard} props.patientExaminationCard - The patient examination card.
+ * @param {boolean} props.isUserEligibleToComment - Indicates if the user is eligible to comment.
+ * @param {boolean} props.isUserEligibleToEdit - Indicates if the user is eligible to edit.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PatientExaminationDetailsHeaderCard({
   patientExaminationCard,
   isUserEligibleToComment,

@@ -7,23 +7,37 @@ import {
 import axiosAgent from "../api/axiosAgent";
 import { LogResponse } from "../models/Logs";
 
+/**
+ * Represents the AdminStore class.
+ * This class is responsible for managing the state and operations related to the admin functionality in the application.
+ */
 export default class AdminStore {
+  // The selected application user.
   selectedApplicationUser: ApplicationUser | undefined;
+
+  // The active application users.
   activeApplicationUsers: PaginatedApplicationUserList = {
     users: [],
     totalUsersCount: 0,
   };
+
+  // The deactivated application users.
   deactivatedApplicationUsers: PaginatedApplicationUserList = {
     users: [],
     totalUsersCount: 0,
   };
+
+  // The deleted application users.
   deletedApplicationUsers: PaginatedApplicationUserList = {
     users: [],
     totalUsersCount: 0,
   };
+  
+  // The response from the CSV add operation.
   csvAddResponse: string = "";
   logResponse: LogResponse = { logs: [], totalCount: 0 };
 
+  // The search parameters for the active application users.
   activeApplicationUsersSearchParams: {
     searchTerm: string;
     userType: string;
@@ -38,6 +52,7 @@ export default class AdminStore {
     pageSize: 20,
   };
 
+  // The search parameters for the deactivated application users.
   deactivatedApplicationUsersSearchParams: {
     searchTerm: string;
     userType: string;
@@ -52,6 +67,7 @@ export default class AdminStore {
     pageSize: 20,
   };
 
+  // The search parameters for the deleted application users.
   deletedApplicationUsersSearchParams: {
     searchTerm: string;
     userType: string;
@@ -66,6 +82,7 @@ export default class AdminStore {
     pageSize: 20,
   };
 
+  // The search parameters for the logs.
   logsSearchParams: {
     startDate: Date;
     endDate: Date;
@@ -82,6 +99,7 @@ export default class AdminStore {
     pageSize: 50,
   };
 
+  // The loading state for the admin operations.
   loading = {
     activeApplicationUsers: false,
     deactivatdApplicationUsers: false,
@@ -95,9 +113,11 @@ export default class AdminStore {
     logs: false,
   };
 
+  // Initializes a new instance of the AdminStore class.
   constructor() {
     makeAutoObservable(this);
 
+    // The reaction to the changes in the search parameters for the active application users.
     reaction(
       () => ({
         searchTerm: this.activeApplicationUsersSearchParams.searchTerm,
@@ -111,6 +131,7 @@ export default class AdminStore {
       }
     );
 
+    // The reaction to the changes in the search parameters for the deactivated application users.
     reaction(
       () => ({
         searchTerm: this.deactivatedApplicationUsersSearchParams.searchTerm,
@@ -124,6 +145,7 @@ export default class AdminStore {
       }
     );
 
+    // The reaction to the changes in the search parameters for the deleted application users.
     reaction(
       () => ({
         searchTerm: this.deletedApplicationUsersSearchParams.searchTerm,
@@ -137,6 +159,7 @@ export default class AdminStore {
       }
     );
 
+    // The reaction to the changes in the search parameters for the logs.
     reaction(
       () => ({
         startDate: this.logsSearchParams.startDate,
@@ -152,6 +175,7 @@ export default class AdminStore {
     );
   }
 
+  // Sets the search parameters for the active application users.
   setActiveApplicationUserSearchParam = (searchParam: {
     searchTerm: string;
     userType: string;
@@ -162,6 +186,7 @@ export default class AdminStore {
     this.activeApplicationUsersSearchParams = searchParam;
   };
 
+  // Sets the search parameters for the deactivated application users.
   setDeactivatedApplicationUserSearchParam = (searchParam: {
     searchTerm: string;
     userType: string;
@@ -172,6 +197,7 @@ export default class AdminStore {
     this.deactivatedApplicationUsersSearchParams = searchParam;
   };
 
+  // Sets the search parameters for the deleted application users.
   setDeletedApplicationUserSearchParam = (searchParam: {
     searchTerm: string;
     userType: string;
@@ -182,50 +208,62 @@ export default class AdminStore {
     this.deletedApplicationUsersSearchParams = searchParam;
   };
 
+  // Sets the response from the CSV add operation.
   setCsvAddResponse = (response: string) => {
     this.csvAddResponse = response;
   };
 
+  // Sets the selected application user.
   setActiveApplicationUsers = (applicationUsers: PaginatedApplicationUserList) => {
     this.activeApplicationUsers = applicationUsers;
   };
 
+  // Sets the deactivated application users.
   setDeactivatedApplicationUsers = (applicationUsers: PaginatedApplicationUserList) => {
     this.deactivatedApplicationUsers = applicationUsers;
   };
 
+  // Sets the deleted application users.
   setDeletedApplicationUsers = (applicationUsers: PaginatedApplicationUserList) => {
     this.deletedApplicationUsers = applicationUsers;
   };
 
+  // Clears the selected application user.
   clearSelectedApplicationUser = () => {
     this.selectedApplicationUser = undefined;
   };
 
+  // Sets the search parameters for the logs start date.
   setLogSearchhParamsStartDate = (date: Date) => {
     this.logsSearchParams.startDate = date;
   };
 
+  // Sets the search parameters for the logs end date.
   setLogSearchParamsEndDate = (date: Date) => {
     this.logsSearchParams.endDate = date;
   };
 
+  // Sets the search parameters for the logs user name.
   setLogSearchParamsUserName = (userName: string) => {
     this.logsSearchParams.userName = userName;
   };
 
+  // Sets the search parameters for the logs level.
   setLogSearchParamsLevel = (level: string) => {
     this.logsSearchParams.level = level;
   };
 
+  // Sets the search parameters for the logs page number.
   setLogSearchParamsPageNumber = (pageNumber: number) => {
     this.logsSearchParams.pageNumber = pageNumber;
   };
 
+  // Sets the search parameters for the logs page size.
   setLogSearchParamsPageSize = (pageSize: number) => {
     this.logsSearchParams.pageSize = pageSize;
   };
 
+  // Clears the search parameters for active application users.
   clearActiveApplicationUsersFilters = () => {
     this.setActiveApplicationUserSearchParam({
       searchTerm: "",
@@ -236,6 +274,7 @@ export default class AdminStore {
     });
   };
 
+  // Clears the search parameters for deactivated application users.
   clearDeactivatedApplicationUsersFilters = () => {
     this.setDeactivatedApplicationUserSearchParam({
       searchTerm: "",
@@ -246,6 +285,7 @@ export default class AdminStore {
     });
   };
 
+  // Clears the search parameters for deleted application users.
   clearDeletedApplicationUsersFilters = () => {
     this.setDeletedApplicationUserSearchParam({
       searchTerm: "",
@@ -256,6 +296,7 @@ export default class AdminStore {
     });
   };
 
+  // Gets the URL parameters for the active application users.
   get activeApplicationUsersAxiosParams() {
     const params = new URLSearchParams();
     params.append(
@@ -275,6 +316,7 @@ export default class AdminStore {
     return params;
   }
 
+  // Gets the URL parameters for the deactivated application users.
   get deactivatedApplicationUsersAxiosParams() {
     const params = new URLSearchParams();
     params.append(
@@ -297,6 +339,7 @@ export default class AdminStore {
     return params;
   }
 
+  // Gets the URL parameters for the deleted application users.
   get deletedApplicationUsersAxiosParams() {
     const params = new URLSearchParams();
     params.append(
@@ -319,6 +362,7 @@ export default class AdminStore {
     return params;
   }
 
+  // Gets the URL parameters for the logs.
   get logsAxiosParams() {
     const params = new URLSearchParams();
     params.append("startDate", this.logsSearchParams.startDate.toISOString());
@@ -330,6 +374,7 @@ export default class AdminStore {
     return params;
   }
 
+  // Gets the user details.
   private getUserDetails = (userName: string) => {
     return this.activeApplicationUsers.users
       .concat(
@@ -339,6 +384,12 @@ export default class AdminStore {
       .find((user) => user.userName === userName);
   };
 
+  /**
+   * Fetches the list of active application users.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the list of active application users is fetched.
+   * @throws {Error} If an error occurs while fetching the list of active application users.
+   */
   fetchActiveApplicationUsers = async () => {
     this.loading.activeApplicationUsers = true;
     try {
@@ -358,6 +409,12 @@ export default class AdminStore {
     }
   };
 
+  /**
+   * Fetches the list of deactivated application users.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the list of deactivated application users is fetched.
+   * @throws {Error} If an error occurs while fetching the list of deactivated application users.
+   */
   fetchDeactivatedApplicationUsers = async () => {
     this.loading.deactivatdApplicationUsers = true;
     try {
@@ -377,6 +434,12 @@ export default class AdminStore {
     }
   };
 
+  /**
+   * Fetches the list of deleted application users.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   * @throws {Error} If an error occurs during the operation.
+   */
   fetchDeletedApplicationUsers = async () => {
     this.loading.deletedApplicationUsers = true;
     try {
@@ -396,6 +459,13 @@ export default class AdminStore {
     }
   };
 
+  /**
+   * Adds an application user.
+   * 
+   * @param values - The values of the application user form.
+   * @returns A promise that resolves when the application user is added successfully.
+   * @throws An error if there is an issue adding the application user.
+   */
   addApplicationUser = async (values: ApplicationUserFormValues) => {
     this.loading.addAppUser = true;
     try {
@@ -413,6 +483,13 @@ export default class AdminStore {
     }
   };
 
+  /**
+   * Adds application users from a CSV file.
+   * 
+   * @param file - The CSV file containing the application users to be added.
+   * @returns A Promise that resolves when the operation is complete.
+   * @throws If an error occurs during the operation.
+   */
   addApplicationUserFromCsv = async (file: File) => {
     this.loading.addAppUsers = true;
     try {
@@ -431,6 +508,13 @@ export default class AdminStore {
     }
   };
 
+  /**
+   * Deletes an application user.
+   *
+   * @param userName - The username of the user to be deleted.
+   * @param deleteComment - The comment explaining the reason for deletion.
+   * @throws {Error} - If an error occurs during the deletion process.
+   */
   deleteApplicationUser = async (userName: string, deleteComment: string) => {
     this.loading.deleteAppUser = true;
     const user = this.getUserDetails(userName);
@@ -462,6 +546,13 @@ export default class AdminStore {
     }
   };
 
+  /**
+   * Fetches user details for the given user name.
+   * 
+   * @param userName - The user name for which to fetch the details.
+   * @returns The user details for the given user name.
+   * @throws If an error occurs while fetching the user details.
+   */
   fetchUserDetails = async (userName: string) => {
     const userDetails = this.getUserDetails(userName);
     if (userDetails) {
@@ -488,6 +579,14 @@ export default class AdminStore {
     }
   };
 
+  /**
+   * Updates an application user.
+   *
+   * @param userName - The username of the user to update.
+   * @param applicationUser - The updated application user object.
+   * @returns A promise that resolves when the user is successfully updated.
+   * @throws If an error occurs during the update process.
+   */
   updateApplicationUser = async (
     userName: string,
     applicationUser: ApplicationUser
@@ -517,6 +616,13 @@ export default class AdminStore {
     }
   };
 
+  /**
+   * Changes the activation status of a user.
+   * 
+   * @param userName - The username of the user whose activation status will be changed.
+   * @returns A promise that resolves when the activation status is successfully changed.
+   * @throws An error if there is an issue changing the activation status.
+   */
   changeActivationStatus = async (userName: string) => {
     this.loading.changeActivationStatus = true;
     try {
@@ -537,6 +643,11 @@ export default class AdminStore {
     }
   };
 
+  /**
+   * Loads logs from the server.
+   * @returns {Promise<void>} A promise that resolves when the logs are loaded.
+   * @throws {Error} If an error occurs while loading the logs.
+   */
   loadLogs = async () => {
     this.loading.logs = true;
     try {

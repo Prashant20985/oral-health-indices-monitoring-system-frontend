@@ -12,6 +12,11 @@ import PatientExaminationCardsList from "../../ExaminationCardOperations/List/Pa
 import { router } from "../../../app/router/Routes";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the patient profile page.
+ *
+ * @returns The JSX element representing the patient profile page.
+ */
 export default observer(function PatientProfile() {
   const { id } = useParams();
 

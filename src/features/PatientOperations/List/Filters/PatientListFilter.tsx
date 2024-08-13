@@ -12,6 +12,19 @@ interface Props {
   clearEmailSearch: () => void;
 }
 
+/**
+ * Renders a filter component for the patient list.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.title - The title of the filter.
+ * @param {string} props.subTitle - The subtitle of the filter.
+ * @param {string} props.searchTerm - The current search term.
+ * @param {Function} props.setSearchTerm - The function to set the search term.
+ * @param {Function} props.clearEmailSearch - The function to clear the email search.
+ * @param {Function} props.clearNameSearch - The function to clear the name search.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function PatientListFilter({
   title,
   subTitle,

@@ -5,6 +5,11 @@ import AdminDashboard from "../AdminOperations/Dashboard/AdminDashboard";
 import DentistTeacherDashboard from "../DentistTeacherOperations/Dashboard/DentistTeacherDashboard";
 import StudentDashboard from "../StudentOperations/Dashboard/StudentDashboard";
 
+/**
+ * Renders the dashboard component based on the user's role.
+ * 
+ * @returns The rendered dashboard component.
+ */
 export default observer(function Dashboard() {
   const {
     userStore: { user },

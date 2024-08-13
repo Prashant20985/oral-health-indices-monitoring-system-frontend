@@ -49,6 +49,20 @@ const Summary = React.lazy(
   () => import("../../../IndexCalculationForms/SummaryForm")
 );
 
+/**
+ * An array of steps for the SolveExamMultiStepForm component.
+ * Each step represents a stage in the form.
+ *
+ * @remarks
+ * The steps are as follows:
+ * 1. Patient Information
+ * 2. Risk Factor Assessment
+ * 3. DMFT/DMFS
+ * 4. BEWE
+ * 5. API
+ * 6. Bleeding
+ * 7. Summary
+ */
 const steps = [
   "Patient Information",
   "Risk Factor Assessment",

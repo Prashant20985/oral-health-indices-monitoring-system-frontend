@@ -13,6 +13,15 @@ import { colors } from "../../themeConfig";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Component for resetting password.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ResetPassword />
+ * ```
+ */
 export default observer(function ResetPassword() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
@@ -76,7 +85,7 @@ export default observer(function ResetPassword() {
                 sx={{ mb: "20px" }}
                 align="left"
               >
-               {t("resetpassword.header")} {email}
+                {t("resetpassword.header")} {email}
               </Typography>
               <Box
                 display="grid"

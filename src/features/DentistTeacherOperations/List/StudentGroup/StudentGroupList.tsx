@@ -20,6 +20,11 @@ import { blueGrey } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
 import LoadingComponent from "../../../../app/common/loadingComponents/LoadingComponent";
 
+/**
+ * Renders a list of student groups for a dentist teacher.
+ * 
+ * @returns The rendered StudentGroupList component.
+ */
 export default observer(function StudentGroupList() {
   const { dentistTeacherStore } = useStore();
 

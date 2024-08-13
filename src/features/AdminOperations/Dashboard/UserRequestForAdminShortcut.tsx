@@ -17,6 +17,11 @@ import { router } from "../../../app/router/Routes";
 import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a component for displaying user requests in the admin dashboard.
+ *
+ * @returns The rendered UserRequestForAdminShortcut component.
+ */
 export default observer(function UserRequestForAdminShortcut() {
   const { userRequestStore } = useStore();
   const theme = useTheme();

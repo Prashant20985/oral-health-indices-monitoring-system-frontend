@@ -13,6 +13,9 @@ import {
 } from "./RiskFactorAssesment";
 import { Summary } from "./Summary";
 
+/**
+ * Represents a patient examination card.
+ */
 export interface PatientExaminationCard {
   id: string;
   doctorName: string;
@@ -34,6 +37,9 @@ export interface PatientExaminationCard {
   };
 }
 
+/**
+ * Represents the form values for a patient examination card by a doctor.
+ */
 export interface PatientExaminationCardByDoctorFormValues {
   patientExaminationCardComment: string;
   summary: Summary;
@@ -44,23 +50,37 @@ export interface PatientExaminationCardByDoctorFormValues {
   api: APIFormValues;
 }
 
+/**
+ * Represents the form values for a patient examination card filled out by a student.
+ * Extends the form values for a patient examination card filled out by a doctor.
+ * @template T - The type of the assigned doctor's ID.
+ */
 export interface PatientExaminationCardByStudentFormValues
   extends PatientExaminationCardByDoctorFormValues {
   assignedDoctorId: string;
 }
 
+/**
+ * Represents the response from an API update.
+ */
 export interface APIUpdateResponse {
   apiResult: number;
   maxilla: number;
   mandible: number;
 }
 
+/**
+ * Represents the response object for updating bleeding information.
+ */
 export interface BleedingUpdateResponse {
   bleedingResult: number;
   maxilla: number;
   mandible: number;
 }
 
+/**
+ * Represents the response object for updating DMFT and DMFS values.
+ */
 export interface DMFT_DMFSUpdateResponse {
   dmftResult: number;
   dmfsResult: number;

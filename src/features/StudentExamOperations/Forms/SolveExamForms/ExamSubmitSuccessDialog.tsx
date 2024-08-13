@@ -18,6 +18,15 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a dialog component to display a success message after submitting an exam.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.open - Determines whether the dialog is open or not.
+ * @param {() => void} props.onClose - Callback function to handle dialog close event.
+ * @returns {JSX.Element} The rendered ExamSubmitSuccessDialog component.
+ */
 export default function ExamSubmitSuccessDialog({ open, onClose }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

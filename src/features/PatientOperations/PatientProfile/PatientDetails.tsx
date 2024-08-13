@@ -23,6 +23,15 @@ interface Props {
   isPracticePatient?: boolean;
 }
 
+/**
+ * Renders the details of a patient.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Patient} props.patientDetails - The details of the patient.
+ * @param {boolean} props.isPracticePatient - Indicates if the patient is a practice patient.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PatientDetails({
   patientDetails,
   isPracticePatient,

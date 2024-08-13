@@ -8,6 +8,11 @@ import { Add } from "@mui/icons-material";
 import { router } from "../../../../app/router/Routes";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a component for supervising students.
+ *
+ * @returns The rendered component.
+ */
 export default observer(function SupervisedStduents() {
   const {
     dentistTeacherStore: {

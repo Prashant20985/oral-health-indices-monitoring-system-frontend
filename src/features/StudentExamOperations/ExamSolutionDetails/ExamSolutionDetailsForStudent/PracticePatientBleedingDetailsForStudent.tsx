@@ -17,6 +17,14 @@ interface Props {
   bleeding: Bleeding;
 }
 
+/**
+ * Renders the details of a practice patient's Bewe for a student.
+ * 
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Bleeding} props.bleeding - The Bleeding data for the patient.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PracticePatientBleedingDetailsForStudent({
   bleeding,
 }: Props) {

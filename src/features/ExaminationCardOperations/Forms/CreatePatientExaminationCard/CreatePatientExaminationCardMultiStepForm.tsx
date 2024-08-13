@@ -59,6 +59,10 @@ const Summary = React.lazy(
   () => import("../../../IndexCalculationForms/SummaryForm")
 );
 
+/**
+ * Represents the steps in the CreatePatientExaminationCardMultiStepForm.
+ * Each step corresponds to a specific section in the form.
+ */
 const steps = [
   "Risk Factor Assessment",
   "DMFT/DMFS",
@@ -68,6 +72,14 @@ const steps = [
   "Summary",
 ];
 
+/**
+ * Renders the content for each step in a multi-step form.
+ *
+ * @param step - The current step in the form.
+ * @param values - The form values.
+ * @param handleChnage - The event handler for input changes.
+ * @returns The JSX element representing the content for the current step.
+ */
 function renderStepContent(
   step: number,
   values:
@@ -135,6 +147,9 @@ function renderStepContent(
   }
 }
 
+/**
+ * Component for creating a multi-step form for creating a patient examination card.
+ */
 export default observer(function CreatePatientExaminationCardMultiStepForm() {
   const { id } = useParams<{ id: string }>();
 

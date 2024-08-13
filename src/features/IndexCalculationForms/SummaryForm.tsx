@@ -16,6 +16,17 @@ interface Props {
   isView?: boolean;
 }
 
+/**
+ * Renders a form for displaying and editing summary information.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Summary} props.summary - The summary object containing the form data.
+ * @param {Function} props.handleChange - The function to handle changes in the form fields.
+ * @param {boolean} props.isView - Indicates whether the form is in view-only mode.
+ * @param {string} props.name - The name of the form.
+ * @returns {JSX.Element} The rendered SummaryForm component.
+ */
 export default function SummaryForm({
   summary,
   handleChange,

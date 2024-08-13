@@ -28,6 +28,15 @@ interface Props {
   cardId: string;
 }
 
+/**
+ * Renders the details of a practice patient's DMFT/DMFS for a teacher.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {DmftDmfs} props.dmft_dmfs - The DMFT/DMFS data.
+ * @param {string} props.cardId - The ID of the card.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PracticePatientDMFT_DMFSDetailsForTeacher({
   dmft_dmfs,
   cardId,

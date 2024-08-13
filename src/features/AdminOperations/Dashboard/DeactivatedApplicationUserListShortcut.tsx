@@ -6,6 +6,11 @@ import * as React from "react";
 import ApplicationUserList from "../List/DataGrid/ApplicationUserList";
 import { router } from "../../../app/router/Routes";
 
+/**
+ * Renders a shortcut component for displaying a list of deactivated application users in the admin dashboard.
+ * Fetches the deactivated application users from the admin store and displays them in a paginated list.
+ * Provides a button to navigate to the full list of deactivated users.
+ */
 export default observer(function DeactivatedApplicationUserListShortcut() {
   const { adminStore } = useStore();
   const theme = useTheme();

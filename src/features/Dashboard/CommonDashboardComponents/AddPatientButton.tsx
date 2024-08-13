@@ -5,6 +5,11 @@ import CreateEditPatientForm from "../../PatientOperations/Forms/CreateEditPatie
 import { PersonAddAlt1Rounded } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a button component for adding a patient.
+ *
+ * @returns The rendered AddPatientButton component.
+ */
 export default observer(function AddPatientButton() {
   const [openForm, setOpenForm] = React.useState(false);
 

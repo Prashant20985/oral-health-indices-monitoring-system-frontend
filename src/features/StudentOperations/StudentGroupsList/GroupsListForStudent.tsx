@@ -10,6 +10,11 @@ import UpcomingExams from "./UpcomingExams";
 import { useTranslation } from "react-i18next";
 import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 
+/**
+ * Renders a list of groups for a student.
+ * 
+ * @returns The rendered component.
+ */
 export default observer(function GroupsListForStudent() {
   const {
     studentStore: {

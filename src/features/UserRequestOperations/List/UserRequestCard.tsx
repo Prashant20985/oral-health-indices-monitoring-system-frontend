@@ -29,6 +29,15 @@ interface Props {
   isCurrentUserRequest?: boolean;
 }
 
+/**
+ * Renders a card component for a user request.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {UserRequest} props.userRequest - The user request object.
+ * @param {boolean} [props.isCurrentUserRequest=false] - Indicates if the user request belongs to the current user.
+ * @returns {JSX.Element} The rendered card component.
+ */
 export default observer(function UserRequestCard({
   userRequest,
   isCurrentUserRequest = false,

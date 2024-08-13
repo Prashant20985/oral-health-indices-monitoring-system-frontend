@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Grid } from "@mui/material";
 
-interface DurationPickerProps {
+interface Props {
   name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -10,14 +10,27 @@ interface DurationPickerProps {
   helperText?: string;
 }
 
-const DurationPicker: React.FC<DurationPickerProps> = ({
+/**
+ * DurationPicker component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.name - The name of the input.
+ * @param {string} props.value - The value of the input.
+ * @param {Function} props.onChange - The function to handle input changes.
+ * @param {Function} props.onBlur - The function to handle the blur event.
+ * @param {boolean} [props.error] - The error message for the input.
+ * @param {string} [props.helperText] - The helper text for the input.
+ * @returns {JSX.Element} The rendered DurationPicker component.
+ */
+export default function DurationPicker({
   name,
   value,
   onChange,
   onBlur,
   error,
   helperText,
-}) => {
+}: Props) {
   const [hours, minutes, seconds] = (value || "00:00:00")
     .split(":")
     .map(Number);
@@ -93,6 +106,4 @@ const DurationPicker: React.FC<DurationPickerProps> = ({
       </Grid>
     </Grid>
   );
-};
-
-export default DurationPicker;
+}

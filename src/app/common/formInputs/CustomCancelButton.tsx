@@ -7,6 +7,15 @@ interface Props {
   buttonText?: string;
 }
 
+/**
+ * CustomCancelButton component.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Function} props.handleCancel - The handleCancel function.
+ * @param {string} [props.buttonText="common.cancel-button"] - The button text.
+ * @returns {JSX.Element} The rendered CustomCancelButton component.
+ */
 export default function CustomCancelButton({ handleCancel, buttonText="common.cancel-button" }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

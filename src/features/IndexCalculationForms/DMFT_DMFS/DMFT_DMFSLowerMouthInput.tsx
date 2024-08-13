@@ -13,6 +13,17 @@ interface Props {
   name?: string;
 }
 
+/**
+ * Renders the input fields for the lower mouth section of the DMFT/DMFS form.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Object} props.lowerMouth - The lower mouth data.
+ * @param {boolean} props.isView - Indicates if the form is in view mode.
+ * @param {Function} props.handleChange - The change event handler.
+ * @param {string} props.name - The name of the input field.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default React.memo(function DMFT_DMFSLowerMouthInput({
   lowerMouth,
   isView,

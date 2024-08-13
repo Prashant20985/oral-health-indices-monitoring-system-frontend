@@ -11,6 +11,17 @@ interface Props {
   handleChangeActivationStatus: () => void;
 }
 
+/**
+ * Renders a button component for changing the activation status of an account.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isAccountActive - Indicates whether the account is active.
+ * @param {Date | null} props.deletedAt - The date when the account was deleted, or null if not deleted.
+ * @param {boolean} [props.disabled=false] - Indicates whether the button is disabled.
+ * @param {Function} props.handleChangeActivationStatus - The function to handle the activation status change.
+ * @returns {JSX.Element} The rendered button component.
+ */
 export default observer(function ChangeActivationStatusButton({
   isAccountActive,
   deletedAt,

@@ -20,6 +20,16 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a form for archiving a patient.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.patientId - The ID of the patient to be archived.
+ * @param {boolean} props.isOpen - Indicates whether the form is open or not.
+ * @param {() => void} props.onClose - Callback function to close the form.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function ArchivePatientForm({
   patientId,
   isOpen,

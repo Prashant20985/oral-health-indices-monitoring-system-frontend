@@ -17,6 +17,18 @@ interface Props {
   isAPIForm?: boolean;
 }
 
+/**
+ * Renders a form for editing API Bleeding assessment.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.cardId - The ID of the examination card.
+ * @param {APIBleedingAssessmentModel} props.assessmentModel - The assessment model for API Bleeding.
+ * @param {Function} props.setIsEditMode - A function to set the edit mode.
+ * @param {boolean} props.isUserEligibleToEdit - Indicates whether the user is eligible to edit the form.
+ * @param {boolean} props.isAPIForm - Indicates whether the form is an API form.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function APIBleedingEditForm({
   cardId,
   assessmentModel,

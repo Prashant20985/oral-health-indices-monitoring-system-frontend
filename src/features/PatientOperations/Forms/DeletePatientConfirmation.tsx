@@ -21,6 +21,16 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a confirmation dialog for deleting a patient.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.patientId - The ID of the patient to be deleted.
+ * @param {boolean} props.isOpen - Indicates whether the dialog is open or not.
+ * @param {() => void} props.onClose - Callback function to close the dialog.
+ * @returns {JSX.Element} The rendered DeletePatientConfirmation component.
+ */
 export default observer(function DeletePatientConfirmation({
   patientId,
   isOpen,

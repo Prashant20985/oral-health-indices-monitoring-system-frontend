@@ -3,6 +3,11 @@ import { colors } from "../../themeConfig";
 import { router } from "../../app/router/Routes";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a button that navigates to the home page when clicked.
+ *
+ * @returns The rendered GoToHomePageButton component.
+ */
 export default function GoToHomePageButton() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

@@ -9,28 +9,47 @@ import {
 } from "../models/ResearchGroup";
 import { PaginatedStudentList, Student } from "../models/ApplicationUser";
 
+/**
+ * Represents a store for managing dentist teacher-related data.
+ */
 export default class DentistTeacherStore {
+  // Represents the studentsNotInGroup property.
   studentsNotInGroup: PaginatedStudentList = {
     students: [],
     totalStudents: 0,
   };
+
+  // Represents the studentGroups property.
   studentGroups: StudentGroup[] = [];
+
+  // Represents the researchGroups property.
   researchGroups: ResearchGroup[] = [];
+
+  // Represents the patientsNotInResearchGroup property.
   patientsNotInResearchGroup: PaginatedResearchGroupPatients = {
     totalNumberOfPatients: 0,
     patients: [],
   };
+
+  // Represents the selectedResearchGroup property.
   selectedResearchGroup: ResearchGroup | undefined;
+
+  // Represents the selectedStudentGroup property.
   selectedStudentGroup: StudentGroup | undefined;
 
+  // Represents the supervisedStudents property.
   supervisedStudents: PaginatedStudentList = { totalStudents: 0, students: [] };
+
+  // Represents the unsupervisedStudents property.
   unsupervisedStudents: PaginatedStudentList = {
     totalStudents: 0,
     students: [],
   };
 
+  // Represents the researchGroupName property.
   researchGroupName: string = "";
 
+  // Represents the patient not in research group search params.
   patientnNotInResearchGroupSearchParams: {
     patientName: string;
     email: string;
@@ -43,6 +62,7 @@ export default class DentistTeacherStore {
     pageSize: 20,
   };
 
+  // Represents the students not in group search params.
   studentsNotInGroupSearchParams: {
     studentName: string;
     email: string;
@@ -55,6 +75,7 @@ export default class DentistTeacherStore {
     pageSize: 20,
   };
 
+  // Represents the supervised students search params.
   supervisedStudentsSearchParam: {
     studentName: string;
     email: string;
@@ -67,6 +88,7 @@ export default class DentistTeacherStore {
     pageSize: 20,
   };
 
+  // Represents the unsupervised students search params.
   unsupervisedStudentsSearchParam: {
     studentName: string;
     email: string;
@@ -79,6 +101,7 @@ export default class DentistTeacherStore {
     pageSize: 20,
   };
 
+  // Represents the loading property.
   loading = {
     createStudentGroup: false,
     addStudentToGroup: false,
@@ -105,6 +128,7 @@ export default class DentistTeacherStore {
   constructor() {
     makeAutoObservable(this);
 
+    // Reaction to the change in researchGroupName property.
     reaction(
       () => ({ researchGroupName: this.researchGroupName }),
       () => {
@@ -113,6 +137,7 @@ export default class DentistTeacherStore {
       }
     );
 
+    // Reaction to the change in patient not in research group search params.
     reaction(
       () => ({
         patientName: this.patientnNotInResearchGroupSearchParams.patientName,
@@ -125,6 +150,7 @@ export default class DentistTeacherStore {
       }
     );
 
+    // Reaction to the change in students not in group search
     reaction(
       () => ({
         studentName: this.studentsNotInGroupSearchParams.studentName,
@@ -137,6 +163,7 @@ export default class DentistTeacherStore {
       }
     );
 
+    // Reaction to the change in supervised students search params.
     reaction(
       () => ({
         studentName: this.supervisedStudentsSearchParam.studentName,
@@ -149,6 +176,7 @@ export default class DentistTeacherStore {
       }
     );
 
+    // Reaction to the change in unsupervised students search params.
     reaction(
       () => ({
         studentName: this.unsupervisedStudentsSearchParam.studentName,
@@ -162,6 +190,7 @@ export default class DentistTeacherStore {
     );
   }
 
+  // Gets the URL params for the patients not in research group.
   get patientsNotInResearchGroupParams() {
     const params = new URLSearchParams();
     params.append(
@@ -180,6 +209,7 @@ export default class DentistTeacherStore {
     return params;
   }
 
+  // Gets the URL params for the students not in group.
   get studentsNotInGroupParams() {
     const params = new URLSearchParams();
     params.append(
@@ -195,6 +225,7 @@ export default class DentistTeacherStore {
     return params;
   }
 
+  // Gets the URL params for the supervised students.
   get supervisedStudentsParams() {
     const params = new URLSearchParams();
     params.append(
@@ -210,6 +241,7 @@ export default class DentistTeacherStore {
     return params;
   }
 
+  // Gets the URL params for the unsupervised students.
   get unsupervisedStudentsParams() {
     const params = new URLSearchParams();
     params.append(
@@ -225,6 +257,7 @@ export default class DentistTeacherStore {
     return params;
   }
 
+  // Sets the supervised students search params.
   setSupervisedStudentSearchParams = (params: {
     studentName: string;
     email: string;
@@ -234,6 +267,7 @@ export default class DentistTeacherStore {
     this.supervisedStudentsSearchParam = params;
   };
 
+  // Sets the unsupervised students search params.
   setUnsupervisedStudentSearchParams = (params: {
     studentName: string;
     email: string;
@@ -243,6 +277,7 @@ export default class DentistTeacherStore {
     this.unsupervisedStudentsSearchParam = params;
   };
 
+  // Sets the student not in student group search params.
   setStudentsNotInGroupSearchParams = (params: {
     studentName: string;
     email: string;
@@ -252,72 +287,88 @@ export default class DentistTeacherStore {
     this.studentsNotInGroupSearchParams = params;
   };
 
+  // Sets the selected student group.
   setSelectedStudentGroup = (studentGroup: StudentGroup) => {
     this.selectedStudentGroup = studentGroup;
   };
 
+  // Sets the selected research group.
   setSelectedResearchGroup = (researchGroup: ResearchGroup | undefined) => {
     this.selectedResearchGroup = researchGroup;
   };
 
+  // Clears the selected research group.
   clearSelectedResearchGroup = () => {
     this.selectedResearchGroup = undefined;
   };
 
+  // Clears the selected student group
   clearSelectedStudentGroup = () => {
     this.selectedStudentGroup = undefined;
   };
 
+  // Sets the patient not in research group search params.
   setResearchGroupName = (researchGroupName: string) => {
     this.researchGroupName = researchGroupName;
   };
 
+  // Sets the students not in group.
   setStudentsNotInGroup = (students: PaginatedStudentList) => {
     this.studentsNotInGroup = students;
   };
 
+  // Sets the student groups.
   setStudentGroups = (groups: StudentGroup[]) => {
     this.studentGroups = groups;
   };
 
+  // Sets the research groups.
   setResearchGroups = (researchGroups: ResearchGroup[]) => {
     this.researchGroups = researchGroups;
   };
 
+  // Sets the patients not in research
   setPatientsNotInResearchGroup = (
     patients: PaginatedResearchGroupPatients
   ) => {
     this.patientsNotInResearchGroup = patients;
   };
 
+  // Sets the supervised students.
   setSupervisedStudents = (students: PaginatedStudentList) => {
     this.supervisedStudents = students;
   };
 
+  // Sets the unsupervised students
   setUnsupervisedStudents = (students: PaginatedStudentList) => {
     this.unsupervisedStudents = students;
   };
 
+  // Gets the research group details.
   private getReseatchGroupDetails = (researchGroupId: string) => {
     return this.researchGroups.find((rg) => rg.id === researchGroupId);
   };
 
+  // Gets the student group details.
   private getStudentGroupDetails = (studentGroupId: string) => {
     return this.studentGroups.find((sg) => sg.id === studentGroupId);
   };
 
+  // Gets the supervised student.
   private supervisedStudent = (studentId: string) => {
     return this.supervisedStudents.students.find(
       (student) => student.id === studentId
     );
   };
 
+  // Gets the unsupervised student.
   private unsupervisedStudent = (studentId: string) => {
     return this.unsupervisedStudents.students.find(
       (student) => student.id === studentId
     );
   };
 
+  // Gets the supervised student name, email and id.
   get supervisedStudentNameEmailWithId() {
     return this.supervisedStudents.students.map((student) => ({
       name: `${student.firstName} ${student.lastName} (${student.email})`,
@@ -325,6 +376,13 @@ export default class DentistTeacherStore {
     }));
   }
 
+  /**
+   * Creates a student group with the given group name.
+   * 
+   * @param groupName - The name of the student group.
+   * @returns A promise that resolves when the student group is created.
+   * @throws If an error occurs during the creation process.
+   */
   createStudentGroup = async (groupName: string) => {
     this.loading.createStudentGroup = true;
     try {
@@ -340,6 +398,14 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Adds a student to a student group.
+   * 
+   * @param groupId - The ID of the group to add the student to.
+   * @param student - The student to be added.
+   * @returns A promise that resolves when the student is successfully added to the group.
+   * @throws If an error occurs while adding the student to the group.
+   */
   addStudentToStudentGroup = async (groupId: string, student: Student) => {
     this.loading.addStudentToGroup = true;
     try {
@@ -371,6 +437,14 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Removes a student from a student group.
+   * 
+   * @param groupId - The ID of the group from which the student will be removed.
+   * @param studentId - The ID of the student to be removed.
+   * @returns A Promise that resolves when the student is successfully removed from the group.
+   * @throws If an error occurs during the removal process.
+   */
   removeStudentFromStudentGroup = async (
     groupId: string,
     studentId: string
@@ -408,6 +482,13 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Deletes a student group.
+   *
+   * @param {string} groupId - The ID of the group to be deleted.
+   * @returns {Promise<void>} - A promise that resolves when the group is deleted.
+   * @throws {Error} - If an error occurs during the deletion process.
+   */
   deleteStudentGroup = async (groupId: string) => {
     this.loading.deleteStudentGroup = true;
     try {
@@ -429,6 +510,14 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Updates the group name of a student group.
+   * 
+   * @param groupId - The ID of the group to update.
+   * @param groupName - The new name for the group.
+   * @returns A Promise that resolves when the group name is successfully updated.
+   * @throws If an error occurs during the update process.
+   */
   updateStudentGroupName = async (groupId: string, groupName: string) => {
     this.loading.updateStudentGroupName = true;
     try {
@@ -460,6 +549,13 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Retrieves the list of students who are not in a specific student group.
+   * 
+   * @param groupId - The ID of the student group.
+   * @returns A Promise that resolves to the list of students not in the group.
+   * @throws If an error occurs while retrieving the students.
+   */
   getStudentsNotInStudentGroup = async (groupId: string) => {
     this.loading.studentsNotInGroup = true;
     try {
@@ -478,6 +574,11 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Retrieves the student groups from the server.
+   * @returns {Promise<void>} A promise that resolves when the student groups are retrieved.
+   * @throws {Error} If an error occurs while retrieving the student groups.
+   */
   getStudentGroups = async () => {
     this.loading.studentGroups = true;
     try {
@@ -493,6 +594,12 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Retrieves the details of a student group.
+   * 
+   * @param studentGroupId - The ID of the student group to retrieve.
+   * @returns A Promise that resolves to the student group details.
+   */
   getStudentGroup = async (studentGroupId: string) => {
     const studentGroup = this.getStudentGroupDetails(studentGroupId);
     if (studentGroup) {
@@ -516,6 +623,11 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Retrieves the research groups using the specified research group name.
+   * @returns A promise that resolves when the research groups are retrieved.
+   * @throws If an error occurs while retrieving the research groups.
+   */
   getResearchGroups = async () => {
     this.loading.researchGroups = true;
     try {
@@ -533,6 +645,12 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Retrieves the research group with the specified ID.
+   * 
+   * @param researchGroupId - The ID of the research group to retrieve.
+   * @returns A Promise that resolves to the retrieved research group.
+   */
   getResearchGroup = async (researchGroupId: string) => {
     const researchGroup = this.getReseatchGroupDetails(researchGroupId);
     if (researchGroup) {
@@ -556,6 +674,10 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Retrieves the list of patients who are not in the research group.
+   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   */
   getPatientsNotInResearchGroup = async () => {
     this.loading.patientsNotInResearchGroup = true;
     try {
@@ -573,6 +695,13 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Creates a research group.
+   *
+   * @param {ResearchGroupFormValues} values - The values for creating the research group.
+   * @returns {Promise<void>} - A promise that resolves when the research group is created.
+   * @throws {Error} - If an error occurs while creating the research group.
+   */
   createResearchGroup = async (values: ResearchGroupFormValues) => {
     this.loading.createResearchGroup = true;
     try {
@@ -588,6 +717,13 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Deletes a research group.
+   * 
+   * @param researchGroupId - The ID of the research group to delete.
+   * @returns A promise that resolves when the research group is successfully deleted.
+   * @throws If an error occurs during the deletion process.
+   */
   deleteResearchGroup = async (researchGroupId: string) => {
     this.loading.deleteResearchGroup = true;
     try {
@@ -608,6 +744,14 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Updates a research group with the specified research group ID and values.
+   * 
+   * @param researchGroupId - The ID of the research group to update.
+   * @param values - The new values for the research group.
+   * @returns A promise that resolves when the research group is successfully updated.
+   * @throws An error if the update operation fails.
+   */
   updateResearchGroup = async (
     researchGroupId: string,
     values: ResearchGroupFormValues
@@ -648,6 +792,14 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Adds a patient to a research group.
+   * 
+   * @param researchGroupId - The ID of the research group.
+   * @param patient - The patient to be added to the research group.
+   * @returns A Promise that resolves when the patient is successfully added to the research group.
+   * @throws An error if there is a problem adding the patient to the research group.
+   */
   addPatientToResearchGroup = async (
     researchGroupId: string,
     patient: ResearchGroupPatient
@@ -677,6 +829,13 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Removes a patient from the research group.
+   * 
+   * @param patient - The patient to be removed from the research group.
+   * @returns A promise that resolves when the patient is successfully removed.
+   * @throws An error if the removal process fails.
+   */
   removePatientFromResearchGroup = async (patient: ResearchGroupPatient) => {
     this.loading.removePatientFromResearchGroup = true;
     try {
@@ -702,6 +861,10 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Fetches the supervised students from the server.
+   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   */
   fetchSupervisedStudents = async () => {
     this.loading.supervisedStudents = true;
     try {
@@ -719,6 +882,13 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Fetches unsupervised students from the server.
+   * Sets the fetched unsupervised students in the store.
+   * Updates the loading state accordingly.
+   *
+   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   */
   fetchUnsupervisedStudents = async () => {
     this.loading.unsupervisedStudents = true;
     try {
@@ -736,6 +906,13 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Supervises a student by their ID.
+   * 
+   * @param studentId - The ID of the student to supervise.
+   * @returns A promise that resolves when the student is successfully supervised.
+   * @throws An error if there was a problem supervising the student.
+   */
   superviseStudent = async (studentId: string) => {
     this.loading.superviseStudent = true;
     try {
@@ -760,6 +937,13 @@ export default class DentistTeacherStore {
     }
   };
 
+  /**
+   * Unsupervises a student.
+   * 
+   * @param studentId - The ID of the student to unsupervise.
+   * @returns A promise that resolves when the student is unsupervised.
+   * @throws If an error occurs during the unsupervise operation.
+   */
   unsuperviseStudent = async (studentId: string) => {
     this.loading.unsuperviseStudent = true;
     try {

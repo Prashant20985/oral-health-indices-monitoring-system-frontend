@@ -22,6 +22,11 @@ import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 import { blueGrey } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a list of user requests for the current user.
+ * 
+ * @returns The UserRequestListForCurrentuser component.
+ */
 export default observer(function UserRequestListForCurrentuser() {
   const { userRequestStore } = useStore();
   const {

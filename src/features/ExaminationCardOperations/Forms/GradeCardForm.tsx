@@ -20,6 +20,19 @@ interface Props {
   handleSubmit: (totalScore: number) => void;
 }
 
+/**
+ * Renders a form for grading a card.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {number} props.totalScore - The total score.
+ * @param {boolean} props.isOpen - Indicates if the form is open.
+ * @param {() => void} props.onClose - The function to close the form.
+ * @param {string} props.title - The title of the form.
+ * @param {string} props.description - The description of the form.
+ * @param {(score: number) => void} props.handleSubmit - The function to handle form submission.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function GradeCardForm({
   totalScore = 0,
   isOpen,

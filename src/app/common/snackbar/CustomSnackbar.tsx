@@ -7,6 +7,16 @@ interface Props {
   snackbarClose: () => void;
 }
 
+/**
+ * CustomSnackbar component.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Function} props.snackbarClose - The function to close the snackbar.
+ * @param {boolean} props.snackbarOpen - The flag indicating whether the snackbar is open or not.
+ * @param {string} props.message - The message to be displayed in the snackbar.
+ * @returns {JSX.Element} The rendered CustomSnackbar component.
+ */
 export default function CustomSanckbar({
   snackbarClose,
   snackbarOpen,

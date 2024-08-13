@@ -11,6 +11,18 @@ interface Props {
   fullwidth?: boolean;
 }
 
+/**
+ * CustomSubmitButton component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isSubmitting - Indicates if the form is currently submitting.
+ * @param {string} props.buttonText - The text to display on the button.
+ * @param {boolean} [props.fullwidth=false] - Indicates if the button should take up the full width.
+ * @param {string} [props.width="25%"] - The width of the button.
+ * @param {string} [props.loadingText="common.submit-button-loading-text"] - The text to display when the button is in a loading state.
+ * @returns {JSX.Element} The rendered CustomSubmitButton component.
+ */
 export default function CustomSubmitButton({
   isSubmitting,
   buttonText,

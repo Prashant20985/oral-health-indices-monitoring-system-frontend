@@ -8,6 +8,15 @@ interface Props {
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * Renders a form for creating an API.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {object} props.apiFormValues - The values of the API form.
+ * @param {Function} props.handleChange - The function to handle form field changes.
+ * @returns {JSX.Element} The JSX element representing the create API form.
+ */
 export default function CreateAPIForm({ apiFormValues, handleChange }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

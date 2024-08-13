@@ -22,6 +22,11 @@ import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 import { blueGrey } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the UserRequestListForAdmin component.
+ * This component displays a list of user requests for the admin user.
+ * It allows the admin user to search for requests, filter them by status, and view details of each request.
+ */
 export default observer(function UserRequestListForAdmin() {
   const { userRequestStore } = useStore();
   const {

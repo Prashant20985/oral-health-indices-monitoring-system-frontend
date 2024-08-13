@@ -21,6 +21,18 @@ interface Props {
   prostheticStatus: string;
 }
 
+/**
+ * Renders the DMFT_DMFSForm component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {dmft_dmfsAssessmentModel} props.dmft_dmfsAssessmentModel - The DMFT_DMFS assessment model.
+ * @param {boolean} [props.isView=false] - Indicates if the form is in view mode.
+ * @param {Function} props.handleChange - The change event handler.
+ * @param {string} props.name - The name of the form.
+ * @param {string} props.prostheticStatus - The prosthetic status.
+ * @returns {JSX.Element} The rendered DMFT_DMFSForm component.
+ */
 export default observer(function DMFT_DMFSForm({
   dmft_dmfsAssessmentModel,
   isView = false,

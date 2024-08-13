@@ -7,6 +7,14 @@ interface AuthProps {
   fallbackPath?: string;
 }
 
+/**
+ * A higher-order component that enforces authentication and role-based access control for a route.
+ * 
+ * @component
+ * @param {AuthProps} props - The props for the RequireAuthentication component.
+ * @param {string[]} props.roles - The roles allowed to access the route.
+ * @returns {ReactNode} The rendered component based on the authentication and role checks.
+ */
 export default function RequireAuthentication({
   roles,
 }: AuthProps) {

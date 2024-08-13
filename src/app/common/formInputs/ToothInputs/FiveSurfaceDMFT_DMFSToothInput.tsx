@@ -15,6 +15,20 @@ interface Props {
   name: string;
 }
 
+/**
+ * Represents a component for a tooth input with five surfaces (DMFT/DMFS).
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {object} props.surfaces - The surfaces object containing values for each surface.
+ * @param {string} props.toothNumber - The tooth number.
+ * @param {function} props.onChange - The function to handle changes in the input.
+ * @param {string} [props.placeholder=""] - The placeholder text for the input.
+ * @param {string} props.error - The error message, if any.
+ * @param {boolean} props.readOnly - Specifies if the input is read-only.
+ * @param {string} props.name - The name of the input.
+ * @returns {JSX.Element} The rendered ToothInput component.
+ */
 export default React.memo(function FiveSurfaceDMFT_DMFSToothInput({
   surfaces,
   toothNumber,

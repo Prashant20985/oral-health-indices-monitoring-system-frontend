@@ -9,6 +9,11 @@ import { observer } from "mobx-react-lite";
 import SkeletonLoadingComponenet from "../common/loadingComponents/SkeletonLoadingComponent";
 import SidebarComponent from "../common/sidebar/SidebarComponent";
 
+/**
+ * The main component of the application.
+ * 
+ * @returns The rendered JSX of the App component.
+ */
 function App() {
   const [theme, colorMode] = useMode();
   const { commonStore, userStore } = useStore();

@@ -25,6 +25,19 @@ interface Props {
   isUserEligibleToComment: boolean;
 }
 
+/**
+ * Renders the details of a Bewe card.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.cardId - The ID of the card.
+ * @param {Bewe} props.bewe - The Bewe object.
+ * @param {boolean} props.isRegularMode - Indicates if the component is in regular mode.
+ * @param {boolean} props.isUserEligibleToComment - Indicates if the user is eligible to comment.
+ * @param {boolean} props.isUserEligibleToEdit - Indicates if the user is eligible to edit.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setIsEditMode - The state setter for edit mode.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function BeweDetails({
   cardId,
   bewe,

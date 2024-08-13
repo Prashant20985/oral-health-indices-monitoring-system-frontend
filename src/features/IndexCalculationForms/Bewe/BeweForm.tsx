@@ -11,6 +11,17 @@ interface Props {
   name?: string;
 }
 
+/**
+ * Renders the BeweForm component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {BeweAssessmentModel} props.beweAssessmentModel - The BeweAssessmentModel object.
+ * @param {boolean} [props.isView=false] - Indicates if the form is in view mode.
+ * @param {Function} props.handleChange - The function to handle form input changes.
+ * @param {string} props.name - The name of the form.
+ * @returns {JSX.Element} The rendered BeweForm component.
+ */
 export default observer(function BeweForm({
   beweAssessmentModel,
   isView = false,

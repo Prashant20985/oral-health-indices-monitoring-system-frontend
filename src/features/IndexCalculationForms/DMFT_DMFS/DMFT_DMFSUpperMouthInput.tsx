@@ -13,6 +13,17 @@ interface Props {
   name?: string;
 }
 
+/**
+ * Component for rendering the upper mouth input for DMFT_DMFS assessment.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {DMFT_DMFSAssessmentModelUpperMouth} props.upperMouth - The upper mouth assessment model.
+ * @param {boolean} [props.isViewMode] - Indicates if the component is in view mode.
+ * @param {Function} [props.handleChange] - The change event handler.
+ * @param {string} [props.name] - The name of the component.
+ * @returns {JSX.Element} The rendered upper mouth input component.
+ */
 export default React.memo(function DMFT_DMFSUpperMouthInput({
   upperMouth,
   isViewMode,

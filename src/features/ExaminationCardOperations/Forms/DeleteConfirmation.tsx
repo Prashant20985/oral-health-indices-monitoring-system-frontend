@@ -15,6 +15,16 @@ interface Props {
   handleDelete: () => void;
 }
 
+/**
+ * Renders a delete confirmation dialog.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the dialog is open or not.
+ * @param {() => void} props.onClose - The function to handle the dialog close event.
+ * @param {() => void} props.handleDelete - The function to handle the delete action.
+ * @returns {JSX.Element} The delete confirmation dialog component.
+ */
 export default function DeleteConfirmation({
   isOpen,
   onClose,

@@ -23,6 +23,23 @@ interface Props {
   rowCount?: number;
 }
 
+/**
+ * Renders a list of students with various actions.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Student[]} props.students - The list of students.
+ * @param {boolean} [props.loading=false] - Indicates if the list is currently loading.
+ * @param {boolean} [props.studentsInGroupList=true] - Indicates if the students are in a group list.
+ * @param {string} props.groupId - The ID of the group.
+ * @param {boolean} props.isSupervisedStudents - Indicates if the students are supervised.
+ * @param {boolean} props.isUnsupervisedStudents - Indicates if the students are unsupervised.
+ * @param {number} props.page - The current page number.
+ * @param {Function} props.setPaginationParams - A function to set the pagination parameters.
+ * @param {number} props.pageSize - The number of students per page.
+ * @param {number} props.rowCount - The total number of rows.
+ * @returns {JSX.Element} The rendered StudentList component.
+ */
 export default observer(function StudentList({
   students,
   loading = false,

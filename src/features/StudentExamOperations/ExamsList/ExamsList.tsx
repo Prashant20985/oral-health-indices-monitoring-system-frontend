@@ -5,6 +5,11 @@ import { useParams } from "react-router-dom";
 import { Alert, Box, Grid, Typography } from "@mui/material";
 import StudentExamCard from "./StudentExamCard";
 
+/**
+ * Renders a list of exams for a student.
+ * 
+ * @returns The JSX element representing the exams list.
+ */
 export default observer(function ExamsList() {
   const {
     studentExamStore: { groupedStudentExams, fetchStudentExams },

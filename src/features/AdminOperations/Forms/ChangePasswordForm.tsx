@@ -16,6 +16,15 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a form for changing the password.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.email - The email of the user.
+ * @param {Function} props.onClose - The function to close the form.
+ * @returns {JSX.Element} The rendered ChangePasswordForm component.
+ */
 export default observer(function ChangePasswordForm({ email, onClose }: Props) {
   const {
     userStore: { changePassword },

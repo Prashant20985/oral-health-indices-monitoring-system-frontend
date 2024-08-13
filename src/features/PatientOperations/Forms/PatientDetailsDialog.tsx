@@ -22,6 +22,17 @@ interface Props {
   patientDetails?: Patient;
 }
 
+/**
+ * Renders a dialog component for displaying patient details.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.patientId - The ID of the patient.
+ * @param {boolean} props.isOpen - Determines whether the dialog is open or not.
+ * @param {Function} props.onClose - The function to close the dialog.
+ * @param {Patient | null} props.patientDetails - The details of the patient.
+ * @returns {JSX.Element} The rendered dialog component.
+ */
 export default observer(function PatientDetailsDialog({
   patientId,
   isOpen,

@@ -11,6 +11,13 @@ interface Props {
   group: StudentGroup;
 }
 
+/**
+ * Renders a card component for a student group.
+ *
+ * @param {Props} props - The component props.
+ * @param {Group} props.group - The group object containing group information.
+ * @returns {JSX.Element} The rendered card component.
+ */
 export default observer(function GroupCard({ group }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

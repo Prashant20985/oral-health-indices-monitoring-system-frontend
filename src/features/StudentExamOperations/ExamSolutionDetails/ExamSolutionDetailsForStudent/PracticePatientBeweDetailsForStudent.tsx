@@ -18,6 +18,14 @@ interface Props {
   bewe: Bewe;
 }
 
+/**
+ * Renders the details of a practice patient's BEWE (Basic Erosive Wear Examination) for a student.
+ * 
+ * @component
+ * @param {Props} props - The component props.
+ * @param {Bewe} props.bewe - The BEWE object containing the details of the practice patient's BEWE.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function PracticePatientBeweDetailsForStudent({
   bewe,
 }: Props) {

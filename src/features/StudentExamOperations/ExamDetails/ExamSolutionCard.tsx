@@ -22,6 +22,15 @@ interface Props {
   examId: string;
 }
 
+/**
+ * Renders a card component displaying the details of an exam solution.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {ExamSolution} props.examSolution - The exam solution object.
+ * @param {string} props.examId - The ID of the exam.
+ * @returns {JSX.Element} The rendered ExamSolutionCard component.
+ */
 export default observer(function ExamSolutionCard({
   examSolution,
   examId,

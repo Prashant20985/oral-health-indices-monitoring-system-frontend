@@ -25,6 +25,19 @@ interface Props {
   isUserEligibleToComment: boolean;
 }
 
+/**
+ * Renders the bleeding details component.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.cardId - The ID of the card.
+ * @param {Bleeding} props.bleeding - The bleeding details.
+ * @param {boolean} props.isRegularMode - Indicates if it's in regular mode.
+ * @param {boolean} props.isUserEligibleToComment - Indicates if the user is eligible to comment.
+ * @param {boolean} props.isUserEligibleToEdit - Indicates if the user is eligible to edit.
+ * @param {Function} props.setIsEditMode - The function to set the edit mode.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function BleedingDetails({
   cardId,
   bleeding,

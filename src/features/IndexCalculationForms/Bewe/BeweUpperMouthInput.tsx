@@ -13,6 +13,17 @@ interface Props {
   name?: string;
 }
 
+/**
+ * Renders the upper mouth input for the Bewe index calculation form.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {BeweAssessmentModel} props.beweAssessmentModel - The Bewe assessment model.
+ * @param {boolean} props.isView - Indicates if the input is in view mode.
+ * @param {Function} props.handleChange - The change event handler.
+ * @param {string} props.name - The name of the input.
+ * @returns {JSX.Element} The rendered upper mouth input component.
+ */
 export default React.memo(function BeweUpperMouthInput({
   beweAssessmentModel,
   isView,

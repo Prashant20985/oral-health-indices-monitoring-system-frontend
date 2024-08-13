@@ -2,6 +2,13 @@ import { Typography, Box } from "@mui/material";
 import GoToHomePageButton from "./GoToHomePageButton";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders the ServerError component.
+ *
+ * This component displays a server error message along with an image and a button to go back to the home page.
+ *
+ * @returns The rendered ServerError component.
+ */
 export default function ServerError() {
   
   const [t] = useTranslation("global");

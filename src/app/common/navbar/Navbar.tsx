@@ -20,6 +20,16 @@ interface AppBarProps extends MuiAppBarProps {
 
 const drawerWidth = 245;
 
+/**
+ * Custom styled AppBar component.
+ *
+ * @remarks
+ * This component extends the MuiAppBar component and adds custom styling.
+ *
+ * @param theme - The theme object used for styling.
+ * @param open - A boolean indicating whether the AppBar is open or closed.
+ * @returns The styled AppBar component.
+ */
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
@@ -43,6 +53,15 @@ interface Props {
   setSidebarOpen: (value: boolean) => void;
 }
 
+/**
+ * Renders the navigation bar component.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {boolean} props.sidebarOpen - Indicates whether the sidebar is open or not.
+ * @param {Function} props.setSidebarOpen - Callback function to set the sidebar open state.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function Navbar({
   sidebarOpen,
   setSidebarOpen,

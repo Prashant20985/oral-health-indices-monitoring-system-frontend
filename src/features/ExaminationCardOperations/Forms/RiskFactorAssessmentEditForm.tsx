@@ -16,6 +16,14 @@ interface Props {
   isUserEligibleToEdit: boolean;
 }
 
+/**
+ * Renders a form for editing a risk factor assessment.
+ *
+ * @param cardId - The ID of the examination card.
+ * @param riskfactorAssessmentModel - The model containing the risk factor assessment data.
+ * @param setIsEditMode - A function to set the edit mode of the form.
+ * @param isUserEligibleToEdit - A boolean indicating whether the user is eligible to edit the form.
+ */
 export default observer(function RiskFactorAssessmentEditForm({
   cardId,
   riskfactorAssessmentModel,

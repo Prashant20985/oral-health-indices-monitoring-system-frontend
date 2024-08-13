@@ -14,7 +14,23 @@ interface Props {
   height?: string;
 }
 
-export default React.memo(function InPutBaseToothSurface({
+/**
+ * React component for a base input component for tooth surfaces.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {string} props.name - The name of the input.
+ * @param {string} props.value - The value of the input.
+ * @param {Function} props.onChange - The function to handle input changes.
+ * @param {string} [props.error] - The error message for the input.
+ * @param {string} [props.placeholder=""] - The placeholder text for the input.
+ * @param {boolean} [props.readOnly=false] - Indicates if the input is read-only.
+ * @param {boolean} [props.disabled=false] - Indicates if the input is disabled.
+ * @param {string} [props.width="1.3rem"] - The width of the input.
+ * @param {string} [props.height="1.4rem"] - The height of the input.
+ * @returns {JSX.Element} The rendered ToothSurfaceInputBase component.
+ */
+export default React.memo(function ToothSurfaceInputBase({
   name,
   value,
   onChange,

@@ -5,6 +5,11 @@ import { colors } from "../../../themeConfig";
 import AddApplicationUserForm from "../Forms/AddApplicationUserForm";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Renders a button component for adding an application user.
+ * 
+ * @returns The rendered AddApplicationUserButton component.
+ */
 export default function AddApplicationUserButton() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);

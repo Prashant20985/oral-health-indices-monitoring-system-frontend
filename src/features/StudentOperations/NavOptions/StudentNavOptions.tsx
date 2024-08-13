@@ -11,6 +11,14 @@ interface Props {
   open: boolean;
 }
 
+/**
+ * Renders the navigation options for the student operations.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {boolean} props.open - Indicates whether the sidebar is open or closed.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default observer(function StudentNavOptions({ open }: Props) {
   const [t] = useTranslation("global");
   const options = [

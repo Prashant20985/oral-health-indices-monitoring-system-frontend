@@ -7,6 +7,25 @@ interface Colors {
   };
 }
 
+/**
+ * CustomPalette interface represents the theme configuration options for the application.
+ * It extends the ThemeOptions interface and defines the palette property.
+ * The palette property contains the color options for the theme, including primary, secondary, neutral, and background colors.
+ * 
+ * @interface CustomPalette
+ * @extends ThemeOptions
+ * @property {PaletteMode} [mode] - The mode of the palette (optional).
+ * @property {Object} primary - The primary color options.
+ * @property {string} primary.main - The main color of the primary palette.
+ * @property {Object} secondary - The secondary color options.
+ * @property {string} secondary.main - The main color of the secondary palette.
+ * @property {Object} neutral - The neutral color options.
+ * @property {string} neutral.dark - The dark shade of the neutral palette.
+ * @property {string} neutral.main - The main shade of the neutral palette.
+ * @property {string} neutral.light - The light shade of the neutral palette.
+ * @property {Object} background - The background color options.
+ * @property {string} background.default - The default background color.
+ */
 interface CustomPalette extends ThemeOptions {
   palette: {
     mode?: PaletteMode;
@@ -27,8 +46,18 @@ interface CustomPalette extends ThemeOptions {
   };
 }
 
+/**
+ * Represents the mode of the application.
+ * It can be either "dark" or "light".
+ */
 type mode = "dark" | "light";
 
+/**
+ * Represents the colors configuration for the theme.
+ *
+ * @param mode - The mode of the theme (either "dark" or "light").
+ * @returns The Colors object containing the color values for the theme.
+ */
 export const colors = (mode: mode): Colors => ({
   ...(mode === "dark"
     ? {
@@ -191,6 +220,12 @@ export const colors = (mode: mode): Colors => ({
       }),
 });
 
+/**
+ * Generates the theme settings for the specified palette mode.
+ *
+ * @param mode - The palette mode.
+ * @returns The custom palette with the specified theme settings.
+ */
 const themeSettings = (mode: PaletteMode): CustomPalette => {
   const color = colors(mode);
   return {
@@ -273,12 +308,20 @@ const themeSettings = (mode: PaletteMode): CustomPalette => {
   };
 };
 
+/**
+ * Context for managing color mode.
+ */
 export const ColorModeContext = createContext<{
   toggleColorMode: () => void;
 }>({
   toggleColorMode: () => {},
 });
 
+/**
+ * Custom hook that provides a theme and color mode toggle functionality.
+ *
+ * @returns An array containing the theme options and a color mode toggle function.
+ */
 export const useMode = (): [
   ThemeOptions,
   {

@@ -1,3 +1,15 @@
+/**
+ * Initializes the application by rendering the root component and setting up internationalization.
+ * @remarks
+ * This function performs the following steps:
+ * 1. Initializes the i18next library for internationalization.
+ * 2. Sets the language based on the value stored in the local storage or defaults to "en".
+ * 3. Loads the language resources for English and Polish.
+ * 4. Renders the root component wrapped in React StrictMode.
+ * 5. Provides the i18next instance and the application store to the component tree.
+ * 6. Provides the router instance to the component tree.
+ * @param rootElement - The root element to render the application.
+ */
 import ReactDOM from "react-dom/client";
 import { StoreContext, store } from "./app/stores/Store";
 import { RouterProvider } from "react-router-dom";

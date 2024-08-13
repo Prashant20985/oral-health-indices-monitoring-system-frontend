@@ -9,6 +9,19 @@ import { StudentExamStore } from "./StudentExamStore";
 import StudentStore from "./StudentStore";
 import { PatientExaminationCardStore } from "./PatientExaminationCardStore";
 
+/**
+ * Represents a store object that contains various store instances.
+ * @interface Store
+ * @property {CommonStore} commonStore - The common store instance.
+ * @property {UserStore} userStore - The user store instance.
+ * @property {AdminStore} adminStore - The admin store instance.
+ * @property {DentistTeacherStore} dentistTeacherStore - The dentist teacher store instance.
+ * @property {UserRequestStore} userRequestStore - The user request store instance.
+ * @property {PatientStore} patientStore - The patient store instance.
+ * @property {StudentExamStore} studentExamStore - The student exam store instance.
+ * @property {StudentStore} studentStore - The student store instance.
+ * @property {PatientExaminationCardStore} patientExaminationCardStore - The patient examination card store instance.
+ */
 interface Store {
   commonStore: CommonStore;
   userStore: UserStore;
@@ -21,6 +34,19 @@ interface Store {
   patientExaminationCardStore: PatientExaminationCardStore;
 }
 
+/**
+ * The store object that holds instances of various store classes.
+ * @typedef {Object} Store
+ * @property {CommonStore} commonStore - The common store instance.
+ * @property {UserStore} userStore - The user store instance.
+ * @property {AdminStore} adminStore - The admin store instance.
+ * @property {DentistTeacherStore} dentistTeacherStore - The dentist teacher store instance.
+ * @property {UserRequestStore} userRequestStore - The user request store instance.
+ * @property {PatientStore} patientStore - The patient store instance.
+ * @property {StudentExamStore} studentExamStore - The student exam store instance.
+ * @property {StudentStore} studentStore - The student store instance.
+ * @property {PatientExaminationCardStore} patientExaminationCardStore - The patient examination card store instance.
+ */
 export const store: Store = {
   commonStore: new CommonStore(),
   userStore: new UserStore(),
@@ -33,8 +59,16 @@ export const store: Store = {
   patientExaminationCardStore: new PatientExaminationCardStore(),
 };
 
+/**
+ * The context for the store.
+ */
 export const StoreContext = createContext(store);
 
+/**
+ * Returns the store context using the useContext hook.
+ *
+ * @returns The store context.
+ */
 export function useStore() {
   return useContext(StoreContext);
 }

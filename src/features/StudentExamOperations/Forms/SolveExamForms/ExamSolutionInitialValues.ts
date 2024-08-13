@@ -1,5 +1,13 @@
 import { ExamSolutionFormValues } from "../../../../app/models/StudentExam";
 
+/**
+ * Represents the initial values for an exam solution form.
+ *
+ * @remarks
+ * This object contains the initial values for various fields in the exam solution form.
+ * It includes the patient's information, summary, risk factor assessment, practice API,
+ * practice bleeding, practice BEWE, and practice DMFT_DMFS.
+ */
 export const ExamSolutionInitialValues: ExamSolutionFormValues = {
   patientDto: {
     firstName: "",
