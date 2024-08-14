@@ -287,6 +287,16 @@ export default class DentistTeacherStore {
     this.studentsNotInGroupSearchParams = params;
   };
 
+  // Sets the patient not in research group search params.
+  setPatientNotInResearchGroupSearchParams = (params: {
+    patientName: string;
+    email: string;
+    page: number;
+    pageSize: number;
+  }) => {
+    this.patientnNotInResearchGroupSearchParams = params;
+  };
+
   // Sets the selected student group.
   setSelectedStudentGroup = (studentGroup: StudentGroup) => {
     this.selectedStudentGroup = studentGroup;
@@ -378,7 +388,7 @@ export default class DentistTeacherStore {
 
   /**
    * Creates a student group with the given group name.
-   * 
+   *
    * @param groupName - The name of the student group.
    * @returns A promise that resolves when the student group is created.
    * @throws If an error occurs during the creation process.
@@ -400,7 +410,7 @@ export default class DentistTeacherStore {
 
   /**
    * Adds a student to a student group.
-   * 
+   *
    * @param groupId - The ID of the group to add the student to.
    * @param student - The student to be added.
    * @returns A promise that resolves when the student is successfully added to the group.
@@ -439,7 +449,7 @@ export default class DentistTeacherStore {
 
   /**
    * Removes a student from a student group.
-   * 
+   *
    * @param groupId - The ID of the group from which the student will be removed.
    * @param studentId - The ID of the student to be removed.
    * @returns A Promise that resolves when the student is successfully removed from the group.
@@ -512,7 +522,7 @@ export default class DentistTeacherStore {
 
   /**
    * Updates the group name of a student group.
-   * 
+   *
    * @param groupId - The ID of the group to update.
    * @param groupName - The new name for the group.
    * @returns A Promise that resolves when the group name is successfully updated.
@@ -551,7 +561,7 @@ export default class DentistTeacherStore {
 
   /**
    * Retrieves the list of students who are not in a specific student group.
-   * 
+   *
    * @param groupId - The ID of the student group.
    * @returns A Promise that resolves to the list of students not in the group.
    * @throws If an error occurs while retrieving the students.
@@ -596,7 +606,7 @@ export default class DentistTeacherStore {
 
   /**
    * Retrieves the details of a student group.
-   * 
+   *
    * @param studentGroupId - The ID of the student group to retrieve.
    * @returns A Promise that resolves to the student group details.
    */
@@ -647,7 +657,7 @@ export default class DentistTeacherStore {
 
   /**
    * Retrieves the research group with the specified ID.
-   * 
+   *
    * @param researchGroupId - The ID of the research group to retrieve.
    * @returns A Promise that resolves to the retrieved research group.
    */
@@ -719,7 +729,7 @@ export default class DentistTeacherStore {
 
   /**
    * Deletes a research group.
-   * 
+   *
    * @param researchGroupId - The ID of the research group to delete.
    * @returns A promise that resolves when the research group is successfully deleted.
    * @throws If an error occurs during the deletion process.
@@ -746,7 +756,7 @@ export default class DentistTeacherStore {
 
   /**
    * Updates a research group with the specified research group ID and values.
-   * 
+   *
    * @param researchGroupId - The ID of the research group to update.
    * @param values - The new values for the research group.
    * @returns A promise that resolves when the research group is successfully updated.
@@ -794,7 +804,7 @@ export default class DentistTeacherStore {
 
   /**
    * Adds a patient to a research group.
-   * 
+   *
    * @param researchGroupId - The ID of the research group.
    * @param patient - The patient to be added to the research group.
    * @returns A Promise that resolves when the patient is successfully added to the research group.
@@ -831,7 +841,7 @@ export default class DentistTeacherStore {
 
   /**
    * Removes a patient from the research group.
-   * 
+   *
    * @param patient - The patient to be removed from the research group.
    * @returns A promise that resolves when the patient is successfully removed.
    * @throws An error if the removal process fails.
@@ -908,7 +918,7 @@ export default class DentistTeacherStore {
 
   /**
    * Supervises a student by their ID.
-   * 
+   *
    * @param studentId - The ID of the student to supervise.
    * @returns A promise that resolves when the student is successfully supervised.
    * @throws An error if there was a problem supervising the student.
@@ -939,7 +949,7 @@ export default class DentistTeacherStore {
 
   /**
    * Unsupervises a student.
-   * 
+   *
    * @param studentId - The ID of the student to unsupervise.
    * @returns A promise that resolves when the student is unsupervised.
    * @throws If an error occurs during the unsupervise operation.
