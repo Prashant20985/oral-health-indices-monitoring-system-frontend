@@ -102,7 +102,7 @@ export default observer(function UserRequesthortcut() {
         <Box display="flex" justifyContent="flex-end">
           <Button
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
-            onClick={() => router.navigate("/admin/requests")}
+            onClick={() => router.navigate("/my-requests")}
             size="small"
           >
             {t("admin-operations.dashboard.user-requests.button")}
