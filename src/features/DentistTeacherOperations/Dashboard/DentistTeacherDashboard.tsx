@@ -13,16 +13,15 @@ import { useTranslation } from "react-i18next";
 
 /**
  * Renders the DentistTeacherDashboard component.
- * 
+ *
  * This component displays the dashboard for the dentist or teacher operations.
  * It fetches and displays the patient examination cards assigned to the doctor.
- * 
+ *
  * @returns The DentistTeacherDashboard component.
  */
 export default observer(function DentistTeacherDashboard() {
-
   const [t] = useTranslation("global");
-  
+
   const {
     patientExaminationCardStore: {
       getPatientExaminationCardsAssignedToDoctor,
@@ -63,25 +62,38 @@ export default observer(function DentistTeacherDashboard() {
                   ? color.primary[500]
                   : color.primary[900],
               minHeight: "25vh",
+              maxHeight: "50vh",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
-            <Box>
+            {/* Sticky Header */}
+            <Box sx={{ position: "sticky", top: 0, zIndex: 1, backgroundColor: theme.palette.background.paper }}>
               <Typography
                 variant="h6"
                 p={1}
                 textTransform="uppercase"
                 fontWeight={600}
               >
-                {t("dentist-teacher-operations.dashboard.header")}
+                {t("dentist-teacher-operations.dashboard.assigned-cards")}
               </Typography>
+              <Divider />
             </Box>
-            <Divider />
-            <PatientExaminationCardsList
-              patientExaminationCards={
-                getTop4PatientExaminationCardsAssignedToDoctor
-              }
-              loading={loading.getPatientExaminationCardsAssignedToDoctor}
-            />
+
+            {/* Scrollable Content */}
+            <Box
+              sx={{
+                overflowY: "auto",
+                flexGrow: 1,
+              }}
+            >
+              <PatientExaminationCardsList
+                patientExaminationCards={
+                  getTop4PatientExaminationCardsAssignedToDoctor
+                }
+                loading={loading.getPatientExaminationCardsAssignedToDoctor}
+              />
+            </Box>
           </Paper>
         </Grid>
         <ActivePatientListShortcut />
