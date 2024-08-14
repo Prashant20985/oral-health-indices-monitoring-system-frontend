@@ -49,11 +49,11 @@ export default function CreatePracticeDMFT_DMFSForm({
             fontweight: 600,
           }}
         >
-           {t("student-exam-operations.form.practice-dmft-dmfs-form.add-calculated-dmft-dmfs-result")}
+           {t("student-exam-operations.forms.practice-dmft-dmfs-form.add-calculated-dmft-dmfs-result")}
         </Typography>
 
         <TextField
-          label= {t("student-exam-operations.form.practice-dmft-dmfs-form.dmft-result")}
+          label= {t("student-exam-operations.forms.practice-dmft-dmfs-form.dmft-result")}
           variant="outlined"
           fullWidth
           type="number"
@@ -63,7 +63,7 @@ export default function CreatePracticeDMFT_DMFSForm({
         />
 
         <TextField
-          label= {t("student-exam-operations.form.practice-dmft-dmfs-form.dmfs-result")}
+          label= {t("student-exam-operations.forms.practice-dmft-dmfs-form.dmfs-result")}
           variant="outlined"
           fullWidth
           type="number"

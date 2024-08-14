@@ -48,10 +48,10 @@ export default function CreatePracticeBeweForm({
             fontweight: 600,
           }}
         >
-           {t("student-exam-operations.form.practice-bewe-form.add-calculated-bewe-result")}
+           {t("student-exam-operations.forms.practice-bewe-form.add-calculated-bewe-result")}
         </Typography>
         <TextField
-          label= {t("student-exam-operations.form.practice-bewe-form.bewe-result")}
+          label= {t("student-exam-operations.forms.practice-bewe-form.bewe-result")}
           variant="outlined"
           fullWidth
           type="number"

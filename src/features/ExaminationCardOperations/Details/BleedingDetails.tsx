@@ -152,7 +152,7 @@ export default observer(function BleedingDetails({
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
         title={t("examination-card-operations.details.bleeding-details.comment-bleeding-form")}
-        description={t("examination-card-operations.details.bleeding-details.desription")}
+        description={t("examination-card-operations.details.bleeding-details.description")}
         handleSubmit={(comment) => {
           handleComment(comment);
         }}
