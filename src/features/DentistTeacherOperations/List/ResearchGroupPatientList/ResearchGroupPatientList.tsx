@@ -1,6 +1,13 @@
 import { observer } from "mobx-react-lite";
 import { ResearchGroupPatient } from "../../../../app/models/ResearchGroup";
-import { Box, IconButton, Tooltip, useTheme } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { colors } from "../../../../themeConfig";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import LinearProgressComponent from "../../../../app/common/loadingComponents/LinearProgressComponent";
@@ -71,15 +78,36 @@ export default observer(function ResearchGroupPatientList({
     setPageModel({ page, pageSize });
   };
 
-  const columns: GridColDef[] = [
-    {
-      field: "firstName",
-      headerName: t(
-        "dentist-teacher-operations.list.research-group.research-group-patient.first-name"
-      ),
-      cellClassName: "name-column--cell",
-      flex: 1.5,
+  const firstNameColumn: GridColDef = {
+    field: "firstName",
+    headerName: t(
+      "dentist-teacher-operations.list.research-group.research-group-patient.first-name"
+    ),
+    cellClassName: "name-column--cell",
+    flex: 1.5,
+    renderCell: ({ row }) => {
+      const { firstName } = row || {};
+      return (
+        <Box display="flex" alignItems="center" alignContent="center" gap={1}>
+          <Avatar
+            alt={firstName}
+            variant="rounded"
+            sx={{
+              width: 30,
+              height: 30,
+              backgroundColor: patientsInGroupList
+                ? color.greenAccent[600]
+                : color.orangeAccent[600],
+            }}
+          />
+          <Typography className="name-column--cell">{firstName}</Typography>
+        </Box>
+      );
     },
+  };
+
+  const columns: GridColDef[] = [
+    ...[firstNameColumn],
     {
       field: "lastName",
       headerName: t(
