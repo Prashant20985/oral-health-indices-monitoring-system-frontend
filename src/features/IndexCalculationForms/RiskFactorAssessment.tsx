@@ -148,9 +148,9 @@ export default observer(function RiskFactorAssessment({
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
     "Caries risk factor assessment": {
-      optionLowRisk: "Yes",
-      optionModerateRisk: "Yes",
-      optionHighRisk: "Yes",
+      optionLowRisk: "Low Risk",
+      optionModerateRisk: "Moderate Risk",
+      optionHighRisk: "High Risk",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: false },
     },
   };
