@@ -44,7 +44,7 @@ export default observer(function ArchivedPatientListShortcut() {
           textTransform="uppercase"
           fontWeight={600}
         >
-          {t("admin-operations.dashboard.archived-users.header")}
+          {t("admin-operations.dashboard.archived-patients.header")}
         </Typography>
         <PatientList
           patients={patientStore.archivedPatients}
@@ -67,7 +67,7 @@ export default observer(function ArchivedPatientListShortcut() {
             onClick={() => router.navigate("/archived-patients")}
             size="small"
           >
-            {t("admin-operations.dashboard.archived-users.button")}
+            {t("admin-operations.dashboard.archived-patients.button")}
           </Button>
         </Box>
       </Paper>

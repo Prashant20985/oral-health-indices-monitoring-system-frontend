@@ -114,6 +114,10 @@
       "user-requests": {
         "header": "żądania użytkowników",
         "button": "Pokaż wszystkie"
+      },
+      "archived-patients": {
+        "header": "Zarchiwizowani pacjenci",
+        "button": "Pokaż wszystkie"
       }
     },
     "forms": {

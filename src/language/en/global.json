@@ -10,29 +10,29 @@
       "pl": "Polish"
     }
   },
-  "common":{
-    "calendar":{
+  "common": {
+    "calendar": {
       "choose-date": "Choose Date",
       "clear-button": "Clear"
     },
-    "countdown-timer":{
+    "countdown-timer": {
       "hours": "Hours",
       "minutes": "Minutes",
       "seconds": "Seconds"
     },
-    "file-dropzone":{
+    "file-dropzone": {
       "title": "Drop file here"
     },
     "cancel-button": "Cancel",
     "submit-button-loading-text": "Saving...",
     "loading-text": "Loading...",
-    "user-options":{
+    "user-options": {
       "title": "User Options",
       "view-profile": "View Profile",
       "log-out": "Log Out"
     },
     "no-rows-found": "No rows found",
-    "side-bar":{
+    "side-bar": {
       "login": "Login",
       "dashboard": "Dashboard",
       "my-requests": "My Requests"
@@ -113,6 +113,10 @@
       },
       "user-requests": {
         "header": "User Requests",
+        "button": "View All"
+      },
+      "archived-patients": {
+        "header": "Archived Patients",
         "button": "View All"
       }
     },
@@ -847,8 +851,8 @@
       }
     }
   },
-  "student-operations":{
-    "dashboard":{
+  "student-operations": {
+    "dashboard": {
       "title": "Student Dashboard"
     },
     "nav-options": {
@@ -860,25 +864,25 @@
       "teacher": "Teacher:",
       "no-exams-found": "No Exams Found"
     },
-    "student-group-list":{
-      "group-for-student-card":{
+    "student-group-list": {
+      "group-for-student-card": {
         "teacher": "Teacher:",
         "view-group-details-button": "View Group Details"
       },
-      "group-list-for-student":{
+      "group-list-for-student": {
         "title": "My Groups",
         "sub-title": "List of My Groups",
         "search": "Search"
       },
-      "upcoming-exams":{
+      "upcoming-exams": {
         "title": "Upcoming Exams",
         "no-upcoming-exams": "No Upcoming Exams"
       }
     }
   },
-  "examination-card-operations":{
-    "details":{
-      "api-details":{
+  "examination-card-operations": {
+    "details": {
+      "api-details": {
         "api-result": "API Result",
         "doctor-api-comment": "Doctor API Comment",
         "no-comment": "No Comment Provided.",
@@ -889,7 +893,7 @@
         "description": "Please provide your comment for the API Form.",
         "message": "Comment has been added successfully."
       },
-      "bewe-details":{
+      "bewe-details": {
         "bewe-result": "BEWE Result",
         "doctor-bewe-comment": "Doctor BEWE Comment",
         "no-comment": "No Comment Provided.",
@@ -900,7 +904,7 @@
         "description": "Please provide your comment for the BEWE Form.",
         "message": "Comment has been added successfully."
       },
-      "bleeding-details":{
+      "bleeding-details": {
         "bleeding-result": "Bleeding Result",
         "doctor-bleeding-comment": "Doctor Bleeding Comment",
         "no-comment": "No Comment Provided.",
@@ -911,7 +915,7 @@
         "description": "Please provide your comment for the Bleeding Form.",
         "message": "Comment has been added successfully."
       },
-      "dmft-dmfs-details":{
+      "dmft-dmfs-details": {
         "doctor-dmft-dmfs-comment": "Doctor DMFT/DMFS Comment",
         "no-comment": "No Comment Provided.",
         "student-dmft-dmfs-comment": "Student DMFT/DMFS Comment",
@@ -921,7 +925,7 @@
         "description": "Please provide your comment for the DMFT/DMFS Form.",
         "message": "Comment has been added successfully."
       },
-      "patient-examination-details-header-card":{
+      "patient-examination-details-header-card": {
         "downloading": "Downloading...",
         "download-button": "Download Report",
         "patient-name": "Patient Name",
