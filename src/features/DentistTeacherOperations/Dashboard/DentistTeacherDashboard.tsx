@@ -60,7 +60,7 @@ export default observer(function DentistTeacherDashboard() {
               backgroundColor:
                 theme.palette.mode === "dark"
                   ? color.primary[500]
-                  : color.primary[900],
+                  : color.primary[400],
               minHeight: "25vh",
               maxHeight: "50vh",
               display: "flex",
@@ -68,7 +68,7 @@ export default observer(function DentistTeacherDashboard() {
             }}
           >
             {/* Sticky Header */}
-            <Box sx={{ position: "sticky", top: 0, zIndex: 1, backgroundColor: theme.palette.background.paper }}>
+            <Box sx={{ position: "sticky", top: 0, zIndex: 1, backgroundColor: "transparent" }}>
               <Typography
                 variant="h6"
                 p={1}
