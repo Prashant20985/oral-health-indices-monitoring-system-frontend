@@ -6,6 +6,12 @@ import { FiveSurfaceToothBewe, FourSurfaceTooth } from "./Tooth";
 export interface PracticeBeweFormValues {
   assessmentModel: BeweAssessmentModel;
   beweResult: number;
+  sectant1: number;
+  sectant2: number;
+  sectant3: number;
+  sectant4: number;
+  sectant5: number;
+  sectant6: number;
 }
 
 /**
@@ -25,6 +31,12 @@ export interface Bewe extends PracticeBeweFormValues {
 export interface BeweValues {
   id: string;
   beweResult: number;
+  sectant1: number;
+  sectant2: number;
+  sectant3: number;
+  sectant4: number;
+  sectant5: number;
+  sectant6: number;
   doctorComment: string;
   studentComment: string;
   assessmentModel: BeweAssessmentModel;

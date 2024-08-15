@@ -36,6 +36,7 @@ import {
 } from "../models/StudentExam";
 import {
   APIUpdateResponse,
+  BeweUpdateResponse,
   BleedingUpdateResponse,
   DMFT_DMFSUpdateResponse,
   PatientExaminationCard,
@@ -528,7 +529,7 @@ const PatientExamintionCardOperations = {
     ),
 
   updateBeweForm: (cardId: string, values: BeweAssessmentModel) =>
-    apiRequests.put<number>(
+    apiRequests.put<BeweUpdateResponse>(
       `/PatientExaminationCard/update-bewe-form/${cardId}`,
       values
     ),

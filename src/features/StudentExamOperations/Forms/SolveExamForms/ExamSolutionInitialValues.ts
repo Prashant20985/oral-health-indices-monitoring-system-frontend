@@ -257,14 +257,20 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
   },
   practiceBewe: {
     beweResult: 0,
+    sectant1: 0,
+    sectant2: 0,
+    sectant3: 0,
+    sectant4: 0,
+    sectant5: 0,
+    sectant6: 0,
     assessmentModel: {
       sectant1: {
         tooth_17: {
-          o: "10",
-          b: "10",
-          l: "10",
-          d: "10",
-          m: "10",
+          o: "",
+          b: "",
+          l: "",
+          d: "",
+          m: "",
         },
         tooth_16: {
           o: "",
