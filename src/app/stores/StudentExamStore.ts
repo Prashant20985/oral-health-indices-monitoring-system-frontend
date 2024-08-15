@@ -110,6 +110,11 @@ export class StudentExamStore {
     this.examSolutionByStudent = null;
   };
 
+  // Clears the studentExams property.
+  clearStudentExams = () => {
+    this.studentExams.clear();
+  };
+
   // Sets the eligibility for students to submit exams.
   setEligibilityToSubmitExam = (isEligible: boolean) => {
     this.isEligibleToSubmitExam = isEligible;
@@ -430,6 +435,7 @@ export class StudentExamStore {
     try {
       const exams = await axiosAgent.StudentExamOperations.getExams(grouId);
       runInAction(() => {
+        this.clearStudentExams();
         exams.forEach((exam) => {
           this.setStudentExams(exam);
         });
