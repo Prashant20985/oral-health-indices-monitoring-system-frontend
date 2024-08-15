@@ -188,6 +188,12 @@ export default observer(function PatientList({
   const columns: GridColDef[] = [
     ...[firstNameColumn],
     {
+      field: "lastName",
+      headerName: t("patient-operations.data-grid.last-name"),
+      cellClassName: "name-column--cell",
+      flex: 1,
+    },
+    {
       field: "email",
       headerName: t("patient-operations.data-grid.email"),
       cellClassName: "name-column--cell",
