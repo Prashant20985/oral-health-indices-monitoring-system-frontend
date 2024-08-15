@@ -24,7 +24,12 @@ export default observer(function PatientProfile() {
   const color = colors(theme.palette.mode);
 
   const {
-    patientStore: { fetchPatientDetails, patientDetails, loading },
+    patientStore: {
+      fetchPatientDetails,
+      patientDetails,
+      loading,
+      clearPatientDetails,
+    },
     patientExaminationCardStore: {
       groupedPatientExaminationCards,
       getPatientExaminationCards,
@@ -44,7 +49,9 @@ export default observer(function PatientProfile() {
       await fetchPatientDetails(id!);
     };
     fetchDetails();
-  }, [fetchPatientDetails, id]);
+
+    return () => clearPatientDetails();
+  }, [fetchPatientDetails, id, clearPatientDetails]);
 
   React.useEffect(() => {
     if (id) {
