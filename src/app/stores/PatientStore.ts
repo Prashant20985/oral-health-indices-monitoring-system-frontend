@@ -120,6 +120,10 @@ export class PatientStore {
     this.archivedPatientsSearchParams.email = "";
   };
 
+  clearPatientDetails = () => {
+    this.patientDetails = null;
+  };
+
   // Gets the URLSearchParams for the activePatientsSerachParams property.
   get activePatientAxiosParams() {
     const params = new URLSearchParams();
@@ -155,7 +159,7 @@ export class PatientStore {
 
   /**
    * Fetches active patients from the server.
-   * 
+   *
    * @returns {Promise<void>} A promise that resolves when the active patients are fetched successfully.
    * @throws {Error} If there is an error while fetching the active patients.
    */
@@ -178,7 +182,7 @@ export class PatientStore {
 
   /**
    * Fetches the archived patients from the server.
-   * 
+   *
    * @returns {Promise<void>} A promise that resolves when the operation is complete.
    * @throws {Error} If an error occurs during the operation.
    */
@@ -296,7 +300,7 @@ export class PatientStore {
    * Unarchives a patient by setting their isArchived property to false.
    * Moves the patient from the archivedPatients array to the activePatients array.
    * Updates the totalPatientsCount for both arrays.
-   * 
+   *
    * @param patientId - The ID of the patient to unarchive.
    * @throws If an error occurs during the unarchiving process.
    */
@@ -330,7 +334,7 @@ export class PatientStore {
 
   /**
    * Deletes a patient from the system.
-   * 
+   *
    * @param {string} patientId - The ID of the patient to be deleted.
    * @returns {Promise<void>} - A promise that resolves when the patient is successfully deleted.
    * @throws {Error} - If an error occurs while deleting the patient.
@@ -359,7 +363,7 @@ export class PatientStore {
 
   /**
    * Fetches the details of a patient.
-   * 
+   *
    * @param patientId - The ID of the patient.
    * @returns A Promise that resolves to the patient details.
    * @throws If an error occurs during the fetch operation.
@@ -368,10 +372,8 @@ export class PatientStore {
     this.loading.patientDetails = true;
     const patient = this.getPatientById(patientId);
     if (patient) {
-      runInAction(() => {
-        this.setPatientDetails(patient);
-        this.loading.patientDetails = false;
-      });
+      this.setPatientDetails(patient);
+      this.loading.patientDetails = false;
       return;
     }
     try {
