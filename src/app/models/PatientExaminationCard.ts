@@ -85,3 +85,16 @@ export interface DMFT_DMFSUpdateResponse {
   dmftResult: number;
   dmfsResult: number;
 }
+
+/**
+ * Represents the response object for updating BEWE values.
+ */
+export interface BeweUpdateResponse {
+  beweResult: number;
+  sectant1: number;
+  sectant2: number;
+  sectant3: number;
+  sectant4: number;
+  sectant5: number;
+  sectant6: number;
+}

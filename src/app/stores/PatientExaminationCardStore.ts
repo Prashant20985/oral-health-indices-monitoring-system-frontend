@@ -138,7 +138,6 @@ export class PatientExaminationCardStore {
     return this.patientExaminationCardsAssignedToDoctor.get(id);
   }
 
-  
   /**
    * Returns an array of grouped patient examination cards.
    * The patient examination cards are grouped by year and month of examination date.
@@ -264,7 +263,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Creates a patient examination card by a doctor.
-   * 
+   *
    * @param {string} patientId - The ID of the patient.
    * @param {PatientExaminationCardByDoctorFormValues} values - The values for the patient examination card.
    * @returns {Promise<void>} - A promise that resolves when the patient examination card is created.
@@ -299,7 +298,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Creates a patient examination card by a student.
-   * 
+   *
    * @param {string} patientId - The ID of the patient.
    * @param {PatientExaminationCardByStudentFormValues} values - The values for the patient examination card.
    * @returns {Promise<void>} - A promise that resolves when the patient examination card is created.
@@ -334,7 +333,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Retrieves the examination cards for a specific patient.
-   * 
+   *
    * @param patientId - The ID of the patient.
    * @returns A promise that resolves to the patient examination cards.
    * @throws If an error occurs while retrieving the examination cards.
@@ -361,7 +360,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Retrieves the patient examination cards assigned to a doctor.
-   * 
+   *
    * @returns {Promise<void>} A promise that resolves when the operation is complete.
    * @throws {Error} If an error occurs during the retrieval process.
    */
@@ -390,7 +389,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Retrieves the details of a patient examination card.
-   * 
+   *
    * @param {string} cardId - The ID of the examination card.
    * @returns {Promise<void>} - A promise that resolves when the details are retrieved.
    * @throws {Error} - If an error occurs while retrieving the details.
@@ -423,7 +422,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Comments on a patient examination card.
-   * 
+   *
    * @param {string} cardId - The ID of the patient examination card.
    * @param {string} comment - The comment to be added.
    * @returns {Promise<void>} - A promise that resolves when the comment is successfully added.
@@ -458,7 +457,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Sends a comment to the API for a patient examination card.
-   * 
+   *
    * @param {string} cardId - The ID of the patient examination card.
    * @param {string} comment - The comment to be sent to the API.
    * @returns {Promise<void>} - A promise that resolves when the comment is successfully sent.
@@ -495,7 +494,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Adds a comment to the bleeding form of a patient examination card.
-   * 
+   *
    * @param cardId - The ID of the patient examination card.
    * @param comment - The comment to be added.
    * @returns A promise that resolves when the comment is successfully added.
@@ -532,7 +531,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Adds a comment to the Bewe form of a patient examination card.
-   * 
+   *
    * @param cardId - The ID of the patient examination card.
    * @param comment - The comment to be added.
    * @throws {Error} If an error occurs while adding the comment.
@@ -568,7 +567,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Adds a comment to the DMFT_DMFS form of a patient examination card.
-   * 
+   *
    * @param cardId - The ID of the patient examination card.
    * @param comment - The comment to be added.
    * @throws {Error} If an error occurs while adding the comment.
@@ -604,7 +603,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Updates the API form for a patient examination card.
-   * 
+   *
    * @param cardId - The ID of the card.
    * @param values - The values to update the API form with.
    * @returns A promise that resolves when the API form is successfully updated.
@@ -648,7 +647,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Updates the bleeding form for a patient examination card.
-   * 
+   *
    * @param {string} cardId - The ID of the patient examination card.
    * @param {APIBleedingAssessmentModel} values - The values to update the bleeding form with.
    * @returns {Promise<void>} - A promise that resolves when the bleeding form is successfully updated.
@@ -692,7 +691,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Updates the Bewe form for a patient examination card.
-   * 
+   *
    * @param {string} cardId - The ID of the card.
    * @param {BeweAssessmentModel} values - The updated Bewe assessment model.
    * @returns {Promise<void>} - A promise that resolves when the update is complete.
@@ -712,7 +711,19 @@ export class PatientExaminationCardStore {
             values;
 
           this.patientExaminationCardDetails.patientExaminationResult.bewe.beweResult =
-            beweUpdateResponse;
+            beweUpdateResponse.beweResult;
+          this.patientExaminationCardDetails.patientExaminationResult.bewe.sectant1 =
+            beweUpdateResponse.sectant1;
+          this.patientExaminationCardDetails.patientExaminationResult.bewe.sectant2 =
+            beweUpdateResponse.sectant2;
+          this.patientExaminationCardDetails.patientExaminationResult.bewe.sectant3 =
+            beweUpdateResponse.sectant3;
+          this.patientExaminationCardDetails.patientExaminationResult.bewe.sectant4 =
+            beweUpdateResponse.sectant4;
+          this.patientExaminationCardDetails.patientExaminationResult.bewe.sectant5 =
+            beweUpdateResponse.sectant5;
+          this.patientExaminationCardDetails.patientExaminationResult.bewe.sectant6 =
+            beweUpdateResponse.sectant6;
         }
         this.loading.updateBeweForm = false;
       });
@@ -727,7 +738,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Updates the DMFT_DMFS form for a patient examination card.
-   * 
+   *
    * @param cardId - The ID of the patient examination card.
    * @param values - The values to update the form with.
    * @returns A promise that resolves when the form is successfully updated.
@@ -771,7 +782,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Updates the risk factor assessment for a patient examination card.
-   * 
+   *
    * @param {string} cardId - The ID of the card to update.
    * @param {RiskFactorAssessmentModel} values - The updated risk factor assessment values.
    * @returns {Promise<void>} - A promise that resolves when the update is complete.
@@ -805,7 +816,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Updates the summary of a patient examination card.
-   * 
+   *
    * @param {string} cardId - The ID of the card to update.
    * @param {Summary} summary - The new summary to set.
    * @returns {Promise<void>} - A promise that resolves when the summary is updated successfully.
@@ -861,7 +872,7 @@ export class PatientExaminationCardStore {
 
   /**
    * Grades a patient examination card.
-   * 
+   *
    * @param {string} cardId - The ID of the card to be graded.
    * @param {number} grade - The grade to assign to the card.
    * @returns {Promise<void>} - A promise that resolves when the grading is complete.

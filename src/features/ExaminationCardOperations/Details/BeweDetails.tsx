@@ -1,12 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { BeweValues } from "../../../app/models/Bewe";
-import {
-  Box,
-  Button,
-  Paper,
-  TextField,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Grid, Paper, TextField, useTheme } from "@mui/material";
 import { colors } from "../../../themeConfig";
 import { Comment } from "@mui/icons-material";
 import BeweEditForm from "../Forms/BeweEditForm";
@@ -94,25 +88,87 @@ export default observer(function BeweDetails({
         <TextField
           fullWidth
           color="secondary"
-          label={t("examination-card-operations.details.bewe-details.bewe-result")}
+          label={t(
+            "examination-card-operations.details.bewe-details.bewe-result"
+          )}
           value={bewe.beweResult}
         />
+        <Grid container spacing={2}>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              fullWidth
+              color="secondary"
+              label="Sectant 1"
+              value={bewe.sectant1}
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              fullWidth
+              color="secondary"
+              label="Sectant 2"
+              value={bewe.sectant2}
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              fullWidth
+              color="secondary"
+              label="Sectant 3"
+              value={bewe.sectant3}
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              fullWidth
+              color="secondary"
+              label="Sectant 6"
+              value={bewe.sectant6}
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              fullWidth
+              color="secondary"
+              label="Sectant 5"
+              value={bewe.sectant5}
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              fullWidth
+              color="secondary"
+              label="Sectant 4"
+              value={bewe.sectant4}
+            />
+          </Grid>
+        </Grid>
         <TextField
           multiline
           fullWidth
           color="secondary"
-          label={t("examination-card-operations.details.bewe-details.doctor-bewe-comment")}
+          label={t(
+            "examination-card-operations.details.bewe-details.doctor-bewe-comment"
+          )}
           rows={3}
-          value={bewe.doctorComment ?? t("examination-card-operations.details.bewe-details.no-comment")}
+          value={
+            bewe.doctorComment ??
+            t("examination-card-operations.details.bewe-details.no-comment")
+          }
         />
         {!isRegularMode && (
           <TextField
             multiline
             fullWidth
             color="secondary"
-            label={t("examination-card-operations.details.bewe-details.student-bewe-comment")}
+            label={t(
+              "examination-card-operations.details.bewe-details.student-bewe-comment"
+            )}
             rows={3}
-            value={bewe.studentComment ?? t("examination-card-operations.details.bewe-details.no-comment")}
+            value={
+              bewe.studentComment ??
+              t("examination-card-operations.details.bewe-details.no-comment")
+            }
           />
         )}
         {isUserEligibleToComment && (
@@ -123,7 +179,13 @@ export default observer(function BeweDetails({
               variant="outlined"
               onClick={() => setOpenCommentDialog(true)}
             >
-              {comment ? t("examination-card-operations.details.bewe-details.edit-comment") : t("examination-card-operations.details.bewe-details.add-comment")}
+              {comment
+                ? t(
+                    "examination-card-operations.details.bewe-details.edit-comment"
+                  )
+                : t(
+                    "examination-card-operations.details.bewe-details.add-comment"
+                  )}
             </Button>
           </Box>
         )}
@@ -137,8 +199,12 @@ export default observer(function BeweDetails({
       <CommentForm
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title={t("examination-card-operations.details.bewe-details.comment-bewe-form")}
-        description={t("examination-card-operations.details.bewe-details.description")}
+        title={t(
+          "examination-card-operations.details.bewe-details.comment-bewe-form"
+        )}
+        description={t(
+          "examination-card-operations.details.bewe-details.description"
+        )}
         handleSubmit={(comment) => {
           handleComment(comment);
         }}

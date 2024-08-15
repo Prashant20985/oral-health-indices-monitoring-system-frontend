@@ -210,7 +210,7 @@ export default observer(function SolveExamForm() {
     return () => {
       window.removeEventListener("beforeunload", unloadCallback);
     };
-  }, []);
+  });
 
   React.useEffect(() => {
     if (examDetails) {

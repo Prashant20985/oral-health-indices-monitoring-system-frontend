@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Grid,
   TextField,
   Typography,
   useTheme,
@@ -15,7 +16,6 @@ import { Bewe } from "../../../../app/models/Bewe";
 import { colors } from "../../../../themeConfig";
 import { Send } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
-import CustomTextField from "../../../../app/common/formInputs/CustomTextField";
 import { useStore } from "../../../../app/stores/Store";
 import CommentStudentExamCardDialog from "../../Forms/CommentStudentExamCardDialog";
 import { useTranslation } from "react-i18next";
@@ -69,30 +69,91 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
         <CardHeader
           title={
             <Typography variant="h5" fontWeight={600}>
-              {t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.title")}
+              {t(
+                "student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.title"
+              )}
             </Typography>
           }
         />
         <CardContent>
-          <Box display="flex" gap={2} mb={2}>
-            <CustomTextField
-              variant="outlined"
-              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.bewe-result")}
+          <Box display="flex" flexDirection="column" gap={2} mb={2}>
+            <TextField
+              label={t(
+                "student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.bewe-result"
+              )}
+              fullWidth
               name="beweResult"
+              color="secondary"
               value={bewe.beweResult}
-              readOnly
             />
+            <Grid container spacing={2}>
+              <Grid item xs={4} lg={4} md={6}>
+                <TextField
+                  fullWidth
+                  color="secondary"
+                  label="Sectant 1"
+                  value={bewe.sectant1}
+                />
+              </Grid>
+              <Grid item xs={4} lg={4} md={6}>
+                <TextField
+                  fullWidth
+                  color="secondary"
+                  label="Sectant 2"
+                  value={bewe.sectant2}
+                />
+              </Grid>
+              <Grid item xs={4} lg={4} md={6}>
+                <TextField
+                  fullWidth
+                  color="secondary"
+                  label="Sectant 3"
+                  value={bewe.sectant3}
+                />
+              </Grid>
+              <Grid item xs={4} lg={4} md={6}>
+                <TextField
+                  fullWidth
+                  color="secondary"
+                  label="Sectant 6"
+                  value={bewe.sectant6}
+                />
+              </Grid>
+              <Grid item xs={4} lg={4} md={6}>
+                <TextField
+                  fullWidth
+                  color="secondary"
+                  label="Sectant 5"
+                  value={bewe.sectant5}
+                />
+              </Grid>
+              <Grid item xs={4} lg={4} md={6}>
+                <TextField
+                  fullWidth
+                  color="secondary"
+                  label="Sectant 4"
+                  value={bewe.sectant4}
+                />
+              </Grid>
+            </Grid>
           </Box>
           <Box display="flex" flexDirection="column" gap={1}>
             <TextField
               fullWidth
-              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.doctor-comment")}
+              label={t(
+                "student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.doctor-comment"
+              )}
               name="comment"
               color="secondary"
               multiline
               rows={3}
               inputProps={{ readonly: true }}
-              value={bewe.comment ?? t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.no-comment")}
+              value={
+                bewe.comment ??
+                t(
+                  "student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.no-comment"
+                )
+              }
             />
             <Box display="flex" justifyContent="flex-end">
               <Button
@@ -102,7 +163,13 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
                 onClick={() => setOpenCommentDialog(true)}
                 startIcon={<Send />}
               >
-                {bewe.comment === null ? t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.add-comment") : t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.edit-comment")}
+                {bewe.comment === null
+                  ? t(
+                      "student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.add-comment"
+                    )
+                  : t(
+                      "student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.edit-comment"
+                    )}
               </Button>
             </Box>
           </Box>
@@ -112,8 +179,12 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
       <CommentStudentExamCardDialog
         isOpen={openCommentDialog}
         onClose={() => setOpenCommentDialog(false)}
-        title={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.comment-bewe-form")}
-        description={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.description")}
+        title={t(
+          "student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.comment-bewe-form"
+        )}
+        description={t(
+          "student-exam-operations.exam-solution-details-for-teacher.practice-patient-bewe-details-for-teacher.description"
+        )}
         comment={bewe.comment ?? ""}
         handleSubmit={handleComment}
       />

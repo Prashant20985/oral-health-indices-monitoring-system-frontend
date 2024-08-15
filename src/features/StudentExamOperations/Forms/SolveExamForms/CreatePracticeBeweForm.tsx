@@ -1,4 +1,11 @@
-import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { PracticeBeweFormValues } from "../../../../app/models/Bewe";
 import BeweForm from "../../../IndexCalculationForms/Bewe/BeweForm";
 import { colors } from "../../../../themeConfig";
@@ -48,10 +55,14 @@ export default function CreatePracticeBeweForm({
             fontweight: 600,
           }}
         >
-           {t("student-exam-operations.forms.practice-bewe-form.add-calculated-bewe-result")}
+          {t(
+            "student-exam-operations.forms.practice-bewe-form.add-calculated-bewe-result"
+          )}
         </Typography>
         <TextField
-          label= {t("student-exam-operations.forms.practice-bewe-form.bewe-result")}
+          label={t(
+            "student-exam-operations.forms.practice-bewe-form.bewe-result"
+          )}
           variant="outlined"
           fullWidth
           type="number"
@@ -59,6 +70,75 @@ export default function CreatePracticeBeweForm({
           onChange={handleChange}
           name="practiceBewe.beweResult"
         />
+
+        <Grid container spacing={2}>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              variant="outlined"
+              fullWidth
+              type="number"
+              color="secondary"
+              onChange={handleChange}
+              name="practiceBewe.sectant1"
+              label="Sectant 1"
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              variant="outlined"
+              fullWidth
+              type="number"
+              color="secondary"
+              onChange={handleChange}
+              name="practiceBewe.sectant2"
+              label="Sectant 2"
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              variant="outlined"
+              fullWidth
+              type="number"
+              color="secondary"
+              onChange={handleChange}
+              name="practiceBewe.sectant3"
+              label="Sectant 3"
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              variant="outlined"
+              fullWidth
+              type="number"
+              color="secondary"
+              onChange={handleChange}
+              name="practiceBewe.sectant6"
+              label="Sectant 6"
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              variant="outlined"
+              fullWidth
+              type="number"
+              color="secondary"
+              onChange={handleChange}
+              name="practiceBewe.sectant5"
+              label="Sectant 5"
+            />
+          </Grid>
+          <Grid item xs={4} lg={4} md={6}>
+            <TextField
+              variant="outlined"
+              fullWidth
+              type="number"
+              color="secondary"
+              onChange={handleChange}
+              name="practiceBewe.sectant4"
+              label="Sectant 4"
+            />
+          </Grid>
+        </Grid>
       </Box>
       <BeweForm
         beweAssessmentModel={beweFormValues.assessmentModel}
