@@ -28,6 +28,7 @@ import CustomCancelButton from "../../../app/common/formInputs/CustomCancelButto
 import * as React from "react";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import { useTranslation } from "react-i18next";
+import { isSameDay, startOfDay } from "date-fns";
 
 interface Props {
   groupId: string;
@@ -78,11 +79,16 @@ export default observer(function PublishExamForm({
           "student-exam-operations.forms.publish-exam-form.date-of-examination-required"
         )
       )
-      .min(
-        new Date(),
+      .test(
+        "is-today-or-later",
         t(
           "student-exam-operations.forms.publish-exam-form.date-of-examination-validation"
-        )
+        ),
+        function (value) {
+          if (!value) return false;
+          const today = startOfDay(new Date());
+          return isSameDay(value, today) || value > today;
+        }
       ),
     examTitle: Yup.string()
       .required(
