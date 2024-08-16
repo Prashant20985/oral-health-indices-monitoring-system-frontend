@@ -79,14 +79,9 @@ function CustomToolbar({
         variant="contained"
         startIcon={<Download />}
         size="small"
-        disabled={
-          studentExamResults.length === 0 ||
-          examDetails.examStatus === "Published"
-        }
+        disabled={studentExamResults.length === 0}
       >
-        {examDetails.examStatus === "Published"
-          ? "Exam Not Graded Yet"
-          : "Export Results"}
+        Export Results
       </Button>
     </GridToolbarContainer>
   );
