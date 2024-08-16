@@ -233,6 +233,7 @@ export class StudentExamStore {
     } catch (error) {
       console.error(error);
       this.loading.updateExam = false;
+      throw error;
     }
   };
 
