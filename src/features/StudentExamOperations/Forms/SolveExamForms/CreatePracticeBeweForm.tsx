@@ -69,6 +69,7 @@ export default function CreatePracticeBeweForm({
           color="secondary"
           onChange={handleChange}
           name="practiceBewe.beweResult"
+          value={beweFormValues.beweResult}
         />
 
         <Grid container spacing={2}>
@@ -81,6 +82,7 @@ export default function CreatePracticeBeweForm({
               onChange={handleChange}
               name="practiceBewe.sectant1"
               label="Sectant 1"
+              value={beweFormValues.sectant1}
             />
           </Grid>
           <Grid item xs={4} lg={4} md={6}>
@@ -92,6 +94,7 @@ export default function CreatePracticeBeweForm({
               onChange={handleChange}
               name="practiceBewe.sectant2"
               label="Sectant 2"
+              value={beweFormValues.sectant2}
             />
           </Grid>
           <Grid item xs={4} lg={4} md={6}>
@@ -103,6 +106,7 @@ export default function CreatePracticeBeweForm({
               onChange={handleChange}
               name="practiceBewe.sectant3"
               label="Sectant 3"
+              value={beweFormValues.sectant3}
             />
           </Grid>
           <Grid item xs={4} lg={4} md={6}>
@@ -114,6 +118,7 @@ export default function CreatePracticeBeweForm({
               onChange={handleChange}
               name="practiceBewe.sectant6"
               label="Sectant 6"
+              value={beweFormValues.sectant6}
             />
           </Grid>
           <Grid item xs={4} lg={4} md={6}>
@@ -125,6 +130,7 @@ export default function CreatePracticeBeweForm({
               onChange={handleChange}
               name="practiceBewe.sectant5"
               label="Sectant 5"
+              value={beweFormValues.sectant5}
             />
           </Grid>
           <Grid item xs={4} lg={4} md={6}>
@@ -136,6 +142,7 @@ export default function CreatePracticeBeweForm({
               onChange={handleChange}
               name="practiceBewe.sectant4"
               label="Sectant 4"
+              value={beweFormValues.sectant4}
             />
           </Grid>
         </Grid>
