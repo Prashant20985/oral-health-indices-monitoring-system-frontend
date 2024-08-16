@@ -18,10 +18,11 @@ import StudentExamCard from "../../StudentExamOperations/ExamsList/StudentExamCa
 import { blueGrey } from "@mui/material/colors";
 import { Groups3, Email } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import { CalendarIcon } from "@mui/x-date-pickers";
 
 /**
  * Renders the details of a student group.
- * 
+ *
  * @returns The JSX element representing the group details for a student.
  */
 export default observer(function GroupDetailsForStudent() {
@@ -87,13 +88,24 @@ export default observer(function GroupDetailsForStudent() {
                 />
               }
               subheader={
-                <Box display="flex" gap={1} alignItems="center" mt={1}>
-                  <Email />
-                  <Typography variant="body1">
-                    {`${
-                      studentGroupDetails.teacher.split("(")[1].split(")")[0]
-                    }@test.com`}
-                  </Typography>
+                <Box display="flex" gap={2}>
+                  <Box display="flex" gap={1} alignItems="center" mt={1}>
+                    <Email />
+                    <Typography variant="h6">
+                      {`${
+                        studentGroupDetails.teacher.split("(")[1].split(")")[0]
+                      }@test.com`}
+                    </Typography>
+                  </Box>
+                  <Box display="flex" gap={1} alignItems="center" mt={1}>
+                    <CalendarIcon />
+                    <Typography variant="h6">
+                      Created At: &nbsp;
+                      {new Date(
+                        studentGroupDetails.createdAt
+                      ).toLocaleDateString()}
+                    </Typography>
+                  </Box>
                 </Box>
               }
             />

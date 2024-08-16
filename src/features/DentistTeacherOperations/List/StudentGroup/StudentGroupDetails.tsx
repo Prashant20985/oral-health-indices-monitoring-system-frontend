@@ -23,10 +23,12 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import ExamsList from "../../../StudentExamOperations/ExamsList/ExamsList";
 import PublishExamForm from "../../../StudentExamOperations/Forms/PublishExamForm";
 import { useTranslation } from "react-i18next";
+import Header from "../../../../app/common/header/Header";
+import { CalendarIcon } from "@mui/x-date-pickers";
 
 /**
  * Renders the details of a student group.
- * 
+ *
  * @returns The JSX element representing the student group details.
  */
 export default observer(function StudentGroupDetails() {
@@ -88,22 +90,38 @@ export default observer(function StudentGroupDetails() {
               </Avatar>
             }
             title={
-              <Typography variant="h2" fontFamily="monospace">
-                {selectedStudentGroup?.groupName}
-              </Typography>
+              <Header
+                title={
+                  selectedStudentGroup?.groupName
+                    ? selectedStudentGroup.groupName
+                    : ""
+                }
+                subTitle={
+                  t(
+                    "dentist-teacher-operations.list.student-group.student-group-card.sub-header"
+                  ) + selectedStudentGroup?.students.length
+                }
+              />
             }
             subheader={
-              <Typography variant="h6">
-                {t(
-                  "dentist-teacher-operations.list.student-group.student-group-card.sub-header"
-                ) + selectedStudentGroup?.students.length}
-              </Typography>
+              <Box display="flex" gap={1} alignItems="center" mt={1}>
+                <CalendarIcon />
+                <Typography variant="h6">
+                  Created At: &nbsp;
+                  {selectedStudentGroup?.createdAt
+                    ? new Date(
+                        selectedStudentGroup?.createdAt
+                      ).toLocaleDateString()
+                    : ""}
+                </Typography>
+              </Box>
             }
           />
           <CardActions>
             <Box display="flex" justifyContent="flex-end" width="100%">
               <Button
                 variant="outlined"
+                size="small"
                 color={theme.palette.mode === "dark" ? "secondary" : "info"}
                 startIcon={<Edit />}
                 onClick={() => setOpenEdit(true)}

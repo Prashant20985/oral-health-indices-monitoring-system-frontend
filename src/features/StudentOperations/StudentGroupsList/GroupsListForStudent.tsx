@@ -12,7 +12,7 @@ import LoadingComponent from "../../../app/common/loadingComponents/LoadingCompo
 
 /**
  * Renders a list of groups for a student.
- * 
+ *
  * @returns The rendered component.
  */
 export default observer(function GroupsListForStudent() {
@@ -30,10 +30,8 @@ export default observer(function GroupsListForStudent() {
   const [t] = useTranslation("global");
 
   React.useEffect(() => {
-    if (studentGroupsWithExams.length === 0) {
-      fetchStudentGroupsWithExams();
-    }
-  }, [fetchStudentGroupsWithExams, studentGroupsWithExams]);
+    fetchStudentGroupsWithExams();
+  }, [fetchStudentGroupsWithExams]);
 
   const [groupSearchQuery, setGroupSearchQuery] = React.useState("");
 
