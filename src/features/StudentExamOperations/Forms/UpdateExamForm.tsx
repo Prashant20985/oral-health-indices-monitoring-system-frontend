@@ -162,9 +162,9 @@ export default observer(function UpdateExamForm({
             <Formik
               initialValues={{ ...initialValues, error: null }}
               onSubmit={async (values, { setErrors }) => {
-                await handleSubmit(values).catch((error) =>
-                  setErrors({ error: error.message })
-                );
+                await handleSubmit(values).catch((error) => {
+                  setErrors({ error: error.response.data });
+                });
               }}
               validationSchema={validationSchema}
             >

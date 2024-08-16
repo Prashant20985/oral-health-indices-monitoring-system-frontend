@@ -69,7 +69,7 @@ export default observer(function StudentExamCard({
   const [openMarkAsGradedDialog, setOpenMarkAsGradedDialog] =
     React.useState(false);
 
-  const { ended } = CheckExamStatus(
+  const { ended, ongoing } = CheckExamStatus(
     exam.dateOfExamination.toString(),
     exam.endTime,
     exam.startTime
@@ -214,8 +214,11 @@ export default observer(function StudentExamCard({
                         "student-exam-operations.exams-list.student-exam-card.edit-exam-button"
                       )}
                     >
-                      <IconButton onClick={() => setOpenEditDialog(true)}>
-                        <Edit color="warning" />
+                      <IconButton
+                        onClick={() => setOpenEditDialog(true)}
+                        disabled={ongoing || ended}
+                      >
+                        <Edit />
                       </IconButton>
                     </Tooltip>
                     <Tooltip
@@ -223,8 +226,11 @@ export default observer(function StudentExamCard({
                         "student-exam-operations.exams-list.student-exam-card.delete-exam-button"
                       )}
                     >
-                      <IconButton onClick={() => setOpenDeleteDialog(true)}>
-                        <DeleteSweep color="error" />
+                      <IconButton
+                        onClick={() => setOpenDeleteDialog(true)}
+                        disabled={ongoing}
+                      >
+                        <DeleteSweep />
                       </IconButton>
                     </Tooltip>
                   </Box>
