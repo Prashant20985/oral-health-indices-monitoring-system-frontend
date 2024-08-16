@@ -21,7 +21,10 @@ interface Props {
  * @param {string} props.examId - The ID of the exam.
  * @returns {JSX.Element} The rendered ExamSolutionList component.
  */
-export default observer(function ExamSolutionList({ examSolutions, examId }: Props) {
+export default observer(function ExamSolutionList({
+  examSolutions,
+  examId,
+}: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
@@ -34,19 +37,23 @@ export default observer(function ExamSolutionList({ examSolutions, examId }: Pro
         backgroundColor:
           theme.palette.mode === "dark" ? color.primary[500] : blueGrey[50],
         p: 1.5,
-        minHeight: "50vh",
+        height: "100%",
       }}
     >
       <Box mb={2}>
         <Header
-          title={t("student-exam-operations.exam-details.exam-solution-list.header")}
-          subTitle={`${t("student-exam-operations.exam-details.exam-solution-list.sub-header")} ${examSolutions.length}`}
+          title={t(
+            "student-exam-operations.exam-details.exam-solution-list.header"
+          )}
+          subTitle={`${t(
+            "student-exam-operations.exam-details.exam-solution-list.sub-header"
+          )} ${examSolutions.length}`}
         />
       </Box>
       <Grid container spacing={1}>
         {examSolutions.map((solution) => (
-          <Grid item xs={12} lg={4} md={6} sm={6} key={solution.id}>
-            <ExamSolutionCard examSolution={solution} examId={examId}/>
+          <Grid item lg={6} md={6} sm={12} key={solution.id}>
+            <ExamSolutionCard examSolution={solution} examId={examId} />
           </Grid>
         ))}
       </Grid>
