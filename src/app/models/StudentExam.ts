@@ -53,7 +53,7 @@ export interface Exam extends UpdateExam {
 
 /**
  * Represents the status of an exam.
- * 
+ *
  * Possible values are:
  * - "Published": The exam has been published.
  * - "Graded": The exam has been graded.
@@ -101,4 +101,20 @@ export interface ExamSolution {
     api: API;
     bleeding: Bleeding;
   };
+}
+
+/**
+ * Represents the data structure for an exam result.
+ *
+ * @remarks
+ * This interface defines the structure of the ExamResult object, which contains information about a student's exam result.
+ *
+ * @public
+ */
+export interface StudentExamResult {
+  userName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  studentMark: number;
 }

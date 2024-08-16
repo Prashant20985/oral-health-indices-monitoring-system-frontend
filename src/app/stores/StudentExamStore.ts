@@ -4,6 +4,7 @@ import {
   ExamSolution,
   ExamSolutionFormValues,
   PublishExam,
+  StudentExamResult,
   UpdateExam,
 } from "../models/StudentExam";
 import axiosAgent from "../api/axiosAgent";
@@ -33,6 +34,9 @@ export class StudentExamStore {
   // Represents the upcomingExams property.
   upcomingExams: Exam[] = [];
 
+  // Represents the examResults property.
+  examResults: StudentExamResult[] = [];
+
   // Represents the loading state of various operations.
   loading = {
     studentExams: false,
@@ -53,6 +57,7 @@ export class StudentExamStore {
     gradeExaminationCard: false,
     isEligibleToSubmitExam: false,
     upcomingExams: false,
+    studentExamResults: false,
   };
 
   constructor() {
@@ -185,7 +190,7 @@ export class StudentExamStore {
 
   /**
    * Deletes an exam.
-   * 
+   *
    * @param examId - The ID of the exam to be deleted.
    * @returns A promise that resolves when the exam is successfully deleted.
    * @throws An error if the deletion fails.
@@ -206,7 +211,7 @@ export class StudentExamStore {
 
   /**
    * Updates an exam with the given examId and values.
-   * 
+   *
    * @param {string} examId - The ID of the exam to update.
    * @param {UpdateExam} values - The updated values for the exam.
    * @returns {Promise<void>} - A promise that resolves when the exam is updated.
@@ -233,7 +238,7 @@ export class StudentExamStore {
 
   /**
    * Comments on a practice patient examination card.
-   * 
+   *
    * @param cardId - The ID of the card to comment on.
    * @param comment - The comment to add to the card.
    * @returns A promise that resolves when the comment is successfully added.
@@ -263,7 +268,7 @@ export class StudentExamStore {
 
   /**
    * Sends a comment to the API for a specific card.
-   * 
+   *
    * @param {string} cardId - The ID of the card.
    * @param {string} comment - The comment to be sent.
    * @returns {Promise<void>} - A promise that resolves when the comment is successfully sent.
@@ -287,7 +292,7 @@ export class StudentExamStore {
 
   /**
    * Adds a comment to the bleeding form of a student exam card.
-   * 
+   *
    * @param cardId - The ID of the exam card.
    * @param comment - The comment to be added.
    * @returns A promise that resolves when the comment is successfully added.
@@ -315,7 +320,7 @@ export class StudentExamStore {
 
   /**
    * Adds a comment to the bewe form of a student exam card.
-   * 
+   *
    * @param cardId - The ID of the exam card.
    * @param comment - The comment to be added.
    * @returns A promise that resolves when the comment is successfully added.
@@ -339,7 +344,7 @@ export class StudentExamStore {
 
   /**
    * Adds a comment to the DMFT_DMFS form for a specific card.
-   * 
+   *
    * @param cardId - The ID of the card.
    * @param comment - The comment to be added.
    * @returns A promise that resolves when the comment is successfully added.
@@ -367,7 +372,7 @@ export class StudentExamStore {
 
   /**
    * Marks an exam as graded.
-   * 
+   *
    * @param examId - The ID of the exam to be marked as graded.
    * @returns A Promise that resolves when the exam is successfully marked as graded.
    * @throws An error if there is a problem marking the exam as graded.
@@ -398,7 +403,7 @@ export class StudentExamStore {
 
   /**
    * Grades an examination card for a student.
-   * 
+   *
    * @param {string} cardId - The ID of the examination card.
    * @param {number} studentMark - The mark obtained by the student.
    * @returns {Promise<void>} - A promise that resolves when the examination card is graded.
@@ -425,7 +430,7 @@ export class StudentExamStore {
 
   /**
    * Fetches student exams for a given group ID.
-   * 
+   *
    * @param groupId - The ID of the group.
    * @returns A Promise that resolves to the fetched exams.
    * @throws If an error occurs during the fetch process.
@@ -449,7 +454,7 @@ export class StudentExamStore {
 
   /**
    * Fetches the details of an exam.
-   * 
+   *
    * @param examId - The ID of the exam to fetch details for.
    */
   fetchExamDetails = async (examId: string) => {
@@ -478,7 +483,7 @@ export class StudentExamStore {
 
   /**
    * Fetches exam cards for a given exam ID.
-   * 
+   *
    * @param examId - The ID of the exam.
    * @returns A promise that resolves to the fetched exam cards.
    * @throws If an error occurs during the fetch operation.
@@ -501,7 +506,7 @@ export class StudentExamStore {
 
   /**
    * Fetches an exam card by its ID.
-   * 
+   *
    * @param cardId - The ID of the exam card to fetch.
    * @returns A Promise that resolves to the fetched exam card.
    * @throws If an error occurs during the fetch operation.
@@ -530,7 +535,7 @@ export class StudentExamStore {
 
   /**
    * Fetches the exam solution for a specific student.
-   * 
+   *
    * @param examId - The ID of the exam.
    * @returns A promise that resolves to the exam solution.
    * @throws If an error occurs while fetching the exam solution.
@@ -552,7 +557,7 @@ export class StudentExamStore {
 
   /**
    * Submits the exam solution for a given exam.
-   * 
+   *
    * @param examId - The ID of the exam.
    * @param values - The values of the exam solution.
    * @returns A boolean indicating whether the exam solution was successfully submitted.
@@ -576,7 +581,7 @@ export class StudentExamStore {
 
   /**
    * Checks the eligibility of a student to submit an exam.
-   * 
+   *
    * @param examId - The ID of the exam to check eligibility for.
    * @returns A promise that resolves to a boolean indicating whether the student is eligible to submit the exam.
    * @throws If an error occurs while checking the eligibility.
@@ -611,6 +616,28 @@ export class StudentExamStore {
     } catch (error) {
       console.error(error);
       this.loading.upcomingExams = false;
+    }
+  };
+
+  /**
+   * Fetches the results of an exam.
+   *
+   * @param examId - The ID of the exam.
+   * @returns A promise that resolves to the exam results.
+   */
+  fetchExamResults = async (examId: string) => {
+    this.loading.studentExamResults = true;
+    try {
+      const result = await axiosAgent.StudentExamOperations.getExamResults(
+        examId
+      );
+      runInAction(() => {
+        this.examResults = result;
+        this.loading.studentExamResults = false;
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.loading.studentExamResults = false));
     }
   };
 }

@@ -32,6 +32,7 @@ import {
   ExamSolution,
   ExamSolutionFormValues,
   PublishExam,
+  StudentExamResult,
   UpdateExam,
 } from "../models/StudentExam";
 import {
@@ -465,6 +466,11 @@ const StudentExamOperations = {
 
   getUpcomingExams: () =>
     apiRequests.get<Exam[]>(`/StudentExam/upcoming-exams`),
+
+  getExamResults: (examId: string) =>
+    apiRequests.get<StudentExamResult[]>(
+      `/StudentExam/exam-results/${examId}`
+    ),
 };
 
 /**
