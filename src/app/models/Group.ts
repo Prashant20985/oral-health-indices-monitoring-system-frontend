@@ -7,6 +7,7 @@ import { Exam } from "./StudentExam";
 export interface StudentGroup {
   id: string;
   groupName: string;
+  createdAt: Date;
   students: Student[];
 }
 
@@ -17,5 +18,6 @@ export interface GroupWithExams {
   id: string;
   groupName: string;
   teacher: string;
+  createdAt: Date;
   exams: Exam[];
 }
