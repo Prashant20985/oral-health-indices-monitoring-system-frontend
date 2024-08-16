@@ -25,7 +25,7 @@ export default function CreatePracticeDMFT_DMFSForm({
   const theme = useTheme();
   const color = colors(theme.palette.mode);
   const [t] = useTranslation("global");
-  
+
   return (
     <Box>
       <Box
@@ -49,27 +49,35 @@ export default function CreatePracticeDMFT_DMFSForm({
             fontweight: 600,
           }}
         >
-           {t("student-exam-operations.forms.practice-dmft-dmfs-form.add-calculated-dmft-dmfs-result")}
+          {t(
+            "student-exam-operations.forms.practice-dmft-dmfs-form.add-calculated-dmft-dmfs-result"
+          )}
         </Typography>
 
         <TextField
-          label= {t("student-exam-operations.forms.practice-dmft-dmfs-form.dmft-result")}
+          label={t(
+            "student-exam-operations.forms.practice-dmft-dmfs-form.dmft-result"
+          )}
           variant="outlined"
           fullWidth
           type="number"
           color="secondary"
           onChange={handleChange}
           name="practiceDMFT_DMFS.dmftResult"
+          value={dmft_dmfsFormValues.dmftResult}
         />
 
         <TextField
-          label= {t("student-exam-operations.forms.practice-dmft-dmfs-form.dmfs-result")}
+          label={t(
+            "student-exam-operations.forms.practice-dmft-dmfs-form.dmfs-result"
+          )}
           variant="outlined"
           fullWidth
           type="number"
           color="secondary"
           onChange={handleChange}
           name="practiceDMFT_DMFS.dmfsResult"
+          value={dmft_dmfsFormValues.dmfsResult}
         />
       </Box>
 
