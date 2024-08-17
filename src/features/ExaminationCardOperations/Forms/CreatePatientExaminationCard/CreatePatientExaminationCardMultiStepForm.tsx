@@ -366,9 +366,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                       loading={supervisors.length === 0}
                       onFocus={() => {
                         if (supervisors.length === 0) {
-                          setTimeout(() => {
                             fetchSupervisors();
-                          }, 3000);
                         }
                       }}
                       renderInput={(params) => (
