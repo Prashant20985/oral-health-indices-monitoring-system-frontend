@@ -22,12 +22,13 @@ import Header from "../../../app/common/header/Header";
 import LogsFilter from "./LogsFilter";
 import { ExpandMore } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 
 /**
  * Renders the Logs component.
- * 
+ *
  * This component displays logs and provides filtering and pagination functionality.
- * 
+ *
  * @returns The rendered Logs component.
  */
 export default observer(function Logs() {
@@ -38,6 +39,7 @@ export default observer(function Logs() {
       logsSearchParams,
       setLogSearchParamsPageNumber,
       setLogSearchParamsPageSize,
+      loading,
     },
   } = useStore();
 
@@ -66,11 +68,14 @@ export default observer(function Logs() {
 
   return (
     <Box>
-      <Header title={t("admin-operations.logs.title")} subTitle={t("admin-operations.logs.sub-title")} />
+      <Header
+        title={t("admin-operations.logs.title")}
+        subTitle={t("admin-operations.logs.sub-title")}
+      />
       <Accordion sx={{ backgroundColor: color.primary[400], mt: 4, mb: 2 }}>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Typography variant="h6" fontWeight={600} color="textsecondary">
-          {t("admin-operations.logs.filter-title")}
+            {t("admin-operations.logs.filter-title")}
           </Typography>
         </AccordionSummary>
         <AccordionDetails
@@ -118,23 +123,35 @@ export default observer(function Logs() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {logResponse.logs.map((log, index) => (
-                <TableRow key={log.id}>
-                  <TableCell>
-                    {(logsSearchParams.pageNumber - 1) *
-                      logsSearchParams.pageSize +
-                      index +
-                      1}
+              {!loading.logs ? (
+                <>
+                  {logResponse.logs.map((log, index) => (
+                    <TableRow key={log.id}>
+                      <TableCell>
+                        {(logsSearchParams.pageNumber - 1) *
+                          logsSearchParams.pageSize +
+                          index +
+                          1}
+                      </TableCell>
+                      <TableCell>
+                        {new Date(log.timestamp).toDateString()}
+                      </TableCell>
+                      <TableCell>{log.properties.executedBy}</TableCell>
+                      <TableCell>{log.properties.requestName}</TableCell>
+                      <TableCell>{log.level}</TableCell>
+                      <TableCell>{log.renderedMessage}</TableCell>
+                    </TableRow>
+                  ))}
+                </>
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={6} sx={{ border: "none" }}>
+                    <Box height="60vh">
+                      <LoadingComponent />
+                    </Box>
                   </TableCell>
-                  <TableCell>
-                    {new Date(log.timestamp).toDateString()}
-                  </TableCell>
-                  <TableCell>{log.properties.executedBy}</TableCell>
-                  <TableCell>{log.properties.requestName}</TableCell>
-                  <TableCell>{log.level}</TableCell>
-                  <TableCell>{log.renderedMessage}</TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </TableContainer>
