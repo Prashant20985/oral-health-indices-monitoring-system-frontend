@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../../app/stores/Store";
 import React from "react";
 import StudentList from "../StudentList/StudentList";
-import { Box, Button } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import Header from "../../../../app/common/header/Header";
 import { Add } from "@mui/icons-material";
 import { router } from "../../../../app/router/Routes";
@@ -32,13 +32,8 @@ export default observer(function SupervisedStduents() {
 
   return (
     <Box>
-      <Box
-        mb={3}
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Box>
+      <Box width="100%" display="flex" justifyContent="space-between" mb={1}>
+        <Box mb={3}>
           <Header
             title={t(
               "dentist-teacher-operations.list.student-group.supervise-students.header"
@@ -48,6 +43,36 @@ export default observer(function SupervisedStduents() {
             )}
           />
         </Box>
+        <Box display="flex" gap={2} width="600px">
+          <TextField
+            color="secondary"
+            label="Student Name"
+            variant="outlined"
+            fullWidth
+            value={supervisedStudentsSearchParam.studentName}
+            onChange={(e) =>
+              setSupervisedStudentSearchParams({
+                ...supervisedStudentsSearchParam,
+                studentName: e.target.value,
+              })
+            }
+          />
+          <TextField
+            color="secondary"
+            label="Email/User Name"
+            variant="outlined"
+            fullWidth
+            value={supervisedStudentsSearchParam.email}
+            onChange={(e) =>
+              setSupervisedStudentSearchParams({
+                ...supervisedStudentsSearchParam,
+                email: e.target.value,
+              })
+            }
+          />
+        </Box>
+      </Box>
+      <Box display="flex" justifyContent="flex-end" mb={1}>
         <Button
           startIcon={<Add />}
           variant="contained"

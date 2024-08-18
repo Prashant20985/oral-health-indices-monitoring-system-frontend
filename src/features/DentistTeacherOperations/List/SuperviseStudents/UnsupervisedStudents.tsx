@@ -2,13 +2,13 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../../app/stores/Store";
 import React from "react";
 import StudentList from "../StudentList/StudentList";
-import { Box } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import Header from "../../../../app/common/header/Header";
 import { useTranslation } from "react-i18next";
 
 /**
  * Renders a component for displaying a list of unsupervised students.
- * 
+ *
  * @returns The rendered UnsupervisedStudents component.
  */
 export default observer(function UnsupervisedStduents() {
@@ -30,15 +30,45 @@ export default observer(function UnsupervisedStduents() {
 
   return (
     <Box>
-      <Box mb={3}>
-        <Header
-          title={t(
-            "dentist-teacher-operations.list.student-group.unsupervised-students.header"
-          )}
-          subTitle={t(
-            "dentist-teacher-operations.list.student-group.unsupervised-students.sub-header"
-          )}
-        />
+      <Box width="100%" display="flex" justifyContent="space-between" mb={1}>
+        <Box mb={3}>
+          <Header
+            title={t(
+              "dentist-teacher-operations.list.student-group.unsupervised-students.header"
+            )}
+            subTitle={t(
+              "dentist-teacher-operations.list.student-group.unsupervised-students.sub-header"
+            )}
+          />
+        </Box>
+        <Box display="flex" gap={2} width="600px">
+          <TextField
+            color="secondary"
+            label="Student Name"
+            variant="outlined"
+            fullWidth
+            value={unsupervisedStudentsSearchParam.studentName}
+            onChange={(e) =>
+              setUnsupervisedStudentSearchParams({
+                ...unsupervisedStudentsSearchParam,
+                studentName: e.target.value,
+              })
+            }
+          />
+          <TextField
+            color="secondary"
+            label="Email/User Name"
+            variant="outlined"
+            fullWidth
+            value={unsupervisedStudentsSearchParam.email}
+            onChange={(e) =>
+              setUnsupervisedStudentSearchParams({
+                ...unsupervisedStudentsSearchParam,
+                email: e.target.value,
+              })
+            }
+          />
+        </Box>
       </Box>
       <StudentList
         students={unsupervisedStudents.students}
