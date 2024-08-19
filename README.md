@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+# Oral Health Examination Project Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+The Oral Health Examination project is a web-based application designed to assist dental practitioners and students in managing patient information, conducting examinations, and enhancing their oral health assessment skills. The frontend is built using React and Vite, offering a fast and efficient development experience, while Material-UI (MUI) is used for creating an intuitive and modern user interface. The frontend integrates seamlessly with the ASP.NET backend, providing features for user management and various oral health assessments.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### User Interface
+- **Responsive Design**: The application adapts to different screen sizes, ensuring a smooth user experience on both desktop and mobile devices.
+- **MUI Components**: Leverage Material-UI for a consistent and accessible design across all user-facing elements.
+- **Theme Customization**: Supports theme switching for light and dark modes.
 
-### `npm start`
+### User Management
+- **User Dashboard**: View and manage user information including names, roles, and activation status.
+- **Role Assignment**: Admins can assign roles such as Admin, Student, Dentist, Teacher, Researcher, and Examiner.
+- **Profile Management**: Users can update their personal information and account settings.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Patient Examinations
+- **DMFT/DMFS Calculator**: Interactive forms to calculate DMFT (Decayed, Missing, Filled Teeth) and DMFS (Decayed, Missing, Filled Surfaces) scores.
+- **API Bleeding Assessment**: Collect and display Approximal Plaque Index (API) and Bleeding scores for patient evaluation.
+- **BEWE Evaluation**: User-friendly interface for performing the Basic Erosive Wear Examination (BEWE).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Student Examinations
+- **Examination Mode**: Students can practice examinations and input patient data directly into the system, including oral health scores.
+- **Assessment Feedback**: Teachers can review student examinations and provide constructive feedback through the UI.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Technologies Used
+- **Vite**: Ultra-fast development environment that supports Hot Module Replacement (HMR) for an efficient development workflow.
+- **React**: A powerful and flexible JavaScript library for building user interfaces with component-based architecture.
+- **Material-UI (MUI)**: A popular React UI framework that provides out-of-the-box components and theming capabilities.
+- **Axios**: For making API requests to the backend, ensuring seamless communication between the frontend and backend services.
