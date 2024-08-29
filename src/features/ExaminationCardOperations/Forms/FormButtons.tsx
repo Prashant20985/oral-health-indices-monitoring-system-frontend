@@ -1,5 +1,6 @@
 import { Edit, Close, Send } from "@mui/icons-material";
 import { Box, Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isView: boolean;
@@ -31,6 +32,7 @@ export default function FormButtons({
   handleSubmit,
   message,
 }: Props) {
+  const [t] = useTranslation("global");
   return (
     <Box mt={1} mb={1} display="flex" justifyContent="flex-end" gap={4}>
       <Button
@@ -43,7 +45,7 @@ export default function FormButtons({
           setIsEditMode(true);
         }}
       >
-        Edit {message}
+        {t("examination-card-operations.forms.form-button.edit-button")} {message}
       </Button>
       {!isView && (
         <Box display="flex" gap={1}>
@@ -57,7 +59,7 @@ export default function FormButtons({
               setIsEditMode(false);
             }}
           >
-            Cancel
+            {t("examination-card-operations.forms.form-button.cancel-button")}
           </Button>
           <Button
             variant="outlined"
@@ -65,7 +67,7 @@ export default function FormButtons({
             color="secondary"
             endIcon={<Send />}
           >
-            Submit
+            {t("examination-card-operations.forms.form-button.submit-button")}
           </Button>
         </Box>
       )}

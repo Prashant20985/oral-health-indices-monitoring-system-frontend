@@ -115,7 +115,7 @@ export default observer(function PracticePatientAPIDetailsForTeacher({
                 onClick={() => setOpenCommentDialog(true)}
                 startIcon={<Send />}
               >
-                {api.comment === null ? "Add Comment" : "Edit Comment"}
+                {api.comment === null ? t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.add-comment") : t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.edit-comment")}
               </Button>
             </Box>
           </Box>

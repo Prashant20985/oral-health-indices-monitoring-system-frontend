@@ -1,10 +1,10 @@
 import {
   Box,
   Button,
-  FormControl,
   Grid,
+  MenuItem,
   Paper,
-  SelectChangeEvent,
+  TextField,
   useTheme,
 } from "@mui/material";
 import { observer } from "mobx-react-lite";
@@ -16,7 +16,6 @@ import { useStore } from "../../../app/stores/Store";
 import { colors } from "../../../themeConfig";
 import UserRequestCard from "./UserRequestCard";
 import Calendar from "../../../app/common/calendar/Calendar";
-import CustomSelect from "../../../app/common/formInputs/CustomSelect";
 import { RequestStatus } from "../../../app/models/UserRequest";
 import NoRowsFound from "../../../app/common/NoRowsFound/NoRowsFound";
 import { blueGrey } from "@mui/material/colors";
@@ -46,13 +45,6 @@ export default observer(function UserRequestListForCurrentuser() {
   }, [fetchUserRequestsForCurrentUser]);
 
   const [openAddRequestForm, setOpenAddRequestForm] = React.useState(false);
-  const handleRequestStatusChange = (
-    event: SelectChangeEvent<RequestStatus>
-  ) => {
-    userRequestStore.setRequestStatusForCurrentUser(
-      event.target.value! as RequestStatus
-    );
-  };
 
   const [t] = useTranslation("global");
 
@@ -107,14 +99,19 @@ export default observer(function UserRequestListForCurrentuser() {
           </Paper>
         </Box>
         <Box display="flex" flexDirection="column" gap={4}>
-          <Box component={FormControl}>
-            <CustomSelect
-              label={t("user-request-operations.list.user-request-for-current-user.request-status-label")}
-              value={userRequestStore.requestStatusForCurrentUser}
-              options={["Completed", "In_Progress", "Submitted"]}
-              onChange={handleRequestStatusChange}
-            />
-          </Box>
+          <TextField
+            select
+            variant="outlined"
+            color="secondary"
+            size="small"
+            value={userRequestStore.requestStatusForCurrentUser}
+            onChange={(event) => userRequestStore.setRequestStatusForCurrentUser(event.target.value as RequestStatus)}
+            fullWidth
+          >
+            <MenuItem value="In_Progress">{t("user-request-operations.list.user-request-for-current-user.in-progress")}</MenuItem>
+            <MenuItem value="Completed">{t("user-request-operations.list.user-request-for-current-user.completed")}</MenuItem>
+            <MenuItem value="Submitted">{t("user-request-operations.list.user-request-for-current-user.submitted")}</MenuItem>
+          </TextField>
           <Box>
             <Calendar setDate={setDateSubmittedForCurrentUser} />
           </Box>

@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { Summary } from "../../app/models/Summary";
 import { colors } from "../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   summary: Summary;
@@ -35,6 +36,7 @@ export default function SummaryForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
 
   return (
     <Box
@@ -58,22 +60,22 @@ export default function SummaryForm({
             fontWeight={600}
             sx={{ mb: 2 }}
           >
-            Need for Dental Interventions
+            {t("examination-card-operations.forms.summary-form.need-for-dental-interventions")}
           </Typography>
           <Typography noWrap variant="h6" fontWeight={600}>
-            0 &nbsp;&nbsp;&nbsp; Missing
+            0 &nbsp;&nbsp;&nbsp; {t("examination-card-operations.forms.summary-form.missing")}
           </Typography>
           <Typography noWrap variant="h6" fontWeight={600}>
-            1 &nbsp;&nbsp;&nbsp; Preventive Treatment
+            1 &nbsp;&nbsp;&nbsp; {t("examination-card-operations.forms.summary-form.preventive-treatment")}
           </Typography>
           <Typography noWrap variant="h6" fontWeight={600}>
-            2 &nbsp;&nbsp;&nbsp; Treatment In Normal Mode
+            2 &nbsp;&nbsp;&nbsp; {t("examination-card-operations.forms.summary-form.treatment-in-normal-mode")}
           </Typography>
           <Typography noWrap variant="h6" fontWeight={600}>
-            3 &nbsp;&nbsp;&nbsp; Emergency Treatment (Pain, Infection)
+            3 &nbsp;&nbsp;&nbsp; {t("examination-card-operations.forms.summary-form.emergency-treatment")}
           </Typography>
           <Typography noWrap variant="h6" fontWeight={600}>
-            4 &nbsp;&nbsp;&nbsp; Interdisciplinary Treatment
+            4 &nbsp;&nbsp;&nbsp; {t("examination-card-operations.forms.summary-form.interdisciplinary-treatment")}
           </Typography>
         </Box>
         <TextField
@@ -83,7 +85,7 @@ export default function SummaryForm({
           onChange={handleChange}
           value={summary.needForDentalInterventions}
           fullWidth
-          label="Need for Dental Interventions"
+          label={t("examination-card-operations.forms.summary-form.need-for-dental-interventions")}
           name={
             name !== undefined
               ? `${name}.needForDentalInterventions`
@@ -110,7 +112,7 @@ export default function SummaryForm({
         fullWidth
         color="secondary"
         multiline
-        label="Proposed Plan of Treatment (Max 500 characters)"
+        label={t("examination-card-operations.forms.summary-form.proposed-plan-of-treatment")}
         onChange={handleChange}
         value={summary.proposedTreatment}
         rows={4}
@@ -127,7 +129,7 @@ export default function SummaryForm({
         fullWidth
         onChange={handleChange}
         color="secondary"
-        label="Description of the treatment (Max 500 characters)"
+        label={t("examination-card-operations.forms.summary-form.description-of-the-treatment")}
         multiline
         value={summary.description}
         rows={4}
@@ -142,7 +144,7 @@ export default function SummaryForm({
         fullWidth
         color="secondary"
         multiline
-        label="Patient Recommendations (Max 500 characters)"
+        label={t("examination-card-operations.forms.summary-form.patient-recommendation")}
         onChange={handleChange}
         value={summary.patientRecommendations}
         rows={4}

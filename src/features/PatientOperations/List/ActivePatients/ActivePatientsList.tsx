@@ -56,7 +56,7 @@ export default observer(function ActivePatientsList() {
     <Box>
       <PatientListFilter
         title={t("patient-operations.list.active-patients.header")}
-        subTitle={t("patient-operations.list.active-patients.header")}
+        subTitle={t("patient-operations.list.active-patients.sub-header")}
         searchTerm={activePatientsSerachParams}
         setSearchTerm={handleSeachParamChange}
         clearEmailSearch={clearActivePatientEmailSearch}

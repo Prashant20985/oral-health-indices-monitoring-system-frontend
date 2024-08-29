@@ -166,11 +166,11 @@ const routes: RouteObject[] = [
         element: <RequireAuthentication roles={["Student"]} />,
         children: [
           {
-            path: "my-groups",
+            path: "my-exams",
             element: <GroupsListForStudent />,
           },
           {
-            path: "my-groups/:groupId",
+            path: "my-exams/:groupId",
             element: <GroupDetailsForStudent />,
           },
           {

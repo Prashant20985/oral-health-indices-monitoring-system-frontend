@@ -2,6 +2,7 @@ import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
 import { BleedingFormValues } from "../../../../app/models/APIBleeding";
 import APIBleedingForm from "../../../IndexCalculationForms/APIBleeding/APIBleedingForm";
 import { colors } from "../../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   bleedingFormValues: BleedingFormValues;
@@ -23,6 +24,7 @@ export default function CreateBleedingForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
 
   return (
     <Box>
@@ -40,7 +42,7 @@ export default function CreateBleedingForm({
         }}
       >
         <TextField
-          label="Comment"
+          label={t("examination-card-operations.forms.create-bleeding-form.comment")}
           variant="outlined"
           fullWidth
           color="secondary"
@@ -53,7 +55,7 @@ export default function CreateBleedingForm({
       </Box>
       <Box mt={2}>
         <Typography variant="h5" fontWeight={600}>
-          Input values can only be +/-
+          {t("examination-card-operations.forms.create-bleeding-form.input-values")}
         </Typography>
       </Box>
       <APIBleedingForm

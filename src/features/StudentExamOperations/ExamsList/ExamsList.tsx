@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Alert, Box, Grid, Typography } from "@mui/material";
 import StudentExamCard from "./StudentExamCard";
 import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
+import { useTranslation } from "react-i18next";
 
 /**
  * Renders a list of exams for a student.
@@ -23,6 +24,8 @@ export default observer(function ExamsList() {
       fetchStudentExams(id);
     }
   }, [fetchStudentExams, id]);
+
+  const [t] = useTranslation("global");
 
   return (
     <Box>
@@ -51,7 +54,7 @@ export default observer(function ExamsList() {
             </>
           ) : (
             <Alert severity="info" variant="outlined" sx={{ mt: 2 }}>
-              No Exams Published
+              {t("student-exam-operations.exams-list.student-exam-card.no-exams-published")}
             </Alert>
           )}
         </>

@@ -89,7 +89,7 @@ export default observer(function AdminNavOptions({ open }: Props) {
         open={open}
         path="/admin/logs"
         icon={<LibraryBooksOutlined />}
-        text="Logs"
+        text={t("admin-operations.nav-options.logs")}
       />
     </>
   );

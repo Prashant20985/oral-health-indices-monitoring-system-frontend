@@ -17,6 +17,7 @@ import {
 import CustomSelect from "../../../../app/common/formInputs/CustomSelect";
 import * as React from "react";
 import Header from "../../../../app/common/header/Header";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   title: string;
@@ -86,6 +87,8 @@ export default function ApplicationUsersListFilter({
 
   const userTypes: UserType[] = ["RegularUser", "GuestUser"];
 
+  const [t] = useTranslation("global");
+
   return (
     <Box
       display="flex"
@@ -100,7 +103,7 @@ export default function ApplicationUsersListFilter({
         <Box>
           <TextField
             color="secondary"
-            label="Search"
+            label={t("admin-operations.list.filter.search")}
             variant="filled"
             type="text"
             value={searchValue}
@@ -119,7 +122,7 @@ export default function ApplicationUsersListFilter({
         </Box>
         <Box component={FormControl} sx={{ width: "10rem" }} size="small">
           <CustomSelect
-            label="User Type"
+            label={t("admin-operations.list.filter.user-type")}
             value={userType as UserType}
             options={userTypes}
             onChange={handleUserTypeChange}
@@ -127,7 +130,7 @@ export default function ApplicationUsersListFilter({
         </Box>
         <Box component={FormControl} sx={{ width: "10rem" }} size="small">
           <CustomSelect
-            label="Role"
+            label={t("admin-operations.list.filter.role")}
             value={role as ApplicationRole}
             options={roles}
             onChange={handleRoleChange}
@@ -142,7 +145,7 @@ export default function ApplicationUsersListFilter({
               }}
             />
           ) : (
-            <Tooltip title="Clear Filter">
+            <Tooltip title={t("admin-operations.list.filter.clear-filter")}>
               <FilterAltOffOutlined
                 color="warning"
                 sx={{

@@ -10,6 +10,7 @@ import {
 import Header from "../../../app/common/header/Header";
 import { colors } from "../../../themeConfig";
 import { APIBleedingAssessmentModel } from "../../../app/models/APIBleeding";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   apiBleedingAssessmentModel: APIBleedingAssessmentModel;
@@ -44,6 +45,7 @@ export default observer(function APIBleedingForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
   return (
     <Box>
       <Box display="inline-flex" flexDirection="column" gap={2} mt={2} p={2}>
@@ -68,7 +70,7 @@ export default observer(function APIBleedingForm({
                     fontWeight={600}
                     textAlign="center"
                   >
-                    Interdental space
+                    {t("examination-card-operations.forms.api-bleeding-form.interdental-space")}
                   </Typography>
                 </Box>
               </Box>

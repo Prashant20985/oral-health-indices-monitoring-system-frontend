@@ -73,7 +73,7 @@ export default observer(function PatientsNotInResearchGroupList() {
             }}
           />
           <TextField
-            label="Student Name"
+            label={t("dentist-teacher-operations.list.research-group.patients-not-in-research-group.student-name")}
             variant="filled"
             fullWidth
             value={

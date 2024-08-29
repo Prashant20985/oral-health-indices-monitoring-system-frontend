@@ -56,22 +56,31 @@ export default observer(function UserRequesthortcut() {
       >
         <Box display="flex" justifyContent="space-between" p={1}>
           <Typography variant="h6" textTransform="uppercase" fontWeight={600}>
-            {t("admin-operations.dashboard.user-requests.header")}
+            {t("user-request-operations.list.user-request-for-current-user.header")}
           </Typography>
           <ButtonGroup
             size="small"
             variant="contained"
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
           >
-            {["Submitted", "In_Progress", "Completed"].map((status) => (
-              <Button
-                key={status}
-                onClick={() => handleButtonClick(status as RequestStatus)}
-                disabled={selectedStatus === status}
-              >
-                {status === "In_Progress" ? "In Progress" : status}
-              </Button>
-            ))}
+            <Button
+              onClick={() => handleButtonClick("Submitted")}
+              disabled={selectedStatus === "Submitted"}
+            >
+              {t("admin-operations.dashboard.user-requests.submitted")}
+            </Button>
+            <Button
+              onClick={() => handleButtonClick("In_Progress")}
+              disabled={selectedStatus === "In_Progress"}
+            >
+              {t("admin-operations.dashboard.user-requests.in-progress")}
+            </Button>
+            <Button
+              onClick={() => handleButtonClick("Completed")}
+              disabled={selectedStatus === "Completed"}
+            >
+              {t("admin-operations.dashboard.user-requests.completed")}
+            </Button>
           </ButtonGroup>
         </Box>
         <Box

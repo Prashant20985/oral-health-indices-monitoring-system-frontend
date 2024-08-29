@@ -8,6 +8,7 @@ import FormButtons from "./FormButtons";
 import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import APIBleedingForm from "../../IndexCalculationForms/APIBleeding/APIBleedingForm";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   cardId: string;
@@ -59,6 +60,8 @@ export default observer(function APIBleedingEditForm({
     }
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Box width="100%">
       <Formik
@@ -72,7 +75,7 @@ export default observer(function APIBleedingEditForm({
                       `${key}: ${(messages as string[]).join(" ")}`
                   )
                   .join(" ")
-              : "An unexpected error occurred. Please try again.";
+              : t("examination-card-operations.forms.api-bleeding-edit-form.error-message");
             setErrors({ error: errorMessage });
           });
         }}
@@ -105,8 +108,8 @@ export default observer(function APIBleedingEditForm({
         snackbarClose={() => setOpenSnackbar(false)}
         message={
           isAPIForm
-            ? "API form updated successfully"
-            : "Bleeding form updated successfully"
+            ? t("examination-card-operations.forms.api-bleeding-edit-form.api-form-updated")
+            : t("examination-card-operations.forms.api-bleeding-edit-form.bleeding-form-updated")
         }
       />
     </Box>

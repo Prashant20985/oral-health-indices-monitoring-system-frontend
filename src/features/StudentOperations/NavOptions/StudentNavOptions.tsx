@@ -23,8 +23,8 @@ export default observer(function StudentNavOptions({ open }: Props) {
   const [t] = useTranslation("global");
   const options = [
     {
-      title: t("student-operations.nav-options.my-groups"),
-      path: "/my-groups",
+      title: t("student-operations.nav-options.my-exams"),
+      path: "/my-exams",
       icon: <SchoolOutlined />,
     },
     {

@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   title: string;
@@ -53,6 +54,8 @@ export default function GradeCardForm({
     }
   }, [totalScore]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Dialog
       open={isOpen}
@@ -78,7 +81,7 @@ export default function GradeCardForm({
           color="secondary"
           type="number"
           fullWidth
-          label="Total Score"
+          label={t("examination-card-operations.forms.grade-card-form.total-score")}
           margin="dense"
           value={totalScoreValue}
           onChange={(event) => setTotalScoreValue(event.target.value)}
@@ -86,7 +89,7 @@ export default function GradeCardForm({
       </DialogContent>
       <DialogActions>
         <Button color="error" variant="contained" onClick={onClose}>
-          Cancel
+          {t("examination-card-operations.forms.grade-card-form.cancel-button")}
         </Button>
         <Button
           type="submit"
@@ -94,7 +97,7 @@ export default function GradeCardForm({
           color="secondary"
           endIcon={<SendOutlined />}
         >
-          Send
+          {t("examination-card-operations.forms.grade-card-form.send-button")}
         </Button>
       </DialogActions>
     </Dialog>

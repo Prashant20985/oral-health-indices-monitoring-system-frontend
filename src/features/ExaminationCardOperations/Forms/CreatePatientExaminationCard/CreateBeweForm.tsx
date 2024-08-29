@@ -2,6 +2,7 @@ import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
 import { BeweFormValues } from "../../../../app/models/Bewe";
 import BeweForm from "../../../IndexCalculationForms/Bewe/BeweForm";
 import { colors } from "../../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   beweFormValues: BeweFormValues;
@@ -23,6 +24,7 @@ export default function CreatePracticeBeweForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
   return (
     <Box>
       <Box
@@ -39,7 +41,7 @@ export default function CreatePracticeBeweForm({
         }}
       >
         <TextField
-          label="Comment"
+          label={t("examination-card-operations.forms.create-bewe-form.comment")}
           variant="outlined"
           fullWidth
           color="secondary"
@@ -52,7 +54,7 @@ export default function CreatePracticeBeweForm({
       </Box>
       <Box mt={2}>
         <Typography variant="h5" fontWeight={600}>
-          Input values can only be 0, 1, 2, 3 or x
+          {t("examination-card-operations.forms.create-bewe-form.input-values")}
         </Typography>
       </Box>
       <BeweForm

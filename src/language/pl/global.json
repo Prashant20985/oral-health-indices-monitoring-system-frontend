@@ -1,8 +1,8 @@
 {
   "topbar": {
     "colorMode": {
-      "dark": "Tryb Ciemny",
-      "light": "Tryb światła"
+      "dark": "Tryb ciemny",
+      "light": "Tryb jasny"
     },
     "language": {
       "header": "Język",
@@ -51,9 +51,13 @@
     "header": "Wpisz adres e-mail powiązany z Twoim kontem, a my wyślemy Ci link umożliwiający zresetowanie hasła",
     "email": "Adres e-mail",
     "button": "Wysłać email",
-    "loading": "Wysyłanie..."
+    "loading": "Wysyłanie...",
+    "emailIsRequired": "Adres e-mail jest wymagany"
   },
   "resetpassword": {
+    "password-is-required": "Hasło jest wymagane",
+    "confirm-password-is-required": "Potwierdzenie hasła jest wymagane",
+    "passwords-match": "Hasła muszą pasować",
     "header": "Resetowanie hasła dla",
     "password": "Hasło",
     "confirmPassword": "Potwierdź hasło",
@@ -91,8 +95,8 @@
         "header": "Aktywni pacjenci",
         "button": "Pokaż wszystkie"
       },
-      "add-user-button": "Dodaj użytkownika aplikacji",
-      "add-user-tooltip": "Dodaj użytkownika aplikacji",
+      "add-user-button": "Dodaj użytkownika",
+      "add-user-tooltip": "Dodaj użytkownika",
       "upload-csv": {
         "button": "Prześlij plik CSV",
         "title": "Dodaj użytkowników z pliku csv",
@@ -112,8 +116,11 @@
         "button": "Pokaż wszystkie"
       },
       "user-requests": {
-        "header": "żądania użytkowników",
-        "button": "Pokaż wszystkie"
+        "header": "Wnioski użytkowników",
+        "button": "Pokaż wszystkie",
+        "submitted": "Zgłoszony",
+        "in-progress": "W trakcie",
+        "completed": "Zakończony"
       },
       "archived-patients": {
         "header": "Zarchiwizowani pacjenci",
@@ -145,7 +152,7 @@
         "last-name": "Nazwisko",
         "username": "Nazwa użytkownika",
         "role": "Rola",
-        "email": "adres e-mail",
+        "email": "Email",
         "phone-number": "Numer telefonu",
         "create-date": "Data utworzenia",
         "comment": "Komentarz",
@@ -175,24 +182,24 @@
     "list": {
       "data-grid": {
         "activation-status": "Status aktywacji",
-        "actions": "działania",
+        "actions": "Działania",
         "view-profile": "Zobacz profil",
         "delete-user": "Usuń użytkownika",
         "user-name": "Nazwa użytkownika",
         "first-name": "Imię",
         "last-name": "Nazwisko",
-        "email": "adres e-mail",
+        "email": "E-mail",
         "delete-date": "Data usunięcia",
         "role": "Rola",
         "activation-message": "Status aktywacji został pomyślnie zmieniony!!"
       },
       "active-users": {
-        "header": "Aktywni użytkownicy",
+        "header": "Aktywni Użytkownicy",
         "sub-header": "Lista aktywnych użytkowników"
       },
       "deactivated-users": {
-        "header": "Deaktywowani użytkownicy",
-        "sub-header": "Lista dezaktywowanych użytkowników"
+        "header": "Nieaktywni Użytkownicy",
+        "sub-header": "Lista nieaktywnych użytkowników"
       },
       "deleted-users": {
         "header": "Usunięci użytkownicy",
@@ -201,7 +208,8 @@
       "filter": {
         "search": "Szukaj",
         "user-type": "Typ użytkownika",
-        "role": "Rola"
+        "role": "Rola",
+        "clear-filter": "Wyczyść filtr"
       }
     },
     "logs": {
@@ -221,11 +229,12 @@
     },
     "nav-options": {
       "active-users": "Aktywni użytkownicy",
-      "deactivated-users": "Dezaktywowani użytkownicy",
+      "deactivated-users": "Nieaktywni użytkownicy",
       "deleted-users": "Usunięci użytkownicy",
       "active-patients": "Aktywni pacjenci",
       "archived-patients": "Zarchiwizowani pacjenci",
-      "user-requests": "żądania użytkowników"
+      "user-requests": "Wnioski użytkowników",
+      "logs": "Logi"
     },
     "user-profile": {
       "header": "Dane użytkownika",
@@ -270,20 +279,22 @@
     },
     "list": {
       "examinationscards-assigned-to-doctor": {
-        "header": "Karty egzaminacyjne",
-        "sub-header": "Karty badań przydzielone lekarzowi",
+        "header": "Przypisane karty",
+        "sub-header": "Karty pacjentów wypełnione przez moich studentów",
         "select-student-label": "Wybierz studenta",
         "select-year-and-month-label": "Wybierz rok i miesiąc"
       },
       "research-group": {
-        "header": "Grupy badawcze",
+        "header": "Grupy badane",
         "add-button": "Dodaj nową grupę badawczą",
         "search": "Szukaj",
         "patients-not-in-research-group": {
           "back-button": "Wróć",
-          "header": "Pacjenci nie należący do grupy badawczej"
+          "header": "Pacjenci nie należący do grupy badawczej",
+          "student-name": "Nazwa studenta"
         },
         "research-group-card": {
+          "view-details-button": "Pokaż szczegóły",
           "created-by": "Utworzony przez: ",
           "number-of-patients": "liczba pacjentów: ",
           "delete-button": "Usuń",
@@ -300,26 +311,27 @@
         "research-group-patient": {
           "first-name": "Imię",
           "last-name": "Nazwisko",
-          "email": "adres e-mail",
+          "email": "E-mail",
           "gender": "Płeć",
           "age": "Wiek",
           "location": "Lokalizacja",
           "added-by": "Dodany przez",
           "actions": "Działania",
           "remove-from-group-button": "Usuń z grupy",
-          "add-to-group-button": "Dodaj do grupy"
+          "add-to-group-button": "Dodaj do grupy",
+          "patient-details": "Szczegóły pacjenta"
         }
       },
       "student-group": {
-        "header": "Grupy studentów",
+        "header": "Grupy studentów i Egzaminy",
         "add-button": "Dodaj nową grupę studentów",
         "search": "Szukaj",
         "user-name": "Nazwa użytkownika",
         "first-name": "Imię",
         "last-name": "Nazwisko",
-        "email": "adres e-mail",
+        "email": "E-mail",
         "group-name": "Nazwa grupy",
-        "actions": "działania",
+        "actions": "Działania",
         "remove-from-group-button": "Usuń z grupy",
         "add-to-group-button": "Dodaj do grupy",
         "supervise-student-button": "Nadzoruj",
@@ -333,7 +345,7 @@
         "student-group-card": {
           "sub-header": "liczba studentów: ",
           "add-student-button": "Dodaj studenta",
-          "edit-group-button": "Edytuj grupę nazwę",
+          "edit-group-button": "Edytuj grupę",
           "delete-group-button": "Usuń grupę",
           "view-details-button": "Pokaż szczegóły",
           "back-button": "Wróć",
@@ -343,8 +355,8 @@
           "publish-new-exam-button": "Opublikuj nowy egzamin"
         },
         "supervise-students": {
-          "header": "Studenci pod opieką",
-          "sub-header": "Studenci pod moim okiem",
+          "header": "Nadzorowani studenci",
+          "sub-header": "Lista studentów pod moją opieką",
           "add-student-button": "Dodaj Ucznia"
         },
         "unsupervised-students": {
@@ -363,11 +375,11 @@
       }
     },
     "nav-options": {
-      "research-groups": "Grupy badawcze",
-      "student-groups": "Grupy studentów",
+      "research-groups": "Grupy badane",
+      "student-groups": "Grupy studentów i Egzaminy",
       "active-patients": "Aktywni pacjenci",
       "archived-patients": "Zarchiwizowani pacjenci",
-      "supervised-students": "Studenci pod nadzorem",
+      "supervised-students": "Nadzorowani studenci",
       "assigned-cards": "Przypisane karty"
     }
   },
@@ -520,11 +532,14 @@
     "list": {
       "user-request-actions": {
         "mark-in-progress": "Oznacz jako w trakcie",
-        "mark-as-completed": "Oznacz jako zakończone",
+        "mark-as-completed": "Oznacz jako Zakończony",
         "message": "Żądanie ustawione na W toku",
         "edit-button": "Edytuj"
       },
       "user-request-card": {
+        "in-progress": "W trakcie",
+        "completed": "Zakończony",
+        "submitted": "Zgłoszony",
         "requester": "Żądający: ",
         "submit-date": "Data złożenia: ",
         "complete-date": "Data zakończenia: ",
@@ -536,14 +551,20 @@
         "admin-comment": "Komentarz administratora: "
       },
       "user-request-admin": {
-        "header": "Wszystkie żądania",
+        "header": "Wszystkie Wnioski",
         "search-label": "Wyszukaj według nazwy osoby żądającej",
-        "status-label": "Status"
+        "status-label": "Status",
+        "in-progress": "W trakcie",
+        "completed": "Zakończony",
+        "submitted": "Zgłoszony"
       },
       "user-request-for-current-user": {
-        "header": "Moje żądania",
+        "header": "Moje Wnioski",
         "new-request-button": "Nowe żądanie",
-        "request-status-label": "Status żądania"
+        "request-status-label": "Status żądania",
+        "in-progress": "W trakcie",
+        "completed": "Zakończony",
+        "submitted": "Zgłoszony"
       }
     }
   },
@@ -556,7 +577,7 @@
         "view-solution": "Zobacz rozwiązanie"
       },
       "exam-solution-list": {
-        "header": "Rozwiązania egzaminacyjne",
+        "header": "Rozwiązania egzaminy",
         "sub-header": "Liczba przesłanych rozwiązań: "
       }
     },
@@ -569,7 +590,8 @@
         "view-exam-button": "Wyświetl egzamin",
         "edit-exam-button": "Edytuj egzamin",
         "delete-exam-button": "Usuń egzamin",
-        "mark-as-graded-button": "Oznacz jako oceniony"
+        "mark-as-graded-button": "Oznacz jako oceniony",
+        "no-exams-published": "Brak opublikowanych egzaminów"
       }
     },
     "exam-solution-details": {
@@ -856,9 +878,9 @@
       "title": "Panel studenta"
     },
     "nav-options": {
-      "my-groups": "Moje grupy",
+      "my-exams": "Moje Egzaminy",
       "active-patients": "Aktywni pacjenci",
-      "archived-patients": "Archiwizowani pacjenci"
+      "archived-patients": "Zarchiwizowani pacjenci"
     },
     "student-group-details": {
       "teacher": "Nauczyciel:",
@@ -870,8 +892,8 @@
         "view-group-details-button": "Zobacz szczegóły grupy"
       },
       "group-list-for-student": {
-        "title": "Moje Grupy",
-        "sub-title": "Lista Moich Grup",
+        "title": "Moje Egzaminy",
+        "sub-title": "Lista egzaminów dla mojej grupy",
         "search": "Szukaj"
       },
       "upcoming-exams": {
@@ -925,7 +947,14 @@
         "description": "Proszę podać komentarz do formularza dotyczącego DMFT/DMFS.",
         "message": "Komentarz został pomyślnie dodany."
       },
+      "index-form-tabs": {
+        "unsaved-changes": "Masz niezapisane zmiany. Czy na pewno chcesz zmienić kartę?",
+        "are-you-sure": "Czy na pewno chcesz opuścić?",
+        "risk-factor-assessment": "Ocena czynników ryzyka",
+        "summary": "Podsumowanie"
+      },
       "patient-examination-details-header-card": {
+        "loading-card": "Ładowanie karty badania pacjenta...",
         "downloading": "Pobieranie...",
         "download-button": "Pobierz raport",
         "patient-name": "Imię pacjenta",
@@ -946,6 +975,110 @@
         "description2": "Proszę podać ocenę dla karty badania do",
         "message": "Komentarz został pomyślnie dodany.",
         "message2": "Całkowity wynik został pomyślnie dodany."
+      }
+    },
+    "forms": {
+      "create-patient-examination-card": {
+        "cancel-confirmation": "Czy na pewno chcesz anulować?",
+        "cancel-warning": "Masz niezapisane zmiany, które zostaną utracone, jeśli anulujesz.",
+        "no": "Nie",
+        "yes": "Tak"
+      },
+      "create-api-form": {
+        "comment": "Komentarz",
+        "input-values": "Wartości wejściowe mogą być tylko +, -, lub x"
+      },
+      "create-bewe-form": {
+        "comment": "Komentarz",
+        "input-values": "Wartości wejściowe mogą być tylko 0, 1, 2, 3 lub x"
+      },
+      "create-bleeding-form": {
+        "comment": "Komentarz",
+        "input-values": "Wartości wejściowe mogą być tylko +, -, lub x"
+      },
+      "create-dmft-dmfs-form": {
+        "add-calculated-result": "Dodaj obliczony wynik DMFT/DMFS",
+        "dmft-result": "Wynik DMFT",
+        "dmfs-result": "Wynik DMFS",
+        "comment": "Komentarz DMFT/DMFS",
+        "input-values": "Wartości wejściowe mogą być tylko 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 lub x"
+      },
+      "solve-multi-step-form": {
+        "are-you-sure": "Czy na pewno chcesz opuścić?",
+        "cancel-button": "Anuluj",
+        "loading-patient-details": "Ładowanie szczegółów pacjenta...",
+        "patient-details": "Szczegóły pacjenta",
+        "years-in-school": "Lata w szkole",
+        "created-at": "Utworzono:",
+        "assign-to-supervisor": "Przypisz do przełożonego",
+        "card-comment": "Komentarz karty",
+        "back-button": "Wstecz",
+        "submit-button": "Prześlij",
+        "next-button": "Dalej",
+        "created-successfully": "Karta badania pacjenta została pomyślnie utworzona!!"
+      },
+      "api-bleeding-edit-form": {
+        "error-message": "Wystąpił nieoczekiwany błąd. Proszę spróbować ponownie.",
+        "api-form-updated": "Formularz API zaktualizowany pomyślnie",
+        "bleeding-form-updated": "Formularz krwawienia zaktualizowany pomyślnie"
+      },
+      "bewe-edit-form": {
+        "bewe-form-updated": "Formularz BEWE zaktualizowany pomyślnie"
+      },
+      "comment-form": {
+        "comment": "Komentarz",
+        "cancel-button": "Anuluj",
+        "send-button": "Wyślij"
+      },
+      "delete-confirmation": {
+        "header": "Czy na pewno chcesz usunąć tę kartę badania?",
+        "delete-warning": "Ta akcja jest nieodwracalna. Czy na pewno chcesz usunąć tę",
+        "cancel-button": "Anuluj",
+        "delete-button": "Usuń"
+      },
+      "dmft-dmfs-edit-form": {
+        "dmft-result": "Wynik DMFT",
+        "dmfs-result": "Wynik DMFS",
+        "dmft-dmfs-form-updated": "Formularz DMFT/DMFS zaktualizowany pomyślnie"
+      },
+      "form-button": {
+        "edit-button": "Edytuj",
+        "cancel-button": "Anuluj",
+        "submit-button": "Prześlij"
+      },
+      "grade-card-form": {
+        "total-score": "Łączna liczba punktów",
+        "cancel-button": "Anuluj",
+        "send-button": "Wyślij"
+      },
+      "risk-factor-assessment-edit-form": {
+        "risk-factor-assessment-updated": "Ocena czynników ryzyka zaktualizowana pomyślnie"
+      },
+      "summary-edit-form": {
+        "summary": "Podsumowanie",
+        "summary-updated": "Podsumowanie zaktualizowane pomyślnie!"
+      },
+      "api-bleeding-form": {
+        "interdental-space": "Przestrzeń międzyzębowa"
+      },
+      "dmft-dmfs-form": {
+        "prosthetic-status": "STATUS PROTETYKI (Protezy ruchome)",
+        "no-prosthetic-restorations": "Brak protez",
+        "partial-denture": "Proteza częściowa",
+        "complete-denture": "Proteza całkowita",
+        "during-prosthetic-treatment": "W trakcie leczenia protetycznego",
+        "none": "Brak"
+      },
+      "summary-form": {
+        "need-for-dental-interventions": "Potrzeba interwencji stomatologicznych",
+        "missing": "Brakujące",
+        "preventive-treatment": "Leczenie zapobiegawcze",
+        "treatment-in-normal-mode": "Leczenie w trybie normalnym",
+        "emergency-treatment": "Leczenie awaryjne (Ból, Infekcja)",
+        "interdisciplinary-treatment": "Leczenie interdyscyplinarne",
+        "proposed-plan-of-treatment": "Proponowany plan leczenia (Max 500 znaków)",
+        "description-of-the-treatment": "Opis leczenia (Max 500 znaków)",
+        "patient-recommendation": "Zalecenia dla pacjenta (Max 500 znaków)"
       }
     }
   }

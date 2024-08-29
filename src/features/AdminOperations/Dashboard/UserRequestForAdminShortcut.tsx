@@ -65,15 +65,24 @@ export default observer(function UserRequestForAdminShortcut() {
             variant="contained"
             color={theme.palette.mode === "dark" ? "secondary" : "info"}
           >
-            {["Submitted", "In_Progress", "Completed"].map((status) => (
-              <Button
-                key={status}
-                onClick={() => handleButtonClick(status as RequestStatus)}
-                disabled={selectedStatus === status}
-              >
-                {status === "In_Progress" ? "In Progress" : status}
-              </Button>
-            ))}
+            <Button
+              onClick={() => handleButtonClick("Submitted")}
+              disabled={selectedStatus === "Submitted"}
+            >
+              {t("admin-operations.dashboard.user-requests.submitted")}
+            </Button>
+            <Button
+              onClick={() => handleButtonClick("In_Progress")}
+              disabled={selectedStatus === "In_Progress"}
+            >
+              {t("admin-operations.dashboard.user-requests.in-progress")}
+            </Button>
+            <Button
+              onClick={() => handleButtonClick("Completed")}
+              disabled={selectedStatus === "Completed"}
+            >
+              {t("admin-operations.dashboard.user-requests.completed")}
+            </Button>
           </ButtonGroup>
         </Box>
         <Box

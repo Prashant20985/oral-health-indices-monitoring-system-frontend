@@ -42,6 +42,7 @@ import CustomErrorMessage from "../../../../app/common/formInputs/CustomErrorMes
 import { router } from "../../../../app/router/Routes";
 import CancelConfirmationDialog from "./CancelConfirmationDialog";
 import CustomSanckbar from "../../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 const RiskFactorAssessment = React.lazy(
   () => import("../../../IndexCalculationForms/RiskFactorAssessment")
@@ -165,6 +166,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [snapShot, setSnapShot] = React.useState(
@@ -230,7 +232,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
   React.useEffect(() => {
     const unloadCallback = (event: BeforeUnloadEvent) => {
       event.preventDefault();
-      return (event.returnValue = "Are you sure you want to leave?");
+      return (event.returnValue = t("examination-card-operations.forms.solve-multi-step-form.are-you-sure"));
     };
 
     window.addEventListener("beforeunload", unloadCallback);
@@ -249,7 +251,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
           endIcon={<Close />}
           onClick={() => setOpenCancelDialog(true)}
         >
-          Cancel
+          {t("examination-card-operations.forms.solve-multi-step-form.cancel-button")}
         </Button>
       </Box>
       <Formik
@@ -281,7 +283,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
             >
               <Grid item xs={12} md={4}>
                 {loading.patientDetails ? (
-                  <LoadingComponent content="Loading Patient Details..." />
+                  <LoadingComponent content={t("examination-card-operations.forms.solve-multi-step-form.loading-patient-details")} />
                 ) : patientDetails ? (
                   <>
                     <Card
@@ -300,7 +302,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                                 fontWeight: 700,
                               }}
                             >
-                              Patient Details
+                              {t("examination-card-operations.forms.solve-multi-step-form.patient-details")}
                             </Typography>
                         }
                       />
@@ -338,13 +340,13 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                             <Box display="flex" alignItems="center" gap={1}>
                               <School />
                               <Typography variant="h6" color="textSecondary">
-                                Years in School: {patientDetails.yearsInSchool}
+                                {t("examination-card-operations.forms.solve-multi-step-form.years-in-school")} {patientDetails.yearsInSchool}
                               </Typography>
                             </Box>
                             <Box display="flex" alignItems="center" gap={1}>
                               <EditCalendar />
                               <Typography variant="h6" color="textSecondary">
-                                Created At:{" "}
+                                {t("examination-card-operations.forms.solve-multi-step-form.created-at")}{" "}
                                 {new Date(
                                   patientDetails.createdAt
                                 ).toDateString()}
@@ -372,7 +374,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                       renderInput={(params) => (
                         <TextField
                           {...params}
-                          label="Assign To Supervisor"
+                          label={t("examination-card-operations.forms.solve-multi-step-form.assign-to-supervisor")}
                           variant="outlined"
                           color="secondary"
                           required={isStudent}
@@ -387,7 +389,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                     fullWidth
                     color="secondary"
                     variant="outlined"
-                    label="Card Comment"
+                    label={t("examination-card-operations.forms.solve-multi-step-form.card-comment")}
                     multiline
                     rows={isStudent ? 6 : 10}
                     value={values.patientExaminationCardComment}
@@ -459,7 +461,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                 disabled={activeStep === 0}
                 startIcon={<ArrowBack />}
               >
-                Back
+                {t("examination-card-operations.forms.solve-multi-step-form.back-button")}
               </Button>
               <>
                 {isLastStep ? (
@@ -471,7 +473,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                     endIcon={<Send />}
                     loadingPosition="end"
                   >
-                    <span>Submit</span>
+                    <span>{t("examination-card-operations.forms.solve-multi-step-form.submit-button")}</span>
                   </LoadingButton>
                 ) : (
                   <Button
@@ -480,7 +482,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                     onClick={() => handleNext(values)}
                     endIcon={<ArrowForward />}
                   >
-                    Next
+                    {t("examination-card-operations.forms.solve-multi-step-form.next-button")}
                   </Button>
                 )}
               </>
@@ -503,7 +505,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
           setSubmitSucessSnackbarOpen(false);
           router.navigate(`/patient-profile/${id}`);
         }}
-        message="Patient Examination Card Created Successfully!!"
+        message={t("examination-card-operations.forms.solve-multi-step-form.created-successfully")}
       />
     </Box>
   );

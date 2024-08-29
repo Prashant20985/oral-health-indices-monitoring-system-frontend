@@ -142,7 +142,7 @@ export default observer(function ResearchGroupDetails() {
                 router.navigate(`/research-groups/${id}/add-patients`)
               }
             >
-              Add Patient
+              {t("dentist-teacher-operations.list.research-group.research-group-details.add-patient-button")}
             </Button>
           </Box>
           {selectedResearchGroup?.patients && (
