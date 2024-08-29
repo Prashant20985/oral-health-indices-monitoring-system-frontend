@@ -858,7 +858,16 @@ export class PatientExaminationCardStore {
         cardId
       );
       runInAction(() => {
-        this.patientExaminationCards.delete(cardId);
+        const card = this.patientExaminationCards.get(cardId);
+        if (card) {
+          this.patientExaminationCards.delete(cardId);
+        } else {
+          const cardAssignedToDoctor =
+            this.patientExaminationCardsAssignedToDoctor.get(cardId);
+          if (cardAssignedToDoctor) {
+            this.patientExaminationCardsAssignedToDoctor.delete(cardId);
+          }
+        }
         this.loading.deletePatientExaminationCard = false;
       });
     } catch (error) {

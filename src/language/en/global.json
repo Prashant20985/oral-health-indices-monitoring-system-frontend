@@ -994,22 +994,22 @@
       },
       "create-api-form": {
         "comment": "Comment",
-        "input-values": "Input values can only be +,- or x"
+        "input-values": "Signs, use only +,- or x"
       },
       "create-bewe-form": {
         "comment": "Comment",
-        "input-values": "Input values can only be 0,1,2,3 or x"
+        "input-values": "Signs, use only 0,1,2,3 or x"
       },
       "create-bleeding-form": {
         "comment": "Comment",
-        "input-values": "Input values can only be +,- or x"
+        "input-values": "Signs, use only +,- or x"
       },
       "create-dmft-dmfs-form": {
         "add-calculated-result": "Add Calculated DMFT/DMFS Result",
         "dmft-result": "DMFT Result",
         "dmfs-result": "DMFS Result",
         "comment": "Comment DMFT/DMFS",
-        "input-values": "Input values can only be 0,1,2,3,4,5,6,7,8,9,10 or x"
+        "input-values": "Signs, use only 0,1,2,3,4,5,6,7,8,9,10 or x"
       },
       "solve-multi-step-form": {
         "caries-risk-assessment": "Caries Risk Assessment",
