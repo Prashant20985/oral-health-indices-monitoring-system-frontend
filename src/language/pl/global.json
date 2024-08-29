@@ -422,7 +422,7 @@
         "age": "Wiek",
         "ethnic-group": "Grupa etniczna",
         "other-group": "Inna grupa",
-        "years-in-school": "Lata w szkole",
+        "years-in-school": "Lata nauki",
         "location": "Lokalizacja",
         "other-data": "inne dane",
         "other-data2": "inne dane 2",
@@ -445,7 +445,7 @@
       "gender": "Płeć",
       "ethnic-group": "Grupa etniczna",
       "other-group": "Inna grupa",
-      "years-in-school": "Lata w szkole",
+      "years-in-school": "Lata nauki",
       "other-data": "inne dane",
       "other-data2": "inne dane 2",
       "other-data3": "inne dane 3",
@@ -487,7 +487,7 @@
     },
     "patient-profile": {
       "header": "Informacja o pacjencie",
-      "years-in-school": "Lata w szkole",
+      "years-in-school": "Lata nauki",
       "created-at": "Utworzono w",
       "first-name": "Imię",
       "last-name": "Nazwisko",
@@ -611,11 +611,11 @@
         "solution-not-submitted2": "Rozwiązanie nie zostało przesłane",
         "exam-has-started2": "Egzamin rozpoczęty",
         "patient-details": "Szczegóły pacjenta",
-        "risk-factor-assessment": "Ocena czynników ryzyka próchnicy",
+        "risk-factor-assessment": "ocena ryzyka próchnicy",
         "dmft-dmfs": "DMFT/DMFS",
         "bewe": "BEWE",
         "api": "API",
-        "bleeding": "Bleeding",
+        "bleeding": "PBI",
         "summary": "Streszczenie"
       },
       "practice-patient-api-details-for-student": {
@@ -630,7 +630,7 @@
         "no-comment": "Brak komentarzy."
       },
       "practice-patient-bleeding-details-for-student": {
-        "title": "Szczegóły Bleeding",
+        "title": "Szczegóły PBI",
         "doctor-comment": "Komentarz lekarza",
         "no-comment": "Brak komentarzy."
       },
@@ -660,11 +660,11 @@
       "add-marks": "Dodaj ocenę",
       "edit-marks": "Edytuj ocenę",
       "patient-details": "Szczegóły pacjenta",
-      "risk-factor-assessment": "Ocenia czynników ryzyka próchnicy",
+      "risk-factor-assessment": "ocena ryzyka próchnicy",
       "dmft-dmfs": "DMFT/DMFS",
       "bewe": "BEWE",
       "api": "API",
-      "bleeding": "Bleeding",
+      "bleeding": "PBI",
       "summary": "Streszczenie",
       "comment-practice-patient-examintation-card": "Komentarz Karta badania pacjenta",
       "description": "Aby przesłać uwagi dotyczące karty badania pacjenta w gabinecie lekarskim, prosimy o wypełnienie poniższego formularza.",
@@ -678,7 +678,7 @@
         "add-comment": "Dodaj komentarz",
         "edit-comment": "Edytuj komentarz",
         "comment-api-form": "Formularz komentarzy API",
-        "description": "Proszę napisać swój komentarz dotyczący formularza API krwawienia."
+        "description": "Proszę napisać swój komentarz dotyczący formularza API PBI."
       },
       "practice-patient-bewe-details-for-teacher": {
         "title": "Szczegóły BEWE",
@@ -691,14 +691,14 @@
         "description": "Proszę napisać swój komentarz dotyczący formularza BEWE."
       },
       "practice-patient-bleeding-details-for-teacher": {
-        "title": "Szczegóły krwawienia",
-        "bleeding-result": "Wynik krwawienia",
+        "title": "Szczegóły PBI",
+        "bleeding-result": "Wynik PBI",
         "doctor-comment": "Komentarz lekarza",
         "no-comment": "Brak komentarzy.",
         "add-comment": "Dodaj komentarz",
         "edit-comment": "Edytuj komentarz",
-        "comment-bleeding-form": "Formularz komentarzy dotyczący krwawienia",
-        "description": "Proszę napisać swój komentarz dotyczący formularza krwawienia."
+        "comment-bleeding-form": "Formularz komentarzy dotyczący PBI",
+        "description": "Proszę napisać swój komentarz dotyczący formularza PBI."
       },
       "practice-patient-dmft-dmfs-details-for-teacher": {
         "title": "Szczegóły DMFT/DMFS",
@@ -714,15 +714,19 @@
     "forms": {
       "practice-api-form": {
         "add-calculated-api-result": "Dodaj obliczony wynik API",
-        "api-result": "Wynik API"
+        "api-result": "Wynik API",
+        "maxilla": "Szczęka",
+        "mandible": "Żuchwa"
       },
       "practice-bewe-form": {
         "add-calculated-bewe-result": "Dodaj obliczony wynik BEWE",
         "bewe-result": "Wynik BEWE"
       },
       "practice-bleeding-form": {
-        "add-calculated-bleeding-result": "Dodaj obliczony wynik krwawienia",
-        "bleeding-result": "Wynik krwawienia"
+        "add-calculated-bleeding-result": "Dodaj obliczony wynik PBI",
+        "bleeding-result": "Wynik PBI",
+        "maxilla": "Szczęka",
+        "mandible": "Żuchwa"
       },
       "practice-dmft-dmfs-form": {
         "add-calculated-dmft-dmfs-result": "Dodaj obliczony wynik DMFT/DMFS",
@@ -737,7 +741,7 @@
         "female": "Kobieta",
         "age": "Wiek",
         "email": "Email",
-        "years-in-school": "Lata w szkole",
+        "years-in-school": "Lata nauki",
         "location": "Lokalizacja",
         "ethnic-group": "Grupa etniczna",
         "other-group": "Inna grupa",
@@ -781,7 +785,7 @@
         "age-required": "Wiek jest wymagany",
         "location-required": "Lokalizacja jest wymagana",
         "email-required": "Email jest wymagany",
-        "years-in-school-required": "Lata w szkole są wymagane",
+        "years-in-school-required": "Lata nauki są wymagane",
         "other-group-validation": "Inna grupa musi mieć maksymalnie 50 znaków",
         "other-data-validation": "Inne dane muszą mieć maksymalnie 50 znaków",
         "other-data2-validation": "Inne dane 2 muszą mieć maksymalnie 50 znaków",
@@ -913,7 +917,9 @@
         "add-comment": "Dodaj komentarz",
         "comment-api-form": "Formularz komentarza API",
         "description": "Proszę podać komentarz do formularza API.",
-        "message": "Komentarz został pomyślnie dodany."
+        "message": "Komentarz został pomyślnie dodany.",
+        "maxilla": "Szczęka",
+        "mandible": "Żuchwa"
       },
       "bewe-details": {
         "bewe-result": "Wynik BEWE",
@@ -927,15 +933,17 @@
         "message": "Komentarz został pomyślnie dodany."
       },
       "bleeding-details": {
-        "bleeding-result": "Wynik krwawienia",
-        "doctor-bleeding-comment": "Komentarz lekarza dotyczący krwawienia",
+        "bleeding-result": "Wynik PBI",
+        "doctor-bleeding-comment": "Komentarz lekarza dotyczący PBI",
         "no-comment": "Nie dodano komentarza.",
-        "student-bleeding-comment": "Komentarz studenta dotyczący krwawienia",
+        "student-bleeding-comment": "Komentarz studenta dotyczący PBI",
         "edit-comment": "Edytuj komentarz",
         "add-comment": "Dodaj komentarz",
-        "comment-bleeding-form": "Formularz komentarza dotyczącego krwawienia",
-        "description": "Proszę podać komentarz do formularza dotyczącego krwawienia.",
-        "message": "Komentarz został pomyślnie dodany."
+        "comment-bleeding-form": "Formularz komentarza dotyczącego PBI",
+        "description": "Proszę podać komentarz do formularza dotyczącego PBI.",
+        "message": "Komentarz został pomyślnie dodany.",
+        "maxilla": "Szczęka",
+        "mandible": "Żuchwa"
       },
       "dmft-dmfs-details": {
         "doctor-dmft-dmfs-comment": "Komentarz lekarza dotyczący DMFT/DMFS",
@@ -950,7 +958,7 @@
       "index-form-tabs": {
         "unsaved-changes": "Masz niezapisane zmiany. Czy na pewno chcesz zmienić kartę?",
         "are-you-sure": "Czy na pewno chcesz opuścić?",
-        "risk-factor-assessment": "Ocena czynników ryzyka",
+        "risk-factor-assessment": "OCENA RYZYKA PRÓCHNICY",
         "summary": "Podsumowanie"
       },
       "patient-examination-details-header-card": {
@@ -1004,11 +1012,13 @@
         "input-values": "Wartości wejściowe mogą być tylko 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 lub x"
       },
       "solve-multi-step-form": {
+        "caries-risk-assessment": "ocena ryzyka próchnicy",
+        "summary": "podsumowanie",
         "are-you-sure": "Czy na pewno chcesz opuścić?",
         "cancel-button": "Anuluj",
         "loading-patient-details": "Ładowanie szczegółów pacjenta...",
         "patient-details": "Szczegóły pacjenta",
-        "years-in-school": "Lata w szkole",
+        "years-in-school": "Lata nauki",
         "created-at": "Utworzono:",
         "assign-to-supervisor": "Przypisz do przełożonego",
         "card-comment": "Komentarz karty",
@@ -1020,7 +1030,7 @@
       "api-bleeding-edit-form": {
         "error-message": "Wystąpił nieoczekiwany błąd. Proszę spróbować ponownie.",
         "api-form-updated": "Formularz API zaktualizowany pomyślnie",
-        "bleeding-form-updated": "Formularz krwawienia zaktualizowany pomyślnie"
+        "bleeding-form-updated": "Formularz PBI zaktualizowany pomyślnie"
       },
       "bewe-edit-form": {
         "bewe-form-updated": "Formularz BEWE zaktualizowany pomyślnie"
@@ -1052,7 +1062,7 @@
         "send-button": "Wyślij"
       },
       "risk-factor-assessment-edit-form": {
-        "risk-factor-assessment-updated": "Ocena czynników ryzyka zaktualizowana pomyślnie"
+        "risk-factor-assessment-updated": "ocena ryzyka próchnicy zaktualizowana pomyślnie"
       },
       "summary-edit-form": {
         "summary": "Podsumowanie",
@@ -1062,19 +1072,19 @@
         "interdental-space": "Przestrzeń międzyzębowa"
       },
       "dmft-dmfs-form": {
-        "prosthetic-status": "STATUS PROTETYKI (Protezy ruchome)",
-        "no-prosthetic-restorations": "Brak protez",
+        "prosthetic-status": "Status Protetyczny - Uzupełnienia ruchome",
+        "no-prosthetic-restorations": "Brak uzupełnień protetycznych",
         "partial-denture": "Proteza częściowa",
         "complete-denture": "Proteza całkowita",
         "during-prosthetic-treatment": "W trakcie leczenia protetycznego",
         "none": "Brak"
       },
       "summary-form": {
-        "need-for-dental-interventions": "Potrzeba interwencji stomatologicznych",
-        "missing": "Brakujące",
-        "preventive-treatment": "Leczenie zapobiegawcze",
-        "treatment-in-normal-mode": "Leczenie w trybie normalnym",
-        "emergency-treatment": "Leczenie awaryjne (Ból, Infekcja)",
+        "need-for-dental-interventions": "Potrzeba Interwencji Stomatologicznej",
+        "missing": "brak",
+        "preventive-treatment": "zabieg profilaktyczny",
+        "treatment-in-normal-mode": "leczenie w normalnym trybie",
+        "emergency-treatment": "leczenie w trybie nagłym (ból, infekcja)",
         "interdisciplinary-treatment": "Leczenie interdyscyplinarne",
         "proposed-plan-of-treatment": "Proponowany plan leczenia (Max 500 znaków)",
         "description-of-the-treatment": "Opis leczenia (Max 500 znaków)",

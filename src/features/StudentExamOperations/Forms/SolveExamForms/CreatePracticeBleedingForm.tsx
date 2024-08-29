@@ -66,7 +66,7 @@ export default function CreatePracticeBleedingForm({
           />
 
           <TextField
-            label="Maxilla"
+            label={t("student-exam-operations.forms.practice-bleeding-form.maxilla")}
             variant="outlined"
             type="number"
             color="secondary"
@@ -77,7 +77,7 @@ export default function CreatePracticeBleedingForm({
           />
 
           <TextField
-            label="Mandible"
+            label={t("student-exam-operations.forms.practice-bleeding-form.mandible")}
             variant="outlined"
             type="number"
             color="secondary"

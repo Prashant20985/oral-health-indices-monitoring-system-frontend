@@ -67,7 +67,7 @@ export default function CreatePracticeAPIForm({
           />
 
           <TextField
-            label="Maxilla"
+            label={t("student-exam-operations.forms.practice-api-form.maxilla")}
             variant="outlined"
             type="number"
             color="secondary"
@@ -78,7 +78,7 @@ export default function CreatePracticeAPIForm({
           />
 
           <TextField
-            label="Mandible"
+            label={t("student-exam-operations.forms.practice-api-form.mandible")}
             variant="outlined"
             type="number"
             value={apiFormValues.mandible}

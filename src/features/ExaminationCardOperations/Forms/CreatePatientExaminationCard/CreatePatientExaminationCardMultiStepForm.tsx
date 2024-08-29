@@ -65,12 +65,12 @@ const Summary = React.lazy(
  * Each step corresponds to a specific section in the form.
  */
 const steps = [
-  "Risk Factor Assessment",
+  "Caries Risk Assessment(OCENA RYZYKA PRÓCHNICY)",
   "DMFT/DMFS",
   "BEWE",
   "API",
-  "Bleeding",
-  "Summary",
+  "PBI",
+  "Summary(PODSUMOWANIE)",
 ];
 
 /**
@@ -260,11 +260,11 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
           await handleSubmit(values).catch((error) => {
             const errorMessage = error.response.data.errors
               ? Object.entries(error.response.data.errors)
-                  .map(
-                    ([key, messages]) =>
-                      `${key}: ${(messages as string[]).join(" ")}`
-                  )
-                  .join("\n")
+                .map(
+                  ([key, messages]) =>
+                    `${key}: ${(messages as string[]).join(" ")}`
+                )
+                .join("\n")
               : error.response.data;
             setErrors({ error: errorMessage });
           });
@@ -294,16 +294,16 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                     >
                       <CardHeader
                         title={
-                            <Typography
-                              variant="h3"
-                              noWrap
-                              sx={{
-                                fontFamily: "revert-layer",
-                                fontWeight: 700,
-                              }}
-                            >
-                              {t("examination-card-operations.forms.solve-multi-step-form.patient-details")}
-                            </Typography>
+                          <Typography
+                            variant="h3"
+                            noWrap
+                            sx={{
+                              fontFamily: "revert-layer",
+                              fontWeight: 700,
+                            }}
+                          >
+                            {t("examination-card-operations.forms.solve-multi-step-form.patient-details")}
+                          </Typography>
                         }
                       />
                       <CardContent>
@@ -368,7 +368,7 @@ export default observer(function CreatePatientExaminationCardMultiStepForm() {
                       loading={supervisors.length === 0}
                       onFocus={() => {
                         if (supervisors.length === 0) {
-                            fetchSupervisors();
+                          fetchSupervisors();
                         }
                       }}
                       renderInput={(params) => (

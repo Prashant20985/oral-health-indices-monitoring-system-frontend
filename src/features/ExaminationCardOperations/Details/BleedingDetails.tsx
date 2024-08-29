@@ -100,13 +100,13 @@ export default observer(function BleedingDetails({
           <TextField
             fullWidth
             color="secondary"
-            label="Maxilla"
+            label={t("examination-card-operations.details.bleeding-details.maxilla")}
             value={bleeding.maxilla}
           />
           <TextField
             fullWidth
             color="secondary"
-            label="Mandible"
+            label={t("examination-card-operations.details.bleeding-details.mandible")}
             value={bleeding.mandible}
           />
         </Box>

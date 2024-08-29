@@ -611,11 +611,11 @@
         "solution-not-submitted2": "Solution Not Submitted",
         "exam-has-started2": "Exam Has Started",
         "patient-details": "Patient Details",
-        "risk-factor-assessment": "Risk Factor Assessment",
+        "risk-factor-assessment": "Caries Risk Assessment",
         "dmft-dmfs": "DMFT/DMFS",
         "bewe": "BEWE",
         "api": "API",
-        "bleeding": "Bleeding",
+        "bleeding": "PBI",
         "summary": "Summary"
       },
       "practice-patient-api-details-for-student": {
@@ -630,7 +630,7 @@
         "no-comment": "No Comment yet."
       },
       "practice-patient-bleeding-details-for-student": {
-        "title": "Bleeding Details",
+        "title": "PBI Details",
         "doctor-comment": "Doctor Comment",
         "no-comment": "No Comment yet."
       },
@@ -660,11 +660,11 @@
       "add-marks": "Add Marks",
       "edit-marks": "Edit Marks",
       "patient-details": "Patient Details",
-      "risk-factor-assessment": "Risk Factor Assessment",
+      "risk-factor-assessment": "Caries Risk Assessment",
       "dmft-dmfs": "DMFT/DMFS",
       "bewe": "BEWE",
       "api": "API",
-      "bleeding": "Bleeding",
+      "bleeding": "PBI",
       "summary": "Summary",
       "comment-practice-patient-examintation-card": "Comment Practice Patient Examination Card",
       "description": "To comment on the practice patient examination card, please fill in the form below.",
@@ -678,7 +678,7 @@
         "add-comment": "Add Comment",
         "edit-comment": "Edit Comment",
         "comment-api-form": "Comment API Form ",
-        "description": "Please write your comment about the API Bleeding form."
+        "description": "Please write your comment about the API PBI form."
       },
       "practice-patient-bewe-details-for-teacher": {
         "title": "BEWE Details",
@@ -691,14 +691,14 @@
         "description": "Please write your comment about the BEWE form."
       },
       "practice-patient-bleeding-details-for-teacher": {
-        "title": "Bleeding Details",
-        "bleeding-result": "Bleeding Result",
+        "title": "PBI Details",
+        "bleeding-result": "PBI Result",
         "doctor-comment": "Doctor Comment",
         "no-comment": "No Comment yet.",
         "add-comment": "Add Comment",
         "edit-comment": "Edit Comment",
-        "comment-bleeding-form": "Comment Bleeding Form",
-        "description": "Please write your comment about the Bleeding form."
+        "comment-bleeding-form": "Comment PBI Form",
+        "description": "Please write your comment about the PBI form."
       },
       "practice-patient-dmft-dmfs-details-for-teacher": {
         "title": "DMFT/DMFS Details",
@@ -714,15 +714,19 @@
     "forms": {
       "practice-api-form": {
         "add-calculated-api-result": "Add Calculated API Result",
-        "api-result": "API Result"
+        "api-result": "API Result",
+        "maxilla": "Maxilla",
+        "mandible": "Mandible"
       },
       "practice-bewe-form": {
         "add-calculated-bewe-result": "Add Calculated BEWE Result",
         "bewe-result": "BEWE Result"
       },
       "practice-bleeding-form": {
-        "add-calculated-bleeding-result": "Add Calculated Bleeding Result",
-        "bleeding-result": "Bleeding Result"
+        "add-calculated-bleeding-result": "Add Calculated PBI Result",
+        "bleeding-result": "PBI Result",
+        "maxilla": "Maxilla",
+        "mandible": "Mandible"
       },
       "practice-dmft-dmfs-form": {
         "add-calculated-dmft-dmfs-result": "Add Calculated DMFT/DMFS Result",
@@ -913,7 +917,9 @@
         "add-comment": "Add Comment",
         "comment-api-form": "Comment API Form",
         "description": "Please provide your comment for the API Form.",
-        "message": "Comment has been added successfully."
+        "message": "Comment has been added successfully.",
+        "maxilla": "Maxilla",
+        "mandible": "Mandible"
       },
       "bewe-details": {
         "bewe-result": "BEWE Result",
@@ -927,15 +933,17 @@
         "message": "Comment has been added successfully."
       },
       "bleeding-details": {
-        "bleeding-result": "Bleeding Result",
-        "doctor-bleeding-comment": "Doctor Bleeding Comment",
+        "bleeding-result": "PBI Result",
+        "doctor-bleeding-comment": "Doctor PBI Comment",
         "no-comment": "No Comment Provided.",
-        "student-bleeding-comment": "Student Bleeding Comment",
+        "student-bleeding-comment": "Student PBI Comment",
         "edit-comment": "Edit Comment",
         "add-comment": "Add Comment",
-        "comment-bleeding-form": "Comment Bleeding Form",
-        "description": "Please provide your comment for the Bleeding Form.",
-        "message": "Comment has been added successfully."
+        "comment-bleeding-form": "Comment PBI Form",
+        "description": "Please provide your comment for the PBI Form.",
+        "message": "Comment has been added successfully.",
+        "maxilla": "Maxilla",
+        "mandible": "Mandible"
       },
       "dmft-dmfs-details": {
         "doctor-dmft-dmfs-comment": "Doctor DMFT/DMFS Comment",
@@ -950,7 +958,7 @@
       "index-form-tabs": {
         "unsaved-changes": "You have unsaved changes. Are you sure you want to change the tab?",
         "are-you-sure": "Are you sure you want to leave?",
-        "risk-factor-assessment": "Risk Factor Assessment",
+        "risk-factor-assessment": "Caries Risk Assessment",
         "summary": "Summary"
       },
       "patient-examination-details-header-card": {
@@ -1004,6 +1012,8 @@
         "input-values": "Input values can only be 0,1,2,3,4,5,6,7,8,9,10 or x"
       },
       "solve-multi-step-form": {
+        "caries-risk-assessment": "Caries Risk Assessment",
+        "summary": "Summary",
         "are-you-sure": "Are you sure you want to leave?",
         "cancel-button": "Cancel",
         "loading-patient-details": "Loading Patient Details...",
@@ -1020,7 +1030,7 @@
       "api-bleeding-edit-form": {
         "error-message": "An unexpected error occurred. Please try again.",
         "api-form-updated": "API form updated successfully",
-        "bleeding-form-updated": "Bleeding form updated successfully"
+        "bleeding-form-updated": "PBI form updated successfully"
       },
       "bewe-edit-form": {
         "bewe-form-updated": "BEWE form updated successfully"
@@ -1052,7 +1062,7 @@
         "send-button": "Send"
       },
       "risk-factor-assessment-edit-form": {
-        "risk-factor-assessment-updated": "Risk Factor Assessment updated successfully"
+        "risk-factor-assessment-updated": "Caries Risk Assessment updated successfully"
       },
       "summary-edit-form": {
         "summary": "Summary",
@@ -1062,18 +1072,18 @@
         "interdental-space": "Interdental space"
       },
       "dmft-dmfs-form": {
-        "prosthetic-status": "STATUS PROSTHETIC (Removable Restorations)",
-        "no-prosthetic-restorations": "No prosthetic restorations",
+        "prosthetic-status": "Prosthetic Status - Denture(s)",
+        "no-prosthetic-restorations": "No denture(s)",
         "partial-denture": "Partial denture",
         "complete-denture": "Complete denture",
-        "during-prostethic-treatment": "During prosthetic treatment",
+        "during-prostethic-treatment": "Under prosthetic treatment",
         "none": "None"
       },
       "summary-form": {
-        "need-for-dental-interventions": "Need for dental interventions",
-        "missing": "Missing",
-        "preventive-treatment": "Preventive treatment",
-        "treatment-in-normal-mode": "Treatment in normal mode",
+        "need-for-dental-interventions": "Necessity of Dental Intervention",
+        "missing": "None",
+        "preventive-treatment": "Prophylaxis procedure",
+        "treatment-in-normal-mode": "Routine treatment",
         "emergency-treatment": "Emergency Treatment (Pain, Infection)",
         "interdisciplinary-treatment": "Interdisciplinary treatment",
         "proposed-plan-of-treatment": "Proposed plan of Treatment (Max 500 characters)",

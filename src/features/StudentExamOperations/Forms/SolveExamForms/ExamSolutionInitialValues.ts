@@ -32,7 +32,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
   riskFactorAssessmentModel: {
     questions: [
       {
-        questionText: "Fluoride exposure",
+        questionText: "Fluoride exposure / Ekspozycja na fluor",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -40,7 +40,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Consumption of sweetened products and beverages",
+        questionText: "Consumption of sweetened products and beverages / Spożycie słodzonych produktów i napojów",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -48,7 +48,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Systematic Dental Care",
+        questionText: "Regular Dental Care / Regularna opieka stomatologiczna",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -56,7 +56,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Systemic diseases",
+        questionText: "Systemic diseases / Choroby ogólnoustrojowe",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -64,7 +64,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Eating disorders",
+        questionText: "Eating disorders / Zaburzenia odżywiania",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -72,7 +72,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Complex Pharmacotherapy",
+        questionText: "Complex Pharmacotherapy / Złożona farmakoterapia",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -80,7 +80,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Alcohol/Nicotine",
+        questionText: "Alcohol/Nicotine / Alkohol/Nikotyna",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -88,7 +88,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "New carious lesions in the last 36 months",
+        questionText: "New carious lesions in the last 36 months / Nowe ogniska próchnicy w ciągu ostatnich 36 mies.",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -96,7 +96,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Visible Plaque",
+        questionText: "Visible Plaque / Widoczna płytka nazębna",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -104,7 +104,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Teeth extraction due to caries in the last 36 months",
+        questionText: "Teeth extraction due to caries in the last 36 months / Ekstrakcja zębów z powodu próchnicy w ciągu ostatnich 36 mies.",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -112,7 +112,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Abnormal Tooth Morphology",
+        questionText: "Abnormal Tooth Morphology / Nietypowa morfologia zębów",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -120,7 +120,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "1 or more proximal restorations",
+        questionText: "1 or more fillings on proximal surfaces / 1 lub więcej wypełnień na powierzchniach stycznych",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -128,7 +128,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Exposed root surfaces",
+        questionText: "Exposed root surfaces / Eksponowane powierzchnie korzeni",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -136,7 +136,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Overhanging fills, no contact points",
+        questionText: "Overhanging fillings, no proximal contact point / Nawisające wypełnienia, brak punktów stycznych",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -144,7 +144,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Fixed Orthodontic Braces",
+        questionText: "Fixed braces / Stały aparat ortodontyczny",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -152,7 +152,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Xerostomy",
+        questionText: "Xerostomia / Kserostomia",
         answer: {
           lowRisk: "",
           moderateRisk: "",
@@ -160,7 +160,7 @@ export const ExamSolutionInitialValues: ExamSolutionFormValues = {
         },
       },
       {
-        questionText: "Caries risk factor assessment",
+        questionText: "Caries Risk Assessment / OCENA RYZYKA PRÓCHNICY",
         answer: {
           lowRisk: "",
           moderateRisk: "",
