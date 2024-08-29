@@ -2,6 +2,7 @@ import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
 import { APIFormValues } from "../../../../app/models/APIBleeding";
 import APIBleedingForm from "../../../IndexCalculationForms/APIBleeding/APIBleedingForm";
 import { colors } from "../../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   apiFormValues: APIFormValues;
@@ -20,6 +21,7 @@ interface Props {
 export default function CreateAPIForm({ apiFormValues, handleChange }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
 
   return (
     <Box>
@@ -37,7 +39,7 @@ export default function CreateAPIForm({ apiFormValues, handleChange }: Props) {
         }}
       >
         <TextField
-          label="Comment"
+          label={t("examination-card-operations.forms.create-api-form.comment")}
           variant="outlined"
           fullWidth
           color="secondary"
@@ -51,7 +53,7 @@ export default function CreateAPIForm({ apiFormValues, handleChange }: Props) {
 
       <Box mt={2}>
         <Typography variant="h5" fontWeight={600}>
-          Input values can only be +/-
+        {t("examination-card-operations.forms.create-api-form.input-values")}
         </Typography>
       </Box>
       <APIBleedingForm

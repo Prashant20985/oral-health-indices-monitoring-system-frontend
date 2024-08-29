@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
 import { Delete } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen: boolean;
@@ -30,6 +31,7 @@ export default function DeleteConfirmation({
   onClose,
   handleDelete,
 }: Props) {
+  const [t] = useTranslation("global");
   return (
     <Dialog
       open={isOpen}
@@ -37,15 +39,15 @@ export default function DeleteConfirmation({
       fullWidth
       TransitionComponent={SlideUpTransition}
     >
-      <DialogTitle>Are you sure you want to delete this card?</DialogTitle>
+      <DialogTitle>{t("examination-card-operations.forms.delete-confirmation.header")}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          This action cannot be undone. Are you sure you want to delete this
+          {t("examination-card-operations.forms.delete-confirmation.delete-warning")}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="info" variant="outlined">
-          Cancel
+          {t("examination-card-operations.forms.delete-confirmation.cancel-button")}
         </Button>
         <Button
           onClick={handleDelete}
@@ -53,7 +55,7 @@ export default function DeleteConfirmation({
           color="error"
           endIcon={<Delete />}
         >
-          Delete
+          {t("examination-card-operations.forms.delete-confirmation.delete-button")}
         </Button>
       </DialogActions>
     </Dialog>

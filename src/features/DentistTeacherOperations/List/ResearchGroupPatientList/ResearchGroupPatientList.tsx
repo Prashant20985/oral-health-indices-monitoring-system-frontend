@@ -175,7 +175,7 @@ export default observer(function ResearchGroupPatientList({
                 borderRadius: "4px",
               }}
             >
-              <Tooltip title="Patient Details">
+              <Tooltip title={t("dentist-teacher-operations.list.research-group.research-group-patient.patient-details")}>
                 <IconButton
                   onClick={() => router.navigate(`/patient-profile/${row.id}`)}
                 >

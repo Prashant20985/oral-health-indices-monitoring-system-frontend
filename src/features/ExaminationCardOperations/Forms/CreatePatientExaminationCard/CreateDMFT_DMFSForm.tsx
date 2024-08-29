@@ -2,6 +2,7 @@ import { Box, Paper, TextField, Typography, useTheme } from "@mui/material";
 import DMFT_DMFSForm from "../../../IndexCalculationForms/DMFT_DMFS/DMFT_DMFSForm";
 import { DMFT_DMFSFormValues } from "../../../../app/models/DMFT_DMFS";
 import { colors } from "../../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   dmft_dmfsFormValues: DMFT_DMFSFormValues;
@@ -23,6 +24,7 @@ export default function CreateDMFT_DMFSForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
   return (
     <Box>
       <Box
@@ -46,10 +48,10 @@ export default function CreateDMFT_DMFSForm({
             fontweight: 600,
           }}
         >
-          Add Calculated DMFT/DMFS Result
+         {t("examination-card-operations.forms.create-dmft-dmfs-form.add-calculated-result")}
         </Typography>
         <TextField
-          label="DMFT Result"
+          label={t("examination-card-operations.forms.create-dmft-dmfs-form.dmft-result")}
           variant="outlined"
           fullWidth
           type="number"
@@ -59,7 +61,7 @@ export default function CreateDMFT_DMFSForm({
           name="dmfT_DMFS.dmftResult"
         />
         <TextField
-          label="DMFS Result"
+          label={t("examination-card-operations.forms.create-dmft-dmfs-form.dmfs-result")}
           variant="outlined"
           fullWidth
           type="number"
@@ -69,7 +71,7 @@ export default function CreateDMFT_DMFSForm({
           name="dmfT_DMFS.dmfsResult"
         />
         <TextField
-          label="Community DMFT/DMFS"
+          label={t("examination-card-operations.forms.create-dmft-dmfs-form.comment")}
           variant="outlined"
           fullWidth
           type="number"
@@ -83,7 +85,7 @@ export default function CreateDMFT_DMFSForm({
       </Box>
       <Box mt={2}>
         <Typography variant="h5" fontWeight={600}>
-          Input values can only be 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 or x
+          {t("examination-card-operations.forms.create-dmft-dmfs-form.input-values")}
         </Typography>
       </Box>
       <DMFT_DMFSForm

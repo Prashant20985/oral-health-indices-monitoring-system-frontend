@@ -4,6 +4,7 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
 import ApplicationUserList from "../DataGrid/ApplicationUserList";
+import { useTranslation } from "react-i18next";
 
 /**
  * Renders a list of deactivated application users.
@@ -12,6 +13,8 @@ import ApplicationUserList from "../DataGrid/ApplicationUserList";
  */
 export default observer(function DeactivatedApplicationUsersList() {
   const { adminStore } = useStore();
+
+  const [t] = useTranslation("global");
 
   const {
     clearDeactivatedApplicationUsersFilters,
@@ -52,8 +55,8 @@ export default observer(function DeactivatedApplicationUsersList() {
   return (
     <Box>
       <ApplicationUsersListFilter
-        title="Deactivated Users"
-        subTitle="List Of Deactivated Users"
+        title={t("admin-operations.list.deactivated-users.header")}
+        subTitle={t("admin-operations.list.deactivated-users.sub-header")}
         initalValues={{
           userType: deactivatedApplicationUsersSearchParams.userType,
           role: deactivatedApplicationUsersSearchParams.role,

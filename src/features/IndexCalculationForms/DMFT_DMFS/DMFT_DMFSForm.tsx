@@ -12,6 +12,7 @@ import DMFT_DMFSUpperMouthInput from "./DMFT_DMFSUpperMouthInput";
 import DMFT_DMFSExtraToothInput from "./DMFT_DMFSExtraToothInput";
 import DMFT_DMFSLowerMouthInput from "./DMFT_DMFSLowerMouthInput";
 import { colors } from "../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   dmft_dmfsAssessmentModel: DMFT_DMFSAssessmentModel;
@@ -42,6 +43,8 @@ export default observer(function DMFT_DMFSForm({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+
+  const [t] = useTranslation("global");
 
   return (
     <Box mt={3}>
@@ -97,19 +100,19 @@ export default observer(function DMFT_DMFSForm({
               fontFamily="monospace"
               noWrap
             >
-              STATUS PROTECTIVE (Removable Restorations)
+              {t("examination-card-operations.forms.dmft-dmfs-form.prosthetic-status")}
             </Typography>
             <Typography variant="h6" fontWeight={600}>
-              0 &nbsp;&nbsp;&nbsp; No Prosthetic Restorations
+              0 &nbsp;&nbsp;&nbsp; {t("examination-card-operations.forms.dmft-dmfs-form.no-prosthetic-restorations")}
             </Typography>
             <Typography variant="h6" fontWeight={600}>
-              1 &nbsp;&nbsp;&nbsp; Partial Denture
+              1 &nbsp;&nbsp;&nbsp; {t("examination-card-operations.forms.dmft-dmfs-form.partial-denture")}
             </Typography>
             <Typography variant="h6" fontWeight={600}>
-              2 &nbsp;&nbsp;&nbsp; Complete Denture
+              2 &nbsp;&nbsp;&nbsp; {t("examination-card-operations.forms.dmft-dmfs-form.complete-denture")}
             </Typography>
             <Typography variant="h6" fontWeight={600}>
-              X &nbsp;&nbsp;&nbsp; During Prosthetic Treatment
+              X &nbsp;&nbsp;&nbsp; {t("examination-card-operations.forms.dmft-dmfs-form.during-prostethic-treatment")}
             </Typography>
           </Box>
           <TextField
@@ -127,7 +130,7 @@ export default observer(function DMFT_DMFSForm({
             inputProps={{ readOnly: isView }}
           >
             <MenuItem value="">
-              <em>None</em>
+              <em>{t("examination-card-operations.forms.dmft-dmfs-form.none")}</em>
             </MenuItem>
             {["0", "1", "2", "x"].map((option) => (
               <MenuItem key={option} value={option}>

@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
 import PatientExaminationDetailsHeaderCard from "./PatientExaminationDetailsHeaderCard";
 import IndexFormTabs from "./IndexFormTabs";
+import { useTranslation } from "react-i18next";
 
 /**
  * Renders the details of a patient examination card.
@@ -14,6 +15,8 @@ import IndexFormTabs from "./IndexFormTabs";
  */
 export default observer(function PatientExaminationCardDetails() {
   const { cardId } = useParams<{ cardId: string }>();
+
+  const [t] = useTranslation("global");
 
   const {
     patientExaminationCardStore: {
@@ -47,7 +50,8 @@ export default observer(function PatientExaminationCardDetails() {
     <Box>
       {loading ? (
         <Box>
-          <LoadingComponent content="Loading Card..." />
+          <LoadingComponent content=
+          {t("examination-card-operations.details.patient-examination-details-header-card.loading-card")} />
         </Box>
       ) : patientExaminationCardDetails !== null ? (
         <Box>

@@ -8,6 +8,7 @@ import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessag
 import FormButtons from "./FormButtons";
 import BeweForm from "../../IndexCalculationForms/Bewe/BeweForm";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   cardId: string;
@@ -47,6 +48,8 @@ export default observer(function BeweEditForm({
       setOpenSnackbar(true);
     });
   };
+
+  const [t] = useTranslation("global");
   return (
     <Box width="100%">
       <Formik
@@ -90,7 +93,7 @@ export default observer(function BeweEditForm({
       <CustomSanckbar
         snackbarOpen={openSnackbar}
         snackbarClose={() => setOpenSnackbar(false)}
-        message="Bewe form updated successfully!"
+        message={t("examination-card-operations.forms.bewe-edit-form.bewe-form-updated")}
       />
     </Box>
   );

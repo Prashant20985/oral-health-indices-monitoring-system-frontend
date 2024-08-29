@@ -9,6 +9,7 @@ import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessag
 import DMFT_DMFSForm from "../../IndexCalculationForms/DMFT_DMFS/DMFT_DMFSForm";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
 import { colors } from "../../../themeConfig";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   cardId: string;
@@ -53,6 +54,7 @@ export default observer(function DMFT_DMFSEditForm({
 
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
 
   return (
     <Box width="100%">
@@ -101,7 +103,7 @@ export default observer(function DMFT_DMFSEditForm({
             >
               <TextField
                 variant="outlined"
-                label="DMFT Result"
+                label={t("examination-card-operations.forms.create-dmft-dmfs-form.dmft-result")}
                 name="dmftResult"
                 color="secondary"
                 value={values.dmftResult}
@@ -110,7 +112,7 @@ export default observer(function DMFT_DMFSEditForm({
               />
               <TextField
                 variant="outlined"
-                label="DMFS Result"
+                label={t("examination-card-operations.forms.create-dmft-dmfs-form.dmfs-result")}
                 name="dmfsResult"
                 color="secondary"
                 value={values.dmfsResult}
@@ -130,7 +132,7 @@ export default observer(function DMFT_DMFSEditForm({
       <CustomSanckbar
         snackbarOpen={openSnackbar}
         snackbarClose={() => setOpenSnackbar(false)}
-        message="DMFT/DMFS Form Updated Successfully!"
+        message={t("examination-card-operations.forms.dmft-dmfs-edit-form.dmft-dmfs-form-updated")}
       />
     </Box>
   );

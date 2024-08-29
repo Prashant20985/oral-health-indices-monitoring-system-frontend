@@ -5,6 +5,7 @@ import { colors } from "../../../themeConfig";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { PatientExaminationCard } from "../../../app/models/PatientExaminationCard";
 import LoadingComponent from "../../../app/common/loadingComponents/LoadingComponent";
+import { useTranslation } from "react-i18next";
 
 const SummaryEditForm = React.lazy(() => import("../Forms/SummaryEditForm"));
 
@@ -43,6 +44,7 @@ export default observer(function IndexFormTabs({
 }: Props) {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
+  const [t] = useTranslation("global");
 
   const [value, setValue] = React.useState("1");
   const [isEditMode, setIsEditMode] = React.useState(false);
@@ -55,7 +57,7 @@ export default observer(function IndexFormTabs({
       setValue(newValue);
     } else {
       const userConfirmed = window.confirm(
-        "You have unsaved changes. Are you sure you want to change the tab?"
+        t("examination-card-operations.details.index-form-tabs.unsaved-changes")
       );
       if (userConfirmed) {
         setValue(newValue);
@@ -68,7 +70,7 @@ export default observer(function IndexFormTabs({
     const unloadCallback = (event: BeforeUnloadEvent) => {
       if (isEditMode) {
         event.preventDefault();
-        return (event.returnValue = "Are you sure you want to leave?");
+        return (event.returnValue = t("examination-card-operations.details.index-form-tabs.are-you-sure"));
       }
     };
     window.addEventListener("beforeunload", unloadCallback);
@@ -94,7 +96,7 @@ export default observer(function IndexFormTabs({
           <Tab
             label={
               <Typography color={color.grey[100]}>
-                Risk Factor Assessment
+                {t("examination-card-operations.details.index-form-tabs.risk-factor-assessment")}
               </Typography>
             }
             value="1"
@@ -116,7 +118,7 @@ export default observer(function IndexFormTabs({
             value="5"
           />
           <Tab
-            label={<Typography color={color.grey[100]}>Summary</Typography>}
+            label={<Typography color={color.grey[100]}>{t("examination-card-operations.details.index-form-tabs.summary")}</Typography>}
             value="6"
           />
         </TabList>

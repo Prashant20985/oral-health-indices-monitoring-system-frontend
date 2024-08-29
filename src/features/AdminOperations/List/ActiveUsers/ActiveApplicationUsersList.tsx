@@ -4,6 +4,7 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import ApplicationUserList from "../DataGrid/ApplicationUserList";
 import ApplicationUsersListFilter from "../Filter/ApplicationUsersListFilter";
+import { useTranslation } from "react-i18next";
 
 /**
  * Renders a list of active application users.
@@ -36,6 +37,8 @@ export default observer(function ActiveApplicationUsersList() {
     });
   };
 
+  const [t] = useTranslation("global");
+
   const handleSeachParamChange = (
     role: string,
     userType: string,
@@ -52,8 +55,8 @@ export default observer(function ActiveApplicationUsersList() {
   return (
     <Box>
       <ApplicationUsersListFilter
-        title="Active Users"
-        subTitle="List Of Active Users"
+        title={t("admin-operations.list.active-users.header")}
+        subTitle={t("admin-operations.list.active-users.sub-header")}
         initalValues={{
           userType: activeApplicationUsersSearchParams.userType,
           role: activeApplicationUsersSearchParams.role,

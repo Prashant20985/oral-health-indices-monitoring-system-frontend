@@ -36,10 +36,10 @@ export default observer(function ResetPassword() {
   const [t] = useTranslation("global");
 
   const validationSchema = Yup.object().shape({
-    password: Yup.string().required("Password is required"),
+    password: Yup.string().required(t("resetpassword.password-is-required")),
     confirmPassword: Yup.string()
-      .required("Confirm Password is required")
-      .test("passwords-match", "Passwords must match", function (value) {
+      .required(t("resetpassword.confirm-password-is-required"))
+      .test("passwords-match", t("resetpassword.passwords-match"), function (value) {
         return value === this.parent.password;
       }),
   });

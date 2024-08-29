@@ -51,9 +51,13 @@
     "header": "Enter the email address associated with your account and we'll send you a link to reset your password",
     "email": "Email",
     "button": "Send Email",
-    "loading": "Sending Email..."
+    "loading": "Sending Email...",
+    "emailIsRequired": "Email is Required"
   },
   "resetpassword": {
+    "password-is-required": "Password is Required",
+    "confirm-password-is-required": "Confirm Password is Required",
+    "passwords-match": "Passwords must match",
     "header": "Password Reset for",
     "password": "Password",
     "confirmPassword": "Confirm Password",
@@ -113,7 +117,10 @@
       },
       "user-requests": {
         "header": "User Requests",
-        "button": "View All"
+        "button": "View All",
+        "submitted": "Submitted",
+        "in-progress": "In Progress",
+        "completed": "Completed"
       },
       "archived-patients": {
         "header": "Archived Patients",
@@ -201,7 +208,8 @@
       "filter": {
         "search": "Search",
         "user-type": "User Type",
-        "role": "Role"
+        "role": "Role",
+        "clear-filter": "Clear Filter"
       }
     },
     "logs": {
@@ -225,7 +233,8 @@
       "deleted-users": "Deleted Users",
       "active-patients": "Active Patients",
       "archived-patients": "Archived Patients",
-      "user-requests": "User Requests"
+      "user-requests": "User Requests",
+      "logs": "Logs"
     },
     "user-profile": {
       "header": "User Details",
@@ -270,8 +279,8 @@
     },
     "list": {
       "examinationscards-assigned-to-doctor": {
-        "header": "Examination Cards",
-        "sub-header": "Examination Cards assigned to Doctor",
+        "header": "Assigned Cards",
+        "sub-header": "Patient Cards Completed by My Students",
         "select-student-label": "Select Student",
         "select-year-and-month-label": "Select Year and Month"
       },
@@ -281,9 +290,11 @@
         "search": "Search",
         "patients-not-in-research-group": {
           "back-button": "Back",
-          "header": "Add Patients to"
+          "header": "Add Patients to",
+          "student-name": "Student Name"
         },
         "research-group-card": {
+          "view-details-button": "View Details",
           "created-by": "Created By: ",
           "number-of-patients": "Number of Patients: ",
           "delete-button": "Delete",
@@ -307,11 +318,12 @@
           "added-by": "Added By",
           "actions": "Actions",
           "remove-from-group-button": "Remove from Group",
-          "add-to-group-button": "Add to Group"
+          "add-to-group-button": "Add to Group",
+          "patient-details": "Patient Details"
         }
       },
       "student-group": {
-        "header": "Student Groups",
+        "header": "Student Groups and Exams",
         "add-button": "Add New Group",
         "search": "Search",
         "user-name": "User Name",
@@ -344,7 +356,7 @@
         },
         "supervise-students": {
           "header": "Supervised Students",
-          "sub-header": "Students Under My Supervison",
+          "sub-header": "List of Students Under My Supervison",
           "add-student-button": "Add Student"
         },
         "unsupervised-students": {
@@ -364,7 +376,7 @@
     },
     "nav-options": {
       "research-groups": "Research Groups",
-      "student-groups": "Student Groups",
+      "student-groups": "Student Groups and Exams",
       "active-patients": "Active Patients",
       "archived-patients": "Archived Patients",
       "supervised-students": "Supervised Students",
@@ -525,6 +537,9 @@
         "edit-button": "Edit"
       },
       "user-request-card": {
+        "in-progress": "In Progress",
+        "completed": "Completed",
+        "submitted": "Submitted",
         "requester": "Requester: ",
         "submit-date": "Submit Date: ",
         "complete-date": "Complete Date: ",
@@ -538,12 +553,18 @@
       "user-request-admin": {
         "header": "All Requests",
         "search-label": "Search by Requestor Name",
-        "status-label": "Status"
+        "status-label": "Status",
+        "in-progress": "In Progress",
+        "completed": "Completed",
+        "submitted": "Submitted"
       },
       "user-request-for-current-user": {
         "header": "My Requests",
         "new-request-button": "New Request",
-        "request-status-label": "Request Status"
+        "request-status-label": "Request Status",
+        "in-progress": "In Progress",
+        "completed": "Completed",
+        "submitted": "Submitted"
       }
     }
   },
@@ -569,7 +590,8 @@
         "view-exam-button": "View Exam",
         "edit-exam-button": "Edit Exam",
         "delete-exam-button": "Delete Exam",
-        "mark-as-graded-button": "Mark as Graded"
+        "mark-as-graded-button": "Mark as Graded",
+        "no-exams-published": "No Exams Published"
       }
     },
     "exam-solution-details": {
@@ -856,7 +878,7 @@
       "title": "Student Dashboard"
     },
     "nav-options": {
-      "my-groups": "My Groups",
+      "my-exams": "My Exams",
       "active-patients": "Active Patients",
       "archived-patients": "Archived Patients"
     },
@@ -870,8 +892,8 @@
         "view-group-details-button": "View Group Details"
       },
       "group-list-for-student": {
-        "title": "My Groups",
-        "sub-title": "List of My Groups",
+        "title": "My Exams",
+        "sub-title": "List of exams for my groups",
         "search": "Search"
       },
       "upcoming-exams": {
@@ -925,7 +947,14 @@
         "description": "Please provide your comment for the DMFT/DMFS Form.",
         "message": "Comment has been added successfully."
       },
+      "index-form-tabs": {
+        "unsaved-changes": "You have unsaved changes. Are you sure you want to change the tab?",
+        "are-you-sure": "Are you sure you want to leave?",
+        "risk-factor-assessment": "Risk Factor Assessment",
+        "summary": "Summary"
+      },
       "patient-examination-details-header-card": {
+        "loading-card": "Loading Card...",
         "downloading": "Downloading...",
         "download-button": "Download Report",
         "patient-name": "Patient Name",
@@ -946,6 +975,110 @@
         "description2": "Please provide your grade for the Examination Card by",
         "message": "Comment has been successfully added.",
         "message2": "Total Score has been successfully added."
+      }
+    },
+    "forms": {
+      "create-patient-examination-card": {
+        "cancel-confirmation": "Are you sure you want to cancel?",
+        "cancel-warning": "You have unsaved changes that will be lost if you cancel.",
+        "no": "No",
+        "yes": "Yes"
+      },
+      "create-api-form": {
+        "comment": "Comment",
+        "input-values": "Input values can only be +,- or x"
+      },
+      "create-bewe-form": {
+        "comment": "Comment",
+        "input-values": "Input values can only be 0,1,2,3 or x"
+      },
+      "create-bleeding-form": {
+        "comment": "Comment",
+        "input-values": "Input values can only be +,- or x"
+      },
+      "create-dmft-dmfs-form": {
+        "add-calculated-result": "Add Calculated DMFT/DMFS Result",
+        "dmft-result": "DMFT Result",
+        "dmfs-result": "DMFS Result",
+        "comment": "Comment DMFT/DMFS",
+        "input-values": "Input values can only be 0,1,2,3,4,5,6,7,8,9,10 or x"
+      },
+      "solve-multi-step-form": {
+        "are-you-sure": "Are you sure you want to leave?",
+        "cancel-button": "Cancel",
+        "loading-patient-details": "Loading Patient Details...",
+        "patient-details": "Patient Details",
+        "years-in-school": "Years in School:",
+        "created-at": "Created At:",
+        "assign-to-supervisor": "Assign to Supervisor",
+        "card-comment": "Card Comment",
+        "back-button": "Back",
+        "submit-button": "Submit",
+        "next-button": "Next",
+        "created-successfully": "Patient Examination Card Created Successfully!!"
+      },
+      "api-bleeding-edit-form": {
+        "error-message": "An unexpected error occurred. Please try again.",
+        "api-form-updated": "API form updated successfully",
+        "bleeding-form-updated": "Bleeding form updated successfully"
+      },
+      "bewe-edit-form": {
+        "bewe-form-updated": "BEWE form updated successfully"
+      },
+      "comment-form": {
+        "comment": "Comment",
+        "cancel-button": "Cancel",
+        "send-button": "Send"
+      },
+      "delete-confirmation": {
+        "header": "Are you sure you want to delete this examination card?",
+        "delete-warning": "This action cannot be undone. Are you sure you want to delete this",
+        "cancel-button": "Cancel",
+        "delete-button": "Delete"
+      },
+      "dmft-dmfs-edit-form": {
+        "dmft-result": "DMFT Result",
+        "dmfs-result": "DMFS Result",
+        "dmft-dmfs-form-updated": "DMFT/DMFS form updated successfully"
+      },
+      "form-button": {
+        "edit-button": "Edit",
+        "cancel-button": "Cancel",
+        "submit-button": "Submit"
+      },
+      "grade-card-form": {
+        "total-score": "Total Score",
+        "cancel-button": "Cancel",
+        "send-button": "Send"
+      },
+      "risk-factor-assessment-edit-form": {
+        "risk-factor-assessment-updated": "Risk Factor Assessment updated successfully"
+      },
+      "summary-edit-form": {
+        "summary": "Summary",
+        "summary-updated": "Summary updated successfully!"
+      },
+      "api-bleeding-form": {
+        "interdental-space": "Interdental space"
+      },
+      "dmft-dmfs-form": {
+        "prosthetic-status": "STATUS PROSTHETIC (Removable Restorations)",
+        "no-prosthetic-restorations": "No prosthetic restorations",
+        "partial-denture": "Partial denture",
+        "complete-denture": "Complete denture",
+        "during-prostethic-treatment": "During prosthetic treatment",
+        "none": "None"
+      },
+      "summary-form": {
+        "need-for-dental-interventions": "Need for dental interventions",
+        "missing": "Missing",
+        "preventive-treatment": "Preventive treatment",
+        "treatment-in-normal-mode": "Treatment in normal mode",
+        "emergency-treatment": "Emergency Treatment (Pain, Infection)",
+        "interdisciplinary-treatment": "Interdisciplinary treatment",
+        "proposed-plan-of-treatment": "Proposed plan of Treatment (Max 500 characters)",
+        "description-of-the-treatment": "Description of the Treatment (Max 500 characters)",
+        "patient-recommendation": "Patient Recommendations (Max 500 characters)"
       }
     }
   }

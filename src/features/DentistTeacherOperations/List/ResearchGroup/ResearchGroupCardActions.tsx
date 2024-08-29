@@ -69,7 +69,7 @@ export default observer(function ResearchGroupCardActions({
             endIcon={<KeyboardDoubleArrowRight />}
             onClick={handleViewDetails}
           >
-            View Details
+            {t("dentist-teacher-operations.list.research-group.research-group-card.view-details-button")}
           </Button>
         </Box>
         <Box display="flex">

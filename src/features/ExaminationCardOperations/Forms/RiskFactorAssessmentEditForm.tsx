@@ -8,6 +8,7 @@ import FormButtons from "./FormButtons";
 import RiskFactorAssessment from "../../IndexCalculationForms/RiskFactorAssessment";
 import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   cardId: string;
@@ -46,6 +47,7 @@ export default observer(function RiskFactorAssessmentEditForm({
       setOpenSnackbar(true);
     });
   };
+  const [t] = useTranslation("global");
   return (
     <Box width="100%">
       <Formik
@@ -89,7 +91,7 @@ export default observer(function RiskFactorAssessmentEditForm({
       <CustomSanckbar
         snackbarOpen={openSnackbar}
         snackbarClose={() => setOpenSnackbar(false)}
-        message="Risk Factor Assessment Updated Successfully!"
+        message={t("examination-card-operations.forms.risk-factor-assessment-edit-form.risk-factor-assessment-updated")}
       />
     </Box>
   );

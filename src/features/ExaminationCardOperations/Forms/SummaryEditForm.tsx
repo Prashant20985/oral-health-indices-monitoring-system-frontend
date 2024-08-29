@@ -8,6 +8,7 @@ import React from "react";
 import { useStore } from "../../../app/stores/Store";
 import CustomErrorMessage from "../../../app/common/formInputs/CustomErrorMessage";
 import CustomSanckbar from "../../../app/common/snackbar/CustomSnackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   cardId: string;
@@ -48,6 +49,8 @@ export default observer(function SummaryEditForm({
     });
   };
 
+  const [t] = useTranslation("global");
+
   return (
     <Box width="100%">
       <Formik
@@ -66,7 +69,7 @@ export default observer(function SummaryEditForm({
                   isView={isView}
                   setIsView={setIsView}
                   resetForm={resetForm}
-                  message="Summary"
+                  message={t("examination-card-operations.forms.summary-edit-form.summary")}
                   setIsEditMode={setIsEditMode}
                   handleSubmit={handleSubmit}
                 />
@@ -86,7 +89,7 @@ export default observer(function SummaryEditForm({
       <CustomSanckbar
         snackbarOpen={openSnackbar}
         snackbarClose={() => setOpenSnackbar(false)}
-        message="Summary updated successfully!"
+        message={t("examination-card-operations.forms.summary-edit-form.summary-updated")}
       />
     </Box>
   );

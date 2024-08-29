@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import SlideUpTransition from "../../../../app/common/transition/SlideUpTransition";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -29,6 +30,8 @@ export default function CancelConfirmationDialog({
   onClose,
   onConfirm,
 }: Props) {
+  const [t] = useTranslation("global");
+
   return (
     <Dialog
       open={open}
@@ -36,18 +39,18 @@ export default function CancelConfirmationDialog({
       TransitionComponent={SlideUpTransition}
       fullWidth
     >
-      <DialogTitle>Are you sure you want to cancel?</DialogTitle>
+      <DialogTitle>{t("examination-card-operations.forms.create-patient-examination-card.cancel-confirmation")}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          You have unsaved changes that will be lost if you cancel.
+          {t("examination-card-operations.forms.create-patient-examination-card.cancel-warning")}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary" variant="outlined">
-          No
+          {t("examination-card-operations.forms.create-patient-examination-card.no")}
         </Button>
         <Button onClick={onConfirm} color="error" variant="outlined">
-          Yes
+          {t("examination-card-operations.forms.create-patient-examination-card.yes")}
         </Button>
       </DialogActions>
     </Dialog>

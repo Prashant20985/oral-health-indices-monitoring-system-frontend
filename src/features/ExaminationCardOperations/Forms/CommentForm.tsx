@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import SlideUpTransition from "../../../app/common/transition/SlideUpTransition";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   title: string;
@@ -49,6 +50,8 @@ export default function CommentForm({
     }
   }, [comment]);
 
+  const [t] = useTranslation("global");
+
   return (
     <Dialog
       open={isOpen}
@@ -73,7 +76,7 @@ export default function CommentForm({
           color="secondary"
           multiline
           rows={4}
-          label="Comment"
+          label={t("examination-card-operations.forms.comment-form.comment")}
           margin="dense"
           fullWidth
           value={commentValue}
@@ -89,7 +92,7 @@ export default function CommentForm({
             onClose();
           }}
         >
-          Cancel
+          {t("examination-card-operations.forms.comment-form.cancel-button")}
         </Button>
         <Button
           type="submit"
@@ -97,7 +100,7 @@ export default function CommentForm({
           color="secondary"
           endIcon={<SendOutlined />}
         >
-          Send
+          {t("examination-card-operations.forms.comment-form.send-button")}
         </Button>
       </DialogActions>
     </Dialog>

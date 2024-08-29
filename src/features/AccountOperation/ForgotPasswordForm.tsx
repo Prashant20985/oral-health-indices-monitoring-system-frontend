@@ -18,16 +18,17 @@ export default observer(function ForgotPassword() {
   const theme = useTheme();
   const color = colors(theme.palette.mode);
 
+  const [t] = useTranslation("global");
+
   const {
     userStore: { forgotPassword },
   } = useStore();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email is required"),
+    email: Yup.string().email().required(t("forgotpassword.emailIsRequired")),
   });
 
-  const [t] = useTranslation("global");
 
   return (
     <Box

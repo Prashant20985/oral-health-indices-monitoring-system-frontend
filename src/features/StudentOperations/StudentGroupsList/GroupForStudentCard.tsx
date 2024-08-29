@@ -73,7 +73,7 @@ export default observer(function GroupForStudentCard({ group }: Props) {
       />
       <CardActions>
         <Button
-          onClick={() => router.navigate(`/my-groups/${group.id}`)}
+          onClick={() => router.navigate(`/my-exams/${group.id}`)}
           color={theme.palette.mode === "dark" ? "secondary" : "info"}
           variant="outlined"
           size="small"

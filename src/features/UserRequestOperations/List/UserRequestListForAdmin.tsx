@@ -2,11 +2,10 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/Store";
 import {
   Box,
-  FormControl,
   Grid,
   InputAdornment,
+  MenuItem,
   Paper,
-  SelectChangeEvent,
   TextField,
   useTheme,
 } from "@mui/material";
@@ -14,7 +13,6 @@ import { colors } from "../../../themeConfig";
 import * as React from "react";
 import Header from "../../../app/common/header/Header";
 import UserRequestCard from "./UserRequestCard";
-import CustomSelect from "../../../app/common/formInputs/CustomSelect";
 import { RequestStatus } from "../../../app/models/UserRequest";
 import Calendar from "../../../app/common/calendar/Calendar";
 import { SearchRounded } from "@mui/icons-material";
@@ -46,14 +44,6 @@ export default observer(function UserRequestListForAdmin() {
   }, [fetchUserRequestsForAdmin]);
 
   const [searchQuery, setSearchQuery] = React.useState("");
-
-  const handleRequestStatusChange = (
-    event: SelectChangeEvent<RequestStatus>
-  ) => {
-    userRequestStore.setRequestStatusForAdmin(
-      event.target.value! as RequestStatus
-    );
-  };
 
   const filteredRequests = userRequestsForAdmin.filter((request) =>
     request.userName.toLocaleLowerCase().includes(searchQuery)
@@ -121,14 +111,19 @@ export default observer(function UserRequestListForAdmin() {
           </Paper>
         </Box>
         <Box display="flex" flexDirection="column" gap={4}>
-          <Box component={FormControl}>
-            <CustomSelect
-              label={t("user-request-operations.list.user-request-admin.status-label")}
-              options={["Completed", "In_Progress", "Submitted"]}
-              value={userRequestStore.requestStatusForAdmin}
-              onChange={handleRequestStatusChange}
-            />
-          </Box>
+          <TextField
+            select
+            variant="outlined"
+            color="secondary"
+            size="small"
+            value={userRequestStore.requestStatusForAdmin}
+            onChange={(event) => userRequestStore.setRequestStatusForAdmin(event.target.value as RequestStatus)}
+            fullWidth
+          >
+            <MenuItem value="In_Progress">{t("user-request-operations.list.user-request-admin.in-progress")}</MenuItem>
+            <MenuItem value="Completed">{t("user-request-operations.list.user-request-admin.completed")}</MenuItem>
+            <MenuItem value="Submitted">{t("user-request-operations.list.user-request-admin.submitted")}</MenuItem>
+          </TextField>
           <Box>
             <Calendar setDate={setDateSubmittedForAdmin} />
           </Box>
