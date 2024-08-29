@@ -65,12 +65,12 @@ const Summary = React.lazy(
  * Each step corresponds to a specific section in the form.
  */
 const steps = [
-  "Caries Risk Assessment(OCENA RYZYKA PRÓCHNICY)",
+  "Caries Risk Assessment | Ocena Ryzyka Próchnicy",
   "DMFT/DMFS",
   "BEWE",
   "API",
   "PBI",
-  "Summary(PODSUMOWANIE)",
+  "Summary | Podsumowanie",
 ];
 
 /**

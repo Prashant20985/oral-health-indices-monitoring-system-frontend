@@ -994,15 +994,15 @@
       },
       "create-api-form": {
         "comment": "Komentarz",
-        "input-values": "Wartości wejściowe mogą być tylko +, -, lub x"
+        "input-values": "Oznaczenia, używaj tylko +,- lub x"
       },
       "create-bewe-form": {
         "comment": "Komentarz",
-        "input-values": "Wartości wejściowe mogą być tylko 0, 1, 2, 3 lub x"
+        "input-values": "Oznaczenia, używaj tylko 0,1,2,3 lub x"
       },
       "create-bleeding-form": {
         "comment": "Komentarz",
-        "input-values": "Wartości wejściowe mogą być tylko +, -, lub x"
+        "input-values": "Oznaczenia, używaj tylko +,- lub x"
       },
       "create-dmft-dmfs-form": {
         "add-calculated-result": "Dodaj obliczony wynik DMFT/DMFS",
@@ -1076,7 +1076,7 @@
         "no-prosthetic-restorations": "Brak uzupełnień protetycznych",
         "partial-denture": "Proteza częściowa",
         "complete-denture": "Proteza całkowita",
-        "during-prosthetic-treatment": "W trakcie leczenia protetycznego",
+        "during-prostethic-treatment": "W trakcie leczenia protetycznego",
         "none": "Brak"
       },
       "summary-form": {
