@@ -51,103 +51,103 @@ export default observer(function RiskFactorAssessment({
       disabled: { lowRisk: boolean; moderateRisk: boolean; highRisk: boolean };
     };
   } = {
-    "Fluoride exposure": {
+    "Fluoride exposure / Ekspozycja na fluor": {
       optionLowRisk: "Yes",
       optionModerateRisk: "No",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Consumption of sweetened products and beverages": {
+    "Consumption of sweetened products and beverages / Spożycie słodzonych produktów i napojów": {
       optionLowRisk: "During main meals",
       optionModerateRisk: "",
       optionHighRisk: "In between meals",
       disabled: { lowRisk: false, moderateRisk: true, highRisk: false },
     },
-    "Systematic Dental Care": {
+    "Regular Dental Care / Regularna opieka stomatologiczna": {
       optionLowRisk: "Yes",
       optionModerateRisk: "No",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Systemic diseases": {
+    "Systemic diseases / Choroby ogólnoustrojowe": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Eating disorders": {
+    "Eating disorders / Zaburzenia odżywiania": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Complex Pharmacotherapy": {
+    "Complex Pharmacotherapy / Złożona farmakoterapia": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Alcohol/Nicotine": {
+    "Alcohol/Nicotine / Alkohol/Nikotyna": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "New carious lesions in the last 36 months": {
+    "New carious lesions in the last 36 months / Nowe ogniska próchnicy w ciągu ostatnich 36 mies.": {
       optionLowRisk: "None",
       optionModerateRisk: "1-2",
       optionHighRisk: ">3",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: false },
     },
-    "Visible Plaque": {
+    "Visible Plaque / Widoczna płytka nazębna": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Teeth extraction due to caries in the last 36 months": {
+    "Teeth extraction due to caries in the last 36 months / Ekstrakcja zębów z powodu próchnicy w ciągu ostatnich 36 mies.": {
       optionLowRisk: "No",
       optionModerateRisk: "",
       optionHighRisk: "Yes",
       disabled: { lowRisk: false, moderateRisk: true, highRisk: false },
     },
-    "Abnormal Tooth Morphology": {
+    "Abnormal Tooth Morphology / Nietypowa morfologia zębów": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "1 or more proximal restorations": {
+    "1 or more fillings on proximal surfaces / 1 lub więcej wypełnień na powierzchniach stycznych": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Exposed root surfaces": {
+    "Exposed root surfaces / Eksponowane powierzchnie korzeni": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Overhanging fills, no contact points": {
+    "Overhanging fillings, no proximal contact point / Nawisające wypełnienia, brak punktów stycznych": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Fixed Orthodontic Braces": {
+    "Fixed braces / Stały aparat ortodontyczny": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    Xerostomy: {
+    "Xerostomia / Kserostomia": {
       optionLowRisk: "No",
       optionModerateRisk: "Yes",
       optionHighRisk: "",
       disabled: { lowRisk: false, moderateRisk: false, highRisk: true },
     },
-    "Caries risk factor assessment": {
+    "Caries Risk Assessment / OCENA RYZYKA PRÓCHNICY": {
       optionLowRisk: "Low Risk",
       optionModerateRisk: "Moderate Risk",
       optionHighRisk: "High Risk",
@@ -223,7 +223,7 @@ export default observer(function RiskFactorAssessment({
                   riskFactorAssessmentOptions[row.questionText].disabled || {};
 
                 const carriesQ =
-                  row.questionText === "Caries risk factor assessment";
+                  row.questionText === "Caries Risk Assessment / OCENA RYZYKA PRÓCHNICY";
 
                 return (
                   <TableRow key={index}>

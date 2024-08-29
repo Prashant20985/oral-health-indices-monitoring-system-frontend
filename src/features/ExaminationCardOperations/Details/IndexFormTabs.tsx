@@ -114,7 +114,7 @@ export default observer(function IndexFormTabs({
             value="4"
           />
           <Tab
-            label={<Typography color={color.grey[100]}>Bleeding</Typography>}
+            label={<Typography color={color.grey[100]}>PBI</Typography>}
             value="5"
           />
           <Tab

@@ -36,7 +36,7 @@ export default React.memo(function BeweUpperMouthInput({
       <Box>
         <Box width="100%" display="flex" justifyContent="center" mb={0.5}>
           <Typography variant="h4" fontWeight={600}>
-            Sectant 1
+            S1
           </Typography>
         </Box>
         {[17, 16, 15, 14].map((toothNumber) => (
@@ -61,7 +61,7 @@ export default React.memo(function BeweUpperMouthInput({
       <Box>
         <Box width="100%" display="flex" justifyContent="center" mb={0.5}>
           <Typography variant="h4" fontWeight={600}>
-            Sectant 2
+            S2
           </Typography>
         </Box>
         <>
@@ -107,7 +107,7 @@ export default React.memo(function BeweUpperMouthInput({
       <Box>
         <Box width="100%" display="flex" justifyContent="center" mb={0.5}>
           <Typography variant="h4" fontWeight={600}>
-            Sectant 3
+            S3
           </Typography>
         </Box>
         {[24, 25, 26, 27].map((toothNumber) => (

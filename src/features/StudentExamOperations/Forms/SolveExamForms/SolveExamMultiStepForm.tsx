@@ -69,7 +69,7 @@ const steps = [
   "DMFT/DMFS",
   "BEWE",
   "API",
-  "Bleeding",
+  "PBI",
   "Summary",
 ];
 

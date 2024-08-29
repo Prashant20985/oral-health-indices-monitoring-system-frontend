@@ -52,7 +52,7 @@ export default observer(function APIBleedingForm({
         {/* Quadrant 1 */}
         <Box component={Stack} direction="row" spacing={1}>
           <Box display="inline-flex" flexDirection="column" gap={1}>
-            <Header title="Quadrant 1" />
+            <Header title="Q1" />
             <Box component={Stack} direction="row" spacing={1}>
               <Box>
                 <StyledTextField
@@ -110,7 +110,7 @@ export default observer(function APIBleedingForm({
           {/* Quadrant 2 */}
           <Box display="inline-flex" flexDirection="column" gap={1}>
             <Box display="flex" justifyContent="flex-end" mb={1}>
-              <Header title="Quadrant 2" />
+              <Header title="Q2" />
             </Box>
             <Box component={Stack} direction="row" spacing={1}>
               <Box>
@@ -193,7 +193,7 @@ export default observer(function APIBleedingForm({
                 sx={{ backgroundColor: color.grey[400] }}
               />
             </Box>
-            <Header title="Quadrant 4" />
+            <Header title="Q4" />
           </Box>
           {/* Quadrant 3 */}
           <Box display="inline-flex" flexDirection="column" gap={1}>
@@ -224,7 +224,7 @@ export default observer(function APIBleedingForm({
               ))}
             </Box>
             <Box display="flex" justifyContent="flex-end">
-              <Header title="Quadrant 3" />
+              <Header title="Q3" />
             </Box>
           </Box>
         </Box>

@@ -100,13 +100,13 @@ export default observer(function APIDetails({
           <TextField
             fullWidth
             color="secondary"
-            label="Maxilla"
+            label={t("examination-card-operations.details.api-details.maxilla")}
             value={api.maxilla}
           />
           <TextField
             fullWidth
             color="secondary"
-            label="Mandible"
+            label={t("examination-card-operations.details.api-details.mandible")}
             value={api.mandible}
           />
         </Box>

@@ -53,7 +53,7 @@ export default React.memo(function BeweLowerMouthInput({
         ))}
         <Box width="100%" display="flex" justifyContent="center" mt={0.5}>
           <Typography variant="h4" fontWeight={600}>
-            Sectant 6
+            S6
           </Typography>
         </Box>
       </Box>
@@ -99,7 +99,7 @@ export default React.memo(function BeweLowerMouthInput({
         </>
         <Box width="100%" display="flex" justifyContent="center" mt={0.5}>
           <Typography variant="h4" fontWeight={600}>
-            Sectant 5
+            S5
           </Typography>
         </Box>
       </Box>
@@ -124,7 +124,7 @@ export default React.memo(function BeweLowerMouthInput({
         ))}
         <Box width="100%" display="flex" justifyContent="center" mt={0.5}>
           <Typography variant="h4" fontWeight={600}>
-            Sectant 4
+            S4
           </Typography>
         </Box>
       </Box>
