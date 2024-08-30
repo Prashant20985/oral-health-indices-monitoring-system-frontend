@@ -81,14 +81,14 @@ export default observer(function PracticePatientBleedingDetailsForTeacher({
             />
             <CustomTextField
               variant="outlined"
-              label="Maxilla"
+              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bleeding-details-for-teacher.maxilla")}
               name="maxilla"
               value={`${bleeding.bleedingResult} %`}
               readOnly
             />
             <CustomTextField
               variant="outlined"
-              label="Mandible"
+              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-bleeding-details-for-teacher.mandible")}
               name="mandible"
               value={`${bleeding.bleedingResult} %`}
               readOnly

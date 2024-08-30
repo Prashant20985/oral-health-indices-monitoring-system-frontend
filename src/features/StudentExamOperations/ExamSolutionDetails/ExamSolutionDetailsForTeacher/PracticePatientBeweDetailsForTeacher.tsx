@@ -91,7 +91,7 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
                 <TextField
                   fullWidth
                   color="secondary"
-                  label="Sectant 1"
+                  label="S1"
                   value={bewe.sectant1}
                 />
               </Grid>
@@ -99,7 +99,7 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
                 <TextField
                   fullWidth
                   color="secondary"
-                  label="Sectant 2"
+                  label="S2"
                   value={bewe.sectant2}
                 />
               </Grid>
@@ -107,7 +107,7 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
                 <TextField
                   fullWidth
                   color="secondary"
-                  label="Sectant 3"
+                  label="S3"
                   value={bewe.sectant3}
                 />
               </Grid>
@@ -115,7 +115,7 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
                 <TextField
                   fullWidth
                   color="secondary"
-                  label="Sectant 6"
+                  label="S6"
                   value={bewe.sectant6}
                 />
               </Grid>
@@ -123,7 +123,7 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
                 <TextField
                   fullWidth
                   color="secondary"
-                  label="Sectant 5"
+                  label="S5"
                   value={bewe.sectant5}
                 />
               </Grid>
@@ -131,7 +131,7 @@ export default observer(function PracticePatientBeweDetailsForTeacher({
                 <TextField
                   fullWidth
                   color="secondary"
-                  label="Sectant 4"
+                  label="S4"
                   value={bewe.sectant4}
                 />
               </Grid>

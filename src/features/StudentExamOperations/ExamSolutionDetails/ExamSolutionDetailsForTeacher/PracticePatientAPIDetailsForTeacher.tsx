@@ -83,14 +83,14 @@ export default observer(function PracticePatientAPIDetailsForTeacher({
             />
             <CustomTextField
               variant="outlined"
-              label="Maxilla"
+              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.maxilla")}
               name="maxilla"
               value={`${api.maxilla} %`}
               readOnly
             />
             <CustomTextField
               variant="outlined"
-              label="Mandible"
+              label={t("student-exam-operations.exam-solution-details-for-teacher.practice-patient-api-details-for-teacher.mandible")}
               name="mandible"
               value={`${api.mandible} %`}
               readOnly

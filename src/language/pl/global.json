@@ -620,6 +620,9 @@
       },
       "practice-patient-api-details-for-student": {
         "title": "Szczegóły API",
+        "api-result": "Wynik API",
+        "maxilla":"Szczęka",
+        "mandible":"Żuchwa",
         "doctor-comment": "Komentarz lekarza",
         "no-comment": "Brak komentarzy."
       },
@@ -631,6 +634,9 @@
       },
       "practice-patient-bleeding-details-for-student": {
         "title": "Szczegóły PBI",
+        "bleeding-result": "Wynik PBI",
+        "maxilla":"Szczęka",
+        "mandible":"Żuchwa",
         "doctor-comment": "Komentarz lekarza",
         "no-comment": "Brak komentarzy."
       },
@@ -673,6 +679,8 @@
       "practice-patient-api-details-for-teacher": {
         "title": "Szczegóły API",
         "api-result": "Wynik API",
+        "maxilla":"Szczęka",
+        "mandible":"Żuchwa",
         "doctor-comment": "Komentarz lekarza",
         "no-comment": "Brak komentarzy.",
         "add-comment": "Dodaj komentarz",
@@ -693,6 +701,8 @@
       "practice-patient-bleeding-details-for-teacher": {
         "title": "Szczegóły PBI",
         "bleeding-result": "Wynik PBI",
+        "maxilla":"Szczęka",
+        "mandible":"Żuchwa",
         "doctor-comment": "Komentarz lekarza",
         "no-comment": "Brak komentarzy.",
         "add-comment": "Dodaj komentarz",
@@ -1009,7 +1019,7 @@
         "dmft-result": "Wynik DMFT",
         "dmfs-result": "Wynik DMFS",
         "comment": "Komentarz DMFT/DMFS",
-        "input-values": "Wartości wejściowe mogą być tylko 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 lub x"
+        "input-values": "Oznaczenia, używaj tylko 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 lub x"
       },
       "solve-multi-step-form": {
         "caries-risk-assessment": "ocena ryzyka próchnicy",

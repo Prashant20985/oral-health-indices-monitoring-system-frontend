@@ -620,6 +620,9 @@
       },
       "practice-patient-api-details-for-student": {
         "title": "API Details",
+        "api-result": "API Result",
+        "maxilla": "Maxilla",
+        "mandible": "Mandible",
         "doctor-comment": "Doctor Comment",
         "no-comment": "No Comment yet."
       },
@@ -631,6 +634,9 @@
       },
       "practice-patient-bleeding-details-for-student": {
         "title": "PBI Details",
+        "bleeding-result": "PBI Result",
+        "maxilla": "Maxilla",
+        "mandible": "Mandible",
         "doctor-comment": "Doctor Comment",
         "no-comment": "No Comment yet."
       },
@@ -673,6 +679,8 @@
       "practice-patient-api-details-for-teacher": {
         "title": "API Details",
         "api-result": "API Result",
+        "maxilla": "Maxilla",
+        "mandible": "Mandible",
         "doctor-comment": "Doctor Comment",
         "no-comment": "No Comment yet.",
         "add-comment": "Add Comment",
@@ -693,6 +701,8 @@
       "practice-patient-bleeding-details-for-teacher": {
         "title": "PBI Details",
         "bleeding-result": "PBI Result",
+        "maxilla": "Maxilla",
+        "mandible": "Mandible",
         "doctor-comment": "Doctor Comment",
         "no-comment": "No Comment yet.",
         "add-comment": "Add Comment",
