@@ -51,9 +51,9 @@ export default observer(function PracticePatientBleedingDetailsForStudent({
         <CardContent>
           <Box display="flex" gap={2} mb={2}>
             {[
-              { label: "Bleeding Result", value: bleeding.bleedingResult },
-              { label: "Maxilla", value: bleeding.maxilla },
-              { label: "Mandible", value: bleeding.mandible },
+              { label: t("student-exam-operations.exam-solution-details.practice-patient-bleeding-details-for-student.bleeding-result"), value: bleeding.bleedingResult },
+              { label: t("student-exam-operations.exam-solution-details.practice-patient-bleeding-details-for-student.maxilla"), value: bleeding.maxilla },
+              { label: t("student-exam-operations.exam-solution-details.practice-patient-bleeding-details-for-student.mandible"), value: bleeding.mandible },
             ].map((item) => (
               <TextField
                 id={item.label}

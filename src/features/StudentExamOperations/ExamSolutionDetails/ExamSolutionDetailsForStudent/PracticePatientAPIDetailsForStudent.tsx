@@ -51,9 +51,9 @@ export default observer(function PracticePatientAPIDetailsForStudent({
         <CardContent>
           <Box display="flex" gap={2} mb={2}>
             {[
-              { label: "API Result", value: api.apiResult },
-              { label: "Maxilla", value: api.maxilla },
-              { label: "Mandible", value: api.mandible },
+              { label: t("student-exam-operations.exam-solution-details.practice-patient-api-details-for-student.api-result"), value: api.apiResult },
+              { label: t("student-exam-operations.exam-solution-details.practice-patient-api-details-for-student.maxilla"), value: api.maxilla },
+              { label: t("student-exam-operations.exam-solution-details.practice-patient-api-details-for-student.mandible"), value: api.mandible },
             ].map((item) => (
               <TextField
                 id={item.label}

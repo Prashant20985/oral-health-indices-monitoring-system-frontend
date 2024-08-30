@@ -81,7 +81,7 @@ export default function CreatePracticeBeweForm({
               color="secondary"
               onChange={handleChange}
               name="practiceBewe.sectant1"
-              label="Sectant 1"
+              label="S1"
               value={beweFormValues.sectant1}
             />
           </Grid>
@@ -93,7 +93,7 @@ export default function CreatePracticeBeweForm({
               color="secondary"
               onChange={handleChange}
               name="practiceBewe.sectant2"
-              label="Sectant 2"
+              label="S2"
               value={beweFormValues.sectant2}
             />
           </Grid>
@@ -105,7 +105,7 @@ export default function CreatePracticeBeweForm({
               color="secondary"
               onChange={handleChange}
               name="practiceBewe.sectant3"
-              label="Sectant 3"
+              label="S3"
               value={beweFormValues.sectant3}
             />
           </Grid>
@@ -117,7 +117,7 @@ export default function CreatePracticeBeweForm({
               color="secondary"
               onChange={handleChange}
               name="practiceBewe.sectant6"
-              label="Sectant 6"
+              label="S6"
               value={beweFormValues.sectant6}
             />
           </Grid>
@@ -129,7 +129,7 @@ export default function CreatePracticeBeweForm({
               color="secondary"
               onChange={handleChange}
               name="practiceBewe.sectant5"
-              label="Sectant 5"
+              label="S5"
               value={beweFormValues.sectant5}
             />
           </Grid>
@@ -141,7 +141,7 @@ export default function CreatePracticeBeweForm({
               color="secondary"
               onChange={handleChange}
               name="practiceBewe.sectant4"
-              label="Sectant 4"
+              label="S4"
               value={beweFormValues.sectant4}
             />
           </Grid>
