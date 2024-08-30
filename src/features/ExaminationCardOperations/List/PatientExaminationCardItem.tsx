@@ -57,7 +57,12 @@ export default observer(function ExaminationCardItem({
 
   const {
     patientExaminationCardStore: { deletePatientExaminationCard },
+    userStore: { user },
   } = useStore();
+
+  const isUserEligibleToDelete =
+    user?.role === "Dentist_Teacher_Examiner" ||
+    user?.role === "Dentist_Teacher_Researcher";
 
   const handleDelete = async () => {
     await deletePatientExaminationCard(patientExaminationCard.id);
@@ -117,13 +122,18 @@ export default observer(function ExaminationCardItem({
         }
         subheader={
           <Typography variant="h6" color="textSecondary">
-            {t("dentist-teacher-operations.list.patient-examination-card.created-by")}{" "}
+            {t(
+              "dentist-teacher-operations.list.patient-examination-card.created-by"
+            )}
+            &nbsp;
             {patientExaminationCard.isRegularMode
               ? patientExaminationCard.doctorName
               : patientExaminationCard.studentName}
             <br />
             {!patientExaminationCard.isRegularMode &&
-              `${t("dentist-teacher-operations.list.patient-examination-card.assigned-doctor")} ${patientExaminationCard.doctorName}`}
+              `${t(
+                "dentist-teacher-operations.list.patient-examination-card.assigned-doctor"
+              )} ${patientExaminationCard.doctorName}`}
           </Typography>
         }
       />
@@ -134,7 +144,9 @@ export default observer(function ExaminationCardItem({
           multiline
           rows={3}
           color="secondary"
-          label={t("dentist-teacher-operations.list.patient-examination-card.description-of-the-treatment")}
+          label={t(
+            "dentist-teacher-operations.list.patient-examination-card.description-of-the-treatment"
+          )}
           value={patientExaminationCard.summary.description}
         />
       </CardContent>
@@ -144,6 +156,7 @@ export default observer(function ExaminationCardItem({
             setOpenDeleteConfirmation(true);
             console.log(patientExaminationCard);
           }}
+          disabled={!isUserEligibleToDelete}
         >
           <Delete />
         </IconButton>
@@ -156,7 +169,9 @@ export default observer(function ExaminationCardItem({
                 startIcon={<Person />}
                 onClick={() => setOpenPatientDetails(true)}
               >
-                {t("dentist-teacher-operations.list.patient-examination-card.patient-details")}
+                {t(
+                  "dentist-teacher-operations.list.patient-examination-card.patient-details"
+                )}
               </Button>
             )}
             <Button
@@ -175,7 +190,9 @@ export default observer(function ExaminationCardItem({
                 }
               }}
             >
-              {t("dentist-teacher-operations.list.patient-examination-card.view-card")}
+              {t(
+                "dentist-teacher-operations.list.patient-examination-card.view-card"
+              )}
             </Button>
           </Box>
         </Box>
